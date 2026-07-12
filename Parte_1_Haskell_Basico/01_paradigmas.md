@@ -36,8 +36,9 @@ A programação funcional baseia-se no **Cálculo Lambda (λ-cálculo)**, um for
 
 Embora matematicamente equivalentes (Tese de Church-Turing), as duas abordagens levaram a caminhos diferentes na computação:
 1. **Lisp (1958)**: Criada por John McCarthy, foi a primeira linguagem a implementar conceitos do cálculo lambda, utilizando S-expressions. Lisp é a ancestral comum do Clojure.
-2. **Família ML (1970s)**: Linguagens como Standard ML e OCaml trouxeram sistemas de tipos estáticos fortes, polimorfismo e casamento de padrões.
-3. **Haskell (1990)**: Surgiu como um padrão acadêmico para unificar pesquisas em linguagens funcionais puras e preguiçosas. Tornou-se a referência máxima em pureza e elegância matemática.
+2. **Família ML (1970s)**: Robin Milner criou a linguagem ML — originalmente para auxiliar provas automatizadas de teoremas — trazendo sistemas de tipos estáticos fortes, polimorfismo e casamento de padrões. Deu origem a Standard ML e OCaml.
+3. **As linguagens preguiçosas (1970s–80s)**: A década de 1970 viu o surgimento da avaliação preguiçosa como estratégia: David Turner desenvolveu SASL, KRC e Miranda, enquanto outras pesquisas produziram Lazy ML, NPL, Hope e Clean.
+4. **Haskell (1990)**: No final dos anos 1980, os esforços de pesquisa em linguagens funcionais preguiçosas estavam espalhados por mais de uma dezena de linguagens. Um comitê foi formado para unificá-los e, após três anos de trabalho, publicou a especificação Haskell 1.0 em 1990 — batizada em homenagem ao lógico **Haskell Curry**. Do emaranhado de linguagens preguiçosas de 1990, apenas Haskell continua ativamente em uso. Durante os anos 1990 permaneceu um assunto acadêmico (o slogan informal da comunidade era *"evitar o sucesso a todo custo"*), mas na década seguinte escapou da academia e hoje tem uma comunidade vibrante de uso comercial e open source.
 
 ---
 
@@ -59,6 +60,29 @@ Em linguagens funcionais, funções são tratadas como qualquer outro tipo de da
 
 Funções que recebem ou retornam outras funções são chamadas de **Funções de Alta Ordem** (*High-Order Functions*).
 
+### 4. Avaliação Preguiçosa (*Lazy Evaluation*)
+Em Haskell, os cálculos são adiados até que seus resultados sejam realmente necessários. Esse recurso não é apenas um modo de postergar a avaliação: ele afeta profundamente a forma como escrevemos programas.
+
+Um exemplo clássico: suponha que queremos encontrar os *k* menores elementos de uma lista não ordenada. Em uma linguagem tradicional, a abordagem óbvia — ordenar a lista inteira e pegar os *k* primeiros — seria cara, e escreveríamos uma função especial que encontra os valores em uma única passagem. Em Haskell, a abordagem "ordene e pegue" funciona bem:
+
+```haskell
+minima k xs = take k (sort xs)
+```
+
+A avaliação preguiçosa garante que a lista só será ordenada *o suficiente* para encontrar os *k* menores elementos. O código resultante é limpo, pequeno e eficiente.
+
+---
+
+## 💪 Por que Programação Funcional? Por que Haskell?
+
+Além dos pilares conceituais, vale entender os argumentos práticos que motivam o estudo do paradigma — este livro os revisitará constantemente.
+
+**Código puro é mais fácil de testar.** Quando uma função responde apenas às suas entradas visíveis, podemos afirmar propriedades do seu comportamento que devem ser *sempre* verdadeiras — e testá-las automaticamente contra milhares de entradas aleatórias (é exatamente o que faremos com o QuickCheck no Módulo 2). Como há muito menos código impuro do que haveria em uma linguagem tradicional, ganhamos muito mais confiança na consistência do software.
+
+**Concisão comparável às linguagens dinâmicas, com segurança estática.** Comparado às linguagens estáticas tradicionais (C, Java), o sistema de tipos de Haskell é mais flexível e, graças à inferência de tipos, quase não exige anotações — reduzindo a redundância do código. Comparado às linguagens dinâmicas (Python, Ruby), Haskell oferece concisão semelhante, mas o compilador prova a ausência de erros de tipo antes da execução: um programa Haskell que compila dificilmente sofre de erros triviais em produção. É a escolha entre a perspectiva de **segurança** que Haskell enfatiza e a de **flexibilidade** que a tipagem dinâmica favorece.
+
+**Uso real na indústria.** Haskell e as demais linguagens funcionais deste curso saíram há muito da academia: bancos usam Haskell para medir risco de carteiras de derivativos; empresas de biotecnologia criam modelos matemáticos com ele; o sistema de controle de versão Darcs e o próprio compilador GHC são escritos em Haskell. Clojure e Elixir, que veremos no Módulo 3, sustentam sistemas web de larga escala (Nubank, WhatsApp/Erlang, Discord).
+
 ---
 
 ## 🗺️ Roteiro do Livro e Conexão de Conceitos
@@ -77,4 +101,8 @@ Este livro foi planejado como um curso integrado, unindo materiais e práticas c
    * **Elixir**: A reatividade de tempo real e tolerância a falhas do modelo de Atores na máquina virtual BEAM, culminando em uma aplicação ToDo List interativa com Phoenix LiveView.
 
 Ao final desta jornada, você terá saído de conceitos puros do Cálculo Lambda até a criação de sistemas web concorrentes e tolerantes a falhas, dominando os principais pilares da programação funcional contemporânea.
+
+---
+
+> **Nota de atribuição:** partes deste capítulo adaptam material de *Real World Haskell*, de Bryan O'Sullivan, Don Stewart e John Goerzen (tradução PT-BR não oficial), disponível sob a licença [Creative Commons Attribution-Noncommercial 3.0](http://creativecommons.org/licenses/by-nc/3.0/).
 

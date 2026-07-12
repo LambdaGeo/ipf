@@ -59,7 +59,24 @@ Todos os comandos específicos do GHCi começam com um caractere de dois pontos 
 | `:type <expressão>` | `:t` | Inspeciona o tipo de dados de uma expressão ou função. |
 | `:info <nome>` | `:i` | Exibe informações detalhadas sobre um identificador, operador ou classe de tipos. |
 | `:quit` | `:q` | Sai do interpretador GHCi. |
+| `:module +<Mod>` | `:m` | Carrega um módulo adicional da biblioteca (ex: `:m +Data.List`). |
+| `:set +t` | | Passa a exibir o tipo de cada expressão avaliada (`:unset +t` desativa). |
 | `:?` | | Abre o menu de ajuda interativa detalhada. |
+
+### A variável especial `it`
+O GHCi guarda o resultado da última expressão avaliada em uma variável especial chamada **`it`**. Isso permite usar o resultado anterior na próxima expressão:
+
+```haskell
+Prelude> "foo"
+"foo"
+Prelude> it ++ "bar"
+"foobar"
+```
+
+Se a avaliação de uma expressão falhar, o valor de `it` não muda — então podemos experimentar expressões potencialmente inválidas com segurança. Combinando o `it` com as setas do teclado (que recuperam e editam as linhas anteriores), ganhamos uma ótima forma de experimentação interativa: o custo de errar é baixíssimo. Aproveite para cometer erros baratos e abundantes enquanto explora a linguagem!
+
+> [!TIP]
+> **Permaneça sem medo diante das mensagens de erro.** As mensagens do GHC podem parecer longas e intimidadoras no início (`No instance for (Num Bool)...`), mas elas têm uma finalidade: apontam a localização exata do problema e frequentemente sugerem uma correção. Elas nos fazem executar uma certa quantidade de depuração *antecipada*, antes mesmo de rodar o programa. No começo, descubra apenas o suficiente para progredir; com a experiência, as partes obscuras das mensagens se tornarão naturais.
 
 ---
 

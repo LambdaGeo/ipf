@@ -47,7 +47,8 @@ markdown_extensions:
 
 nav:
   - Apresentação: index.md
-  - "Unidade 1: Paradigmas e Haskell Básico":
+  - "Módulo 1: Paradigmas e Haskell Básico (20h)":
+      - Plano do Módulo 1: unidade1/00_plano_modulo1.md
       - Introdução aos Paradigmas: unidade1/01_paradigmas.md
       - Instalação do Ambiente: unidade1/02_instalacao.md
       - Fundamentos: unidade1/03_fundamentos.md
@@ -56,7 +57,8 @@ nav:
       - Listas: unidade1/06_listas.md
       - Funções de Alta Ordem: unidade1/07_alta_ordem.md
       - Exercícios Resolvidos: unidade1/08_exercicios.md
-  - "Unidade 2: Haskell Avançado e Qualidade":
+  - "Módulo 2: Haskell Avançado e Qualidade (20h)":
+      - Plano do Módulo 2: unidade2/00_plano_modulo2.md
       - Declarando Custom Types: unidade2/01_declarando_tipos_classes.md
       - Programas Interativos (IO): unidade2/02_programas_interativos.md
       - Exercícios Avançados: unidade2/03_exercicios_avancados.md
@@ -64,7 +66,8 @@ nav:
       - Escrevendo a Biblioteca JSON: unidade2/05_biblioteca_json.md
       - Testes com QuickCheck: unidade2/06_testes_qualidade.md
       - Trabalho Prático: unidade2/07_avaliacao.md
-  - "Unidade 3: Clojure e Elixir":
+  - "Módulo 3: Clojure e Elixir (20h)":
+      - Plano do Módulo 3: unidade3/00_plano_modulo3.md
       - Clojure Fundamentos: unidade3/01_clojure_fundamentos.md
       - Clojure Vetores e Mapas: unidade3/02_clojure_colecoes.md
       - Clojure Funções de Alta Ordem: unidade3/03_clojure_alta_ordem.md
