@@ -1,0 +1,51 @@
+# Python Virtual Environment
+.venv/
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# MkDocs compiled output
+site/
+
+# IDEs and Editors
+.vscode/
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.swp
+.DS_Store
+
+# Haskell build artifacts (Stack & Cabal)
+.stack-work/
+dist/
+dist-*
+cabal-dev/
+*.o
+*.hi
+*.chi
+*.chs.h
+*.dyn_o
+*.dyn_hi
+.hspec-failures
+
+# Elixir / Phoenix build artifacts (BEAM)
+/_build/
+/deps/
+/*.ez
+erl_crash.dump
+mix.lock
+.elixir_ls/
+
+# Clojure / Leiningen / Shadow-cljs build artifacts
+/target/
+.lein-failures
+.lein-plugins/
+.shadow-cljs/
+.cpcache/
+.nrepl-port
+classes/
+pom.xml
+*.jar

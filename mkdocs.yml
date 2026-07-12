@@ -1,0 +1,82 @@
+site_name: Introdução à Programação Funcional
+site_description: Livro didático e guia de estudos para a disciplina de Introdução à Programação Funcional.
+site_author: Sérgio S. Costa
+theme:
+  name: material
+  language: pt
+  palette:
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      primary: indigo
+      accent: indigo
+      toggle:
+        icon: material/brightness-7
+        name: Mudar para modo escuro
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      primary: indigo
+      accent: indigo
+      toggle:
+        icon: material/brightness-4
+        name: Mudar para modo claro
+  features:
+    - navigation.tabs
+    - navigation.sections
+    - navigation.expand
+    - navigation.top
+    - search.suggest
+    - search.highlight
+    - content.code.copy
+    - content.code.annotate
+
+markdown_extensions:
+  - admonition
+  - pymdownx.details
+  - pymdownx.superfences
+  - pymdownx.highlight:
+      anchor_linenums: true
+      line_spans: __span
+      pygments_lang_class: true
+  - pymdownx.inlinehilite
+  - pymdownx.snippets
+  - pymdownx.tabbed:
+      alternate_style: true
+  - tables
+  - toc:
+      permalink: true
+
+nav:
+  - Apresentação: index.md
+  - "Unidade 1: Paradigmas e Haskell Básico":
+      - Introdução aos Paradigmas: unidade1/01_paradigmas.md
+      - Instalação do Ambiente: unidade1/02_instalacao.md
+      - Fundamentos: unidade1/03_fundamentos.md
+      - Tipos e Classes: unidade1/04_tipos_classes.md
+      - Funções: unidade1/05_funcoes.md
+      - Listas: unidade1/06_listas.md
+      - Funções de Alta Ordem: unidade1/07_alta_ordem.md
+      - Programas Interativos (IO): unidade1/08_programas_interativos.md
+      - Declarando Custom Types: unidade1/09_declarando_tipos_classes.md
+      - Exercícios Resolvidos: unidade1/10_exercicios.md
+  - "Unidade 2: Haskell Avançado e Qualidade":
+      - Projetos Modernos com Stack: unidade2/01_haskell_moderno.md
+      - Escrevendo a Biblioteca JSON: unidade2/02_biblioteca_json.md
+      - Testes com QuickCheck: unidade2/03_testes_qualidade.md
+      - Trabalho Prático: unidade2/04_avaliacao.md
+  - "Unidade 3: Clojure e Elixir":
+      - Clojure Fundamentos: unidade3/01_clojure_fundamentos.md
+      - Clojure Vetores e Mapas: unidade3/02_clojure_colecoes.md
+      - Clojure Funções de Alta Ordem: unidade3/03_clojure_alta_ordem.md
+      - Clojure Mapas e Threading: unidade3/04_clojure_threading_mapas_complexos.md
+      - Clojure Lazy Sequences: unidade3/05_clojure_lazy_sequences.md
+      - Clojure Metaprogramação (Macros): unidade3/06_clojure_metaprogramacao.md
+      - Clojure Interoperabilidade Java: unidade3/07_clojure_interop.md
+      - Clojure Revisão de Pilares: unidade3/08_clojure_revisao.md
+      - Clojure Exercícios Resolvidos: unidade3/09_clojure_exercicios.md
+      - "Trabalho Clojure: Tutorial Todo List": unidade3/10_clojure_tutorial_todo.md
+      - Elixir Fundamentos: unidade3/11_elixir_fundamentos.md
+      - Elixir Pattern Matching e Coleções: unidade3/12_elixir_colecoes_pattern_matching.md
+      - Elixir Módulos, Funções e Testes: unidade3/13_elixir_modulos_funcoes_testes.md
+      - Elixir Processos e Concorrência: unidade3/14_elixir_processos.md
+      - Elixir Metaprogramação: unidade3/15_elixir_metaprogramacao.md
+      - "Trabalho Elixir: Tutorial Todo List": unidade3/16_elixir_tutorial_todo.md
