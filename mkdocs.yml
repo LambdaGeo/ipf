@@ -77,10 +77,10 @@ nav:
       - Clojure Interoperabilidade Java: unidade3/07_clojure_interop.md
       - Clojure Revisão de Pilares: unidade3/08_clojure_revisao.md
       - Clojure Exercícios Resolvidos: unidade3/09_clojure_exercicios.md
-      - "Trabalho Clojure: Tutorial Todo List": unidade3/10_clojure_tutorial_todo.md
+      - "Trabalho Clojure: ToDo Full-Stack": unidade3/10_clojure_tutorial_todo.md
       - Elixir Fundamentos: unidade3/11_elixir_fundamentos.md
       - Elixir Pattern Matching e Coleções: unidade3/12_elixir_colecoes_pattern_matching.md
       - Elixir Módulos, Funções e Testes: unidade3/13_elixir_modulos_funcoes_testes.md
       - Elixir Processos e Concorrência: unidade3/14_elixir_processos.md
       - Elixir Metaprogramação: unidade3/15_elixir_metaprogramacao.md
-      - "Trabalho Elixir: Tutorial Todo List": unidade3/16_elixir_tutorial_todo.md
+      - "Trabalho Elixir: ToDo com LiveView": unidade3/16_elixir_tutorial_todo.md

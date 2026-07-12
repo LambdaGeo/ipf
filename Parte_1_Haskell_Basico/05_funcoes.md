@@ -85,6 +85,58 @@ somarPares :: (Int, Int) -> (Int, Int) -> (Int, Int)
 somarPares (x1, y1) (x2, y2) = (x1 + x2, y1 + y2)
 ```
 
+### Padrões Exaustivos
+Ao escrever uma série de padrões, é importante cobrir **todos os casos possíveis** do tipo. Se nenhuma equação casar com o valor recebido, o programa falha em tempo de execução:
+
+```haskell
+exemploRuim :: [Int] -> Int
+exemploRuim (x:xs) = x + exemploRuim xs
+-- exemploRuim []  ==> *** Exception: Non-exhaustive patterns
+```
+
+O GHC oferece a opção de compilação `-fwarn-incomplete-patterns` (ou `-Wall`), que emite um aviso quando uma sequência de padrões não cobre todos os construtores do tipo. Quando precisamos de um comportamento padrão para os casos restantes, usamos o curinga `_` como último padrão.
+
+### As-Patterns: Nomeando o Todo e as Partes
+Às vezes queremos desestruturar um valor **e** manter uma referência ao valor completo. O símbolo `@` (chamado *as-pattern*) faz exatamente isso: no padrão `xs@(_:xs')`, a variável `xs` é ligada à lista inteira que casou, enquanto `xs'` recebe apenas a cauda.
+
+```haskell
+-- Retorna todos os sufixos não vazios de uma lista
+sufixos :: [a] -> [[a]]
+sufixos xs@(_:xs') = xs : sufixos xs'
+sufixos _          = []
+```
+
+```haskell
+Prelude> sufixos "foo"
+["foo","oo","o"]
+```
+
+Sem o as-pattern, teríamos de reconstruir a lista no corpo da função (`sufixos (x:xs) = (x:xs) : ...`), o que é menos legível e ainda aloca um novo nó de lista em tempo de execução — o as-pattern **compartilha** o valor original em vez de copiá-lo.
+
+### Erros Comuns de Iniciantes com Padrões
+Um equívoco clássico é tentar comparar um argumento com o valor de uma variável já definida:
+
+```haskell
+data Fruta = Maca | Laranja
+
+maca = "maca"
+
+qualFruta :: String -> Fruta
+qualFruta f = case f of
+                maca    -> Maca     -- ERRADO!
+                laranja -> Laranja
+```
+
+O `maca` dentro do `case` **não** se refere à variável global `maca`: é uma nova variável de padrão local que casa com *qualquer* valor (um padrão *irrefutável*). O correto é comparar com valores literais:
+
+```haskell
+qualFruta f = case f of
+                "maca"    -> Maca
+                "laranja" -> Laranja
+```
+
+Outro erro comum: um nome pode aparecer **apenas uma vez** em um padrão. Não é possível escrever `saoIguais x x = True` para exprimir "os dois argumentos devem ser idênticos" — para isso, usamos guardas: `saoIguais x y | x == y = ...`.
+
 ---
 
 ## 5. Expressões `case`
@@ -101,4 +153,30 @@ descreverNumero n = "O numero fornecido eh: " ++ case n of
 
 A estrutura `case` avalia a expressão e executa o casamento de padrões de cima para baixo, retornando o valor associado ao primeiro padrão compatível.
 
+---
+
+## 6. Combinando Padrões e Guardas
+
+Padrões e guardas se complementam: o padrão verifica a *forma* do dado, e o guarda verifica *condições* sobre os valores extraídos. Escrever uma função como uma série de equações usando os dois mecanismos torna os casos explícitos logo de início. Compare a função `meuDrop` escrita com `if`:
+
+```haskell
+meuDrop n xs = if n <= 0 || null xs
+               then xs
+               else meuDrop (n - 1) (tail xs)
+```
+
+Com a reformulação usando padrões e guardas:
+
+```haskell
+meuDrop n xs | n <= 0 = xs
+meuDrop _ []          = []
+meuDrop n (_:xs)      = meuDrop (n - 1) xs
+```
+
+Essa mudança de estilo nos permite enumerar *de frente* os casos em que a função se comporta de maneira diferente — enterrar as decisões dentro de expressões `if` torna o código mais difícil de ler.
+
 No próximo capítulo, veremos como aplicar recursão e casamento de padrões sobre estruturas de dados recursivas como **Listas**.
+
+---
+
+> **Nota de atribuição:** partes deste capítulo adaptam material de *Real World Haskell*, de Bryan O'Sullivan, Don Stewart e John Goerzen (tradução PT-BR não oficial), sob a licença [Creative Commons Attribution-Noncommercial 3.0](http://creativecommons.org/licenses/by-nc/3.0/).

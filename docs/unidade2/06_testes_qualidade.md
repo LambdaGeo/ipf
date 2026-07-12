@@ -1,154 +1,89 @@
 # Testes e Garantia de Qualidade com QuickCheck
 
-Neste capítulo, aprenderemos como realizar **Garantia de Qualidade (QA)** e testes automatizados em Haskell usando a metodologia de **Testes Baseados em Propriedades (Property-Based Testing)**, adaptando os conceitos originais do clássico *Real World Haskell* (Capítulo 11) para o ambiente de testes de um projeto **Stack** moderno com a biblioteca **QuickCheck**.
+Neste capítulo, aprenderemos a metodologia de **Testes Baseados em Propriedades** (*Property-Based Testing*) com a biblioteca **QuickCheck**, adaptando o capítulo 11 do *Real World Haskell* para o ambiente de testes de um projeto **Stack** moderno — e a aplicaremos à biblioteca JSON do capítulo anterior.
+
+!!! success "Tutorial completo no blog"
+    O passo a passo — configuração da suíte no `package.yaml`, todas as propriedades, a instância `Arbitrary` do `JValue` e a medição de cobertura — está na **Parte 2** do tutorial no blog do LambdaGEO:
+
+    👉 **[Construindo e Testando uma Biblioteca Haskell: JSON, Pretty Printing e QuickCheck](https://lambdageo.github.io/blog/tutorial-haskell-json-quickcheck/)**
+
+    Este capítulo apresenta os conceitos; siga o tutorial para implementar a suíte completa.
 
 ---
 
 ## 🧪 Por que Testar Propriedades?
 
-Os testes unitários tradicionais baseiam-se em fornecer entradas específicas e checar se o resultado bate com a saída esperada (ex: `soma 2 3 == 5`). Embora úteis, eles exigem que o desenvolvedor pense manualmente em todos os casos especiais (como listas vazias, números negativos, limites de tipos).
+Os testes unitários tradicionais fornecem entradas específicas e checam saídas esperadas (`soma 2 3 == 5`). Embora úteis, exigem que o desenvolvedor pense manualmente em todos os casos especiais. Os testes baseados em propriedades invertem essa lógica:
 
-Os **Testes Baseados em Propriedades** invertem essa lógica:
-1. Em vez de testar casos individuais, definimos **propriedades universais** (invariantes) que nosso código deve obedecer para *qualquer* entrada.
-2. A biblioteca **QuickCheck** gera automaticamente centenas ou milhares de dados de entrada aleatórios e testa essas invariantes.
-3. Se ela encontrar alguma entrada que falha, ela realiza o processo de **encolhimento (shrinking)** para encontrar o menor caso de teste possível que reproduz o erro.
+1. Definimos **propriedades universais** (invariantes) que o código deve obedecer para *qualquer* entrada;
+2. O **QuickCheck** gera automaticamente centenas de entradas aleatórias e testa as invariantes;
+3. Ao encontrar uma falha, ele **encolhe** (*shrinking*) a entrada até o menor caso que reproduz o erro.
 
----
+## 💡 O Sabor da Coisa: Propriedades de uma Ordenação
 
-## 1. Configurando o QuickCheck no Projeto Stack
-
-Para utilizar o QuickCheck em nosso projeto modernizado `hs2json`, editamos o arquivo `package.yaml` para adicionar o pacote `QuickCheck` como dependência na seção de testes (`tests`):
-
-```yaml
-tests:
-  hs2json-test:
-    main:                Spec.hs
-    source-dirs:         test
-    dependencies:
-      - hs2json
-      - QuickCheck
-```
-
-Sempre que rodarmos `stack test`, o Stack compilará e executará os testes definidos nessa suíte.
-
----
-
-## 2. Escrevendo Invariantes Básicas
-
-Vamos implementar e testar um algoritmo clássico de ordenação (*quicksort*) e definir suas propriedades.
-
-Crie o arquivo `test/Spec.hs` com o código:
+Para um algoritmo de ordenação `qsort`, que invariantes devem valer para **qualquer** lista?
 
 ```haskell
-module Main where
-
 import Test.QuickCheck
 import Data.List (sort, (\\))
 
--- Algoritmo Quicksort didatico (nao in-place)
-qsort :: Ord a => [a] -> [a]
-qsort []     = []
-qsort (x:xs) = qsort lhs ++ [x] ++ qsort rhs
-  where lhs = filter (< x) xs
-        rhs = filter (>= x) xs
+-- Idempotência: ordenar duas vezes == ordenar uma vez
+prop_idempotente :: [Int] -> Bool
+prop_idempotente xs = qsort (qsort xs) == qsort xs
 
--- Propriedade 1: Idempotência (ordenar duas vezes dá o mesmo resultado)
-prop_idempotent :: [Int] -> Bool
-prop_idempotent xs = qsort (qsort xs) == qsort xs
+-- O menor elemento vem primeiro (só para listas não vazias)
+prop_minimo :: [Int] -> Property
+prop_minimo xs = not (null xs) ==> head (qsort xs) == minimum xs
 
--- Propriedade 2: O menor elemento da entrada deve estar no início da saída
--- Usamos a implicação (==>) para ignorar listas vazias
-prop_minimum :: [Int] -> Property
-prop_minimum xs = not (null xs) ==> head (qsort xs) == minimum xs
-
--- Propriedade 3: A lista final deve estar de fato ordenada
-prop_ordered :: [Int] -> Bool
-prop_ordered xs = ordered (qsort xs)
-  where ordered []       = True
-        ordered [_]      = True
-        ordered (x:y:ys) = x <= y && ordered (y:ys)
-
--- Propriedade 4: A saída deve ser uma permutação da entrada
-prop_permutation :: [Int] -> Bool
-prop_permutation xs = null (xs \\ qsort xs) && null (qsort xs \\ xs)
-
--- Propriedade 5: Modelo de Teste (deve ser idêntico à ordenação padrão do Haskell)
-prop_sort_model :: [Int] -> Bool
-prop_sort_model xs = qsort xs == sort xs
-
-main :: IO ()
-main = do
-    putStrLn "Executando Testes de Propriedades com QuickCheck:"
-    quickCheck prop_idempotent
-    quickCheck prop_minimum
-    quickCheck prop_ordered
-    quickCheck prop_permutation
-    quickCheck prop_sort_model
+-- Teste baseado em modelo: concorda com o sort da biblioteca padrão
+prop_modelo :: [Int] -> Bool
+prop_modelo xs = qsort xs == sort xs
 ```
-
-Para rodar os testes:
-
-```bash
-stack test
-```
-
-A saída mostrará o sucesso das propriedades:
 
 ```text
-Executando Testes de Propriedades com QuickCheck:
-+++ OK, passed 100 tests.
-+++ OK, passed 100 tests (exposing 13% empty lists).
-+++ OK, passed 100 tests.
-+++ OK, passed 100 tests.
+ghci> quickCheck prop_idempotente
 +++ OK, passed 100 tests.
 ```
+
+Três conceitos importantes aparecem aqui:
+
+* **Implicação (`==>`)**: descarta entradas inválidas antes de testar (note que o tipo muda de `Bool` para `Property`);
+* **Teste baseado em modelo**: comparar com uma implementação de referência correta (ainda que ineficiente) é uma técnica poderosíssima — grandes projetos Haskell mantêm suítes de propriedades executadas a cada commit;
+* **QuickCheck como "lint" de API**: se uma propriedade é difícil de enunciar, talvez a interface esteja mal desenhada.
+
+> [!TIP]
+> É por isso que **código puro é mais fácil de testar** (como prometido no primeiro capítulo do livro): uma função que só depende das entradas visíveis pode ser bombardeada com milhares de entradas aleatórias sem *mocks* nem preparação de ambiente.
+
+## 🎲 Gerando Dados Customizados: a Classe `Arbitrary`
+
+Para testar o `JValue`, precisamos ensinar o QuickCheck a gerar valores aleatórios do nosso tipo, implementando a classe `Arbitrary`:
+
+```haskell
+class Arbitrary a where
+  arbitrary :: Gen a
+```
+
+A biblioteca fornece combinadores (`elements`, `choose`, `oneof`, `listOf`) para construir geradores. O desafio interessante do `JValue` é que ele é **recursivo**: um gerador ingênuo pode criar objetos infinitamente profundos. A solução — detalhada no tutorial — usa o combinador `sized` para limitar a profundidade, reduzindo o "orçamento" a cada nível de recursão.
+
+## 📊 Cobertura com HPC
+
+Milhares de testes passando é reconfortante — mas quais partes do código os testes *realmente* exercitam? O **HPC** (*Haskell Program Coverage*) responde com precisão:
+
+```bash
+stack test --coverage
+```
+
+O relatório HTML mostra expressões, ramos e funções cobertos, destacando os trechos que nenhum teste alcança — o guia perfeito para escrever as próximas propriedades.
+
+## 🎯 O que Você Deve Dominar ao Final
+
+* Enunciar invariantes de uma função como propriedades QuickCheck (`prop_*`);
+* Usar `==>` para restringir entradas e explicar o tipo `Property`;
+* Implementar `Arbitrary` para um tipo recursivo com controle de profundidade (`sized`);
+* Interpretar um relatório de cobertura HPC e usá-lo para direcionar novos testes.
+
+Esses são exatamente os itens cobrados no [trabalho prático do módulo](07_avaliacao.md).
 
 ---
 
-## 3. Gerando Dados de Teste Customizados (`Arbitrary`)
-
-Para testar estruturas de dados complexas criadas por nós (como o `JValue` da nossa biblioteca JSON), precisamos ensinar o QuickCheck a gerar instâncias aleatórias dessa estrutura. Fazemos isso implementando a classe de tipo **`Arbitrary`**.
-
-Para evitar recursão infinita e estruturas gigantescas que consomem toda a memória, utilizamos o combinador `sized` do QuickCheck para controlar a profundidade do dado gerado de forma recursiva.
-
-Crie um novo arquivo de teste chamado `test/JSONSpec.hs` e implemente a geração aleatória de JSON:
-
-```haskell
-{-# LANGUAGE OverloadedStrings #-}
-module JSONSpec where
-
-import Test.QuickCheck
-import SimpleJSON
-
--- Geradores auxiliares para JValue
-instance Arbitrary JValue where
-  arbitrary = sized genJValue
-
-genJValue :: Int -> Gen JValue
-genJValue 0 = oneof
-    [ JBool <$> arbitrary
-    , return JNull
-    , JNumber <$> arbitrary
-    , JString <$> arbitrary
-    ]
-genJValue n = oneof
-    [ JBool <$> arbitrary
-    , return JNull
-    , JNumber <$> arbitrary
-    , JString <$> arbitrary
-    -- Casos recursivos (reduzem a profundidade por 2)
-    , JArray <$> resize (n `div` 2) (listOf (genJValue (n `div` 2)))
-    , JObject <$> resize (n `div` 2) (listOf genPair)
-    ]
-  where
-    genPair = do
-      key <- arbitrary
-      val <- genJValue (n `div` 2)
-      return (key, val)
-
--- Propriedade Exemplo: Ler e depois extrair string
-prop_jvalue_string :: String -> Bool
-prop_jvalue_string s = getString (JString s) == Just s
-```
-
-O QuickCheck usará esses geradores para passar objetos JSON extremamente profundos e variados para as nossas funções, validando nossa biblioteca sob estresse!
+> **Nota de atribuição:** este capítulo adapta material do capítulo 11 de *Real World Haskell*, de Bryan O'Sullivan, Don Stewart e John Goerzen (tradução PT-BR não oficial), sob a licença [Creative Commons Attribution-Noncommercial 3.0](http://creativecommons.org/licenses/by-nc/3.0/).

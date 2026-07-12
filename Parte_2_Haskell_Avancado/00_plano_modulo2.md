@@ -38,6 +38,8 @@ Ao final deste módulo, o estudante deverá ser capaz de:
 
 O módulo é orientado a projeto: os conceitos das aulas 1–5 convergem para a construção incremental da biblioteca JSON (aulas 6–8), que é também o objeto da avaliação. As aulas 4, 9 e 10 são realizadas em laboratório.
 
+Os capítulos 5 e 6 deste material apresentam os conceitos e as decisões de projeto; o desenvolvimento passo a passo é guiado pelo tutorial **[Construindo e Testando uma Biblioteca Haskell: JSON, Pretty Printing e QuickCheck](https://lambdageo.github.io/blog/tutorial-haskell-json-quickcheck/)**, no blog do LambdaGEO.
+
 ## Avaliação
 
 - **Trabalho prático (100%)** — desenvolvimento da biblioteca JSON estruturada com Stack e integrada com uma suíte de testes QuickCheck, conforme especificado no capítulo [Trabalho Prático](07_avaliacao.md). A nota considera: corretude e completude da biblioteca, qualidade e cobertura das propriedades testadas, organização do projeto e defesa individual na aula 10.

@@ -28,7 +28,20 @@ type ListaAssoc k v = [(k, v)]
 
 ---
 
-## 2. Tipos Algébricos de Dados (ADTs) (`data`)
+## 2. Tipos Novos com Isolamento: `newtype`
+
+Quando queremos um tipo **distinto** (não apenas um apelido) que envolve exatamente **um construtor com um único campo**, usamos `newtype`:
+
+```haskell
+newtype Dolar = Dolar Float
+newtype CustomerID = CustomerID Int
+```
+
+Diferentemente de `type`, o compilador trata `Dolar` e `Float` como tipos incompatíveis — impossível passar um `Float` cru onde se espera `Dolar`. Diferentemente de `data`, o `newtype` não tem custo em tempo de execução: o "envelope" existe apenas em tempo de compilação e é removido pelo compilador. É a ferramenta ideal para dar segurança de tipos a valores primitivos (IDs, moedas, unidades de medida).
+
+---
+
+## 3. Tipos Algébricos de Dados (ADTs) (`data`)
 
 Para criar tipos de dados inteiramente novos com seus próprios construtores de valor, utilizamos a palavra-chave **`data`**. Um **Tipo Algébrico de Dados** é composto por uma combinação de dois padrões matemáticos: **Tipos Soma** (alternativas) e **Tipos Produto** (combinações).
 
@@ -73,9 +86,26 @@ area (Retangulo l a)   = l * a
 area (Quadrado l)      = l ^ 2
 ```
 
+### Analogia com Outras Linguagens
+Os ADTs unificam, em um único mecanismo, várias construções que outras linguagens oferecem separadamente:
+
+* **`struct` do C / classe de dados**: um ADT com um único construtor e vários campos agrupa valores relacionados — a diferença é que os campos em Haskell são posicionais e anônimos (a menos que usemos a sintaxe de registro, a seguir).
+* **`enum` do C/Java**: um tipo soma de construtores sem argumentos (`data Cor = Vermelho | Verde | Azul`) representa valores simbólicos — mas, ao contrário do C, os construtores **não** são inteiros disfarçados, e o compilador impede misturá-los com números.
+* **`union` do C**: um tipo soma com argumentos é uma "união disjunta" **segura**: o valor lembra qual construtor o criou, e o pattern matching nos obriga a tratar cada caso — em C, é o programador quem precisa rastrear manualmente qual alternativa a união contém, uma fonte clássica de bugs.
+
+### ADTs vs. Tuplas
+Dois pares `(String, String)` são sempre do mesmo tipo, mesmo que um represente um animal e outro um móvel — o sistema de tipos não pode nos proteger da mistura. Já dois ADTs estruturalmente idênticos com nomes diferentes são tipos **distintos**:
+
+```haskell
+data Cetaceo = Cetaceo String String
+data Movel   = Movel String String
+```
+
+Regra prática: se você usa um valor composto amplamente no código, declare um `data` — ganha segurança de tipos e legibilidade; para usos pequenos e localizados, uma tupla resolve.
+
 ---
 
-## 3. Sintaxe de Registro (Record Syntax)
+## 4. Sintaxe de Registro (Record Syntax)
 
 Quando definimos tipos produto com muitos campos, acessar os valores por posição em casamento de padrões torna-se confuso e propenso a erros. Para resolver isso, Haskell fornece a **Sintaxe de Registro** (*Record Syntax*), que permite nomear os campos:
 
@@ -97,7 +127,45 @@ data Usuario = Usuario
 
 ---
 
-## 4. Tipos Recursivos: Modelando Estruturas de Dados
+## 5. Tipos Parametrizados e o `Maybe`
+
+Assim como as listas, nossos próprios tipos podem ser **polimórficos**: basta introduzir variáveis de tipo na declaração. O exemplo mais importante do Prelude é o tipo `Maybe`, que representa um valor que pode estar presente ou ausente:
+
+```haskell
+data Maybe a = Just a
+             | Nothing
+```
+
+A variável `a` indica que `Maybe` recebe outro tipo como parâmetro: `Maybe Int`, `Maybe String`, `Maybe [Bool]` são tipos distintos construídos a partir dele.
+
+```haskell
+Prelude> Just 1.5
+Just 1.5
+Prelude> :type Just "bicicleta"
+Just "bicicleta" :: Maybe [Char]
+```
+
+### Tratando Erros: `error` vs. `Maybe`
+Haskell oferece a função `error :: String -> a`, que aborta a execução imediatamente com uma mensagem. O problema: quem chama a função não consegue distinguir um erro recuperável de uma falha fatal. Compare:
+
+```haskell
+-- Versão que "explode":
+meuSegundo :: [a] -> a
+meuSegundo xs = if null (tail xs)
+                then error "lista muito curta"
+                else head (tail xs)
+
+-- Versão total e segura com Maybe:
+segundoSeguro :: [a] -> Maybe a
+segundoSeguro (_:x:_) = Just x
+segundoSeguro _       = Nothing
+```
+
+Na versão com `Maybe`, devolvemos `Nothing` quando a lista é curta demais — e o **chamador** decide o que fazer, em vez de o programa cair. Note também como o pattern matching `(_:x:_)` torna a versão segura mais concisa: o padrão casa apenas com listas de pelo menos dois elementos, ligando `x` ao segundo.
+
+---
+
+## 6. Tipos Recursivos: Modelando Estruturas de Dados
 
 Os tipos declarados com `data` podem ser recursivos, ou seja, conter referências a si mesmos em seus campos. Isso nos permite modelar estruturas de dados complexas, como árvores binárias:
 
@@ -106,6 +174,8 @@ data Arvore a = Folha
               | No a (Arvore a) (Arvore a)
               deriving (Show, Eq)
 ```
+
+Uma árvore binária ou é um nó com um valor e dois filhos (que também são árvores binárias), ou é uma folha vazia. Em Java, a classe equivalente usaria `null` para indicar a ausência de um filho; em Haskell não existe `null` — usamos explicitamente o construtor `Folha`, e o compilador nos obriga a tratá-lo no pattern matching. Toda uma classe de erros (`NullPointerException`) simplesmente não existe.
 
 Podemos processar essa árvore utilizando recursão sobre sua estrutura:
 
@@ -117,7 +187,7 @@ altura (No _ e d) = 1 + max (altura e) (altura d)
 
 ---
 
-## 5. Implementando Classes de Tipos Personalizadas
+## 7. Implementando Classes de Tipos Personalizadas
 
 Vimos na Unidade 1 que classes de tipos (como `Eq` e `Ord`) governam comportamentos comuns. Haskell nos permite declarar novas classes de tipos por meio da palavra-chave `class`:
 
@@ -148,3 +218,7 @@ data Ponto = Ponto Double Double
 ```
 
 No próximo capítulo, veremos como utilizar o encapsulamento de tipos algébricos para lidar com a manipulação de Entrada/Saída de forma segura através da Monad de IO.
+
+---
+
+> **Nota de atribuição:** partes deste capítulo adaptam material de *Real World Haskell*, de Bryan O'Sullivan, Don Stewart e John Goerzen (tradução PT-BR não oficial), sob a licença [Creative Commons Attribution-Noncommercial 3.0](http://creativecommons.org/licenses/by-nc/3.0/).

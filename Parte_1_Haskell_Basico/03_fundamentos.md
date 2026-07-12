@@ -110,6 +110,28 @@ Prelude> 5 + (-3)
 
 Envolver os números negativos em parênteses evita que o compilador confunda o sinal do número com a aplicação do operador de subtração.
 
+Esse tratamento incomum dos números negativos representa um *trade-off* fundamentado: Haskell permite definir novos operadores a qualquer momento (um recurso que usaremos bastante), e os projetistas da linguagem aceitaram uma sintaxe um pouco mais pesada para números negativos em troca desse poder expressivo.
+
+### Precedência e Associatividade dos Operadores
+Haskell atribui valores numéricos de precedência aos operadores, de 1 (menor) a 9 (maior). Um operador de maior precedência é aplicado antes de um de menor precedência. Podemos inspecionar a precedência de qualquer operador no GHCi com o comando `:info`:
+
+```haskell
+Prelude> :info (+)
+...
+infixl 6 +
+Prelude> :info (*)
+...
+infixl 7 *
+Prelude> :info (^)
+...
+infixr 8 ^
+```
+
+A linha `infixl 6 +` indica que `(+)` tem precedência 6 e é **associativo à esquerda** (`infixl`); já `(^)` é **associativo à direita** (`infixr`). Como `(*)` tem precedência 7, maior que a do `(+)`, a expressão `1 + 4 * 4` é avaliada como `1 + (4 * 4)`.
+
+> [!TIP]
+> Não é necessário memorizar as regras de precedência: na dúvida, adicione parênteses. Expressões complexas que dependem totalmente da precedência dos operadores são fontes notórias de bugs — a presença de alguns parênteses ajuda os futuros leitores (incluindo você mesmo) a entender a intenção.
+
 ---
 
 ## 4. Álgebra Booleana e Operadores de Comparação
@@ -207,4 +229,33 @@ calcularRetanguloWhere largura altura = area + perimetro
     perimetro = 2 * (largura + altura)
 ```
 
+---
+
+## 7. Avaliação Preguiçosa na Prática: Substituição e *Thunks*
+
+Como o Haskell avalia uma expressão como `isOdd (1 + 2)`, onde:
+
+```haskell
+isOdd n = mod n 2 == 1
+```
+
+Em uma linguagem de avaliação **estrita** (C, Python, Java), os argumentos são avaliados *antes* da função ser aplicada: primeiro `1 + 2` viraria `3`, depois `isOdd` seria chamada com `3`.
+
+Haskell escolhe outro caminho: a avaliação **não-estrita** (preguiçosa). A subexpressão `1 + 2` *não* é reduzida imediatamente para `3`. Em vez disso, é criada uma "promessa" de que, quando o valor for realmente necessário, ele será calculado. O registro usado para rastrear essa expressão não avaliada é chamado de **thunk**. Se o resultado nunca for usado, o cálculo nunca acontece.
+
+Uma consequência elegante: operadores de "curto-circuito" não precisam de suporte especial da linguagem. Em Haskell, `(||)` é uma função comum — se o operando esquerdo avaliar para `True`, o direito simplesmente nunca é avaliado:
+
+```haskell
+meuOu :: Bool -> Bool -> Bool
+meuOu a b = if a then a else b
+```
+
+A expressão `meuOu True (length [1..] > 0)` retorna `True` sem travar, mesmo com uma lista infinita no segundo argumento — algo impossível de escrever como função comum em uma linguagem estrita.
+
+Um bom modelo mental para entender a avaliação em Haskell é a **substituição e reescrita**: substitua cada nome pela sua definição, repetidamente, avaliando apenas o suficiente de cada expressão para determinar o valor final.
+
 No próximo capítulo, exploraremos como o sistema de tipos estáticos do Haskell garante que essas expressões operem de forma segura e otimizada.
+
+---
+
+> **Nota de atribuição:** partes deste capítulo adaptam material de *Real World Haskell*, de Bryan O'Sullivan, Don Stewart e John Goerzen (tradução PT-BR não oficial), sob a licença [Creative Commons Attribution-Noncommercial 3.0](http://creativecommons.org/licenses/by-nc/3.0/).

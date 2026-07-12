@@ -93,9 +93,60 @@ cadastro :: (String, Int, Bool)
 cadastro = ("Sergio", 42, True)
 ```
 
+O tipo de uma tupla registra o número, a posição e o tipo de seus elementos. Isso significa que `(Bool, Char)` e `(Char, Bool)` são tipos **distintos**, assim como `(Bool, Char)` e `(Bool, Char, Char)`. Tuplas de dois elementos são chamadas de *pares*; as de três, *triplas*. Na prática, tuplas com muitos elementos tornam o código pesado e são raras. Existe ainda o tipo especial `()` (pronunciado "unit"), uma tupla de zero elementos com um único valor, também escrito `()` — semelhante ao `void` do C.
+
+Para pares, as funções `fst` e `snd` retornam o primeiro e o segundo elemento, respectivamente:
+
+```haskell
+Prelude> fst (1, 'a')
+1
+Prelude> snd (1, 'a')
+'a'
+```
+
+> [!WARNING]
+> **Tuplas Haskell não são "listas imutáveis".** Se você vem do Python, não leve essa ideia para cá: `fst` e `snd` só funcionam para pares, e não é possível indexar ou iterar uma tupla como uma lista. Use tuplas para coleções *pequenas e de tamanho fixo* com tipos heterogêneos — por exemplo, para retornar múltiplos valores de uma função.
+
 ---
 
-## 5. Classes de Tipos (Typeclasses)
+## 5. Polimorfismo Paramétrico e Variáveis de Tipo
+
+Considere a função `last`, que busca o último elemento de uma lista. Ela funciona da mesma maneira não importa o tipo dos elementos:
+
+```haskell
+Prelude> last [1,2,3,4,5]
+5
+Prelude> last "baz"
+'z'
+```
+
+Para expressar isso, sua assinatura contém uma **variável de tipo**:
+
+```haskell
+Prelude> :type last
+last :: [a] -> a
+```
+
+Aqui, `a` é a variável de tipo (sempre iniciada com letra **minúscula**, em contraste com os nomes de tipos concretos, que começam com maiúscula). Lemos a assinatura como: *"recebe uma lista cujos elementos têm algum tipo `a`, e retorna um valor desse mesmo tipo `a`"*. Quando uma função tem variáveis de tipo na assinatura, dizemos que ela é **polimórfica**. Esse tipo de polimorfismo é chamado de **polimorfismo paramétrico** — a inspiração direta dos *generics* de Java/C# e dos *templates* de C++.
+
+### Raciocinando sobre assinaturas polimórficas
+O polimorfismo paramétrico traz um poder de raciocínio surpreendente: como a função não pode saber qual é o tipo real de `a`, ela não pode criar, inspecionar nem transformar esse valor. Observe `fst :: (a, b) -> a` — a única implementação razoável possível (fora loops infinitos ou falhas) é *retornar o primeiro elemento do par*. A assinatura sozinha praticamente determina o comportamento!
+
+### A assinatura revela pureza
+Em Haskell, os efeitos colaterais aparecem no tipo: se o resultado de uma função começa com `IO`, ela é **impura** (interage com o mundo externo); caso contrário, é **pura**:
+
+```haskell
+Prelude> :type lines
+lines :: String -> [String]        -- pura
+Prelude> :type readFile
+readFile :: FilePath -> IO String  -- impura (lê do disco)
+```
+
+O sistema de tipos nos impede de misturar acidentalmente código puro e impuro — voltaremos a isso no capítulo de programas interativos (Módulo 2).
+
+---
+
+## 6. Classes de Tipos (Typeclasses)
 
 Muitas funções em Haskell podem ser usadas em múltiplos tipos diferentes. Por exemplo, o operador `==` pode comparar inteiros, caracteres ou booleanos. Essa funcionalidade é governada por **Typeclasses** (Classes de Tipos), que definem comportamentos abstratos compartilhados por vários tipos:
 
@@ -116,3 +167,7 @@ Muitas funções em Haskell podem ser usadas em múltiplos tipos diferentes. Por
 * **`Num`**: Tipos que possuem comportamento numérico básico (como soma, subtração e multiplicação).
 
 Nos próximos capítulos, estudaremos como definir nossas próprias funções e tipos algébricos personalizados que herdam esses comportamentos.
+
+---
+
+> **Nota de atribuição:** partes deste capítulo adaptam material de *Real World Haskell*, de Bryan O'Sullivan, Don Stewart e John Goerzen (tradução PT-BR não oficial), sob a licença [Creative Commons Attribution-Noncommercial 3.0](http://creativecommons.org/licenses/by-nc/3.0/).

@@ -46,4 +46,5 @@ Aulas expositivas dialogadas intercaladas com codificação ao vivo no GHCi. As 
 ## Bibliografia do módulo
 
 - LIPOVAČA, Miran. *Learn You a Haskell for Great Good!* — capítulos 1 a 6.
+- O'SULLIVAN, Bryan; STEWART, Don; GOERZEN, John. *Real World Haskell* — capítulos 1 a 4 (partes adaptadas ao longo dos capítulos deste módulo).
 - HUTTON, Graham. *Programming in Haskell*. 2. ed. — capítulos 1 a 7 (leitura complementar).

@@ -80,6 +80,24 @@ pedirConfirmacao = do
     else return False
 ```
 
+### Por Baixo do `do`: os Operadores `>>=` e `>>`
+A notação `do` é apenas açúcar sintático. Por baixo, as ações são encadeadas com dois operadores:
+
+* **`(>>=)`** (pronunciado *bind*): executa a ação da esquerda, extrai seu resultado e o passa para a função da direita. Tipo: `IO a -> (a -> IO b) -> IO b`.
+* **`(>>)`**: executa a ação da esquerda, descarta o resultado e executa a da direita.
+
+O programa `interagir` acima é equivalente a:
+
+```haskell
+interagir :: IO ()
+interagir =
+  putStrLn "Qual eh o seu nome?" >>
+  getLine >>= \nome ->
+  putStrLn ("Bem-vindo ao Haskell, " ++ nome ++ "!")
+```
+
+Cada linha `x <- acao` do bloco `do` vira `acao >>= \x -> ...`, e cada ação sem `<-` vira um `>>`. Saber essa correspondência ajuda a ler código Haskell mais avançado e a entender o que a monad `IO` realmente faz.
+
 ---
 
 ## 5. Manipulação de Arquivos
@@ -93,16 +111,39 @@ Além de ler e escrever no console, o Haskell fornece ações básicas para ler 
 Exemplo de um programa que lê um arquivo e grava seu conteúdo em maiúsculas em outro arquivo:
 
 ```haskell
+import Data.Char (toUpper)
+
 converterArquivo :: FilePath -> FilePath -> IO ()
 converterArquivo origem destino = do
   conteudo <- readFile origem
-  let conteudoMaiusculo = map paraMaiuscula conteudo
+  let conteudoMaiusculo = map toUpper conteudo
   writeFile destino conteudoMaiusculo
   putStrLn "Arquivo processado com sucesso!"
-  
-paraMaiuscula :: Char -> Char
--- Função pura auxiliar (exemplo ilustrativo)
-paraMaiuscula c = c -- lógica real usaria Data.Char.toUpper
 ```
 
+Note o padrão típico dos programas Haskell: a ação impura (`readFile`/`writeFile`) fica nas bordas, enquanto a transformação em si (`map toUpper`) é uma função **pura**, ligada com `let` — fácil de testar isoladamente.
+
+---
+
+## 6. O Padrão `interact`: Filtros de Texto em Uma Linha
+
+Para programas do estilo "lê da entrada padrão, transforma, escreve na saída" (filtros Unix), o Haskell oferece a função `interact :: (String -> String) -> IO ()`, que recebe uma **função pura** de transformação e cuida de todo o I/O. Um contador de linhas completo:
+
+```haskell
+-- WC.hs
+main = interact wordCount
+    where wordCount input = show (length (lines input)) ++ "\n"
+```
+
+```bash
+$ runghc WC < arquivo.txt
+7
+```
+
+Graças à avaliação preguiçosa, o `interact` processa a entrada de forma incremental — funciona até com entradas maiores que a memória. Esse é o desenho recomendado para programas Haskell: **concentre a lógica em funções puras e reduza o código impuro ao mínimo indispensável.** Grande parte do risco em software está na comunicação com o mundo exterior; como o sistema de tipos nos diz exatamente quais partes do código têm efeitos colaterais, a "superfície de ataque" fica pequena e bem vigiada.
+
 No próximo capítulo, praticaremos esses conceitos avançados de Haskell através de uma coletânea de exercícios sobre tipos e entrada/saída.
+
+---
+
+> **Nota de atribuição:** partes deste capítulo adaptam material de *Real World Haskell*, de Bryan O'Sullivan, Don Stewart e John Goerzen (tradução PT-BR não oficial), sob a licença [Creative Commons Attribution-Noncommercial 3.0](http://creativecommons.org/licenses/by-nc/3.0/).
