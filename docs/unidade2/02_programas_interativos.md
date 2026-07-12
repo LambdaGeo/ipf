@@ -1,244 +1,108 @@
-# 6. Programas interativos
+# Entrada/Saída (I/O) e Programação Interativa
 
-Conforme discutimos anteriormente, funções de **entrada e saída** de dados são **impuras** pois alteram o estado atual do sistema.
+Até este ponto, focamos puramente em expressões funcionais que recebem dados e computam saídas sem qualquer efeito colateral. No entanto, um programa útil na vida real precisa interagir com o mundo externo: ler dados do teclado, gravar arquivos em disco ou realizar requisições de rede. Neste capítulo, estudaremos como o Haskell resolve o paradoxo de interagir com o mundo impuro de forma segura através da **Monad de IO** e da **notação `do`**.
 
-- Aula gravada
-    
-    [https://www.youtube.com/watch?v=SDCR6fYF5Hg](https://www.youtube.com/watch?v=SDCR6fYF5Hg)
-    
-- Então temos um problema:
-    - Um programa em Haskell consiste num conjunto de funções, sem
-    efeitos colaterais.
-    - O objetivo de executar qualquer programa é ter algum efeito colateral
-    
-    Como usar o Haskell para escrever programas interativos que leem do teclado e gravam na tela enquanto estão em execução
-    
-    ![](6%20Programas%20interativos/Untitled.png)
-    
-- Solução
-    
-    Escrever programas interativos em Haskell usando tipos que fazem distinção entre expressões funcionais “puras” de ações “impuras” que podem envolver efeitos colaterais
-    
-    Um valor do tipo (`IO a`) é uma ação que, quando realizada, pode fazer alguma forma de IO antes de devolver um resultado do tipo `a`.
-    
-    ```haskell
-    type IO a = World -> (a, World)
-    ```
-    
-    ![](6%20Programas%20interativos/Untitled%201.png)
-    
-    Por exemplo:
-    
-    - IO Char: O tipo das ações de IO que retornam um caracter
-    - IO (): O tipo das ações que não tem valor de retorno
-    
-    A função `getChar` captura um caracter do teclado. Se eu executar tal função duas vezes, a saída não necessariamente será igual.
-    
-    A função `putChar` escreve um caracter na saída padarão (ex.: monitor). Se eu executar duas vezes seguidas com a mesma entrada, a saída será diferente.
-    
-    ```haskell
-    getchar :: IO Char
-    putChar :: Char -> IO ()
-    
-    ```
-    
-    Aqui entraria o conceito de mônadas, mas para esse curso, vamos usar IO de forma mais transparente
-    
-    Para saber mais, o grupo da UFABC tem esse material [http://pesquisa.ufabc.edu.br/haskell/monads.html](http://pesquisa.ufabc.edu.br/haskell/monads.html)
-    
-    Podem entrar em contato comigo, caso queiram tirar mais dúvidas.
-    
-- Entrada e Saída - Ação
-    
-    No Haskell chamamos as funções de entrada e saída como **ações de IO** (**IO actions**).
-    
-    As funções básicas são implementadas internamente de acordo com o Sistema Operacional
-    
-    Vamos trabalhar inicialmente com três ações básicas:
-    
-    ```haskell
-    -- recebe um caracter da entrada padrão
-    getChar :: IO Char
-    
-    -- escreve um caracter na saída padrão
-    putChar :: Char -> IO ()
-    
-    -- retorna um valor puro envolvido de uma ação IO
-    return :: a -> IO a
-    ```
-    
-    Compondo as ações básicas para criar outras funções.
-    
-    - O Haskell tem uma notação (do notation) que facilita combinar as ações, que leva a lembrar um estilo imperativo.
-        
-        ```haskell
-        do
-           <comando 1>
-           <comando 2>
-           ...
-           <comando n>
-        ```
-        
-        onde cada comando é da forma
-        
-        ```haskell
-        v <- <ação>
-        ```
-        
-        ou apenas
-        
-        ```haskell
-        <ação>
-        ```
-        
-        - Um pouco mais sobre a do notation
-            
-            
-            Para ser tratado como um monada, um tipo de dadoas Haskell precisa implementar a classe de tipos monada.
-            
-            ```haskell
-            class Monad m where  
-                return :: a -> m a  
-              
-                (>>=) :: m a -> (a -> m b) -> m b  
-              
-                (>>) :: m a -> m b -> m b  
-                x >> y = x >>= \_ -> y  
-              
-                fail :: String -> m a  
-                fail msg = error msg
-            ```
-            
-            Sem a notação do, teríamos que usar os operadores (>≥= ) ou (>>) para combinar as ações. Por exemplo, caso quiséssemos ler uma mensagem e logo imprimir ela na tela, basta combina-las da seguinte mainira:
-            
-            ```haskell
-            main = getLine >>= putStrLn
-            ```
-            
-            Lembrando que:
-            
-            ```haskell
-            getLine :: IO String
-            putStrLn :: String -> IO ()
-            ```
-            
-            Agora, se fosse necessário fazer alguma operação com essa entrada, tipo concatenar com outro valor:
-            
-            ```haskell
-            main = getLine >>= (\s -> return ("ola "++ s) ) >>= putStrLn
-            ```
-            
-            Onde o tipo da expressão lambda é:
-            
-            ```haskell
-            (\s -> return ("ola "++ s) ) :: String -> IO String
-            ```
-            
-            Usando a notação do ficaria:
-            
-            ```haskell
-            main = do
-              s <- getLine
-              putStrLn ("ola "++ s)
-            ```
-            
-            Existem implementações para diversos tipos de dados. Por exemplo para o tipo de dados Maybe
-            
-            ```haskell
-            instance Monad Maybe where  
-                return x = Just x  
-                Nothing >>= f = Nothing  
-                Just x >>= f  = f x  
-                fail _ = Nothing
-            ```
-            
-            Ou mesmo para lista:
-            
-            ```haskell
-            instance Monad [] where
-                return x = [x]
-                xs >>= f = concatMap f xs
-                fail _ = []
-            ```
-            
-            Excelente vídeo Graham Hutton sobre monad:
-            
-            [https://www.youtube.com/watch?v=t1e8gqXLbsU&t=17s](https://www.youtube.com/watch?v=t1e8gqXLbsU&t=17s)
-            
-        
-    - Exemplos
-        
-        Capturar apenas um caracter pode não ser tão interessante quanto capturar uma linha inteira de informação. Podemos escrever uma função `getLine` da seguinte maneira:
-        
-        ```haskell
-        getLine :: IO String
-        getLine = do x <- getChar
-                     if x == '\n' then
-                        return []
-                     else
-                        do xs <- getLine
-                           return (x:xs)
-        ```
-        
-        A função inversa, que escreve uma `String` na saída padrão:
-        
-        ```haskell
-        putStr :: String -> IO ()
-        putStr []     = return ()
-        putStr (x:xs) = do putChar x
-                           putStr  xs
-                           
-        putStrLn :: String -> IO ()
-        putStrLn xs = do putStr xs
-                         putChar 'n'
-        ```
-        
-    
-- Podemos tentar entender melhor agora um Hello World
-    
-    ```haskell
-    ask :: String -> IO String
-    ask question = do
-      putStrLn question
-      getLine
-    
-    main :: IO ()
-    main = do
-      nome <- ask "Qual eh o seu nome?"
-      putStrLn ("Bem vindo "++ nome ++ "!")
-    ```
-    
-    Pode experimentar esse codigo em: [https://repl.it/@SergioSouza1/hellohaskell](https://repl.it/@SergioSouza1/hellohaskell)
-    
-- Um programa um pouco mais elaborado
-    
-    O programa a seguir remove stopword de um dado texto de entrada, e salva em um novo arquivo.
-    
-    ```haskell
-    import Data.Char
-    
-    ignore = ["OF","THE","TO","A","AN","AND","OR","FOR"]
-    
-    textFilter text = 
-      filter  (flip notElem ignore ) 
-      $ words 
-      $ map toUpper text
-    
-    main = do
-      text <- readFile "entrada.txt"
-      writeFile "saida.txt" $ unwords $ textFilter text
-    ```
-    
-    Um exemplo de arquivo de entrada seria:
-    
-    ```
-    Of all the adaptations that allow our animal brethren to soar through the air or endure the darkness and crushing pressure  ...
-    ```
-    
-    Ao executar o programa acima a saída será:
-    
-    ```
-    ALL ADAPTATIONS THAT ALLOW OUR ANIMAL BRETHREN SOAR THROUGH AIR ENDURE DARKNESS CRUSHING PRESSURE ...
-    ```
-    
-    Esse programa pode ser acessado em [https://repl.it/@SergioSouza1/haskellremovestopwords#main.hs](https://repl.it/@SergioSouza1/haskellremovestopwords#main.hs)
+---
+
+## 1. O Paradoxo do I/O na Programação Funcional Pura
+
+Se o Haskell é uma linguagem funcional pura baseada em determinismo matemático (onde a mesma função com os mesmos argumentos sempre retorna o mesmo valor), como podemos implementar uma função como `lerTeclado`? Se o usuário digita coisas diferentes a cada execução, essa função seria impura e violaria as garantias de otimização e avaliação preguiçosa do compilador.
+
+Para resolver este paradoxo, o Haskell separa rigorosamente o mundo das **expressões puras** do mundo das **ações de I/O**.
+
+```text
+  ┌────────────────────────────────┐
+  │      Mundo Puro (Haskell)      │
+  │  - Sem efeitos colaterais      │
+  │  - Determinismo absoluto       │
+  └───────────────┬────────────────┘
+                  │  (Encapsulamento via Tipo IO)
+                  ▼
+  ┌────────────────────────────────┐
+  │       Mundo Impuro (I/O)       │
+  │  - Leitura/Escrita de Arquivos │
+  │  - Interação com Teclado/Tela  │
+  └────────────────────────────────┘
+```
+
+---
+
+## 2. A Solução: O Tipo `IO a`
+
+Em Haskell, uma ação que interage com o mundo externo tem o tipo **`IO a`**. Isso significa: *"uma receita/ação que, quando executada pelo sistema operacional, realizará efeitos colaterais e retornará um valor do tipo `a`"*.
+
+* **`IO Char`**: Uma ação que realiza I/O e retorna um caractere (ex: `getChar`).
+* **`IO ()`**: Uma ação que realiza I/O mas não retorna nenhum valor útil (representado pelo tipo unitário `()`, semelhante ao `void` de outras linguagens).
+
+> [!IMPORTANT]
+> Existe uma diferença crucial entre o tipo `String` e o tipo `IO String`. Um valor do tipo `String` é apenas texto puro que pode ser avaliado com segurança. Um valor do tipo `IO String` é uma **ação pendente** (como ler uma linha do teclado) que só produzirá a string quando for executada. Você nunca pode "extrair" um valor de `IO` para o mundo puro sem que a função inteira também se torne uma ação de `IO`.
+
+---
+
+## 3. Ações Básicas de I/O
+
+A biblioteca padrão do Haskell fornece as seguintes ações primitivas de I/O:
+
+* **`getChar :: IO Char`**: Lê um único caractere do teclado.
+* **`putChar :: Char -> IO ()`**: Escreve um único caractere na tela.
+* **`getLine :: IO String`**: Lê uma linha inteira de texto do teclado.
+* **`putStrLn :: String -> IO ()`**: Escreve uma string na tela seguida por uma nova linha.
+
+---
+
+## 4. Sequenciando Ações com a Notação `do`
+
+Para realizar várias ações de I/O em sequência, utilizamos o construtor sintático **`do`**. Ele nos permite encadear ações de forma linear, assemelhando-se à programação imperativa:
+
+```haskell
+interagir :: IO ()
+interagir = do
+  putStrLn "Qual eh o seu nome?"
+  nome <- getLine
+  putStrLn ("Bem-vindo ao Haskell, " ++ nome ++ "!")
+```
+
+### O Operador de Atribuição de I/O (`<-`)
+Note o uso do símbolo **`<-`**. Ele serve para extrair o valor puro produzido por uma ação de `IO` e vinculá-lo a um nome local (neste caso, extraindo a `String` de dentro de `IO String` retornada por `getLine`).
+
+### O Significado de `return` em Haskell
+Diferentemente de linguagens imperativas, onde `return` é um comando de controle que interrompe a execução de uma função, em Haskell o **`return` é uma função comum**. 
+
+A função `return :: a -> IO a` pega um valor puro de tipo `a` e o envelopa em uma ação de `IO` que não realiza nenhum efeito colateral:
+
+```haskell
+pedirConfirmacao :: IO Bool
+pedirConfirmacao = do
+  putStrLn "Deseja continuar? (s/n)"
+  resposta <- getChar
+  if resposta == 's' 
+    then return True 
+    else return False
+```
+
+---
+
+## 5. Manipulação de Arquivos
+
+Além de ler e escrever no console, o Haskell fornece ações básicas para ler e gravar arquivos em disco:
+
+* **`readFile :: FilePath -> IO String`**: Abre e lê todo o conteúdo de um arquivo de forma preguiçosa.
+* **`writeFile :: FilePath -> String -> IO ()`**: Grava uma string em um arquivo (sobrescrevendo o conteúdo existente).
+* **`appendFile :: FilePath -> String -> IO ()`**: Anexa uma string no final de um arquivo existente.
+
+Exemplo de um programa que lê um arquivo e grava seu conteúdo em maiúsculas em outro arquivo:
+
+```haskell
+converterArquivo :: FilePath -> FilePath -> IO ()
+converterArquivo origem destino = do
+  conteudo <- readFile origem
+  let conteudoMaiusculo = map paraMaiuscula conteudo
+  writeFile destino conteudoMaiusculo
+  putStrLn "Arquivo processado com sucesso!"
+  
+paraMaiuscula :: Char -> Char
+-- Função pura auxiliar (exemplo ilustrativo)
+paraMaiuscula c = c -- lógica real usaria Data.Char.toUpper
+```
+
+No próximo capítulo, praticaremos esses conceitos avançados de Haskell através de uma coletânea de exercícios sobre tipos e entrada/saída.
