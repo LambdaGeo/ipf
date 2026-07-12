@@ -1,46 +1,44 @@
-# Instalando via stack
+# Instalação e Configuração do Ambiente Haskell
 
-O guia rápido a instalação do stack pode ser encontrado em:
+A abordagem moderna e padrão recomendada hoje pela comunidade Haskell para instalar e gerenciar o compilador e suas ferramentas de build é o **GHCup** (Haskell Toolchain Installer). O GHCup gerencia a instalação do compilador GHC, do gerenciador de pacotes Cabal, do servidor de linguagem HLS (Haskell Language Server) e do **Stack**.
 
-[https://docs.haskellstack.org/en/stable/README/](https://docs.haskellstack.org/en/stable/README/)
+Neste livro, utilizaremos o **Stack** como a nossa ferramenta de build e gerenciamento de projetos devido à sua confiabilidade com os *Resolvers* (snapshots compatíveis de pacotes que garantem compilação livre de erros de versão).
 
-e com mais detalhes em:
+---
 
-[https://docs.haskellstack.org/en/stable/GUIDE/](https://docs.haskellstack.org/en/stable/GUIDE/)
+## 💻 Como Instalar o Haskell com GHCup
 
-A seguir farei um resumo de alguns pontos que considerei importantes para ajudar fazerem o trabalho da terceira unidade.
-
-[https://youtu.be/SosFv3ME9zs](https://youtu.be/SosFv3ME9zs)
-
-## Como instalar ?
-
-No Linux basta:
-
-```haskell
-curl -sSL https://get.haskellstack.org/ | sh
+### 1. No Linux e macOS
+Abra o seu terminal e execute o comando oficial do GHCup:
+```bash
+curl --proto '=https' --tlsv1.2 -sSf https://get-ghcup.haskell.org | sh
 ```
+Durante a instalação interativa:
+* Pressione **Enter** para aceitar os caminhos padrão do diretório de instalação.
+* Quando perguntado se deseja adicionar os caminhos ao seu `PATH` (no arquivo `.bashrc` ou `.zshrc`), responda **Yes (Y)**.
+* Quando perguntado se deseja instalar o **Stack** (nossa ferramenta de build), responda **Yes (Y)**.
+* Quando perguntado se deseja instalar o **HLS** (Haskell Language Server, essencial para autocompletar e linting no VS Code), responda **Yes (Y)**.
 
-Então, será pedido a sua senha de administrador para baixar e depois para copiar o `stack` para o sistema. 
+Após a conclusão da instalação, reinicie o seu terminal ou execute `source ~/.bashrc` (ou seu equivalente) para carregar os caminhos de execução.
 
-No caso do windows, após baixar o [executável](https://get.haskellstack.org/stable/windows-x86_64-installer.exe), basta seguir o processo "next, next ..."
+### 2. No Windows
+Abra o console do PowerShell (de preferência como Administrador) e execute o script oficial:
+```powershell
+Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://get-ghcup.haskell.org/install_haskell.ps1'))
+```
+Siga as instruções exibidas na tela e selecione as opções para instalar o **Stack** e o **HLS**.
 
-![](Instalando%20via%20stack/Untitled.png)
+---
 
-![](Instalando%20via%20stack/Untitled%201.png)
+## 🛠️ O que é o Stack e como usá-lo?
 
-Depois de instalado, ao criar um projeto ou acessar o ghci, o stack irá baixar o ghc. Então, para instalar o stack, execute o seguinte comando em um terminal:
+O **Stack** é um gerenciador de projetos que isola as dependências de cada projeto Haskell. A primeira vez que você rodar um comando do Stack, ele baixará a versão correspondente do compilador GHC automaticamente na sua pasta pessoal de usuário, sem interferir com outras instalações do seu sistema.
 
+Para testar a instalação e abrir o interpretador interativo (REPL) do Haskell gerenciado pelo Stack, execute:
 ```bash
 stack ghci
 ```
-
-Na primeira vez esse processo irá demorar, pois irá baixar o ghc e diversas bibliotecas.
-
-![](Instalando%20via%20stack/Untitled%202.png)
-
-No termino desse processo, você  já poderá interagir  com o GHCI.
-
-![](Instalando%20via%20stack/Untitled%203.png)
+*Na primeira vez, esse comando pode demorar alguns minutos pois o Stack baixará o compilador GHC e as bibliotecas base para o diretório de cache do usuário.*
 
 ## Criando um projeto
 

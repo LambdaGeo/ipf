@@ -150,14 +150,15 @@ nav:
       - Funções: unidade1/05_funcoes.md
       - Listas: unidade1/06_listas.md
       - Funções de Alta Ordem: unidade1/07_alta_ordem.md
-      - Programas Interativos (IO): unidade1/08_programas_interativos.md
-      - Declarando Custom Types: unidade1/09_declarando_tipos_classes.md
-      - Exercícios Resolvidos: unidade1/10_exercicios.md
+      - Exercícios Resolvidos: unidade1/08_exercicios.md
   - "Unidade 2: Haskell Avançado e Qualidade":
-      - Projetos Modernos com Stack: unidade2/01_haskell_moderno.md
-      - Escrevendo a Biblioteca JSON: unidade2/02_biblioteca_json.md
-      - Testes com QuickCheck: unidade2/03_testes_qualidade.md
-      - Trabalho Prático: unidade2/04_avaliacao.md
+      - Declarando Custom Types: unidade2/01_declarando_tipos_classes.md
+      - Programas Interativos (IO): unidade2/02_programas_interativos.md
+      - Exercícios Avançados: unidade2/03_exercicios_avancados.md
+      - Projetos Modernos com Stack: unidade2/04_haskell_moderno.md
+      - Escrevendo a Biblioteca JSON: unidade2/05_biblioteca_json.md
+      - Testes com QuickCheck: unidade2/06_testes_qualidade.md
+      - Trabalho Prático: unidade2/07_avaliacao.md
   - "Unidade 3: Clojure e Elixir":
       - Clojure Fundamentos: unidade3/01_clojure_fundamentos.md
       - Clojure Vetores e Mapas: unidade3/02_clojure_colecoes.md
