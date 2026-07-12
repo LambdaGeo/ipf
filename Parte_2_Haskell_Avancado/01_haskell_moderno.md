@@ -88,3 +88,17 @@ main = do
     let val = JString "Haskell Moderno"
     print (getString val)
 ```
+
+---
+
+## 🔗 Transição: Da Teoria Acadêmica para o Desenvolvimento Modular
+
+Na Unidade 1, você trabalhou com arquivos soltos compilados pelo `ghc` ou carregados no `ghci`. Essa abordagem é ideal para focar na sintaxe e conceitos puros da linguagem (como casamento de padrões, listas e recursão). 
+
+No entanto, no desenvolvimento real, lidamos com código dividido em múltiplos arquivos (módulos), dependências externas (como bibliotecas HTTP, bancos de dados ou frameworks de teste) e testes de unidade automatizados.
+
+Nesta **Unidade 2**, usamos o **Stack** para unificar duas práticas fundamentais:
+1. **Modelagem de Dados (SimpleJSON)**: Onde aplicamos os conceitos de tipos de dados algébricos e pattern matching para construir uma biblioteca de parsing e manipulação de objetos JSON reais (baseado no Capítulo 5 do *Real World Haskell*).
+2. **Garantia de Qualidade (QuickCheck)**: Onde mostramos como testar propriedades matemáticas da nossa biblioteca de maneira automatizada (baseado no Capítulo 11 do *Real World Haskell*).
+
+No próximo capítulo, iniciaremos a construção da nossa biblioteca `SimpleJSON`, aplicando as estruturas de projeto do Stack apresentadas aqui.

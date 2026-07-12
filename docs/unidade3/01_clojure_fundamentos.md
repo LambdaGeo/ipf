@@ -1,8 +1,18 @@
 # Fundamentos em Clojure
 
-## 1. Introdução
+## 1. Introdução e Conexão de Paradigmas
 
-Bem-vindo(a) à sua primeira imersão em Clojure! Se você já se perguntou sobre o poder e a elegância da programação funcional, você está no lugar certo. Este documento é a sua primeira aula, o ponto de partida de uma jornada para dominar uma linguagem que pode transformar a maneira como você pensa sobre código. Juntos, vamos explorar os conceitos fundamentais que fazem de Clojure uma ferramenta tão especial: a segurança da **imutabilidade**, a simplicidade de uma **sintaxe única**, a arte de criar **funções poderosas** e o conceito revolucionário de que, em Clojure, **código é apenas mais um tipo de dado**. Prepare-se para abrir sua mente e dar seus primeiros passos em um mundo de código mais claro, previsível e expressivo.
+Seja bem-vindo(a) à sua primeira imersão em Clojure! 
+
+Nas Unidades 1 e 2, você trabalhou com **Haskell**, uma linguagem de tipagem estática forte, pura e baseada em avaliação preguiçosa. Em Haskell, a segurança do código vem majoritariamente do compilador, que realiza verificações estritas de tipos antes mesmo de o código ser executado.
+
+Agora, na **Unidade 3**, fazemos uma transição filosófica importante ao entrar no ecossistema **Lisp** com o **Clojure**. Embora ambas as linguagens compartilhem os pilares da programação funcional (como imutabilidade e funções como cidadãs de primeira classe), a abordagem do Clojure é diferente:
+1. **Tipagem Dinâmica e Pragmática**: Clojure não realiza checagem de tipos em tempo de compilação da forma estrita do Haskell. Isso confere uma flexibilidade incrível e agilidade de prototipagem.
+2. **Desenvolvimento Focado no REPL**: O REPL (Read-Eval-Print Loop) em Clojure não é apenas um local para testar funções (como o GHCi); ele é o próprio núcleo do desenvolvimento, onde você altera o programa em execução sem precisar reiniciar o processo.
+3. **Código como Dados (Homoiconicidade)**: Em Clojure, a própria sintaxe do código é estruturada como listas e mapas. Isso abre as portas para uma metaprogramação absurdamente poderosa através de **Macros**, algo impossível na sintaxe rígida do Haskell.
+4. **Ambiente Hospedado**: Clojure roda sobre a Java Virtual Machine (JVM), dando acesso nativo ao ecossistema robusto e maduro do Java.
+
+Prepare-se para abrir sua mente e descobrir uma nova forma de projetar softwares funcionais, preditivos e altamente flexíveis.
 
 ### 1.1 O Que é Programação Funcional (e por que Clojure é especial?)
 

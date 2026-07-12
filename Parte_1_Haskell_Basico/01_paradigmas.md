@@ -58,3 +58,23 @@ Em linguagens funcionais, funções são tratadas como qualquer outro tipo de da
 * Podem ser armazenadas em variáveis ou coleções de dados.
 
 Funções que recebem ou retornam outras funções são chamadas de **Funções de Alta Ordem** (*High-Order Functions*).
+
+---
+
+## 🗺️ Roteiro do Livro e Conexão de Conceitos
+
+Este livro foi planejado como um curso integrado, unindo materiais e práticas consolidadas em diferentes semestres para oferecer uma visão completa e moderna da programação funcional. O roteiro de aprendizado divide-se em três partes:
+
+1. **Unidade 1: Paradigmas e Haskell Básico (Fundamentos Matemáticos)**
+   Aqui estabelecemos os alicerces teóricos e a sintaxe de Haskell. Ao trabalhar com uma linguagem funcional pura e estaticamente tipada, você aprenderá a pensar em termos de imutabilidade, casamento de padrões, recursão e funções de alta ordem. É o treinamento conceitual mais rigoroso.
+   
+2. **Unidade 2: Haskell Avançado e Qualidade de Código (Prática Industrial)**
+   Subimos o nível para o desenvolvimento de software modular. Unificamos o clássico *Real World Haskell* com as ferramentas modernas do compilador GHC (através do **Stack**). Você aprenderá a modelar uma biblioteca de dados JSON e a garantir sua correção matemática usando testes baseados em propriedades com o **QuickCheck**, unindo teoria e engenharia de software de alta qualidade.
+   
+3. **Unidade 3: Lisp (Clojure) e Atores (Elixir) (A Diversidade do Paradigma)**
+   Após dominar o rigor estático e puro de Haskell, exploramos dois mundos fundamentais na indústria:
+   * **Clojure**: A flexibilidade e poder de metaprogramação de um Lisp dinâmico e hospedado na JVM, culminando no desenvolvimento de uma aplicação web ToDo List.
+   * **Elixir**: A reatividade de tempo real e tolerância a falhas do modelo de Atores na máquina virtual BEAM, culminando em uma aplicação ToDo List interativa com Phoenix LiveView.
+
+Ao final desta jornada, você terá saído de conceitos puros do Cálculo Lambda até a criação de sistemas web concorrentes e tolerantes a falhas, dominando os principais pilares da programação funcional contemporânea.
+
