@@ -1,4 +1,4 @@
-# Avaliação do Módulo 2: Projeto hs2json
+# Avaliação da Unidade 2: Projeto hs2json
 
 Esta atividade avaliativa consiste em construir um projeto completo em Haskell moderno, aplicando técnicas de desenvolvimento de bibliotecas, modularização em Stack e testes baseados em propriedades com QuickCheck.
 

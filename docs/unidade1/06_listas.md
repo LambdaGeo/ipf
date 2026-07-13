@@ -93,7 +93,7 @@ somarLista []     = 0
 somarLista (x:xs) = x + somarLista xs
 ```
 
-Pensar na estrutura da lista — vazia, ou um elemento seguido do restante — e tratar os dois casos separadamente é uma abordagem chamada **recursão estrutural**. O caso não-recursivo (lista vazia) é o **caso base**; o outro é o **caso recursivo** (ou *indutivo*). Essa técnica não se limita a listas: vale para qualquer tipo de dado algébrico, como veremos no Módulo 2.
+Pensar na estrutura da lista — vazia, ou um elemento seguido do restante — e tratar os dois casos separadamente é uma abordagem chamada **recursão estrutural**. O caso não-recursivo (lista vazia) é o **caso base**; o outro é o **caso recursivo** (ou *indutivo*). Essa técnica não se limita a listas: vale para qualquer tipo de dado algébrico, como veremos na Unidade 2.
 
 ### Exemplo 2: O Clássico Quicksort em Haskell
 A expressividade do casamento de padrões e da recursão sobre listas permite implementar o famoso algoritmo de ordenação **Quicksort** de forma incrivelmente compacta em Haskell:

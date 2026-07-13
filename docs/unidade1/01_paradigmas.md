@@ -48,7 +48,7 @@ Durante a década de 1990, Haskell cumpriu um papel duplo: era uma linguagem est
 
 Enquanto isso, o mainstream da programação experimentava ajustes relativamente pequenos — de C para C++, de C++ para Java. Na periferia, surgiam as linguagens dinâmicas: Guido van Rossum projetou o Python, Larry Wall criou o Perl e Yukihiro Matsumoto desenvolveu o Ruby. À medida que se popularizavam, elas espalharam três ideias fundamentais: os programadores não estavam trabalhando em linguagens suficientemente **expressivas**; muitas vezes vale a pena sacrificar desempenho de execução em troca de um grande ganho de **produtividade**; e — não por acaso — várias dessas linguagens **emprestaram conceitos da programação funcional**.
 
-Impulsionado em parte por essa visibilidade, Haskell escapou da academia e hoje tem uma comunidade vibrante de uso comercial e open source. O movimento se completou: as linguagens mainstream de hoje (Java, C++, Python, JavaScript) incorporaram lambdas, `map`/`filter` e imutabilidade, e linguagens funcionais nativas da indústria — como o **Clojure** e o **Elixir**, que estudaremos no Módulo 3 — sustentam sistemas de larga escala.
+Impulsionado em parte por essa visibilidade, Haskell escapou da academia e hoje tem uma comunidade vibrante de uso comercial e open source. O movimento se completou: as linguagens mainstream de hoje (Java, C++, Python, JavaScript) incorporaram lambdas, `map`/`filter` e imutabilidade, e linguagens funcionais nativas da indústria — como o **Clojure** e o **Elixir**, que estudaremos na Unidade 3 — sustentam sistemas de larga escala.
 
 ---
 
@@ -87,11 +87,11 @@ A avaliação preguiçosa garante que a lista só será ordenada *o suficiente* 
 
 Além dos pilares conceituais, vale entender os argumentos práticos que motivam o estudo do paradigma — este livro os revisitará constantemente.
 
-**Código puro é mais fácil de testar.** Quando uma função responde apenas às suas entradas visíveis, podemos afirmar propriedades do seu comportamento que devem ser *sempre* verdadeiras — e testá-las automaticamente contra milhares de entradas aleatórias (é exatamente o que faremos com o QuickCheck no Módulo 2). Como há muito menos código impuro do que haveria em uma linguagem tradicional, ganhamos muito mais confiança na consistência do software.
+**Código puro é mais fácil de testar.** Quando uma função responde apenas às suas entradas visíveis, podemos afirmar propriedades do seu comportamento que devem ser *sempre* verdadeiras — e testá-las automaticamente contra milhares de entradas aleatórias (é exatamente o que faremos com o QuickCheck na Unidade 2). Como há muito menos código impuro do que haveria em uma linguagem tradicional, ganhamos muito mais confiança na consistência do software.
 
 **Concisão comparável às linguagens dinâmicas, com segurança estática.** Comparado às linguagens estáticas tradicionais (C, Java), o sistema de tipos de Haskell é mais flexível e, graças à inferência de tipos, quase não exige anotações — reduzindo a redundância do código. Comparado às linguagens dinâmicas (Python, Ruby), Haskell oferece concisão semelhante, mas o compilador prova a ausência de erros de tipo antes da execução: um programa Haskell que compila dificilmente sofre de erros triviais em produção. É a escolha entre a perspectiva de **segurança** que Haskell enfatiza e a de **flexibilidade** que a tipagem dinâmica favorece.
 
-**Uso real na indústria.** Haskell e as demais linguagens funcionais deste curso saíram há muito da academia: bancos usam Haskell para medir risco de carteiras de derivativos; empresas de biotecnologia criam modelos matemáticos com ele; o sistema de controle de versão Darcs e o próprio compilador GHC são escritos em Haskell. Clojure e Elixir, que veremos no Módulo 3, sustentam sistemas web de larga escala (Nubank, WhatsApp/Erlang, Discord).
+**Uso real na indústria.** Haskell e as demais linguagens funcionais deste curso saíram há muito da academia: bancos usam Haskell para medir risco de carteiras de derivativos; empresas de biotecnologia criam modelos matemáticos com ele; o sistema de controle de versão Darcs e o próprio compilador GHC são escritos em Haskell. Clojure e Elixir, que veremos na Unidade 3, sustentam sistemas web de larga escala (Nubank, WhatsApp/Erlang, Discord).
 
 ---
 

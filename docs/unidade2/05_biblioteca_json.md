@@ -1,6 +1,6 @@
 # Desenvolvendo uma Biblioteca JSON em Haskell
 
-Neste capítulo, iniciamos o projeto central do Módulo 2: uma biblioteca completa para manipulação e serialização de dados em formato **JSON (JavaScript Object Notation)**, adaptando o clássico *Real World Haskell* (Capítulo 5) para um projeto moderno gerenciado pelo **Stack**.
+Neste capítulo, iniciamos o projeto central da Unidade 2: uma biblioteca completa para manipulação e serialização de dados em formato **JSON (JavaScript Object Notation)**, adaptando o clássico *Real World Haskell* (Capítulo 5) para um projeto moderno gerenciado pelo **Stack**.
 
 !!! success "Tutorial completo no blog"
     O passo a passo detalhado — do `stack new` até o pacote final, com todos os módulos, códigos e explicações — está publicado como tutorial no blog do LambdaGEO:

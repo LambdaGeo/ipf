@@ -1,6 +1,6 @@
 # Funções de Alta Ordem, Currying e Composição
 
-Neste capítulo, encerraremos nosso primeiro módulo explorando o recurso que confere a máxima expressividade ao paradigma funcional: as **Funções de Alta Ordem** (*Higher-Order Functions*). Ao tratar funções como valores comuns, aprenderemos a parametrizar comportamentos, reutilizar padrões de iteração genéricos (`map`, `filter`, `fold`) e encadear transformações de dados de maneira matemática através da composição — descobrindo, no caminho, como *pensar sobre loops* em uma linguagem que não os possui.
+Neste capítulo, encerraremos nossa primeira unidade explorando o recurso que confere a máxima expressividade ao paradigma funcional: as **Funções de Alta Ordem** (*Higher-Order Functions*). Ao tratar funções como valores comuns, aprenderemos a parametrizar comportamentos, reutilizar padrões de iteração genéricos (`map`, `filter`, `fold`) e encadear transformações de dados de maneira matemática através da composição — descobrindo, no caminho, como *pensar sobre loops* em uma linguagem que não os possui.
 
 ---
 
@@ -457,7 +457,7 @@ Essa omissão do argumento de entrada é chamada de **Point-Free Style** e resul
 
 ## 6. Dicas para Escrever Código Legível
 
-Ao longo do módulo vimos três "níveis" de ferramentas para processar listas — e vale estabelecer uma hierarquia de preferência:
+Ao longo da unidade vimos três "níveis" de ferramentas para processar listas — e vale estabelecer uma hierarquia de preferência:
 
 1. **Funções de biblioteca compostas** (`map`, `filter`, `take`, composições): cada uma faz *uma coisa só* e tem comportamento conhecido. O leitor foca na ideia do código, não na mecânica.
 2. **Folds**: exigem um pouco mais de esforço para ler que uma composição de `map`/`filter`, mas se comportam de forma regular e previsível.
@@ -480,7 +480,7 @@ Adaptados do *Real World Haskell* (cap. 4):
 5. Usando composição e funções de biblioteca (sem recursão explícita), escreva uma função que recebe um texto e retorna a última palavra de cada linha.
 6. **(Desafio)** Escreva `foldl` em termos de `foldr`. Aviso: não é trivial! Tenha à mão o GHCi (para descobrir o que a função `id` faz), lápis e papel.
 
-Com isso, encerramos o **Módulo 1**! Agora você domina as bases teóricas do paradigma funcional e a modelagem matemática básica no Haskell.
+Com isso, encerramos a **Unidade 1**! Agora você domina as bases teóricas do paradigma funcional e a modelagem matemática básica no Haskell.
 
 ---
 

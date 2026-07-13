@@ -1,17 +1,17 @@
-# Módulo 3 — Clojure e Elixir (20h)
+# Unidade 3 — Clojure e Elixir (20h)
 
 ## Identificação
 
 | | |
 |---|---|
-| **Módulo** | 3 de 3 |
+| **Unidade** | 3 de 3 |
 | **Carga horária** | 20 horas (10 aulas de 2h) |
-| **Pré-requisitos** | Módulos 1 e 2 concluídos (fundamentos do paradigma funcional em Haskell) |
+| **Pré-requisitos** | Unidades 1 e 2 concluídas (fundamentos do paradigma funcional em Haskell) |
 | **Linguagens** | Clojure/ClojureScript (JVM) e Elixir (BEAM/Erlang VM) |
 
 ## Objetivos de aprendizagem
 
-Ao final deste módulo, o estudante deverá ser capaz de:
+Ao final desta unidade, o estudante deverá ser capaz de:
 
 1. **Transferir** os conceitos funcionais aprendidos em Haskell (imutabilidade, alta ordem, recursão) para linguagens dinâmicas da indústria.
 2. **Programar** em Clojure utilizando coleções persistentes, funções de alta ordem, threading macros e lazy sequences.
@@ -39,7 +39,7 @@ Ao final deste módulo, o estudante deverá ser capaz de:
 
 ## Metodologia
 
-O módulo aplica a estratégia de *transferência de paradigma*: cada conceito é apresentado retomando o equivalente já estudado em Haskell. As aulas 1–5 e 7–9 combinam exposição com codificação ao vivo no REPL (Clojure) e no IEx (Elixir); as aulas 6 e 10 são laboratórios dedicados aos projetos avaliativos.
+A unidade aplica a estratégia de *transferência de paradigma*: cada conceito é apresentado retomando o equivalente já estudado em Haskell. As aulas 1–5 e 7–9 combinam exposição com codificação ao vivo no REPL (Clojure) e no IEx (Elixir); as aulas 6 e 10 são laboratórios dedicados aos projetos avaliativos.
 
 ## Avaliação
 
@@ -50,7 +50,7 @@ Dois projetos práticos, com peso igual:
 
 Cada projeto é avaliado por: funcionamento conforme a especificação, qualidade e idiomaticidade do código, e extensões implementadas além do tutorial (diferencial de nota).
 
-## Bibliografia do módulo
+## Bibliografia da unidade
 
 - MILLER, Alex; HALLOWAY, Stuart; BEDRA, Aaron. *Programming Clojure*. 3. ed.
 - THOMAS, Dave. *Programming Elixir ≥ 1.6*.

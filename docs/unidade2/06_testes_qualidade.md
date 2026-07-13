@@ -85,7 +85,7 @@ O relatório HTML mostra expressões, ramos e funções cobertos, destacando os 
 * Implementar `Arbitrary` para um tipo recursivo com controle de profundidade (`sized`);
 * Interpretar um relatório de cobertura HPC e usá-lo para direcionar novos testes.
 
-Esses são exatamente os itens cobrados no [trabalho prático do módulo](07_avaliacao.md).
+Esses são exatamente os itens cobrados no [trabalho prático da unidade](07_avaliacao.md).
 
 ---
 

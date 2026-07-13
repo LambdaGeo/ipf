@@ -1,6 +1,6 @@
 # Trabalho Elixir: ToDo List com Phoenix LiveView
 
-Este capítulo apresenta o **segundo projeto avaliativo do Módulo 3**: construir uma aplicação de **Lista de Tarefas (Todo List)** do zero, usando a stack moderna de **Elixir com Phoenix LiveView** — um framework funcional e reativo para o desenvolvimento web full-stack.
+Este capítulo apresenta o **segundo projeto avaliativo da Unidade 3**: construir uma aplicação de **Lista de Tarefas (Todo List)** do zero, usando a stack moderna de **Elixir com Phoenix LiveView** — um framework funcional e reativo para o desenvolvimento web full-stack.
 
 !!! success "Tutorial completo no blog"
     O passo a passo detalhado — com todos os comandos, códigos e explicações — está publicado como tutorial no blog do LambdaGEO:
@@ -42,7 +42,7 @@ Comparar as duas soluções — e argumentar sobre os *trade-offs* de cada arqui
 7. **Toggle**: marcar tarefas como concluídas;
 8. **Tema**: personalização visual com Tailwind/daisyUI.
 
-Repare como o projeto exercita os conceitos do módulo: **pattern matching** nos handlers de eventos, o **operador pipe** nas consultas Ecto, e os **processos da BEAM** — cada usuário conectado é um processo LiveView isolado, aplicando diretamente o modelo de atores estudado no capítulo de [processos e concorrência](14_elixir_processos.md).
+Repare como o projeto exercita os conceitos da unidade: **pattern matching** nos handlers de eventos, o **operador pipe** nas consultas Ecto, e os **processos da BEAM** — cada usuário conectado é um processo LiveView isolado, aplicando diretamente o modelo de atores estudado no capítulo de [processos e concorrência](14_elixir_processos.md).
 
 ## 📦 Requisitos de Entrega
 
@@ -51,4 +51,4 @@ Repare como o projeto exercita os conceitos do módulo: **pattern matching** nos
 3. `README.md` explicando como configurar e executar o projeto;
 4. **Extensões além do tutorial são o diferencial de nota** — sugestões: PubSub para sincronizar múltiplos usuários em tempo real, filtros, edição de tarefas, testes com ExUnit.
 
-A pontuação e os critérios detalhados estão no [plano do módulo](00_plano_modulo3.md).
+A pontuação e os critérios detalhados estão no [plano da unidade](00_plano_unidade3.md).

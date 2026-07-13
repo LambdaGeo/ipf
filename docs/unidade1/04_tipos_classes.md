@@ -142,7 +142,7 @@ Prelude> :type readFile
 readFile :: FilePath -> IO String  -- impura (lê do disco)
 ```
 
-O sistema de tipos nos impede de misturar acidentalmente código puro e impuro — voltaremos a isso no capítulo de programas interativos (Módulo 2).
+O sistema de tipos nos impede de misturar acidentalmente código puro e impuro — voltaremos a isso no capítulo de programas interativos (Unidade 2).
 
 ---
 

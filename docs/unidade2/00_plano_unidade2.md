@@ -1,17 +1,17 @@
-# Módulo 2 — Haskell Avançado e Qualidade de Código (20h)
+# Unidade 2 — Haskell Avançado e Qualidade de Código (20h)
 
 ## Identificação
 
 | | |
 |---|---|
-| **Módulo** | 2 de 3 |
+| **Unidade** | 2 de 3 |
 | **Carga horária** | 20 horas (10 aulas de 2h) |
-| **Pré-requisitos** | Módulo 1 concluído (Haskell básico: funções, listas, alta ordem) |
+| **Pré-requisitos** | Unidade 1 concluída (Haskell básico: funções, listas, alta ordem) |
 | **Linguagem** | Haskell (projetos com Stack, QuickCheck, HSpec) |
 
 ## Objetivos de aprendizagem
 
-Ao final deste módulo, o estudante deverá ser capaz de:
+Ao final desta unidade, o estudante deverá ser capaz de:
 
 1. **Definir** tipos algébricos de dados (ADTs), tipos recursivos e instâncias de classes de tipos próprias.
 2. **Construir** programas interativos compreendendo a separação entre código puro e ações `IO`.
@@ -36,7 +36,7 @@ Ao final deste módulo, o estudante deverá ser capaz de:
 
 ## Metodologia
 
-O módulo é orientado a projeto: os conceitos das aulas 1–5 convergem para a construção incremental da biblioteca JSON (aulas 6–8), que é também o objeto da avaliação. As aulas 4, 9 e 10 são realizadas em laboratório.
+A unidade é orientada a projeto: os conceitos das aulas 1–5 convergem para a construção incremental da biblioteca JSON (aulas 6–8), que é também o objeto da avaliação. As aulas 4, 9 e 10 são realizadas em laboratório.
 
 Os capítulos 5 e 6 deste material apresentam os conceitos e as decisões de projeto; o desenvolvimento passo a passo é guiado pelo tutorial **[Construindo e Testando uma Biblioteca Haskell: JSON, Pretty Printing e QuickCheck](https://lambdageo.github.io/blog/tutorial-haskell-json-quickcheck/)**, no blog do LambdaGEO.
 
@@ -44,7 +44,7 @@ Os capítulos 5 e 6 deste material apresentam os conceitos e as decisões de pro
 
 - **Trabalho prático (100%)** — desenvolvimento da biblioteca JSON estruturada com Stack e integrada com uma suíte de testes QuickCheck, conforme especificado no capítulo [Trabalho Prático](07_avaliacao.md). A nota considera: corretude e completude da biblioteca, qualidade e cobertura das propriedades testadas, organização do projeto e defesa individual na aula 10.
 
-## Bibliografia do módulo
+## Bibliografia da unidade
 
 - O'SULLIVAN, Bryan; STEWART, Don; GOERZEN, John. *Real World Haskell* — capítulos 5 e 11 (código modernizado para os padrões atuais do GHC).
 - LIPOVAČA, Miran. *Learn You a Haskell for Great Good!* — capítulos 7 a 9.

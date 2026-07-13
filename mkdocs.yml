@@ -1,7 +1,7 @@
 site_name: Introdução à Programação Funcional
 site_description: >
   Livro didático da disciplina de Introdução à Programação Funcional:
-  Haskell, Clojure e Elixir em três módulos de 20 horas.
+  Haskell, Clojure e Elixir em três unidades de 20 horas.
 site_author: "Sergio Souza Costa"
 
 docs_dir: docs
@@ -44,8 +44,8 @@ extra_javascript:
 nav:
   - Apresentação: index.md
 
-  - Módulo 1 — Paradigmas e Haskell Básico (20h):
-    - "Plano do Módulo 1":                         unidade1/00_plano_modulo1.md
+  - Unidade 1 — Paradigmas e Haskell Básico (20h):
+    - "Plano da Unidade 1":                        unidade1/00_plano_unidade1.md
     - "Cap 1: Introdução aos Paradigmas":          unidade1/01_paradigmas.md
     - "Cap 2: Instalação do Ambiente":             unidade1/02_instalacao.md
     - "Cap 3: Fundamentos e o GHCi":               unidade1/03_fundamentos.md
@@ -55,8 +55,8 @@ nav:
     - "Cap 7: Funções de Alta Ordem":              unidade1/07_alta_ordem.md
     - "Cap 8: Exercícios Resolvidos":              unidade1/08_exercicios.md
 
-  - Módulo 2 — Haskell Avançado e Qualidade (20h):
-    - "Plano do Módulo 2":                         unidade2/00_plano_modulo2.md
+  - Unidade 2 — Haskell Avançado e Qualidade (20h):
+    - "Plano da Unidade 2":                        unidade2/00_plano_unidade2.md
     - "Cap 9: Tipos Algébricos e Typeclasses":     unidade2/01_declarando_tipos_classes.md
     - "Cap 10: Programas Interativos (IO)":        unidade2/02_programas_interativos.md
     - "Cap 11: Exercícios Avançados":              unidade2/03_exercicios_avancados.md
@@ -65,8 +65,8 @@ nav:
     - "Cap 14: Testes com QuickCheck":             unidade2/06_testes_qualidade.md
     - "Trabalho Prático: hs2json":                 unidade2/07_avaliacao.md
 
-  - Módulo 3 — Clojure e Elixir (20h):
-    - "Plano do Módulo 3":                         unidade3/00_plano_modulo3.md
+  - Unidade 3 — Clojure e Elixir (20h):
+    - "Plano da Unidade 3":                        unidade3/00_plano_unidade3.md
     - "Cap 15: Clojure — Fundamentos":             unidade3/01_clojure_fundamentos.md
     - "Cap 16: Clojure — Vetores e Mapas":         unidade3/02_clojure_colecoes.md
     - "Cap 17: Clojure — Alta Ordem":              unidade3/03_clojure_alta_ordem.md

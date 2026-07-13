@@ -1,17 +1,17 @@
-# Módulo 1 — Paradigmas e Haskell Básico (20h)
+# Unidade 1 — Paradigmas e Haskell Básico (20h)
 
 ## Identificação
 
 | | |
 |---|---|
-| **Módulo** | 1 de 3 |
+| **Unidade** | 1 de 3 |
 | **Carga horária** | 20 horas (10 aulas de 2h) |
 | **Pré-requisitos** | Lógica de programação; experiência prévia com alguma linguagem imperativa |
 | **Linguagem** | Haskell (GHC via GHCup, GHCi, Stack) |
 
 ## Objetivos de aprendizagem
 
-Ao final deste módulo, o estudante deverá ser capaz de:
+Ao final desta unidade, o estudante deverá ser capaz de:
 
 1. **Diferenciar** o paradigma funcional dos paradigmas imperativo e orientado a objetos, explicando conceitos como imutabilidade, transparência referencial e funções puras.
 2. **Configurar** o ambiente de desenvolvimento Haskell (GHCup, GHCi, Stack) e utilizar o REPL como ferramenta de exploração.
@@ -32,7 +32,7 @@ Ao final deste módulo, o estudante deverá ser capaz de:
 | 7 | 2h | Prática dirigida em laboratório: recursão e listas | [Listas](06_listas.md) |
 | 8 | 2h | Funções de alta ordem: `map`, `filter`, `fold`, composição e aplicação parcial | [Funções de Alta Ordem](07_alta_ordem.md) |
 | 9 | 2h | Resolução comentada de exercícios e preparação para a avaliação | [Exercícios Resolvidos](08_exercicios.md) |
-| 10 | 2h | Revisão geral e **avaliação escrita do módulo** | — |
+| 10 | 2h | Revisão geral e **avaliação escrita da unidade** | — |
 
 ## Metodologia
 
@@ -41,10 +41,10 @@ Aulas expositivas dialogadas intercaladas com codificação ao vivo no GHCi. As 
 ## Avaliação
 
 - **Avaliação escrita individual (70%)** — aula 10: questões conceituais sobre paradigmas e questões de codificação em Haskell básico (funções, listas, alta ordem).
-- **Listas de exercícios (30%)** — entregas parciais ao longo do módulo, baseadas nos exercícios dos capítulos.
+- **Listas de exercícios (30%)** — entregas parciais ao longo da unidade, baseadas nos exercícios dos capítulos.
 
-## Bibliografia do módulo
+## Bibliografia da unidade
 
 - LIPOVAČA, Miran. *Learn You a Haskell for Great Good!* — capítulos 1 a 6.
-- O'SULLIVAN, Bryan; STEWART, Don; GOERZEN, John. *Real World Haskell* — capítulos 1 a 4 (partes adaptadas ao longo dos capítulos deste módulo).
+- O'SULLIVAN, Bryan; STEWART, Don; GOERZEN, John. *Real World Haskell* — capítulos 1 a 4 (partes adaptadas ao longo dos capítulos desta unidade).
 - HUTTON, Graham. *Programming in Haskell*. 2. ed. — capítulos 1 a 7 (leitura complementar).
