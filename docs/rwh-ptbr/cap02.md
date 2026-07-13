@@ -1,4 +1,4 @@
-[Sumário](index)
+[Sumário](index.md)
 
 ## Capítulo 2. Tipos e Funções           
 
@@ -31,7 +31,7 @@ Tipagem forte pode tornar mais difícil escrevermos certos tipos de código. Por
 A grande vantagem da tipagem forte é que ela captura bugs real em nosso código antes que possam causar problemas. Por exemplo, em uma linguagem fortemente tipada, não podemos acidentalmente utilizar uma cadeia onde um inteiro é esperado.
 
 
->![[Note]]({{site.url}}/rwh-ptbr/assets/note.png)**Os tipos mais fracos e os tipos mais fortes**
+>![[Note]](assets/note.png)**Os tipos mais fracos e os tipos mais fortes**
 
 >É útil ter consciência de que muitas comunidades linguísticas têm suas próprias definições de um “tipo forte”. No entanto, vamos falar brevemente e em termos gerais sobre a noção de força nos sistemas do tipo.
 
@@ -55,7 +55,7 @@ Ter um sistema do tipo _estático_ significa que o compilador sabe o tipo de cad
 
 Esta mensagem de erro é do tipo que já vimos antes. O compilador tem inferido que o tipo da expressão `"false"` é \[Char\]. O `(&&)` exige que cada operador de seus operandos como sendo do tipo Bool, e seu operando à esquerda de fato tem este tipo. Desde que o real tipo de `"false"` não corresponde ao tipo necessário, o compilador rejeita esta expressão como mal escrita.
 
-Tipagem estática pode ocasionalmente dificultar a escrita de alguns tipos de código útil. Em linguagens como Python “duck typing” é comum, quando um objeto age parecido como um outro para ser utilizado como um substituto para ele \[[2](#ftn.id578004)\]. Felizmente, o sistema de _typeclasses_ do Haskell, que iremos cobrir em [Capítulo 6, _Utilizar Typeclasses_](using-typeclasses.html "Capítulo 6. Utilizar Typeclasses"), fornece quase todos os benefícios de tipagem dinâmica, de uma forma segura e conveniente. Haskell tem algum suporte para a programação com tipos dinâmicos reais, embora não seja tão fácil como em um linguagem que inteiramente encorpora à noção de tipos dinâmicos.
+Tipagem estática pode ocasionalmente dificultar a escrita de alguns tipos de código útil. Em linguagens como Python “duck typing” é comum, quando um objeto age parecido como um outro para ser utilizado como um substituto para ele \[[2](#ftn.id578004)\]. Felizmente, o sistema de _typeclasses_ do Haskell, que iremos cobrir em [Capítulo 6, _Utilizar Typeclasses_](http://book.realworldhaskell.org/read/using-typeclasses.html "Capítulo 6. Utilizar Typeclasses"), fornece quase todos os benefícios de tipagem dinâmica, de uma forma segura e conveniente. Haskell tem algum suporte para a programação com tipos dinâmicos reais, embora não seja tão fácil como em um linguagem que inteiramente encorpora à noção de tipos dinâmicos.
 
 A combinação de tipagem forte e estática, torna impossível a ocorrência de erros de tipo em tempo de execução. Enquanto isso significa que irar requerem mais do pensamento “a frente”, ele também elimina muitos erros simples que podem de outra maneira ser extremamente difíceis de encontrar. É um truísmo na comunidade Haskell que uma vez que o código compila, é mais provável que funcione corretamente do que em outras linguagens. (Talvez uma maneira mais realista de colocar isso é que o código Haskell muitas vezes tem menos bugs trivial).
 
@@ -100,7 +100,7 @@ Na [seção intitulada “Primeiros passos com os tipos”](), apresentamos algu
 *   Os valores de tipo Double são usados para números de ponto flutuante. Um valor Double é normalmente 64 bits de largura, e usa o sistema nativo de ponto flutuante de representação. (O tipo Float, também existe, mas seu uso não é recomendado; o compilador Haskell concentra-se em tornar o Double mais eficiente, de modo que o Float é muito mais lento).
     
 
-Já fizemos uma breve visita da notação para os tipos em Haskell [na seção chamada “Primeiros passos com os tipos”](getting-started.html#starting.types "Primeiros passos com os tipos"). Quando escrevemos um tipo explicitamente, usamos a notação de `expression :: MyType` para dizer que a `expression` tem o tipo MyType. Se omitirmos o `::` e o tipo que se segue, o compilador Haskell irá inferir o tipo da expressão.
+Já fizemos uma breve visita da notação para os tipos em Haskell [na seção chamada “Primeiros passos com os tipos”](http://book.realworldhaskell.org/read/getting-started.html#starting.types "Primeiros passos com os tipos"). Quando escrevemos um tipo explicitamente, usamos a notação de `expression :: MyType` para dizer que a `expression` tem o tipo MyType. Se omitirmos o `::` e o tipo que se segue, o compilador Haskell irá inferir o tipo da expressão.
 
     ghci> :type 'a'
     'a' :: Char
@@ -157,7 +157,7 @@ Isto é, aplica-se o `compare` com os resultados da aplicação `sqrt 3` e `sqrt
 
 Um tipo de dados composto é construído a partir de outros tipos. Os tipos mais comuns de dados compostos em Haskell são listas e tuplas.
 
-Nós já vimos o tipo de lista na [seção chamada “Strings e caracteres”](getting-started.html#starting.string "Strings e caracteres"), onde descobrimos que Haskell representa uma seqüência de texto como uma lista de valores Char, e que o tipo de “lista de Char” é escrito \[Char\].
+Nós já vimos o tipo de lista na [seção chamada “Strings e caracteres”](http://book.realworldhaskell.org/read/getting-started.html#starting.string "Strings e caracteres"), onde descobrimos que Haskell representa uma seqüência de texto como uma lista de valores Char, e que o tipo de “lista de Char” é escrito \[Char\].
 
 A função `head` (“cabeça”) retorna o primeiro elemento de uma lista.
 
@@ -187,7 +187,7 @@ Podemos escrever o tipo de “lista de `a`” colocando a variável tipo entre c
 
 
 
->![[Note]]({{site.url}}/rwh-ptbr/assets/note.png)**Distinguir nomes de tipo e as variáveis tipo**
+>![[Note]](assets/note.png)**Distinguir nomes de tipo e as variáveis tipo**
 
 >Agora podemos ver porque um nome do tipo deve começar com uma letra maiúscula: o que torna diferente uma variável do tipo, é que ela deve começar com uma letra minúscula.
 
@@ -200,7 +200,7 @@ O tipo da expressão acima é uma lista de listas de Bool.
 
 
 
->![[Note]]({{site.url}}/rwh-ptbr/assets/note.png)**As listas são especiais**
+>![[Note]](assets/note.png)**As listas são especiais**
 
 >As listas são o “pão e a manteiga” de coleções Haskell. Em uma linguagem imperativa, poderíamos realizar uma tarefa com muitos itens iteragindo através de um loop. Isso é algo que nós frequentemente , fazemos em Haskell através do percorrimento em uma lista, seja por recursão ou usando uma função que faça a recursão para nós. Listas são a forma mais fácil  que temos para usar dados que estruturem o nosso programa e o seu fluxo de controle. Nós vamos gastar muito mais tempo para discutir as listas no [Capítulo 4, _A programação funcional_]().
 
@@ -272,7 +272,7 @@ Se o seu background  for em uma outra linguagem de programação, estes exemplo
 
 
 
->![[Note]]({{site.url}}/rwh-ptbr/assets/note.png)**Tuplas Haskell não são listas imutáveis**
+>![[Note]](assets/note.png)**Tuplas Haskell não são listas imutáveis**
 
 >Se você está vindo do mundo do Python, você provavelmente tem usado listas e tuplas como conceitos quase intercambiáveis. Embora os elementos de uma tupla Python são imutáveis, que podem ser indexados e iterada usando os mesmos métodos como uma lista. Este não é o caso em Haskell, portanto, não tente levar essa idéia com você em território linguístico desconhecido.
 
@@ -334,7 +334,7 @@ No lado esquerdo do `=` temos o nome da função, seguido pelos argumentos da fu
     3
 
 
->![[Note]]({{site.url}}/rwh-ptbr/assets/note.png)**E se ghci não conseguir encontrar o arquivo fonte?**
+>![[Note]](assets/note.png)**E se ghci não conseguir encontrar o arquivo fonte?**
 
 >Quando você executar **ghci** pode não ser capaz de encontrar o seu arquivo fonte. Ele irá procurar por arquivos fonte em qualquer diretório que ele foi executado. Se este não é o diretório que seu arquivo fonte esta, na verdade, você pode usar o comando **:cd** do **ghci** para alterar o seu diretório de trabalho.
 
@@ -459,7 +459,7 @@ Nosso predicado contém algumas novidades a mais. A função `null` indica se a 
     ghci> :type (||)
     (||) :: Bool -> Bool -> Bool
 
->![[Tip]]({{site.url}}/rwh-ptbr/assets/tip.png)**Os operadores não são especiais**
+>![[Tip]](assets/tip.png)**Os operadores não são especiais**
 
 >Observe que fomos capazes de encontrar o tipo de `(||)` por envolvimento em parênteses. O operador `(||)` não é “incorporado” a linguagem: é uma função comum.
 
@@ -546,7 +546,7 @@ Nos agora substituimos este valor de retorno para a expressão `(||)`. Uma vez q
 
 Isso faz com que ramo `else` da expressão `if` será avaliada. Este ramo contém uma aplicação recursiva da função `meuDrop`.
 
->![[Note]]({{site.url}}/rwh-ptbr/assets/note.png)**Curtos-circuitos de graça**
+>![[Note]](assets/note.png)**Curtos-circuitos de graça**
 
 >Muitas linguagens necessitam tratar o operador lógico "ou" especialmente para que os curto-circuitos aconteça, se seu operando à esquerda é avaliada como `True`. Em Haskell, `(||)` é uma função comum: a avaliação não-estrita constrói essa capacidade para a linguagem.
 
@@ -672,7 +672,7 @@ Para captar esta idéia, a sua assinatura tipo contém uma "type variable".
 
 Aqui, `a` é a "type variable". Podemos ler a assinatura como “tem uma lista, da qual todos os elementos têm algum tipo `a`, e retorna um valor do mesmo tipo `a`”.
 
->![[Tip]]({{site.url}}/rwh-ptbr/assets/tip.png)**Identificação de uma variável de tipo**
+>![[Tip]](assets/tip.png)**Identificação de uma variável de tipo**
 
 >Type variables sempre começam com uma letra minúscula. Você sempre pode dizer uma type variable de uma variável normal pelo contexto, porque as linguagens de tipos e funções são separadas: variáveis tipo existem nas assinaturas, tipo e variáveis normais existem em expressões regulares.
 
@@ -684,7 +684,7 @@ Quando queremos aplicar `last` digamos, uma lista de Char, o compilador substitu
 
 Este tipo de polimorfismo é chamado polimorfismo _paramétrico_ . A escolha do nome é fácil de entender, por analogia: assim como uma função pode ter parâmetros que podemos ligar mais tarde a valores reais, um tipo Haskell podem ter parâmetros que podemos ligar mais tarde para outros tipos.
 
->![[Tip]]({{site.url}}/rwh-ptbr/assets/tip.png)**Um pouco nomenclatura**
+>![[Tip]](assets/tip.png)**Um pouco nomenclatura**
 
 >Se um tipo contém parametros para tipos, nós dizemos que é um tipo parametrizado, ou um tipo polimórfico. Se uma função ou do tipo de valor contém parâmetros de tipo, nós chamamos de polimorfismo.
 
@@ -698,11 +698,11 @@ Normalmente em linguagens orientadas a objeto, o polimorfismo de _subtipo_ é ma
 
 Também é comum o polimorfismo _coerção_ o que permite um valor de um tipo a ser convertido implicitamente em um valor de outro tipo. Muitas linguagens fornecem alguma forma de coerção polimorfismo: um exemplo é a conversão automática entre números inteiros e de ponto flutuante. Haskell deliberadamente evita mesmo tipo de coerção automática simples.
 
-Isso não é toda a história do polimorfismo em Haskell: vamos voltar ao assunto no [Capítulo 6, _Usando Typeclasses_](using-typeclasses.html "Chapter 6. Using Typeclasses").
+Isso não é toda a história do polimorfismo em Haskell: vamos voltar ao assunto no [Capítulo 6, _Usando Typeclasses_](http://book.realworldhaskell.org/read/using-typeclasses.html "Chapter 6. Using Typeclasses").
 
 #### Raciocínio sobre funções polimórficas
 
-Na [seção denominada “Tipos de função e pureza”](types-and-functions.html#funcstypes.sigs "Function types and purity"), falamos sobre como descobrir o comportamento de uma função com base na sua assinatura. Podemos aplicar o mesmo tipo de raciocínio para funções polimórficas. Vamos dar uma olhada novamente na `fst`.
+Na [seção denominada “Tipos de função e pureza”](http://book.realworldhaskell.org/read/types-and-functions.html#funcstypes.sigs "Function types and purity"), falamos sobre como descobrir o comportamento de uma função com base na sua assinatura. Podemos aplicar o mesmo tipo de raciocínio para funções polimórficas. Vamos dar uma olhada novamente na `fst`.
 
     ghci> :type fst
     fst :: (a, b) -> a
@@ -713,7 +713,7 @@ O tipo do resultado de `fst` é `a`. Já mencionamos que o polimorfismo paramét
 
 #### Outras leituras
 
-Há um profundo sentido matemático em que qualquer função não-patológicos do tipo (a,b) -> a deve fazer exatamente o que `fst` faz. Além disso, essa linha de raciocínio se estende a mais complicada de funções polimórficas. O documento \[[Wadler89](bibliography.html#bib.wadler89 "[Wadler89]")\] abrange este procedimento em profundidade.
+Há um profundo sentido matemático em que qualquer função não-patológicos do tipo (a,b) -> a deve fazer exatamente o que `fst` faz. Além disso, essa linha de raciocínio se estende a mais complicada de funções polimórficas. O documento \[[Wadler89](http://book.realworldhaskell.org/read/bibliography.html#bib.wadler89 "[Wadler89]")\] abrange este procedimento em profundidade.
 
 >Tem sido sugerido que nós devemos criar “uma caixa de teoria” para as discussões das coisas profundas, e referências a trabalhos acadêmicos.
 
@@ -734,7 +734,7 @@ take :: Int -> (\[a\] -> \[a\])
 
 A partir disso, parece que devemos ler a assinatura de tipo como uma função que recebe um argumento, um Int, e retorna outra função. Essa outra função também tem um argumento, uma lista, e retorna uma lista do mesmo tipo, como seu resultado.
 
-Isso é correto, mas não é fácil de ver quais seriam as suas consequências. Voltaremos a este tema na [seção chamada “Aplicação de função parcial e currying”](functional-programming.html#fp.partialapp "Partial function application and currying"), uma vez que passamos um pouco de tempo escrevendo funções. Por agora, podemos tratar do tipo após a última `->` como sendo função do tipo de retorno, e os tipos anteriores como os próprios argumentos da função.
+Isso é correto, mas não é fácil de ver quais seriam as suas consequências. Voltaremos a este tema na [seção chamada “Aplicação de função parcial e currying”](http://book.realworldhaskell.org/read/functional-programming.html#fp.partialapp "Partial function application and currying"), uma vez que passamos um pouco de tempo escrevendo funções. Por agora, podemos tratar do tipo após a última `->` como sendo função do tipo de retorno, e os tipos anteriores como os próprios argumentos da função.
 
 Podemos agora escrever uma assinatura tipo da função `meuDrop` que definimos anteriormente.
 
@@ -784,7 +784,7 @@ Conclusão
 
 Neste capítulo, nós tivemos uma visão geral do turbilhão do sistema de tipos do Haskell e grande parte da sua sintaxe. Nós lemos sobre os tipos mais comuns, e descobrimos como escrever funções simples. Nós introduzimos polimorfismo, expressões condicionais, pureza e sobre avaliação preguiçosa.
 
-Isso tudo equivale a uma grande quantidade de informação para absorver. No [Capítulo 3, _Definir os tipos, racionalizando as funções_](defining-types-streamlining-functions.html "Chapter 3. Defining Types, Streamlining Functions"), vamos construir esse conhecimento básico para melhorar ainda mais a nossa compreensão do Haskell.
+Isso tudo equivale a uma grande quantidade de informação para absorver. No [Capítulo 3, _Definir os tipos, racionalizando as funções_](http://book.realworldhaskell.org/read/defining-types-streamlining-functions.html "Chapter 3. Defining Types, Streamlining Functions"), vamos construir esse conhecimento básico para melhorar ainda mais a nossa compreensão do Haskell.
 
   
 
@@ -794,9 +794,9 @@ Isso tudo equivale a uma grande quantidade de informação para absorver. No [Ca
 
 \[[3](#id578076)\] Às vezes, precisamos dar ao compilador um pouco de informação para ajudá-lo a fazer uma escolha para a compreensão do nosso código.
 
-\[[4](#id578737)\] Vamos falar mais sobre o polimorfismo na [seção intitulada “Polimorfismo em Haskell”](types-and-functions.html#funcstypes.polymorphism "Polymorphism in Haskell").
+\[[4](#id578737)\] Vamos falar mais sobre o polimorfismo na [seção intitulada “Polimorfismo em Haskell”](http://book.realworldhaskell.org/read/types-and-functions.html#funcstypes.polymorphism "Polymorphism in Haskell").
 
-\[[5](#id579534)\] O ambiente em que opera **ghci** é chamado de mónade IO. No [Capítulo 7, _I/O_](io.html "Chapter 7. I/O"), vamos cobrir o mónade IO em profundidade, e aparentemente arbitrárias restrições que **ghci** coloca a nós fará mais sentido.
+\[[5](#id579534)\] O ambiente em que opera **ghci** é chamado de mónade IO. No [Capítulo 7, _I/O_](http://book.realworldhaskell.org/read/io.html "Chapter 7. I/O"), vamos cobrir o mónade IO em profundidade, e aparentemente arbitrárias restrições que **ghci** coloca a nós fará mais sentido.
 
 \[[6](#id580576)\] A expressão “não-estrita” e “preguiçosa” têm significados técnicas ligeiramente diferentes , mas não vamos entrar em detalhes da distinção aqui.
 

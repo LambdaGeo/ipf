@@ -1,4 +1,4 @@
-[Sumário](index)
+[Sumário](index.md)
 
 ## Capítulo 3. Definindo os tipos e entendendo as funções
 
@@ -37,9 +37,9 @@ data MagazineInfo = Magazine Int String [String]
 Mesmo que este tipo InfoRevista tem a mesma estrutura que o nosso tipo InfoLivro, Haskell trata os tipos come distintos porque a sua natureza e construtores de valor têm nomes diferentes.
 
 
->![[Note]]({{site.url}}/rwh-ptbr/assets/note.png)**Derivando o quê?**
+>![[Note]](assets/note.png)**Derivando o quê?**
 
->Nós vamos explicar o significado completo de `deriving Show` depois, em [seção denominada “Show”](using-typeclasses.html#typeclasses.wellknown.show "Show"). Por enquanto, é o suficiente saber que precisamos disso em uma declaração deste tipo para que o **ghci** automaticamente saiba como imprimir um valor deste tipo.
+>Nós vamos explicar o significado completo de `deriving Show` depois, em [seção denominada “Show”](http://book.realworldhaskell.org/read/using-typeclasses.html#typeclasses.wellknown.show "Show"). Por enquanto, é o suficiente saber que precisamos disso em uma declaração deste tipo para que o **ghci** automaticamente saiba como imprimir um valor deste tipo.
 
 Podemos criar um novo valor do tipo InfoLivro tratando `Livro` como uma função, e aplicá-lo com argumentos do tipo Int, String, e \[String\].
 
@@ -140,7 +140,7 @@ O nosso conhecido Bool é o mais comum e simples exemplo de uma categoria de tip
 O tipo Bool tem dois construtores, os valores `True` e `False`. Cada construtor de valor é separado na definição por um caracter `|`, que pode ler-se “ou”: nós podemos construir um Bool que tem o valor `True`, ou o valor `False`. Quando um tipo tem mais de um construtor de valor, são normalmente referido como _alternativas_ ou _casos_. Podemos usar qualquer uma das alternativas para criar um valor desse tipo.
 
 
->![[Note]]({{site.url}}/rwh-ptbr/assets/note.png)**Uma nota sobre nomeação**
+>![[Note]](assets/note.png)**Uma nota sobre nomeação**
 
 >Embora a expressão “tipo de dado algébrico” seja longa, nós estamos tendo o cuidado de evitar o uso da sigla “TAD”. Essa sigla já é amplamente entendida como suporte para o “tipo _abstrato_ de dado”. Desde que Haskell suporte ambos, tipos de dados algébricos e tipos de dados abstratos, vamos ser explícito e evitar a sigla inteiramente.
 
@@ -241,7 +241,7 @@ As formas polares e cartesianas usam os mesmos tipos para seus dois elementos. N
 O operador `(==)` exige que os seus argumentos sejam do mesmo tipo.
 
 
->![[Tip]]({{site.url}}/rwh-ptbr/assets/tip.png)**Comparando-se a igualdade**
+>![[Tip]](assets/tip.png)**Comparando-se a igualdade**
 
 >Observe que no cláusule `deriving` de vector tipos nossa, nós adicionamos uma outra palavra, `Eq`. Isso faz com que a aplicação Haskell para gerar o código que nos permite comparar os valores de igualdade.
 
@@ -280,7 +280,7 @@ data BookInfo = Book Int String [String]
 
 Por _posicional_, queremos dizer que o número de seção é o primeiro campo do tipo Haskell, eo título é na segunda. Nós nos referimos a eles pelo local, e não pelo nome.
 
-Na [seção chamada “casamento de padrões”](defining-types-streamlining-functions.html#deftypes.pattern "Pattern matching"), veremos como acessar os campos de um valor Livraria. Na [seção intitulada “Sintaxe record”](defining-types-streamlining-functions.html#deftypes.record "Record syntax"), vamos introduzir uma sintaxe alternativa para a definição de tipos de dados que parece um pouco mais similar a C.
+Na [seção chamada “casamento de padrões”](http://book.realworldhaskell.org/read/defining-types-streamlining-functions.html#deftypes.pattern "Pattern matching"), veremos como acessar os campos de um valor Livraria. Na [seção intitulada “Sintaxe record”](http://book.realworldhaskell.org/read/defining-types-streamlining-functions.html#deftypes.record "Record syntax"), vamos introduzir uma sintaxe alternativa para a definição de tipos de dados que parece um pouco mais similar a C.
 
 ##### Tipos enumerados
 
@@ -378,10 +378,10 @@ A versão em Haskell deste código é tanto drasticamente mais curta e mais segu
            | Poly [Vector]
 ```
 
-Se criarmos um valor Forma usando o construtor `Circulo`, o fato de que nós criamos um `Circulo` é armazenado. Quando mais tarde usar um `Circulo`, não podemos tratá-la acidentalmente, como um `Quadrado`. Vamos ver por que [o “Casamento de padrões”](defining-types-streamlining-functions.html#deftypes.pattern "Pattern matching").
+Se criarmos um valor Forma usando o construtor `Circulo`, o fato de que nós criamos um `Circulo` é armazenado. Quando mais tarde usar um `Circulo`, não podemos tratá-la acidentalmente, como um `Quadrado`. Vamos ver por que [o “Casamento de padrões”](http://book.realworldhaskell.org/read/defining-types-streamlining-functions.html#deftypes.pattern "Pattern matching").
 
 
->![[Tip]]({{site.url}}/rwh-ptbr/assets/tip.png)**Algumas notas**
+>![[Tip]](assets/tip.png)**Algumas notas**
 
 >Da leitura dos capítulos anteriores, que agora deve ficar claro que _todos_ os tipos de dados que define a palavra-chave `data` são os tipos de dados algébricos. Alguns podem ter apenas uma alternativa, enquanto outros têm vários, mas eles estão todos usando as mesmas máquinas.
 
@@ -429,7 +429,7 @@ Estamos avaliando agora `1 + (2 + somaLista [])`. Nesta aplicação recursiva de
 
 O resultado da `somaLista [1,2]` é, portanto `1 + (2 + (0))`, ou `3`.
 
->![[Note]]({{site.url}}/rwh-ptbr/assets/note.png)**A ordenação é importante**
+>![[Note]](assets/note.png)**A ordenação é importante**
 
 >Como já mencionado, a implementação Haskell checa o padrão para casar na  mesma ordem em que especificá-mos em nossas funções. Procedimento de "casamento" é de cima para baixo, e termina no primeiro sucesso.
 
@@ -456,7 +456,7 @@ Vamos considerar o que acontece se o casamento de padrão `(Livro id nome autore
 
 Como o padrão combina age como o inverso da construção, é por vezes referido como _de_construção.
 
->![[Note]]({{site.url}}/rwh-ptbr/assets/note.png)**A desconstrução não destrói nada**
+>![[Note]](assets/note.png)**A desconstrução não destrói nada**
 
 >Se você está mergulhada em programação orientada a objeto jargão, não confunda a desconstrução com destruição! Correspondência de um padrão não tem nenhum efeito sobre o valor que estamos examinando: só nos permite “olhar para dentro” dele.
 
@@ -488,7 +488,7 @@ Sempre que um valor literal está presente em um padrão (`True` e `5` do padrã
 	*** Exception: Tuple.hs:10:0-39: Non-exhaustive patterns in function complicated
 
 
-Para uma explicação sobre essa mensagem de erro, avance um pouco, para [a seção chamada “Padrões exaustivos e curingas”](defining-types-streamlining-functions.html#deftypes.patterns.nonexhaustive "Exhaustive patterns and wild cards").
+Para uma explicação sobre essa mensagem de erro, avance um pouco, para [a seção chamada “Padrões exaustivos e curingas”](http://book.realworldhaskell.org/read/defining-types-streamlining-functions.html#deftypes.patterns.nonexhaustive "Exhaustive patterns and wild cards").
 
 Nós podemos casar padrões em um tipo de dados algébrico usando o valor seus construtores. Lembrando-se do tipo InfoLivro definido anteriormente: podemos extrair os valores de um InfoLivro como se segue.
 
@@ -560,7 +560,7 @@ Se aplicarmos isso a um valor que não pode corresponder, vamos receber um erro 
 
 Neste exemplo, nenhuma equação na definição da função coincide com o valor `[]`.
 
->![[Tip]]({{site.url}}/rwh-ptbr/assets/tip.png)**Aviso sobre padrões incompletos**
+>![[Tip]](assets/tip.png)**Aviso sobre padrões incompletos**
 
 >GHC oferece uma opção de compilação útil `-fwarn-incomplete-patterns`, que fará com que ele imprime um aviso durante a compilação se uma seqüência de padrões não correspondem a todos tipo de valor de um construtor.
 
@@ -757,7 +757,7 @@ E porque `Cons 0 Nulo` tem o tipo Lista a, nós podemos usar isso como um parâm
 
 Poderíamos continuar dessa maneira indefinidamente, criando cada vez mais cadeias `Cons`, cada uma com um único `Nulo` no final.
 
->![[Tip]]({{site.url}}/rwh-ptbr/assets/tip.png)**É Lista uma lista aceitável?**
+>![[Tip]](assets/tip.png)**É Lista uma lista aceitável?**
 
 >Nós podemos facilmente provar a nós mesmos que o nosso tipo List a tem a mesma forma que o tipo lista \[a\] existente no ghc. Para fazer isso, nós escrevemos uma função que recebe um valor do tipo \[a\], e produzimos um valor de um tipo Lista a.
 
@@ -921,7 +921,7 @@ lend amount balance = let reserve    = 100
 
 As palavras-chave a olhar aqui é a `let`, que inicia um bloco de declarações de variáveis, e `in`, que termina-o. Cada linha introduz uma nova variável. O nome está do lado esquerdo do `=`, e a expressão que ele está vinculada está à direita.
 
-![[Note]]({{site.url}}/rwh-ptbr/assets/note.png)
+![[Note]](assets/note.png)
 
 >**Notas especiais**
 
@@ -929,7 +929,7 @@ As palavras-chave a olhar aqui é a `let`, que inicia um bloco de declarações 
 
 >Quando definimos uma variável em um bloco `let`, nós referimos a ela como uma variável _vinculação `let`_ (_`let`-bound_ variable). Isto simplesmente significa que ele diz: temos vinculado a uma variável em um bloco `let`.
 
->Além disso, a utilização de espaço em branco aqui é importante. Falaremos em mais detalhes sobre as regras de layout [a seção chamada “A regra de impedimento e espaço em branco em uma expressão”](defining-types-streamlining-functions.html#deftypes.offside "The offside rule and white space in an expression").
+>Além disso, a utilização de espaço em branco aqui é importante. Falaremos em mais detalhes sobre as regras de layout [a seção chamada “A regra de impedimento e espaço em branco em uma expressão”](http://book.realworldhaskell.org/read/defining-types-streamlining-functions.html#deftypes.offside "The offside rule and white space in an expression").
 
 Podemos usar o nome de uma variável em bloco `let` dentro do bloco de declarações e na expressão que segue a palavras-chave `in`.
 
@@ -972,7 +972,7 @@ Porque o argumento da função `a` nunca é usado no corpo da função, devido a
 	ghci> :type quux
 	quux :: t -> [Char]
 
->![[Tip]]({{site.url}}/rwh-ptbr/assets/tip.png)**Advertências do compilador são seus amigos**
+>![[Tip]](assets/tip.png)**Advertências do compilador são seus amigos**
 
 >Ocultamento pode, obviamente, levar à confusão e bugs, assim GHC tem um opção útil `-fwarn-name-shadowing`. Quando ativado, GHC irá imprimir uma mensagem de aviso toda vez que ocultarmos um nome.
 
@@ -991,7 +991,7 @@ lend2 amount balance = if amount < reserve * 0.5
 
 Enquanto uma cláusula `where` pode parecer estranho inicialmente, oferece uma maravilhosa ajuda a legibilidade. Deixa-nos dirigir o foco do nosso leitor os detalhes importantes de uma expressão, com as definições apresentadas a seguir. Depois de um tempo, você pode sentir falta por não achar cláusulas `where` em linguagens que não as possuem.
 
-Tal como acontece com expressões `let`, espaço em branco é significativo nas cláusulas `where`. Nós falaremos mais sobre as regras de layout em breve, na [seção chamada “A regra offside e espaço em branco em uma expressão”](defining-types-streamlining-functions.html#deftypes.offside "The offside rule and white space in an expression").
+Tal como acontece com expressões `let`, espaço em branco é significativo nas cláusulas `where`. Nós falaremos mais sobre as regras de layout em breve, na [seção chamada “A regra offside e espaço em branco em uma expressão”](http://book.realworldhaskell.org/read/defining-types-streamlining-functions.html#deftypes.offside "The offside rule and white space in an expression").
 
 #### Funções locais, variáveis globais
 
@@ -1178,7 +1178,7 @@ equational orange = Orange
 
 Agora você pode ver o problema? Aqui, é mais óbvio `maçã` não se refere ao valor mais alto nível o nome `maçã`: é uma variável padrão local.
 
->![[Note]]({{site.url}}/rwh-ptbr/assets/note.png)**IPadrões irrefutáveis**
+>![[Note]](assets/note.png)**IPadrões irrefutáveis**
 
 >Referimo-nos a um padrão que sempre sucede como _irrefutável_. Nomes de variáveis simples e um curinga `_` são exemplos de padrões irrefutáveis.
 
@@ -1235,7 +1235,7 @@ lend3 amount balance
 
 A procura de guarda-expressão especial `otherwise` é simplesmente uma variável associada ao valor `True`, para ajudar a legibilidade.
 
-Podemos usar os guardas em qualquer lugar que nós podemos usar os padrões. Escrever uma função como uma série de equações usando a correspondência de padrão e os guardas podem torná-lo mais claro. Lembre-se da função `meuDrop` é definida na [seção chamada “Avaliação condicional”](types-and-functions.html#funcstypes.if "Conditional evaluation")?
+Podemos usar os guardas em qualquer lugar que nós podemos usar os padrões. Escrever uma função como uma série de equações usando a correspondência de padrão e os guardas podem torná-lo mais claro. Lembre-se da função `meuDrop` é definida na [seção chamada “Avaliação condicional”](http://book.realworldhaskell.org/read/types-and-functions.html#funcstypes.if "Conditional evaluation")?
 
 ```haskell
 -- file: ch02/myDrop.hs

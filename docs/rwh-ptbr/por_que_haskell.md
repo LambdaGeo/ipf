@@ -310,6 +310,6 @@ Agradecimentos
 
 Copyright 2007, 2008 Bryan O'Sullivan, Don Stewart, and John Goerzen. This work is licensed under a [Creative Commons Attribution-Noncommercial 3.0 License](http://creativecommons.org/licenses/by-nc/3.0/). Icons by [Paul Davey](mailto:mattahan@gmail.com) aka [Mattahan](http://mattahan.deviantart.com/).
 
-[Anterior](index.html) [Próximo](getting-started.html)
+[Anterior](index.md) [Próximo](http://book.realworldhaskell.org/read/getting-started.html)
 
-[Inicio](index.html)
+[Inicio](index.md)

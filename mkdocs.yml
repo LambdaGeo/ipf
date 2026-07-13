@@ -83,3 +83,11 @@ nav:
     - "Cap 27: Elixir — Processos e Concorrência": unidade3/14_elixir_processos.md
     - "Cap 28: Elixir — Metaprogramação":          unidade3/15_elixir_metaprogramacao.md
     - "Trabalho Elixir: ToDo com LiveView":        unidade3/16_elixir_tutorial_todo.md
+
+  - Apêndice — Real World Haskell (PT-BR):
+    - "Sobre a tradução":                          rwh-ptbr/index.md
+    - "Por que Haskell?":                          rwh-ptbr/por_que_haskell.md
+    - "RWH Cap 1: Começando":                      rwh-ptbr/cap01.md
+    - "RWH Cap 2: Tipos e Funções":                rwh-ptbr/cap02.md
+    - "RWH Cap 3: Definindo Tipos":                rwh-ptbr/cap03.md
+    - "RWH Cap 4: Programação Funcional":          rwh-ptbr/cap04.md

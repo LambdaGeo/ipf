@@ -54,7 +54,7 @@ No último módulo, exploramos a diversidade do paradigma funcional através de 
 ## 📚 Bibliografia e Referências
 
 * **Haskell**: Lipovača, Miran. *Learn You a Haskell for Great Good!*
-* **Real World Haskell**: O'Sullivan, Bryan; Stewart, Don; Goerzen, John. *Real World Haskell* (com código modernizado para os padrões atuais do GHC).
+* **Real World Haskell**: O'Sullivan, Bryan; Stewart, Don; Goerzen, John. *Real World Haskell* (com código modernizado para os padrões atuais do GHC). Os capítulos 1 a 4 estão disponíveis em tradução PT-BR não oficial no [apêndice deste livro](rwh-ptbr/index.md).
 * **Clojure**: Miller, Alex. *Programming Clojure*.
 * **Elixir**: Thomas, Dave. *Programming Elixir*.
 * **Materiais e Tutoriais Complementares**: [LambdaGEO Research Lab](https://lambdageo.github.io).
