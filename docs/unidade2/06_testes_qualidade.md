@@ -9,6 +9,9 @@ Neste capítulo, aprenderemos a metodologia de **Testes Baseados em Propriedades
 
     Este capítulo apresenta os conceitos; siga o tutorial para implementar a suíte completa.
 
+!!! info "Leitura complementar"
+    O capítulo original que inspirou este material: [*Real World Haskell*, Cap. 11 — Testing and quality assurance](http://book.realworldhaskell.org/read/testing-and-quality-assurance.html) (em inglês; o tutorial do blog moderniza o código para QuickCheck 2.14 e o HPC atual).
+
 ---
 
 ## 🧪 Por que Testar Propriedades?
@@ -86,4 +89,4 @@ Esses são exatamente os itens cobrados no [trabalho prático do módulo](07_ava
 
 ---
 
-> **Nota de atribuição:** este capítulo adapta material do capítulo 11 de *Real World Haskell*, de Bryan O'Sullivan, Don Stewart e John Goerzen (tradução PT-BR não oficial), sob a licença [Creative Commons Attribution-Noncommercial 3.0](http://creativecommons.org/licenses/by-nc/3.0/).
+> **Nota de atribuição:** este capítulo adapta material do capítulo 11 de *Real World Haskell*, de Bryan O'Sullivan, Don Stewart e John Goerzen ([book.realworldhaskell.org](http://book.realworldhaskell.org/read/)), sob a licença [Creative Commons Attribution-Noncommercial 3.0](http://creativecommons.org/licenses/by-nc/3.0/).

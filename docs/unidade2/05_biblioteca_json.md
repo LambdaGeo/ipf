@@ -9,6 +9,9 @@ Neste capítulo, iniciamos o projeto central do Módulo 2: uma biblioteca comple
 
     Este capítulo apresenta os conceitos e as decisões de projeto; siga a **Parte 1** do tutorial para construir a biblioteca.
 
+!!! info "Leitura complementar"
+    O capítulo original que inspirou este projeto: [*Real World Haskell*, Cap. 5 — Writing a library: working with JSON data](http://book.realworldhaskell.org/read/writing-a-library-working-with-json-data.html) (em inglês; o tutorial do blog moderniza o código para GHC 9.x e Stack).
+
 ---
 
 ## 📜 Um Tour Relâmpago pelo JSON

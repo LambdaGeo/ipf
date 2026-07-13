@@ -571,7 +571,7 @@ it :: Integer
 ghci> :type 3 + 2
 3 + 2 :: (Num t) => t
 ```
-Haskell tem vários tipos numéricos. Por exemplo, um número literal como `1` pode (dependendo do contexto em que ele aparece) ser um inteiro ou um ponto flutuante. Quando nós forçamos o ghci a valorar a expressão `3 + 2`, ele  precisa escolher um tipo para poder imprimir o valor da expressão, e por padrão é inteiro. No segundo caso, nós pedimos ao ghci para imprimir o tipo da expressão sem valora-la, portanto, não precisa ser tão específico. A resposta, na verdade, é "seu tipo é numérico". Nós iremos ver mais sobre esta notação de tipos em [Capítulo 6. _Usando Classes de tipos_](cap06.md "Usando Classes de tipos")
+Haskell tem vários tipos numéricos. Por exemplo, um número literal como `1` pode (dependendo do contexto em que ele aparece) ser um inteiro ou um ponto flutuante. Quando nós forçamos o ghci a valorar a expressão `3 + 2`, ele  precisa escolher um tipo para poder imprimir o valor da expressão, e por padrão é inteiro. No segundo caso, nós pedimos ao ghci para imprimir o tipo da expressão sem valora-la, portanto, não precisa ser tão específico. A resposta, na verdade, é "seu tipo é numérico". Nós iremos ver mais sobre esta notação de tipos em [Capítulo 6. _Usando Classes de tipos_](http://book.realworldhaskell.org/read/using-typeclasses.html "Usando Classes de tipos")
 
 ### Um simples programa
 
@@ -660,7 +660,6 @@ Modifique o exemplo `WC.hs` novamente, para imprimir o número de caracteres em 
 
 \[[1](#id577349)\] Incidentally, what do these cities have in common?
 
-![](/support/figs/rss.png) Want to stay up to date? Subscribe to the comment feed for [this chapter](/feeds/comments/), or the [entire book](/feeds/comments/).
     
 
 Copyright 2007, 2008 Bryan O'Sullivan, Don Stewart, and John Goerzen. This work is licensed under a [Creative Commons Attribution-Noncommercial 3.0 License](http://creativecommons.org/licenses/by-nc/3.0/). Icons by [Paul Davey](mailto:mattahan@gmail.com) aka [Mattahan](http://mattahan.deviantart.com/).

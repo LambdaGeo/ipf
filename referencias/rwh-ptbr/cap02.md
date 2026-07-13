@@ -800,6 +800,5 @@ Isso tudo equivale a uma grande quantidade de informação para absorver. No [Ca
 
 \[[6](#id580576)\] A expressão “não-estrita” e “preguiçosa” têm significados técnicas ligeiramente diferentes , mas não vamos entrar em detalhes da distinção aqui.
 
-![](support/figs/rss.png) Quer ficar atualizado? Assine o feed comentário para [este capítulo](/feeds/comments/), ou o [livro inteiro](/feeds/comments/).
 
 Copyright 2007, 2008 Bryan O'Sullivan, Don Stewart e John Goerzen. Esta obra está licenciada sob uma [Creative Commons Attribution-Noncommercial 3.0 License](http://creativecommons.org/licenses/by-nc/3.0/). Ícones por [Paul Davey](mailto:mattahan@gmail.com) aka [Mattahan](http://mattahan.deviantart.com/).
