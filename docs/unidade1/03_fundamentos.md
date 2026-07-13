@@ -40,8 +40,8 @@ x = 1
 
 O Haskell rejeitará o código com um erro de compilação, acusando múltiplas definições conflitantes para o mesmo identificador `x`. 
 
-> [!IMPORTANT]
-> Em Haskell, identificadores são **constantes matemáticas imutáveis**, e não caixas de memória que podem mudar de valor ao longo do tempo. Uma vez que definimos o valor de um identificador, ele é fixo e garantido para toda a vida útil do escopo.
+!!! info
+    Em Haskell, identificadores são **constantes matemáticas imutáveis**, e não caixas de memória que podem mudar de valor ao longo do tempo. Uma vez que definimos o valor de um identificador, ele é fixo e garantido para toda a vida útil do escopo.
 
 ---
 
@@ -75,8 +75,8 @@ Prelude> it ++ "bar"
 
 Se a avaliação de uma expressão falhar, o valor de `it` não muda — então podemos experimentar expressões potencialmente inválidas com segurança. Combinando o `it` com as setas do teclado (que recuperam e editam as linhas anteriores), ganhamos uma ótima forma de experimentação interativa: o custo de errar é baixíssimo. Aproveite para cometer erros baratos e abundantes enquanto explora a linguagem!
 
-> [!TIP]
-> **Permaneça sem medo diante das mensagens de erro.** As mensagens do GHC podem parecer longas e intimidadoras no início (`No instance for (Num Bool)...`), mas elas têm uma finalidade: apontam a localização exata do problema e frequentemente sugerem uma correção. Elas nos fazem executar uma certa quantidade de depuração *antecipada*, antes mesmo de rodar o programa. No começo, descubra apenas o suficiente para progredir; com a experiência, as partes obscuras das mensagens se tornarão naturais.
+!!! tip
+    **Permaneça sem medo diante das mensagens de erro.** As mensagens do GHC podem parecer longas e intimidadoras no início (`No instance for (Num Bool)...`), mas elas têm uma finalidade: apontam a localização exata do problema e frequentemente sugerem uma correção. Elas nos fazem executar uma certa quantidade de depuração *antecipada*, antes mesmo de rodar o programa. No começo, descubra apenas o suficiente para progredir; com a experiência, as partes obscuras das mensagens se tornarão naturais.
 
 ---
 
@@ -129,8 +129,8 @@ infixr 8 ^
 
 A linha `infixl 6 +` indica que `(+)` tem precedência 6 e é **associativo à esquerda** (`infixl`); já `(^)` é **associativo à direita** (`infixr`). Como `(*)` tem precedência 7, maior que a do `(+)`, a expressão `1 + 4 * 4` é avaliada como `1 + (4 * 4)`.
 
-> [!TIP]
-> Não é necessário memorizar as regras de precedência: na dúvida, adicione parênteses. Expressões complexas que dependem totalmente da precedência dos operadores são fontes notórias de bugs — a presença de alguns parênteses ajuda os futuros leitores (incluindo você mesmo) a entender a intenção.
+!!! tip
+    Não é necessário memorizar as regras de precedência: na dúvida, adicione parênteses. Expressões complexas que dependem totalmente da precedência dos operadores são fontes notórias de bugs — a presença de alguns parênteses ajuda os futuros leitores (incluindo você mesmo) a entender a intenção.
 
 ---
 

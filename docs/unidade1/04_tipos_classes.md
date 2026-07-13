@@ -104,8 +104,8 @@ Prelude> snd (1, 'a')
 'a'
 ```
 
-> [!WARNING]
-> **Tuplas Haskell não são "listas imutáveis".** Se você vem do Python, não leve essa ideia para cá: `fst` e `snd` só funcionam para pares, e não é possível indexar ou iterar uma tupla como uma lista. Use tuplas para coleções *pequenas e de tamanho fixo* com tipos heterogêneos — por exemplo, para retornar múltiplos valores de uma função.
+!!! warning
+    **Tuplas Haskell não são "listas imutáveis".** Se você vem do Python, não leve essa ideia para cá: `fst` e `snd` só funcionam para pares, e não é possível indexar ou iterar uma tupla como uma lista. Use tuplas para coleções *pequenas e de tamanho fixo* com tipos heterogêneos — por exemplo, para retornar múltiplos valores de uma função.
 
 ---
 

@@ -34,8 +34,8 @@ Em Haskell, uma ação que interage com o mundo externo tem o tipo **`IO a`**. I
 * **`IO Char`**: Uma ação que realiza I/O e retorna um caractere (ex: `getChar`).
 * **`IO ()`**: Uma ação que realiza I/O mas não retorna nenhum valor útil (representado pelo tipo unitário `()`, semelhante ao `void` de outras linguagens).
 
-> [!IMPORTANT]
-> Existe uma diferença crucial entre o tipo `String` e o tipo `IO String`. Um valor do tipo `String` é apenas texto puro que pode ser avaliado com segurança. Um valor do tipo `IO String` é uma **ação pendente** (como ler uma linha do teclado) que só produzirá a string quando for executada. Você nunca pode "extrair" um valor de `IO` para o mundo puro sem que a função inteira também se torne uma ação de `IO`.
+!!! info
+    Existe uma diferença crucial entre o tipo `String` e o tipo `IO String`. Um valor do tipo `String` é apenas texto puro que pode ser avaliado com segurança. Um valor do tipo `IO String` é uma **ação pendente** (como ler uma linha do teclado) que só produzirá a string quando for executada. Você nunca pode "extrair" um valor de `IO` para o mundo puro sem que a função inteira também se torne uma ação de `IO`.
 
 ---
 

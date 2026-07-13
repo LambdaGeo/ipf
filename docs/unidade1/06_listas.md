@@ -73,8 +73,8 @@ Prelude> head []
 
 Funções que só têm valor de retorno definido para um *subconjunto* das entradas válidas são chamadas de **funções parciais**; as que retornam resultados válidos para todo o domínio são **funções totais**. Chamar uma função parcial com uma entrada que ela não trata é provavelmente a maior fonte de bugs evitáveis em programas Haskell — saiba sempre se a função que você usa é parcial ou total. Uma alternativa segura é escrever versões totais com `Maybe` (ex: `safeHead :: [a] -> Maybe a`), exercício que faremos no fim do módulo.
 
-> [!TIP]
-> **Prefira `null` a `length` para testar se uma lista está vazia.** Como a lista é encadeada, `length` precisa percorrê-la inteira — e, com listas infinitas (comuns em Haskell!), `length xs > 0` entra em loop, enquanto `null xs` roda em tempo constante.
+!!! tip
+    **Prefira `null` a `length` para testar se uma lista está vazia.** Como a lista é encadeada, `length` precisa percorrê-la inteira — e, com listas infinitas (comuns em Haskell!), `length xs > 0` entra em loop, enquanto `null xs` roda em tempo constante.
 
 ---
 
@@ -124,8 +124,8 @@ asInt xs = loop 0 xs
 
 Passar `0` inicial equivale a inicializar a variável no começo do loop; cada chamada recursiva consome um elemento e atualiza o acumulador. Como a última coisa que `loop` faz é chamar a si mesma, ela é uma função **recursiva de cauda** (*tail recursive*) — o compilador transforma essas chamadas para executarem em espaço constante (*tail call optimisation*), exatamente como um loop imperativo.
 
-> [!NOTE]
-> **A convenção do apóstrofo.** O apóstrofo é um caractere válido em nomes Haskell (pronuncia-se "linha", como em matemática). É idiomático usar `acc'` para "o novo valor de `acc`": `loop acc (x:xs) = let acc' = acc * 10 + digitToInt x in loop acc' xs`. Reconheça o padrão ao ler código — mas cuidado, um apóstrofo é fácil de não enxergar.
+!!! note
+    **A convenção do apóstrofo.** O apóstrofo é um caractere válido em nomes Haskell (pronuncia-se "linha", como em matemática). É idiomático usar `acc'` para "o novo valor de `acc`": `loop acc (x:xs) = let acc' = acc * 10 + digitToInt x in loop acc' xs`. Reconheça o padrão ao ler código — mas cuidado, um apóstrofo é fácil de não enxergar.
 
 ---
 

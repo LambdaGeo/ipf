@@ -54,8 +54,8 @@ Três conceitos importantes aparecem aqui:
 * **Teste baseado em modelo**: comparar com uma implementação de referência correta (ainda que ineficiente) é uma técnica poderosíssima — grandes projetos Haskell mantêm suítes de propriedades executadas a cada commit;
 * **QuickCheck como "lint" de API**: se uma propriedade é difícil de enunciar, talvez a interface esteja mal desenhada.
 
-> [!TIP]
-> É por isso que **código puro é mais fácil de testar** (como prometido no primeiro capítulo do livro): uma função que só depende das entradas visíveis pode ser bombardeada com milhares de entradas aleatórias sem *mocks* nem preparação de ambiente.
+!!! tip
+    É por isso que **código puro é mais fácil de testar** (como prometido no primeiro capítulo do livro): uma função que só depende das entradas visíveis pode ser bombardeada com milhares de entradas aleatórias sem *mocks* nem preparação de ambiente.
 
 ## 🎲 Gerando Dados Customizados: a Classe `Arbitrary`
 

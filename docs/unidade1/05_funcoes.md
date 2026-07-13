@@ -202,8 +202,8 @@ emprestar valor saldo = if valor < reserva * 0.5
   segundaDeclaracao = 2    -- parse error!
 ```
 
-> [!WARNING]
-> **Use espaços, nunca tabs.** Editores interpretam tabulações com larguras diferentes (8 colunas no Unix, 4 no Windows), então um arquivo com tabs pode compilar na sua máquina e quebrar na do colega. O padrão da linguagem assume a convenção Unix — configure seu editor para inserir espaços em arquivos `.hs`.
+!!! warning
+    **Use espaços, nunca tabs.** Editores interpretam tabulações com larguras diferentes (8 colunas no Unix, 4 no Windows), então um arquivo com tabs pode compilar na sua máquina e quebrar na do colega. O padrão da linguagem assume a convenção Unix — configure seu editor para inserir espaços em arquivos `.hs`.
 
 A propósito: a regra offside não é obrigatória — Haskell aceita estruturação explícita com chaves e pontos-e-vírgulas (`let { a = 1; b = 2 } in a + b`) — mas ela praticamente nunca é usada em programas reais.
 

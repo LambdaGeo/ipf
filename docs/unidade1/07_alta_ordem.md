@@ -445,8 +445,8 @@ macros = foldr passo [] . lines
 
 Repare como o programa inteiro é a combinação das peças que estudamos: composição (`foldr passo [] . lines`), fold com guarda, seção com crases e o pipeline `head . tail . words`.
 
-> [!WARNING]
-> **Use `head` com sabedoria.** `segundaPalavra` chama duas funções parciais (`head` e `tail`) — mas aqui podemos *provar* por inspeção que é seguro: o guarda garante que a linha contém pelo menos duas palavras (`"#define"` e a macro). Esse é o tipo de raciocínio necessário sempre que chamamos funções parciais; se alguém alterar o guarda, o código pode passar a explodir de forma sutil.
+!!! warning
+    **Use `head` com sabedoria.** `segundaPalavra` chama duas funções parciais (`head` e `tail`) — mas aqui podemos *provar* por inspeção que é seguro: o guarda garante que a linha contém pelo menos duas palavras (`"#define"` e a macro). Esse é o tipo de raciocínio necessário sempre que chamamos funções parciais; se alguém alterar o guarda, o código pode passar a explodir de forma sutil.
 
 ### Estilo Point-Free (Livre de Pontos)
 Note que em definições como `dobroMaisUm = (+1) . (*2)` e `capCount = length . filter (...) . words`, nós não declaramos o argumento da função. Apenas declaramos como as funções se combinam.

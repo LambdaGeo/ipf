@@ -21,8 +21,8 @@ type Par a = (a, a)
 type ListaAssoc k v = [(k, v)]
 ```
 
-> [!WARNING]
-> Como os sinônimos de tipo são apenas "apelidos", o compilador não impede que você passe um par comum `(Double, Double)` para uma função que espera uma `Coordenada`. Para obter isolamento completo e segurança de tipos em tempo de compilação, devemos utilizar `newtype` ou `data`.
+!!! warning
+    Como os sinônimos de tipo são apenas "apelidos", o compilador não impede que você passe um par comum `(Double, Double)` para uma função que espera uma `Coordenada`. Para obter isolamento completo e segurança de tipos em tempo de compilação, devemos utilizar `newtype` ou `data`.
 >
 > Além disso, sinônimos de tipo **não podem ser recursivos** (por exemplo, tentar declarar `type Arvore = (Int, [Arvore])` resultará em erro).
 
