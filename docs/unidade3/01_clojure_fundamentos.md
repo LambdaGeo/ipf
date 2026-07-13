@@ -117,12 +117,8 @@ De acordo com *Clojure for the Brave and True*, `let` oferece duas vantagens pri
 
 ```
 
-<aside>
-💡
-
-veremos melhor os nomes locais quando criarmos nossas funcoes
-
-</aside>
+!!! tip
+    veremos melhor os nomes locais quando criarmos nossas funcoes
 
 ### 3.3. Keywords: Etiquetas Eficientes
 

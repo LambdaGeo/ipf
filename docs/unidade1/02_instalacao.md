@@ -151,7 +151,7 @@ Agora vamos implementar um teste para a função quicksort.  Se esta função ob
 prop_idempotent xs = qsort (qsort xs) == qsort xs
 ```
 
-Em [https://lambda-ma.github.io/rwh-ptbr/cap11](https://lambda-ma.github.io/rwh-ptbr/cap11) é explicado o funcionamento dessa biblioteca. O objetivo desse tutorial é apresentar o `stack`.  Então, por aqui, assuma que vamos precisar atualizar o arquivo `test/Spec.hs`  como a seguir:
+O funcionamento dessa biblioteca será estudado em detalhes na Unidade 2 (capítulo de [Testes com QuickCheck](../unidade2/06_testes_qualidade.md)); a referência original é o capítulo 11 de [*Real World Haskell*](http://book.realworldhaskell.org/read/testing-and-quality-assurance.html). O objetivo deste tutorial é apresentar o `stack`. Então, por aqui, assuma que vamos precisar atualizar o arquivo `test/Spec.hs` como a seguir:
 
 ```haskell
 {-# LANGUAGE TemplateHaskell #-}

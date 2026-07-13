@@ -312,24 +312,20 @@ greet.(123)
 3. **Cláusula coringa (`_`):**
     - Captura qualquer valor que não tenha correspondido às cláusulas anteriores.
 
-<aside>
-💡
+!!! tip "Chamando uma função anônima"
+    Em Elixir, funções anônimas são armazenadas em variáveis. Para chamá-las, usamos o **ponto (`.`)**:
 
-Em Elixir, funções anônimas são armazenadas em variáveis. Para chamá-las, usamos o **ponto (`.`)**:
+    ```elixir
+    greet = fn name -> "Olá, #{name}!" end
+    greet.("João")  # ✅ Chamada correta
+    ```
 
-```elixir
-greet = fn name -> "Olá, #{name}!" end
-greet.("João")  # ✅ Chamada correta
+    Sem o ponto, o Elixir procura por uma função nomeada no módulo, e não funcionará.
 
-```
+    **Resumo:**
 
-Sem o ponto, o Elixir procura por uma função nomeada no módulo, e não funcionará.
-
-> Resumo:
-> 
-> - **Função anônima em variável:** `variavel.(args)`
-> - **Função nomeada:** `Modulo.func(args)` ou `func(args)` dentro do mesmo módulo.
-</aside>
+    - **Função anônima em variável:** `variavel.(args)`
+    - **Função nomeada:** `Modulo.func(args)` ou `func(args)` dentro do mesmo módulo.
 
 ---
 

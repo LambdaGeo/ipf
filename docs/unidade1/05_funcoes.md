@@ -1,358 +1,231 @@
-# 3. Funções
+# Estrutura de Funções: Condicionais, Guardas e Pattern Matching
 
-- Definição de funções
-    
-    [https://youtu.be/UPscxxix1g4](https://youtu.be/UPscxxix1g4)
-    
-    Funções generalizam expressões, por exemplo a função matemática `f(x) = x ^ 2` seria definida em Haskell como:
-    
-    ```haskell
-    f x = x ^ 2
-    ```
-    
-    A aplicação dessa função em Haskell não requer parênteses:
-    
-    ```haskell
-    > f 4
-    8
-    ```
-    
-    Por ter inferência de tipos, em Haskell não é necessário anotar os tipos a uma função. Porém, uma assinatura possível para a função acima seria:
-    
-    ```haskell
-    f :: Double -> Double
-    f x = x ^ 2
-    ```
-    
-    Funções podem ter mais de um parâmetro. Por exemplo:
-    
-    ```haskell
-    delta a b c = (b ^ 2) + (4 * a * c)
-    ```
-    
-    - Definições locais
-        
-        Para organizar nosso código, podemos utilizar a cláusula **`where`** ou **`let`** para definir nomes intermediários.
-        
-        Por exemplo, a distancia euclidiana entre dois pontos:
-        
-        ![](3%20Fun%C3%A7%C3%B5es/Untitled.png)
-        
-        - Cláusula where
-            
-            As definições de cláusula where aplicam ao código que a antecede.
-            
-            Usando a cláusula `where`, poderia ser escrito em Haskell como:
-            
-            ```haskell
-            distance (x1, y1) (x2, y2)  = sqrt sxy
-              where
-            		sxy = dx + dy
-                dx = (x2 - x1) ^ 2
-                dy = (y2 - y1) ^ 2
-                
-            ```
-            
-        - Expressão let
-            
-            Essa estrutura é muito comum em linguagens da família ML, como F# e OCaml. 
-            
-            A forma do `let` é :
-            
-            `let <bindings> in <expression>` 
-            
-            Os nomes definidos em let são acessíveis à expressão após a parte in.
-            
-            A mesma função de cálculo de distância euclidiana poderia ser escrito da seguinte maneira:
-            
-            ```haskell
-            distance (x1, y1) (x2, y2) = 
-              let dx = (x2 - x1) ^ 2
-                  dy = (y2 - y1) ^ 2
-                  sxy = dx + dy
-                  in sqrt sxy
-            ```
-            
-        
-        Ambos exemplos podem ser experimentados em: [https://repl.it/@SergioSouza1/exemplo-where-let](https://repl.it/@SergioSouza1/exemplo-where-let)
-        
-- Expressões condicionais e guardadas
-    
-    [https://youtu.be/kHPSVwRYgXQ](https://youtu.be/kHPSVwRYgXQ)
-    
-    Funções podem usar expressões condicionais `if-then-else`:
-    
-    ```haskell
-    signum n = if n < 0 then -1 else
-                if n == 0 then 0 else 1
-    ```
-    
-    e
-    
-    ```haskell
-    abs :: Num a => a -> a
-    abs n = if (n >= 0) then n else (-n)
-    ```
-    
-    Porém, vale ressalta que aqui temos uma "expressão" condicional. Nas linguagens imperativas temos "comandos" condicionais. Então a clausula `else` é obrigatória, e ela deve retornar o mesmo tipo
-    
-    - Expressões *guardadas* (Guard Expressions)
-        
-        Uma alternativa ao uso de `if-then-else` é o uso de *guards* (`|`) que deve ser lido como *tal que*:
-        
-        ```haskell
-        signum n 
-        	| n == 0    =  0  
-          | n > 0     =  1
-          | otherwise = -1
-        ```
-        
-        `otherwise` é o caso contrário e é definido como `otherwise = True`. Ou seja, sempre é verdade
-        
-        Note que as expressões guardadas são avaliadas de cima para baixo, o primeiro verdadeiro será executado e o restante ignorado.
-        
-        ```haskell
-        classificaIMC :: Double -> String
-        classificaIMC imc 
-            | imc <= 18.5 = "abaixo do peso"
-            -- não preciso fazer && imc > 18.5
-            | imc <= 25.0 = "no peso correto"
-            | imc <= 30.0 = "acima do peso"
-            | otherwise   = "muito acima do peso"
-        ```
-        
-        Reescrever if-then-else
-        
-- Pattern Matching
-    
-    [https://youtu.be/YnLUK7U1LLY](https://youtu.be/YnLUK7U1LLY)
-    
-    Muitas funções têm uma definição particularmente clara usando
-    pattern matching em seus argumentos
-    
-    Considere a seguinte função usando expressões condicionais:
-    
-    ```haskell
-    negar :: Bool -> Bool
-    negar x = if (x == True) then False else True
-    ```
-    
-    Podemos reescreve-la utilizando guardas:
-    
-    ```haskell
-    negar :: Bool -> Bool
-    negar x | x == True  = False
-          | x == False = True
-    ```
-    
-    Quando temos comparações de igualdade nos guardas, podemos definir as expressões substituindo diretamente os argumentos:
-    
-    ```haskell
-    negar :: Bool -> Bool
-    negar True  = False
-    negar False = True
-    ```
-    
-    Assim como os guards, os padrões são avaliados do primeiro definido até o último.
-    
-    Podemos usar pattern patching com diversos outros tipos. Por exemplo, no caso de numeros inteiros podemos definir alguns casos e usar uma variável para o caso geral:
-    
-    ```haskell
-    fat 0 = 1
-    fat 1 = 1
-    fat 2 = 2
-    fat n = n * fat (n-1)
-    ```
-    
-    - Uso de caracter curinga.
-        
-        Podemos indicar que não importa o que está presente em parte de um padrão. A notação para isto é o caractere sublinhado `_`, que chamamos de um curinga ou wild card.
-        
-        ```haskell
-        (&&) :: Bool -> Bool -> Bool
-        True && True = True
-        True && False = False
-        False && True = False
-        False && False = False
-        ```
-        
-        Poderia ser definido de modo mais compacto usando os curingas.
-        
-        ```haskell
-        True && True = True
-        _ && _ = False
-        ```
-        
-        Uma outra  forma seria:
-        
-        ```haskell
-        True && b = b
-        False && _ = False
-        ```
-        
-- Funções recursivas
-    - Aula básica sobre recursividade dada para uma disciplina de estrutura de dados.
-        
-        [https://pt.slideshare.net/skosta/aula-recursividade](https://pt.slideshare.net/skosta/aula-recursividade)
-        
-        [https://www.youtube.com/watch?v=3RTIzLCpJo0](https://www.youtube.com/watch?v=3RTIzLCpJo0)
-        
-    
-    [https://youtu.be/g5cjphvkP5Q](https://youtu.be/g5cjphvkP5Q)
-    
-    - Exemplos clássicos
-        
-        Com a ausência de variáveis mutáveis, não é possível a utilização de estruturas de iteração. Usa-se nestes casos:
-        
-        - as funções de alta ordem ou
-        - funções recursivas explicitamente.
-        
-        Para exemplificar uma função recursiva, vamos usar o clássico exemplo.
-        
-        ![](3%20Fun%C3%A7%C3%B5es/Untitled%201.png)
-        
-        ```haskell
-        fat 0 = 1
-        fat n = n * fat (n-1)
-        ```
-        
-        O Haskell avalia as expressões por substituição:
-        
-        ```haskell
-        > fat 4
-              => 4 * fat 3
-              => 4 * (3 * fat 2)
-              => 4 * (3 * (2 * fat 1))
-              => 4 * (3 * (2 * 1))
-              => 4 * (3 * 2)
-              => 4 * 6
-              => 24
-        ```
-        
-        O algoritmo de Euclides para encontrar o Máximo Divisor Comum (*greatest common divisor* - gcd) é definido matematicamente como:
-        
-        ```haskell
-        gcd :: Int -> Int -> Int
-        gcd a 0 = a
-        gcd a b = gcd b (a `mod` b)
-        
-        ```
-        
-        ```haskell
-        > gcd 48 18
-            => gcd 18 12
-            => gcd 12 6
-            => gcd 6 0
-            => 6
-        
-        ```
-        
-    - Eficiência
-        
-        As funções recursivas são muito criticadas na literatura. Em partes essa crítica é razoável, dado o consumo de memória que pode levar ao erro conhecido como “stack overflow”. Contudo, existem diversas técnicas que podem evitar esse tipo de erro, como por exemplo a recursão em cauda. O algorimo de fibonacci é muito usado como um exemplo ruim de recursividade. Essa implementação é bem simples, porém tem um custo alto, além de consumir muito tempo.
-        
-        ```haskell
-        fib :: Integer -> Integer
-        fib 0 = 1
-        fib 1 = 1
-        fib x = fib (x - 1) + fib (x - 2)
-        ```
-        
-        Com algumas modificações, podemos fazer uma nova versão que é capaz de imprimir facilmente o milésimo fibonnacci.
-        
-        ```haskell
-        fibTuple :: (Integer, Integer, Integer) -> (Integer, Integer, Integer)
-        fibTuple (x, y, 0) = (x, y, 0)
-        fibTuple (x, y, index) = fibTuple (y, x + y, index - 1)
-        
-        fibEf :: Integer -> Integer
-        fibEf x =  r
-          where
-          (r,_,_) = fibTuple (0, 1, x) 
-        
-        main = print $ fibEf 1000
-        ```
-        
-        A execução do código acima retornaria o seguinte número:
-        
-        ```
-        4346655768693745643568852767504062580256466051737178040248172908953655541794
-        90518904038798400792551692959225930803226347752096896232398733224711616429964409
-        06533187938298969649928516003704476137795166849228875
-        
-        ```
-        
-        - For utilizada a técnica conhecida como tail recursion. Essa técnica é muito bem explicada   por Hutton nesse vídeo.
-            
-            [https://www.youtube.com/watch?v=_JtPhF8MshA](https://www.youtube.com/watch?v=_JtPhF8MshA)
-            
-        
-- Expressões *λ (lambda)*
-    
-    [https://youtu.be/a7lKUy0gtPA](https://youtu.be/a7lKUy0gtPA)
-    
-    As expressões lambdas, também chamadas de funções anônimas, definem uma função sem nome para uso geral. Considerado um exemplo com strings:
-    
-    ```python
-    s = "Ola Mundo"
-    print (s) # string nomeada
-    
-    print ("ola mundo") # string anônima
-    ```
-    
-    As expressões lambdas são muito úteis quando não queremos criar uma função, mas apenas passa-la para outra função. Pense nas expressões lambdas como equivalente a literais como `10`, ou `"Ola Mundo!"`. Nesse exemplo, a expressão lambda é passado para a função map, que irá retornar uma nova lista com os valores duplicados.
-    
-    ```haskell
-    > map (\x-> 2 *x) [4,5,6]
-    => [8,10,12]
-    ```
-    
-    Veremos mais a frente sobre funções de alta ordem e lista. 
-    
-    - Vídeo de Hutton sobre cálculo lambda:
-        
-        [https://youtu.be/eis11j_iGMs](https://youtu.be/eis11j_iGMs)
-        
-- Funções e Operadores
-    
-    [https://youtu.be/E7Gn13iXZjo](https://youtu.be/E7Gn13iXZjo)
-    
-    Para definir um operador em Haskell, podemos criar na forma infixa ou na forma de função:
-    
-    ```haskell
-    (<^>) :: Int -> Int -> Int
-    a <^> b =  a + b
-    ```
-    
-    ou
-    
-    ```haskell
-    (<^>) :: Int -> Int -> Int
-    (<^>) a b =  a + b
-    ```
-    
-    Da mesma forma, uma função pode ser utilizada como operador se envolta de crases:
-    
-    ```haskell
-    > mod 10 3
-    1
-    > 10 `mod` 3
-    1
-    ```
-    
-    - Seções
-        
-        Sendo `#` um operador, temos que `(#), (x #), (# y)` são chamados de seções, e definem:
-        
-        ```haskell
-        (#)   = \x -> (\y -> x # y)
-        (x #) = \y -> x # y
-        (# y) = \x -> x # y
-        ```
-        
-        Seções e aplicações parciais poderia ser usado como alternativa a expressão lambdas:
-        
-        ```haskell
-        Prelude> map ((*) 2) [4,5,6]
-        [8,10,12]
-        ```
+Na programação funcional, as funções são os blocos de construção primários. Neste capítulo, exploraremos a fundo como declarar e estruturar funções em Haskell. Analisaremos mecanismos para controle de fluxo e tomada de decisão: desde condicionais básicas até a elegância matemática de guardas e o poder do casamento de padrões (*pattern matching*).
+
+---
+
+## 1. Declaração de Funções e Assinaturas de Tipos
+
+Em Haskell, é uma boa prática declarar a **assinatura de tipo** da função logo acima de sua implementação. Isso funciona como documentação para o programador e como uma especificação que o compilador validará estritamente.
+
+```haskell
+-- Assinatura de tipo: recebe dois números inteiros e retorna outro
+soma :: Int -> Int -> Int
+soma x y = x + y
+```
+
+### Funções com Múltiplos Parâmetros (Currying)
+Como você deve ter notado, a assinatura de tipo utiliza setas (`->`) para separar os argumentos e o retorno. Em Haskell, sob o capô, **toda função recebe exatamente um único argumento** e retorna uma nova função que espera o próximo. Esse conceito matemático é conhecido como **Currying** (em homenagem ao matemático Haskell Curry) e será detalhado no capítulo de funções de alta ordem.
+
+---
+
+## 2. Expressões Condicionais: `if-then-else`
+
+Ao contrário das linguagens imperativas, onde o `if` é uma estrutura de controle (um comando), em Haskell o `if` é uma **expressão**. Isso significa que ele **obrigatoriamente deve retornar um valor**.
+
+```haskell
+sinal :: Int -> Int
+sinal n = if n < 0 then -1 else if n == 0 then 0 else 1
+```
+
+### Regras do `if` em Haskell:
+1. **O bloco `else` é obrigatório**: Como uma expressão precisa avaliar para algum valor em qualquer cenário, não podemos omitir o `else`.
+2. **Tipos idênticos**: Os blocos `then` e `else` devem retornar valores do **mesmo tipo**.
+
+---
+
+## 3. Guardas (Guards)
+
+Quando lidamos com múltiplos caminhos condicionais, encadear vários blocos `if-then-else` torna o código poluído e difícil de ler. Para resolver isso, Haskell fornece os **Guardas** (representados por barras verticais `|`), que testam predicados booleanos sequencialmente.
+
+Reescrevendo a função `sinal` com guardas:
+
+```haskell
+sinal :: Int -> Int
+sinal n | n < 0     = -1
+        | n == 0    = 0
+        | otherwise = 1
+```
+
+### Detalhes Sintáticos:
+* O símbolo `=` é colocado apenas após a condição do guarda para ligá-la à sua expressão de retorno.
+* A palavra-chave **`otherwise`** é equivalente a `True` e serve como a ramificação padrão (o equivalente ao `else` final).
+
+---
+
+## 4. Casamento de Padrões (Pattern Matching)
+
+O **Casamento de Padrões** (*Pattern Matching*) é o mecanismo mais expressivo para tomada de decisões em linguagens funcionais. Em vez de testarmos condições lógicas gerais, definimos equações separadas para diferentes formatos ou valores de dados que a função pode receber.
+
+Considere a negação lógica:
+
+```haskell
+negar :: Bool -> Bool
+negar True  = False
+negar False = True
+```
+
+O compilador analisa a chamada da função de cima para baixo. Se passarmos `True`, ele seleciona a primeira linha; se passarmos `False`, seleciona a segunda.
+
+### O Padrão Curinga (Wildcard)
+Podemos usar o caractere sublinhado (`_`) como um curinga para casar com "qualquer valor", descartando-o se não formos utilizá-lo. Isso é muito comum para definir casos padrão:
+
+```haskell
+ehDificil :: String -> Bool
+ehDificil "Haskell" = False
+ehDificil "Clojure" = False
+ehDificil _         = True  -- Qualquer outra linguagem é considerada difícil por padrão
+```
+
+### Pattern Matching em Tuplas
+Podemos desestruturar estruturas de dados complexas, como tuplas, diretamente nos argumentos da função:
+
+```haskell
+somarPares :: (Int, Int) -> (Int, Int) -> (Int, Int)
+somarPares (x1, y1) (x2, y2) = (x1 + x2, y1 + y2)
+```
+
+### Padrões Exaustivos
+Ao escrever uma série de padrões, é importante cobrir **todos os casos possíveis** do tipo. Se nenhuma equação casar com o valor recebido, o programa falha em tempo de execução:
+
+```haskell
+exemploRuim :: [Int] -> Int
+exemploRuim (x:xs) = x + exemploRuim xs
+-- exemploRuim []  ==> *** Exception: Non-exhaustive patterns
+```
+
+O GHC oferece a opção de compilação `-fwarn-incomplete-patterns` (ou `-Wall`), que emite um aviso quando uma sequência de padrões não cobre todos os construtores do tipo. Quando precisamos de um comportamento padrão para os casos restantes, usamos o curinga `_` como último padrão.
+
+### As-Patterns: Nomeando o Todo e as Partes
+Às vezes queremos desestruturar um valor **e** manter uma referência ao valor completo. O símbolo `@` (chamado *as-pattern*) faz exatamente isso: no padrão `xs@(_:xs')`, a variável `xs` é ligada à lista inteira que casou, enquanto `xs'` recebe apenas a cauda.
+
+```haskell
+-- Retorna todos os sufixos não vazios de uma lista
+sufixos :: [a] -> [[a]]
+sufixos xs@(_:xs') = xs : sufixos xs'
+sufixos _          = []
+```
+
+```haskell
+Prelude> sufixos "foo"
+["foo","oo","o"]
+```
+
+Sem o as-pattern, teríamos de reconstruir a lista no corpo da função (`sufixos (x:xs) = (x:xs) : ...`), o que é menos legível e ainda aloca um novo nó de lista em tempo de execução — o as-pattern **compartilha** o valor original em vez de copiá-lo.
+
+### Erros Comuns de Iniciantes com Padrões
+Um equívoco clássico é tentar comparar um argumento com o valor de uma variável já definida:
+
+```haskell
+data Fruta = Maca | Laranja
+
+maca = "maca"
+
+qualFruta :: String -> Fruta
+qualFruta f = case f of
+                maca    -> Maca     -- ERRADO!
+                laranja -> Laranja
+```
+
+O `maca` dentro do `case` **não** se refere à variável global `maca`: é uma nova variável de padrão local que casa com *qualquer* valor (um padrão *irrefutável*). O correto é comparar com valores literais:
+
+```haskell
+qualFruta f = case f of
+                "maca"    -> Maca
+                "laranja" -> Laranja
+```
+
+Outro erro comum: um nome pode aparecer **apenas uma vez** em um padrão. Não é possível escrever `saoIguais x x = True` para exprimir "os dois argumentos devem ser idênticos" — para isso, usamos guardas: `saoIguais x y | x == y = ...`.
+
+---
+
+## 5. Expressões `case`
+
+O casamento de padrões que vimos acima é aplicado na própria definição das equações da função. Contudo, às vezes precisamos realizar um casamento de padrões dentro de uma expressão no meio da implementação. Para isso, utilizamos a construção **`case ... of`**:
+
+```haskell
+descreverNumero :: Int -> String
+descreverNumero n = "O numero fornecido eh: " ++ case n of
+    0 -> "Zero"
+    1 -> "Um"
+    _ -> "Muitos"
+```
+
+A estrutura `case` avalia a expressão e executa o casamento de padrões de cima para baixo, retornando o valor associado ao primeiro padrão compatível.
+
+---
+
+## 6. Combinando Padrões e Guardas
+
+Padrões e guardas se complementam: o padrão verifica a *forma* do dado, e o guarda verifica *condições* sobre os valores extraídos. Escrever uma função como uma série de equações usando os dois mecanismos torna os casos explícitos logo de início. Compare a função `meuDrop` escrita com `if`:
+
+```haskell
+meuDrop n xs = if n <= 0 || null xs
+               then xs
+               else meuDrop (n - 1) (tail xs)
+```
+
+Com a reformulação usando padrões e guardas:
+
+```haskell
+meuDrop n xs | n <= 0 = xs
+meuDrop _ []          = []
+meuDrop n (_:xs)      = meuDrop (n - 1) xs
+```
+
+Essa mudança de estilo nos permite enumerar *de frente* os casos em que a função se comporta de maneira diferente — enterrar as decisões dentro de expressões `if` torna o código mais difícil de ler.
+
+---
+
+## 7. A Regra Offside: Indentação com Significado
+
+Em Haskell, o espaço em branco **tem significado**: a linguagem usa a indentação para delimitar blocos de código, dispensando chaves e pontos-e-vírgulas. Esse mecanismo é chamado de **regra offside**, e vale a pena entendê-lo antes que ele o surpreenda com um `parse error`.
+
+As regras práticas:
+
+1. **Declarações de nível superior devem começar todas na mesma coluna.** A primeira declaração do arquivo pode começar em qualquer coluna; as seguintes devem alinhar-se a ela.
+2. **Uma linha mais indentada que a anterior é uma *continuação*** da declaração anterior — é assim que quebramos definições longas em várias linhas.
+3. **Dentro de `let`, `where` e `do`**, o compilador memoriza a coluna do primeiro item: linhas na mesma coluna iniciam um novo item do bloco; linhas mais à direita continuam o item anterior; linhas mais à esquerda encerram o bloco.
+
+```haskell
+-- Correto: as definições do where alinhadas na mesma coluna
+emprestar valor saldo = if valor < reserva * 0.5
+                        then Just novoSaldo
+                        else Nothing
+    where reserva   = 100
+          novoSaldo = saldo - valor
+```
+
+```haskell
+-- ERRO: a segunda declaração está em coluna diferente da primeira
+    primeiraDeclaracao = 1
+  segundaDeclaracao = 2    -- parse error!
+```
+
+!!! warning
+    **Use espaços, nunca tabs.** Editores interpretam tabulações com larguras diferentes (8 colunas no Unix, 4 no Windows), então um arquivo com tabs pode compilar na sua máquina e quebrar na do colega. O padrão da linguagem assume a convenção Unix — configure seu editor para inserir espaços em arquivos `.hs`.
+
+A propósito: a regra offside não é obrigatória — Haskell aceita estruturação explícita com chaves e pontos-e-vírgulas (`let { a = 1; b = 2 } in a + b`) — mas ela praticamente nunca é usada em programas reais.
+
+### Ocultamento (Shadowing)
+Blocos `let` e `where` podem ser aninhados, e um nome interno pode **ocultar** um nome externo de mesmo identificador:
+
+```haskell
+bar = let x = 1
+      in ((let x = "foo" in x), x)   -- resulta em ("foo", 1)
+```
+
+O `x` interno esconde o externo — mesmo nome, tipo e valor diferentes. O ocultamento também pode esconder **parâmetros da função**, uma fonte clássica de confusão:
+
+```haskell
+quux a = let a = "foo"
+         in a ++ "eek!"    -- o parâmetro 'a' nunca é usado!
+```
+
+Ocultamento leva a bugs sutis; o GHC oferece a opção `-fwarn-name-shadowing` (incluída no `-Wall`) para avisar sempre que um nome ocultar outro.
+
+No próximo capítulo, veremos como aplicar recursão e casamento de padrões sobre estruturas de dados recursivas como **Listas**.
+
+---
+
+> **Nota de atribuição:** partes deste capítulo adaptam material de *Real World Haskell*, de Bryan O'Sullivan, Don Stewart e John Goerzen ([book.realworldhaskell.org](http://book.realworldhaskell.org/read/)), sob a licença [Creative Commons Attribution-Noncommercial 3.0](http://creativecommons.org/licenses/by-nc/3.0/).

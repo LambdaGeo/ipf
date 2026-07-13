@@ -1,83 +1,85 @@
 site_name: Introdução à Programação Funcional
-site_description: Livro didático e guia de estudos para a disciplina de Introdução à Programação Funcional.
-site_author: Sérgio S. Costa
+site_description: >
+  Livro didático da disciplina de Introdução à Programação Funcional:
+  Haskell, Clojure e Elixir em três unidades de 20 horas.
+site_author: "Sergio Souza Costa"
+
+docs_dir: docs
+site_dir: site
+
 theme:
   name: material
   language: pt
-  palette:
-    - media: "(prefers-color-scheme: light)"
-      scheme: default
-      primary: indigo
-      accent: indigo
-      toggle:
-        icon: material/brightness-7
-        name: Mudar para modo escuro
-    - media: "(prefers-color-scheme: dark)"
-      scheme: slate
-      primary: indigo
-      accent: indigo
-      toggle:
-        icon: material/brightness-4
-        name: Mudar para modo claro
   features:
-    - navigation.tabs
-    - navigation.sections
-    - navigation.expand
     - navigation.top
-    - search.suggest
-    - search.highlight
-    - content.code.copy
+    - navigation.sections
+    - toc.integrate
     - content.code.annotate
+    - content.code.copy
+  palette:
+    - scheme: default
+      primary: teal
+      accent: green
+
+plugins:
+  - search
 
 markdown_extensions:
   - admonition
   - pymdownx.details
-  - pymdownx.superfences
+  - pymdownx.arithmatex:
+      generic: true
   - pymdownx.highlight:
       anchor_linenums: true
-      line_spans: __span
-      pygments_lang_class: true
-  - pymdownx.inlinehilite
-  - pymdownx.snippets
   - pymdownx.tabbed:
       alternate_style: true
+  - pymdownx.superfences
   - tables
   - toc:
       permalink: true
 
+extra_javascript:
+  - https://unpkg.com/mathjax@3/es5/tex-mml-chtml.js
+
 nav:
   - Apresentação: index.md
-  - "Unidade 1: Paradigmas e Haskell Básico":
-      - Introdução aos Paradigmas: unidade1/01_paradigmas.md
-      - Instalação do Ambiente: unidade1/02_instalacao.md
-      - Fundamentos: unidade1/03_fundamentos.md
-      - Tipos e Classes: unidade1/04_tipos_classes.md
-      - Funções: unidade1/05_funcoes.md
-      - Listas: unidade1/06_listas.md
-      - Funções de Alta Ordem: unidade1/07_alta_ordem.md
-      - Exercícios Resolvidos: unidade1/08_exercicios.md
-  - "Unidade 2: Haskell Avançado e Qualidade":
-      - Declarando Custom Types: unidade2/01_declarando_tipos_classes.md
-      - Programas Interativos (IO): unidade2/02_programas_interativos.md
-      - Exercícios Avançados: unidade2/03_exercicios_avancados.md
-      - Projetos Modernos com Stack: unidade2/04_haskell_moderno.md
-      - Escrevendo a Biblioteca JSON: unidade2/05_biblioteca_json.md
-      - Testes com QuickCheck: unidade2/06_testes_qualidade.md
-      - Trabalho Prático: unidade2/07_avaliacao.md
-  - "Unidade 3: Clojure e Elixir":
-      - Clojure Fundamentos: unidade3/01_clojure_fundamentos.md
-      - Clojure Vetores e Mapas: unidade3/02_clojure_colecoes.md
-      - Clojure Funções de Alta Ordem: unidade3/03_clojure_alta_ordem.md
-      - Clojure Mapas e Threading: unidade3/04_clojure_threading_mapas_complexos.md
-      - Clojure Lazy Sequences: unidade3/05_clojure_lazy_sequences.md
-      - Clojure Metaprogramação (Macros): unidade3/06_clojure_metaprogramacao.md
-      - Clojure Interoperabilidade Java: unidade3/07_clojure_interop.md
-      - Clojure Revisão de Pilares: unidade3/08_clojure_revisao.md
-      - Clojure Exercícios Resolvidos: unidade3/09_clojure_exercicios.md
-      - "Trabalho Clojure: Tutorial Todo List": unidade3/10_clojure_tutorial_todo.md
-      - Elixir Fundamentos: unidade3/11_elixir_fundamentos.md
-      - Elixir Pattern Matching e Coleções: unidade3/12_elixir_colecoes_pattern_matching.md
-      - Elixir Módulos, Funções e Testes: unidade3/13_elixir_modulos_funcoes_testes.md
-      - Elixir Processos e Concorrência: unidade3/14_elixir_processos.md
-      - Elixir Metaprogramação: unidade3/15_elixir_metaprogramacao.md
-      - "Trabalho Elixir: Tutorial Todo List": unidade3/16_elixir_tutorial_todo.md
+
+  - Unidade 1 — Paradigmas e Haskell Básico (20h):
+    - "Plano da Unidade 1":                        unidade1/00_plano_unidade1.md
+    - "Cap 1: Introdução aos Paradigmas":          unidade1/01_paradigmas.md
+    - "Cap 2: Instalação do Ambiente":             unidade1/02_instalacao.md
+    - "Cap 3: Fundamentos e o GHCi":               unidade1/03_fundamentos.md
+    - "Cap 4: Tipos e Classes":                    unidade1/04_tipos_classes.md
+    - "Cap 5: Funções e Pattern Matching":         unidade1/05_funcoes.md
+    - "Cap 6: Listas, Recursão e Compreensão":     unidade1/06_listas.md
+    - "Cap 7: Funções de Alta Ordem":              unidade1/07_alta_ordem.md
+    - "Cap 8: Exercícios Resolvidos":              unidade1/08_exercicios.md
+
+  - Unidade 2 — Haskell Avançado e Qualidade (20h):
+    - "Plano da Unidade 2":                        unidade2/00_plano_unidade2.md
+    - "Cap 9: Tipos Algébricos e Typeclasses":     unidade2/01_declarando_tipos_classes.md
+    - "Cap 10: Programas Interativos (IO)":        unidade2/02_programas_interativos.md
+    - "Cap 11: Exercícios Avançados":              unidade2/03_exercicios_avancados.md
+    - "Cap 12: Projetos Modernos com Stack":       unidade2/04_haskell_moderno.md
+    - "Cap 13: A Biblioteca JSON":                 unidade2/05_biblioteca_json.md
+    - "Cap 14: Testes com QuickCheck":             unidade2/06_testes_qualidade.md
+    - "Trabalho Prático: hs2json":                 unidade2/07_avaliacao.md
+
+  - Unidade 3 — Clojure e Elixir (20h):
+    - "Plano da Unidade 3":                        unidade3/00_plano_unidade3.md
+    - "Cap 15: Clojure — Fundamentos":             unidade3/01_clojure_fundamentos.md
+    - "Cap 16: Clojure — Vetores e Mapas":         unidade3/02_clojure_colecoes.md
+    - "Cap 17: Clojure — Alta Ordem":              unidade3/03_clojure_alta_ordem.md
+    - "Cap 18: Clojure — Threading Macros":        unidade3/04_clojure_threading_mapas_complexos.md
+    - "Cap 19: Clojure — Lazy Sequences":          unidade3/05_clojure_lazy_sequences.md
+    - "Cap 20: Clojure — Macros":                  unidade3/06_clojure_metaprogramacao.md
+    - "Cap 21: Clojure — Interop com Java":        unidade3/07_clojure_interop.md
+    - "Cap 22: Clojure — Revisão de Pilares":      unidade3/08_clojure_revisao.md
+    - "Cap 23: Clojure — Exercícios Resolvidos":   unidade3/09_clojure_exercicios.md
+    - "Trabalho Clojure: ToDo Full-Stack":         unidade3/10_clojure_tutorial_todo.md
+    - "Cap 24: Elixir — Fundamentos":              unidade3/11_elixir_fundamentos.md
+    - "Cap 25: Elixir — Pattern Matching":         unidade3/12_elixir_colecoes_pattern_matching.md
+    - "Cap 26: Elixir — Módulos e Testes":         unidade3/13_elixir_modulos_funcoes_testes.md
+    - "Cap 27: Elixir — Processos e Concorrência": unidade3/14_elixir_processos.md
+    - "Cap 28: Elixir — Metaprogramação":          unidade3/15_elixir_metaprogramacao.md
+    - "Trabalho Elixir: ToDo com LiveView":        unidade3/16_elixir_tutorial_todo.md

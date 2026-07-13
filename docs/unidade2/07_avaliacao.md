@@ -2,6 +2,11 @@
 
 Esta atividade avaliativa consiste em construir um projeto completo em Haskell moderno, aplicando técnicas de desenvolvimento de bibliotecas, modularização em Stack e testes baseados em propriedades com QuickCheck.
 
+!!! success "Tutorial guiado no blog"
+    O desenvolvimento completo do projeto é guiado pelo tutorial no blog do LambdaGEO:
+
+    👉 **[Construindo e Testando uma Biblioteca Haskell: JSON, Pretty Printing e QuickCheck](https://lambdageo.github.io/blog/tutorial-haskell-json-quickcheck/)**
+
 ---
 
 ## 📋 Especificações do Projeto

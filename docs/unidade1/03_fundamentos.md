@@ -1,720 +1,261 @@
-# 1. Fundamentos
+# Fundamentos do Haskell e o Interpretador GHCi
 
-- **Por quê estudar o paradigma funcional ?**
-    
-    [https://www.youtube.com/watch?v=PuiwBS_CoPY](https://www.youtube.com/watch?v=PuiwBS_CoPY)
-    
-    - Mudança de paradigma
-        
-        Como  a seguinte expressão seria avaliada em Python ? e em Haskell ? 
-        
-        ```haskell
-        x = x + 1
-        ```
-        
-        - Avaliação no Haskell
-            
-            Irá substituir indefenidamente `x` por `x+1`
-            
-            ```haskell
-            x = (x+1) + 1
-            x = ((x+1)+1) + 1
-            ...
-            ```
-            
-        
-        E agora esse:
-        
-        ```haskell
-        x = 0
-        x = x + 1
-        ```
-        
-        - Avaliação em Haskell
-            
-            Levará um erro, pois tem duas definições diferentes para `x`
-            
-        
-        ![](1%20Fundamentos/Untitled.png)
-        
-    - Conceitos já estão presentes em diversas linguagens e frameworks.
-        - Linguagens mais recentes já foram criadas com diversos conceitos de programação funcional como Kotlin, Swift, Rust, Golang ...
-        - Outras nem tão novas já tinham alguns recursos, e tem adicionado outros, como Python e JavaScript (arrow functions, react)
-        - Outras como Java e C++ também tem incorporado esses conceitos.
-    - Melhoria na capacidade de expresar idéias
-        
-        Segundo diversos autores, aprender novas linguagens melhora a nossa capacidade de expressar idéias. O que pode ser potencializado quando as linguagens são de diferentes paradigmas.
-        
-    - **Programação funcional é difícil ?**
-        
-        No início, quando descobre que não tem variáveis, você pode se sentir assim :
-        
-        ![](1%20Fundamentos/Untitled%201.png)
-        
-        Mas depois, basta abrir a cabeça e tentar aceitar que se trata de um novo paradigma
-        
-        ![](1%20Fundamentos/Untitled%202.png)
-        
-- **Linguagens e Paradigmas de programação**
-    
-    [https://www.youtube.com/watch?v=iyX0Lzt-ANk](https://www.youtube.com/watch?v=iyX0Lzt-ANk)
-    
-    - Linguagens de programação
-        
-        > “*A program is a sequence of symbols that specifies a computation. A programming language is a set of rules that specify which sequences of symbols constitute a program, and what computation the program describes.*”
-        > 
-        
-        > “*A programming language is an artificial formalism in which algorithms can be expressed*”. (Gabbrielli, Maurizio, Martini, Simone - Programming Languages: Principles and Paradigms)
-        > 
-    - Paradigmas de programação
-        - Entre tantas linguagens, podemos identificar diferenças e similaridades
-        - As linguagens dentro de um mesmo paradigma, tendem a ter mais similaridades.
-        - Definição:
-            
-            > “A paradigm is a distinctive style of programming. Each paradigm is characterized by the predominance of certain key concepts”. (David Watt - Programming Language Design Concepts)
-            > 
-            
-            ![](1%20Fundamentos/Untitled%203.png)
-            
-        
-        - O 4 principais paradigmas
-            
-            Um programa em assembly é uma sequência de operações do processador.
-            
-            Um programa em uma linguagem de alto nível depende do paradigma de programação. Por exemplo
-            
-            ![](1%20Fundamentos/Untitled%204.png)
-            
-            - Imperativo
-                - Estruturado (ou procedural),  uma coleção de subrotinas ou procedimentos: C, Ada, Pascal
-                - Orientado a objeto, uma coleção de objetos que se relacionam e se comunicam através de mensagens: Smalltalk, C++, Java, Python, Ruby, Kotlin, C#
-            - Declarativo
-                - Funcional, uma composição e aplicações de funções: Haskell, Lisp, Clojure, Elixir ..
-                - Lógico,  uma coleção de fatos e regras: Prolog, Mercury
-    - Paradigma Funcional
-        - Definição
-            
-            Nos últimos anos a programação funcional tem ganhado um destaque maior, e é fácil ouvir falar sobre esse paradigma em palestras de tecnologia. Porém, é importante distinguir a programação funcional, das linguagens funcionais. De acordo com Hutton: 
-            
-            > "*Functional programming is style of programming in which the basic method of computation is the application of functions to arguments*;"
-            > 
-            
-            > "*A functional language is one that supports and encourages the functional style*".
-            > 
-        
-        Martin Odersky o criador da linguagem Scala, destaca duas visões, uma mais restrita e outra mais ampla.
-        
-        - Wider sense, programar com **foco nas funções**, e nas suas composições
-            - As funções como **valores de primeira classe,** que significa que elas podem:
-                - Ser entrada para outras funções
-                - Ser saída de outras funções.
-                - Fazer parte de outras estruturas de dados
-                - Ser tratada como literais, não precisam estar associadas a um nome, ou seja, elas podem ser anônimas.
-                
-                Como as funções são valores como qualquer outro, pode-se declarar uma função como se fosse um valor literal. Não é necessário "amarrar" esse valor a um nome. Esse tipo de função é normalmente denominada de funções anônimas, ou expressões lambdas.
-                
-                ```haskell
-                Prelude> map (\x->2 * x) [4,5,6]
-                [8,10,12]
-                ```
-                
-            - Sintaxe simplificada
-                
-                Programar com foco nas funções, elas são usualmente escritas através de uma sintaxe simples. Por exemplo, uma função dobro em Haskell seria definido da seguinte maneira:
-                
-                ```haskell
-                dobro x = 2 * x
-                ```
-                
-                Compare essa definição de função com outras linguagens, como Ada, Pascal, C e até mesmo com linguagens dinâmicas e modernas como Python.
-                
-                ```python
-                def dobro (x) :    
-                    return 2 * x
-                ```
-                
-                A chamada de uma função também é simples, basta passar o nome da função e os parâmetros de entrada sem usar parênteses e nem virgulas. Por exemplo, acessando o *repl.it* podemos entrar no terminal com ( [https://repl.it/@profsergiocosta/haskellexemplo1](https://repl.it/@profsergiocosta/haskellexemplo1)) :
-                
-                ```haskell
-                > dobro 2
-                4
-                ```
-                
-        - Restricted sense, programar sem **efeitos colaterais (funções puras).**
-            
-            Programas escritos em linguagens imperativas (estruturadas)  lidam com alteração de estados, onde uma mesma variável pode assumir diferentes valores durante a execução. Por exemplo, a somatoria é usualmente resolvido da seguinte maneira:
-            
-            ```c
-            total = 0;
-            for (i = 1; i < 10; ++i)
-               total = total+i;
-            ```
-            
-            O mesmo problema poderia ser escrito da seguinte maneira em Haskell:
-            
-            ```haskell
-            sum [1..10]
-            ```
-            
-            - Uma visão mais restrita, define que em um programa funcional é definido por funções que aplicadas a **valores imutáveis** produzem novos valores.
-            - As funções não deveriam causar nenhum **efeito colateral**, como uma operação de entrada e saída ou alteração de valores de uma variável.
-            - Quando uma função tem um efeito colateral ela deixa de ser uma **função pura** e perde a **transparência referenci~~a~~l**. [Texto no medium que explico melhor esse conceito, e as vantanges.](https://medium.com/@sergiocosta/princ%C3%ADpios-e-padr%C3%B5es-de-programa%C3%A7%C3%A3o-funcional-parte-1-fa3bff0d6d2d)
-            - Mesmo em linguagens imperativas é possível escrever funções puras, por exemplo:
-                
-                ```c
-                double dobra(double x) {
-                  return 2*x;
-                }
-                ```
-                
-                A função abaixo é pura ou impura ?
-                
-                ```c
-                double i = 0;
-                
-                double dobraMaisI(double x) {
-                  i += 1;
-                  return 2*x + i;
-                }
-                
-                ```
-                
-                E essa ?
-                
-                ```c
-                double media (int *valores, int n) {
-                    double soma = 0;
-                    int i;
-                    for (i = 0; i < n; i++)
-                        soma_valor(&soma, valores[i]);
-                    return soma / n;
-                }
-                
-                void soma_valor (double *soma, int valor) {
-                    *soma += valor;
-                }
-                ```
-                
-- **Breve histórico da programação funcional**
-    
-    
-    ### Vídeos
-    
-    - Vídeo aula do Erick Meijer (a partir do minuto 8:00)
-        
-        [https://youtu.be/UIUlFQH4Cvo](https://youtu.be/UIUlFQH4Cvo)
-        
-    - Talk do John Hughes
-        
-        [https://youtu.be/XrNdvWqxBvA](https://youtu.be/XrNdvWqxBvA)
-        
-    
-    ### Timeline
-    
-    - 1930s: Alonzo Church develops the lambda calculus, a simple but powerful theory of functions.
-        
-        ![](1%20Fundamentos/Untitled%205.png)
-        
-    - 1950s: John McCarthy develops Lisp, the first functional language, with some influences from the lambda calculus, but retaining variable assignments.
-        
-        ![](1%20Fundamentos/Untitled%206.png)
-        
-    - 1960s: Peter Landin develops ISWIM, the first pure functional language, based strongly on the lambda calculus, with no assignments.
-        
-        ![](1%20Fundamentos/Untitled%207.png)
-        
-    - 1970s: John Backus develops FP, a functional language that emphasizes higher-order functions and reasoning about programs.
-        
-        ![](1%20Fundamentos/Untitled%208.png)
-        
-    - 1970s: Robin Milner and others develop ML, the first modern functional language, which introduced type inference and polymorphic types.
-        
-        ![](1%20Fundamentos/Untitled%209.png)
-        
-    - 1970-1980: David Turner develops a number of lazy functional languages, culminating in the Miranda system.
-        
-        ![](1%20Fundamentos/Untitled%2010.png)
-        
-    - 1986: Joseph Leslie Armstrong, na Ericsson, desenvolve a linguage, Erlang.
-        
-        ![](1%20Fundamentos/Untitled%2011.png)
-        
-    - 1987:An international committee of researchers initiates the development of Haskell, a standard lazy functional language.
-        
-        ![](1%20Fundamentos/Untitled%2012.png)
-        
-    - 2000: Jacques Garrigue extended Objective Caml with several new features, which he had been experimenting with for a few years in the Objective Label dialect of Objective Caml. Among these features were polymorphic methods, labeled and optional function arguments, and polymorphic variants.
-        
-        ![](1%20Fundamentos/Untitled%2013.png)
-        
-    - 2003:The committee publishes the Haskell 98 report, defining a stable version of the language.
-        
-        ![](1%20Fundamentos/Untitled%2014.png)
-        
-    - 2001-2003 The design of Scala started in 2001 at the [École Polytechnique Fédérale de Lausanne](https://en.wikipedia.org/wiki/%C3%89cole_Polytechnique_F%C3%A9d%C3%A9rale_de_Lausanne) (EPFL) (in [Lausanne](https://en.wikipedia.org/wiki/Lausanne), [Switzerland](https://en.wikipedia.org/wiki/Switzerland)) by [Martin Odersky](https://en.wikipedia.org/wiki/Martin_Odersky). It followed on from work on Funnel, a programming language combining ideas from functional programming and [Petri nets](https://en.wikipedia.org/wiki/Petri_net).[[12]](https://en.wikipedia.org/wiki/Scala_(programming_language)#cite_note-history-of-scala-12) Odersky formerly worked on [Generic Java](https://en.wikipedia.org/wiki/Generic_Java), and [javac](https://en.wikipedia.org/wiki/Javac), Sun's Java compiler.[[12]](https://en.wikipedia.org/wiki/Scala_(programming_language)#cite_note-history-of-scala-12) After an internal release in late 2003, Scala was released publicly in early 2004 on the [Java platform](https://en.wikipedia.org/wiki/Java_(software_platform)),[[13]](https://en.wikipedia.org/wiki/Scala_(programming_language)#cite_note-cacm-13)[[6]](https://en.wikipedia.org/wiki/Scala_(programming_language)#cite_note-overview-6)[[12]](https://en.wikipedia.org/wiki/Scala_(programming_language)#cite_note-history-of-scala-12)[[14]](https://en.wikipedia.org/wiki/Scala_(programming_language)#cite_note-spec-14) A second version (v2.0) followed in March 2006.[[6]](https://en.wikipedia.org/wiki/Scala_(programming_language)#cite_note-overview-6)
-        
-        ![](1%20Fundamentos/Untitled%2015.png)
-        
-    - 2005: O post: [The Free Lunch Is Over: A Fundamental Turn Toward Concurrency in Software](http://www.gotw.ca/publications/concurrency-ddj.htm) chama bastante atenção da comunidade.
-    - 2005 F#, uma linguagem funcional do dialeto ML, que compila para a máquina virtual CLR, da Microsoft
-    - 2007 Clojure, uma linguagem funcional do dialeto Lisp que compila para a máquina virtual do java
-    - 2010: O comitê publica Haskell 2010 report.
-    - 2011 José Valim lança a linguagem Elixir, que compila para a máquina virtual Erlang.
-        
-        ![](1%20Fundamentos/Untitled%2016.png)
-        
-    
-- **Primeiros passos com a linguagem Haskell**
-    - Vídeo do professor Hugues
-        
-        [https://youtu.be/LnX3B9oaKzw](https://youtu.be/LnX3B9oaKzw)
-        
-    
-    [https://www.youtube.com/watch?v=3J-Ou955QRE](https://www.youtube.com/watch?v=3J-Ou955QRE)
-    
-    - Surgiu em 1990 com o objetivo de ser a primeira linguagem puramente funcional.
-    - Por muito tempo considerada uma linguagem acadêmica.
-    - Atualmente é utilizada em diversas empresas (totalmente ou em parte de projetos).
-    - Principais características
-        - **Criada por um comitê**
-            
-            Por ter sido criada por um comitê de estudiosos de linguagem de programação funcional e com a mentalidade de mantê-la útil para o ensino e pesquisa de linguagem de programação, assim como uso em empresas, a linguagem adquiriu diversas características distintas e interessantes não observadas em outras linguagens.
-            
-        - **Códigos concisos e declarativos**
-            
-            o programador *declara* o que ele quer ao invés de escrever um passo-a-passo. Programas em Haskell chegam a ser dezenas de vezes menores que em outras linguagens.
-            
-            ```haskell
-            take 100 [x | x <- N, primo x]
-            ```
-            
-        - **Puramente funcional (imutabilidade)**
-            - Haskell é considerada uma linguagem puramente funcional, ou seja, ela não possui elementos de programação imperativa, como em Clojure, Lisp, Elixir entre outras.
-            - Em Haskell os efeitos colaterais são isolados e assim ela consegue manter as funções puras.
-            - A grande maioria das linguagens são impuras, como F#, Clojure, Ocaml, Elixir entre outras. Nessas linguagens os efeitos colaterais são apenas reduzidos, porém existem diversos elementos de programação imperativa.
-            - Não existe nem o conceito de variável, apenas nomes e declarações. Uma vez que um nome é declarado com um valor, ele não pode sofrer alterações.
-            
-            ```haskell
-            x = 1.0
-            x = 2.0 -- Erro, pois existe duas definições para x
-            
-            ```
-            
-        - **Funções Recursivas**
-            
-            Com a imutabilidade, o conceito de laços de repetição também não existe em linguagens funcionais. Eles são implementados através de funções recursivas.
-            
-            ```haskell
-            f 0 = 1
-            f n = 2 * f (n-1)
-            
-            print (f 10)
-            ```
-            
-        - **Tipos polimórficos**
-            
-            Permite definir funções genéricas que funcionam para classes de tipos. Por exemplo, o operador de soma *+* pode ser utilizado para qualquer tipo numérico.
-            
-            ```haskell
-            1 + 2         -- 3
-            1.0 + 3.0     -- 4.0
-            (2%3) + (3%6) -- (7%6)
-            
-            ```
-            
-        - **Avaliação preguiçosa**
-            - Algumas linguagens funcionais implementam o conceito de avaliação preguiçosa (avaliação não estrita).
-            - Quando uma expressão é gerada, ela gera uma promessa de execução. Se e quando necessário, ela é avaliada.
-            - Exemplo de avaliação estrita
-                
-                ```c
-                int main () {
-                    int x = 2;
-                    f(x*x, 4*x + 3);
-                    return 0;
-                }
-                
-                int f(int x, int y) {
-                    return 2*x;
-                }
-                
-                ```
-                
-                Passo 1
-                
-                ```
-                int main () {
-                    int x = 2;
-                    f(2*2, 4*2 + 3);
-                    return 0;
-                }
-                
-                int f(int x, int y) {
-                    return 2*x;
-                }
-                
-                ```
-                
-                Passo 2
-                
-                ```
-                int main () {
-                    int x = 2;
-                    f(4, 4*x + 3);
-                    return 0;
-                }
-                
-                int f(int x, int y) {
-                    return 2*x;
-                }
-                
-                ```
-                
-                Passo 3
-                
-                ```
-                int main () {
-                    int x = 2;
-                    f(4, 11);
-                    return 0;
-                }
-                
-                int f(int x, int y) {
-                    return 2*x;
-                }
-                
-                ```
-                
-                Passo 4
-                
-                ```
-                int main () {
-                    int x = 2;
-                    8;
-                    return 0;
-                }
-                
-                int f(int x, int y) {
-                    return 2*x;
-                }
-                
-                ```
-                
-            - Exemplo de avaliação preguiçosa
-                
-                ```haskell
-                f x y = 2*x
-                
-                main = do
-                  let z = 2
-                  print (f (z*z) (4*z + 3))
-                
-                ```
-                
-                ```haskell
-                f x y = 2*x
-                
-                main = do
-                  let z = 2
-                  print (2 * (z*z))
-                
-                ```
-                
-                ```haskell
-                f x y = 2*x
-                
-                main = do
-                  let z = 2
-                  print (8)
-                
-                ```
-                
-                A expressão 4*z + 3 nunca foi avaliada!
-                
-                - A avaliação preguiçosa que permite a criação de listas infinitas.
-                
-                ```haskell
-                take 10 [2*i | i <-[1..]]
-                ```
-                
-            
-        - **Estaticamente tipada**
-            - Algumas linguagens funcionais possuem sistemas de tipos dinâmicos, sendo mais flexíveis, porém mais suscetíveis a erros em tempo de execução.
-                - Exemplos de linguagens funcionais dinâmicas incluem Lisp, Clojure e Elixir.
-            - Haskell é uma linguagem com um sistema de tipos estático, sendo mais rígida e segura, checando os erros em tempo de compilação e evitando erros em tempo de execução.  Por exemplo, uma implementação simples de uma turma em Haskell poderia ser:
-            
-            ```haskell
-            -- tipos
-            data Disciplina = Disciplina {
-                sigla::String, 
-                nome::String, 
-                ch::Int
-            } deriving (Show)
-            
-            data Turma = Turma {
-                disciplina::Disciplina, 
-                inicio:: String,
-                alunos ::[String] 
-            } deriving (Show)
-            
-            -- valores
-            pp = Disciplina {
-                  sigla ="pp", 
-                  nome = "Paradigmas de Programacao",
-                  ch = 60 
-            }
-            
-            turma = Turma {
-              disciplina = pp,
-              inicio = "07/01/2019",
-              alunos = ["Marcos", "Ana", "Eva", "Lucas", "Joao"]
-            }
-            ```
-            
-            - Em linguagens dinâmicas como Clojure, usa-se as estruturas de dados já existentes, como listas, vetores e maps para representar os dados. Neste caso nenhum tipo de dado é definido, apenas os valores.
-            
-            ```clojure
-            (def pp
-              {:disciplina/sigla "pp"
-               :disciplina/nome "Paradigmas de Programação"
-               :disciplina/ch 60})
-            
-            (def turma {
-                        :turma/disciplina pp
-                        :turma/inicio #inst "2018-02-10"
-                        :turma/alunos ["Marcos" "Ana" "Eva", "Lucas" "Joao"]})
-            ```
-            
-        - **Sistema de tipagem forte**
-            
-            Ao contrário de linguagens como *Java* e *C*, as declarações de tipo no Haskell são simplificadas (e muitas vezes podem ser ignoradas), porém, seu sistema rigoroso permite que muitos erros comuns sejam detectados em tempo de **compilação**.
-            
-            ```java
-            int x    = 10;
-            double y = 5.1;
-            System.out.println("Resultado:  " + (x*y)); // ok
-            
-            ```
-            
-            Ser estativamente tipado, não significa ser fortemente tipado. Em Haskell o seguinte código não compila:
-            
-            ```haskell
-            x = 10  :: Int
-            y = 5.1 :: Double
-            print ("Resultado: " + (x*y) ) -- não compila
-            ```
-            
-            OCaml poderia ser considerada mais fortemente tipada do que Haskell
-            
-        - **ML-like**
-            - Tem a sintaxe influenciada pela linguagem ML como SML, OCaml , F#, Scala e Elixir .
-                - Estas linguagens são bem distintas das linguagens da família Lisp que são conhecidas pelo grande quantidade de uso de parenteses.
-                    
-                    Nas linguagens que são dialetos de Lisp, todo programa é uma coleção de listas, que são processadas por uma “máquina”. Toda lista tem seus valores entre a abertura e fechamento de parênteses. Deste modo, não existe distinção entre código e dado. As linguagens dessa família inclui: Scheme, Racket e Clojure.
-                    
-            - Para comparação, considere a função fatorial implementado usando case expression em Haskell:
-            
-            ```haskell
-            fat n = case n of
-              0 -> 1
-              _ -> n * fat (n-1)
-            ```
-            
-            - Agora uma implementação equivalente em F#:
-            
-            ```fsharp
-            let rec fat n = 
-                match n with
-                | 0 -> 1
-                | _ ->  n * fat (n - 1)
-            ```
-            
-        - **Uso de parenteses reduzido**
-            
-            
-            Na matemática a aplicação de funções em seus argumentos é definido pelo nome da função e os parâmetros entre parênteses. A expressão `f(a,b) + c*d` representa a aplicação de `f` nos parâmetros `a,b` e, em seguida, a soma do resultado com o resultado do produto entre `c,d`.
-            
-            No Haskell, a aplicação de função é definida como o nome da função seguido dos parâmetros separados por espaço com a maior prioridade na aplicação da função. O exemplo anterior ficaria:
-            
-            ```haskell
-            f a b + c*d
-            ```
-            
-            A tabela abaixo contém alguns contrastes entre a notação matemática e o Haskell:
-            
-            [Aplicação de funções](1%20Fundamentos/Aplica%C3%A7%C3%A3o%20de%20fun%C3%A7%C3%B5es%205b14dfd2cbb14a5280cbfdde7bbba349.csv)
-            
-        - **Número reduzido de palavas reservadas**
-            
-            Os únicos nomes que não podem ser utilizados são:
-            
-            > case, class, data, default, deriving do, else, foreign, if, import, in infix, infixl, infixr, instance, let module, newtype, of, then, type, where
-            > 
-    - Um Hello World !
-        
-        Programas escritos em Haskell usa por concenção a extensao .hs. Abaixo um classico Hello World!
-        
-        ```haskell
-        module Main where   -- indica que é o módulo principal
-        
-        main :: IO ()
-        main = do                  -- início da função principal
-          putStrLn "hello world"   -- imprime hello world
-        ```
-        
-        Você pode ver esse programa rodando em :[https://repl.it/@SergioSouza1/haskellhelloworld](https://repl.it/@SergioSouza1/haskellhelloworld)
-        
-        ### Regra de layout
-        
-        O layout dos códigos em Haskell é similar ao do Python, em que os blocos lógicos são definidos pela indentação.
-        
-        ```haskell
-        f x = a*x + b
-             where
-               a = 1
-               b = 3
-        z = f 2 + 3 
-        
-        ```
-        
-        A palavra-chave *where* faz parte da definição de *f*, da mesma forma, as definições de *a, b* fazem parte da cláusula *where*. A definição de *z* não faz parte de *f*.
-        
-        A definição de tabulação varia de editor para editor. Como o espaço é importante no Haskell, **usem espaço ao invés de tab.**
-        
-        Comentários em uma linha são demarcados pela sequência **--**, comentários em múltiplas linhas são demarcados por **{-** e **-}**:
-        
-        ```haskell
-        -- função que dobra o valor de x
-        dobra x = x + x
-        
-        {-
-        dobra recebe uma variável numérica
-        e retorna seu valor em dobro.
-        -}
-        
-        ```
-        
-    - Uma função Haskell um pouco mais complexa 😃
-        
-        O que está sendo feito pela função abaixo ? 
-        
-        ```haskell
-        f []     = []
-        f (x:xs) = f ys ++ [x] ++ f zs
-                   where
-                      ys = [a | a <- xs, a <= x]
-                      zs = [b | b <- xs, b > x]
-        ```
-        
-        - Resposta:
-            
-            Esse é um algoritmo clássico de ordenação denominado de quicksort. Considerando `q` no lugar de `f`:
-            
-            ![](1%20Fundamentos/Untitled%2017.png)
-            
-            Pode experimentar essa função no [repl.it](http://repl.it) [https://repl.it/@SergioSouza1/icognito](https://repl.it/@SergioSouza1/icognito)
-            
-        
-    - **Primeiros passos**
-        
-        ![](1%20Fundamentos/Untitled%2018.png)
-        
-        **Glasgow Haskell Compiler**: compilador de código aberto para a linguagem Haskell.
-        
-        Possui um modo interativo **ghci,** normalmente chamado de REPL (Read Evaluate Print Loop). 
-        
-        ### Repl.it
-        
-        Para as aulas e laboratório, iremos usar apenas o repl.it. Ele utiliza o GHC, porém de modo transparente já que não será necessário instalar nada no seu computador.
-        
-        Muito do curso será acompanhado através de uma turma criada lá. 
-        
-        <aside>
-        📖 Para aprendermos um pouco sobre expressões em Haskell, faça o seguinte laboratorio. As atividade de 1.1 a 2.1:
-        
-        </aside>
-        
-        [Sign Up](https://repl.it/classroom/invite/rOFcESf)
-        
-        <aside>
-        📌 Esse laboratório foi criado como base nos [Capítulo 2 do livro Real World Haskell](http://book.realworldhaskell.org/read/getting-started.html) e no Capítulo 2 do livro Programming in Haskell (Graham Hutton)
-        
-        </aside>
-        
-        - **Instalação do Stack**
-            
-            A instalação do Stack e de um editor de texto é opcional, mas pode ser bem aproveitoso, principalmente a partir da terceira semana.
-            
-            Mas nessa semana, aproveite bem o [repl.it](http://repl.it) 😃
-            
-            Atualmente é mais utilizado um gerenciador de projeto Stack. Ele mesmo baixa e "instala" o GHC. No terminal de uma distribuição Linux:
-            
-            ```bash
-            curl -sSL https://get.haskellstack.org/ | sh
-            ```
-            
-            ou
-            
-            ```bash
-            wget -qO- https://get.haskellstack.org/ | sh
-            ```
-            
-            ### Interpretador
-            
-            Depois de instalado o stack, basta:
-            
-            ```haskell
-            $ stack ghci
-            > 2+3*4
-            14
-            
-            > (2+3)*4
-            20
-            
-            > sqrt (3^2 + 4^2)
-            5.0
-            ```
-            
-            ### Criando projetos
-            
-            Para criar projetos, utilizaremos a ferramenta stack. Essa ferramenta cria um ambiente isolado
-            
-            ```haskell
-            $ stack new primeiro-projeto simple
-            $ cd primeiro-projeto
-            $ stack setup
-            $ stack build
-            $ stack exec primeiro-projeto
-            ```
-            
-            Os dois últimos comandos são referentes a compilação do projeto e execução.
-            
-            Obs: No inicio desse curso, não é obrigatório trabalhar com o stack, principalmente criar projetos. 
-            
-            O stack cria a seguinte estrutura de diretório:
-            
-            - **LICENSE:** informação sobre a licença de uso do software.
-            - **README.md:** informações sobre o projeto em formato Markdown.
-            - **Setup.hs:** retrocompatibilidade com o sistema cabal.
-            - **primeiro-projeto.cabal:** informações das dependências do projeto.
-            - **stack.yaml:** parâmetros do projeto
-            - **package.yaml:** configurações de compilação e dependências de bibliotecas externas.
-            - **src/Main.hs:** arquivo principal do projeto.
-            
-            Nesse caso, um Hello World 😃
-            
-            ```haskell
-            module Main where   -- indica que é o módulo principal
-            
-            main :: IO ()
-            main = do                  -- início da função principal
-              putStrLn "hello world"   -- imprime hello world
-            ```
-            
-        - **Editor de texto**
-            
-            [Visual Studio Code](http://pesquisa.ufabc.edu.br/haskell/posts/basico/01-Compilador.html) com os pacotes:
-            
-            - Haskell Syntax Highlighting
-            - Haskero
-            - hoogle-vscode
+Neste capítulo, daremos os primeiros passos práticos na linguagem Haskell. Em vez de focarmos em programas completos e complexos, utilizaremos o ambiente interativo **GHCi** para conversar com o compilador em tempo real. Esta abordagem de desenvolvimento orientada a feedback facilitará a compreensão dos fundamentos da sintaxe, regras de avaliação e a transição mental de paradigmas.
+
+---
+
+## 1. A Mudança de Paradigma: Mutação vs. Definição
+
+Para quem vem de linguagens imperativas (como Python, Java ou C), a primeira barreira no aprendizado do paradigma funcional é a forma como lidamos com a atribuição de valores. Considere o seguinte código comum em linguagens imperativas:
+
+```python
+# Em Python
+x = 0
+x = x + 1
+```
+
+Em Python, a instrução `x = x + 1` significa: *"Pegue o valor atual na célula de memória referenciada por `x`, adicione 1 a ele, e salve o novo valor de volta na mesma célula de memória"*.
+
+Em Haskell, se tentarmos escrever algo equivalente:
+
+```haskell
+-- Em Haskell
+x = x + 1
+```
+
+O compilador interpretará isso como uma **definição matemática**: *"x é igual a x + 1"*. Em termos matemáticos, a equação $x = x + 1$ não possui solução finita. Se tentarmos avaliar o valor de `x` no interpretador GHCi, o Haskell (devido à sua avaliação preguiçosa) substituirá recursivamente `x` por seu próprio corpo indefinidamente:
+
+```haskell
+x = (x + 1) + 1
+x = ((x + 1) + 1) + 1
+-- ... causando uma recursão infinita e estourando a pilha de execução (stack overflow)
+```
+
+Da mesma forma, se definirmos:
+
+```haskell
+x = 0
+x = 1
+```
+
+O Haskell rejeitará o código com um erro de compilação, acusando múltiplas definições conflitantes para o mesmo identificador `x`. 
+
+!!! info
+    Em Haskell, identificadores são **constantes matemáticas imutáveis**, e não caixas de memória que podem mudar de valor ao longo do tempo. Uma vez que definimos o valor de um identificador, ele é fixo e garantido para toda a vida útil do escopo.
+
+---
+
+## 2. O Interpretador GHCi: Seu Laboratório Interativo
+
+O Glasgow Haskell Compiler (GHC) possui um console interativo chamado **GHCi**. Nele, podemos digitar expressões Haskell, avaliá-las imediatamente, inspecionar tipos de dados e depurar nosso código. Se você estiver familiarizado com o console interativo do Python (`python`) ou Ruby (`irb`), o GHCi desempenha um papel semelhante.
+
+### Comandos Essenciais do GHCi
+Todos os comandos específicos do GHCi começam com um caractere de dois pontos (`:`):
+
+| Comando | Atalho | Descrição |
+| :--- | :--- | :--- |
+| `:load <arquivo>` | `:l` | Carrega um arquivo de código-fonte Haskell no REPL. |
+| `:reload` | `:r` | Recarrega todos os arquivos atualmente abertos (útil após edições). |
+| `:type <expressão>` | `:t` | Inspeciona o tipo de dados de uma expressão ou função. |
+| `:info <nome>` | `:i` | Exibe informações detalhadas sobre um identificador, operador ou classe de tipos. |
+| `:quit` | `:q` | Sai do interpretador GHCi. |
+| `:module +<Mod>` | `:m` | Carrega um módulo adicional da biblioteca (ex: `:m +Data.List`). |
+| `:set +t` | | Passa a exibir o tipo de cada expressão avaliada (`:unset +t` desativa). |
+| `:?` | | Abre o menu de ajuda interativa detalhada. |
+
+### A variável especial `it`
+O GHCi guarda o resultado da última expressão avaliada em uma variável especial chamada **`it`**. Isso permite usar o resultado anterior na próxima expressão:
+
+```haskell
+Prelude> "foo"
+"foo"
+Prelude> it ++ "bar"
+"foobar"
+```
+
+Se a avaliação de uma expressão falhar, o valor de `it` não muda — então podemos experimentar expressões potencialmente inválidas com segurança. Combinando o `it` com as setas do teclado (que recuperam e editam as linhas anteriores), ganhamos uma ótima forma de experimentação interativa: o custo de errar é baixíssimo. Aproveite para cometer erros baratos e abundantes enquanto explora a linguagem!
+
+!!! tip
+    **Permaneça sem medo diante das mensagens de erro.** As mensagens do GHC podem parecer longas e intimidadoras no início (`No instance for (Num Bool)...`), mas elas têm uma finalidade: apontam a localização exata do problema e frequentemente sugerem uma correção. Elas nos fazem executar uma certa quantidade de depuração *antecipada*, antes mesmo de rodar o programa. No começo, descubra apenas o suficiente para progredir; com a experiência, as partes obscuras das mensagens se tornarão naturais.
+
+---
+
+## 3. Aritmética Básica no GHCi
+
+Ao abrir o GHCi executando `stack ghci` no seu terminal, você será recebido pelo prompt `Prelude>` (o módulo base de funções carregadas por padrão). Podemos usar o interpretador diretamente como uma calculadora de alta precisão:
+
+```haskell
+Prelude> 2 + 15
+17
+Prelude> 49 * 100
+4900
+Prelude> 1892 - 1472
+420
+Prelude> 5 / 2
+2.5
+```
+
+Note que operadores aritméticos tradicionais (`+`, `-`, `*`, `/`) possuem regras de precedência padrão matemáticas (multiplicação e divisão possuem prioridade sobre soma e subtração).
+
+### Parênteses e Números Negativos
+Diferentemente de outras linguagens, o operador `-` pode ser ambíguo em Haskell. Quando queremos utilizar um número negativo em uma expressão, devemos **obrigatoriamente envolvê-lo entre parênteses**:
+
+```haskell
+Prelude> 5 + -3
+-- ERRO! O compilador tentará aplicar o operador "+" e o operador "-" consecutivamente.
+
+Prelude> 5 + (-3)
+2
+```
+
+Envolver os números negativos em parênteses evita que o compilador confunda o sinal do número com a aplicação do operador de subtração.
+
+Esse tratamento incomum dos números negativos representa um *trade-off* fundamentado: Haskell permite definir novos operadores a qualquer momento (um recurso que usaremos bastante), e os projetistas da linguagem aceitaram uma sintaxe um pouco mais pesada para números negativos em troca desse poder expressivo.
+
+### Precedência e Associatividade dos Operadores
+Haskell atribui valores numéricos de precedência aos operadores, de 1 (menor) a 9 (maior). Um operador de maior precedência é aplicado antes de um de menor precedência. Podemos inspecionar a precedência de qualquer operador no GHCi com o comando `:info`:
+
+```haskell
+Prelude> :info (+)
+...
+infixl 6 +
+Prelude> :info (*)
+...
+infixl 7 *
+Prelude> :info (^)
+...
+infixr 8 ^
+```
+
+A linha `infixl 6 +` indica que `(+)` tem precedência 6 e é **associativo à esquerda** (`infixl`); já `(^)` é **associativo à direita** (`infixr`). Como `(*)` tem precedência 7, maior que a do `(+)`, a expressão `1 + 4 * 4` é avaliada como `1 + (4 * 4)`.
+
+!!! tip
+    Não é necessário memorizar as regras de precedência: na dúvida, adicione parênteses. Expressões complexas que dependem totalmente da precedência dos operadores são fontes notórias de bugs — a presença de alguns parênteses ajuda os futuros leitores (incluindo você mesmo) a entender a intenção.
+
+---
+
+## 4. Álgebra Booleana e Operadores de Comparação
+
+O GHCi também nos permite computar expressões lógicas e relacionais. Os booleanos em Haskell são representados pelos construtores de valor `True` e `False` (sensíveis a maiúsculas/minúsculas).
+
+### Operadores Lógicos:
+* `&&` (conjunção / E lógico)
+* `||` (disjunção / OU lógico)
+* `not` (negação lógica - note que é uma função, não um operador simbólico)
+
+```haskell
+Prelude> True && False
+False
+Prelude> False || True
+True
+Prelude> not True
+False
+```
+
+### Operadores de Comparação:
+Para comparar valores numéricos ou textuais, utilizamos os operadores relacionais padrão:
+* `==` (igualdade)
+* `/=` (desigualdade / diferente de - diferente do tradicional `!=` de outras linguagens)
+* `>`, `>=`, `<`, `<=` (maior, maior-ou-igual, menor, menor-ou-igual)
+
+```haskell
+Prelude> 5 == 5
+True
+Prelude> 10 /= 9
+True
+Prelude> 'a' > 'b'
+False
+```
+
+---
+
+## 5. Aplicação de Funções: Espaços em Vez de Parênteses
+
+Uma das maiores diferenças sintáticas em Haskell é a **aplicação de funções**. Em matemática tradicional e linguagens tradicionais, chamamos funções passando argumentos entre parênteses e separados por vírgulas, como `f(x, y)`. 
+
+Em Haskell, **parênteses e vírgulas não são usados para passar argumentos**. Em vez disso, aplicamos uma função simplesmente separando seu nome e seus argumentos por **espaços**:
+
+```haskell
+Prelude> min 9 10
+9
+Prelude> max 3 2
+3
+Prelude> compare 5 10
+LT
+```
+
+A função `min` recebe dois argumentos numéricos e retorna o menor. A função `compare` recebe dois argumentos comparáveis e retorna um tipo chamado `Ordering` (que pode ser `LT` - Less Than, `GT` - Greater Than, ou `EQ` - Equal).
+
+### Precedência de Aplicação de Funções
+A aplicação de função em Haskell possui a **maior prioridade de todas**. Isso significa que a expressão `f x + 1` é avaliada como `(f x) + 1`, e não como `f (x + 1)`.
+
+Se desejarmos passar o resultado de uma operação como argumento para uma função, devemos delimitar explicitamente o argumento com parênteses:
+
+```haskell
+Prelude> succ 5 + 1
+7
+-- Avaliado como: (succ 5) + 1 = 6 + 1 = 7
+
+Prelude> succ (5 + 1)
+7
+-- Avaliado como: succ 6 = 7
+```
+
+---
+
+## 6. Definições Locais: `let` e `where`
+
+Quando escrevemos programas funcionais reais, frequentemente precisamos declarar constantes auxiliares ou subdividir problemas complexos em pequenos blocos nomeados. Em Haskell, fazemos isso por meio de dois construtores de escopo local: **`let`** e **`where`**.
+
+### 1. Cláusulas `let ... in ...`
+A estrutura `let` define ligações locais que podem ser referenciadas apenas dentro da expressão demarcada pelo bloco `in`. É uma expressão declarativa e pode ser usada em qualquer lugar onde uma expressão normal seja válida:
+
+```haskell
+calcularRetangulo :: Float -> Float -> Float
+calcularRetangulo largura altura = 
+    let area = largura * altura
+        perimetro = 2 * (largura + altura)
+    in area + perimetro
+```
+
+### 2. Cláusulas `where`
+A cláusula `where` é anexada no final de uma definição de função e permite declarar variáveis locais visíveis para todo o escopo de equações e guardas daquela função. É altamente idiomática em Haskell por manter o corpo da função principal limpo e focado no topo:
+
+```haskell
+calcularRetanguloWhere :: Float -> Float -> Float
+calcularRetanguloWhere largura altura = area + perimetro
+  where
+    area = largura * altura
+    perimetro = 2 * (largura + altura)
+```
+
+---
+
+## 7. Avaliação Preguiçosa na Prática: Substituição e *Thunks*
+
+Como o Haskell avalia uma expressão como `isOdd (1 + 2)`, onde:
+
+```haskell
+isOdd n = mod n 2 == 1
+```
+
+Em uma linguagem de avaliação **estrita** (C, Python, Java), os argumentos são avaliados *antes* da função ser aplicada: primeiro `1 + 2` viraria `3`, depois `isOdd` seria chamada com `3`.
+
+Haskell escolhe outro caminho: a avaliação **não-estrita** (preguiçosa). A subexpressão `1 + 2` *não* é reduzida imediatamente para `3`. Em vez disso, é criada uma "promessa" de que, quando o valor for realmente necessário, ele será calculado. O registro usado para rastrear essa expressão não avaliada é chamado de **thunk**. Se o resultado nunca for usado, o cálculo nunca acontece.
+
+Uma consequência elegante: operadores de "curto-circuito" não precisam de suporte especial da linguagem. Em Haskell, `(||)` é uma função comum — se o operando esquerdo avaliar para `True`, o direito simplesmente nunca é avaliado:
+
+```haskell
+meuOu :: Bool -> Bool -> Bool
+meuOu a b = if a then a else b
+```
+
+A expressão `meuOu True (length [1..] > 0)` retorna `True` sem travar, mesmo com uma lista infinita no segundo argumento — algo impossível de escrever como função comum em uma linguagem estrita.
+
+Um bom modelo mental para entender a avaliação em Haskell é a **substituição e reescrita**: substitua cada nome pela sua definição, repetidamente, avaliando apenas o suficiente de cada expressão para determinar o valor final.
+
+No próximo capítulo, exploraremos como o sistema de tipos estáticos do Haskell garante que essas expressões operem de forma segura e otimizada.
+
+---
+
+> **Nota de atribuição:** partes deste capítulo adaptam material de *Real World Haskell*, de Bryan O'Sullivan, Don Stewart e John Goerzen ([book.realworldhaskell.org](http://book.realworldhaskell.org/read/)), sob a licença [Creative Commons Attribution-Noncommercial 3.0](http://creativecommons.org/licenses/by-nc/3.0/).

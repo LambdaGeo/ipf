@@ -183,16 +183,12 @@ estoque
 ;=> ["Mochila" "Camiseta" "Tênis"]
 ```
 
-<aside>
-💡
+!!! tip "Rebinding, não mutação"
+    Embora pareça que a "variável" `estoque` tenha mudado de valor, o que realmente aconteceu aqui foi um **rebinding** — ou seja, o símbolo `estoque` foi **reassociado** a um novo valor.
 
-**Nota:** Embora pareça que a "variável" `estoque` tenha mudado de valor, o que realmente aconteceu aqui foi um **rebinding** — ou seja, o símbolo `estoque` foi **reassociado** a um novo valor.
+    Em Clojure, os valores são imutáveis: o vetor original (`["Mochila"]`) continua existindo, intacto. O que mudou foi apenas a **referência**: agora o nome `estoque` aponta para um novo vetor (`["Mochila" "Tênis"]`).
 
-Em Clojure, os valores são imutáveis: o vetor original (`["Mochila"]`) continua existindo, intacto. O que mudou foi apenas a **referência**: agora o nome `estoque` aponta para um novo vetor (`["Mochila" "Tênis"]`).
-
-Isso é diferente de linguagens imperativas onde variáveis são caixas mutáveis. Em Clojure, estamos apenas **atualizando o mapeamento entre um nome e um valor**, sem modificar os dados em si.
-
-</aside>
+    Isso é diferente de linguagens imperativas onde variáveis são caixas mutáveis. Em Clojure, estamos apenas **atualizando o mapeamento entre um nome e um valor**, sem modificar os dados em si.
 
 ---
 
@@ -255,12 +251,8 @@ Acessando dados em mapas aninhados com get-in
 ;; => "01000-000"
 ```
 
-<aside>
-💡
-
-veremos esses mapas com mais detalhes em outra aula
-
-</aside>
+!!! tip
+    veremos esses mapas com mais detalhes em outra aula
 
 verificando se uma chave existe
 
