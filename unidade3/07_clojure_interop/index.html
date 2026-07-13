@@ -1,0 +1,1568 @@
+
+<!doctype html>
+<html lang="pt" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Livro didático da disciplina de Introdução à Programação Funcional: Haskell, Clojure e Elixir em três unidades de 20 horas.
+">
+      
+      
+        <meta name="author" content="Sergio Souza Costa">
+      
+      
+      
+        <link rel="prev" href="../06_clojure_metaprogramacao/">
+      
+      
+        <link rel="next" href="../08_clojure_revisao/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+    
+    
+      
+        <title>Cap 21: Clojure — Interop com Java - Introdução à Programação Funcional</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="teal" data-md-color-accent="green">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#interoperabilidade-entre-clojure-e-java" class="md-skip">
+          Ir para o conteúdo
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Cabeçalho">
+    <a href="../.." title="Introdução à Programação Funcional" class="md-header__button md-logo" aria-label="Introdução à Programação Funcional" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Introdução à Programação Funcional
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Cap 21: Clojure — Interop com Java
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="teal" data-md-color-accent="green"  aria-hidden="true"  type="radio" name="__palette" id="__palette_0">
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Buscar" placeholder="Buscar" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Pesquisar">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Limpar" aria-label="Limpar" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Inicializando a pesquisa
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+  
+
+<nav class="md-nav md-nav--primary md-nav--integrated" aria-label="Navegação" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Introdução à Programação Funcional" class="md-nav__button md-logo" aria-label="Introdução à Programação Funcional" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Introdução à Programação Funcional
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Apresentação
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Unidade 1 — Paradigmas e Haskell Básico (20h)
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Unidade 1 — Paradigmas e Haskell Básico (20h)
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../unidade1/00_plano_unidade1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Plano da Unidade 1
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../unidade1/01_paradigmas/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cap 1: Introdução aos Paradigmas
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../unidade1/02_instalacao/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cap 2: Instalação do Ambiente
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../unidade1/03_fundamentos/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cap 3: Fundamentos e o GHCi
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../unidade1/04_tipos_classes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cap 4: Tipos e Classes
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../unidade1/05_funcoes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cap 5: Funções e Pattern Matching
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../unidade1/06_listas/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cap 6: Listas, Recursão e Compreensão
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../unidade1/07_alta_ordem/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cap 7: Funções de Alta Ordem
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../unidade1/08_exercicios/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cap 8: Exercícios Resolvidos
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Unidade 2 — Haskell Avançado e Qualidade (20h)
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Unidade 2 — Haskell Avançado e Qualidade (20h)
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../unidade2/00_plano_unidade2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Plano da Unidade 2
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../unidade2/01_declarando_tipos_classes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cap 9: Tipos Algébricos e Typeclasses
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../unidade2/02_programas_interativos/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cap 10: Programas Interativos (IO)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../unidade2/03_exercicios_avancados/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cap 11: Exercícios Avançados
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../unidade2/04_haskell_moderno/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cap 12: Projetos Modernos com Stack
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../unidade2/05_biblioteca_json/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cap 13: A Biblioteca JSON
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../unidade2/06_testes_qualidade/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cap 14: Testes com QuickCheck
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../unidade2/07_avaliacao/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Trabalho Prático: hs2json
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Unidade 3 — Clojure e Elixir (20h)
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Unidade 3 — Clojure e Elixir (20h)
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../00_plano_unidade3/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Plano da Unidade 3
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../01_clojure_fundamentos/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cap 15: Clojure — Fundamentos
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../02_clojure_colecoes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cap 16: Clojure — Vetores e Mapas
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../03_clojure_alta_ordem/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cap 17: Clojure — Alta Ordem
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../04_clojure_threading_mapas_complexos/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cap 18: Clojure — Threading Macros
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../05_clojure_lazy_sequences/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cap 19: Clojure — Lazy Sequences
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../06_clojure_metaprogramacao/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cap 20: Clojure — Macros
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cap 21: Clojure — Interop com Java
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../08_clojure_revisao/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cap 22: Clojure — Revisão de Pilares
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../09_clojure_exercicios/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cap 23: Clojure — Exercícios Resolvidos
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../10_clojure_tutorial_todo/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Trabalho Clojure: ToDo Full-Stack
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../11_elixir_fundamentos/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cap 24: Elixir — Fundamentos
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../12_elixir_colecoes_pattern_matching/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cap 25: Elixir — Pattern Matching
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../13_elixir_modulos_funcoes_testes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cap 26: Elixir — Módulos e Testes
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../14_elixir_processos/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cap 27: Elixir — Processos e Concorrência
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../15_elixir_metaprogramacao/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cap 28: Elixir — Metaprogramação
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../16_elixir_tutorial_todo/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Trabalho Elixir: ToDo com LiveView
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="interoperabilidade-entre-clojure-e-java">Interoperabilidade entre Clojure e Java<a class="headerlink" href="#interoperabilidade-entre-clojure-e-java" title="Permanent link">&para;</a></h1>
+<p>A interoperabilidade entre Clojure e Java não é um recurso acessório ou uma biblioteca adicional; é uma característica fundamental e intrínseca ao design da linguagem. Essa capacidade de interagir de forma transparente e robusta com o ecossistema Java decorre do fato de que Clojure é uma linguagem hospedada na Java Virtual Machine (JVM). Ela compila diretamente para bytecode Java, o que a torna uma cidadã de primeira classe no universo JVM.</p>
+<p>Como ressaltado por Amit Rathore, essa união é poderosa: <em>"It also runs on the JVM. This makes for a very potent combination."</em> Essa base compartilhada permite que os desenvolvedores Clojure aproveitem um dos ecossistemas de software mais maduros, vastos e testados do mundo, sem a necessidade de "pontes" ou camadas de tradução complexas.</p>
+<p>Nesta aula, exploraremos os mecanismos práticos dessa interoperabilidade, começando pelo cenário mais comum: chamar código Java a partir de uma aplicação Clojure.</p>
+<h1 id="1-chamando-codigo-java-a-partir-do-clojure">1. Chamando Código Java a partir do Clojure<a class="headerlink" href="#1-chamando-codigo-java-a-partir-do-clojure" title="Permanent link">&para;</a></h1>
+<p>Uma das maiores vantagens estratégicas de adotar Clojure é o acesso imediato a décadas de bibliotecas, frameworks e ferramentas Java. A capacidade de invocar código Java existente a partir do Clojure permite que as equipes reutilizem soluções robustas e se concentrem em resolver os problemas de negócio, em vez de reinventar funcionalidades básicas.</p>
+<h2 id="11-os-fundamentos-instancias-metodos-e-campos">1.1. Os Fundamentos: Instâncias, Métodos e Campos<a class="headerlink" href="#11-os-fundamentos-instancias-metodos-e-campos" title="Permanent link">&para;</a></h2>
+<p>Clojure oferece uma sintaxe concisa e direta para as operações Java mais comuns: instanciar objetos, chamar métodos e acessar campos.</p>
+<ol>
+<li><strong>Instanciando Objetos Java:</strong> Para criar uma nova instância de uma classe Java, utiliza-se a forma especial <code>new</code>. Clojure também oferece uma sintaxe abreviada com um ponto final (<code>.</code>), que é a forma mais idiomática e comum.</li>
+<li><strong>Chamando Métodos Java:</strong> A sintaxe para chamada de métodos diferencia claramente entre métodos de instância (que operam em um objeto específico) e métodos estáticos (que pertencem à classe).<ul>
+<li><strong>Métodos de Instância:</strong> A sintaxe principal é <code>(.metodoDeInstancia instancia argumentos*)</code>. Existe uma forma alternativa, <code>(. instancia metodoDeInstancia argumentos*)</code>, que é particularmente útil em macros de encadeamento (<code>&gt;</code> e <code>&gt;&gt;</code>).</li>
+<li><strong>Métodos Estáticos:</strong> A sintaxe <code>(Classe/metodoEstatico argumentos*)</code> utiliza uma barra (<code>/</code>) para separar o nome da classe do método estático.</li>
+</ul>
+</li>
+<li><strong>Acessando Campos Java:</strong> O acesso a campos estáticos de uma classe Java segue a mesma convenção dos métodos estáticos, utilizando a barra como separador.</li>
+</ol>
+<p>A tabela a seguir serve como uma referência rápida para essas operações fundamentais.</p>
+<table>
+<thead>
+<tr>
+<th>Operação Java</th>
+<th>Sintaxe Clojure Correspondente</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>new ClassName(args)</code></td>
+<td><code>(new ClassName args*)</code> ou <code>(ClassName. args*)</code></td>
+</tr>
+<tr>
+<td><code>instance.instanceMethod(args)</code></td>
+<td><code>(.instanceMethod instance args*)</code> ou <code>(. instance instanceMethod args*)</code></td>
+</tr>
+<tr>
+<td><code>ClassName.staticMethod(args)</code></td>
+<td><code>(ClassName/staticMethod args*)</code></td>
+</tr>
+<tr>
+<td><code>ClassName.staticField</code></td>
+<td><code>ClassName/staticField</code></td>
+</tr>
+</tbody>
+</table>
+<p>Com esses fundamentos estabelecidos, podemos explorar como integrar essas chamadas de forma idiomática no estilo funcional do Clojure.</p>
+<h2 id="12-integracao-idiomatica-com-funcoes-de-ordem-superior">1.2. Integração Idiomática com Funções de Ordem Superior<a class="headerlink" href="#12-integracao-idiomatica-com-funcoes-de-ordem-superior" title="Permanent link">&para;</a></h2>
+<p>Um desafio comum ao integrar o mundo orientado a objetos do Java com o mundo funcional do Clojure é que os métodos de instância Java não são funções de primeira classe. Isso significa que eles não podem ser passados diretamente para funções de ordem superior como <code>map</code> ou <code>filter</code>.</p>
+<ol>
+<li><strong>Ilustrando o Problema</strong> Tentar passar um método de instância diretamente para <code>map</code>, como no exemplo de Stuart Halloway, resultará em um erro de compilação, pois <code>.toUpperCase</code> não é um símbolo que pode ser resolvido como uma função.</li>
+<li><strong>A Solução com Função Anônima</strong> A solução mais direta, embora verbosa, é encapsular a chamada do método Java dentro de uma função anônima. Isso funciona perfeitamente, mas adiciona uma camada de sintaxe extra.</li>
+<li><strong>A Solução Idiomática com <code>memfn</code></strong> Clojure fornece a macro <code>memfn</code> para resolver esse problema de forma elegante e concisa. <code>memfn</code> recebe o nome de um método de instância e retorna uma função Clojure que pode ser passada para qualquer função de ordem superior.</li>
+</ol>
+<p>Enquanto <code>memfn</code> elegantemente preenche a lacuna para métodos individuais, uma integração robusta frequentemente requer o engajamento com os padrões de design mais amplos do Java, para os quais Clojure fornece macros poderosas como <code>proxy</code>.</p>
+<h2 id="13-lidando-com-padroes-comuns-do-java">1.3. Lidando com Padrões Comuns do Java<a class="headerlink" href="#13-lidando-com-padroes-comuns-do-java" title="Permanent link">&para;</a></h2>
+<p>O ecossistema Java utiliza intensivamente padrões de design como Interfaces, Classes Abstratas e JavaBeans. Clojure fornece macros específicas para interagir com esses padrões de forma idiomática, traduzindo conceitos orientados a objetos para uma abordagem mais funcional.</p>
+<ol>
+<li><strong>Interfaces e Classes Abstratas com <code>proxy</code></strong> A macro <code>proxy</code> permite criar, em tempo de execução, uma instância de uma classe anônima que implementa uma ou mais interfaces Java ou estende uma classe base. Isso é uma abordagem funcional e direta para um problema clássico de OO. Em vez de definir um arquivo <code>.java</code> separado apenas para implementar uma interface, <code>proxy</code> permite criar implementações inline, o que é ideal para os padrões de <em>event-handler</em> e <em>callback</em> comuns em bibliotecas Java. O exemplo conceitual do <code>GrizzlyAdapter</code> de Amit Rathore ilustra como se pode implementar um método abstrato (<code>service</code>) diretamente no Clojure para criar um manipulador de servidor web funcional sem a cerimônia de uma classe formal.</li>
+<li><strong>JavaBeans com <code>bean</code></strong> A macro <code>bean</code> serve como uma ponte poderosa entre o paradigma de objetos/getters/setters do Java e o paradigma de mapa/função-palavra-chave do Clojure. Ela trata um objeto JavaBean como se fosse um mapa Clojure imutável, o que representa uma mudança profunda: um objeto Java mutável e com estado pode ser inspecionado como um valor Clojure imutável e idiomático. Isso simplifica enormemente o acesso às propriedades do objeto, como demonstra Stuart Halloway com a classe <code>Cipher</code>, tornando objetos Java complexos tão fáceis de inspecionar quanto estruturas de dados nativas do Clojure.</li>
+</ol>
+<h2 id="14-otimizacao-de-performance-com-type-hints">1.4. Otimização de Performance com Type Hints<a class="headerlink" href="#14-otimizacao-de-performance-com-type-hints" title="Permanent link">&para;</a></h2>
+<p>Clojure é uma linguagem dinamicamente tipada. Por padrão, ao chamar um método Java, o compilador Clojure utiliza reflexão (<em>reflection</em>) para determinar em tempo de execução qual método deve ser invocado. Embora flexível, a reflexão acarreta uma sobrecarga de performance.</p>
+<p>Para otimizar trechos de código críticos, os desenvolvedores podem fornecer "dicas de tipo" (<em>Type Hints</em>). Essas dicas são metadados que informam ao compilador o tipo exato de um objeto Java. Essencialmente, as dicas de tipo são um mecanismo explícito para trocar a flexibilidade dinâmica do Clojure por performance. Não é uma ferramenta de uso geral, mas uma otimização direcionada para <em>hotspots</em> críticos, permitindo que o compilador gere bytecode que invoca o método Java diretamente, evitando a sobrecarga da reflexão e alcançando uma velocidade próxima à do Java nativo.</p>
+<h1 id="2-chamando-codigo-clojure-a-partir-do-java">2. Chamando Código Clojure a partir do Java<a class="headerlink" href="#2-chamando-codigo-clojure-a-partir-do-java" title="Permanent link">&para;</a></h1>
+<p>A interoperabilidade é uma via de mão dupla. É igualmente estratégico permitir que aplicações Java existentes consumam funcionalidades escritas em Clojure. Isso viabiliza uma migração gradual de sistemas legados ou o desenvolvimento de módulos especializados e de alta performance em Clojure, que podem ser integrados a um sistema Java maior.</p>
+<h2 id="21-compilacao-ahead-of-time-aot">2.1. Compilação Ahead-of-Time (AOT)<a class="headerlink" href="#21-compilacao-ahead-of-time-aot" title="Permanent link">&para;</a></h2>
+<p>O pré-requisito fundamental para que o código Clojure seja visível para o Java é a compilação <em>Ahead-of-Time</em> (AOT). Esse processo converte os arquivos-fonte Clojure (<code>.clj</code>) em bytecode Java (<code>.class</code>), que a JVM pode executar diretamente.</p>
+<ol>
+<li><strong>A Função <code>compile</code></strong> A função <code>compile</code> do Clojure é usada para compilar um namespace inteiro, gerando os arquivos <code>.class</code> correspondentes para todas as funções públicas definidas nele.</li>
+<li><strong>Exemplo Prático</strong> Conforme demonstrado por Amit Rathore, para compilar um namespace chamado <code>com.curry.utils.calculators</code>, basta executar o seguinte comando no REPL:</li>
+</ol>
+<h2 id="22-gerando-classes-java-com">2.2. Gerando Classes Java com<a class="headerlink" href="#22-gerando-classes-java-com" title="Permanent link">&para;</a></h2>
+<p>Enquanto <code>compile</code> gera uma classe padrão para um namespace, a macro <code>gen-class</code> oferece um controle muito mais fino sobre a estrutura da classe Java resultante. Ela permite especificar superclasses, interfaces e construtores, tornando a integração com código Java que espera tipos específicos muito mais robusta.</p>
+<p>As opções mais comuns da macro <code>gen-class</code>, baseadas na Tabela 5.1 do livro de Amit Rathore, incluem:</p>
+<ul>
+<li><strong><code>:name</code></strong>: Especifica o nome completo da classe Java que será gerada.</li>
+<li><strong><code>:extends</code></strong>: Indica o nome completo da superclasse que a classe gerada irá estender.</li>
+<li><strong><code>:implements</code></strong>: Um vetor de interfaces que a classe gerada implementará.</li>
+<li><strong><code>:constructors</code></strong>: Um mapa que mapeia as assinaturas de construtor da nova classe gerada pelo Clojure para as assinaturas de construtor correspondentes da superclasse Java que ela estende.</li>
+</ul>
+<hr />
+<h1 id="3-topicos-avancados-e-padroes-de-uso">3. Tópicos Avançados e Padrões de Uso<a class="headerlink" href="#3-topicos-avancados-e-padroes-de-uso" title="Permanent link">&para;</a></h1>
+<p>A verdadeira interoperabilidade vai além de simples chamadas de método. Ela abrange a troca fluida de estruturas de dados e o tratamento unificado de erros, que são cruciais para a construção de sistemas integrados robustos e resilientes.</p>
+<h2 id="31-interoperabilidade-de-estruturas-de-dados">3.1. Interoperabilidade de Estruturas de Dados<a class="headerlink" href="#31-interoperabilidade-de-estruturas-de-dados" title="Permanent link">&para;</a></h2>
+<p>As estruturas de dados de Clojure e Java podem coexistir e interagir de forma surpreendentemente natural.</p>
+<ol>
+<li><strong>Tratando Coleções Java como Sequências Clojure</strong> Uma das características mais poderosas do Clojure é sua abstração de sequência (<code>seq</code>). A maioria das funções de coleção do Clojure opera sobre essa abstração, e as coleções Java, como arrays, podem ser tratadas diretamente como sequências. Isso significa que se pode usar <code>map</code>, <code>filter</code> e outras funções de ordem superior em arrays Java sem qualquer conversão explícita, como demonstrado por Zack Tellman.</li>
+<li><strong>Estendendo Tipos Java com Protocolos Clojure</strong> Os protocolos do Clojure oferecem uma solução elegante para um famoso desafio da ciência da computação conhecido como "O Problema da Expressão" (<em>The Expression Problem</em>). O problema consiste em como adicionar novas operações a tipos de dados existentes sem modificar o código-fonte original desses tipos. A macro <code>extend-protocol</code> do Clojure permite exatamente isso: fazer com que tipos Java existentes — mesmo aqueles de bibliotecas de terceiros sobre as quais não se tem controle — participem de um protocolo Clojure. Como Amit Rathore demonstra, uma classe Java como <code>com.curry.expenses.Expense</code> pode ser estendida para participar do protocolo <code>ExpenseCalculations</code>, efetivamente promovendo o tipo Java a um cidadão de primeira classe no sistema Clojure. Ele pode então ser manipulado pelas mesmas funções que operam sobre os tipos nativos do Clojure, sem alterar a classe Java original.</li>
+</ol>
+<h2 id="32-tratamento-de-excecoes-java">3.2. Tratamento de Exceções Java<a class="headerlink" href="#32-tratamento-de-excecoes-java" title="Permanent link">&para;</a></h2>
+<p>Clojure lida com as exceções lançadas pelo código Java de uma maneira familiar e direta, usando um bloco <code>try</code>/<code>catch</code>.</p>
+<ul>
+<li><strong>Sintaxe <code>try</code>/<code>catch</code></strong> A sintaxe é análoga à de Java e outras linguagens, permitindo capturar exceções Java específicas por sua classe. O bloco <code>try</code> envolve o código que pode lançar uma exceção, e um ou mais blocos <code>catch</code> definem como lidar com diferentes tipos de exceções.</li>
+<li><strong>Exemplo Prático</strong> Stuart Halloway fornece um exemplo claro onde um <code>try</code>/<code>catch</code> é usado para responder a uma exceção. A função a seguir tenta carregar uma classe Java pelo nome e retorna <code>true</code> se bem-sucedida. Se a classe não for encontrada, <code>Class/forName</code> lança uma <code>ClassNotFoundException</code>, que é capturada, fazendo com que a função retorne <code>false</code> em vez de deixar a exceção propagar.</li>
+</ul>
+<hr />
+<h2 id="conclusao-o-poder-do-ecossistema-unificado">Conclusão: O Poder do Ecossistema Unificado<a class="headerlink" href="#conclusao-o-poder-do-ecossistema-unificado" title="Permanent link">&para;</a></h2>
+<p>A interoperabilidade entre Clojure e Java é uma característica definidora, bidirecional e profundamente integrada. Ela permite não apenas que o Clojure chame o Java, mas também que o Java chame o Clojure, facilitando a integração em qualquer direção. As ferramentas fornecidas pela linguagem, de sintaxes concisas a macros poderosas como <code>proxy</code>, <code>memfn</code> e <code>gen-class</code>, garantem que essa interação seja idiomática e eficiente.</p>
+<p>Em última análise, a interoperabilidade do Clojure transforma a JVM de um mero ambiente de execução em um vasto ecossistema preexistente de ferramentas poderosas. Isso permite que os desenvolvedores se concentrem no design funcional de alto nível enquanto se apoiam nos ombros de gigantes, tornando o Clojure um "multiplicador de força" pragmático para qualquer equipe investida no ecossistema JVM. Essa simbiose combina o poder expressivo de um Lisp moderno com a solidez e a vastidão de uma das plataformas de software mais bem-sucedidas da história.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Voltar ao topo
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.top", "navigation.sections", "toc.integrate", "content.code.annotate", "content.code.copy"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copiado para \u00e1rea de transfer\u00eancia", "clipboard.copy": "Copiar para \u00e1rea de transfer\u00eancia", "search.result.more.one": "Mais 1 nesta p\u00e1gina", "search.result.more.other": "Mais # nesta p\u00e1gina", "search.result.none": "Nenhum resultado encontrado", "search.result.one": "1 resultado encontrado", "search.result.other": "# resultados encontrados", "search.result.placeholder": "Digite para iniciar a busca", "search.result.term.missing": "Ausente", "select.version": "Selecione a vers\u00e3o"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+        <script src="https://unpkg.com/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+    
+  </body>
+</html>

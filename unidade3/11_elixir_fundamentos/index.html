@@ -1,0 +1,2000 @@
+
+<!doctype html>
+<html lang="pt" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Livro didático da disciplina de Introdução à Programação Funcional: Haskell, Clojure e Elixir em três unidades de 20 horas.
+">
+      
+      
+        <meta name="author" content="Sergio Souza Costa">
+      
+      
+      
+        <link rel="prev" href="../10_clojure_tutorial_todo/">
+      
+      
+        <link rel="next" href="../12_elixir_colecoes_pattern_matching/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+    
+    
+      
+        <title>Cap 24: Elixir — Fundamentos - Introdução à Programação Funcional</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="teal" data-md-color-accent="green">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#fundamentos-do-elixir" class="md-skip">
+          Ir para o conteúdo
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Cabeçalho">
+    <a href="../.." title="Introdução à Programação Funcional" class="md-header__button md-logo" aria-label="Introdução à Programação Funcional" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Introdução à Programação Funcional
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Cap 24: Elixir — Fundamentos
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="teal" data-md-color-accent="green"  aria-hidden="true"  type="radio" name="__palette" id="__palette_0">
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Buscar" placeholder="Buscar" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Pesquisar">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Limpar" aria-label="Limpar" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Inicializando a pesquisa
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+  
+
+<nav class="md-nav md-nav--primary md-nav--integrated" aria-label="Navegação" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Introdução à Programação Funcional" class="md-nav__button md-logo" aria-label="Introdução à Programação Funcional" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Introdução à Programação Funcional
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Apresentação
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Unidade 1 — Paradigmas e Haskell Básico (20h)
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Unidade 1 — Paradigmas e Haskell Básico (20h)
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../unidade1/00_plano_unidade1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Plano da Unidade 1
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../unidade1/01_paradigmas/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cap 1: Introdução aos Paradigmas
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../unidade1/02_instalacao/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cap 2: Instalação do Ambiente
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../unidade1/03_fundamentos/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cap 3: Fundamentos e o GHCi
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../unidade1/04_tipos_classes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cap 4: Tipos e Classes
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../unidade1/05_funcoes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cap 5: Funções e Pattern Matching
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../unidade1/06_listas/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cap 6: Listas, Recursão e Compreensão
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../unidade1/07_alta_ordem/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cap 7: Funções de Alta Ordem
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../unidade1/08_exercicios/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cap 8: Exercícios Resolvidos
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Unidade 2 — Haskell Avançado e Qualidade (20h)
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Unidade 2 — Haskell Avançado e Qualidade (20h)
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../unidade2/00_plano_unidade2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Plano da Unidade 2
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../unidade2/01_declarando_tipos_classes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cap 9: Tipos Algébricos e Typeclasses
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../unidade2/02_programas_interativos/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cap 10: Programas Interativos (IO)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../unidade2/03_exercicios_avancados/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cap 11: Exercícios Avançados
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../unidade2/04_haskell_moderno/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cap 12: Projetos Modernos com Stack
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../unidade2/05_biblioteca_json/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cap 13: A Biblioteca JSON
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../unidade2/06_testes_qualidade/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cap 14: Testes com QuickCheck
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../unidade2/07_avaliacao/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Trabalho Prático: hs2json
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Unidade 3 — Clojure e Elixir (20h)
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Unidade 3 — Clojure e Elixir (20h)
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../00_plano_unidade3/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Plano da Unidade 3
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../01_clojure_fundamentos/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cap 15: Clojure — Fundamentos
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../02_clojure_colecoes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cap 16: Clojure — Vetores e Mapas
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../03_clojure_alta_ordem/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cap 17: Clojure — Alta Ordem
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../04_clojure_threading_mapas_complexos/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cap 18: Clojure — Threading Macros
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../05_clojure_lazy_sequences/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cap 19: Clojure — Lazy Sequences
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../06_clojure_metaprogramacao/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cap 20: Clojure — Macros
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../07_clojure_interop/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cap 21: Clojure — Interop com Java
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../08_clojure_revisao/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cap 22: Clojure — Revisão de Pilares
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../09_clojure_exercicios/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cap 23: Clojure — Exercícios Resolvidos
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../10_clojure_tutorial_todo/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Trabalho Clojure: ToDo Full-Stack
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cap 24: Elixir — Fundamentos
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cap 24: Elixir — Fundamentos
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Índice">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Índice
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1-introducao-e-conexao-de-paradigmas-clojure-vs-elixir" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Introdução e Conexão de Paradigmas: Clojure vs Elixir
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#objetivos-de-aprendizagem" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🎯 Objetivos de Aprendizagem
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#11-instalacao-e-ambiente-15-min" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🔸 1.1 Instalação e Ambiente (15 min)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#12-tipos-basicos-25-min" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🔸 1.2 Tipos Básicos (25 min)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="🔸 1.2 Tipos Básicos (25 min)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#inteiros-e-operacoes-aritmeticas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Inteiros e Operações Aritméticas
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pontos-flutuantes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Pontos Flutuantes
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#booleanos-e-valores-de-verdade" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Booleanos e Valores de Verdade
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#atomos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Átomos
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#strings" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Strings
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#13-imutabilidade" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🔸 1.3 Imutabilidade
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#14-colecoes-basicas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🔸 1.4 Coleções Básicas
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="🔸 1.4 Coleções Básicas">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#listas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Listas ([ ])
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tuplas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Tuplas ({ })
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#mapas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Mapas (%{ })
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#keyword-lists-chave-valor" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Keyword Lists ([chave: valor])
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#15-operador-pipe" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🔸 1.5 Operador Pipe (|&gt;)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#16-introducao-ao-enum" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🔸 1.6 Introdução ao Enum
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#exercicios-em-sala" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🔸 Exercícios em Sala
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#tarefa-para-casa" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🔸 Tarefa para Casa
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#material-de-apoio" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🔸 Material de Apoio
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../12_elixir_colecoes_pattern_matching/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cap 25: Elixir — Pattern Matching
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../13_elixir_modulos_funcoes_testes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cap 26: Elixir — Módulos e Testes
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../14_elixir_processos/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cap 27: Elixir — Processos e Concorrência
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../15_elixir_metaprogramacao/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cap 28: Elixir — Metaprogramação
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../16_elixir_tutorial_todo/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Trabalho Elixir: ToDo com LiveView
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="fundamentos-do-elixir">Fundamentos do Elixir<a class="headerlink" href="#fundamentos-do-elixir" title="Permanent link">&para;</a></h1>
+<h2 id="1-introducao-e-conexao-de-paradigmas-clojure-vs-elixir">1. Introdução e Conexão de Paradigmas: Clojure vs Elixir<a class="headerlink" href="#1-introducao-e-conexao-de-paradigmas-clojure-vs-elixir" title="Permanent link">&para;</a></h2>
+<p>Seja bem-vindo(a) à introdução ao Elixir!</p>
+<p>Após explorar o ecossistema Lisp com o <strong>Clojure</strong>, que roda na JVM e foca fortemente em processamento de dados imutáveis com S-expressions e metaprogramação, passamos para a segunda metade da Unidade 3, onde estudamos a linguagem <strong>Elixir</strong>.</p>
+<p>Ambas as linguagens compartilham princípios funcionais cruciais, como imutabilidade e funções puras, mas diferem amplamente na sua plataforma e propósito de concorrência:
+1. <strong>VM do Erlang (BEAM) vs JVM</strong>: A JVM do Clojure foi desenhada para alta performance de computação bruta em thread pools. A BEAM do Elixir foi desenhada para sistemas distribuídos altamente tolerantes a falhas e concorrentes com milhões de processos leves de baixo consumo de memória.
+2. <strong>Modelo de Atores vs Memória Compartilhada</strong>: Clojure lida com concorrência usando referências de estado imutável com STM (Software Transactional Memory) ou Atoms sobre threads compartilhadas. Elixir utiliza o <strong>Modelo de Atores</strong>, onde processos são totalmente isolados e não compartilham nenhuma memória entre si, comunicando-se exclusivamente via troca de mensagens assíncronas.
+3. <strong>Sintaxe Amigável</strong>: Elixir possui uma sintaxe influenciada por Ruby, muito mais familiar e acessível para desenvolvedores de linguagens imperativas do que as S-expressions do Clojure, mas mantendo a pureza funcional sob o capô.
+4. <strong>O Operador Pipe (<code>|&gt;</code>)</strong>: Elixir introduz uma das sintaxes mais elegantes para pipeline de dados, o operador pipe, que permite encadear transformações de dados de forma extremamente legível (similar às threading macros do Clojure, mas integrado na raiz da sintaxe da linguagem).</p>
+<p>Nesta seção, você aprenderá os fundamentos sintáticos e operacionais do Elixir, preparando-se para construir aplicativos web de tempo real com Phoenix LiveView.</p>
+<hr />
+<h2 id="objetivos-de-aprendizagem">🎯 <strong>Objetivos de Aprendizagem</strong><a class="headerlink" href="#objetivos-de-aprendizagem" title="Permanent link">&para;</a></h2>
+<ul>
+<li>Instalar e configurar o ambiente Elixir</li>
+<li>Dominar o uso do IEx (Interactive Elixir)</li>
+<li>Compreender tipos básicos e imutabilidade</li>
+<li>Aplicar o operador pipe (<code>|&gt;</code>)</li>
+<li>Manipular coleções básicas com <code>Enum</code></li>
+</ul>
+<hr />
+<h2 id="11-instalacao-e-ambiente-15-min">🔸 <strong>1.1 Instalação e Ambiente (15 min)</strong><a class="headerlink" href="#11-instalacao-e-ambiente-15-min" title="Permanent link">&para;</a></h2>
+<p>Exisitem diversas maneiras de instalar o elixir, veja mais detalhes em  https://elixir-lang.org/install.html</p>
+<hr />
+<h2 id="12-tipos-basicos-25-min">🔸 <strong>1.2 Tipos Básicos (25 min)</strong><a class="headerlink" href="#12-tipos-basicos-25-min" title="Permanent link">&para;</a></h2>
+<h3 id="inteiros-e-operacoes-aritmeticas"><strong>Inteiros e Operações Aritméticas</strong><a class="headerlink" href="#inteiros-e-operacoes-aritmeticas" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="mi">42</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="mh">0x1F</span><span class="w">  </span><span class="c1"># hexadecimal -&gt; 31</span>
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="mb">0b1010</span><span class="w">  </span><span class="c1"># binário -&gt; 10</span>
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="mi">1_000_000</span><span class="w">  </span><span class="c1"># separador visual -&gt; 1000000</span>
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>
+<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="mi">1</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">2</span><span class="w">  </span><span class="c1"># 3</span>
+<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="mi">10</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="mi">2</span><span class="w">  </span><span class="c1"># 5.0 (float)</span>
+<a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a><span class="n">div</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">)</span><span class="w">  </span><span class="c1"># 5 (divisão inteira)</span>
+<a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a><span class="n">rem</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">)</span><span class="w">  </span><span class="c1"># 1 (resto)</span>
+</code></pre></div>
+<blockquote>
+<p>Inteiros podem ser representados em diferentes bases e suportam operações básicas.
+</p>
+</blockquote>
+<hr />
+<h3 id="pontos-flutuantes"><strong>Pontos Flutuantes</strong><a class="headerlink" href="#pontos-flutuantes" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="mf">3.14</span>
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="mf">1.0e-10</span>
+</code></pre></div>
+<blockquote>
+<p>Usados para valores decimais ou muito pequenos/grandes, sempre em precisão dupla (64 bits).
+</p>
+</blockquote>
+<hr />
+<h3 id="booleanos-e-valores-de-verdade"><strong>Booleanos e Valores de Verdade</strong><a class="headerlink" href="#booleanos-e-valores-de-verdade" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="no">true</span>
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="no">false</span>
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="no">nil</span><span class="w">  </span><span class="c1"># também considerado &quot;falsy&quot;</span>
+<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>
+<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="o">!!</span><span class="mi">1</span><span class="w">    </span><span class="c1"># true</span>
+<a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a><span class="o">!!</span><span class="no">nil</span><span class="w">  </span><span class="c1"># false</span>
+</code></pre></div>
+<blockquote>
+<p>Em Elixir, apenas false e nil são falsos. Todo o resto é verdadeiro.
+</p>
+</blockquote>
+<hr />
+<h3 id="atomos"><strong>Átomos</strong><a class="headerlink" href="#atomos" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="ss">:ok</span>
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="ss">:error</span>
+<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="ss">:admin</span>
+<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="ss">:&quot;átomo com espaços&quot;</span>
+</code></pre></div>
+<blockquote>
+<p>Átomos são constantes nomeadas, cujo nome é o próprio valor.</p>
+<p>Servem para:</p>
+<ul>
+<li>Representar <strong>estados</strong> (<code>:ok</code>, <code>:error</code>)</li>
+<li>Rótulos simbólicos e flags</li>
+<li>Identificadores em estruturas de dados</li>
+</ul>
+</blockquote>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="nc">File</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="s2">&quot;dados.txt&quot;</span><span class="p">)</span>
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="c1"># {:ok, &quot;conteúdo&quot;} ou {:error, :enoent}</span>
+</code></pre></div>
+<hr />
+<h3 id="strings"><strong>Strings</strong><a class="headerlink" href="#strings" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="s2">&quot;Hello World&quot;</span>
+<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="s2">&quot;interpolação </span><span class="si">#{</span><span class="mi">1</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="si">}</span><span class="s2">&quot;</span><span class="w">  </span><span class="c1"># =&gt; &quot;interpolação 2&quot;</span>
+<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="nc">String</span><span class="o">.</span><span class="n">length</span><span class="p">(</span><span class="s2">&quot;Olá&quot;</span><span class="p">)</span><span class="w">      </span><span class="c1"># 3</span>
+</code></pre></div>
+<blockquote>
+<p>Strings são binários UTF-8, suportando acentos e emojis.</p>
+<p>Suportam <strong>interpolação</strong> e funções do módulo <code>String</code>.
+</p>
+</blockquote>
+<hr />
+<h2 id="13-imutabilidade">🔸 <strong>1.3 Imutabilidade</strong><a class="headerlink" href="#13-imutabilidade" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">]</span>
+<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="mi">0</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">x</span><span class="p">]</span><span class="w">  </span><span class="c1"># x não é modificado</span>
+<a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="n">x</span><span class="w">  </span><span class="c1"># =&gt; [1, 2, 3]</span>
+<a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a><span class="n">y</span><span class="w">  </span><span class="c1"># =&gt; [0, 1, 2, 3]</span>
+</code></pre></div>
+<blockquote>
+<p>Todos os valores em Elixir são imutáveis. Alterar dados cria novas estruturas, preservando as originais.
+</p>
+</blockquote>
+<hr />
+<h2 id="14-colecoes-basicas">🔸 <strong>1.4 Coleções Básicas</strong><a class="headerlink" href="#14-colecoes-basicas" title="Permanent link">&para;</a></h2>
+<h3 id="listas"><strong>Listas (<code>[ ]</code>)</strong><a class="headerlink" href="#listas" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="n">list</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="p">]</span>
+<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="p">[</span><span class="n">head</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">tail</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">list</span>
+<a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a><span class="c1"># head: 1, tail: [2, 3, 4]</span>
+<a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a><span class="p">[</span><span class="mi">0</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">list</span><span class="p">]</span><span class="w">  </span><span class="c1"># [0, 1, 2, 3, 4]</span>
+</code></pre></div>
+<blockquote>
+<p>Sequências ordenadas, boas para iterações e transformações.</p>
+<p>Acesso rápido no início, lento no final.
+</p>
+</blockquote>
+<hr />
+<h3 id="tuplas"><strong>Tuplas (<code>{ }</code>)</strong><a class="headerlink" href="#tuplas" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="n">person</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="s2">&quot;João&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">25</span><span class="p">,</span><span class="w"> </span><span class="ss">:engineer</span><span class="p">}</span>
+<a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a><span class="n">elem</span><span class="p">(</span><span class="n">person</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w">  </span><span class="c1"># &quot;João&quot;</span>
+<a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a><span class="n">put_elem</span><span class="p">(</span><span class="n">person</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">26</span><span class="p">)</span><span class="w">  </span><span class="c1"># {&quot;João&quot;, 26, :engineer&quot;}</span>
+</code></pre></div>
+<blockquote>
+<p>Estrutura fixa de tamanho conhecido.</p>
+<p>Ideal para <strong>retornar múltiplos valores</strong> ou <strong>representar estados</strong>.
+</p>
+</blockquote>
+<hr />
+<h3 id="mapas"><strong>Mapas (<code>%{ }</code>)</strong><a class="headerlink" href="#mapas" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="n">user</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">%{</span><span class="ss">name</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Maria&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">age</span><span class="p">:</span><span class="w"> </span><span class="mi">30</span><span class="p">}</span>
+<a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a><span class="n">user</span><span class="o">.</span><span class="n">name</span><span class="w">       </span><span class="c1"># &quot;Maria&quot;</span>
+<a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a><span class="n">user</span><span class="p">[</span><span class="ss">:name</span><span class="p">]</span><span class="w">     </span><span class="c1"># &quot;Maria&quot;</span>
+<a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a><span class="nc">Map</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">user</span><span class="p">,</span><span class="w"> </span><span class="ss">:age</span><span class="p">)</span><span class="w">  </span><span class="c1"># 30</span>
+</code></pre></div>
+<blockquote>
+<p>Coleção de pares chave-valor, ótima para representar entidades.</p>
+<p>Atualizações geram <strong>novos mapas</strong>.
+</p>
+</blockquote>
+<hr />
+<h3 id="keyword-lists-chave-valor"><strong>Keyword Lists (<code>[chave: valor]</code>)</strong><a class="headerlink" href="#keyword-lists-chave-valor" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="n">config</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="ss">host</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;localhost&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">port</span><span class="p">:</span><span class="w"> </span><span class="mi">4000</span><span class="p">]</span>
+<a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a><span class="n">config</span><span class="p">[</span><span class="ss">:host</span><span class="p">]</span><span class="w">  </span><span class="c1"># &quot;localhost&quot;</span>
+</code></pre></div>
+<blockquote>
+<p>Lista de tuplas com chaves átomos, preservando ordem.</p>
+<p>Muito usada para <strong>configurações e opções de funções</strong>.
+</p>
+</blockquote>
+<div class="admonition tip">
+<p class="admonition-title">Mapas vs Keyword Lists</p>
+<p>Em Elixir, <strong>mapas</strong> e <strong>keyword lists</strong> são coleções de pares chave-valor, mas têm diferenças importantes:</p>
+<table>
+<thead>
+<tr>
+<th>Característica</th>
+<th>Mapas (<code>%{}</code>)</th>
+<th>Keyword Lists (<code>[key: value]</code>)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Sintaxe</strong></td>
+<td><code>%{chave =&gt; valor}</code></td>
+<td><code>[chave: valor]</code></td>
+</tr>
+<tr>
+<td><strong>Chaves</strong></td>
+<td>Qualquer tipo</td>
+<td>Sempre átomos (<code>:chave</code>)</td>
+</tr>
+<tr>
+<td><strong>Ordem</strong></td>
+<td>Não garantida</td>
+<td>Mantida (útil quando a ordem importa)</td>
+</tr>
+<tr>
+<td><strong>Chaves duplicadas</strong></td>
+<td>Não permitidas</td>
+<td>Permitidas</td>
+</tr>
+<tr>
+<td><strong>Acesso</strong></td>
+<td><code>map[:chave]</code> ou <code>map.chave</code></td>
+<td><code>kw[:chave]</code></td>
+</tr>
+<tr>
+<td><strong>Uso típico</strong></td>
+<td>Dados estruturados complexos</td>
+<td>Opções de funções, configurações simples</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Resumo:</strong></p>
+<ul>
+<li>Use <strong>mapas</strong> para representar dados estruturados e mutáveis (como registros de pessoas, produtos, etc.).</li>
+<li>Use <strong>keyword lists</strong> para passar <strong>opções ou parâmetros de funções</strong>, especialmente quando a ordem importa.</li>
+</ul>
+<p>Exemplo:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="c1"># Mapa</span>
+<a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a><span class="n">user</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">%{</span><span class="ss">name</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Ana&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">age</span><span class="p">:</span><span class="w"> </span><span class="mi">30</span><span class="p">}</span>
+<a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a><span class="n">user</span><span class="p">[</span><span class="ss">:name</span><span class="p">]</span>
+<a id="__codelineno-11-4" name="__codelineno-11-4" href="#__codelineno-11-4"></a><span class="c1"># &quot;Ana&quot;</span>
+<a id="__codelineno-11-5" name="__codelineno-11-5" href="#__codelineno-11-5"></a>
+<a id="__codelineno-11-6" name="__codelineno-11-6" href="#__codelineno-11-6"></a><span class="c1"># Keyword List</span>
+<a id="__codelineno-11-7" name="__codelineno-11-7" href="#__codelineno-11-7"></a><span class="n">opts</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="ss">host</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;localhost&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">port</span><span class="p">:</span><span class="w"> </span><span class="mi">4000</span><span class="p">]</span>
+<a id="__codelineno-11-8" name="__codelineno-11-8" href="#__codelineno-11-8"></a><span class="n">opts</span><span class="p">[</span><span class="ss">:host</span><span class="p">]</span>
+<a id="__codelineno-11-9" name="__codelineno-11-9" href="#__codelineno-11-9"></a><span class="c1"># &quot;localhost&quot;</span>
+</code></pre></div>
+<p>Apesar de parecerem similares, a escolha depende do contexto e da necessidade de ordem ou chaves duplicadas.</p>
+</div>
+<hr />
+<h2 id="15-operador-pipe">🔸 <strong>1.5 Operador Pipe (<code>|&gt;</code>)</strong><a class="headerlink" href="#15-operador-pipe" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="s2">&quot;  hello world  &quot;</span>
+<a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a><span class="o">|&gt;</span><span class="w"> </span><span class="nc">String</span><span class="o">.</span><span class="n">trim</span><span class="p">()</span>
+<a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a><span class="o">|&gt;</span><span class="w"> </span><span class="nc">String</span><span class="o">.</span><span class="n">upcase</span><span class="p">()</span>
+<a id="__codelineno-12-4" name="__codelineno-12-4" href="#__codelineno-12-4"></a><span class="c1"># &quot;HELLO WORLD&quot;</span>
+<a id="__codelineno-12-5" name="__codelineno-12-5" href="#__codelineno-12-5"></a>
+<a id="__codelineno-12-6" name="__codelineno-12-6" href="#__codelineno-12-6"></a><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w"> </span><span class="mi">5</span><span class="p">]</span>
+<a id="__codelineno-12-7" name="__codelineno-12-7" href="#__codelineno-12-7"></a><span class="o">|&gt;</span><span class="w"> </span><span class="nc">Enum</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="o">&amp;</span><span class="p">(</span><span class="ni">&amp;1</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">2</span><span class="p">))</span>
+<a id="__codelineno-12-8" name="__codelineno-12-8" href="#__codelineno-12-8"></a><span class="o">|&gt;</span><span class="w"> </span><span class="nc">Enum</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="o">&amp;</span><span class="p">(</span><span class="ni">&amp;1</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">2</span><span class="p">))</span>
+<a id="__codelineno-12-9" name="__codelineno-12-9" href="#__codelineno-12-9"></a><span class="o">|&gt;</span><span class="w"> </span><span class="nc">Enum</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+<a id="__codelineno-12-10" name="__codelineno-12-10" href="#__codelineno-12-10"></a><span class="c1"># 18</span>
+</code></pre></div>
+<blockquote>
+<p>Encadeia funções de forma sequencial e legível.
+</p>
+</blockquote>
+<hr />
+<h2 id="16-introducao-ao-enum">🔸 <strong>1.6 Introdução ao Enum</strong><a class="headerlink" href="#16-introducao-ao-enum" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a><span class="nc">Enum</span><span class="o">.</span><span class="n">count</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">])</span><span class="w">         </span><span class="c1"># 3</span>
+<a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a><span class="nc">Enum</span><span class="o">.</span><span class="n">empty?</span><span class="p">([])</span><span class="w">               </span><span class="c1"># true</span>
+<a id="__codelineno-13-3" name="__codelineno-13-3" href="#__codelineno-13-3"></a><span class="nc">Enum</span><span class="o">.</span><span class="n">member?</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">],</span><span class="w"> </span><span class="mi">2</span><span class="p">)</span><span class="w">   </span><span class="c1"># true</span>
+<a id="__codelineno-13-4" name="__codelineno-13-4" href="#__codelineno-13-4"></a>
+<a id="__codelineno-13-5" name="__codelineno-13-5" href="#__codelineno-13-5"></a><span class="nc">Enum</span><span class="o">.</span><span class="n">map</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">],</span><span class="w"> </span><span class="k">fn</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="k">end</span><span class="p">)</span><span class="w">       </span><span class="c1"># [2,4,6]</span>
+<a id="__codelineno-13-6" name="__codelineno-13-6" href="#__codelineno-13-6"></a><span class="nc">Enum</span><span class="o">.</span><span class="n">filter</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="p">],</span><span class="w"> </span><span class="k">fn</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">rem</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span><span class="o">==</span><span class="mi">0</span><span class="w"> </span><span class="k">end</span><span class="p">)</span><span class="w">  </span><span class="c1"># [2,4]</span>
+</code></pre></div>
+<blockquote>
+<p>Enum oferece funções de ordem superior para manipular coleções de forma funcional.
+</p>
+</blockquote>
+<hr />
+<h2 id="exercicios-em-sala">🔸 <strong>Exercícios em Sala</strong><a class="headerlink" href="#exercicios-em-sala" title="Permanent link">&para;</a></h2>
+<ol>
+<li>Criar uma lista com números de 1 a 5, usar pipe para <strong>dobrar cada número</strong> e filtrar apenas pares.</li>
+<li>Criar um mapa representando uma pessoa, <strong>adicionar nova chave</strong> usando <code>Map.put</code>.</li>
+</ol>
+<hr />
+<h2 id="tarefa-para-casa">🔸 <strong>Tarefa para Casa</strong><a class="headerlink" href="#tarefa-para-casa" title="Permanent link">&para;</a></h2>
+<ol>
+<li>Ler as lições “Basics” do Elixir School em português.</li>
+<li>Fazer exercícios do Exercism: "Hello World", "Two Fer", "Reverse String".</li>
+<li>Praticar no IEx: criar <strong>10 pipelines diferentes</strong> usando <code>Enum</code>.</li>
+</ol>
+<hr />
+<h2 id="material-de-apoio">🔸 <strong>Material de Apoio</strong><a class="headerlink" href="#material-de-apoio" title="Permanent link">&para;</a></h2>
+<ul>
+<li><a href="https://elixirschool.com/pt/lessons/basics/basics">📘 Elixir School - Básico</a></li>
+<li><a href="https://hexdocs.pm/elixir/introduction.html">📘 HexDocs - Getting Started</a></li>
+<li><a href="https://exercism.org/tracks/elixir">🧪 Exercism - Trilha Elixir</a></li>
+</ul>
+<hr />
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Voltar ao topo
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.top", "navigation.sections", "toc.integrate", "content.code.annotate", "content.code.copy"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copiado para \u00e1rea de transfer\u00eancia", "clipboard.copy": "Copiar para \u00e1rea de transfer\u00eancia", "search.result.more.one": "Mais 1 nesta p\u00e1gina", "search.result.more.other": "Mais # nesta p\u00e1gina", "search.result.none": "Nenhum resultado encontrado", "search.result.one": "1 resultado encontrado", "search.result.other": "# resultados encontrados", "search.result.placeholder": "Digite para iniciar a busca", "search.result.term.missing": "Ausente", "select.version": "Selecione a vers\u00e3o"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+        <script src="https://unpkg.com/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+    
+  </body>
+</html>

@@ -1,0 +1,2089 @@
+
+<!doctype html>
+<html lang="pt" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Livro didático da disciplina de Introdução à Programação Funcional: Haskell, Clojure e Elixir em três unidades de 20 horas.
+">
+      
+      
+        <meta name="author" content="Sergio Souza Costa">
+      
+      
+      
+        <link rel="prev" href="../06_listas/">
+      
+      
+        <link rel="next" href="../08_exercicios/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+    
+    
+      
+        <title>Cap 7: Funções de Alta Ordem - Introdução à Programação Funcional</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="teal" data-md-color-accent="green">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#funcoes-de-alta-ordem-currying-e-composicao" class="md-skip">
+          Ir para o conteúdo
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Cabeçalho">
+    <a href="../.." title="Introdução à Programação Funcional" class="md-header__button md-logo" aria-label="Introdução à Programação Funcional" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Introdução à Programação Funcional
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Cap 7: Funções de Alta Ordem
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="teal" data-md-color-accent="green"  aria-hidden="true"  type="radio" name="__palette" id="__palette_0">
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Buscar" placeholder="Buscar" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Pesquisar">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Limpar" aria-label="Limpar" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Inicializando a pesquisa
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+  
+
+<nav class="md-nav md-nav--primary md-nav--integrated" aria-label="Navegação" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Introdução à Programação Funcional" class="md-nav__button md-logo" aria-label="Introdução à Programação Funcional" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Introdução à Programação Funcional
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Apresentação
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Unidade 1 — Paradigmas e Haskell Básico (20h)
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Unidade 1 — Paradigmas e Haskell Básico (20h)
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../00_plano_unidade1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Plano da Unidade 1
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../01_paradigmas/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cap 1: Introdução aos Paradigmas
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../02_instalacao/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cap 2: Instalação do Ambiente
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../03_fundamentos/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cap 3: Fundamentos e o GHCi
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../04_tipos_classes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cap 4: Tipos e Classes
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../05_funcoes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cap 5: Funções e Pattern Matching
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../06_listas/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cap 6: Listas, Recursão e Compreensão
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cap 7: Funções de Alta Ordem
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cap 7: Funções de Alta Ordem
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Índice">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Índice
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1-o-que-sao-funcoes-de-alta-ordem" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. O que são Funções de Alta Ordem?
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-funcoes-infixas-e-as-crases" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Funções Infixas e as Crases
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-currying-e-aplicacao-parcial" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Currying e Aplicação Parcial
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. Currying e Aplicação Parcial">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#a-seta-so-tem-um-significado" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        A Seta -&gt; Só Tem Um Significado
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#aplicacao-parcial" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Aplicação Parcial
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#secoes-aplicacao-parcial-de-operadores" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Seções: Aplicação Parcial de Operadores
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#funcoes-anonimas-lambdas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Funções Anônimas (Lambdas)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#estudo-de-caso-quatro-versoes-da-mesma-funcao" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Estudo de Caso: Quatro Versões da Mesma Função
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-o-trio-de-ouro-map-filter-e-fold" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. O Trio de Ouro: Map, Filter e Fold
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4. O Trio de Ouro: Map, Filter e Fold">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-map-transformando-cada-elemento" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. map: Transformando Cada Elemento
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-filter-selecionando-elementos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. filter: Selecionando Elementos
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-foldr-e-foldl-acumulando-um-resultado" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. foldr e foldl: Acumulando um Resultado
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#foldl-avaliacao-preguicosa-e-space-leaks" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ⚠️ foldl, Avaliação Preguiçosa e Space Leaks
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="⚠️ foldl, Avaliação Preguiçosa e Space Leaks">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#como-o-foldl-funciona-por-baixo-a-funcao-seq" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Como o foldl' Funciona Por Baixo: a Função seq
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#por-que-usar-map-filter-e-fold-em-vez-de-recursao-explicita" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Por que usar map, filter e fold em vez de recursão explícita?
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-composicao-de-funcoes-e-point-free-style" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Composição de Funções e Point-Free Style
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5. Composição de Funções e Point-Free Style">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#pipelines-reais-de-composicao" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Pipelines Reais de Composição
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#estilo-point-free-livre-de-pontos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Estilo Point-Free (Livre de Pontos)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-dicas-para-escrever-codigo-legivel" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. Dicas para Escrever Código Legível
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-exercicios-de-fixacao" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. Exercícios de Fixação
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../08_exercicios/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cap 8: Exercícios Resolvidos
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Unidade 2 — Haskell Avançado e Qualidade (20h)
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Unidade 2 — Haskell Avançado e Qualidade (20h)
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../unidade2/00_plano_unidade2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Plano da Unidade 2
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../unidade2/01_declarando_tipos_classes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cap 9: Tipos Algébricos e Typeclasses
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../unidade2/02_programas_interativos/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cap 10: Programas Interativos (IO)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../unidade2/03_exercicios_avancados/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cap 11: Exercícios Avançados
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../unidade2/04_haskell_moderno/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cap 12: Projetos Modernos com Stack
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../unidade2/05_biblioteca_json/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cap 13: A Biblioteca JSON
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../unidade2/06_testes_qualidade/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cap 14: Testes com QuickCheck
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../unidade2/07_avaliacao/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Trabalho Prático: hs2json
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Unidade 3 — Clojure e Elixir (20h)
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Unidade 3 — Clojure e Elixir (20h)
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../unidade3/00_plano_unidade3/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Plano da Unidade 3
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../unidade3/01_clojure_fundamentos/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cap 15: Clojure — Fundamentos
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../unidade3/02_clojure_colecoes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cap 16: Clojure — Vetores e Mapas
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../unidade3/03_clojure_alta_ordem/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cap 17: Clojure — Alta Ordem
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../unidade3/04_clojure_threading_mapas_complexos/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cap 18: Clojure — Threading Macros
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../unidade3/05_clojure_lazy_sequences/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cap 19: Clojure — Lazy Sequences
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../unidade3/06_clojure_metaprogramacao/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cap 20: Clojure — Macros
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../unidade3/07_clojure_interop/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cap 21: Clojure — Interop com Java
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../unidade3/08_clojure_revisao/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cap 22: Clojure — Revisão de Pilares
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../unidade3/09_clojure_exercicios/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cap 23: Clojure — Exercícios Resolvidos
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../unidade3/10_clojure_tutorial_todo/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Trabalho Clojure: ToDo Full-Stack
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../unidade3/11_elixir_fundamentos/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cap 24: Elixir — Fundamentos
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../unidade3/12_elixir_colecoes_pattern_matching/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cap 25: Elixir — Pattern Matching
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../unidade3/13_elixir_modulos_funcoes_testes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cap 26: Elixir — Módulos e Testes
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../unidade3/14_elixir_processos/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cap 27: Elixir — Processos e Concorrência
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../unidade3/15_elixir_metaprogramacao/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cap 28: Elixir — Metaprogramação
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../unidade3/16_elixir_tutorial_todo/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Trabalho Elixir: ToDo com LiveView
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="funcoes-de-alta-ordem-currying-e-composicao">Funções de Alta Ordem, Currying e Composição<a class="headerlink" href="#funcoes-de-alta-ordem-currying-e-composicao" title="Permanent link">&para;</a></h1>
+<p>Neste capítulo, encerraremos nossa primeira unidade explorando o recurso que confere a máxima expressividade ao paradigma funcional: as <strong>Funções de Alta Ordem</strong> (<em>Higher-Order Functions</em>). Ao tratar funções como valores comuns, aprenderemos a parametrizar comportamentos, reutilizar padrões de iteração genéricos (<code>map</code>, <code>filter</code>, <code>fold</code>) e encadear transformações de dados de maneira matemática através da composição — descobrindo, no caminho, como <em>pensar sobre loops</em> em uma linguagem que não os possui.</p>
+<hr />
+<h2 id="1-o-que-sao-funcoes-de-alta-ordem">1. O que são Funções de Alta Ordem?<a class="headerlink" href="#1-o-que-sao-funcoes-de-alta-ordem" title="Permanent link">&para;</a></h2>
+<p>Uma <strong>Função de Alta Ordem</strong> é simplesmente uma função que atende a pelo menos um dos seguintes requisitos:
+1. Recebe uma ou mais funções como argumento.
+2. Retorna uma função como resultado.</p>
+<p>Essa flexibilidade é viabilizada pelo fato de que, em Haskell, as funções são <strong>Cidadãs de Primeira Classe</strong> (<em>First-Class Citizens</em>). Elas podem ser armazenadas em estruturas de dados, passadas como parâmetros e manipuladas exatamente como inteiros, booleanos ou strings.</p>
+<p>Considere a função <code>duasVezes</code>, que recebe uma função <code>f</code> e aplica essa função consecutivamente a um valor <code>x</code>:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nf">duasVezes</span><span class="w"> </span><span class="ow">::</span><span class="w"> </span><span class="p">(</span><span class="n">a</span><span class="w"> </span><span class="ow">-&gt;</span><span class="w"> </span><span class="n">a</span><span class="p">)</span><span class="w"> </span><span class="ow">-&gt;</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="ow">-&gt;</span><span class="w"> </span><span class="n">a</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="nf">duasVezes</span><span class="w"> </span><span class="n">f</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="ow">=</span><span class="w"> </span><span class="n">f</span><span class="w"> </span><span class="p">(</span><span class="n">f</span><span class="w"> </span><span class="n">x</span><span class="p">)</span>
+</code></pre></div>
+<p>Podemos utilizá-la passando comportamentos diferentes como argumentos:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="kt">Prelude</span><span class="o">&gt;</span><span class="w"> </span><span class="n">duasVezes</span><span class="w"> </span><span class="p">(</span><span class="o">*</span><span class="mi">2</span><span class="p">)</span><span class="w"> </span><span class="mi">4</span>
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="mi">16</span>
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>
+<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="kt">Prelude</span><span class="o">&gt;</span><span class="w"> </span><span class="n">duasVezes</span><span class="w"> </span><span class="n">reverse</span><span class="w"> </span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">]</span>
+<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">]</span>
+</code></pre></div>
+<hr />
+<h2 id="2-funcoes-infixas-e-as-crases">2. Funções Infixas e as Crases<a class="headerlink" href="#2-funcoes-infixas-e-as-crases" title="Permanent link">&para;</a></h2>
+<p>Antes de aprofundar o currying, um recurso sintático que usaremos bastante: qualquer função de dois argumentos pode ser aplicada em <strong>notação infixa</strong> (entre os argumentos), envolvendo seu nome em crases (<em>backticks</em>):</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="kt">Prelude</span><span class="o">&gt;</span><span class="w"> </span><span class="n">elem</span><span class="w"> </span><span class="sc">&#39;a&#39;</span><span class="w"> </span><span class="s">&quot;camogie&quot;</span><span class="w">      </span><span class="c1">-- notação prefixada</span>
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="kt">True</span>
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="kt">Prelude</span><span class="o">&gt;</span><span class="w"> </span><span class="mi">3</span><span class="w"> </span><span class="p">`</span><span class="n">elem</span><span class="p">`</span><span class="w"> </span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w"> </span><span class="mi">8</span><span class="p">]</span><span class="w">   </span><span class="c1">-- notação infixa: lê-se &quot;3 é elemento de...&quot;</span>
+<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="kt">False</span>
+</code></pre></div>
+<p>A melhoria de legibilidade fica mais evidente com funções do módulo <code>Data.List</code> como <code>isPrefixOf</code>, <code>isInfixOf</code> e <code>isSuffixOf</code>:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="kt">Prelude</span><span class="o">&gt;</span><span class="w"> </span><span class="kt">:</span><span class="kr">module</span><span class="w"> </span><span class="err">+</span><span class="nn">Data.List</span>
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="kt">Prelude</span><span class="w"> </span><span class="kt">Data</span><span class="o">.</span><span class="kt">List</span><span class="o">&gt;</span><span class="w"> </span><span class="s">&quot;foo&quot;</span><span class="w"> </span><span class="p">`</span><span class="n">isPrefixOf</span><span class="p">`</span><span class="w"> </span><span class="s">&quot;foobar&quot;</span>
+<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="kt">True</span>
+<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="kt">Prelude</span><span class="w"> </span><span class="kt">Data</span><span class="o">.</span><span class="kt">List</span><span class="o">&gt;</span><span class="w"> </span><span class="s">&quot;agulha&quot;</span><span class="w"> </span><span class="p">`</span><span class="n">isInfixOf</span><span class="p">`</span><span class="w"> </span><span class="s">&quot;palheiro cheio de agulhas&quot;</span>
+<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a><span class="kt">True</span>
+</code></pre></div>
+<p>A notação infixa é apenas uma conveniência sintática — não muda o comportamento da função. Escolha a forma que tornar o código mais legível em cada situação.</p>
+<hr />
+<h2 id="3-currying-e-aplicacao-parcial">3. Currying e Aplicação Parcial<a class="headerlink" href="#3-currying-e-aplicacao-parcial" title="Permanent link">&para;</a></h2>
+<p>Em Haskell, <strong>todas as funções recebem formalmente apenas um argumento</strong>. Quando declaramos uma função que parece aceitar múltiplos parâmetros, como <code>soma :: Int -&gt; Int -&gt; Int</code>, o compilador na verdade cria uma função que recebe o primeiro <code>Int</code> e retorna outra função, que por sua vez recebe o segundo <code>Int</code> e finalmente calcula o resultado. </p>
+<p>Esse processo de transformar uma função de múltiplos parâmetros em uma cadeia de funções de um único parâmetro é chamado de <strong>Currying</strong>.</p>
+<h3 id="a-seta-so-tem-um-significado">A Seta <code>-&gt;</code> Só Tem Um Significado<a class="headerlink" href="#a-seta-so-tem-um-significado" title="Permanent link">&para;</a></h3>
+<p>Você pode se perguntar por que a seta <code>-&gt;</code> parece cumprir dois papéis na assinatura <code>dropWhile :: (a -&gt; Bool) -&gt; [a] -&gt; [a]</code> — separar os argumentos entre si <em>e</em> separá-los do retorno. Na verdade, <code>-&gt;</code> tem um único significado: <em>uma função que recebe o tipo à esquerda e retorna o tipo à direita</em>. A seta é <strong>associativa à direita</strong>, então a assinatura acima é lida como:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="nf">dropWhile</span><span class="w"> </span><span class="ow">::</span><span class="w"> </span><span class="p">(</span><span class="n">a</span><span class="w"> </span><span class="ow">-&gt;</span><span class="w"> </span><span class="kt">Bool</span><span class="p">)</span><span class="w"> </span><span class="ow">-&gt;</span><span class="w"> </span><span class="p">([</span><span class="n">a</span><span class="p">]</span><span class="w"> </span><span class="ow">-&gt;</span><span class="w"> </span><span class="p">[</span><span class="n">a</span><span class="p">])</span>
+</code></pre></div>
+<p>Ou seja: <code>dropWhile</code> recebe um predicado e <strong>retorna uma função</strong> de listas para listas. Isso não é um detalhe teórico — é diretamente útil:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="kt">Prelude</span><span class="o">&gt;</span><span class="w"> </span><span class="kt">:</span><span class="kr">module</span><span class="w"> </span><span class="err">+</span><span class="nn">Data.Char</span>
+<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="kt">Prelude</span><span class="w"> </span><span class="kt">Data</span><span class="o">.</span><span class="kt">Char</span><span class="o">&gt;</span><span class="w"> </span><span class="kt">:</span><span class="kr">type</span><span class="w"> </span><span class="n">dropWhile</span><span class="w"> </span><span class="n">isSpace</span>
+<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="nf">dropWhile</span><span class="w"> </span><span class="n">isSpace</span><span class="w"> </span><span class="ow">::</span><span class="w"> </span><span class="p">[</span><span class="kt">Char</span><span class="p">]</span><span class="w"> </span><span class="ow">-&gt;</span><span class="w"> </span><span class="p">[</span><span class="kt">Char</span><span class="p">]</span>
+<a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a><span class="kt">Prelude</span><span class="w"> </span><span class="kt">Data</span><span class="o">.</span><span class="kt">Char</span><span class="o">&gt;</span><span class="w"> </span><span class="n">map</span><span class="w"> </span><span class="p">(</span><span class="n">dropWhile</span><span class="w"> </span><span class="n">isSpace</span><span class="p">)</span><span class="w"> </span><span class="p">[</span><span class="s">&quot; a&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;f&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;   e&quot;</span><span class="p">]</span>
+<a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a><span class="p">[</span><span class="s">&quot;a&quot;</span><span class="p">,</span><span class="s">&quot;f&quot;</span><span class="p">,</span><span class="s">&quot;e&quot;</span><span class="p">]</span>
+</code></pre></div>
+<p>O valor <code>dropWhile isSpace</code> é, por si só, uma função que remove espaços iniciais de uma string — pronta para ser passada ao <code>map</code>.</p>
+<h3 id="aplicacao-parcial">Aplicação Parcial<a class="headerlink" href="#aplicacao-parcial" title="Permanent link">&para;</a></h3>
+<p>Como as funções funcionam por Currying, podemos chamá-las passando <strong>menos argumentos</strong> do que o total esperado. Isso nos retorna uma nova função especializada:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="c1">-- Função base:</span>
+<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="nf">multiplicar</span><span class="w"> </span><span class="ow">::</span><span class="w"> </span><span class="kt">Int</span><span class="w"> </span><span class="ow">-&gt;</span><span class="w"> </span><span class="kt">Int</span><span class="w"> </span><span class="ow">-&gt;</span><span class="w"> </span><span class="kt">Int</span>
+<a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="nf">multiplicar</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="ow">=</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">y</span>
+<a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a>
+<a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a><span class="c1">-- Aplicação parcial: passamos apenas o primeiro argumento</span>
+<a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a><span class="nf">dobro</span><span class="w"> </span><span class="ow">::</span><span class="w"> </span><span class="kt">Int</span><span class="w"> </span><span class="ow">-&gt;</span><span class="w"> </span><span class="kt">Int</span>
+<a id="__codelineno-6-7" name="__codelineno-6-7" href="#__codelineno-6-7"></a><span class="nf">dobro</span><span class="w"> </span><span class="ow">=</span><span class="w"> </span><span class="n">multiplicar</span><span class="w"> </span><span class="mi">2</span>
+<a id="__codelineno-6-8" name="__codelineno-6-8" href="#__codelineno-6-8"></a>
+<a id="__codelineno-6-9" name="__codelineno-6-9" href="#__codelineno-6-9"></a><span class="nf">triplo</span><span class="w"> </span><span class="ow">::</span><span class="w"> </span><span class="kt">Int</span><span class="w"> </span><span class="ow">-&gt;</span><span class="w"> </span><span class="kt">Int</span>
+<a id="__codelineno-6-10" name="__codelineno-6-10" href="#__codelineno-6-10"></a><span class="nf">triplo</span><span class="w"> </span><span class="ow">=</span><span class="w"> </span><span class="n">multiplicar</span><span class="w"> </span><span class="mi">3</span>
+</code></pre></div>
+<p>Cada argumento fornecido "corta" um elemento do início da assinatura. Veja com <code>zip3</code>, que junta três listas em uma lista de triplas:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="kt">Prelude</span><span class="o">&gt;</span><span class="w"> </span><span class="kt">:</span><span class="kr">type</span><span class="w"> </span><span class="n">zip3</span>
+<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="nf">zip3</span><span class="w"> </span><span class="ow">::</span><span class="w"> </span><span class="p">[</span><span class="n">a</span><span class="p">]</span><span class="w"> </span><span class="ow">-&gt;</span><span class="w"> </span><span class="p">[</span><span class="n">b</span><span class="p">]</span><span class="w"> </span><span class="ow">-&gt;</span><span class="w"> </span><span class="p">[</span><span class="n">c</span><span class="p">]</span><span class="w"> </span><span class="ow">-&gt;</span><span class="w"> </span><span class="p">[(</span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="n">b</span><span class="p">,</span><span class="w"> </span><span class="n">c</span><span class="p">)]</span>
+<a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a><span class="kt">Prelude</span><span class="o">&gt;</span><span class="w"> </span><span class="kt">:</span><span class="kr">type</span><span class="w"> </span><span class="n">zip3</span><span class="w"> </span><span class="s">&quot;foo&quot;</span>
+<a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a><span class="nf">zip3</span><span class="w"> </span><span class="s">&quot;foo&quot;</span><span class="w"> </span><span class="ow">::</span><span class="w"> </span><span class="p">[</span><span class="n">b</span><span class="p">]</span><span class="w"> </span><span class="ow">-&gt;</span><span class="w"> </span><span class="p">[</span><span class="n">c</span><span class="p">]</span><span class="w"> </span><span class="ow">-&gt;</span><span class="w"> </span><span class="p">[(</span><span class="kt">Char</span><span class="p">,</span><span class="w"> </span><span class="n">b</span><span class="p">,</span><span class="w"> </span><span class="n">c</span><span class="p">)]</span>
+<a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a><span class="kt">Prelude</span><span class="o">&gt;</span><span class="w"> </span><span class="n">zip3</span><span class="w"> </span><span class="s">&quot;foo&quot;</span><span class="w"> </span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">]</span><span class="w"> </span><span class="p">[</span><span class="kt">True</span><span class="p">,</span><span class="kt">False</span><span class="p">,</span><span class="kt">True</span><span class="p">]</span>
+<a id="__codelineno-7-6" name="__codelineno-7-6" href="#__codelineno-7-6"></a><span class="p">[(</span><span class="sc">&#39;f&#39;</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="kt">True</span><span class="p">),(</span><span class="sc">&#39;o&#39;</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="kt">False</span><span class="p">),(</span><span class="sc">&#39;o&#39;</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="kt">True</span><span class="p">)]</span>
+</code></pre></div>
+<p>A aplicação parcial é um mecanismo fantástico para criar funções auxiliares dinâmicas na hora de passar para funções de alta ordem — e frequentemente evita a criação cansativa de funções descartáveis.</p>
+<h3 id="secoes-aplicacao-parcial-de-operadores">Seções: Aplicação Parcial de Operadores<a class="headerlink" href="#secoes-aplicacao-parcial-de-operadores" title="Permanent link">&para;</a></h3>
+<p>Haskell fornece um atalho para aplicar parcialmente operadores infixos: colocando o operador entre parênteses, podemos fixar o argumento da esquerda <strong>ou</strong> da direita. Esse recurso é chamado de <strong>seção</strong> (<em>section</em>):</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="kt">Prelude</span><span class="o">&gt;</span><span class="w"> </span><span class="p">(</span><span class="mi">1</span><span class="o">+</span><span class="p">)</span><span class="w"> </span><span class="mi">2</span>
+<a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a><span class="mi">3</span>
+<a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a><span class="kt">Prelude</span><span class="o">&gt;</span><span class="w"> </span><span class="n">map</span><span class="w"> </span><span class="p">(</span><span class="o">*</span><span class="mi">3</span><span class="p">)</span><span class="w"> </span><span class="p">[</span><span class="mi">24</span><span class="p">,</span><span class="w"> </span><span class="mi">36</span><span class="p">]</span>
+<a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a><span class="p">[</span><span class="mi">72</span><span class="p">,</span><span class="w"> </span><span class="mi">108</span><span class="p">]</span>
+<a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a><span class="kt">Prelude</span><span class="o">&gt;</span><span class="w"> </span><span class="n">map</span><span class="w"> </span><span class="p">(</span><span class="mi">2</span><span class="o">^</span><span class="p">)</span><span class="w"> </span><span class="p">[</span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w"> </span><span class="mi">7</span><span class="p">]</span><span class="w">    </span><span class="c1">-- fixa a base: 2^3, 2^5, 2^7</span>
+<a id="__codelineno-8-6" name="__codelineno-8-6" href="#__codelineno-8-6"></a><span class="p">[</span><span class="mi">8</span><span class="p">,</span><span class="w"> </span><span class="mi">32</span><span class="p">,</span><span class="w"> </span><span class="mi">128</span><span class="p">]</span>
+<a id="__codelineno-8-7" name="__codelineno-8-7" href="#__codelineno-8-7"></a><span class="kt">Prelude</span><span class="o">&gt;</span><span class="w"> </span><span class="n">map</span><span class="w"> </span><span class="p">(</span><span class="o">^</span><span class="mi">2</span><span class="p">)</span><span class="w"> </span><span class="p">[</span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w"> </span><span class="mi">7</span><span class="p">]</span><span class="w">    </span><span class="c1">-- fixa o expoente: 3^2, 5^2, 7^2</span>
+<a id="__codelineno-8-8" name="__codelineno-8-8" href="#__codelineno-8-8"></a><span class="p">[</span><span class="mi">9</span><span class="p">,</span><span class="w"> </span><span class="mi">25</span><span class="p">,</span><span class="w"> </span><span class="mi">49</span><span class="p">]</span>
+</code></pre></div>
+<p>Funções nomeadas também podem virar seções usando crases: <code>(`elem` ['a'..'z'])</code> é uma função que verifica se um caractere é letra minúscula.</p>
+<h3 id="funcoes-anonimas-lambdas">Funções Anônimas (Lambdas)<a class="headerlink" href="#funcoes-anonimas-lambdas" title="Permanent link">&para;</a></h3>
+<p>Podemos escrever funções sem nome — as <strong>lambdas</strong>, em referência ao cálculo lambda. A sintaxe usa uma barra invertida <code>\</code> (lembrando a letra λ), seguida dos argumentos e de uma seta <code>-&gt;</code>:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="kt">Prelude</span><span class="o">&gt;</span><span class="w"> </span><span class="n">map</span><span class="w"> </span><span class="p">(</span><span class="nf">\</span><span class="n">x</span><span class="w"> </span><span class="ow">-&gt;</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">]</span>
+<a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a><span class="p">[</span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w"> </span><span class="mi">10</span><span class="p">]</span>
+</code></pre></div>
+<p>Diferentemente das funções nomeadas, uma lambda só pode ter <strong>uma única cláusula</strong> — portanto, cuidado ao usar padrões em lambdas: certifique-se de que o padrão não pode falhar. Por questão de legibilidade, prefira a aplicação parcial ou uma função auxiliar nomeada (via <code>where</code>) quando a lambda começar a crescer: o nome bem escolhido informa ao leitor o que a função faz.</p>
+<h3 id="estudo-de-caso-quatro-versoes-da-mesma-funcao">Estudo de Caso: Quatro Versões da Mesma Função<a class="headerlink" href="#estudo-de-caso-quatro-versoes-da-mesma-funcao" title="Permanent link">&para;</a></h3>
+<p>Vamos escrever <code>estaEmAlguma</code>, que verifica se uma string (<code>agulha</code>) aparece dentro de alguma string de uma lista (<code>palheiro</code>). A evolução das quatro versões resume tudo o que vimos até aqui:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="kr">import</span><span class="w"> </span><span class="nn">Data.List</span><span class="w"> </span><span class="p">(</span><span class="nf">isInfixOf</span><span class="p">)</span>
+<a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a>
+<a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a><span class="c1">-- Versão 1: função auxiliar nomeada</span>
+<a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a><span class="nf">estaEmAlguma</span><span class="w"> </span><span class="n">agulha</span><span class="w"> </span><span class="n">palheiro</span><span class="w"> </span><span class="ow">=</span><span class="w"> </span><span class="n">any</span><span class="w"> </span><span class="n">contida</span><span class="w"> </span><span class="n">palheiro</span>
+<a id="__codelineno-10-5" name="__codelineno-10-5" href="#__codelineno-10-5"></a><span class="w">    </span><span class="kr">where</span><span class="w"> </span><span class="n">contida</span><span class="w"> </span><span class="n">s</span><span class="w"> </span><span class="ow">=</span><span class="w"> </span><span class="n">agulha</span><span class="w"> </span><span class="p">`</span><span class="n">isInfixOf</span><span class="p">`</span><span class="w"> </span><span class="n">s</span>
+<a id="__codelineno-10-6" name="__codelineno-10-6" href="#__codelineno-10-6"></a>
+<a id="__codelineno-10-7" name="__codelineno-10-7" href="#__codelineno-10-7"></a><span class="c1">-- Versão 2: lambda</span>
+<a id="__codelineno-10-8" name="__codelineno-10-8" href="#__codelineno-10-8"></a><span class="nf">estaEmAlguma2</span><span class="w"> </span><span class="n">agulha</span><span class="w"> </span><span class="n">palheiro</span><span class="w"> </span><span class="ow">=</span><span class="w"> </span><span class="n">any</span><span class="w"> </span><span class="p">(</span><span class="nf">\</span><span class="n">s</span><span class="w"> </span><span class="ow">-&gt;</span><span class="w"> </span><span class="n">agulha</span><span class="w"> </span><span class="p">`</span><span class="n">isInfixOf</span><span class="p">`</span><span class="w"> </span><span class="n">s</span><span class="p">)</span><span class="w"> </span><span class="n">palheiro</span>
+<a id="__codelineno-10-9" name="__codelineno-10-9" href="#__codelineno-10-9"></a>
+<a id="__codelineno-10-10" name="__codelineno-10-10" href="#__codelineno-10-10"></a><span class="c1">-- Versão 3: aplicação parcial</span>
+<a id="__codelineno-10-11" name="__codelineno-10-11" href="#__codelineno-10-11"></a><span class="nf">estaEmAlguma3</span><span class="w"> </span><span class="n">agulha</span><span class="w"> </span><span class="n">palheiro</span><span class="w"> </span><span class="ow">=</span><span class="w"> </span><span class="n">any</span><span class="w"> </span><span class="p">(</span><span class="n">isInfixOf</span><span class="w"> </span><span class="n">agulha</span><span class="p">)</span><span class="w"> </span><span class="n">palheiro</span>
+<a id="__codelineno-10-12" name="__codelineno-10-12" href="#__codelineno-10-12"></a>
+<a id="__codelineno-10-13" name="__codelineno-10-13" href="#__codelineno-10-13"></a><span class="c1">-- Versão 4: seção com crases (a mais idiomática)</span>
+<a id="__codelineno-10-14" name="__codelineno-10-14" href="#__codelineno-10-14"></a><span class="nf">estaEmAlguma4</span><span class="w"> </span><span class="n">agulha</span><span class="w"> </span><span class="n">palheiro</span><span class="w"> </span><span class="ow">=</span><span class="w"> </span><span class="n">any</span><span class="w"> </span><span class="p">(</span><span class="n">agulha</span><span class="w"> </span><span class="p">`</span><span class="n">isInfixOf</span><span class="p">`)</span><span class="w"> </span><span class="n">palheiro</span>
+</code></pre></div>
+<p>Na versão 3, <code>isInfixOf agulha</code> é a função parcialmente aplicada: fixamos o primeiro argumento e obtemos uma função que espera apenas a string a examinar — exatamente o que <code>any</code> precisa. A versão 4 usa uma seção para preservar a legibilidade da notação infixa. As quatro são equivalentes; a progressão mostra como o currying e as seções eliminam código descartável.</p>
+<hr />
+<h2 id="4-o-trio-de-ouro-map-filter-e-fold">4. O Trio de Ouro: Map, Filter e Fold<a class="headerlink" href="#4-o-trio-de-ouro-map-filter-e-fold" title="Permanent link">&para;</a></h2>
+<p>Diferentemente das linguagens tradicionais, Haskell não tem laços <code>for</code> nem <code>while</code>. Como processar coleções de dados, então? A resposta está em perceber que quase todos os loops que escrevemos na vida seguem <strong>três padrões</strong>: transformar cada elemento, selecionar alguns elementos, ou acumular um resultado. Haskell captura cada padrão em uma função de alta ordem — e é assim que devemos <em>pensar sobre loops</em> no paradigma funcional.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>       Lista de Entrada ─────► [ 1, 2, 3, 4, 5 ]
+<a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a>                                    │
+<a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a>       ┌───────────────┬────────────┴────────────┬──────────────┐
+<a id="__codelineno-11-4" name="__codelineno-11-4" href="#__codelineno-11-4"></a>       ▼               ▼                         ▼              ▼
+<a id="__codelineno-11-5" name="__codelineno-11-5" href="#__codelineno-11-5"></a>     [Map]          [Filter]                  [Foldr]        [Foldl]
+<a id="__codelineno-11-6" name="__codelineno-11-6" href="#__codelineno-11-6"></a>  (Transformar)    (Selecionar)            (Acumular Dir) (Acumular Esq)
+<a id="__codelineno-11-7" name="__codelineno-11-7" href="#__codelineno-11-7"></a>       │               │                         │              │
+<a id="__codelineno-11-8" name="__codelineno-11-8" href="#__codelineno-11-8"></a>       ▼               ▼                         ▼              ▼
+<a id="__codelineno-11-9" name="__codelineno-11-9" href="#__codelineno-11-9"></a>  [ 2,4,6,8,10 ]   [ 2, 4 ]                     15              15
+</code></pre></div>
+<h3 id="1-map-transformando-cada-elemento">1. <code>map</code>: Transformando Cada Elemento<a class="headerlink" href="#1-map-transformando-cada-elemento" title="Permanent link">&para;</a></h3>
+<p>Considere um loop C que eleva ao quadrado cada elemento de um array:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="kt">void</span><span class="w"> </span><span class="nf">square</span><span class="p">(</span><span class="kt">double</span><span class="w"> </span><span class="o">*</span><span class="n">out</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="o">*</span><span class="n">in</span><span class="p">,</span><span class="w"> </span><span class="kt">size_t</span><span class="w"> </span><span class="n">length</span><span class="p">)</span>
+<a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a><span class="p">{</span>
+<a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a><span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">size_t</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">length</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-12-4" name="__codelineno-12-4" href="#__codelineno-12-4"></a><span class="w">        </span><span class="n">out</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">in</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">in</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
+<a id="__codelineno-12-5" name="__codelineno-12-5" href="#__codelineno-12-5"></a><span class="w">    </span><span class="p">}</span>
+<a id="__codelineno-12-6" name="__codelineno-12-6" href="#__codelineno-12-6"></a><span class="p">}</span>
+</code></pre></div>
+<p>Em Haskell, escreveríamos esse "loop" com recursão explícita, como aprendemos no capítulo de listas:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a><span class="nf">quadrados</span><span class="w"> </span><span class="ow">::</span><span class="w"> </span><span class="p">[</span><span class="kt">Double</span><span class="p">]</span><span class="w"> </span><span class="ow">-&gt;</span><span class="w"> </span><span class="p">[</span><span class="kt">Double</span><span class="p">]</span>
+<a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a><span class="nf">quadrados</span><span class="w"> </span><span class="p">(</span><span class="n">x</span><span class="kt">:</span><span class="n">xs</span><span class="p">)</span><span class="w"> </span><span class="ow">=</span><span class="w"> </span><span class="n">x</span><span class="o">*</span><span class="n">x</span><span class="w"> </span><span class="kt">:</span><span class="w"> </span><span class="n">quadrados</span><span class="w"> </span><span class="n">xs</span>
+<a id="__codelineno-13-3" name="__codelineno-13-3" href="#__codelineno-13-3"></a><span class="nf">quadrados</span><span class="w"> </span><span class="kt">[]</span><span class="w">     </span><span class="ow">=</span><span class="w"> </span><span class="kt">[]</span>
+</code></pre></div>
+<p>Agora um segundo "loop": converter cada letra de uma string para maiúscula:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a><span class="kr">import</span><span class="w"> </span><span class="nn">Data.Char</span><span class="w"> </span><span class="p">(</span><span class="nf">toUpper</span><span class="p">)</span>
+<a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a>
+<a id="__codelineno-14-3" name="__codelineno-14-3" href="#__codelineno-14-3"></a><span class="nf">maiusculas</span><span class="w"> </span><span class="ow">::</span><span class="w"> </span><span class="kt">String</span><span class="w"> </span><span class="ow">-&gt;</span><span class="w"> </span><span class="kt">String</span>
+<a id="__codelineno-14-4" name="__codelineno-14-4" href="#__codelineno-14-4"></a><span class="nf">maiusculas</span><span class="w"> </span><span class="p">(</span><span class="n">x</span><span class="kt">:</span><span class="n">xs</span><span class="p">)</span><span class="w"> </span><span class="ow">=</span><span class="w"> </span><span class="n">toUpper</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="kt">:</span><span class="w"> </span><span class="n">maiusculas</span><span class="w"> </span><span class="n">xs</span>
+<a id="__codelineno-14-5" name="__codelineno-14-5" href="#__codelineno-14-5"></a><span class="nf">maiusculas</span><span class="w"> </span><span class="kt">[]</span><span class="w">     </span><span class="ow">=</span><span class="w"> </span><span class="kt">[]</span>
+</code></pre></div>
+<p>Observe que as duas funções têm <strong>exatamente a mesma estrutura</strong> — só muda a operação aplicada à cabeça (<code>x*x</code> vs. <code>toUpper x</code>). Quando detectamos um idioma repetido, o passo natural em Haskell é abstraí-lo: extraímos a operação como parâmetro, e o que sobra é o <code>map</code>:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a><span class="nf">map</span><span class="w"> </span><span class="ow">::</span><span class="w"> </span><span class="p">(</span><span class="n">a</span><span class="w"> </span><span class="ow">-&gt;</span><span class="w"> </span><span class="n">b</span><span class="p">)</span><span class="w"> </span><span class="ow">-&gt;</span><span class="w"> </span><span class="p">[</span><span class="n">a</span><span class="p">]</span><span class="w"> </span><span class="ow">-&gt;</span><span class="w"> </span><span class="p">[</span><span class="n">b</span><span class="p">]</span>
+<a id="__codelineno-15-2" name="__codelineno-15-2" href="#__codelineno-15-2"></a><span class="nf">map</span><span class="w"> </span><span class="kr">_</span><span class="w"> </span><span class="kt">[]</span><span class="w">     </span><span class="ow">=</span><span class="w"> </span><span class="kt">[]</span>
+<a id="__codelineno-15-3" name="__codelineno-15-3" href="#__codelineno-15-3"></a><span class="nf">map</span><span class="w"> </span><span class="n">f</span><span class="w"> </span><span class="p">(</span><span class="n">x</span><span class="kt">:</span><span class="n">xs</span><span class="p">)</span><span class="w"> </span><span class="ow">=</span><span class="w"> </span><span class="n">f</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="kt">:</span><span class="w"> </span><span class="n">map</span><span class="w"> </span><span class="n">f</span><span class="w"> </span><span class="n">xs</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a><span class="nf">quadrados2</span><span class="w">  </span><span class="ow">=</span><span class="w"> </span><span class="n">map</span><span class="w"> </span><span class="p">(</span><span class="nf">\</span><span class="n">x</span><span class="w"> </span><span class="ow">-&gt;</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">x</span><span class="p">)</span>
+<a id="__codelineno-16-2" name="__codelineno-16-2" href="#__codelineno-16-2"></a><span class="nf">maiusculas2</span><span class="w"> </span><span class="ow">=</span><span class="w"> </span><span class="n">map</span><span class="w"> </span><span class="n">toUpper</span>
+<a id="__codelineno-16-3" name="__codelineno-16-3" href="#__codelineno-16-3"></a>
+<a id="__codelineno-16-4" name="__codelineno-16-4" href="#__codelineno-16-4"></a><span class="kt">Prelude</span><span class="o">&gt;</span><span class="w"> </span><span class="n">map</span><span class="w"> </span><span class="p">(</span><span class="o">+</span><span class="mi">10</span><span class="p">)</span><span class="w"> </span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">]</span>
+<a id="__codelineno-16-5" name="__codelineno-16-5" href="#__codelineno-16-5"></a><span class="p">[</span><span class="mi">11</span><span class="p">,</span><span class="w"> </span><span class="mi">12</span><span class="p">,</span><span class="w"> </span><span class="mi">13</span><span class="p">]</span>
+</code></pre></div>
+<h3 id="2-filter-selecionando-elementos">2. <code>filter</code>: Selecionando Elementos<a class="headerlink" href="#2-filter-selecionando-elementos" title="Permanent link">&para;</a></h3>
+<p>O segundo padrão de loop é verificar quais elementos satisfazem algum critério. Escrito com recursão explícita e guardas:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a><span class="nf">somenteImpares</span><span class="w"> </span><span class="ow">::</span><span class="w"> </span><span class="p">[</span><span class="kt">Int</span><span class="p">]</span><span class="w"> </span><span class="ow">-&gt;</span><span class="w"> </span><span class="p">[</span><span class="kt">Int</span><span class="p">]</span>
+<a id="__codelineno-17-2" name="__codelineno-17-2" href="#__codelineno-17-2"></a><span class="nf">somenteImpares</span><span class="w"> </span><span class="p">(</span><span class="n">x</span><span class="kt">:</span><span class="n">xs</span><span class="p">)</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">odd</span><span class="w"> </span><span class="n">x</span><span class="w">     </span><span class="ow">=</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="kt">:</span><span class="w"> </span><span class="n">somenteImpares</span><span class="w"> </span><span class="n">xs</span>
+<a id="__codelineno-17-3" name="__codelineno-17-3" href="#__codelineno-17-3"></a><span class="w">                      </span><span class="o">|</span><span class="w"> </span><span class="n">otherwise</span><span class="w"> </span><span class="ow">=</span><span class="w"> </span><span class="n">somenteImpares</span><span class="w"> </span><span class="n">xs</span>
+<a id="__codelineno-17-4" name="__codelineno-17-4" href="#__codelineno-17-4"></a><span class="nf">somenteImpares</span><span class="w"> </span><span class="kr">_</span><span class="w">                  </span><span class="ow">=</span><span class="w"> </span><span class="kt">[]</span>
+</code></pre></div>
+<p>Novamente, o padrão é tão comum que o Prelude o abstrai — passando o <em>predicado</em> como parâmetro, obtemos o <code>filter</code>:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a><span class="nf">filter</span><span class="w"> </span><span class="ow">::</span><span class="w"> </span><span class="p">(</span><span class="n">a</span><span class="w"> </span><span class="ow">-&gt;</span><span class="w"> </span><span class="kt">Bool</span><span class="p">)</span><span class="w"> </span><span class="ow">-&gt;</span><span class="w"> </span><span class="p">[</span><span class="n">a</span><span class="p">]</span><span class="w"> </span><span class="ow">-&gt;</span><span class="w"> </span><span class="p">[</span><span class="n">a</span><span class="p">]</span>
+<a id="__codelineno-18-2" name="__codelineno-18-2" href="#__codelineno-18-2"></a><span class="nf">filter</span><span class="w"> </span><span class="kr">_</span><span class="w"> </span><span class="kt">[]</span><span class="w">     </span><span class="ow">=</span><span class="w"> </span><span class="kt">[]</span>
+<a id="__codelineno-18-3" name="__codelineno-18-3" href="#__codelineno-18-3"></a><span class="nf">filter</span><span class="w"> </span><span class="n">p</span><span class="w"> </span><span class="p">(</span><span class="n">x</span><span class="kt">:</span><span class="n">xs</span><span class="p">)</span>
+<a id="__codelineno-18-4" name="__codelineno-18-4" href="#__codelineno-18-4"></a><span class="w">    </span><span class="o">|</span><span class="w"> </span><span class="n">p</span><span class="w"> </span><span class="n">x</span><span class="w">       </span><span class="ow">=</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="kt">:</span><span class="w"> </span><span class="n">filter</span><span class="w"> </span><span class="n">p</span><span class="w"> </span><span class="n">xs</span>
+<a id="__codelineno-18-5" name="__codelineno-18-5" href="#__codelineno-18-5"></a><span class="w">    </span><span class="o">|</span><span class="w"> </span><span class="n">otherwise</span><span class="w"> </span><span class="ow">=</span><span class="w"> </span><span class="n">filter</span><span class="w"> </span><span class="n">p</span><span class="w"> </span><span class="n">xs</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a><span class="kt">Prelude</span><span class="o">&gt;</span><span class="w"> </span><span class="n">filter</span><span class="w"> </span><span class="n">even</span><span class="w"> </span><span class="p">[</span><span class="mi">1</span><span class="o">..</span><span class="mi">6</span><span class="p">]</span>
+<a id="__codelineno-19-2" name="__codelineno-19-2" href="#__codelineno-19-2"></a><span class="p">[</span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w"> </span><span class="mi">6</span><span class="p">]</span>
+</code></pre></div>
+<h3 id="3-foldr-e-foldl-acumulando-um-resultado">3. <code>foldr</code> e <code>foldl</code>: Acumulando um Resultado<a class="headerlink" href="#3-foldr-e-foldl-acumulando-um-resultado" title="Permanent link">&para;</a></h3>
+<p>O terceiro padrão é <strong>reduzir</strong> a coleção a um único valor. Com recursão de cauda e acumulador (o "loop com variável acumuladora" do capítulo anterior):</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-20-1" name="__codelineno-20-1" href="#__codelineno-20-1"></a><span class="nf">minhaSoma</span><span class="w"> </span><span class="ow">::</span><span class="w"> </span><span class="p">[</span><span class="kt">Int</span><span class="p">]</span><span class="w"> </span><span class="ow">-&gt;</span><span class="w"> </span><span class="kt">Int</span>
+<a id="__codelineno-20-2" name="__codelineno-20-2" href="#__codelineno-20-2"></a><span class="nf">minhaSoma</span><span class="w"> </span><span class="n">xs</span><span class="w"> </span><span class="ow">=</span><span class="w"> </span><span class="n">auxiliar</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="n">xs</span>
+<a id="__codelineno-20-3" name="__codelineno-20-3" href="#__codelineno-20-3"></a><span class="w">    </span><span class="kr">where</span><span class="w"> </span><span class="n">auxiliar</span><span class="w"> </span><span class="n">acc</span><span class="w"> </span><span class="p">(</span><span class="n">x</span><span class="kt">:</span><span class="n">xs</span><span class="p">)</span><span class="w"> </span><span class="ow">=</span><span class="w"> </span><span class="n">auxiliar</span><span class="w"> </span><span class="p">(</span><span class="n">acc</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">x</span><span class="p">)</span><span class="w"> </span><span class="n">xs</span>
+<a id="__codelineno-20-4" name="__codelineno-20-4" href="#__codelineno-20-4"></a><span class="w">          </span><span class="n">auxiliar</span><span class="w"> </span><span class="n">acc</span><span class="w"> </span><span class="kr">_</span><span class="w">      </span><span class="ow">=</span><span class="w"> </span><span class="n">acc</span>
+</code></pre></div>
+<p>Podemos descrever esse comportamento genericamente: <em>"faça algo com cada elemento, atualizando um acumulador, e retorne o acumulador ao final"</em>. Essa abstração é a família <strong><code>fold</code></strong> (o <em>reduce</em> de outras linguagens), que recebe uma função de passo, um valor inicial e a lista. Existem duas variantes, definidas assim:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-21-1" name="__codelineno-21-1" href="#__codelineno-21-1"></a><span class="nf">foldl</span><span class="w"> </span><span class="ow">::</span><span class="w"> </span><span class="p">(</span><span class="n">a</span><span class="w"> </span><span class="ow">-&gt;</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="ow">-&gt;</span><span class="w"> </span><span class="n">a</span><span class="p">)</span><span class="w"> </span><span class="ow">-&gt;</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="ow">-&gt;</span><span class="w"> </span><span class="p">[</span><span class="n">b</span><span class="p">]</span><span class="w"> </span><span class="ow">-&gt;</span><span class="w"> </span><span class="n">a</span>
+<a id="__codelineno-21-2" name="__codelineno-21-2" href="#__codelineno-21-2"></a><span class="nf">foldl</span><span class="w"> </span><span class="n">passo</span><span class="w"> </span><span class="n">acc</span><span class="w"> </span><span class="p">(</span><span class="n">x</span><span class="kt">:</span><span class="n">xs</span><span class="p">)</span><span class="w"> </span><span class="ow">=</span><span class="w"> </span><span class="n">foldl</span><span class="w"> </span><span class="n">passo</span><span class="w"> </span><span class="p">(</span><span class="n">passo</span><span class="w"> </span><span class="n">acc</span><span class="w"> </span><span class="n">x</span><span class="p">)</span><span class="w"> </span><span class="n">xs</span>
+<a id="__codelineno-21-3" name="__codelineno-21-3" href="#__codelineno-21-3"></a><span class="nf">foldl</span><span class="w"> </span><span class="kr">_</span><span class="w">     </span><span class="n">acc</span><span class="w"> </span><span class="kt">[]</span><span class="w">     </span><span class="ow">=</span><span class="w"> </span><span class="n">acc</span>
+<a id="__codelineno-21-4" name="__codelineno-21-4" href="#__codelineno-21-4"></a>
+<a id="__codelineno-21-5" name="__codelineno-21-5" href="#__codelineno-21-5"></a><span class="nf">foldr</span><span class="w"> </span><span class="ow">::</span><span class="w"> </span><span class="p">(</span><span class="n">a</span><span class="w"> </span><span class="ow">-&gt;</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="ow">-&gt;</span><span class="w"> </span><span class="n">b</span><span class="p">)</span><span class="w"> </span><span class="ow">-&gt;</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="ow">-&gt;</span><span class="w"> </span><span class="p">[</span><span class="n">a</span><span class="p">]</span><span class="w"> </span><span class="ow">-&gt;</span><span class="w"> </span><span class="n">b</span>
+<a id="__codelineno-21-6" name="__codelineno-21-6" href="#__codelineno-21-6"></a><span class="nf">foldr</span><span class="w"> </span><span class="n">passo</span><span class="w"> </span><span class="n">ini</span><span class="w"> </span><span class="p">(</span><span class="n">x</span><span class="kt">:</span><span class="n">xs</span><span class="p">)</span><span class="w"> </span><span class="ow">=</span><span class="w"> </span><span class="n">passo</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="p">(</span><span class="n">foldr</span><span class="w"> </span><span class="n">passo</span><span class="w"> </span><span class="n">ini</span><span class="w"> </span><span class="n">xs</span><span class="p">)</span>
+<a id="__codelineno-21-7" name="__codelineno-21-7" href="#__codelineno-21-7"></a><span class="nf">foldr</span><span class="w"> </span><span class="kr">_</span><span class="w">     </span><span class="n">ini</span><span class="w"> </span><span class="kt">[]</span><span class="w">     </span><span class="ow">=</span><span class="w"> </span><span class="n">ini</span>
+</code></pre></div>
+<p>Com <code>foldl</code>, nossa soma vira uma linha — restam apenas as duas decisões que importam: o valor inicial do acumulador e como atualizá-lo:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-22-1" name="__codelineno-22-1" href="#__codelineno-22-1"></a><span class="nf">somaBonita</span><span class="w"> </span><span class="ow">::</span><span class="w"> </span><span class="p">[</span><span class="kt">Integer</span><span class="p">]</span><span class="w"> </span><span class="ow">-&gt;</span><span class="w"> </span><span class="kt">Integer</span>
+<a id="__codelineno-22-2" name="__codelineno-22-2" href="#__codelineno-22-2"></a><span class="nf">somaBonita</span><span class="w"> </span><span class="n">xs</span><span class="w"> </span><span class="ow">=</span><span class="w"> </span><span class="n">foldl</span><span class="w"> </span><span class="p">(</span><span class="o">+</span><span class="p">)</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="n">xs</span>
+</code></pre></div>
+<p>A diferença entre as variantes está na direção de associação:</p>
+<ul>
+<li><strong><code>foldr</code> (Fold Right)</strong>: Associa os elementos da direita para a esquerda. É útil para gerar listas e trabalhar com listas infinitas devido à avaliação preguiçosa.</li>
+<li><strong><code>foldl</code> (Fold Left)</strong>: Associa da esquerda para a direita, consumindo a lista da cabeça para o fim.</li>
+</ul>
+<p>Para entender a diferença de associação, vamos expandir manualmente cada avaliação:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-23-1" name="__codelineno-23-1" href="#__codelineno-23-1"></a><span class="nf">foldl</span><span class="w"> </span><span class="p">(</span><span class="o">+</span><span class="p">)</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="p">(</span><span class="mi">1</span><span class="kt">:</span><span class="mi">2</span><span class="kt">:</span><span class="mi">3</span><span class="kt">:[]</span><span class="p">)</span>
+<a id="__codelineno-23-2" name="__codelineno-23-2" href="#__codelineno-23-2"></a><span class="w">   </span><span class="o">==</span><span class="w"> </span><span class="n">foldl</span><span class="w"> </span><span class="p">(</span><span class="o">+</span><span class="p">)</span><span class="w"> </span><span class="p">(</span><span class="mi">0</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span><span class="w">             </span><span class="p">(</span><span class="mi">2</span><span class="kt">:</span><span class="mi">3</span><span class="kt">:[]</span><span class="p">)</span>
+<a id="__codelineno-23-3" name="__codelineno-23-3" href="#__codelineno-23-3"></a><span class="w">   </span><span class="o">==</span><span class="w"> </span><span class="n">foldl</span><span class="w"> </span><span class="p">(</span><span class="o">+</span><span class="p">)</span><span class="w"> </span><span class="p">((</span><span class="mi">0</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">2</span><span class="p">)</span><span class="w">       </span><span class="p">(</span><span class="mi">3</span><span class="kt">:[]</span><span class="p">)</span>
+<a id="__codelineno-23-4" name="__codelineno-23-4" href="#__codelineno-23-4"></a><span class="w">   </span><span class="o">==</span><span class="w"> </span><span class="n">foldl</span><span class="w"> </span><span class="p">(</span><span class="o">+</span><span class="p">)</span><span class="w"> </span><span class="p">(((</span><span class="mi">0</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">2</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">3</span><span class="p">)</span><span class="w"> </span><span class="kt">[]</span>
+<a id="__codelineno-23-5" name="__codelineno-23-5" href="#__codelineno-23-5"></a><span class="w">   </span><span class="o">==</span><span class="w">           </span><span class="p">(((</span><span class="mi">0</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">2</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">3</span><span class="p">)</span><span class="w">          </span><span class="c1">-- agrupa à esquerda</span>
+<a id="__codelineno-23-6" name="__codelineno-23-6" href="#__codelineno-23-6"></a>
+<a id="__codelineno-23-7" name="__codelineno-23-7" href="#__codelineno-23-7"></a><span class="nf">foldr</span><span class="w"> </span><span class="p">(</span><span class="o">+</span><span class="p">)</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="p">(</span><span class="mi">1</span><span class="kt">:</span><span class="mi">2</span><span class="kt">:</span><span class="mi">3</span><span class="kt">:[]</span><span class="p">)</span>
+<a id="__codelineno-23-8" name="__codelineno-23-8" href="#__codelineno-23-8"></a><span class="w">   </span><span class="o">==</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="p">(</span><span class="n">foldr</span><span class="w"> </span><span class="p">(</span><span class="o">+</span><span class="p">)</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="p">(</span><span class="mi">2</span><span class="kt">:</span><span class="mi">3</span><span class="kt">:[]</span><span class="p">))</span>
+<a id="__codelineno-23-9" name="__codelineno-23-9" href="#__codelineno-23-9"></a><span class="w">   </span><span class="o">==</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="p">(</span><span class="mi">2</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="p">(</span><span class="n">foldr</span><span class="w"> </span><span class="p">(</span><span class="o">+</span><span class="p">)</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="p">(</span><span class="mi">3</span><span class="kt">:[]</span><span class="p">)))</span>
+<a id="__codelineno-23-10" name="__codelineno-23-10" href="#__codelineno-23-10"></a><span class="w">   </span><span class="o">==</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="p">(</span><span class="mi">2</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="p">(</span><span class="mi">3</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="p">(</span><span class="n">foldr</span><span class="w"> </span><span class="p">(</span><span class="o">+</span><span class="p">)</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="kt">[]</span><span class="p">)))</span>
+<a id="__codelineno-23-11" name="__codelineno-23-11" href="#__codelineno-23-11"></a><span class="w">   </span><span class="o">==</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="p">(</span><span class="mi">2</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="p">(</span><span class="mi">3</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">0</span><span class="p">))</span><span class="w">                      </span><span class="c1">-- agrupa à direita</span>
+</code></pre></div>
+<p>Há uma explicação intuitiva bonita de como <code>foldr</code> funciona: ele <strong>substitui a lista vazia pelo valor inicial, e cada construtor <code>(:)</code> por uma aplicação da função</strong>:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-24-1" name="__codelineno-24-1" href="#__codelineno-24-1"></a><span class="mi">1</span><span class="w"> </span><span class="kt">:</span><span class="w"> </span><span class="p">(</span><span class="mi">2</span><span class="w"> </span><span class="kt">:</span><span class="w"> </span><span class="p">(</span><span class="mi">3</span><span class="w"> </span><span class="kt">:</span><span class="w"> </span><span class="kt">[]</span><span class="p">))</span>
+<a id="__codelineno-24-2" name="__codelineno-24-2" href="#__codelineno-24-2"></a><span class="mi">1</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="p">(</span><span class="mi">2</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="p">(</span><span class="mi">3</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="p">))</span>
+</code></pre></div>
+<p>Isso explica por que muitas funções de lista são expressáveis com <code>foldr</code> — inclusive <code>map</code> e <code>filter</code>:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-25-1" name="__codelineno-25-1" href="#__codelineno-25-1"></a><span class="nf">meuMap</span><span class="w"> </span><span class="ow">::</span><span class="w"> </span><span class="p">(</span><span class="n">a</span><span class="w"> </span><span class="ow">-&gt;</span><span class="w"> </span><span class="n">b</span><span class="p">)</span><span class="w"> </span><span class="ow">-&gt;</span><span class="w"> </span><span class="p">[</span><span class="n">a</span><span class="p">]</span><span class="w"> </span><span class="ow">-&gt;</span><span class="w"> </span><span class="p">[</span><span class="n">b</span><span class="p">]</span>
+<a id="__codelineno-25-2" name="__codelineno-25-2" href="#__codelineno-25-2"></a><span class="nf">meuMap</span><span class="w"> </span><span class="n">f</span><span class="w"> </span><span class="ow">=</span><span class="w"> </span><span class="n">foldr</span><span class="w"> </span><span class="p">(</span><span class="nf">\</span><span class="n">x</span><span class="w"> </span><span class="n">ys</span><span class="w"> </span><span class="ow">-&gt;</span><span class="w"> </span><span class="n">f</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="kt">:</span><span class="w"> </span><span class="n">ys</span><span class="p">)</span><span class="w"> </span><span class="kt">[]</span>
+<a id="__codelineno-25-3" name="__codelineno-25-3" href="#__codelineno-25-3"></a>
+<a id="__codelineno-25-4" name="__codelineno-25-4" href="#__codelineno-25-4"></a><span class="nf">meuFilter</span><span class="w"> </span><span class="ow">::</span><span class="w"> </span><span class="p">(</span><span class="n">a</span><span class="w"> </span><span class="ow">-&gt;</span><span class="w"> </span><span class="kt">Bool</span><span class="p">)</span><span class="w"> </span><span class="ow">-&gt;</span><span class="w"> </span><span class="p">[</span><span class="n">a</span><span class="p">]</span><span class="w"> </span><span class="ow">-&gt;</span><span class="w"> </span><span class="p">[</span><span class="n">a</span><span class="p">]</span>
+<a id="__codelineno-25-5" name="__codelineno-25-5" href="#__codelineno-25-5"></a><span class="nf">meuFilter</span><span class="w"> </span><span class="n">p</span><span class="w"> </span><span class="ow">=</span><span class="w"> </span><span class="n">foldr</span><span class="w"> </span><span class="n">passo</span><span class="w"> </span><span class="kt">[]</span>
+<a id="__codelineno-25-6" name="__codelineno-25-6" href="#__codelineno-25-6"></a><span class="w">  </span><span class="kr">where</span><span class="w"> </span><span class="n">passo</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="n">ys</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">p</span><span class="w"> </span><span class="n">x</span><span class="w">       </span><span class="ow">=</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="kt">:</span><span class="w"> </span><span class="n">ys</span>
+<a id="__codelineno-25-7" name="__codelineno-25-7" href="#__codelineno-25-7"></a><span class="w">                   </span><span class="o">|</span><span class="w"> </span><span class="n">otherwise</span><span class="w"> </span><span class="ow">=</span><span class="w"> </span><span class="n">ys</span>
+</code></pre></div>
+<p>E até a concatenação de listas <code>(++)</code>: anexar <code>ys</code> ao fim de <code>xs</code> é simplesmente <em>substituir o <code>[]</code> final de <code>xs</code> por <code>ys</code></em>:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-26-1" name="__codelineno-26-1" href="#__codelineno-26-1"></a><span class="nf">anexa</span><span class="w"> </span><span class="ow">::</span><span class="w"> </span><span class="p">[</span><span class="n">a</span><span class="p">]</span><span class="w"> </span><span class="ow">-&gt;</span><span class="w"> </span><span class="p">[</span><span class="n">a</span><span class="p">]</span><span class="w"> </span><span class="ow">-&gt;</span><span class="w"> </span><span class="p">[</span><span class="n">a</span><span class="p">]</span>
+<a id="__codelineno-26-2" name="__codelineno-26-2" href="#__codelineno-26-2"></a><span class="nf">anexa</span><span class="w"> </span><span class="n">xs</span><span class="w"> </span><span class="n">ys</span><span class="w"> </span><span class="ow">=</span><span class="w"> </span><span class="n">foldr</span><span class="w"> </span><span class="p">(</span><span class="kt">:</span><span class="p">)</span><span class="w"> </span><span class="n">ys</span><span class="w"> </span><span class="n">xs</span>
+</code></pre></div>
+<p>A classe de funções expressáveis com <code>foldr</code> é chamada de <strong>recursiva primitiva</strong> — e um número surpreendente de funções de manipulação de listas se encaixa nela (como desafio avançado: até <code>foldl</code> pode ser escrita usando <code>foldr</code>!).</p>
+<h3 id="foldl-avaliacao-preguicosa-e-space-leaks">⚠️ <code>foldl</code>, Avaliação Preguiçosa e <em>Space Leaks</em><a class="headerlink" href="#foldl-avaliacao-preguicosa-e-space-leaks" title="Permanent link">&para;</a></h3>
+<p>Por causa da avaliação preguiçosa, <code>foldl</code> não calcula as somas parciais imediatamente — ele acumula uma expressão adiada (<em>thunk</em>) cada vez maior: <code>(((0+1)+2)+3)...</code>. Para listas grandes, isso consome memória linear e pode estourar a pilha:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-27-1" name="__codelineno-27-1" href="#__codelineno-27-1"></a><span class="kt">Prelude</span><span class="o">&gt;</span><span class="w"> </span><span class="n">foldl</span><span class="w"> </span><span class="p">(</span><span class="o">+</span><span class="p">)</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="p">[</span><span class="mi">1</span><span class="o">..</span><span class="mi">1000000</span><span class="p">]</span>
+<a id="__codelineno-27-2" name="__codelineno-27-2" href="#__codelineno-27-2"></a><span class="o">***</span><span class="w"> </span><span class="kt">Exception:</span><span class="w"> </span><span class="n">stack</span><span class="w"> </span><span class="n">overflow</span>
+</code></pre></div>
+<p>Esse <em>thunking</em> invisível é chamado de <strong>space leak</strong> (vazamento de espaço) — um obstáculo clássico para novos programadores Haskell. A solução é simples: o módulo <code>Data.List</code> define <strong><code>foldl'</code></strong>, uma versão estrita que avalia o acumulador a cada passo:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-28-1" name="__codelineno-28-1" href="#__codelineno-28-1"></a><span class="kt">Prelude</span><span class="o">&gt;</span><span class="w"> </span><span class="kr">import</span><span class="w"> </span><span class="nn">Data.List</span>
+<a id="__codelineno-28-2" name="__codelineno-28-2" href="#__codelineno-28-2"></a><span class="kt">Prelude</span><span class="w"> </span><span class="kt">Data</span><span class="o">.</span><span class="kt">List</span><span class="o">&gt;</span><span class="w"> </span><span class="n">foldl&#39;</span><span class="w"> </span><span class="p">(</span><span class="o">+</span><span class="p">)</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="p">[</span><span class="mi">1</span><span class="o">..</span><span class="mi">1000000</span><span class="p">]</span>
+<a id="__codelineno-28-3" name="__codelineno-28-3" href="#__codelineno-28-3"></a><span class="mi">500000500000</span>
+</code></pre></div>
+<p>Em programas reais, prefira sempre <code>foldl'</code> a <code>foldl</code>.</p>
+<h4 id="como-o-foldl-funciona-por-baixo-a-funcao-seq">Como o <code>foldl'</code> Funciona Por Baixo: a Função <code>seq</code><a class="headerlink" href="#como-o-foldl-funciona-por-baixo-a-funcao-seq" title="Permanent link">&para;</a></h4>
+<p>O <code>foldl'</code> não é mágica — ele usa uma função chamada <strong><code>seq</code></strong> para <em>forçar</em> a avaliação do acumulador a cada passo, em vez de deixá-lo como uma promessa (thunk):</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-29-1" name="__codelineno-29-1" href="#__codelineno-29-1"></a><span class="nf">seq</span><span class="w"> </span><span class="ow">::</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="ow">-&gt;</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="ow">-&gt;</span><span class="w"> </span><span class="n">b</span>
+</code></pre></div>
+<p><code>seq</code> avalia seu <strong>primeiro</strong> argumento (só o suficiente para saber que não é um erro nem um loop infinito — a chamada <em>avaliação em forma normal fraca</em>), descarta o resultado, e retorna o <strong>segundo</strong> argumento. Com isso, podemos definir nosso próprio <code>foldl'</code>:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-30-1" name="__codelineno-30-1" href="#__codelineno-30-1"></a><span class="nf">meuFoldl&#39;</span><span class="w"> </span><span class="ow">::</span><span class="w"> </span><span class="p">(</span><span class="n">a</span><span class="w"> </span><span class="ow">-&gt;</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="ow">-&gt;</span><span class="w"> </span><span class="n">a</span><span class="p">)</span><span class="w"> </span><span class="ow">-&gt;</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="ow">-&gt;</span><span class="w"> </span><span class="p">[</span><span class="n">b</span><span class="p">]</span><span class="w"> </span><span class="ow">-&gt;</span><span class="w"> </span><span class="n">a</span>
+<a id="__codelineno-30-2" name="__codelineno-30-2" href="#__codelineno-30-2"></a><span class="nf">meuFoldl&#39;</span><span class="w"> </span><span class="kr">_</span><span class="w">    </span><span class="n">acc</span><span class="w"> </span><span class="kt">[]</span><span class="w">     </span><span class="ow">=</span><span class="w"> </span><span class="n">acc</span>
+<a id="__codelineno-30-3" name="__codelineno-30-3" href="#__codelineno-30-3"></a><span class="nf">meuFoldl&#39;</span><span class="w"> </span><span class="n">step</span><span class="w"> </span><span class="n">acc</span><span class="w"> </span><span class="p">(</span><span class="n">x</span><span class="kt">:</span><span class="n">xs</span><span class="p">)</span><span class="w"> </span><span class="ow">=</span>
+<a id="__codelineno-30-4" name="__codelineno-30-4" href="#__codelineno-30-4"></a><span class="w">    </span><span class="kr">let</span><span class="w"> </span><span class="n">novo</span><span class="w"> </span><span class="ow">=</span><span class="w"> </span><span class="n">step</span><span class="w"> </span><span class="n">acc</span><span class="w"> </span><span class="n">x</span>
+<a id="__codelineno-30-5" name="__codelineno-30-5" href="#__codelineno-30-5"></a><span class="w">    </span><span class="kr">in</span><span class="w">  </span><span class="n">novo</span><span class="w"> </span><span class="p">`</span><span class="n">seq</span><span class="p">`</span><span class="w"> </span><span class="n">meuFoldl&#39;</span><span class="w"> </span><span class="n">step</span><span class="w"> </span><span class="n">novo</span><span class="w"> </span><span class="n">xs</span>
+</code></pre></div>
+<p>A expressão <code>novo</code>seq<code>meuFoldl' step novo xs</code> força <code>novo</code> a ser calculado <em>imediatamente</em> — antes da chamada recursiva — impedindo que thunks se acumulem. Esse é o "truque" por trás de toda função "estrita" em Haskell: usar <code>seq</code> (ou a anotação <code>!</code> de <em>bang patterns</em>) para dizer ao compilador "calcule isso agora, não depois".</p>
+<h3 id="por-que-usar-map-filter-e-fold-em-vez-de-recursao-explicita">Por que usar <code>map</code>, <code>filter</code> e <code>fold</code> em vez de recursão explícita?<a class="headerlink" href="#por-que-usar-map-filter-e-fold-em-vez-de-recursao-explicita" title="Permanent link">&para;</a></h3>
+<p>Porque essas funções são onipresentes e têm comportamento regular e previsível: um leitor entende <code>foldr (+) 0</code> de imediato, enquanto uma recursão explícita exige leitura cuidadosa para descobrir o que está acontecendo. Detectar um idioma repetido e abstraí-lo em uma função de alta ordem — escrevendo menos código — é um aspecto central do estilo Haskell.</p>
+<hr />
+<h2 id="5-composicao-de-funcoes-e-point-free-style">5. Composição de Funções e Point-Free Style<a class="headerlink" href="#5-composicao-de-funcoes-e-point-free-style" title="Permanent link">&para;</a></h2>
+<p>Lembra da função <code>sufixos</code> do capítulo de funções (as-patterns)? Ela faz quase o mesmo que a função <code>tails</code> de <code>Data.List</code> — só descarta o sufixo vazio final. Parece um desperdício reescrevê-la do zero, quando podemos <strong>reutilizar</strong> funções existentes: <code>tails</code> seguida de <code>init</code> (que remove o último elemento):</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-31-1" name="__codelineno-31-1" href="#__codelineno-31-1"></a><span class="nf">sufixos2</span><span class="w"> </span><span class="n">xs</span><span class="w"> </span><span class="ow">=</span><span class="w"> </span><span class="n">init</span><span class="w"> </span><span class="p">(</span><span class="n">tails</span><span class="w"> </span><span class="n">xs</span><span class="p">)</span>
+</code></pre></div>
+<p>Dando um passo atrás, vemos um padrão: <em>aplicar uma função e, em seguida, aplicar outra ao seu resultado</em>. Vamos transformar esse padrão em uma função:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-32-1" name="__codelineno-32-1" href="#__codelineno-32-1"></a><span class="nf">compor</span><span class="w"> </span><span class="ow">::</span><span class="w"> </span><span class="p">(</span><span class="n">b</span><span class="w"> </span><span class="ow">-&gt;</span><span class="w"> </span><span class="n">c</span><span class="p">)</span><span class="w"> </span><span class="ow">-&gt;</span><span class="w"> </span><span class="p">(</span><span class="n">a</span><span class="w"> </span><span class="ow">-&gt;</span><span class="w"> </span><span class="n">b</span><span class="p">)</span><span class="w"> </span><span class="ow">-&gt;</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="ow">-&gt;</span><span class="w"> </span><span class="n">c</span>
+<a id="__codelineno-32-2" name="__codelineno-32-2" href="#__codelineno-32-2"></a><span class="nf">compor</span><span class="w"> </span><span class="n">f</span><span class="w"> </span><span class="n">g</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="ow">=</span><span class="w"> </span><span class="n">f</span><span class="w"> </span><span class="p">(</span><span class="n">g</span><span class="w"> </span><span class="n">x</span><span class="p">)</span>
+<a id="__codelineno-32-3" name="__codelineno-32-3" href="#__codelineno-32-3"></a>
+<a id="__codelineno-32-4" name="__codelineno-32-4" href="#__codelineno-32-4"></a><span class="nf">sufixos3</span><span class="w"> </span><span class="n">xs</span><span class="w"> </span><span class="ow">=</span><span class="w"> </span><span class="n">compor</span><span class="w"> </span><span class="n">init</span><span class="w"> </span><span class="n">tails</span><span class="w"> </span><span class="n">xs</span>
+<a id="__codelineno-32-5" name="__codelineno-32-5" href="#__codelineno-32-5"></a><span class="nf">sufixos4</span><span class="w">    </span><span class="ow">=</span><span class="w"> </span><span class="n">compor</span><span class="w"> </span><span class="n">init</span><span class="w"> </span><span class="n">tails</span><span class="w">      </span><span class="c1">-- currying nos deixa omitir o xs</span>
+</code></pre></div>
+<p>Não precisamos escrever <code>compor</code> nós mesmos: "colar" funções é tão comum que o Prelude fornece o operador <strong><code>(.)</code></strong> — que corresponde à composição matemática <span class="arithmatex">\((f \circ g)(x) = f(g(x))\)</span>:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-33-1" name="__codelineno-33-1" href="#__codelineno-33-1"></a><span class="p">(</span><span class="o">.</span><span class="p">)</span><span class="w"> </span><span class="ow">::</span><span class="w"> </span><span class="p">(</span><span class="n">b</span><span class="w"> </span><span class="ow">-&gt;</span><span class="w"> </span><span class="n">c</span><span class="p">)</span><span class="w"> </span><span class="ow">-&gt;</span><span class="w"> </span><span class="p">(</span><span class="n">a</span><span class="w"> </span><span class="ow">-&gt;</span><span class="w"> </span><span class="n">b</span><span class="p">)</span><span class="w"> </span><span class="ow">-&gt;</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="ow">-&gt;</span><span class="w"> </span><span class="n">c</span>
+<a id="__codelineno-33-2" name="__codelineno-33-2" href="#__codelineno-33-2"></a><span class="nf">f</span><span class="w"> </span><span class="o">.</span><span class="w"> </span><span class="n">g</span><span class="w"> </span><span class="ow">=</span><span class="w"> </span><span class="nf">\</span><span class="n">x</span><span class="w"> </span><span class="ow">-&gt;</span><span class="w"> </span><span class="n">f</span><span class="w"> </span><span class="p">(</span><span class="n">g</span><span class="w"> </span><span class="n">x</span><span class="p">)</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-34-1" name="__codelineno-34-1" href="#__codelineno-34-1"></a><span class="nf">sufixos5</span><span class="w"> </span><span class="ow">=</span><span class="w"> </span><span class="n">init</span><span class="w"> </span><span class="o">.</span><span class="w"> </span><span class="n">tails</span>
+<a id="__codelineno-34-2" name="__codelineno-34-2" href="#__codelineno-34-2"></a>
+<a id="__codelineno-34-3" name="__codelineno-34-3" href="#__codelineno-34-3"></a><span class="c1">-- Função que dobra um número e depois soma 1:</span>
+<a id="__codelineno-34-4" name="__codelineno-34-4" href="#__codelineno-34-4"></a><span class="nf">dobroMaisUm</span><span class="w"> </span><span class="ow">::</span><span class="w"> </span><span class="kt">Int</span><span class="w"> </span><span class="ow">-&gt;</span><span class="w"> </span><span class="kt">Int</span>
+<a id="__codelineno-34-5" name="__codelineno-34-5" href="#__codelineno-34-5"></a><span class="nf">dobroMaisUm</span><span class="w"> </span><span class="ow">=</span><span class="w"> </span><span class="p">(</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="o">.</span><span class="w"> </span><span class="p">(</span><span class="o">*</span><span class="mi">2</span><span class="p">)</span>
+</code></pre></div>
+<p>O <code>(.)</code> não é sintaxe especial da linguagem — é um operador comum, que poderíamos ter definido nós mesmos.</p>
+<h3 id="pipelines-reais-de-composicao">Pipelines Reais de Composição<a class="headerlink" href="#pipelines-reais-de-composicao" title="Permanent link">&para;</a></h3>
+<p>Podemos encadear quantas funções quisermos, desde que o tipo de saída de cada uma case com o tipo de entrada da próxima. Um quebra-cabeça: contar quantas palavras de uma string começam com letra maiúscula.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-35-1" name="__codelineno-35-1" href="#__codelineno-35-1"></a><span class="kr">import</span><span class="w"> </span><span class="nn">Data.Char</span><span class="w"> </span><span class="p">(</span><span class="nf">isUpper</span><span class="p">)</span>
+<a id="__codelineno-35-2" name="__codelineno-35-2" href="#__codelineno-35-2"></a>
+<a id="__codelineno-35-3" name="__codelineno-35-3" href="#__codelineno-35-3"></a><span class="nf">capCount</span><span class="w"> </span><span class="ow">=</span><span class="w"> </span><span class="n">length</span><span class="w"> </span><span class="o">.</span><span class="w"> </span><span class="n">filter</span><span class="w"> </span><span class="p">(</span><span class="n">isUpper</span><span class="w"> </span><span class="o">.</span><span class="w"> </span><span class="n">head</span><span class="p">)</span><span class="w"> </span><span class="o">.</span><span class="w"> </span><span class="n">words</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-36-1" name="__codelineno-36-1" href="#__codelineno-36-1"></a><span class="kt">Prelude</span><span class="o">&gt;</span><span class="w"> </span><span class="n">capCount</span><span class="w"> </span><span class="s">&quot;Hello there, Mom!&quot;</span>
+<a id="__codelineno-36-2" name="__codelineno-36-2" href="#__codelineno-36-2"></a><span class="mi">2</span>
+</code></pre></div>
+<p>Para entender uma cadeia de composições, leia <strong>da direita para a esquerda</strong>, conferindo os tipos de cada estágio no GHCi:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-37-1" name="__codelineno-37-1" href="#__codelineno-37-1"></a><span class="kt">Prelude</span><span class="o">&gt;</span><span class="w"> </span><span class="kt">:</span><span class="kr">type</span><span class="w"> </span><span class="n">words</span>
+<a id="__codelineno-37-2" name="__codelineno-37-2" href="#__codelineno-37-2"></a><span class="nf">words</span><span class="w"> </span><span class="ow">::</span><span class="w"> </span><span class="kt">String</span><span class="w"> </span><span class="ow">-&gt;</span><span class="w"> </span><span class="p">[</span><span class="kt">String</span><span class="p">]</span>
+<a id="__codelineno-37-3" name="__codelineno-37-3" href="#__codelineno-37-3"></a><span class="kt">Prelude</span><span class="o">&gt;</span><span class="w"> </span><span class="kt">:</span><span class="kr">type</span><span class="w"> </span><span class="n">isUpper</span><span class="w"> </span><span class="o">.</span><span class="w"> </span><span class="n">head</span>
+<a id="__codelineno-37-4" name="__codelineno-37-4" href="#__codelineno-37-4"></a><span class="nf">isUpper</span><span class="w"> </span><span class="o">.</span><span class="w"> </span><span class="n">head</span><span class="w"> </span><span class="ow">::</span><span class="w"> </span><span class="p">[</span><span class="kt">Char</span><span class="p">]</span><span class="w"> </span><span class="ow">-&gt;</span><span class="w"> </span><span class="kt">Bool</span>
+<a id="__codelineno-37-5" name="__codelineno-37-5" href="#__codelineno-37-5"></a><span class="kt">Prelude</span><span class="o">&gt;</span><span class="w"> </span><span class="kt">:</span><span class="kr">type</span><span class="w"> </span><span class="n">filter</span><span class="w"> </span><span class="p">(</span><span class="n">isUpper</span><span class="w"> </span><span class="o">.</span><span class="w"> </span><span class="n">head</span><span class="p">)</span>
+<a id="__codelineno-37-6" name="__codelineno-37-6" href="#__codelineno-37-6"></a><span class="nf">filter</span><span class="w"> </span><span class="p">(</span><span class="n">isUpper</span><span class="w"> </span><span class="o">.</span><span class="w"> </span><span class="n">head</span><span class="p">)</span><span class="w"> </span><span class="ow">::</span><span class="w"> </span><span class="p">[[</span><span class="kt">Char</span><span class="p">]]</span><span class="w"> </span><span class="ow">-&gt;</span><span class="w"> </span><span class="p">[[</span><span class="kt">Char</span><span class="p">]]</span>
+</code></pre></div>
+<p><code>words</code> quebra o texto em palavras; <code>filter (isUpper . head)</code> mantém só as que começam com maiúscula; <code>length</code> conta o resultado.</p>
+<p>Um exemplo tirado de uma aplicação real: extrair nomes de macros (<code>DLT_EN10MB</code>, <code>DLT_AX25</code>...) de um arquivo de cabeçalho C cheio de linhas como <code>#define DLT_EN10MB 1 /* Ethernet */</code>:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-38-1" name="__codelineno-38-1" href="#__codelineno-38-1"></a><span class="kr">import</span><span class="w"> </span><span class="nn">Data.List</span><span class="w"> </span><span class="p">(</span><span class="nf">isPrefixOf</span><span class="p">)</span>
+<a id="__codelineno-38-2" name="__codelineno-38-2" href="#__codelineno-38-2"></a>
+<a id="__codelineno-38-3" name="__codelineno-38-3" href="#__codelineno-38-3"></a><span class="nf">macros</span><span class="w"> </span><span class="ow">::</span><span class="w"> </span><span class="kt">String</span><span class="w"> </span><span class="ow">-&gt;</span><span class="w"> </span><span class="p">[</span><span class="kt">String</span><span class="p">]</span>
+<a id="__codelineno-38-4" name="__codelineno-38-4" href="#__codelineno-38-4"></a><span class="nf">macros</span><span class="w"> </span><span class="ow">=</span><span class="w"> </span><span class="n">foldr</span><span class="w"> </span><span class="n">passo</span><span class="w"> </span><span class="kt">[]</span><span class="w"> </span><span class="o">.</span><span class="w"> </span><span class="n">lines</span>
+<a id="__codelineno-38-5" name="__codelineno-38-5" href="#__codelineno-38-5"></a><span class="w">  </span><span class="kr">where</span>
+<a id="__codelineno-38-6" name="__codelineno-38-6" href="#__codelineno-38-6"></a><span class="w">    </span><span class="n">passo</span><span class="w"> </span><span class="n">linha</span><span class="w"> </span><span class="n">acc</span>
+<a id="__codelineno-38-7" name="__codelineno-38-7" href="#__codelineno-38-7"></a><span class="w">      </span><span class="o">|</span><span class="w"> </span><span class="s">&quot;#define DLT_&quot;</span><span class="w"> </span><span class="p">`</span><span class="n">isPrefixOf</span><span class="p">`</span><span class="w"> </span><span class="n">linha</span><span class="w"> </span><span class="ow">=</span><span class="w"> </span><span class="n">segundaPalavra</span><span class="w"> </span><span class="n">linha</span><span class="w"> </span><span class="kt">:</span><span class="w"> </span><span class="n">acc</span>
+<a id="__codelineno-38-8" name="__codelineno-38-8" href="#__codelineno-38-8"></a><span class="w">      </span><span class="o">|</span><span class="w"> </span><span class="n">otherwise</span><span class="w">                         </span><span class="ow">=</span><span class="w"> </span><span class="n">acc</span>
+<a id="__codelineno-38-9" name="__codelineno-38-9" href="#__codelineno-38-9"></a><span class="w">    </span><span class="n">segundaPalavra</span><span class="w"> </span><span class="ow">=</span><span class="w"> </span><span class="n">head</span><span class="w"> </span><span class="o">.</span><span class="w"> </span><span class="n">tail</span><span class="w"> </span><span class="o">.</span><span class="w"> </span><span class="n">words</span>
+</code></pre></div>
+<p>Repare como o programa inteiro é a combinação das peças que estudamos: composição (<code>foldr passo [] . lines</code>), fold com guarda, seção com crases e o pipeline <code>head . tail . words</code>.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p><strong>Use <code>head</code> com sabedoria.</strong> <code>segundaPalavra</code> chama duas funções parciais (<code>head</code> e <code>tail</code>) — mas aqui podemos <em>provar</em> por inspeção que é seguro: o guarda garante que a linha contém pelo menos duas palavras (<code>"#define"</code> e a macro). Esse é o tipo de raciocínio necessário sempre que chamamos funções parciais; se alguém alterar o guarda, o código pode passar a explodir de forma sutil.</p>
+</div>
+<h3 id="estilo-point-free-livre-de-pontos">Estilo Point-Free (Livre de Pontos)<a class="headerlink" href="#estilo-point-free-livre-de-pontos" title="Permanent link">&para;</a></h3>
+<p>Note que em definições como <code>dobroMaisUm = (+1) . (*2)</code> e <code>capCount = length . filter (...) . words</code>, nós não declaramos o argumento da função. Apenas declaramos como as funções se combinam.</p>
+<p>Essa omissão do argumento de entrada é chamada de <strong>Point-Free Style</strong> e resulta em códigos muito limpos, focados puramente na combinação de funções e no fluxo dos dados.</p>
+<hr />
+<h2 id="6-dicas-para-escrever-codigo-legivel">6. Dicas para Escrever Código Legível<a class="headerlink" href="#6-dicas-para-escrever-codigo-legivel" title="Permanent link">&para;</a></h2>
+<p>Ao longo da unidade vimos três "níveis" de ferramentas para processar listas — e vale estabelecer uma hierarquia de preferência:</p>
+<ol>
+<li><strong>Funções de biblioteca compostas</strong> (<code>map</code>, <code>filter</code>, <code>take</code>, composições): cada uma faz <em>uma coisa só</em> e tem comportamento conhecido. O leitor foca na ideia do código, não na mecânica.</li>
+<li><strong>Folds</strong>: exigem um pouco mais de esforço para ler que uma composição de <code>map</code>/<code>filter</code>, mas se comportam de forma regular e previsível.</li>
+<li><strong>Recursão explícita (de cauda)</strong>: totalmente geral — e é esse o problema. Como um loop imperativo, pode estar fazendo <em>qualquer coisa</em>, e o leitor precisa examinar a definição inteira para descobrir o quê.</li>
+</ol>
+<p><strong>Regra prática</strong>: não use um fold se puder compor funções de biblioteca; prefira um fold a um loop recursivo explícito.</p>
+<p>Quanto às <strong>lambdas</strong>: elas interrompem o "fluxo" da leitura. Geralmente é tão fácil definir uma função local nomeada em um <code>let</code>/<code>where</code> — e o nome bem escolhido funciona como uma minúscula documentação local.</p>
+<hr />
+<h2 id="7-exercicios-de-fixacao">7. Exercícios de Fixação<a class="headerlink" href="#7-exercicios-de-fixacao" title="Permanent link">&para;</a></h2>
+<p>Adaptados do <em>Real World Haskell</em> (cap. 4):</p>
+<ol>
+<li>Reescreva a função <code>asInt</code> (do capítulo de listas) usando <code>foldl'</code>. Depois, estenda-a para tratar o sinal negativo: <code>asInt "-31337"</code> deve retornar <code>-31337</code>.</li>
+<li>A função <code>concat :: [[a]] -&gt; [a]</code> concatena uma lista de listas. Escreva sua própria versão usando <code>foldr</code>.</li>
+<li>Escreva sua própria versão recursiva de <code>takeWhile</code>; depois, reescreva-a usando <code>foldr</code>.</li>
+<li>Escreva <code>minhaQualquer :: (a -&gt; Bool) -&gt; [a] -&gt; Bool</code> (equivalente ao <code>any</code>) de duas formas: com recursão explícita e com fold.</li>
+<li>Usando composição e funções de biblioteca (sem recursão explícita), escreva uma função que recebe um texto e retorna a última palavra de cada linha.</li>
+<li><strong>(Desafio)</strong> Escreva <code>foldl</code> em termos de <code>foldr</code>. Aviso: não é trivial! Tenha à mão o GHCi (para descobrir o que a função <code>id</code> faz), lápis e papel.</li>
+</ol>
+<p>Com isso, encerramos a <strong>Unidade 1</strong>! Agora você domina as bases teóricas do paradigma funcional e a modelagem matemática básica no Haskell.</p>
+<hr />
+<blockquote>
+<p><strong>Nota de atribuição:</strong> partes deste capítulo adaptam material de <em>Real World Haskell</em>, de Bryan O'Sullivan, Don Stewart e John Goerzen (<a href="http://book.realworldhaskell.org/read/">book.realworldhaskell.org</a>), sob a licença <a href="http://creativecommons.org/licenses/by-nc/3.0/">Creative Commons Attribution-Noncommercial 3.0</a>.</p>
+</blockquote>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Voltar ao topo
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.top", "navigation.sections", "toc.integrate", "content.code.annotate", "content.code.copy"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copiado para \u00e1rea de transfer\u00eancia", "clipboard.copy": "Copiar para \u00e1rea de transfer\u00eancia", "search.result.more.one": "Mais 1 nesta p\u00e1gina", "search.result.more.other": "Mais # nesta p\u00e1gina", "search.result.none": "Nenhum resultado encontrado", "search.result.one": "1 resultado encontrado", "search.result.other": "# resultados encontrados", "search.result.placeholder": "Digite para iniciar a busca", "search.result.term.missing": "Ausente", "select.version": "Selecione a vers\u00e3o"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+        <script src="https://unpkg.com/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+    
+  </body>
+</html>

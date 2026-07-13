@@ -1,0 +1,2408 @@
+
+<!doctype html>
+<html lang="pt" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Livro didático da disciplina de Introdução à Programação Funcional: Haskell, Clojure e Elixir em três unidades de 20 horas.
+">
+      
+      
+        <meta name="author" content="Sergio Souza Costa">
+      
+      
+      
+        <link rel="prev" href="../13_elixir_modulos_funcoes_testes/">
+      
+      
+        <link rel="next" href="../15_elixir_metaprogramacao/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+    
+    
+      
+        <title>Cap 27: Elixir — Processos e Concorrência - Introdução à Programação Funcional</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="teal" data-md-color-accent="green">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#processos" class="md-skip">
+          Ir para o conteúdo
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Cabeçalho">
+    <a href="../.." title="Introdução à Programação Funcional" class="md-header__button md-logo" aria-label="Introdução à Programação Funcional" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Introdução à Programação Funcional
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Cap 27: Elixir — Processos e Concorrência
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="teal" data-md-color-accent="green"  aria-hidden="true"  type="radio" name="__palette" id="__palette_0">
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Buscar" placeholder="Buscar" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Pesquisar">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Limpar" aria-label="Limpar" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Inicializando a pesquisa
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+  
+
+<nav class="md-nav md-nav--primary md-nav--integrated" aria-label="Navegação" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Introdução à Programação Funcional" class="md-nav__button md-logo" aria-label="Introdução à Programação Funcional" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Introdução à Programação Funcional
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Apresentação
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Unidade 1 — Paradigmas e Haskell Básico (20h)
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Unidade 1 — Paradigmas e Haskell Básico (20h)
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../unidade1/00_plano_unidade1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Plano da Unidade 1
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../unidade1/01_paradigmas/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cap 1: Introdução aos Paradigmas
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../unidade1/02_instalacao/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cap 2: Instalação do Ambiente
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../unidade1/03_fundamentos/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cap 3: Fundamentos e o GHCi
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../unidade1/04_tipos_classes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cap 4: Tipos e Classes
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../unidade1/05_funcoes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cap 5: Funções e Pattern Matching
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../unidade1/06_listas/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cap 6: Listas, Recursão e Compreensão
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../unidade1/07_alta_ordem/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cap 7: Funções de Alta Ordem
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../unidade1/08_exercicios/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cap 8: Exercícios Resolvidos
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Unidade 2 — Haskell Avançado e Qualidade (20h)
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Unidade 2 — Haskell Avançado e Qualidade (20h)
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../unidade2/00_plano_unidade2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Plano da Unidade 2
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../unidade2/01_declarando_tipos_classes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cap 9: Tipos Algébricos e Typeclasses
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../unidade2/02_programas_interativos/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cap 10: Programas Interativos (IO)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../unidade2/03_exercicios_avancados/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cap 11: Exercícios Avançados
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../unidade2/04_haskell_moderno/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cap 12: Projetos Modernos com Stack
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../unidade2/05_biblioteca_json/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cap 13: A Biblioteca JSON
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../unidade2/06_testes_qualidade/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cap 14: Testes com QuickCheck
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../unidade2/07_avaliacao/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Trabalho Prático: hs2json
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Unidade 3 — Clojure e Elixir (20h)
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Unidade 3 — Clojure e Elixir (20h)
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../00_plano_unidade3/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Plano da Unidade 3
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../01_clojure_fundamentos/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cap 15: Clojure — Fundamentos
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../02_clojure_colecoes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cap 16: Clojure — Vetores e Mapas
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../03_clojure_alta_ordem/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cap 17: Clojure — Alta Ordem
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../04_clojure_threading_mapas_complexos/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cap 18: Clojure — Threading Macros
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../05_clojure_lazy_sequences/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cap 19: Clojure — Lazy Sequences
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../06_clojure_metaprogramacao/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cap 20: Clojure — Macros
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../07_clojure_interop/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cap 21: Clojure — Interop com Java
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../08_clojure_revisao/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cap 22: Clojure — Revisão de Pilares
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../09_clojure_exercicios/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cap 23: Clojure — Exercícios Resolvidos
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../10_clojure_tutorial_todo/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Trabalho Clojure: ToDo Full-Stack
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../11_elixir_fundamentos/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cap 24: Elixir — Fundamentos
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../12_elixir_colecoes_pattern_matching/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cap 25: Elixir — Pattern Matching
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../13_elixir_modulos_funcoes_testes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cap 26: Elixir — Módulos e Testes
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cap 27: Elixir — Processos e Concorrência
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../15_elixir_metaprogramacao/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cap 28: Elixir — Metaprogramação
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../16_elixir_tutorial_todo/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Trabalho Elixir: ToDo com LiveView
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="processos">Processos<a class="headerlink" href="#processos" title="Permanent link">&para;</a></h1>
+<h1 id="modulo-1-fundamentos-de-computacao-concorrente-na-beam">🎓 Módulo 1: Fundamentos de Computação Concorrente na BEAM<a class="headerlink" href="#modulo-1-fundamentos-de-computacao-concorrente-na-beam" title="Permanent link">&para;</a></h1>
+<p><strong>Objetivo:</strong> Compreender o modelo de execução da Máquina Virtual Erlang (BEAM) e contrastá-lo com os modelos tradicionais de Threads de SO e Green Threads (Go).</p>
+<p><strong>1. O Problema da Concorrência Tradicional</strong></p>
+<p>Na engenharia de software clássica (Java, C++, C#), a unidade de concorrência é a <strong>Thread do Sistema Operacional (OS Thread)</strong>.
+• <strong>Peso:</strong> Cada thread consome uma quantidade significativa de memória (geralmente alguns MBs apenas para a stack).
+• <strong>Gerenciamento:</strong> O Kernel do SO é responsável por agendar essas threads (Context Switching). Trocar de contexto no nível do kernel é uma operação custosa (latência).
+• <strong>Memória Compartilhada:</strong> Threads do mesmo processo compartilham o mesmo espaço de memória (Heap).
+    ◦ <em>O Perigo:</em> Se a Thread A e a Thread B tentam escrever na variável <code>x</code> ao mesmo tempo, ocorre uma <strong>Condição de Corrida (Race Condition)</strong>.
+    ◦ <em>A Solução (e o problema dela):</em> Usamos Mutexes, Semáforos e Locks. Isso introduz complexidade e riscos de <strong>Deadlocks</strong>.</p>
+<p><strong>2. A Solução Elixir: O Modelo de Atores e a BEAM</strong></p>
+<p>O Elixir roda sobre a BEAM. A BEAM não utiliza threads do SO diretamente para executar sua lógica. Ela utiliza <strong>Processos Leves (Lightweight Processes)</strong>.</p>
+<p><strong>2.1. O Processo da BEAM</strong></p>
+<p>• <strong>Peso:</strong> Extremamente leve (inicia com cerca de ~300 words ou ~2.5KB). Você pode rodar milhões deles em um laptop.
+• <strong>Isolamento de Memória (Share Nothing):</strong> Cada processo tem sua própria Heap e Stack. O Processo A <strong>não consegue</strong> acessar a memória do Processo B.
+• <strong>Comunicação:</strong> A única forma de interação é através de <strong>Troca de Mensagens</strong> (Message Passing). Os dados são copiados de um processo para outro (com exceção de binários grandes, que usam contagem de referência).</p>
+<p><strong>2.2. O Scheduler da BEAM (Escalonamento)</strong></p>
+<p>Isso é crucial para engenheiros: A BEAM roda, geralmente, uma Thread de SO por Núcleo de CPU.
+Dentro dessas threads, a BEAM roda seus próprios escalonadores (Schedulers).
+• <strong>Escalonamento Preemptivo:</strong> A BEAM atribui a cada processo um número de "reduções" (aproximadamente 2000 chamadas de função). Quando as reduções acabam, a BEAM pausa o processo forçadamente e dá a vez para o próximo.
+    ◦ <em>Vantagem:</em> Um processo com loop infinito ou cálculo pesado <strong>não trava o sistema</strong>. Em Node.js (single-thread event loop), um cálculo pesado trava tudo. No Elixir, não.</p>
+<p><strong>3. Comparativo Técnico: Elixir vs. Go (Goroutines) vs. Java (Threads)</strong></p>
+<p>Esta é uma dúvida comum de mercado e academia.</p>
+<table>
+<thead>
+<tr>
+<th><strong>Característica</strong></th>
+<th><strong>Java / C# (OS Threads)</strong></th>
+<th><strong>Go (Goroutines)</strong></th>
+<th><strong>Elixir (BEAM Processes)</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Gerenciamento</strong></td>
+<td>Kernel do SO</td>
+<td>Runtime da linguagem (M:N)</td>
+<td>Runtime da linguagem (M:N)</td>
+</tr>
+<tr>
+<td><strong>Uso de Memória</strong></td>
+<td>Alto (MBs)</td>
+<td>Baixo (KBs)</td>
+<td><strong>Muito Baixo (KBs)</strong></td>
+</tr>
+<tr>
+<td><strong>Memória</strong></td>
+<td>Compartilhada (precisa de mutex)</td>
+<td>Compartilhada (mas encoraja <em>channels</em>)</td>
+<td><strong>Isolada — <em>Share Nothing</em></strong></td>
+</tr>
+<tr>
+<td><strong>Tolerância a Falhas</strong></td>
+<td>Se uma thread crashar, o processo pode cair.</td>
+<td>Se houver <em>panic</em> não tratado, o programa cai.</td>
+<td><strong>Se um processo crashar, só ele morre. O sistema continua.</strong></td>
+</tr>
+<tr>
+<td><strong>Latência</strong></td>
+<td>Previsível (limitada pelo SO)</td>
+<td>Baixa</td>
+<td><strong>Soft Real-Time (latência muito previsível)</strong></td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h3 id="nota-para-o-engenheiro"><strong>Nota para o Engenheiro</strong><a class="headerlink" href="#nota-para-o-engenheiro" title="Permanent link">&para;</a></h3>
+<p>Goroutines (Go) e Processos Elixir (BEAM) são ambos <em>green threads</em>, mas com filosofias opostas:</p>
+<ul>
+<li><strong>Go:</strong> paralelismo com <strong>memória compartilhada</strong>, embora incentive <em>channels</em>.</li>
+<li><strong>Elixir/BEAM:</strong> <strong>isolamento total</strong>, focado em <strong>tolerância a falhas</strong> e sistemas auto-curáveis.</li>
+</ul>
+<p><strong>4. Conceitos Fundamentais</strong></p>
+<p>Precisamos alinhar o vocabulário para as próximas etapas.</p>
+<p><strong>4.1. Concorrência vs. Paralelismo</strong></p>
+<p>• <strong>Concorrência:</strong> É sobre a <strong>estrutura</strong> do programa. É a capacidade de lidar com muitas coisas ao mesmo tempo. (Ex: Um servidor web aceitando 10 mil conexões).
+• <strong>Paralelismo:</strong> É sobre a <strong>execução</strong> física. É fazer muitas coisas no mesmo instante de tempo. Requer múltiplos núcleos de CPU.
+    ◦ <em>Em Elixir:</em> Você escreve código concorrente (muitos processos). A BEAM se encarrega de paralelizar isso automaticamente em todos os núcleos disponíveis.</p>
+<p><strong>4.2. Síncrono vs. Assíncrono</strong></p>
+<p>Em sistemas distribuídos (e no Elixir):
+• <strong>Síncrono (Call):</strong> Envio a mensagem e <strong>bloqueio</strong> minha execução até receber a resposta (Request/Response).
+• <strong>Assíncrono (Cast):</strong> Envio a mensagem e sigo minha vida ("Fire and forget"). Não sei se a mensagem chegou ou se foi processada na hora.</p>
+<p><strong>4.3. Transparência de Localização (Sistemas Distribuídos)</strong></p>
+<p>Como processos se comunicam apenas por mensagens enviadas para um endereço (PID - Process ID), não importa onde esse processo está.
+• Enviar mensagem para o PID <code>&lt;0.100.0&gt;</code> (na mesma máquina).
+• Enviar mensagem para o PID <code>&lt;50.100.0&gt;</code> (em um servidor no Japão).
+<strong>O código é exatamente o mesmo.</strong> Isso torna o Elixir uma linguagem naturalmente orientada a sistemas distribuídos (Clusters).</p>
+<h1 id="modulo-2-laboratorio-de-anatomia-de-processos">🧪 Módulo 2: Laboratório de Anatomia de Processos<a class="headerlink" href="#modulo-2-laboratorio-de-anatomia-de-processos" title="Permanent link">&para;</a></h1>
+<p><strong>Objetivo:</strong> Manipular as primitivas de concorrência da BEAM (<code>spawn</code>, <code>send</code>, <code>receive</code>) e entender o ciclo de vida de um processo.</p>
+<h3 id="1-preparacao-do-ambiente">1. Preparação do Ambiente<a class="headerlink" href="#1-preparacao-do-ambiente" title="Permanent link">&para;</a></h3>
+<p>Abra seu terminal. Vamos criar um projeto chamado <code>lab_concorrencia</code>.
+Isso carrega o ambiente do Mix, que será útil para compilar os módulos que criaremos mais à frente.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>mix<span class="w"> </span>new<span class="w"> </span>lab_concorrencia
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="nb">cd</span><span class="w"> </span>lab_concorrencia
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>iex<span class="w"> </span>-S<span class="w"> </span>mix
+</code></pre></div>
+<p><em>O comando <code>iex -S mix</code> abre o shell interativo carregando o contexto do seu projeto.</em></p>
+<hr />
+<h3 id="2-identidade-o-pid-process-identifier">2. Identidade: O PID (Process Identifier)<a class="headerlink" href="#2-identidade-o-pid-process-identifier" title="Permanent link">&para;</a></h3>
+<p>Em sistemas distribuídos, para enviar uma mensagem, precisamos de um endereço. No Elixir, esse endereço é o <strong>PID</strong>.</p>
+<p>No IEx, digite:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="n">self</span><span class="p">()</span>
+</code></pre></div>
+<p><strong>Saída esperada:</strong> <code>#PID&lt;0.152.0&gt;</code> (Os números podem variar).</p>
+<p><strong>👨‍🏫 Análise do Professor:</strong></p>
+<ul>
+<li>Este é o endereço do <strong>próprio terminal IEx</strong>. Sim, o shell onde você digita é um Processo Elixir rodando sobre a BEAM.</li>
+<li>O formato <code>&lt;A.B.C&gt;</code> geralmente indica:<ul>
+<li><code>A</code>: Nó (Node) onde o processo está rodando (0 = máquina local).</li>
+<li><code>B</code>: ID sequencial do processo.</li>
+<li><code>C</code>: Serial (usado quando o B "dá a volta" no contador).</li>
+</ul>
+</li>
+</ul>
+<hr />
+<h3 id="3-criacao-spawn-vida-e-morte">3. Criação: <code>spawn</code> (Vida e Morte)<a class="headerlink" href="#3-criacao-spawn-vida-e-morte" title="Permanent link">&para;</a></h3>
+<p>A função <code>spawn/1</code> aceita uma função anônima, cria um processo novo para executá-la em uma stack de memória isolada e retorna o PID dele.</p>
+<p>Digite no IEx:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="n">pid_calculadora</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">spawn</span><span class="p">(</span><span class="k">fn</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="k">end</span><span class="p">)</span>
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="c1"># Saída: #PID&lt;0.155.0&gt;</span>
+</code></pre></div>
+<p>Agora, verifique se esse processo ainda existe:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="nc">Process</span><span class="o">.</span><span class="n">alive?</span><span class="p">(</span><span class="n">pid_calculadora</span><span class="p">)</span>
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="c1"># Saída: false</span>
+</code></pre></div>
+<p><strong>👨‍🏫 O Conceito de Ciclo de Vida:</strong>
+Por que ele morreu?
+Diferente de uma Thread Java que pode ficar "idle" (ociosa) gastando recursos, um Processo Elixir é estritamente funcional.</p>
+<ol>
+<li>Ele nasce.</li>
+<li>Ele executa a função.</li>
+<li>Se não há mais instruções, ele termina (exit normal).</li>
+<li>O Garbage Collector limpa a memória dele imediatamente.</li>
+</ol>
+<hr />
+<h3 id="4-comunicacao-assincrona-send-e-a-mailbox">4. Comunicação Assíncrona: <code>send</code> e a Mailbox 📬<a class="headerlink" href="#4-comunicacao-assincrona-send-e-a-mailbox" title="Permanent link">&para;</a></h3>
+<p>Todo processo nasce com uma <strong>Caixa de Correio (Mailbox)</strong> interna.
+O envio de mensagens em Elixir é <strong>Assíncrono (Non-blocking)</strong>.</p>
+<p>Vamos usar o seu próprio processo do IEx (<code>self()</code>) para testar.</p>
+<ol>
+<li>
+<p>Armazene seu endereço:Elixir</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="nv">meu_pid</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>self<span class="o">()</span>
+</code></pre></div>
+</li>
+<li>
+<p>Envie uma mensagem para si mesmo:Elixir</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>send<span class="o">(</span>meu_pid,<span class="w"> </span><span class="o">{</span>:ola,<span class="w"> </span><span class="s2">&quot;Mundo&quot;</span><span class="o">})</span>
+<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="c1"># Saída: {:ola, &quot;Mundo&quot;}</span>
+</code></pre></div>
+<p><em>Observe:</em> A função retorna a mensagem enviada, mas nada foi impresso na tela como "Recebido". Onde está a mensagem?</p>
+</li>
+<li>
+<p>Inspecione a memória do processo (Buffer):
+Use a função de debug <code>flush()</code>:Elixir</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>flush<span class="o">()</span>
+<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="c1"># Saída:</span>
+<a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="c1"># {:ola, &quot;Mundo&quot;}</span>
+<a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a><span class="c1"># :ok</span>
+</code></pre></div>
+</li>
+</ol>
+<p><strong>👨‍🏫 Análise do Engenheiro:</strong>
+A mensagem ficou armazenada na Heap do processo. O <code>send</code> apenas deposita a mensagem e retorna o controle imediatamente para a CPU. O remetente não sabe se a mensagem foi lida. Isso é o fundamento do desacoplamento em sistemas distribuídos.</p>
+<hr />
+<h3 id="5-sincronizacao-receive-o-bloqueio">5. Sincronização: <code>receive</code> (O Bloqueio)<a class="headerlink" href="#5-sincronizacao-receive-o-bloqueio" title="Permanent link">&para;</a></h3>
+<p>Para ler a mensagem, o processo precisa parar o que está fazendo e verificar a caixa de correio. Isso é feito com <code>receive</code>.
+<strong>Atenção:</strong> O <code>receive</code> é uma operação <strong>bloqueante</strong>. Se a caixa estiver vazia, o processo dorme (não gasta CPU) até chegar algo.</p>
+<p>Vamos criar um processo que sabe esperar por uma mensagem.</p>
+<p>Digite no IEx:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="c1"># Definimos a função que o processo vai rodar</span>
+<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="nv">funcao_ouvinte</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>fn<span class="w"> </span>-&gt;
+<a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a><span class="w">  </span>receive<span class="w"> </span><span class="k">do</span>
+<a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a><span class="w">    </span><span class="o">{</span>:ping,<span class="w"> </span>remetente_pid<span class="o">}</span><span class="w"> </span>-&gt;
+<a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a><span class="w">      </span>IO.puts<span class="w"> </span><span class="s2">&quot;🏓 Recebi PING. Enviando PONG...&quot;</span>
+<a id="__codelineno-7-6" name="__codelineno-7-6" href="#__codelineno-7-6"></a><span class="w">      </span>send<span class="o">(</span>remetente_pid,<span class="w"> </span>:pong<span class="o">)</span>
+<a id="__codelineno-7-7" name="__codelineno-7-7" href="#__codelineno-7-7"></a><span class="w">  </span>end
+<a id="__codelineno-7-8" name="__codelineno-7-8" href="#__codelineno-7-8"></a>end
+<a id="__codelineno-7-9" name="__codelineno-7-9" href="#__codelineno-7-9"></a>
+<a id="__codelineno-7-10" name="__codelineno-7-10" href="#__codelineno-7-10"></a><span class="c1"># Criamos o processo</span>
+<a id="__codelineno-7-11" name="__codelineno-7-11" href="#__codelineno-7-11"></a><span class="nv">pid_ping</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>spawn<span class="o">(</span>funcao_ouvinte<span class="o">)</span>
+</code></pre></div>
+<p>Verifique se ele está vivo:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>Process.alive?<span class="o">(</span>pid_ping<span class="o">)</span>
+<a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a><span class="c1"># Saída: true</span>
+</code></pre></div>
+<p><em>Ele está vivo, parado na linha do <code>receive</code>, aguardando.</em></p>
+<p>Agora, vamos interagir:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>send<span class="o">(</span>pid_ping,<span class="w"> </span><span class="o">{</span>:ping,<span class="w"> </span>self<span class="o">()})</span>
+<a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a><span class="c1"># Saída no terminal: 🏓 Recebi PING. Enviando PONG...</span>
+<a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a><span class="c1"># Retorno: {:ping, #PID&lt;...&gt;}</span>
+</code></pre></div>
+<p>Verifique se recebemos a resposta (:pong):</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>flush<span class="o">()</span>
+<a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a><span class="c1"># Saída: :pong</span>
+</code></pre></div>
+<p>Verifique se o processo ouvinte ainda vive:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>Process.alive?<span class="o">(</span>pid_ping<span class="o">)</span>
+<a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a><span class="c1"># Saída: false</span>
+</code></pre></div>
+<p><em>Ele processou o <code>ping</code>, acabou o bloco <code>receive</code>, saiu da função e morreu.</em></p>
+<hr />
+<h3 id="6-a-persistencia-recursao-de-cauda-o-servidor">6. A Persistência: Recursão de Cauda (O Servidor) 🔄<a class="headerlink" href="#6-a-persistencia-recursao-de-cauda-o-servidor" title="Permanent link">&para;</a></h3>
+<p>Para criar um sistema (como um Banco ou Webserver), o processo não pode morrer após uma mensagem. Ele deve voltar ao estado de espera.
+Em linguagens imperativas, usaríamos <code>while(true)</code>. Em Elixir, usamos <strong>Recursão</strong>.</p>
+<p>Como estamos dentro do projeto <code>lab_concorrencia</code>, vamos criar um arquivo real para isso.</p>
+<ol>
+<li>Abra seu editor (VS Code).</li>
+<li>Crie o arquivo <code>lib/processo_persistente.ex</code>.</li>
+</ol>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a>defmodule<span class="w"> </span>ProcessoPersistente<span class="w"> </span><span class="k">do</span>
+<a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a><span class="w">  </span>def<span class="w"> </span>aguardar_mensagem<span class="w"> </span><span class="k">do</span>
+<a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a><span class="w">    </span>receive<span class="w"> </span><span class="k">do</span>
+<a id="__codelineno-12-4" name="__codelineno-12-4" href="#__codelineno-12-4"></a><span class="w">      </span><span class="o">{</span>:mensagem,<span class="w"> </span>texto<span class="o">}</span><span class="w"> </span>-&gt;
+<a id="__codelineno-12-5" name="__codelineno-12-5" href="#__codelineno-12-5"></a><span class="w">        </span>IO.puts<span class="w"> </span><span class="s2">&quot;📝 Log: #{texto}&quot;</span>
+<a id="__codelineno-12-6" name="__codelineno-12-6" href="#__codelineno-12-6"></a><span class="w">        </span><span class="c1"># AQUI ESTÁ O SEGREDO:</span>
+<a id="__codelineno-12-7" name="__codelineno-12-7" href="#__codelineno-12-7"></a><span class="w">        </span><span class="c1"># Chamamos a função novamente. O processo volta para o topo e para no &#39;receive&#39;.</span>
+<a id="__codelineno-12-8" name="__codelineno-12-8" href="#__codelineno-12-8"></a><span class="w">        </span>aguardar_mensagem<span class="o">()</span>
+<a id="__codelineno-12-9" name="__codelineno-12-9" href="#__codelineno-12-9"></a>
+<a id="__codelineno-12-10" name="__codelineno-12-10" href="#__codelineno-12-10"></a><span class="w">      </span><span class="o">{</span>:parar<span class="o">}</span><span class="w"> </span>-&gt;
+<a id="__codelineno-12-11" name="__codelineno-12-11" href="#__codelineno-12-11"></a><span class="w">        </span>IO.puts<span class="w"> </span><span class="s2">&quot;🛑 Encerrando processo...&quot;</span>
+<a id="__codelineno-12-12" name="__codelineno-12-12" href="#__codelineno-12-12"></a><span class="w">        </span><span class="c1"># Não chamamos a recursão. O processo chegará ao fim e morrerá.</span>
+<a id="__codelineno-12-13" name="__codelineno-12-13" href="#__codelineno-12-13"></a><span class="w">    </span>end
+<a id="__codelineno-12-14" name="__codelineno-12-14" href="#__codelineno-12-14"></a><span class="w">  </span>end
+<a id="__codelineno-12-15" name="__codelineno-12-15" href="#__codelineno-12-15"></a>end
+</code></pre></div>
+<p>Recompile o projeto para ler o arquivo novo:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a>recompile<span class="o">()</span>
+</code></pre></div>
+<p>ou caso tenha saido:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a>iex<span class="w"> </span>-S<span class="w"> </span>mix
+</code></pre></div>
+<p>Teste a persistência:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a><span class="c1"># 1. Spawn</span>
+<a id="__codelineno-15-2" name="__codelineno-15-2" href="#__codelineno-15-2"></a><span class="n">pid</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">spawn</span><span class="p">(</span><span class="nc">ProcessoPersistente</span><span class="p">,</span><span class="w"> </span><span class="ss">:aguardar_mensagem</span><span class="p">,</span><span class="w"> </span><span class="p">[])</span>
+</code></pre></div>
+<hr />
+<ul>
+<li>
+<p>Entendendo o <code>spawn/3</code></p>
+<p>Quando usamos <code>spawn/3</code>, estamos usando o padrão <strong>MFA</strong> (Module, Function, Arguments), que é onipresente na máquina virtual do Elixir.</p>
+<p>O terceiro parâmetro (<code>[]</code>) é a <strong>Lista de Argumentos Iniciais</strong> que serão passados para a função quando ela começar.</p>
+<h3 id="1-por-que-esta-vazio-esse-exemplo">1. Por que está vazio <code>[]</code> esse exemplo?<a class="headerlink" href="#1-por-que-esta-vazio-esse-exemplo" title="Permanent link">&para;</a></h3>
+<p>Olhe para a definição da função que criamos:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a><span class="kd">def</span><span class="w"> </span><span class="n">aguardar_mensagem</span><span class="w"> </span><span class="k">do</span><span class="w">  </span><span class="c1"># &lt;--- Veja: Não recebe nenhum parâmetro aqui</span>
+<a id="__codelineno-16-2" name="__codelineno-16-2" href="#__codelineno-16-2"></a><span class="w">  </span><span class="k">receive</span><span class="w"> </span><span class="k">do</span>
+<a id="__codelineno-16-3" name="__codelineno-16-3" href="#__codelineno-16-3"></a><span class="w">    </span><span class="c1"># ...</span>
+<a id="__codelineno-16-4" name="__codelineno-16-4" href="#__codelineno-16-4"></a><span class="w">  </span><span class="k">end</span>
+<a id="__codelineno-16-5" name="__codelineno-16-5" href="#__codelineno-16-5"></a><span class="k">end</span>
+</code></pre></div>
+<p>Como a função <code>aguardar_mensagem/0</code> não pede nenhum dado para começar, nós passamos uma lista vazia <code>[]</code> no <code>spawn</code>.</p>
+<h3 id="2-e-se-a-funcao-precisasse-de-dados">2. E se a função precisasse de dados?<a class="headerlink" href="#2-e-se-a-funcao-precisasse-de-dados" title="Permanent link">&para;</a></h3>
+<p>Imagine que queremos criar um processo que já nasce sabendo o nome do usuário.</p>
+<p><strong>A função seria:</strong></p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a><span class="kd">def</span><span class="w"> </span><span class="n">cumprimentar</span><span class="p">(</span><span class="n">nome</span><span class="p">,</span><span class="w"> </span><span class="n">idade</span><span class="p">)</span><span class="w"> </span><span class="k">do</span>
+<a id="__codelineno-17-2" name="__codelineno-17-2" href="#__codelineno-17-2"></a><span class="w">  </span><span class="nc">IO</span><span class="o">.</span><span class="n">puts</span><span class="w"> </span><span class="s2">&quot;Olá, eu sou o </span><span class="si">#{</span><span class="n">nome</span><span class="si">}</span><span class="s2"> e tenho </span><span class="si">#{</span><span class="n">idade</span><span class="si">}</span><span class="s2"> anos.&quot;</span>
+<a id="__codelineno-17-3" name="__codelineno-17-3" href="#__codelineno-17-3"></a><span class="k">end</span>
+</code></pre></div>
+<p><strong>O Spawn seria:</strong></p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a><span class="c1"># A lista DEVE ter 2 itens, na mesma ordem dos parâmetros da função</span>
+<a id="__codelineno-18-2" name="__codelineno-18-2" href="#__codelineno-18-2"></a><span class="n">spawn</span><span class="p">(</span><span class="nc">Modulo</span><span class="p">,</span><span class="w"> </span><span class="ss">:cumprimentar</span><span class="p">,</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;Maria&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">30</span><span class="p">])</span>
+</code></pre></div>
+</li>
+</ul>
+<p>Agora vamos enviar algumas mensagens:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a><span class="c1"># 2. Enviar múltiplas mensagens</span>
+<a id="__codelineno-19-2" name="__codelineno-19-2" href="#__codelineno-19-2"></a><span class="n">send</span><span class="p">(</span><span class="n">pid</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="ss">:mensagem</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;Primeiro log&quot;</span><span class="p">})</span>
+<a id="__codelineno-19-3" name="__codelineno-19-3" href="#__codelineno-19-3"></a><span class="n">send</span><span class="p">(</span><span class="n">pid</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="ss">:mensagem</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;Segundo log&quot;</span><span class="p">})</span>
+<a id="__codelineno-19-4" name="__codelineno-19-4" href="#__codelineno-19-4"></a><span class="n">send</span><span class="p">(</span><span class="n">pid</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="ss">:mensagem</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;Terceiro log&quot;</span><span class="p">})</span>
+<a id="__codelineno-19-5" name="__codelineno-19-5" href="#__codelineno-19-5"></a>
+<a id="__codelineno-19-6" name="__codelineno-19-6" href="#__codelineno-19-6"></a><span class="c1"># 3. Verificar vida</span>
+<a id="__codelineno-19-7" name="__codelineno-19-7" href="#__codelineno-19-7"></a><span class="nc">Process</span><span class="o">.</span><span class="n">alive?</span><span class="p">(</span><span class="n">pid</span><span class="p">)</span>
+<a id="__codelineno-19-8" name="__codelineno-19-8" href="#__codelineno-19-8"></a><span class="c1"># true (Ele processou tudo e voltou a dormir no receive)</span>
+<a id="__codelineno-19-9" name="__codelineno-19-9" href="#__codelineno-19-9"></a>
+<a id="__codelineno-19-10" name="__codelineno-19-10" href="#__codelineno-19-10"></a><span class="c1"># 4. Parar</span>
+<a id="__codelineno-19-11" name="__codelineno-19-11" href="#__codelineno-19-11"></a><span class="n">send</span><span class="p">(</span><span class="n">pid</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="ss">:parar</span><span class="p">})</span>
+<a id="__codelineno-19-12" name="__codelineno-19-12" href="#__codelineno-19-12"></a><span class="nc">Process</span><span class="o">.</span><span class="n">alive?</span><span class="p">(</span><span class="n">pid</span><span class="p">)</span>
+<a id="__codelineno-19-13" name="__codelineno-19-13" href="#__codelineno-19-13"></a><span class="c1"># false</span>
+</code></pre></div>
+<p><strong>Professor:</strong> Finalizamos o laboratório de primitivas.
+O aluno aprendeu:</p>
+<ol>
+<li>Como criar um PID (<code>spawn</code>).</li>
+<li>Que o envio é "Fire-and-forget" (<code>send</code>).</li>
+<li>Que o recebimento trava o processo (<code>receive</code>).</li>
+<li>Que servidores são apenas loops recursivos infinitos.</li>
+</ol>
+<h1 id="modulo-3-construindo-um-servidor-de-conta">🏭 Módulo 3: Construindo um Servidor de Conta<a class="headerlink" href="#modulo-3-construindo-um-servidor-de-conta" title="Permanent link">&para;</a></h1>
+<p><strong>Objetivo:</strong> Implementar um processo com estado persistente (Stateful). Faremos isso em duas etapas:</p>
+<ol>
+<li><strong>A Versão "Raiz" (Manual):</strong> Para entender onde o estado mora (recursão).</li>
+<li><strong>A Versão "Profissional" (GenServer):</strong> Para ganhar robustez e padronização.</li>
+</ol>
+<hr />
+<h2 id="1-etapa-a-o-servidor-manual-entendendo-o-loop">1. Etapa A: O Servidor Manual (Entendendo o Loop) 🔨<a class="headerlink" href="#1-etapa-a-o-servidor-manual-entendendo-o-loop" title="Permanent link">&para;</a></h2>
+<p>Antes de usarmos ferramentas prontas, vamos criar uma conta bancária usando apenas primitivas: <code>spawn</code>, <code>receive</code> e recursão. Isso vai provar para você que <strong>não existe mágica</strong>, apenas engenharia.</p>
+<h3 id="passo-1-o-loop-de-estado">🛠️ Passo 1: O Loop de Estado<a class="headerlink" href="#passo-1-o-loop-de-estado" title="Permanent link">&para;</a></h3>
+<p>Crie o arquivo <code>lib/conta_manual.ex</code>.</p>
+<p>Neste código, observe que o <strong>saldo</strong> não é uma variável global. Ele é um <strong>argumento</strong> que é passado de uma volta do loop para a próxima.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-20-1" name="__codelineno-20-1" href="#__codelineno-20-1"></a><span class="kd">defmodule</span><span class="w"> </span><span class="nc">ContaManual</span><span class="w"> </span><span class="k">do</span>
+<a id="__codelineno-20-2" name="__codelineno-20-2" href="#__codelineno-20-2"></a><span class="w">  </span><span class="c1"># Função para iniciar o processo</span>
+<a id="__codelineno-20-3" name="__codelineno-20-3" href="#__codelineno-20-3"></a><span class="w">  </span><span class="kd">def</span><span class="w"> </span><span class="n">iniciar</span><span class="p">(</span><span class="n">saldo_inicial</span><span class="p">)</span><span class="w"> </span><span class="k">do</span>
+<a id="__codelineno-20-4" name="__codelineno-20-4" href="#__codelineno-20-4"></a><span class="w">    </span><span class="n">spawn</span><span class="p">(</span><span class="bp">__MODULE__</span><span class="p">,</span><span class="w"> </span><span class="ss">:loop_do_servidor</span><span class="p">,</span><span class="w"> </span><span class="p">[</span><span class="n">saldo_inicial</span><span class="p">])</span>
+<a id="__codelineno-20-5" name="__codelineno-20-5" href="#__codelineno-20-5"></a><span class="w">  </span><span class="k">end</span>
+<a id="__codelineno-20-6" name="__codelineno-20-6" href="#__codelineno-20-6"></a>
+<a id="__codelineno-20-7" name="__codelineno-20-7" href="#__codelineno-20-7"></a><span class="w">  </span><span class="c1"># O CORAÇÃO DO PROCESSO</span>
+<a id="__codelineno-20-8" name="__codelineno-20-8" href="#__codelineno-20-8"></a><span class="w">  </span><span class="c1"># Esta função nunca termina. Ela fica girando eternamente.</span>
+<a id="__codelineno-20-9" name="__codelineno-20-9" href="#__codelineno-20-9"></a><span class="w">  </span><span class="kd">def</span><span class="w"> </span><span class="n">loop_do_servidor</span><span class="p">(</span><span class="n">saldo_atual</span><span class="p">)</span><span class="w"> </span><span class="k">do</span>
+<a id="__codelineno-20-10" name="__codelineno-20-10" href="#__codelineno-20-10"></a><span class="w">    </span><span class="c1"># 1. O processo para e espera uma mensagem chegar na caixa de correio</span>
+<a id="__codelineno-20-11" name="__codelineno-20-11" href="#__codelineno-20-11"></a><span class="w">    </span><span class="k">receive</span><span class="w"> </span><span class="k">do</span>
+<a id="__codelineno-20-12" name="__codelineno-20-12" href="#__codelineno-20-12"></a><span class="w">      </span><span class="p">{</span><span class="ss">:depositar</span><span class="p">,</span><span class="w"> </span><span class="n">valor</span><span class="p">}</span><span class="w"> </span><span class="o">-&gt;</span>
+<a id="__codelineno-20-13" name="__codelineno-20-13" href="#__codelineno-20-13"></a><span class="w">        </span><span class="n">novo_saldo</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">saldo_atual</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">valor</span>
+<a id="__codelineno-20-14" name="__codelineno-20-14" href="#__codelineno-20-14"></a><span class="w">        </span><span class="nc">IO</span><span class="o">.</span><span class="n">puts</span><span class="w"> </span><span class="s2">&quot;💰 [Manual] Depositado </span><span class="si">#{</span><span class="n">valor</span><span class="si">}</span><span class="s2">. Novo saldo: </span><span class="si">#{</span><span class="n">novo_saldo</span><span class="si">}</span><span class="s2">&quot;</span>
+<a id="__codelineno-20-15" name="__codelineno-20-15" href="#__codelineno-20-15"></a>
+<a id="__codelineno-20-16" name="__codelineno-20-16" href="#__codelineno-20-16"></a><span class="w">        </span><span class="c1"># A MÁGICA: Reinicia o loop, passando o NOVO saldo</span>
+<a id="__codelineno-20-17" name="__codelineno-20-17" href="#__codelineno-20-17"></a><span class="w">        </span><span class="n">loop_do_servidor</span><span class="p">(</span><span class="n">novo_saldo</span><span class="p">)</span>
+<a id="__codelineno-20-18" name="__codelineno-20-18" href="#__codelineno-20-18"></a>
+<a id="__codelineno-20-19" name="__codelineno-20-19" href="#__codelineno-20-19"></a><span class="w">      </span><span class="p">{</span><span class="ss">:ver_saldo</span><span class="p">,</span><span class="w"> </span><span class="n">pid_do_cliente</span><span class="p">}</span><span class="w"> </span><span class="o">-&gt;</span>
+<a id="__codelineno-20-20" name="__codelineno-20-20" href="#__codelineno-20-20"></a><span class="w">        </span><span class="c1"># Para responder, precisamos enviar uma mensagem de volta manualmente</span>
+<a id="__codelineno-20-21" name="__codelineno-20-21" href="#__codelineno-20-21"></a><span class="w">        </span><span class="n">send</span><span class="p">(</span><span class="n">pid_do_cliente</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="ss">:resposta_saldo</span><span class="p">,</span><span class="w"> </span><span class="n">saldo_atual</span><span class="p">})</span>
+<a id="__codelineno-20-22" name="__codelineno-20-22" href="#__codelineno-20-22"></a>
+<a id="__codelineno-20-23" name="__codelineno-20-23" href="#__codelineno-20-23"></a><span class="w">        </span><span class="c1"># Reinicia o loop mantendo o MESMO saldo</span>
+<a id="__codelineno-20-24" name="__codelineno-20-24" href="#__codelineno-20-24"></a><span class="w">        </span><span class="n">loop_do_servidor</span><span class="p">(</span><span class="n">saldo_atual</span><span class="p">)</span>
+<a id="__codelineno-20-25" name="__codelineno-20-25" href="#__codelineno-20-25"></a><span class="w">    </span><span class="k">end</span>
+<a id="__codelineno-20-26" name="__codelineno-20-26" href="#__codelineno-20-26"></a><span class="w">  </span><span class="k">end</span>
+<a id="__codelineno-20-27" name="__codelineno-20-27" href="#__codelineno-20-27"></a><span class="k">end</span>
+</code></pre></div>
+<h3 id="testando-a-versao-manual-iex">⚡ Testando a Versão Manual (IEx)<a class="headerlink" href="#testando-a-versao-manual-iex" title="Permanent link">&para;</a></h3>
+<p>Abra o terminal e veja a dificuldade de comunicação:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-21-1" name="__codelineno-21-1" href="#__codelineno-21-1"></a><span class="c1"># 1. Iniciar</span>
+<a id="__codelineno-21-2" name="__codelineno-21-2" href="#__codelineno-21-2"></a><span class="nv">pid</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>ContaManual.iniciar<span class="o">(</span><span class="m">0</span><span class="o">)</span>
+<a id="__codelineno-21-3" name="__codelineno-21-3" href="#__codelineno-21-3"></a>
+<a id="__codelineno-21-4" name="__codelineno-21-4" href="#__codelineno-21-4"></a><span class="c1"># 2. Depositar (Fácil, só enviar)</span>
+<a id="__codelineno-21-5" name="__codelineno-21-5" href="#__codelineno-21-5"></a>send<span class="o">(</span>pid,<span class="w"> </span><span class="o">{</span>:depositar,<span class="w"> </span><span class="m">500</span><span class="o">})</span>
+<a id="__codelineno-21-6" name="__codelineno-21-6" href="#__codelineno-21-6"></a><span class="c1"># &quot;💰 [Manual] Depositado 500. Novo saldo: 500&quot;</span>
+<a id="__codelineno-21-7" name="__codelineno-21-7" href="#__codelineno-21-7"></a>
+<a id="__codelineno-21-8" name="__codelineno-21-8" href="#__codelineno-21-8"></a><span class="c1"># 3. Ver Saldo (Difícil! Preciso enviar meu PID e esperar resposta)</span>
+<a id="__codelineno-21-9" name="__codelineno-21-9" href="#__codelineno-21-9"></a>send<span class="o">(</span>pid,<span class="w"> </span><span class="o">{</span>:ver_saldo,<span class="w"> </span>self<span class="o">()})</span>
+<a id="__codelineno-21-10" name="__codelineno-21-10" href="#__codelineno-21-10"></a>
+<a id="__codelineno-21-11" name="__codelineno-21-11" href="#__codelineno-21-11"></a><span class="c1"># Agora preciso caçar a resposta na minha caixa de correio</span>
+<a id="__codelineno-21-12" name="__codelineno-21-12" href="#__codelineno-21-12"></a>flush<span class="o">()</span>
+<a id="__codelineno-21-13" name="__codelineno-21-13" href="#__codelineno-21-13"></a><span class="c1"># {:resposta_saldo, 500}</span>
+</code></pre></div>
+<p><strong>Análise do Professor:</strong>
+Funciona? Sim. Mas é frágil.</p>
+<ul>
+<li>E se o processo morrer? O cliente fica esperando pra sempre.</li>
+<li>E se eu quiser esperar a resposta (Síncrono)? Teria que escrever um <code>receive</code> no cliente.</li>
+<li>É muito código repetitivo ("Boilerplate").</li>
+</ul>
+<hr />
+<h2 id="2-etapa-b-o-padrao-ouro-genserver">2. Etapa B: O Padrão Ouro (<code>GenServer</code>) 🏆<a class="headerlink" href="#2-etapa-b-o-padrao-ouro-genserver" title="Permanent link">&para;</a></h2>
+<p>Na Etapa A, construímos um servidor "na unha". Funciona? Sim. É seguro para produção? <strong>Não.</strong>
+Como engenheiros, analisamos os riscos daquela abordagem manual:
+1. <strong>Boilerplate:</strong> Você teve que escrever a recursão (<code>loop_do_servidor</code>) manualmente. Se esquecer uma linha, o servidor morre.
+2. <strong>Timeouts:</strong> Se você mandar uma mensagem e o servidor não responder, seu cliente fica travado para sempre.
+3. <strong>Padronização:</strong> Se cada programador escrever seu próprio loop <code>receive</code>, o código do projeto vira uma bagunça imprevisível.
+Para resolver isso, a OTP (Open Telecom Platform) nos dá o <strong>GenServer</strong> (Generic Server). Ele abstrai a recursão, o tratamento de erros e o ciclo de vida do processo.</p>
+<p><strong>2.1. Teoria: A Fronteira do Processo (Client vs Server)</strong></p>
+<p>A maior confusão de quem começa com GenServer é entender <strong>onde</strong> o código está rodando. O módulo do GenServer é dividido em duas partes que rodam em processos diferentes.
+Imagine um <strong>Restaurante</strong>:
+1. <strong>Client API (O Garçom):</strong> É a interface pública. Você chama essas funções. Elas rodam no <strong>seu</strong> processo (no terminal ou na requisição HTTP). O trabalho delas é apenas anotar o pedido e gritar para a cozinha.
+2. <strong>Server Callbacks (A Cozinha):</strong> É a implementação interna. Essas funções rodam dentro do <strong>processo do GenServer</strong>. Elas recebem o pedido, cozinham (processam a lógica/estado) e devolvem o prato.</p>
+<p><strong>2.2. Os Protocolos de Comunicação (<code>Call</code> vs <code>Cast</code>)</strong></p>
+<p>Em sistemas distribuídos, a forma como enviamos mensagens define a confiabilidade do sistema. O GenServer padroniza isso em dois verbos:</p>
+<table>
+<thead>
+<tr>
+<th>Tipo</th>
+<th>O Verbo</th>
+<th>Analogia do Mundo Real</th>
+<th>Comportamento Técnico</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Síncrono</td>
+<td><strong>Call</strong></td>
+<td>Ligar para a Pizzaria 📞</td>
+<td>Você fica esperando a resposta. Se não atender em 5s (timeout), gera erro. <strong>Garante consistência.</strong></td>
+</tr>
+<tr>
+<td>Assíncrono</td>
+<td><strong>Cast</strong></td>
+<td>Mandar um e-mail 📧</td>
+<td>Você envia e não espera retorno. Pode ser lido agora ou mais tarde. <strong>Garante performance (“fire and forget”).</strong></td>
+</tr>
+</tbody>
+</table>
+<p><strong>3. Laboratório Prático: O Banco Profissional</strong></p>
+<p>Agora vamos refazer nossa conta bancária, mas usando a estrutura que você verá em empresas reais como Discord ou WhatsApp.
+Desafio de Engenharia:
+Implementar o módulo ContaBancaria onde:
+• O <strong>Estado</strong> (Saldo) é gerenciado automaticamente pelo GenServer.
+• <strong>Depósitos</strong> usam <code>cast</code> (pois o banco aceita seu dinheiro na hora, sem bloquear).
+• <strong>Saques</strong> e <strong>Consultas</strong> usam <code>call</code> (pois você precisa da resposta imediata).</p>
+<h3 id="passo-2-a-implementacao-profissional">🛠️ Passo 2: A Implementação Profissional<a class="headerlink" href="#passo-2-a-implementacao-profissional" title="Permanent link">&para;</a></h3>
+<p>Vamos criar o módulo <code>ContaBancaria</code> (a versão final) dentro do projeto.</p>
+<p>Crie o arquivo <code>lib/conta_bancaria.ex</code>.
+<em>Note como <code>loop(novo_saldo)</code> vira <code>{:noreply, novo_saldo}</code>.</em></p>
+<p>Elixir</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-22-1" name="__codelineno-22-1" href="#__codelineno-22-1"></a><span class="kd">defmodule</span><span class="w"> </span><span class="nc">ContaBancaria</span><span class="w"> </span><span class="k">do</span>
+<a id="__codelineno-22-2" name="__codelineno-22-2" href="#__codelineno-22-2"></a><span class="w">  </span><span class="c1"># 1. Injeta o comportamento de GenServer (o loop invisível)</span>
+<a id="__codelineno-22-3" name="__codelineno-22-3" href="#__codelineno-22-3"></a><span class="w">  </span><span class="kn">use</span><span class="w"> </span><span class="nc">GenServer</span>
+<a id="__codelineno-22-4" name="__codelineno-22-4" href="#__codelineno-22-4"></a>
+<a id="__codelineno-22-5" name="__codelineno-22-5" href="#__codelineno-22-5"></a><span class="w">  </span><span class="c1"># ===================================================================</span>
+<a id="__codelineno-22-6" name="__codelineno-22-6" href="#__codelineno-22-6"></a><span class="w">  </span><span class="c1"># API DO CLIENTE (Roda no processo do usuário)</span>
+<a id="__codelineno-22-7" name="__codelineno-22-7" href="#__codelineno-22-7"></a><span class="w">  </span><span class="c1"># ===================================================================</span>
+<a id="__codelineno-22-8" name="__codelineno-22-8" href="#__codelineno-22-8"></a>
+<a id="__codelineno-22-9" name="__codelineno-22-9" href="#__codelineno-22-9"></a><span class="w">  </span><span class="na">@doc</span><span class="w"> </span><span class="s2">&quot;Inicia a conta. O argumento é o saldo inicial (default 0).&quot;</span>
+<a id="__codelineno-22-10" name="__codelineno-22-10" href="#__codelineno-22-10"></a><span class="w">  </span><span class="kd">def</span><span class="w"> </span><span class="n">abrir_conta</span><span class="p">(</span><span class="n">saldo_inicial</span><span class="w"> </span><span class="p">\\</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="k">do</span>
+<a id="__codelineno-22-11" name="__codelineno-22-11" href="#__codelineno-22-11"></a><span class="w">    </span><span class="c1"># __MODULE__ é um atalho para &#39;ContaBancaria&#39;.</span>
+<a id="__codelineno-22-12" name="__codelineno-22-12" href="#__codelineno-22-12"></a><span class="w">    </span><span class="nc">GenServer</span><span class="o">.</span><span class="n">start_link</span><span class="p">(</span><span class="bp">__MODULE__</span><span class="p">,</span><span class="w"> </span><span class="n">saldo_inicial</span><span class="p">)</span>
+<a id="__codelineno-22-13" name="__codelineno-22-13" href="#__codelineno-22-13"></a><span class="w">  </span><span class="k">end</span>
+<a id="__codelineno-22-14" name="__codelineno-22-14" href="#__codelineno-22-14"></a>
+<a id="__codelineno-22-15" name="__codelineno-22-15" href="#__codelineno-22-15"></a><span class="w">  </span><span class="kd">def</span><span class="w"> </span><span class="n">ver_saldo</span><span class="p">(</span><span class="n">pid</span><span class="p">)</span><span class="w"> </span><span class="k">do</span>
+<a id="__codelineno-22-16" name="__codelineno-22-16" href="#__codelineno-22-16"></a><span class="w">    </span><span class="c1"># Call = Síncrono. O GenServer cuida de enviar, esperar e retornar o valor.</span>
+<a id="__codelineno-22-17" name="__codelineno-22-17" href="#__codelineno-22-17"></a><span class="w">    </span><span class="nc">GenServer</span><span class="o">.</span><span class="n">call</span><span class="p">(</span><span class="n">pid</span><span class="p">,</span><span class="w"> </span><span class="ss">:mostrar_saldo</span><span class="p">)</span>
+<a id="__codelineno-22-18" name="__codelineno-22-18" href="#__codelineno-22-18"></a><span class="w">  </span><span class="k">end</span>
+<a id="__codelineno-22-19" name="__codelineno-22-19" href="#__codelineno-22-19"></a>
+<a id="__codelineno-22-20" name="__codelineno-22-20" href="#__codelineno-22-20"></a><span class="w">  </span><span class="kd">def</span><span class="w"> </span><span class="n">depositar</span><span class="p">(</span><span class="n">pid</span><span class="p">,</span><span class="w"> </span><span class="n">valor</span><span class="p">)</span><span class="w"> </span><span class="k">do</span>
+<a id="__codelineno-22-21" name="__codelineno-22-21" href="#__codelineno-22-21"></a><span class="w">    </span><span class="c1"># Cast = Assíncrono. Só avisa.</span>
+<a id="__codelineno-22-22" name="__codelineno-22-22" href="#__codelineno-22-22"></a><span class="w">    </span><span class="nc">GenServer</span><span class="o">.</span><span class="n">cast</span><span class="p">(</span><span class="n">pid</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="ss">:depositar</span><span class="p">,</span><span class="w"> </span><span class="n">valor</span><span class="p">})</span>
+<a id="__codelineno-22-23" name="__codelineno-22-23" href="#__codelineno-22-23"></a><span class="w">  </span><span class="k">end</span>
+<a id="__codelineno-22-24" name="__codelineno-22-24" href="#__codelineno-22-24"></a>
+<a id="__codelineno-22-25" name="__codelineno-22-25" href="#__codelineno-22-25"></a><span class="w">  </span><span class="kd">def</span><span class="w"> </span><span class="n">sacar</span><span class="p">(</span><span class="n">pid</span><span class="p">,</span><span class="w"> </span><span class="n">valor</span><span class="p">)</span><span class="w"> </span><span class="k">do</span>
+<a id="__codelineno-22-26" name="__codelineno-22-26" href="#__codelineno-22-26"></a><span class="w">    </span><span class="c1"># Call = Síncrono. Preciso saber se deu certo.</span>
+<a id="__codelineno-22-27" name="__codelineno-22-27" href="#__codelineno-22-27"></a><span class="w">    </span><span class="nc">GenServer</span><span class="o">.</span><span class="n">call</span><span class="p">(</span><span class="n">pid</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="ss">:sacar</span><span class="p">,</span><span class="w"> </span><span class="n">valor</span><span class="p">})</span>
+<a id="__codelineno-22-28" name="__codelineno-22-28" href="#__codelineno-22-28"></a><span class="w">  </span><span class="k">end</span>
+<a id="__codelineno-22-29" name="__codelineno-22-29" href="#__codelineno-22-29"></a>
+<a id="__codelineno-22-30" name="__codelineno-22-30" href="#__codelineno-22-30"></a><span class="w">  </span><span class="c1"># ===================================================================</span>
+<a id="__codelineno-22-31" name="__codelineno-22-31" href="#__codelineno-22-31"></a><span class="w">  </span><span class="c1"># CALLBACKS DO SERVIDOR (A Lógica Interna)</span>
+<a id="__codelineno-22-32" name="__codelineno-22-32" href="#__codelineno-22-32"></a><span class="w">  </span><span class="c1"># ===================================================================</span>
+<a id="__codelineno-22-33" name="__codelineno-22-33" href="#__codelineno-22-33"></a>
+<a id="__codelineno-22-34" name="__codelineno-22-34" href="#__codelineno-22-34"></a><span class="w">  </span><span class="c1"># 2. init/1: Define o estado inicial da primeira volta do loop.</span>
+<a id="__codelineno-22-35" name="__codelineno-22-35" href="#__codelineno-22-35"></a><span class="w">  </span><span class="na">@impl</span><span class="w"> </span><span class="no">true</span>
+<a id="__codelineno-22-36" name="__codelineno-22-36" href="#__codelineno-22-36"></a><span class="w">  </span><span class="kd">def</span><span class="w"> </span><span class="n">init</span><span class="p">(</span><span class="n">saldo_inicial</span><span class="p">)</span><span class="w"> </span><span class="k">do</span>
+<a id="__codelineno-22-37" name="__codelineno-22-37" href="#__codelineno-22-37"></a><span class="w">    </span><span class="p">{</span><span class="ss">:ok</span><span class="p">,</span><span class="w"> </span><span class="n">saldo_inicial</span><span class="p">}</span>
+<a id="__codelineno-22-38" name="__codelineno-22-38" href="#__codelineno-22-38"></a><span class="w">  </span><span class="k">end</span>
+<a id="__codelineno-22-39" name="__codelineno-22-39" href="#__codelineno-22-39"></a>
+<a id="__codelineno-22-40" name="__codelineno-22-40" href="#__codelineno-22-40"></a><span class="w">  </span><span class="c1"># 3. handle_call: Responde ao cliente E decide o estado futuro.</span>
+<a id="__codelineno-22-41" name="__codelineno-22-41" href="#__codelineno-22-41"></a><span class="w">  </span><span class="na">@impl</span><span class="w"> </span><span class="no">true</span>
+<a id="__codelineno-22-42" name="__codelineno-22-42" href="#__codelineno-22-42"></a><span class="w">  </span><span class="kd">def</span><span class="w"> </span><span class="n">handle_call</span><span class="p">(</span><span class="ss">:mostrar_saldo</span><span class="p">,</span><span class="w"> </span><span class="n">_from</span><span class="p">,</span><span class="w"> </span><span class="n">saldo_atual</span><span class="p">)</span><span class="w"> </span><span class="k">do</span>
+<a id="__codelineno-22-43" name="__codelineno-22-43" href="#__codelineno-22-43"></a><span class="w">    </span><span class="c1"># {:reply, O_QUE_RESPONDE, O_ESTADO_FUTURO}</span>
+<a id="__codelineno-22-44" name="__codelineno-22-44" href="#__codelineno-22-44"></a><span class="w">    </span><span class="p">{</span><span class="ss">:reply</span><span class="p">,</span><span class="w"> </span><span class="n">saldo_atual</span><span class="p">,</span><span class="w"> </span><span class="n">saldo_atual</span><span class="p">}</span>
+<a id="__codelineno-22-45" name="__codelineno-22-45" href="#__codelineno-22-45"></a><span class="w">  </span><span class="k">end</span>
+<a id="__codelineno-22-46" name="__codelineno-22-46" href="#__codelineno-22-46"></a>
+<a id="__codelineno-22-47" name="__codelineno-22-47" href="#__codelineno-22-47"></a><span class="w">  </span><span class="na">@impl</span><span class="w"> </span><span class="no">true</span>
+<a id="__codelineno-22-48" name="__codelineno-22-48" href="#__codelineno-22-48"></a><span class="w">  </span><span class="kd">def</span><span class="w"> </span><span class="n">handle_call</span><span class="p">({</span><span class="ss">:sacar</span><span class="p">,</span><span class="w"> </span><span class="n">valor</span><span class="p">},</span><span class="w"> </span><span class="n">_from</span><span class="p">,</span><span class="w"> </span><span class="n">saldo_atual</span><span class="p">)</span><span class="w"> </span><span class="k">do</span>
+<a id="__codelineno-22-49" name="__codelineno-22-49" href="#__codelineno-22-49"></a><span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="n">saldo_atual</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="n">valor</span><span class="w"> </span><span class="k">do</span>
+<a id="__codelineno-22-50" name="__codelineno-22-50" href="#__codelineno-22-50"></a><span class="w">      </span><span class="n">novo_saldo</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">saldo_atual</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">valor</span>
+<a id="__codelineno-22-51" name="__codelineno-22-51" href="#__codelineno-22-51"></a><span class="w">      </span><span class="p">{</span><span class="ss">:reply</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="ss">:ok</span><span class="p">,</span><span class="w"> </span><span class="n">novo_saldo</span><span class="p">},</span><span class="w"> </span><span class="n">novo_saldo</span><span class="p">}</span>
+<a id="__codelineno-22-52" name="__codelineno-22-52" href="#__codelineno-22-52"></a><span class="w">    </span><span class="k">else</span>
+<a id="__codelineno-22-53" name="__codelineno-22-53" href="#__codelineno-22-53"></a><span class="w">      </span><span class="c1"># Responde erro e MANTÉM o estado antigo</span>
+<a id="__codelineno-22-54" name="__codelineno-22-54" href="#__codelineno-22-54"></a><span class="w">      </span><span class="p">{</span><span class="ss">:reply</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="ss">:error</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;Saldo Insuficiente&quot;</span><span class="p">},</span><span class="w"> </span><span class="n">saldo_atual</span><span class="p">}</span>
+<a id="__codelineno-22-55" name="__codelineno-22-55" href="#__codelineno-22-55"></a><span class="w">    </span><span class="k">end</span>
+<a id="__codelineno-22-56" name="__codelineno-22-56" href="#__codelineno-22-56"></a><span class="w">  </span><span class="k">end</span>
+<a id="__codelineno-22-57" name="__codelineno-22-57" href="#__codelineno-22-57"></a>
+<a id="__codelineno-22-58" name="__codelineno-22-58" href="#__codelineno-22-58"></a><span class="w">  </span><span class="c1"># 4. handle_cast: Não responde nada, apenas atualiza o estado futuro.</span>
+<a id="__codelineno-22-59" name="__codelineno-22-59" href="#__codelineno-22-59"></a><span class="w">  </span><span class="na">@impl</span><span class="w"> </span><span class="no">true</span>
+<a id="__codelineno-22-60" name="__codelineno-22-60" href="#__codelineno-22-60"></a><span class="w">  </span><span class="kd">def</span><span class="w"> </span><span class="n">handle_cast</span><span class="p">({</span><span class="ss">:depositar</span><span class="p">,</span><span class="w"> </span><span class="n">valor</span><span class="p">},</span><span class="w"> </span><span class="n">saldo_atual</span><span class="p">)</span><span class="w"> </span><span class="k">do</span>
+<a id="__codelineno-22-61" name="__codelineno-22-61" href="#__codelineno-22-61"></a><span class="w">    </span><span class="n">novo_saldo</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">saldo_atual</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">valor</span>
+<a id="__codelineno-22-62" name="__codelineno-22-62" href="#__codelineno-22-62"></a><span class="w">    </span><span class="nc">IO</span><span class="o">.</span><span class="n">puts</span><span class="p">(</span><span class="s2">&quot;🏦 [GenServer] Depósito de R$ </span><span class="si">#{</span><span class="n">valor</span><span class="si">}</span><span class="s2"> recebido.&quot;</span><span class="p">)</span>
+<a id="__codelineno-22-63" name="__codelineno-22-63" href="#__codelineno-22-63"></a>
+<a id="__codelineno-22-64" name="__codelineno-22-64" href="#__codelineno-22-64"></a><span class="w">    </span><span class="c1"># {:noreply, novo_saldo} é a versão chique de &quot;loop_do_servidor(novo_saldo)&quot;</span>
+<a id="__codelineno-22-65" name="__codelineno-22-65" href="#__codelineno-22-65"></a><span class="w">    </span><span class="p">{</span><span class="ss">:noreply</span><span class="p">,</span><span class="w"> </span><span class="n">novo_saldo</span><span class="p">}</span>
+<a id="__codelineno-22-66" name="__codelineno-22-66" href="#__codelineno-22-66"></a><span class="w">  </span><span class="k">end</span>
+<a id="__codelineno-22-67" name="__codelineno-22-67" href="#__codelineno-22-67"></a><span class="k">end</span>
+</code></pre></div>
+<h3 id="nota-de-engenharia-o-que-e-esse-impl-true">📝 Nota de Engenharia: O que é esse <code>@impl true</code>?<a class="headerlink" href="#nota-de-engenharia-o-que-e-esse-impl-true" title="Permanent link">&para;</a></h3>
+<p>Você deve ter notado que, antes das funções <code>handle_call</code> e <code>handle_cast</code>, colocamos o atributo <code>@impl true</code>.</p>
+<p>Se você vem do <strong>Java</strong> ou <strong>C#</strong>, isso é exatamente equivalente ao <strong><code>@Override</code></strong>.</p>
+<h3 id="para-que-serve">Para que serve?<a class="headerlink" href="#para-que-serve" title="Permanent link">&para;</a></h3>
+<p>O <code>use GenServer</code> define um <strong>Contrato</strong> (chamado de <em>Behaviour</em> em Elixir). Ele diz: <em>"Quem usar este módulo DEVE ou PODE implementar funções chamadas <code>init</code>, <code>handle_call</code>, <code>handle_cast</code>, etc."</em></p>
+<p>O <code>@impl true</code> serve dois propósitos:</p>
+<ol>
+<li><strong>Legibilidade (Para Humanos):</strong> Ele avisa ao programador que está lendo: <em>"Ei, essa função <code>handle_cast</code> não foi inventada por mim. Ela faz parte das regras do GenServer."</em></li>
+<li><strong>Segurança (Para o Compilador):</strong> Este é o mais importante. Ele age como um corretor ortográfico.</li>
+</ol>
+<p><strong>Exemplo do "Salva-Vidas":</strong>
+Imagine que você digitou errado o nome da função (escreveu <code>handle_cat</code> em vez de <code>handle_cast</code>).</p>
+<ul>
+<li><strong>SEM <code>@impl</code>:</strong> O Elixir vai achar que você criou uma função nova chamada <code>handle_cat</code> propositalmente. O código compila, mas seu servidor não funciona (as mensagens são ignoradas). Você perde horas debugando.</li>
+<li>
+<p><strong>COM <code>@impl</code>:</strong> O compilador vai gritar:</p>
+<blockquote>
+<p>"Erro: Você marcou handle_cat como uma implementação de GenServer, mas o GenServer não tem nenhuma função com esse nome. Você quis dizer handle_cast?"
+</p>
+</blockquote>
+</li>
+</ul>
+<p><strong>Regra de Ouro:</strong> Sempre use <code>@impl true</code> nos callbacks (<code>init</code>, <code>handle_call</code>, <code>handle_cast</code>, <code>terminate</code>). É o cinto de segurança do seu código.</p>
+<h3 id="testando-a-versao-genserver">⚡ Testando a Versão GenServer<a class="headerlink" href="#testando-a-versao-genserver" title="Permanent link">&para;</a></h3>
+<p>Volte ao terminal (<code>recompile()</code>). Veja como a experiência de uso (Developer Experience) é superior.</p>
+<p>Elixir</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-23-1" name="__codelineno-23-1" href="#__codelineno-23-1"></a><span class="c1"># 1. Abrir conta</span>
+<a id="__codelineno-23-2" name="__codelineno-23-2" href="#__codelineno-23-2"></a><span class="p">{</span><span class="ss">:ok</span><span class="p">,</span><span class="w"> </span><span class="n">pid</span><span class="p">}</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">ContaBancaria</span><span class="o">.</span><span class="n">abrir_conta</span><span class="p">(</span><span class="mi">1000</span><span class="p">)</span>
+<a id="__codelineno-23-3" name="__codelineno-23-3" href="#__codelineno-23-3"></a>
+<a id="__codelineno-23-4" name="__codelineno-23-4" href="#__codelineno-23-4"></a><span class="c1"># 2. Testar Assincronismo (Cast)</span>
+<a id="__codelineno-23-5" name="__codelineno-23-5" href="#__codelineno-23-5"></a><span class="nc">ContaBancaria</span><span class="o">.</span><span class="n">depositar</span><span class="p">(</span><span class="n">pid</span><span class="p">,</span><span class="w"> </span><span class="mi">500</span><span class="p">)</span>
+<a id="__codelineno-23-6" name="__codelineno-23-6" href="#__codelineno-23-6"></a><span class="c1"># :ok (Retorno imediato)</span>
+<a id="__codelineno-23-7" name="__codelineno-23-7" href="#__codelineno-23-7"></a><span class="c1"># [GenServer] Depósito de R$ 500 recebido. (Log assíncrono)</span>
+<a id="__codelineno-23-8" name="__codelineno-23-8" href="#__codelineno-23-8"></a>
+<a id="__codelineno-23-9" name="__codelineno-23-9" href="#__codelineno-23-9"></a><span class="c1"># 3. Testar Sincronismo (Call) - Sem precisar de flush()!</span>
+<a id="__codelineno-23-10" name="__codelineno-23-10" href="#__codelineno-23-10"></a><span class="nc">ContaBancaria</span><span class="o">.</span><span class="n">ver_saldo</span><span class="p">(</span><span class="n">pid</span><span class="p">)</span>
+<a id="__codelineno-23-11" name="__codelineno-23-11" href="#__codelineno-23-11"></a><span class="c1"># 1500</span>
+<a id="__codelineno-23-12" name="__codelineno-23-12" href="#__codelineno-23-12"></a>
+<a id="__codelineno-23-13" name="__codelineno-23-13" href="#__codelineno-23-13"></a><span class="c1"># 4. Testar Lógica de Negócio</span>
+<a id="__codelineno-23-14" name="__codelineno-23-14" href="#__codelineno-23-14"></a><span class="nc">ContaBancaria</span><span class="o">.</span><span class="n">sacar</span><span class="p">(</span><span class="n">pid</span><span class="p">,</span><span class="w"> </span><span class="mi">2000</span><span class="p">)</span>
+<a id="__codelineno-23-15" name="__codelineno-23-15" href="#__codelineno-23-15"></a><span class="c1"># {:error, &quot;Saldo Insuficiente&quot;}</span>
+</code></pre></div>
+<hr />
+<h2 id="3-reflexao-de-engenharia">3. Reflexão de Engenharia<a class="headerlink" href="#3-reflexao-de-engenharia" title="Permanent link">&para;</a></h2>
+<p>Por que migramos do manual para o GenServer?</p>
+<ol>
+<li><strong>Abstração do Loop:</strong> Não precisamos escrever a recursão manualmente. O retorno <code>{:noreply, novo_estado}</code> cuida disso.</li>
+<li><strong>Abstração da Comunicação:</strong> Não precisamos lidar com PIDs de resposta no <code>handle_call</code>. O GenServer sabe quem chamou e devolve a resposta.</li>
+<li><strong>Tratamento de Erros:</strong> O GenServer captura exceções e evita que um crash leve o sistema todo junto (ele isola a falha).</li>
+</ol>
+<hr />
+<p><strong>Professor:</strong> Agora temos um sistema funcional e limpo.
+Mas, como engenheiros, devemos ser pessimistas. <strong>E se houver um bug no código?</strong> E se dividirmos por zero? O processo vai morrer. O dinheiro vai sumir.</p>
+<h1 id="modulo-4-supervisores-e-tolerancia-a-falhas">🛡️ Módulo 4: Supervisores e Tolerância a Falhas<a class="headerlink" href="#modulo-4-supervisores-e-tolerancia-a-falhas" title="Permanent link">&para;</a></h1>
+<p><strong>Objetivo:</strong> Transformar nosso processo isolado em uma <strong>Árvore de Supervisão</strong> (Supervision Tree), criando um sistema que se cura sozinho (Self-healing).</p>
+<h2 id="1-teoria-o-supervisor">1. Teoria: O Supervisor<a class="headerlink" href="#1-teoria-o-supervisor" title="Permanent link">&para;</a></h2>
+<p>Um Supervisor é um processo especial. A única função dele é vigiar outros processos (chamados de <em>children</em> ou filhos).</p>
+<p>Se um filho morre (crash), o Supervisor percebe o sinal de saída (<code>EXIT</code>) e aplica uma estratégia de reinicialização.</p>
+<h3 id="estrategias-comuns">Estratégias Comuns:<a class="headerlink" href="#estrategias-comuns" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>:one_for_one (Um por Um):</strong> Se o processo A morrer, reinicie apenas o A. (Mais comum).</li>
+<li><strong>:one_for_all (Um por Todos):</strong> Se o processo A morrer, mate o B e o C, e reinicie todos. (Usado quando os processos dependem estritamente um do outro).</li>
+</ul>
+<hr />
+<h2 id="2-laboratorio-pratico-preparando-o-crash">2. Laboratório Prático: Preparando o Crash 💥<a class="headerlink" href="#2-laboratorio-pratico-preparando-o-crash" title="Permanent link">&para;</a></h2>
+<p>Para testar a resiliência, precisamos de uma forma de "quebrar" nossa conta bancária propositalmente.</p>
+<h3 id="passo-1-adicionando-o-botao-de-autodestruicao">🛠️ Passo 1: Adicionando o Botão de Autodestruição<a class="headerlink" href="#passo-1-adicionando-o-botao-de-autodestruicao" title="Permanent link">&para;</a></h3>
+<p>Edite o arquivo <code>lib/conta_bancaria.ex</code>. Vamos adicionar uma função que causa um erro fatal (divisão por zero ou <code>raise</code>).</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-24-1" name="__codelineno-24-1" href="#__codelineno-24-1"></a><span class="kd">defmodule</span><span class="w"> </span><span class="nc">ContaBancaria</span><span class="w"> </span><span class="k">do</span>
+<a id="__codelineno-24-2" name="__codelineno-24-2" href="#__codelineno-24-2"></a><span class="w">  </span><span class="kn">use</span><span class="w"> </span><span class="nc">GenServer</span>
+<a id="__codelineno-24-3" name="__codelineno-24-3" href="#__codelineno-24-3"></a>
+<a id="__codelineno-24-4" name="__codelineno-24-4" href="#__codelineno-24-4"></a><span class="w">  </span><span class="c1"># ... (Mantenha o código anterior de start_link, init, etc) ...</span>
+<a id="__codelineno-24-5" name="__codelineno-24-5" href="#__codelineno-24-5"></a>
+<a id="__codelineno-24-6" name="__codelineno-24-6" href="#__codelineno-24-6"></a><span class="w">  </span><span class="c1"># Adicione esta função na API do Cliente</span>
+<a id="__codelineno-24-7" name="__codelineno-24-7" href="#__codelineno-24-7"></a><span class="w">  </span><span class="kd">def</span><span class="w"> </span><span class="n">causar_bug</span><span class="p">(</span><span class="n">pid</span><span class="p">)</span><span class="w"> </span><span class="k">do</span>
+<a id="__codelineno-24-8" name="__codelineno-24-8" href="#__codelineno-24-8"></a><span class="w">    </span><span class="nc">GenServer</span><span class="o">.</span><span class="n">cast</span><span class="p">(</span><span class="n">pid</span><span class="p">,</span><span class="w"> </span><span class="ss">:bug_fatal</span><span class="p">)</span>
+<a id="__codelineno-24-9" name="__codelineno-24-9" href="#__codelineno-24-9"></a><span class="w">  </span><span class="k">end</span>
+<a id="__codelineno-24-10" name="__codelineno-24-10" href="#__codelineno-24-10"></a>
+<a id="__codelineno-24-11" name="__codelineno-24-11" href="#__codelineno-24-11"></a><span class="w">  </span><span class="c1"># Adicione este callback lá no final</span>
+<a id="__codelineno-24-12" name="__codelineno-24-12" href="#__codelineno-24-12"></a><span class="w">  </span><span class="na">@impl</span><span class="w"> </span><span class="no">true</span>
+<a id="__codelineno-24-13" name="__codelineno-24-13" href="#__codelineno-24-13"></a><span class="w">  </span><span class="kd">def</span><span class="w"> </span><span class="n">handle_cast</span><span class="p">(</span><span class="ss">:bug_fatal</span><span class="p">,</span><span class="w"> </span><span class="n">_saldo</span><span class="p">)</span><span class="w"> </span><span class="k">do</span>
+<a id="__codelineno-24-14" name="__codelineno-24-14" href="#__codelineno-24-14"></a><span class="w">    </span><span class="nc">IO</span><span class="o">.</span><span class="n">puts</span><span class="p">(</span><span class="s2">&quot;💣 BOOM! Ocorreu um erro inesperado...&quot;</span><span class="p">)</span>
+<a id="__codelineno-24-15" name="__codelineno-24-15" href="#__codelineno-24-15"></a><span class="w">    </span><span class="c1"># raise gera uma exceção que mata o processo na hora</span>
+<a id="__codelineno-24-16" name="__codelineno-24-16" href="#__codelineno-24-16"></a><span class="w">    </span><span class="k">raise</span><span class="w"> </span><span class="s2">&quot;Erro Fatal Simulada pelo Desenvolvedor&quot;</span>
+<a id="__codelineno-24-17" name="__codelineno-24-17" href="#__codelineno-24-17"></a><span class="w">  </span><span class="k">end</span>
+<a id="__codelineno-24-18" name="__codelineno-24-18" href="#__codelineno-24-18"></a>
+<a id="__codelineno-24-19" name="__codelineno-24-19" href="#__codelineno-24-19"></a><span class="w">  </span><span class="c1"># ... (Mantenha os outros handle_cast/handle_call) ...</span>
+<a id="__codelineno-24-20" name="__codelineno-24-20" href="#__codelineno-24-20"></a><span class="k">end</span>
+</code></pre></div>
+<hr />
+<h3 id="passo-2-transformando-o-projeto-em-uma-aplicacao">🛠️ Passo 2: Transformando o Projeto em uma Aplicação<a class="headerlink" href="#passo-2-transformando-o-projeto-em-uma-aplicacao" title="Permanent link">&para;</a></h3>
+<p>Quando criamos o projeto com <code>mix new lab_concorrencia</code>, ele veio "pelado". Precisamos dizer ao Mix que este projeto tem um ponto de entrada (uma Application Callback).</p>
+<ol>
+<li>Crie o arquivo <code>lib/lab_concorrencia/application.ex</code>:</li>
+</ol>
+<p>Elixir</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-25-1" name="__codelineno-25-1" href="#__codelineno-25-1"></a><span class="kd">defmodule</span><span class="w"> </span><span class="nc">LabConcorrencia.Application</span><span class="w"> </span><span class="k">do</span>
+<a id="__codelineno-25-2" name="__codelineno-25-2" href="#__codelineno-25-2"></a><span class="w">  </span><span class="c1"># Transforma este módulo em uma Application (ponto de partida do sistema)</span>
+<a id="__codelineno-25-3" name="__codelineno-25-3" href="#__codelineno-25-3"></a><span class="w">  </span><span class="kn">use</span><span class="w"> </span><span class="nc">Application</span>
+<a id="__codelineno-25-4" name="__codelineno-25-4" href="#__codelineno-25-4"></a>
+<a id="__codelineno-25-5" name="__codelineno-25-5" href="#__codelineno-25-5"></a><span class="w">  </span><span class="na">@impl</span><span class="w"> </span><span class="no">true</span>
+<a id="__codelineno-25-6" name="__codelineno-25-6" href="#__codelineno-25-6"></a><span class="w">  </span><span class="kd">def</span><span class="w"> </span><span class="n">start</span><span class="p">(</span><span class="n">_type</span><span class="p">,</span><span class="w"> </span><span class="n">_args</span><span class="p">)</span><span class="w"> </span><span class="k">do</span>
+<a id="__codelineno-25-7" name="__codelineno-25-7" href="#__codelineno-25-7"></a><span class="w">    </span><span class="c1"># Lista de filhos que queremos que iniciem junto com o App</span>
+<a id="__codelineno-25-8" name="__codelineno-25-8" href="#__codelineno-25-8"></a><span class="w">    </span><span class="n">children</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span>
+<a id="__codelineno-25-9" name="__codelineno-25-9" href="#__codelineno-25-9"></a><span class="w">      </span><span class="c1"># Aqui dizemos: &quot;Supervisor, inicie a ContaBancaria com saldo 1000&quot;</span>
+<a id="__codelineno-25-10" name="__codelineno-25-10" href="#__codelineno-25-10"></a><span class="w">      </span><span class="p">{</span><span class="nc">ContaBancaria</span><span class="p">,</span><span class="w"> </span><span class="mi">1000</span><span class="p">}</span>
+<a id="__codelineno-25-11" name="__codelineno-25-11" href="#__codelineno-25-11"></a><span class="w">    </span><span class="p">]</span>
+<a id="__codelineno-25-12" name="__codelineno-25-12" href="#__codelineno-25-12"></a>
+<a id="__codelineno-25-13" name="__codelineno-25-13" href="#__codelineno-25-13"></a><span class="w">    </span><span class="c1"># Opções:</span>
+<a id="__codelineno-25-14" name="__codelineno-25-14" href="#__codelineno-25-14"></a><span class="w">    </span><span class="c1"># strategy: :one_for_one -&gt; Se a conta morrer, reinicia ela.</span>
+<a id="__codelineno-25-15" name="__codelineno-25-15" href="#__codelineno-25-15"></a><span class="w">    </span><span class="c1"># name: Nome do Supervisor para referência.</span>
+<a id="__codelineno-25-16" name="__codelineno-25-16" href="#__codelineno-25-16"></a><span class="w">    </span><span class="n">opts</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="ss">strategy</span><span class="p">:</span><span class="w"> </span><span class="ss">:one_for_one</span><span class="p">,</span><span class="w"> </span><span class="ss">name</span><span class="p">:</span><span class="w"> </span><span class="nc">LabConcorrencia.Supervisor</span><span class="p">]</span>
+<a id="__codelineno-25-17" name="__codelineno-25-17" href="#__codelineno-25-17"></a>
+<a id="__codelineno-25-18" name="__codelineno-25-18" href="#__codelineno-25-18"></a><span class="w">    </span><span class="nc">IO</span><span class="o">.</span><span class="n">puts</span><span class="p">(</span><span class="s2">&quot;🛡️ Supervisor Iniciado. Vigiando processos...&quot;</span><span class="p">)</span>
+<a id="__codelineno-25-19" name="__codelineno-25-19" href="#__codelineno-25-19"></a><span class="w">    </span><span class="nc">Supervisor</span><span class="o">.</span><span class="n">start_link</span><span class="p">(</span><span class="n">children</span><span class="p">,</span><span class="w"> </span><span class="n">opts</span><span class="p">)</span>
+<a id="__codelineno-25-20" name="__codelineno-25-20" href="#__codelineno-25-20"></a><span class="w">  </span><span class="k">end</span>
+<a id="__codelineno-25-21" name="__codelineno-25-21" href="#__codelineno-25-21"></a><span class="k">end</span>
+</code></pre></div>
+<ol>
+<li><strong>IMPORTANTE:</strong> Precisamos avisar o Mix para carregar esse arquivo.
+Abra o arquivo <code>mix.exs</code> na raiz, procure a função <code>application</code> e altere para:</li>
+</ol>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-26-1" name="__codelineno-26-1" href="#__codelineno-26-1"></a><span class="w">  </span><span class="kd">def</span><span class="w"> </span><span class="n">application</span><span class="w"> </span><span class="k">do</span>
+<a id="__codelineno-26-2" name="__codelineno-26-2" href="#__codelineno-26-2"></a><span class="w">    </span><span class="p">[</span>
+<a id="__codelineno-26-3" name="__codelineno-26-3" href="#__codelineno-26-3"></a><span class="w">      </span><span class="ss">extra_applications</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="ss">:logger</span><span class="p">],</span>
+<a id="__codelineno-26-4" name="__codelineno-26-4" href="#__codelineno-26-4"></a><span class="w">      </span><span class="c1"># Adicione esta linha: &#39;mod&#39; define o módulo de entrada da aplicação</span>
+<a id="__codelineno-26-5" name="__codelineno-26-5" href="#__codelineno-26-5"></a><span class="w">      </span><span class="ss">mod</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nc">LabConcorrencia.Application</span><span class="p">,</span><span class="w"> </span><span class="p">[]}</span><span class="w"> </span>
+<a id="__codelineno-26-6" name="__codelineno-26-6" href="#__codelineno-26-6"></a><span class="w">    </span><span class="p">]</span>
+<a id="__codelineno-26-7" name="__codelineno-26-7" href="#__codelineno-26-7"></a><span class="w">  </span><span class="k">end</span>
+</code></pre></div>
+<hr />
+<h3 id="passo-3-o-teste-de-imortalidade-e-a-correcao-do-contrato">🛠️ Passo 3: O Teste de Imortalidade (e a Correção do Contrato) 🧪<a class="headerlink" href="#passo-3-o-teste-de-imortalidade-e-a-correcao-do-contrato" title="Permanent link">&para;</a></h3>
+<p>Agora que configuramos nosso Supervisor no <code>Application.ex</code>, a teoria diz que ele deve iniciar a conta automaticamente. Vamos testar?</p>
+<p><strong>1. O Erro Esperado (A Falha de Contrato)</strong>
+Reinicie o terminal (<code>iex -S mix</code>).
+Ao fazer isso, você provavelmente será recebido por uma mensagem de erro assustadora e o IEx fechará ou mostrará um crash log gigante.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-27-1" name="__codelineno-27-1" href="#__codelineno-27-1"></a>*<span class="w"> </span><span class="o">(</span>Mix<span class="o">)</span><span class="w"> </span>Could<span class="w"> </span>not<span class="w"> </span>start<span class="w"> </span>application<span class="w"> </span>lab_concorrencia:<span class="w"> </span>...<span class="w"> </span>**<span class="w"> </span><span class="o">(</span>EXIT<span class="o">)</span><span class="w"> </span>
+<a id="__codelineno-27-2" name="__codelineno-27-2" href="#__codelineno-27-2"></a>an<span class="w"> </span>exception<span class="w"> </span>was<span class="w"> </span>raised:<span class="w"> </span>**<span class="w"> </span><span class="o">(</span>UndefinedFunctionError<span class="o">)</span><span class="w"> </span>
+<a id="__codelineno-27-3" name="__codelineno-27-3" href="#__codelineno-27-3"></a><span class="k">function</span><span class="w"> </span>ContaBancaria.start_link/1<span class="w"> </span>is<span class="w"> </span>undefined<span class="w"> </span>or<span class="w"> </span>private
+</code></pre></div>
+<p><strong>👨‍🏫 O Diagnóstico de Engenharia:</strong>
+Por que falhou?
+Quando dissemos ao Supervisor para cuidar do filho <code>{ContaBancaria, 1000}</code>, o Supervisor assumiu o comportamento padrão da OTP: ele tentou procurar e executar uma função chamada <strong>obrigatoriamente</strong> de <code>start_link</code>.</p>
+<p>Mas espere! No passo anterior, nós demos o nome criativo de <code>abrir_conta</code>.</p>
+<ul>
+<li><strong>Você:</strong> "Quero abrir uma conta."</li>
+<li><strong>Supervisor:</strong> "Só sei executar <code>start_link</code>. Não encontrei, então vou crashar o sistema."</li>
+</ul>
+<p><strong>2. A Solução (Obedecendo a Convenção)</strong>
+Vamos renomear nossa função de inicialização para seguir o padrão da indústria.</p>
+<p>Edite o arquivo <code>lib/conta_bancaria.ex</code>:</p>
+<p>Elixir</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-28-1" name="__codelineno-28-1" href="#__codelineno-28-1"></a><span class="kd">defmodule</span><span class="w"> </span><span class="nc">ContaBancaria</span><span class="w"> </span><span class="k">do</span>
+<a id="__codelineno-28-2" name="__codelineno-28-2" href="#__codelineno-28-2"></a><span class="w">  </span><span class="kn">use</span><span class="w"> </span><span class="nc">GenServer</span>
+<a id="__codelineno-28-3" name="__codelineno-28-3" href="#__codelineno-28-3"></a>
+<a id="__codelineno-28-4" name="__codelineno-28-4" href="#__codelineno-28-4"></a><span class="w">  </span><span class="c1"># --- API DO CLIENTE ---</span>
+<a id="__codelineno-28-5" name="__codelineno-28-5" href="#__codelineno-28-5"></a>
+<a id="__codelineno-28-6" name="__codelineno-28-6" href="#__codelineno-28-6"></a><span class="w">  </span><span class="c1"># ANTES: def abrir_conta(saldo_inicial \\ 0) do</span>
+<a id="__codelineno-28-7" name="__codelineno-28-7" href="#__codelineno-28-7"></a><span class="w">  </span><span class="c1"># DEPOIS: Renomeamos para start_link para o Supervisor encontrar</span>
+<a id="__codelineno-28-8" name="__codelineno-28-8" href="#__codelineno-28-8"></a><span class="w">  </span><span class="kd">def</span><span class="w"> </span><span class="n">start_link</span><span class="p">(</span><span class="n">saldo_inicial</span><span class="w"> </span><span class="p">\\</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="k">do</span>
+<a id="__codelineno-28-9" name="__codelineno-28-9" href="#__codelineno-28-9"></a><span class="w">    </span><span class="c1"># Aproveitamos para adicionar name: __MODULE__ (já prepara para o futuro)</span>
+<a id="__codelineno-28-10" name="__codelineno-28-10" href="#__codelineno-28-10"></a><span class="w">    </span><span class="nc">GenServer</span><span class="o">.</span><span class="n">start_link</span><span class="p">(</span><span class="bp">__MODULE__</span><span class="p">,</span><span class="w"> </span><span class="n">saldo_inicial</span><span class="p">,</span><span class="w"> </span><span class="ss">name</span><span class="p">:</span><span class="w"> </span><span class="bp">__MODULE__</span><span class="p">)</span>
+<a id="__codelineno-28-11" name="__codelineno-28-11" href="#__codelineno-28-11"></a><span class="w">  </span><span class="k">end</span>
+<a id="__codelineno-28-12" name="__codelineno-28-12" href="#__codelineno-28-12"></a>
+<a id="__codelineno-28-13" name="__codelineno-28-13" href="#__codelineno-28-13"></a><span class="w">  </span><span class="c1"># ... mantenha o resto igual ...</span>
+<a id="__codelineno-28-14" name="__codelineno-28-14" href="#__codelineno-28-14"></a><span class="k">end</span>
+</code></pre></div>
+<p><strong>3. O Teste de Imortalidade (Agora funciona!)</strong>
+Agora sim. Reinicie o terminal (<code>iex -S mix</code>).
+Você deve ver a mensagem: <code>"🛡️ Supervisor Iniciado..."</code>.</p>
+<p>Agora vamos provar que o sistema se cura sozinho.</p>
+<p><strong>A. Encontrando a Vítima:</strong>
+Como o Supervisor iniciou a conta, precisamos descobrir qual PID ele gerou.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-29-1" name="__codelineno-29-1" href="#__codelineno-29-1"></a><span class="c1"># O Supervisor nos diz quem são seus filhos.</span>
+<a id="__codelineno-29-2" name="__codelineno-29-2" href="#__codelineno-29-2"></a><span class="p">[{</span><span class="bp">_</span><span class="p">,</span><span class="w"> </span><span class="n">pid_da_conta</span><span class="p">,</span><span class="w"> </span><span class="bp">_</span><span class="p">,</span><span class="w"> </span><span class="bp">_</span><span class="p">}]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">Supervisor</span><span class="o">.</span><span class="n">which_children</span><span class="p">(</span><span class="nc">LabConcorrencia.Supervisor</span><span class="p">)</span>
+<a id="__codelineno-29-3" name="__codelineno-29-3" href="#__codelineno-29-3"></a>
+<a id="__codelineno-29-4" name="__codelineno-29-4" href="#__codelineno-29-4"></a><span class="c1"># Verifique se pegou certo:</span>
+<a id="__codelineno-29-5" name="__codelineno-29-5" href="#__codelineno-29-5"></a><span class="nc">IO</span><span class="o">.</span><span class="n">inspect</span><span class="p">(</span><span class="n">pid_da_conta</span><span class="p">)</span>
+<a id="__codelineno-29-6" name="__codelineno-29-6" href="#__codelineno-29-6"></a><span class="c1"># Ex: #PID&lt;0.155.0&gt;</span>
+</code></pre></div>
+<p><strong>B. Verificação de Saúde:</strong>
+Garanta que a conta está funcionando:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-30-1" name="__codelineno-30-1" href="#__codelineno-30-1"></a><span class="nc">ContaBancaria</span><span class="o">.</span><span class="n">ver_saldo</span><span class="p">(</span><span class="n">pid_da_conta</span><span class="p">)</span>
+<a id="__codelineno-30-2" name="__codelineno-30-2" href="#__codelineno-30-2"></a><span class="c1"># 1000 (O valor inicial configurado no Application.ex)</span>
+</code></pre></div>
+<p><strong>C. 💣 O GRANDE MOMENTO: A Sabotagem:</strong>
+Vamos invocar a função <code>causar_bug</code> que criamos. Prepare-se para o erro vermelho (que agora é sinal de sucesso).</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-31-1" name="__codelineno-31-1" href="#__codelineno-31-1"></a><span class="nc">ContaBancaria</span><span class="o">.</span><span class="n">causar_bug</span><span class="p">(</span><span class="n">pid_da_conta</span><span class="p">)</span>
+</code></pre></div>
+<p><strong>O que aconteceu?</strong></p>
+<ol>
+<li>O processo morreu (Crash).</li>
+<li>O Supervisor percebeu o sinal de <code>EXIT</code>.</li>
+<li>Imediatamente, ele iniciou um <strong>novo processo</strong> para substituir o morto.</li>
+</ol>
+<p><strong>D. A Prova da Ressurreição:</strong>
+Tente falar com o PID antigo:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-32-1" name="__codelineno-32-1" href="#__codelineno-32-1"></a><span class="nc">Process</span><span class="o">.</span><span class="n">alive?</span><span class="p">(</span><span class="n">pid_da_conta</span><span class="p">)</span>
+<a id="__codelineno-32-2" name="__codelineno-32-2" href="#__codelineno-32-2"></a><span class="c1"># false (Morto e enterrado)</span>
+</code></pre></div>
+<p>Agora, pergunte ao Supervisor quem é o filho dele <strong>agora</strong>:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-33-1" name="__codelineno-33-1" href="#__codelineno-33-1"></a><span class="nc">Supervisor</span><span class="o">.</span><span class="n">which_children</span><span class="p">(</span><span class="nc">LabConcorrencia.Supervisor</span><span class="p">)</span>
+<a id="__codelineno-33-2" name="__codelineno-33-2" href="#__codelineno-33-2"></a><span class="c1"># Saída: [{ContaBancaria, #PID&lt;0.160.0&gt;, ...}]</span>
+</code></pre></div>
+<p><strong>Olhe o PID!</strong> É um número novo (ex: 160).
+O Supervisor limpou a bagunça e subiu uma nova instância. Seu banco digital continua no ar, pronto para receber novos clientes.</p>
+<hr />
+<h2 id="3-reflexao-de-arquitetura-o-pulo-do-gato">3. Reflexão de Arquitetura (O "Pulo do Gato")<a class="headerlink" href="#3-reflexao-de-arquitetura-o-pulo-do-gato" title="Permanent link">&para;</a></h2>
+<p>Aluno, observe um detalhe crítico:</p>
+<p>Pegue o PID novo e veja o saldo:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-34-1" name="__codelineno-34-1" href="#__codelineno-34-1"></a><span class="p">[{</span><span class="bp">_</span><span class="p">,</span><span class="w"> </span><span class="n">novo_pid</span><span class="p">,</span><span class="w"> </span><span class="bp">_</span><span class="p">,</span><span class="w"> </span><span class="bp">_</span><span class="p">}]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">Supervisor</span><span class="o">.</span><span class="n">which_children</span><span class="p">(</span><span class="nc">LabConcorrencia.Supervisor</span><span class="p">)</span>
+<a id="__codelineno-34-2" name="__codelineno-34-2" href="#__codelineno-34-2"></a><span class="w">    </span><span class="nc">ContaBancaria</span><span class="o">.</span><span class="n">ver_saldo</span><span class="p">(</span><span class="n">novo_pid</span><span class="p">)</span>
+<a id="__codelineno-34-3" name="__codelineno-34-3" href="#__codelineno-34-3"></a><span class="c1"># 1000</span>
+</code></pre></div>
+<p>Se você tivesse depositado 500 reais antes do crash, o saldo seria 1500. Após o crash, ele voltou para 1000 (estado inicial).</p>
+<p><strong>Por quê?</strong>
+Porque processos guardam estado em <strong>Memória RAM</strong>. Se o processo morre, a memória vai junto. O Supervisor reinicia o processo "do zero" (clean state).</p>
+<p><strong>Engenharia de Sistemas Robustos:</strong></p>
+<ul>
+<li><strong>O Supervisor garante disponibilidade:</strong> O serviço do banco continua no ar (o processo existe).</li>
+<li><strong>O Banco de Dados garante persistência:</strong> Para não perder o saldo, o <code>GenServer</code> deveria salvar o valor num banco (Postgres/Redis) a cada depósito e ler do banco no <code>init</code>.</li>
+</ul>
+<hr />
+<p><strong>Parabéns!</strong> Você construiu um sistema que:</p>
+<ol>
+<li>Roda concorrentemente (Processos).</li>
+<li>Gerencia estado (GenServer).</li>
+<li>Se recupera de falhas sozinho (Supervisors).</li>
+</ol>
+<p>Isso é a base de sistemas como WhatsApp e Discord.</p>
+<p>Em um sistema real com milhares de processos, nós não ficamos anotando PIDs (<code>#PID&lt;0.155.0&gt;</code>) num caderninho. PIDs são efêmeros; eles mudam toda vez que o processo morre e renasce. Precisamos de um <strong>Nome Fixo</strong> (DNS interno). Vamos resolver isso ?</p>
+<hr />
+<h1 id="processos-nomeados-named-processes">🏷️ Processos Nomeados (Named Processes)<a class="headerlink" href="#processos-nomeados-named-processes" title="Permanent link">&para;</a></h1>
+<p><strong>O Problema:</strong> Quando o Supervisor reinicia a <code>ContaBancaria</code> após um crash, o PID muda. Se o seu código dependia do PID antigo, ele quebra.</p>
+<p><strong>A Solução:</strong> Registramos o processo com um nome (geralmente um Átomo). Assim, mandamos mensagens para o <strong>Nome</strong>, e o Elixir descobre quem é o PID atual daquele nome.</p>
+<h3 id="passo-1-atualizando-o-codigo">🛠️ Passo 1: Atualizando o Código<a class="headerlink" href="#passo-1-atualizando-o-codigo" title="Permanent link">&para;</a></h3>
+<p>Abra <code>lib/conta_bancaria.ex</code>. Vamos fazer apenas duas pequenas alterações:</p>
+<ol>
+<li>No <code>start_link</code>, vamos adicionar a opção <code>name</code>.</li>
+<li>Na API do cliente, vamos permitir chamar pelo nome.</li>
+</ol>
+<p>Elixir</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-35-1" name="__codelineno-35-1" href="#__codelineno-35-1"></a><span class="kd">defmodule</span><span class="w"> </span><span class="nc">ContaBancaria</span><span class="w"> </span><span class="k">do</span>
+<a id="__codelineno-35-2" name="__codelineno-35-2" href="#__codelineno-35-2"></a><span class="w">  </span><span class="kn">use</span><span class="w"> </span><span class="nc">GenServer</span>
+<a id="__codelineno-35-3" name="__codelineno-35-3" href="#__codelineno-35-3"></a>
+<a id="__codelineno-35-4" name="__codelineno-35-4" href="#__codelineno-35-4"></a><span class="w">  </span><span class="c1"># --- API DO CLIENTE ---</span>
+<a id="__codelineno-35-5" name="__codelineno-35-5" href="#__codelineno-35-5"></a>
+<a id="__codelineno-35-6" name="__codelineno-35-6" href="#__codelineno-35-6"></a><span class="w">  </span><span class="c1"># Alteração 1: name: __MODULE__</span>
+<a id="__codelineno-35-7" name="__codelineno-35-7" href="#__codelineno-35-7"></a><span class="w">  </span><span class="c1"># Isso registra o processo com o nome &quot;ContaBancaria&quot; (o átomo do módulo).</span>
+<a id="__codelineno-35-8" name="__codelineno-35-8" href="#__codelineno-35-8"></a><span class="w">  </span><span class="kd">def</span><span class="w"> </span><span class="n">start_link</span><span class="p">(</span><span class="n">saldo_inicial</span><span class="w"> </span><span class="p">\\</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="k">do</span>
+<a id="__codelineno-35-9" name="__codelineno-35-9" href="#__codelineno-35-9"></a><span class="w">    </span><span class="nc">GenServer</span><span class="o">.</span><span class="n">start_link</span><span class="p">(</span><span class="bp">__MODULE__</span><span class="p">,</span><span class="w"> </span><span class="n">saldo_inicial</span><span class="p">,</span><span class="w"> </span><span class="ss">name</span><span class="p">:</span><span class="w"> </span><span class="bp">__MODULE__</span><span class="p">)</span>
+<a id="__codelineno-35-10" name="__codelineno-35-10" href="#__codelineno-35-10"></a><span class="w">  </span><span class="k">end</span>
+<a id="__codelineno-35-11" name="__codelineno-35-11" href="#__codelineno-35-11"></a>
+<a id="__codelineno-35-12" name="__codelineno-35-12" href="#__codelineno-35-12"></a><span class="w">  </span><span class="c1"># Alteração 2: Default para o nome</span>
+<a id="__codelineno-35-13" name="__codelineno-35-13" href="#__codelineno-35-13"></a><span class="w">  </span><span class="c1"># Se o usuário não passar o PID, assumimos que ele quer falar com a conta padrão.</span>
+<a id="__codelineno-35-14" name="__codelineno-35-14" href="#__codelineno-35-14"></a><span class="w">  </span><span class="kd">def</span><span class="w"> </span><span class="n">ver_saldo</span><span class="p">(</span><span class="n">pid_ou_nome</span><span class="w"> </span><span class="p">\\</span><span class="w"> </span><span class="bp">__MODULE__</span><span class="p">)</span><span class="w"> </span><span class="k">do</span>
+<a id="__codelineno-35-15" name="__codelineno-35-15" href="#__codelineno-35-15"></a><span class="w">    </span><span class="nc">GenServer</span><span class="o">.</span><span class="n">call</span><span class="p">(</span><span class="n">pid_ou_nome</span><span class="p">,</span><span class="w"> </span><span class="ss">:mostrar_saldo</span><span class="p">)</span>
+<a id="__codelineno-35-16" name="__codelineno-35-16" href="#__codelineno-35-16"></a><span class="w">  </span><span class="k">end</span>
+<a id="__codelineno-35-17" name="__codelineno-35-17" href="#__codelineno-35-17"></a>
+<a id="__codelineno-35-18" name="__codelineno-35-18" href="#__codelineno-35-18"></a><span class="w">  </span><span class="kd">def</span><span class="w"> </span><span class="n">depositar</span><span class="p">(</span><span class="n">pid_ou_nome</span><span class="w"> </span><span class="p">\\</span><span class="w"> </span><span class="bp">__MODULE__</span><span class="p">,</span><span class="w"> </span><span class="n">valor</span><span class="p">)</span><span class="w"> </span><span class="k">do</span>
+<a id="__codelineno-35-19" name="__codelineno-35-19" href="#__codelineno-35-19"></a><span class="w">    </span><span class="nc">GenServer</span><span class="o">.</span><span class="n">cast</span><span class="p">(</span><span class="n">pid_ou_nome</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="ss">:depositar</span><span class="p">,</span><span class="w"> </span><span class="n">valor</span><span class="p">})</span>
+<a id="__codelineno-35-20" name="__codelineno-35-20" href="#__codelineno-35-20"></a><span class="w">  </span><span class="k">end</span>
+<a id="__codelineno-35-21" name="__codelineno-35-21" href="#__codelineno-35-21"></a>
+<a id="__codelineno-35-22" name="__codelineno-35-22" href="#__codelineno-35-22"></a><span class="w">  </span><span class="kd">def</span><span class="w"> </span><span class="n">sacar</span><span class="p">(</span><span class="n">pid_ou_nome</span><span class="w"> </span><span class="p">\\</span><span class="w"> </span><span class="bp">__MODULE__</span><span class="p">,</span><span class="w"> </span><span class="n">valor</span><span class="p">)</span><span class="w"> </span><span class="k">do</span>
+<a id="__codelineno-35-23" name="__codelineno-35-23" href="#__codelineno-35-23"></a><span class="w">    </span><span class="nc">GenServer</span><span class="o">.</span><span class="n">call</span><span class="p">(</span><span class="n">pid_ou_nome</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="ss">:sacar</span><span class="p">,</span><span class="w"> </span><span class="n">valor</span><span class="p">})</span>
+<a id="__codelineno-35-24" name="__codelineno-35-24" href="#__codelineno-35-24"></a><span class="w">  </span><span class="k">end</span>
+<a id="__codelineno-35-25" name="__codelineno-35-25" href="#__codelineno-35-25"></a>
+<a id="__codelineno-35-26" name="__codelineno-35-26" href="#__codelineno-35-26"></a><span class="w">  </span><span class="kd">def</span><span class="w"> </span><span class="n">causar_bug</span><span class="p">(</span><span class="n">pid_ou_nome</span><span class="w"> </span><span class="p">\\</span><span class="w"> </span><span class="bp">__MODULE__</span><span class="p">)</span><span class="w"> </span><span class="k">do</span>
+<a id="__codelineno-35-27" name="__codelineno-35-27" href="#__codelineno-35-27"></a><span class="w">    </span><span class="nc">GenServer</span><span class="o">.</span><span class="n">cast</span><span class="p">(</span><span class="n">pid_ou_nome</span><span class="p">,</span><span class="w"> </span><span class="ss">:bug_fatal</span><span class="p">)</span>
+<a id="__codelineno-35-28" name="__codelineno-35-28" href="#__codelineno-35-28"></a><span class="w">  </span><span class="k">end</span>
+<a id="__codelineno-35-29" name="__codelineno-35-29" href="#__codelineno-35-29"></a>
+<a id="__codelineno-35-30" name="__codelineno-35-30" href="#__codelineno-35-30"></a><span class="w">  </span><span class="c1"># ... (O resto do código e callbacks continuam IGUAIS) ...</span>
+<a id="__codelineno-35-31" name="__codelineno-35-31" href="#__codelineno-35-31"></a><span class="k">end</span>
+</code></pre></div>
+<h3 id="passo-2-o-teste-definitivo">🛠️ Passo 2: O Teste Definitivo<a class="headerlink" href="#passo-2-o-teste-definitivo" title="Permanent link">&para;</a></h3>
+<p>Reinicie seu terminal (<code>iex -S mix</code>) e veja a mágica da <strong>Transparência de Localização</strong>.</p>
+<ol>
+<li>
+<p><strong>Uso direto (Sem PID):</strong>Elixir</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-36-1" name="__codelineno-36-1" href="#__codelineno-36-1"></a><span class="c1"># Não preciso mais buscar PID. Chamo direto pelo nome do módulo.</span>
+<a id="__codelineno-36-2" name="__codelineno-36-2" href="#__codelineno-36-2"></a><span class="nc">ContaBancaria</span><span class="o">.</span><span class="n">ver_saldo</span><span class="p">()</span>
+<a id="__codelineno-36-3" name="__codelineno-36-3" href="#__codelineno-36-3"></a><span class="c1"># 1000</span>
+</code></pre></div>
+</li>
+<li>
+<p><strong>Crash e Recuperação Transparente:</strong>Elixir</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-37-1" name="__codelineno-37-1" href="#__codelineno-37-1"></a><span class="c1"># Vamos matar o processo</span>
+<a id="__codelineno-37-2" name="__codelineno-37-2" href="#__codelineno-37-2"></a><span class="nc">ContaBancaria</span><span class="o">.</span><span class="n">causar_bug</span><span class="p">()</span>
+<a id="__codelineno-37-3" name="__codelineno-37-3" href="#__codelineno-37-3"></a><span class="c1"># [Log de erro gigante...]</span>
+<a id="__codelineno-37-4" name="__codelineno-37-4" href="#__codelineno-37-4"></a>
+<a id="__codelineno-37-5" name="__codelineno-37-5" href="#__codelineno-37-5"></a><span class="c1"># IMEDIATAMENTE tente ver o saldo de novo:</span>
+<a id="__codelineno-37-6" name="__codelineno-37-6" href="#__codelineno-37-6"></a><span class="nc">ContaBancaria</span><span class="o">.</span><span class="n">ver_saldo</span><span class="p">()</span>
+<a id="__codelineno-37-7" name="__codelineno-37-7" href="#__codelineno-37-7"></a><span class="c1"># 1000</span>
+</code></pre></div>
+</li>
+</ol>
+<p><strong>O que aconteceu?</strong></p>
+<ol>
+<li>O processo antigo morreu.</li>
+<li>O Supervisor criou um novo PID.</li>
+<li>O novo processo, ao nascer, gritou: <em>"Agora EU sou o <code>ContaBancaria</code>!"</em></li>
+<li>Quando você chamou <code>ver_saldo()</code>, o Elixir mandou a mensagem para o novo PID automaticamente.</li>
+</ol>
+<p>Isso é <strong>Alta Disponibilidade</strong>. O cliente nem percebeu que o servidor caiu e voltou.</p>
+<h1 id="modulo-intermediario-especialistas-agent-e-task">🛠️ Módulo Intermediário: Especialistas (<code>Agent</code> e <code>Task</code>)<a class="headerlink" href="#modulo-intermediario-especialistas-agent-e-task" title="Permanent link">&para;</a></h1>
+<p>Em alguns casos, ao invés de usar <strong>GenServer</strong> (que faz tudo), podemos usar seus "irmãos menores". Eles são processos especializados:</p>
+<ol>
+<li><strong><code>Agent</code></strong>: Especialista em <strong>Guardar Estado</strong> (Simples).</li>
+<li><strong><code>Task</code></strong>: Especialista em <strong>Processamento Paralelo</strong> (Cálculo).</li>
+</ol>
+<hr />
+<h2 id="1-o-agent-o-cofre-de-estado">1. O <code>Agent</code> (O Cofre de Estado) 💼<a class="headerlink" href="#1-o-agent-o-cofre-de-estado" title="Permanent link">&para;</a></h2>
+<p>Imagine que você só quer guardar um valor (como uma configuração global ou um contador) e ler/atualizar isso de forma segura entre vários processos.
+Criar um <code>GenServer</code> inteiro com <code>handle_call</code> e <code>handle_cast</code> só para isso é "matar formiga com bazuca".</p>
+<p>O <strong>Agent</strong> abstrai tudo isso.</p>
+<h3 id="pratica-o-cofre-do-banco">🛠️ Prática: O Cofre do Banco<a class="headerlink" href="#pratica-o-cofre-do-banco" title="Permanent link">&para;</a></h3>
+<p>Vamos criar um cofre que guarda as reservas totais do banco.
+Crie o arquivo <code>lib/cofre.ex</code>:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-38-1" name="__codelineno-38-1" href="#__codelineno-38-1"></a><span class="kd">defmodule</span><span class="w"> </span><span class="nc">Cofre</span><span class="w"> </span><span class="k">do</span>
+<a id="__codelineno-38-2" name="__codelineno-38-2" href="#__codelineno-38-2"></a><span class="w">  </span><span class="c1"># Inicia o Agent.</span>
+<a id="__codelineno-38-3" name="__codelineno-38-3" href="#__codelineno-38-3"></a><span class="w">  </span><span class="c1"># A função anônima (fn -&gt; ...) define o estado inicial.</span>
+<a id="__codelineno-38-4" name="__codelineno-38-4" href="#__codelineno-38-4"></a><span class="w">  </span><span class="kd">def</span><span class="w"> </span><span class="n">start_link</span><span class="p">(</span><span class="n">valor_inicial</span><span class="p">)</span><span class="w"> </span><span class="k">do</span>
+<a id="__codelineno-38-5" name="__codelineno-38-5" href="#__codelineno-38-5"></a><span class="w">    </span><span class="nc">Agent</span><span class="o">.</span><span class="n">start_link</span><span class="p">(</span><span class="k">fn</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">valor_inicial</span><span class="w"> </span><span class="k">end</span><span class="p">,</span><span class="w"> </span><span class="ss">name</span><span class="p">:</span><span class="w"> </span><span class="bp">__MODULE__</span><span class="p">)</span>
+<a id="__codelineno-38-6" name="__codelineno-38-6" href="#__codelineno-38-6"></a><span class="w">  </span><span class="k">end</span>
+<a id="__codelineno-38-7" name="__codelineno-38-7" href="#__codelineno-38-7"></a>
+<a id="__codelineno-38-8" name="__codelineno-38-8" href="#__codelineno-38-8"></a><span class="w">  </span><span class="c1"># Leitura Síncrona</span>
+<a id="__codelineno-38-9" name="__codelineno-38-9" href="#__codelineno-38-9"></a><span class="w">  </span><span class="c1"># O Agent.get pega o estado atual e retorna o que você quiser.</span>
+<a id="__codelineno-38-10" name="__codelineno-38-10" href="#__codelineno-38-10"></a><span class="w">  </span><span class="c1"># Aqui retornamos o próprio saldo (&amp;(&amp;1) é um atalho para fn x -&gt; x end).</span>
+<a id="__codelineno-38-11" name="__codelineno-38-11" href="#__codelineno-38-11"></a><span class="w">  </span><span class="kd">def</span><span class="w"> </span><span class="n">ver_total</span><span class="w"> </span><span class="k">do</span>
+<a id="__codelineno-38-12" name="__codelineno-38-12" href="#__codelineno-38-12"></a><span class="w">    </span><span class="nc">Agent</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="bp">__MODULE__</span><span class="p">,</span><span class="w"> </span><span class="k">fn</span><span class="w"> </span><span class="n">saldo</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">saldo</span><span class="w"> </span><span class="k">end</span><span class="p">)</span>
+<a id="__codelineno-38-13" name="__codelineno-38-13" href="#__codelineno-38-13"></a><span class="w">  </span><span class="k">end</span>
+<a id="__codelineno-38-14" name="__codelineno-38-14" href="#__codelineno-38-14"></a>
+<a id="__codelineno-38-15" name="__codelineno-38-15" href="#__codelineno-38-15"></a><span class="w">  </span><span class="c1"># Atualização Síncrona</span>
+<a id="__codelineno-38-16" name="__codelineno-38-16" href="#__codelineno-38-16"></a><span class="w">  </span><span class="c1"># O Agent.update altera o estado.</span>
+<a id="__codelineno-38-17" name="__codelineno-38-17" href="#__codelineno-38-17"></a><span class="w">  </span><span class="kd">def</span><span class="w"> </span><span class="n">depositar</span><span class="p">(</span><span class="n">valor</span><span class="p">)</span><span class="w"> </span><span class="k">do</span>
+<a id="__codelineno-38-18" name="__codelineno-38-18" href="#__codelineno-38-18"></a><span class="w">    </span><span class="nc">Agent</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="bp">__MODULE__</span><span class="p">,</span><span class="w"> </span><span class="k">fn</span><span class="w"> </span><span class="n">saldo</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">saldo</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">valor</span><span class="w"> </span><span class="k">end</span><span class="p">)</span>
+<a id="__codelineno-38-19" name="__codelineno-38-19" href="#__codelineno-38-19"></a><span class="w">  </span><span class="k">end</span>
+<a id="__codelineno-38-20" name="__codelineno-38-20" href="#__codelineno-38-20"></a><span class="k">end</span>
+</code></pre></div>
+<h3 id="teste-no-terminal-iex-s-mix">⚡ Teste no Terminal (<code>iex -S mix</code>)<a class="headerlink" href="#teste-no-terminal-iex-s-mix" title="Permanent link">&para;</a></h3>
+<p>Olhe como é simples (sem callbacks complexos):</p>
+<p>Elixir</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-39-1" name="__codelineno-39-1" href="#__codelineno-39-1"></a><span class="c1"># 1. Iniciar com 50 mil reais</span>
+<a id="__codelineno-39-2" name="__codelineno-39-2" href="#__codelineno-39-2"></a><span class="nc">Cofre</span><span class="o">.</span><span class="n">start_link</span><span class="p">(</span><span class="mi">50_000</span><span class="p">)</span>
+<a id="__codelineno-39-3" name="__codelineno-39-3" href="#__codelineno-39-3"></a>
+<a id="__codelineno-39-4" name="__codelineno-39-4" href="#__codelineno-39-4"></a><span class="c1"># 2. Consultar</span>
+<a id="__codelineno-39-5" name="__codelineno-39-5" href="#__codelineno-39-5"></a><span class="nc">Cofre</span><span class="o">.</span><span class="n">ver_total</span><span class="p">()</span>
+<a id="__codelineno-39-6" name="__codelineno-39-6" href="#__codelineno-39-6"></a><span class="c1"># 50000</span>
+<a id="__codelineno-39-7" name="__codelineno-39-7" href="#__codelineno-39-7"></a>
+<a id="__codelineno-39-8" name="__codelineno-39-8" href="#__codelineno-39-8"></a><span class="c1"># 3. Atualizar</span>
+<a id="__codelineno-39-9" name="__codelineno-39-9" href="#__codelineno-39-9"></a><span class="nc">Cofre</span><span class="o">.</span><span class="n">depositar</span><span class="p">(</span><span class="mi">10_000</span><span class="p">)</span>
+<a id="__codelineno-39-10" name="__codelineno-39-10" href="#__codelineno-39-10"></a><span class="nc">Cofre</span><span class="o">.</span><span class="n">ver_total</span><span class="p">()</span>
+<a id="__codelineno-39-11" name="__codelineno-39-11" href="#__codelineno-39-11"></a><span class="c1"># 60000</span>
+</code></pre></div>
+<p><strong>Conceito de Engenharia:</strong> O <code>Agent</code> garante <strong>Atomicidade</strong>. Se 100 processos tentarem atualizar o cofre ao mesmo tempo, o Agent coloca todos em fila e atende um por um. Não há risco de corromper o dado.</p>
+<hr />
+<h2 id="2-a-task-o-trabalhador-assincrono">2. A <code>Task</code> (O Trabalhador Assíncrono) 👷<a class="headerlink" href="#2-a-task-o-trabalhador-assincrono" title="Permanent link">&para;</a></h2>
+<p>E se precisarmos fazer algo demorado (ex: enviar e-mail de confirmação ou gerar PDF) e não quisermos travar o nosso Banco?</p>
+<p>Lembre-se: O Elixir é síncrono por padrão. Se você colocar um <code>sleep(5000)</code> no meio do código, tudo para.
+A <strong>Task</strong> serve para jogar esse trabalho para um processo descartável secundário.</p>
+<h3 id="pratica-o-notificador">🛠️ Prática: O Notificador<a class="headerlink" href="#pratica-o-notificador" title="Permanent link">&para;</a></h3>
+<p>Crie o arquivo <code>lib/notificador.ex</code>:</p>
+<p>Elixir</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-40-1" name="__codelineno-40-1" href="#__codelineno-40-1"></a><span class="kd">defmodule</span><span class="w"> </span><span class="nc">Notificador</span><span class="w"> </span><span class="k">do</span>
+<a id="__codelineno-40-2" name="__codelineno-40-2" href="#__codelineno-40-2"></a><span class="w">  </span><span class="kd">def</span><span class="w"> </span><span class="n">enviar_email</span><span class="p">(</span><span class="n">cliente</span><span class="p">)</span><span class="w"> </span><span class="k">do</span>
+<a id="__codelineno-40-3" name="__codelineno-40-3" href="#__codelineno-40-3"></a><span class="w">    </span><span class="nc">IO</span><span class="o">.</span><span class="n">puts</span><span class="p">(</span><span class="s2">&quot;📧 Iniciando envio de email para </span><span class="si">#{</span><span class="n">cliente</span><span class="si">}</span><span class="s2">...&quot;</span><span class="p">)</span>
+<a id="__codelineno-40-4" name="__codelineno-40-4" href="#__codelineno-40-4"></a>
+<a id="__codelineno-40-5" name="__codelineno-40-5" href="#__codelineno-40-5"></a><span class="w">    </span><span class="c1"># Simula uma conexão lenta com servidor de email (3 segundos)</span>
+<a id="__codelineno-40-6" name="__codelineno-40-6" href="#__codelineno-40-6"></a><span class="w">    </span><span class="nc">Process</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">5000</span><span class="p">)</span>
+<a id="__codelineno-40-7" name="__codelineno-40-7" href="#__codelineno-40-7"></a>
+<a id="__codelineno-40-8" name="__codelineno-40-8" href="#__codelineno-40-8"></a><span class="w">    </span><span class="nc">IO</span><span class="o">.</span><span class="n">puts</span><span class="p">(</span><span class="s2">&quot;✅ Email enviado com sucesso para </span><span class="si">#{</span><span class="n">cliente</span><span class="si">}</span><span class="s2">!&quot;</span><span class="p">)</span>
+<a id="__codelineno-40-9" name="__codelineno-40-9" href="#__codelineno-40-9"></a><span class="w">  </span><span class="k">end</span>
+<a id="__codelineno-40-10" name="__codelineno-40-10" href="#__codelineno-40-10"></a><span class="k">end</span>
+</code></pre></div>
+<h3 id="teste-comparativo-iex">⚡ Teste Comparativo (IEx)<a class="headerlink" href="#teste-comparativo-iex" title="Permanent link">&para;</a></h3>
+<p><strong>Cenário A: O jeito travado (Sem Task)</strong>
+Rode isso e veja seu terminal congelar:</p>
+<p>Elixir</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-41-1" name="__codelineno-41-1" href="#__codelineno-41-1"></a><span class="nc">Notificador</span><span class="o">.</span><span class="n">enviar_email</span><span class="p">(</span><span class="s2">&quot;Joao&quot;</span><span class="p">)</span>
+<a id="__codelineno-41-2" name="__codelineno-41-2" href="#__codelineno-41-2"></a><span class="c1"># ... (você não consegue digitar nada por 3 segundos) ...</span>
+<a id="__codelineno-41-3" name="__codelineno-41-3" href="#__codelineno-41-3"></a><span class="c1"># &quot;✅ Email enviado...&quot;</span>
+</code></pre></div>
+<p><em>Em um servidor web, isso seria desastroso. O usuário ficaria vendo a ampulheta girar.</em></p>
+<p><strong>Cenário B: O jeito fluido (Com Task)</strong>
+Agora vamos usar <code>Task.start/1</code>.</p>
+<p>Elixir</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-42-1" name="__codelineno-42-1" href="#__codelineno-42-1"></a><span class="nc">Task</span><span class="o">.</span><span class="n">start</span><span class="p">(</span><span class="k">fn</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="nc">Notificador</span><span class="o">.</span><span class="n">enviar_email</span><span class="p">(</span><span class="s2">&quot;Maria&quot;</span><span class="p">)</span><span class="w"> </span><span class="k">end</span><span class="p">)</span>
+<a id="__codelineno-42-2" name="__codelineno-42-2" href="#__codelineno-42-2"></a><span class="c1"># {:ok, #PID&lt;0.165.0&gt;}</span>
+<a id="__codelineno-42-3" name="__codelineno-42-3" href="#__codelineno-42-3"></a><span class="c1"># O terminal libera IMEDIATAMENTE! Você pode continuar digitando.</span>
+</code></pre></div>
+<p><em>Três segundos depois, a mensagem "✅ Email enviado..." aparece magicamente no meio do que você estiver fazendo.</em></p>
+<p><strong>3. Resumo da Arquitetura: Quando usar o quê?</strong></p>
+<table>
+<thead>
+<tr>
+<th>Ferramenta</th>
+<th>Analogia</th>
+<th>Uso Principal</th>
+<th>Complexidade</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>spawn</strong></td>
+<td>Célula-tronco</td>
+<td>Baixo nível, criar processos brutos (evitar em produção).</td>
+<td>💀 Alta (Manual)</td>
+</tr>
+<tr>
+<td><strong>Task</strong></td>
+<td>Freelancer</td>
+<td>Tarefas pontuais, paralelas e descartáveis (cálculos, emails).</td>
+<td>⭐ Baixa</td>
+</tr>
+<tr>
+<td><strong>Agent</strong></td>
+<td>Armário / Cofre</td>
+<td>Guardar e compartilhar um estado simples.</td>
+<td>⭐ Baixa</td>
+</tr>
+<tr>
+<td><strong>GenServer</strong></td>
+<td>Gerente</td>
+<td>Lógica de negócio complexa, estado robusto e longa vida.</td>
+<td>⭐⭐ Média</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h1 id="revisao-geral-do-modulo">🎓 Revisão Geral do Modulo<a class="headerlink" href="#revisao-geral-do-modulo" title="Permanent link">&para;</a></h1>
+<p>Parabéns, caro aluno. Você completou a jornada fundamental da plataforma BEAM.
+Vamos recapitular o modelo mental que você construiu, pois é isso que importa na sua carreira.</p>
+<h3 id="1-o-paradigma-funcional">1. O Paradigma Funcional<a class="headerlink" href="#1-o-paradigma-funcional" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Imutabilidade:</strong> Dados nunca mudam. <code>lista = [1]</code> cria uma nova lista, não altera a antiga. Isso elimina efeitos colaterais.</li>
+<li><strong>Pipeline (<code>|&gt;</code>):</strong> Programar é transformar dados. <code>DadoBruto |&gt; Tratar |&gt; Salvar</code>.</li>
+<li><strong>Modules vs Classes:</strong> Módulos são sacos de funções. Não guardam estado.</li>
+<li><strong>Pattern Matching:</strong> A forma como tomamos decisões (<code>def handle(10), do: ...</code>) e extraímos dados, substituindo <code>if/else</code> complexos.</li>
+</ul>
+<h3 id="2-o-modelo-de-concorrencia-atores">2. O Modelo de Concorrência (Atores)<a class="headerlink" href="#2-o-modelo-de-concorrencia-atores" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Processos Leves:</strong> A unidade básica não é a Thread do SO, mas o Processo da BEAM. Isolados, leves (KB) e massivos (milhões).</li>
+<li><strong>Mensageria:</strong> Processos não compartilham memória. Eles trocam cópias de dados via <code>send</code> e <code>receive</code>.</li>
+<li><strong>Assíncrono (<code>cast</code>) vs Síncrono (<code>call</code>):</strong> A distinção vital em sistemas distribuídos.</li>
+</ul>
+<h3 id="3-as-ferramentas-de-trabalho">3. As Ferramentas de Trabalho<a class="headerlink" href="#3-as-ferramentas-de-trabalho" title="Permanent link">&para;</a></h3>
+<p>Não reinventamos a roda. Usamos abstrações:</p>
+<ul>
+<li><strong><code>Task</code>:</strong> Para rodar scripts paralelos ("Faça isso e me avise").</li>
+<li><strong><code>Agent</code>:</strong> Para guardar estado simples ("Segure este valor").</li>
+<li><strong><code>GenServer</code>:</strong> O servidor genérico. A peça fundamental para lógica de negócios com estado e concorrência.</li>
+</ul>
+<h3 id="4-tolerancia-a-falhas-the-erlang-way">4. Tolerância a Falhas (The Erlang Way)<a class="headerlink" href="#4-tolerancia-a-falhas-the-erlang-way" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Let it Crash:</strong> Não trate erros impossíveis. Deixe o processo morrer.</li>
+<li><strong>Supervisors:</strong> O "Anjo da Guarda" que vigia processos e os reinicia para um estado limpo e conhecido.</li>
+<li><strong>Árvore de Supervisão:</strong> A arquitetura hierárquica do sistema. Se um worker falha, o supervisor local resolve. Se o supervisor falha, o supervisor dele resolve.</li>
+</ul>
+<hr />
+<h3 id="proximos-passos-na-sua-carreira">🚀 Próximos Passos na sua Carreira<a class="headerlink" href="#proximos-passos-na-sua-carreira" title="Permanent link">&para;</a></h3>
+<p>Agora que você domina a base, para onde ir?</p>
+<ol>
+<li><strong>Phoenix Framework:</strong> É o "Django/Rails" do Elixir, mas capaz de aguentar milhões de conexões WebSocket simultâneas (graças aos Processos que você acabou de aprender!).</li>
+<li><strong>Ecto:</strong> A biblioteca de banco de dados. Você aprendeu que processos perdem estado ao reiniciar. O Ecto é quem salva isso no Postgres.</li>
+<li><strong>Broadway/GenStage:</strong> Para processamento de dados em massa (Data Pipelines) com back-pressure.</li>
+</ol>
+<p>Foi uma honra guiá-lo nesta jornada. Você agora tem o mindset de um Engenheiro de Software Concorrente. <strong>Sucesso!</strong></p>
+<h3 id="veja-mais">veja mais<a class="headerlink" href="#veja-mais" title="Permanent link">&para;</a></h3>
+<p><a href="https://www.youtube.com/watch?v=GeGXXfNvdSA">Excelente palestra do Fabia Akita de 2015</a></p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Voltar ao topo
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.top", "navigation.sections", "toc.integrate", "content.code.annotate", "content.code.copy"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copiado para \u00e1rea de transfer\u00eancia", "clipboard.copy": "Copiar para \u00e1rea de transfer\u00eancia", "search.result.more.one": "Mais 1 nesta p\u00e1gina", "search.result.more.other": "Mais # nesta p\u00e1gina", "search.result.none": "Nenhum resultado encontrado", "search.result.one": "1 resultado encontrado", "search.result.other": "# resultados encontrados", "search.result.placeholder": "Digite para iniciar a busca", "search.result.term.missing": "Ausente", "select.version": "Selecione a vers\u00e3o"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+        <script src="https://unpkg.com/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+    
+  </body>
+</html>

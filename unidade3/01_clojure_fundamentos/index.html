@@ -1,0 +1,2249 @@
+
+<!doctype html>
+<html lang="pt" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Livro didático da disciplina de Introdução à Programação Funcional: Haskell, Clojure e Elixir em três unidades de 20 horas.
+">
+      
+      
+        <meta name="author" content="Sergio Souza Costa">
+      
+      
+      
+        <link rel="prev" href="../00_plano_unidade3/">
+      
+      
+        <link rel="next" href="../02_clojure_colecoes/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+    
+    
+      
+        <title>Cap 15: Clojure — Fundamentos - Introdução à Programação Funcional</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="teal" data-md-color-accent="green">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#fundamentos-em-clojure" class="md-skip">
+          Ir para o conteúdo
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Cabeçalho">
+    <a href="../.." title="Introdução à Programação Funcional" class="md-header__button md-logo" aria-label="Introdução à Programação Funcional" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Introdução à Programação Funcional
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Cap 15: Clojure — Fundamentos
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="teal" data-md-color-accent="green"  aria-hidden="true"  type="radio" name="__palette" id="__palette_0">
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Buscar" placeholder="Buscar" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Pesquisar">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Limpar" aria-label="Limpar" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Inicializando a pesquisa
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+  
+
+<nav class="md-nav md-nav--primary md-nav--integrated" aria-label="Navegação" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Introdução à Programação Funcional" class="md-nav__button md-logo" aria-label="Introdução à Programação Funcional" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Introdução à Programação Funcional
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Apresentação
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Unidade 1 — Paradigmas e Haskell Básico (20h)
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Unidade 1 — Paradigmas e Haskell Básico (20h)
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../unidade1/00_plano_unidade1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Plano da Unidade 1
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../unidade1/01_paradigmas/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cap 1: Introdução aos Paradigmas
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../unidade1/02_instalacao/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cap 2: Instalação do Ambiente
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../unidade1/03_fundamentos/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cap 3: Fundamentos e o GHCi
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../unidade1/04_tipos_classes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cap 4: Tipos e Classes
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../unidade1/05_funcoes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cap 5: Funções e Pattern Matching
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../unidade1/06_listas/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cap 6: Listas, Recursão e Compreensão
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../unidade1/07_alta_ordem/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cap 7: Funções de Alta Ordem
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../unidade1/08_exercicios/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cap 8: Exercícios Resolvidos
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Unidade 2 — Haskell Avançado e Qualidade (20h)
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Unidade 2 — Haskell Avançado e Qualidade (20h)
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../unidade2/00_plano_unidade2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Plano da Unidade 2
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../unidade2/01_declarando_tipos_classes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cap 9: Tipos Algébricos e Typeclasses
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../unidade2/02_programas_interativos/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cap 10: Programas Interativos (IO)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../unidade2/03_exercicios_avancados/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cap 11: Exercícios Avançados
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../unidade2/04_haskell_moderno/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cap 12: Projetos Modernos com Stack
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../unidade2/05_biblioteca_json/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cap 13: A Biblioteca JSON
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../unidade2/06_testes_qualidade/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cap 14: Testes com QuickCheck
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../unidade2/07_avaliacao/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Trabalho Prático: hs2json
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Unidade 3 — Clojure e Elixir (20h)
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Unidade 3 — Clojure e Elixir (20h)
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../00_plano_unidade3/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Plano da Unidade 3
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cap 15: Clojure — Fundamentos
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cap 15: Clojure — Fundamentos
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Índice">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Índice
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1-introducao-e-conexao-de-paradigmas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Introdução e Conexão de Paradigmas
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1. Introdução e Conexão de Paradigmas">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#11-o-que-e-programacao-funcional-e-por-que-clojure-e-especial" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.1 O Que é Programação Funcional (e por que Clojure é especial?)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#12-computacao-como-funcoes-matematicas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.2. Computação como Funções Matemáticas
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#12-o-pilar-da-imutabilidade" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.2. O Pilar da Imutabilidade
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#13-por-que-escolher-clojure" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.3. Por que escolher Clojure?
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-sua-primeira-conversa-com-clojure-o-repl-e-a-sintaxe" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Sua Primeira Conversa com Clojure: O REPL e a Sintaxe
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. Sua Primeira Conversa com Clojure: O REPL e a Sintaxe">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21-o-repl-seu-ambiente-interativo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.1. O REPL: Seu Ambiente Interativo
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#21-preparando-o-ambiente-de-desenvolvimento" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.1. Preparando o Ambiente de Desenvolvimento
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#22-desmistificando-os-parenteses-a-sintaxe-de-clojure" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.2. Desmistificando os Parênteses: A Sintaxe de Clojure
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-dando-nomes-as-coisas-simbolos-escopo-e-keywords" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Dando Nomes às Coisas: Símbolos, Escopo e Keywords
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. Dando Nomes às Coisas: Símbolos, Escopo e Keywords">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#31-nomes-globais-com" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.1. Nomes Globais com
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#32-nomes-locais-com" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.2. Nomes Locais com
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#33-keywords-etiquetas-eficientes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.3. Keywords: Etiquetas Eficientes
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-a-essencia-do-codigo-criando-suas-proprias-funcoes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. A Essência do Código: Criando Suas Próprias Funções
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4. A Essência do Código: Criando Suas Próprias Funções">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#41-a-anatomia-de-uma-funcao-com" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.1. A Anatomia de uma Função com
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#42-funcoes-puras-vs-funcoes-com-efeitos-colaterais" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.2. Funções Puras vs. Funções com Efeitos Colaterais
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#43-multiplas-aridades-uma-funcao-varias-formas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.3. Múltiplas Aridades: Uma Função, Várias Formas
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-tomando-decisoes-no-codigo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Tomando Decisões no Código
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5. Tomando Decisões no Código">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#51-o-fundamental" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.1. O Fundamental
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#52-a-verdade-em-clojure-e" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.2. A Verdade em Clojure: e
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#53-predicados-e-a-convencao" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.3. Predicados e a Convenção
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#54-para-casos-sem-senao" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.4. : Para Casos sem "senão"
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-o-superpoder-do-clojure-homoiconicidade-codigo-como-dados" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. O Superpoder do Clojure: Homoiconicidade (Código como Dados)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="6. O Superpoder do Clojure: Homoiconicidade (Código como Dados)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#61-o-que-significa-codigo-como-dados" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.1. O que significa "Código como Dados"?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#62-a-diferenca-entre-dados-e-execucao" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.2. A Diferença entre Dados e Execução
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#63-por-que-isso-e-importante" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.3. Por que isso é importante?
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-conclusao-sua-jornada-apenas-comecou" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. Conclusão: Sua Jornada Apenas Começou
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#8-pratica-guiada" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8. Prática Guiada
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="8. Prática Guiada">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#41-exercicio-1-operacoes-simples-com-simbolos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.1. Exercício 1: Operações Simples com Símbolos
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#codigo-da-solucao" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Código da Solução
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#42-exercicio-2-funcao-com-escopo-local" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.2. Exercício 2: Função com Escopo Local
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#codigo-da-solucao_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Código da Solução
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../02_clojure_colecoes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cap 16: Clojure — Vetores e Mapas
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../03_clojure_alta_ordem/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cap 17: Clojure — Alta Ordem
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../04_clojure_threading_mapas_complexos/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cap 18: Clojure — Threading Macros
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../05_clojure_lazy_sequences/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cap 19: Clojure — Lazy Sequences
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../06_clojure_metaprogramacao/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cap 20: Clojure — Macros
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../07_clojure_interop/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cap 21: Clojure — Interop com Java
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../08_clojure_revisao/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cap 22: Clojure — Revisão de Pilares
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../09_clojure_exercicios/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cap 23: Clojure — Exercícios Resolvidos
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../10_clojure_tutorial_todo/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Trabalho Clojure: ToDo Full-Stack
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../11_elixir_fundamentos/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cap 24: Elixir — Fundamentos
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../12_elixir_colecoes_pattern_matching/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cap 25: Elixir — Pattern Matching
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../13_elixir_modulos_funcoes_testes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cap 26: Elixir — Módulos e Testes
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../14_elixir_processos/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cap 27: Elixir — Processos e Concorrência
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../15_elixir_metaprogramacao/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cap 28: Elixir — Metaprogramação
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../16_elixir_tutorial_todo/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Trabalho Elixir: ToDo com LiveView
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="fundamentos-em-clojure">Fundamentos em Clojure<a class="headerlink" href="#fundamentos-em-clojure" title="Permanent link">&para;</a></h1>
+<h2 id="1-introducao-e-conexao-de-paradigmas">1. Introdução e Conexão de Paradigmas<a class="headerlink" href="#1-introducao-e-conexao-de-paradigmas" title="Permanent link">&para;</a></h2>
+<p>Seja bem-vindo(a) à sua primeira imersão em Clojure! </p>
+<p>Nas Unidades 1 e 2, você trabalhou com <strong>Haskell</strong>, uma linguagem de tipagem estática forte, pura e baseada em avaliação preguiçosa. Em Haskell, a segurança do código vem majoritariamente do compilador, que realiza verificações estritas de tipos antes mesmo de o código ser executado.</p>
+<p>Agora, na <strong>Unidade 3</strong>, fazemos uma transição filosófica importante ao entrar no ecossistema <strong>Lisp</strong> com o <strong>Clojure</strong>. Embora ambas as linguagens compartilhem os pilares da programação funcional (como imutabilidade e funções como cidadãs de primeira classe), a abordagem do Clojure é diferente:
+1. <strong>Tipagem Dinâmica e Pragmática</strong>: Clojure não realiza checagem de tipos em tempo de compilação da forma estrita do Haskell. Isso confere uma flexibilidade incrível e agilidade de prototipagem.
+2. <strong>Desenvolvimento Focado no REPL</strong>: O REPL (Read-Eval-Print Loop) em Clojure não é apenas um local para testar funções (como o GHCi); ele é o próprio núcleo do desenvolvimento, onde você altera o programa em execução sem precisar reiniciar o processo.
+3. <strong>Código como Dados (Homoiconicidade)</strong>: Em Clojure, a própria sintaxe do código é estruturada como listas e mapas. Isso abre as portas para uma metaprogramação absurdamente poderosa através de <strong>Macros</strong>, algo impossível na sintaxe rígida do Haskell.
+4. <strong>Ambiente Hospedado</strong>: Clojure roda sobre a Java Virtual Machine (JVM), dando acesso nativo ao ecossistema robusto e maduro do Java.</p>
+<p>Prepare-se para abrir sua mente e descobrir uma nova forma de projetar softwares funcionais, preditivos e altamente flexíveis.</p>
+<h3 id="11-o-que-e-programacao-funcional-e-por-que-clojure-e-especial">1.1 O Que é Programação Funcional (e por que Clojure é especial?)<a class="headerlink" href="#11-o-que-e-programacao-funcional-e-por-que-clojure-e-especial" title="Permanent link">&para;</a></h3>
+<p>A programação funcional é mais do que um conjunto de técnicas; é uma maneira de pensar sobre a resolução de problemas com código. Em vez de dar ao computador uma sequência de passos que mudam o estado do programa, nós o instruímos através da composição de funções.</p>
+<h3 id="12-computacao-como-funcoes-matematicas">1.2. Computação como Funções Matemáticas<a class="headerlink" href="#12-computacao-como-funcoes-matematicas" title="Permanent link">&para;</a></h3>
+<p>No coração do paradigma funcional está uma ideia simples, mas profunda. Como descrito em <em>Clojure in Action</em>, a programação funcional "trata a computação como a aplicação de funções matemáticas". Em um programa funcional, idealmente, não há estado que se altera arbitrariamente. Para um iniciante, isso significa que seu código se torna muito mais previsível. Uma função, quando chamada com os mesmos argumentos, sempre retornará o mesmo resultado, tornando o comportamento do programa mais fácil de entender e depurar.</p>
+<h3 id="12-o-pilar-da-imutabilidade">1.2. O Pilar da Imutabilidade<a class="headerlink" href="#12-o-pilar-da-imutabilidade" title="Permanent link">&para;</a></h3>
+<p>Em Clojure, a imutabilidade é a regra, não a exceção. Isso significa que as estruturas de dados principais, como vetores e mapas, "uma vez criadas, não podem ser alteradas" (<em>Clojure in Action</em>).</p>
+<p>Mas como programamos se não podemos mudar nada? A resposta é simples: quando uma "mudança" é necessária, Clojure não modifica a estrutura de dados original. Em vez disso, ele cria e retorna uma <em>nova</em> estrutura de dados que contém a alteração.</p>
+<p>O principal benefício dessa abordagem é a segurança. O código torna-se imune a uma vasta classe de bugs relacionados à mutação não gerenciada e é inerentemente mais seguro para ser executado em ambientes concorrentes (com múltiplos threads), um desafio comum na programação moderna.</p>
+<h3 id="13-por-que-escolher-clojure">1.3. Por que escolher Clojure?<a class="headerlink" href="#13-por-que-escolher-clojure" title="Permanent link">&para;</a></h3>
+<p>Clojure é uma linguagem de propósito geral que combina o melhor de vários mundos, tornando-a uma escolha atraente para uma ampla gama de tarefas.</p>
+<ul>
+<li><strong>Um Lisp Moderno:</strong> Clojure pertence à família de linguagens Lisp, o que lhe confere uma de suas características mais poderosas: a capacidade de metaprogramação através de macros. Isso significa que você pode escrever código que escreve código, estendendo a própria linguagem.</li>
+<li><strong>Abraça o Paradigma Funcional:</strong> Clojure não foi adaptado para a programação funcional; ele foi projetado desde o início com os princípios de imutabilidade e funções puras em seu núcleo.</li>
+<li><strong>Roda na JVM:</strong> Por ser executado na Java Virtual Machine (JVM), Clojure tem acesso direto a um ecossistema vasto e maduro de bibliotecas e frameworks Java, combinando o poder de uma linguagem moderna com a estabilidade e o alcance de uma das plataformas mais testadas do mundo.</li>
+</ul>
+<p>Agora que entendemos a teoria por trás de Clojure, é hora de colocá-la em prática e ter nossa primeira conversa com a linguagem.</p>
+<h2 id="2-sua-primeira-conversa-com-clojure-o-repl-e-a-sintaxe">2. Sua Primeira Conversa com Clojure: O REPL e a Sintaxe<a class="headerlink" href="#2-sua-primeira-conversa-com-clojure-o-repl-e-a-sintaxe" title="Permanent link">&para;</a></h2>
+<p>Uma das melhores partes de aprender Clojure é a interatividade. Você não precisa escrever um programa inteiro para ver os resultados; você pode "conversar" com a linguagem em tempo real.</p>
+<h3 id="21-o-repl-seu-ambiente-interativo">2.1. O REPL: Seu Ambiente Interativo<a class="headerlink" href="#21-o-repl-seu-ambiente-interativo" title="Permanent link">&para;</a></h3>
+<p>O <strong>REPL</strong> (Read-Eval-Print Loop ou Ciclo de Leitura-Avaliação-Impressão) é um ambiente interativo onde você pode digitar código Clojure, executá-lo e ver o resultado instantaneamente. O REPL é uma ferramenta fundamental no fluxo de trabalho de um desenvolvedor Clojure. Ele permite experimentação rápida, desenvolvimento incremental e oferece um feedback imediato, tornando o processo de aprendizado e desenvolvimento muito mais dinâmico e produtivo.</p>
+<p>Podemos usar o <a href="https://tryclojure.org/">https://tryclojure.org/</a> como nossso REPL</p>
+<p><img alt="image.png" src="../Fundamentos%20em%20Clojure/image.png" /></p>
+<h3 id="21-preparando-o-ambiente-de-desenvolvimento">2.1. Preparando o Ambiente de Desenvolvimento<a class="headerlink" href="#21-preparando-o-ambiente-de-desenvolvimento" title="Permanent link">&para;</a></h3>
+<p>Para o desenvolvimento de sistemas o REPL online  não será suficiente, nesses casos, vamos precisar instalar na nossa própria máquina.</p>
+<ol>
+<li>Acesse o site oficial para as instruções de instalação: <code>https://clojure.org/guides/getting_started</code>.</li>
+<li>Siga o processo de acordo com seu sistema operacional:<ul>
+<li><strong>Mac:</strong> Utilize o Homebrew com o comando <code>brew install clojure</code>.</li>
+<li><strong>Linux:</strong> Baixe o arquivo TARGZ, descompacte-o e adicione o diretório <code>bin</code> ao seu PATH.</li>
+<li><strong>Windows:</strong> Utilize o instalador específico fornecido no site.</li>
+</ul>
+</li>
+<li>Após a instalação, abra seu terminal e execute o interpretador interativo (REPL).</li>
+<li>Experiência na web https://tryclojure.org/ ou https://onecompiler.com/clojure</li>
+</ol>
+<h3 id="22-desmistificando-os-parenteses-a-sintaxe-de-clojure">2.2. Desmistificando os Parênteses: A Sintaxe de Clojure<a class="headerlink" href="#22-desmistificando-os-parenteses-a-sintaxe-de-clojure" title="Permanent link">&para;</a></h3>
+<p>À primeira vista, o código Clojure pode parecer estranho por causa dos parênteses. No entanto, essa sintaxe, conhecida como S-expressions (expressões simbólicas), é a fonte de uma simplicidade e poder incríveis.</p>
+<ol>
+<li>A estrutura fundamental é <code>(função argumento1 argumento2 ...)</code>.</li>
+<li>Considere o exemplo <code>(+ 13 3)</code>. Isso é chamado de <strong>notação prefixada</strong>, onde a operação (ou função) vem <em>antes</em> dos operandos (ou argumentos). Em Clojure, <code>+</code> não é um operador especial; é apenas mais uma função. Essa uniformidade torna a linguagem mais simples e consistente.</li>
+<li>Todas as operações seguem essa mesma lógica:</li>
+<li>Longe de serem um problema, os parênteses são, como afirma <em>Clojure in Action</em>, "uma grande fonte das capacidades de Clojure", pois permitem que o código seja tratado como uma estrutura de dados, algo que exploraremos mais adiante.</li>
+</ol>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="p">(</span><span class="nb">println </span><span class="s">&quot;Bem vindo ao sistema de estoque&quot;</span><span class="p">)</span>
+</code></pre></div>
+<p>Agora que você entende a estrutura básica de uma chamada de função, vamos ver como podemos dar nomes aos valores que usamos.</p>
+<h2 id="3-dando-nomes-as-coisas-simbolos-escopo-e-keywords">3. Dando Nomes às Coisas: Símbolos, Escopo e Keywords<a class="headerlink" href="#3-dando-nomes-as-coisas-simbolos-escopo-e-keywords" title="Permanent link">&para;</a></h2>
+<p>Para escrever programas úteis, precisamos de uma forma de nomear valores e conceitos. Clojure nos oferece algumas ferramentas para isso, cada uma com um propósito específico.</p>
+<h3 id="31-nomes-globais-com">3.1. Nomes Globais com<a class="headerlink" href="#31-nomes-globais-com" title="Permanent link">&para;</a></h3>
+<p>A forma <code>def</code> é usada para criar nomes globais, chamados de "Vars". Esses nomes são definidos no nível mais alto do seu programa e são acessíveis de qualquer lugar. Use <code>def</code> para coisas que precisam ter um significado constante em todo o seu projeto.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="p">(</span><span class="k">def </span><span class="nv">PI</span><span class="w"> </span><span class="mf">3.14159</span><span class="p">)</span>
+</code></pre></div>
+<h3 id="32-nomes-locais-com">3.2. Nomes Locais com<a class="headerlink" href="#32-nomes-locais-com" title="Permanent link">&para;</a></h3>
+<p>A forma <code>let</code> é a maneira preferida e mais comum de criar nomes em Clojure. Diferente de <code>def</code>, <code>let</code> cria nomes com <strong>escopo local</strong>, o que significa que eles só existem dentro do bloco <code>let</code>.</p>
+<p>De acordo com <em>Clojure for the Brave and True</em>, <code>let</code> oferece duas vantagens principais:</p>
+<ol>
+<li><strong>Clareza:</strong> Permite dar nomes a valores intermediários, tornando o código mais legível.</li>
+<li><strong>Eficiência:</strong> Permite que uma expressão seja avaliada apenas uma vez e seu resultado reutilizado várias vezes dentro do bloco.</li>
+</ol>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="p">(</span><span class="k">def </span><span class="nv">nome-global</span><span class="w"> </span><span class="s">&quot;Rosanthony&quot;</span><span class="p">)</span>
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="p">(</span><span class="nb">println </span><span class="nv">nome-global</span><span class="p">)</span>
+<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="c1">; =&gt; &quot;Rosanthony&quot;</span>
+<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a>
+<a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a><span class="p">(</span><span class="k">let </span><span class="p">[</span><span class="nv">nome-local</span><span class="w"> </span><span class="s">&quot;Bloodthunder&quot;</span><span class="p">]</span>
+<a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a><span class="w">  </span><span class="p">(</span><span class="nb">println </span><span class="nv">nome-local</span><span class="p">)</span><span class="w">    </span><span class="c1">; =&gt; &quot;Bloodthunder&quot;</span>
+<a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a><span class="w">  </span><span class="p">(</span><span class="nb">println </span><span class="nv">nome-global</span><span class="p">))</span><span class="w"> </span><span class="c1">; A variável global ainda é acessível aqui</span>
+<a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a>
+<a id="__codelineno-2-10" name="__codelineno-2-10" href="#__codelineno-2-10"></a><span class="c1">;; A linha abaixo causaria um erro, pois &#39;nome-local&#39; não existe fora do bloco &#39;let&#39;.</span>
+<a id="__codelineno-2-11" name="__codelineno-2-11" href="#__codelineno-2-11"></a><span class="c1">;; (println nome-local)</span>
+</code></pre></div>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>veremos melhor os nomes locais quando criarmos nossas funcoes</p>
+</div>
+<h3 id="33-keywords-etiquetas-eficientes">3.3. Keywords: Etiquetas Eficientes<a class="headerlink" href="#33-keywords-etiquetas-eficientes" title="Permanent link">&para;</a></h3>
+<p>Keywords (palavras-chave) são um tipo de dado único em Clojure. Elas começam com o caractere de dois-pontos (<code>:</code>), como em <code>:mochila</code> ou <code>:autor</code>. Pense nelas como etiquetas ou rótulos permanentes. A principal diferença para uma string é que uma string (ex: <code>"nome"</code>) é um dado que seu programa processa, enquanto uma keyword (ex: <code>:nome</code>) é como uma etiqueta que faz parte da estrutura do seu programa. Elas são extremamente eficientes e são a forma mais comum de usar chaves em mapas, uma das estruturas de dados mais importantes de Clojure.</p>
+<p>Após aprender a nomear valores, o próximo passo lógico é aprender a nomear e criar blocos de código reutilizáveis: as funções.</p>
+<h2 id="4-a-essencia-do-codigo-criando-suas-proprias-funcoes">4. A Essência do Código: Criando Suas Próprias Funções<a class="headerlink" href="#4-a-essencia-do-codigo-criando-suas-proprias-funcoes" title="Permanent link">&para;</a></h2>
+<p>As funções são os blocos de construção fundamentais de qualquer programa Clojure. É através delas que a lógica do seu programa toma forma.</p>
+<h3 id="41-a-anatomia-de-uma-funcao-com">4.1. A Anatomia de uma Função com<a class="headerlink" href="#41-a-anatomia-de-uma-funcao-com" title="Permanent link">&para;</a></h3>
+<p>Usamos o macro <code>defn</code> para definir uma nova função. Sua estrutura básica é muito clara:</p>
+<p><code>(defn nome-da-funcao [parametros] (corpo-da-funcao))</code></p>
+<p>Vamos analisar um exemplo simples:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="p">(</span><span class="kd">defn </span><span class="nv">total-cost</span><span class="w"> </span><span class="p">[</span><span class="nv">item-cost</span><span class="w"> </span><span class="nv">number-of-items</span><span class="p">]</span>
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="w">  </span><span class="p">(</span><span class="nb">* </span><span class="nv">item-cost</span><span class="w"> </span><span class="nv">number-of-items</span><span class="p">))</span>
+</code></pre></div>
+<p>Neste exemplo, <code>total-cost</code> é o nome da função, <code>item-cost</code> e <code>number-of-items</code> são seus parâmetros. Um ponto crucial em Clojure é que <strong>não existe a palavra-chave <code>return</code></strong>. A função automaticamente retorna o valor da última expressão avaliada em seu corpo.</p>
+<h3 id="42-funcoes-puras-vs-funcoes-com-efeitos-colaterais">4.2. Funções Puras vs. Funções com Efeitos Colaterais<a class="headerlink" href="#42-funcoes-puras-vs-funcoes-com-efeitos-colaterais" title="Permanent link">&para;</a></h3>
+<p>Em programação funcional, é útil distinguir entre dois tipos de funções:</p>
+<table>
+<thead>
+<tr>
+<th>Funções Puras</th>
+<th>Funções com Efeitos Colaterais</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Definição:</strong> São funções cujo resultado depende <em>apenas</em> de suas entradas e que não interagem com o mundo exterior (não têm efeitos colaterais).</td>
+<td><strong>Definição:</strong> Funções que interagem com o mundo exterior, como imprimir no console, escrever em um arquivo ou fazer uma requisição de rede.</td>
+</tr>
+<tr>
+<td><strong>Benefício:</strong> São altamente previsíveis, fáceis de testar e de raciocinar sobre seu comportamento.</td>
+<td><strong>Quando usar:</strong> São necessárias sempre que seu programa precisa interagir com o usuário ou outros sistemas.</td>
+</tr>
+<tr>
+<td><strong>Exemplo:</strong> A função <code>total-cost</code> que definimos acima é uma função pura.</td>
+<td><strong>Exemplo:</strong> A função <code>println</code>, que imprime texto no console.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="43-multiplas-aridades-uma-funcao-varias-formas">4.3. Múltiplas Aridades: Uma Função, Várias Formas<a class="headerlink" href="#43-multiplas-aridades-uma-funcao-varias-formas" title="Permanent link">&para;</a></h3>
+<p>Clojure permite que uma única função tenha diferentes comportamentos dependendo do número de argumentos (ou "aridade") que recebe. Isso é conhecido como sobrecarga de aridade.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="p">(</span><span class="kd">defn </span><span class="nv">minha-funcao</span>
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="w">  </span><span class="c1">;; Corpo para 0 argumentos</span>
+<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="w">  </span><span class="p">([]</span>
+<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="w">   </span><span class="s">&quot;Fui chamada sem argumentos!&quot;</span><span class="p">)</span>
+<a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a>
+<a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a><span class="w">  </span><span class="c1">;; Corpo para 1 argumento</span>
+<a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a><span class="w">  </span><span class="p">([</span><span class="nv">x</span><span class="p">]</span>
+<a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a><span class="w">   </span><span class="p">(</span><span class="nb">str </span><span class="s">&quot;Recebi o argumento: &quot;</span><span class="w"> </span><span class="nv">x</span><span class="p">))</span>
+<a id="__codelineno-4-9" name="__codelineno-4-9" href="#__codelineno-4-9"></a>
+<a id="__codelineno-4-10" name="__codelineno-4-10" href="#__codelineno-4-10"></a><span class="w">  </span><span class="c1">;; Corpo para 2 argumentos</span>
+<a id="__codelineno-4-11" name="__codelineno-4-11" href="#__codelineno-4-11"></a><span class="w">  </span><span class="p">([</span><span class="nv">x</span><span class="w"> </span><span class="nv">y</span><span class="p">]</span>
+<a id="__codelineno-4-12" name="__codelineno-4-12" href="#__codelineno-4-12"></a><span class="w">   </span><span class="p">(</span><span class="nb">str </span><span class="s">&quot;Recebi dois argumentos: &quot;</span><span class="w"> </span><span class="nv">x</span><span class="w"> </span><span class="s">&quot; e &quot;</span><span class="w"> </span><span class="nv">y</span><span class="p">)))</span>
+<a id="__codelineno-4-13" name="__codelineno-4-13" href="#__codelineno-4-13"></a>
+<a id="__codelineno-4-14" name="__codelineno-4-14" href="#__codelineno-4-14"></a><span class="p">(</span><span class="nb">println </span><span class="p">(</span><span class="nf">minha-funcao</span><span class="p">))</span><span class="w">          </span><span class="c1">; =&gt; &quot;Fui chamada sem argumentos!&quot;</span>
+<a id="__codelineno-4-15" name="__codelineno-4-15" href="#__codelineno-4-15"></a><span class="p">(</span><span class="nb">println </span><span class="p">(</span><span class="nf">minha-funcao</span><span class="w"> </span><span class="s">&quot;olá&quot;</span><span class="p">))</span><span class="w">    </span><span class="c1">; =&gt; &quot;Recebi o argumento: olá&quot;</span>
+<a id="__codelineno-4-16" name="__codelineno-4-16" href="#__codelineno-4-16"></a><span class="p">(</span><span class="nb">println </span><span class="p">(</span><span class="nf">minha-funcao</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="mi">2</span><span class="p">))</span><span class="w">      </span><span class="c1">; =&gt; &quot;Recebi dois argumentos: 1 e 2&quot;</span>
+</code></pre></div>
+<p>Com a capacidade de criar funções, precisamos agora de ferramentas para controlar o fluxo de execução dentro delas, tomando decisões baseadas em certas condições.</p>
+<p>Podemos testar no onecompiler.com</p>
+<p><img alt="image.png" src="../Fundamentos%20em%20Clojure/image%201.png" /></p>
+<h2 id="5-tomando-decisoes-no-codigo">5. Tomando Decisões no Código<a class="headerlink" href="#5-tomando-decisoes-no-codigo" title="Permanent link">&para;</a></h2>
+<p>Lógica condicional é a espinha dorsal de qualquer programa não trivial. Clojure oferece formas simples e poderosas para isso.</p>
+<h3 id="51-o-fundamental">5.1. O Fundamental<a class="headerlink" href="#51-o-fundamental" title="Permanent link">&para;</a></h3>
+<p>O <code>if</code> em Clojure é uma expressão, o que significa que ele sempre retorna um valor. Sua estrutura é direta:</p>
+<p><code>(if teste-condicional expressao-se-verdadeiro expressao-se-falso)</code></p>
+<p>Se <code>teste-condicional</code> for verdadeiro, ele avalia e retorna <code>expressao-se-verdadeiro</code>. Caso contrário, avalia e retorna <code>expressao-se-falso</code>.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="p">(</span><span class="kd">defn </span><span class="nv">verificar-maioridade</span><span class="w"> </span><span class="p">[</span><span class="nv">idade</span><span class="p">]</span>
+<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="w">  </span><span class="p">(</span><span class="k">if </span><span class="p">(</span><span class="nb">&gt;= </span><span class="nv">idade</span><span class="w"> </span><span class="mi">18</span><span class="p">)</span>
+<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="w">    </span><span class="s">&quot;Você é maior de idade.&quot;</span>
+<a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a><span class="w">    </span><span class="s">&quot;Você é menor de idade.&quot;</span><span class="p">))</span>
+</code></pre></div>
+<p><strong>Uso:</strong></p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="p">(</span><span class="nf">verificar-maioridade</span><span class="w"> </span><span class="mi">20</span><span class="p">)</span>
+<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="c1">;; =&gt; &quot;Você é maior de idade.&quot;</span>
+<a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a>
+<a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a><span class="p">(</span><span class="nf">verificar-maioridade</span><span class="w"> </span><span class="mi">15</span><span class="p">)</span>
+<a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a><span class="c1">;; =&gt; &quot;Você é menor de idade.&quot;</span>
+</code></pre></div>
+<h3 id="52-a-verdade-em-clojure-e">5.2. A Verdade em Clojure: e<a class="headerlink" href="#52-a-verdade-em-clojure-e" title="Permanent link">&para;</a></h3>
+<p>O conceito de "verdade" (ou <em>truthiness</em>) em Clojure é extremamente simples e consistente. Como diz <em>Getting Clojure</em>:</p>
+<p>"Em um [...] contexto booleano, <strong>apenas <code>false</code> e <code>nil</code> são tratados como falsos</strong>. Todo o resto é tratado como verdadeiro."</p>
+<p>Isso significa que números (incluindo <code>0</code>), strings (incluindo as vazias <code>""</code>), e coleções vazias (como <code>[]</code> ou <code>{}</code>) são todos considerados <strong>verdadeiros</strong> em um teste condicional.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="p">(</span><span class="kd">defn </span><span class="nv">verificar-verdade</span><span class="w"> </span><span class="p">[</span><span class="nv">valor</span><span class="p">]</span>
+<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="w">  </span><span class="p">(</span><span class="k">if </span><span class="nv">valor</span>
+<a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a><span class="w">    </span><span class="s">&quot;Isto é tratado como VERDADEIRO.&quot;</span>
+<a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a><span class="w">    </span><span class="s">&quot;Isto é tratado como FALSO.&quot;</span><span class="p">))</span>
+</code></pre></div>
+<p><strong>Uso:</strong></p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="p">(</span><span class="nf">verificar-verdade</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span>
+<a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a><span class="c1">;; =&gt; &quot;Isto é tratado como VERDADEIRO.&quot;</span>
+<a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a>
+<a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a><span class="p">(</span><span class="nf">verificar-verdade</span><span class="w"> </span><span class="s">&quot;&quot;</span><span class="p">)</span>
+<a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a><span class="c1">;; =&gt; &quot;Isto é tratado como VERDADEIRO.&quot;</span>
+<a id="__codelineno-8-6" name="__codelineno-8-6" href="#__codelineno-8-6"></a>
+<a id="__codelineno-8-7" name="__codelineno-8-7" href="#__codelineno-8-7"></a><span class="p">(</span><span class="nf">verificar-verdade</span><span class="w"> </span><span class="nv">nil</span><span class="p">)</span>
+<a id="__codelineno-8-8" name="__codelineno-8-8" href="#__codelineno-8-8"></a><span class="c1">;; =&gt; &quot;Isto é tratado como FALSO.&quot;</span>
+<a id="__codelineno-8-9" name="__codelineno-8-9" href="#__codelineno-8-9"></a>
+<a id="__codelineno-8-10" name="__codelineno-8-10" href="#__codelineno-8-10"></a><span class="p">(</span><span class="nf">verificar-verdade</span><span class="w"> </span><span class="nv">false</span><span class="p">)</span>
+<a id="__codelineno-8-11" name="__codelineno-8-11" href="#__codelineno-8-11"></a><span class="c1">;; =&gt; &quot;Isto é tratado como FALSO.&quot;</span>
+</code></pre></div>
+<blockquote>
+<p>Excelente para mostrar que 0, "" e [] são considerados verdadeiros em Clojure!
+</p>
+</blockquote>
+<h3 id="53-predicados-e-a-convencao">5.3. Predicados e a Convenção<a class="headerlink" href="#53-predicados-e-a-convencao" title="Permanent link">&para;</a></h3>
+<p>Uma <strong>função predicado</strong> é simplesmente uma função que retorna um valor booleano (<code>true</code> ou <code>false</code>). Por convenção, em Clojure, os nomes dessas funções terminam com um ponto de interrogação (<code>?</code>).</p>
+<p>Exemplos comuns incluem:</p>
+<ul>
+<li><code>zero?</code>: Retorna <code>true</code> se o número for zero.</li>
+<li><code>empty?</code>: Retorna <code>true</code> se uma coleção estiver vazia.</li>
+<li><code>string?</code>: Retorna <code>true</code> se o valor for uma string.</li>
+</ul>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="p">(</span><span class="kd">defn </span><span class="nv">analisar-colecao</span><span class="w"> </span><span class="p">[</span><span class="nv">col</span><span class="p">]</span>
+<a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a><span class="w">  </span><span class="p">(</span><span class="k">if </span><span class="p">(</span><span class="nf">empty?</span><span class="w"> </span><span class="nv">col</span><span class="p">)</span>
+<a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a><span class="w">    </span><span class="s">&quot;A coleção está vazia.&quot;</span>
+<a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a><span class="w">    </span><span class="s">&quot;A coleção contém elementos.&quot;</span><span class="p">))</span>
+</code></pre></div>
+<p><strong>Uso:</strong></p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="p">(</span><span class="nf">analisar-colecao</span><span class="w"> </span><span class="p">[])</span>
+<a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a><span class="c1">;; =&gt; &quot;A coleção está vazia.&quot;</span>
+<a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a>
+<a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a><span class="p">(</span><span class="nf">analisar-colecao</span><span class="w"> </span><span class="p">[</span><span class="mi">1</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="mi">3</span><span class="p">])</span>
+<a id="__codelineno-10-5" name="__codelineno-10-5" href="#__codelineno-10-5"></a><span class="c1">;; =&gt; &quot;A coleção contém elementos.&quot;</span>
+<a id="__codelineno-10-6" name="__codelineno-10-6" href="#__codelineno-10-6"></a>
+<a id="__codelineno-10-7" name="__codelineno-10-7" href="#__codelineno-10-7"></a><span class="p">(</span><span class="nb">string? </span><span class="s">&quot;abc&quot;</span><span class="p">)</span>
+<a id="__codelineno-10-8" name="__codelineno-10-8" href="#__codelineno-10-8"></a><span class="c1">;; =&gt; true</span>
+<a id="__codelineno-10-9" name="__codelineno-10-9" href="#__codelineno-10-9"></a>
+<a id="__codelineno-10-10" name="__codelineno-10-10" href="#__codelineno-10-10"></a><span class="p">(</span><span class="nb">zero? </span><span class="mi">0</span><span class="p">)</span>
+<a id="__codelineno-10-11" name="__codelineno-10-11" href="#__codelineno-10-11"></a><span class="c1">;; =&gt; true</span>
+<a id="__codelineno-10-12" name="__codelineno-10-12" href="#__codelineno-10-12"></a>
+<a id="__codelineno-10-13" name="__codelineno-10-13" href="#__codelineno-10-13"></a><span class="p">(</span><span class="nb">zero? </span><span class="mi">10</span><span class="p">)</span>
+<a id="__codelineno-10-14" name="__codelineno-10-14" href="#__codelineno-10-14"></a><span class="c1">;; =&gt; false</span>
+</code></pre></div>
+<blockquote>
+<p>Esse trecho ajuda a reforçar o uso de predicados e a importância da interrogação ? na convenção de nomes.
+</p>
+</blockquote>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="p">(</span><span class="kd">defn </span><span class="nv">saudacao</span><span class="w"> </span><span class="p">[</span><span class="nv">nome</span><span class="p">]</span>
+<a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a><span class="w">  </span><span class="p">(</span><span class="nb">if-let </span><span class="p">[</span><span class="nv">n</span><span class="w"> </span><span class="nv">nome</span><span class="p">]</span>
+<a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a><span class="w">    </span><span class="p">(</span><span class="nb">str </span><span class="s">&quot;Olá, &quot;</span><span class="w"> </span><span class="nv">n</span><span class="w"> </span><span class="s">&quot;!&quot;</span><span class="p">)</span>
+<a id="__codelineno-11-4" name="__codelineno-11-4" href="#__codelineno-11-4"></a><span class="w">    </span><span class="s">&quot;Olá, visitante!&quot;</span><span class="p">))</span>
+</code></pre></div>
+<p><strong>Uso:</strong></p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="p">(</span><span class="nf">saudacao</span><span class="w"> </span><span class="s">&quot;Ana&quot;</span><span class="p">)</span>
+<a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a><span class="c1">;; =&gt; &quot;Olá, Ana!&quot;</span>
+<a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a>
+<a id="__codelineno-12-4" name="__codelineno-12-4" href="#__codelineno-12-4"></a><span class="p">(</span><span class="nf">saudacao</span><span class="w"> </span><span class="nv">nil</span><span class="p">)</span>
+<a id="__codelineno-12-5" name="__codelineno-12-5" href="#__codelineno-12-5"></a><span class="c1">;; =&gt; &quot;Olá, visitante!&quot;</span>
+</code></pre></div>
+<blockquote>
+<p>Uma forma elegante de combinar verificação e binding de valor.
+</p>
+</blockquote>
+<h3 id="54-para-casos-sem-senao">5.4. : Para Casos sem "senão"<a class="headerlink" href="#54-para-casos-sem-senao" title="Permanent link">&para;</a></h3>
+<p>Às vezes, você só quer executar uma ação se uma condição for verdadeira, sem se preocupar com o caso "senão". Para isso, Clojure oferece o <code>when</code>, uma forma mais concisa de <code>if</code> sem a cláusula <code>else</code>.</p>
+<p>Com todos esses blocos de construção em mãos — sintaxe, nomes, funções e condicionais — estamos prontos para descobrir o conceito mais poderoso e distintivo de Clojure e da família Lisp.</p>
+<p>🔹 <strong>Exemplo 1 – Imprimir apenas se o número for positivo</strong></p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a><span class="p">(</span><span class="kd">defn </span><span class="nv">mostrar-se-positivo</span><span class="w"> </span><span class="p">[</span><span class="nv">n</span><span class="p">]</span>
+<a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a><span class="w">  </span><span class="p">(</span><span class="nb">when </span><span class="p">(</span><span class="nb">&gt; </span><span class="nv">n</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span>
+<a id="__codelineno-13-3" name="__codelineno-13-3" href="#__codelineno-13-3"></a><span class="w">    </span><span class="p">(</span><span class="nb">println </span><span class="nv">n</span><span class="w"> </span><span class="s">&quot;é positivo.&quot;</span><span class="p">)))</span>
+</code></pre></div>
+<p><strong>Uso:</strong></p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a><span class="p">(</span><span class="nf">mostrar-se-positivo</span><span class="w"> </span><span class="mi">10</span><span class="p">)</span>
+<a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a><span class="c1">;; =&gt; Imprime: 10 é positivo.</span>
+<a id="__codelineno-14-3" name="__codelineno-14-3" href="#__codelineno-14-3"></a>
+<a id="__codelineno-14-4" name="__codelineno-14-4" href="#__codelineno-14-4"></a><span class="p">(</span><span class="nf">mostrar-se-positivo</span><span class="w"> </span><span class="mi">-5</span><span class="p">)</span>
+<a id="__codelineno-14-5" name="__codelineno-14-5" href="#__codelineno-14-5"></a><span class="c1">;; =&gt; Não imprime nada</span>
+</code></pre></div>
+<p>🔹 <strong>Exemplo 2 – Atualizar estado apenas se uma chave existir</strong></p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a><span class="p">(</span><span class="kd">defn </span><span class="nv">atualizar-nome</span><span class="w"> </span><span class="p">[</span><span class="nv">usuario</span><span class="p">]</span>
+<a id="__codelineno-15-2" name="__codelineno-15-2" href="#__codelineno-15-2"></a><span class="w">  </span><span class="p">(</span><span class="nb">when </span><span class="p">(</span><span class="ss">:nome</span><span class="w"> </span><span class="nv">usuario</span><span class="p">)</span>
+<a id="__codelineno-15-3" name="__codelineno-15-3" href="#__codelineno-15-3"></a><span class="w">    </span><span class="p">(</span><span class="nb">println </span><span class="s">&quot;Atualizando nome para:&quot;</span><span class="w"> </span><span class="p">(</span><span class="ss">:nome</span><span class="w"> </span><span class="nv">usuario</span><span class="p">))</span>
+<a id="__codelineno-15-4" name="__codelineno-15-4" href="#__codelineno-15-4"></a><span class="w">    </span><span class="c1">;; outras ações poderiam vir aqui</span>
+<a id="__codelineno-15-5" name="__codelineno-15-5" href="#__codelineno-15-5"></a><span class="w">    </span><span class="nv">true</span><span class="p">))</span>
+</code></pre></div>
+<p><strong>Uso:</strong></p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a><span class="p">(</span><span class="nf">atualizar-nome</span><span class="w"> </span><span class="p">{</span><span class="ss">:nome</span><span class="w"> </span><span class="s">&quot;Carlos&quot;</span><span class="p">})</span>
+<a id="__codelineno-16-2" name="__codelineno-16-2" href="#__codelineno-16-2"></a><span class="c1">;; =&gt; Imprime: Atualizando nome para: Carlos</span>
+<a id="__codelineno-16-3" name="__codelineno-16-3" href="#__codelineno-16-3"></a>
+<a id="__codelineno-16-4" name="__codelineno-16-4" href="#__codelineno-16-4"></a><span class="p">(</span><span class="nf">atualizar-nome</span><span class="w"> </span><span class="p">{</span><span class="ss">:idade</span><span class="w"> </span><span class="mi">30</span><span class="p">})</span>
+<a id="__codelineno-16-5" name="__codelineno-16-5" href="#__codelineno-16-5"></a><span class="c1">;; =&gt; Não imprime nada</span>
+</code></pre></div>
+<blockquote>
+<p>Este exemplo mostra como when permite várias expressões no corpo, como um println, uma possível lógica de atualização, retorno etc.
+</p>
+</blockquote>
+<hr />
+<p>🔹 <strong>Exemplo 3 – Combinar com Predicados</strong></p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a><span class="p">(</span><span class="kd">defn </span><span class="nv">alertar-se-vazio</span><span class="w"> </span><span class="p">[</span><span class="nv">colecao</span><span class="p">]</span>
+<a id="__codelineno-17-2" name="__codelineno-17-2" href="#__codelineno-17-2"></a><span class="w">  </span><span class="p">(</span><span class="nb">when </span><span class="p">(</span><span class="nf">empty?</span><span class="w"> </span><span class="nv">colecao</span><span class="p">)</span>
+<a id="__codelineno-17-3" name="__codelineno-17-3" href="#__codelineno-17-3"></a><span class="w">    </span><span class="p">(</span><span class="nb">println </span><span class="s">&quot;Atenção: a coleção está vazia!&quot;</span><span class="p">)))</span>
+</code></pre></div>
+<p><strong>Uso:</strong></p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a><span class="p">(</span><span class="nf">alertar-se-vazio</span><span class="w"> </span><span class="p">[])</span>
+<a id="__codelineno-18-2" name="__codelineno-18-2" href="#__codelineno-18-2"></a><span class="c1">;; =&gt; Imprime: Atenção: a coleção está vazia!</span>
+<a id="__codelineno-18-3" name="__codelineno-18-3" href="#__codelineno-18-3"></a>
+<a id="__codelineno-18-4" name="__codelineno-18-4" href="#__codelineno-18-4"></a><span class="p">(</span><span class="nf">alertar-se-vazio</span><span class="w"> </span><span class="p">[</span><span class="mi">1</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="mi">3</span><span class="p">])</span>
+<a id="__codelineno-18-5" name="__codelineno-18-5" href="#__codelineno-18-5"></a><span class="c1">;; =&gt; Não imprime nada</span>
+</code></pre></div>
+<p>📌 Recapitulando</p>
+<ul>
+<li><code>if</code> → usa-se quando há <strong>caso "senão"</strong>.</li>
+<li><code>when</code> → para <strong>executar algo apenas se a condição for verdadeira</strong>, com possibilidade de múltiplas expressões.</li>
+</ul>
+<h2 id="6-o-superpoder-do-clojure-homoiconicidade-codigo-como-dados">6. O Superpoder do Clojure: Homoiconicidade (Código como Dados)<a class="headerlink" href="#6-o-superpoder-do-clojure-homoiconicidade-codigo-como-dados" title="Permanent link">&para;</a></h2>
+<p>Este é o conceito que, uma vez compreendido, revela a verdadeira magia por trás das linguagens Lisp.</p>
+<h3 id="61-o-que-significa-codigo-como-dados">6.1. O que significa "Código como Dados"?<a class="headerlink" href="#61-o-que-significa-codigo-como-dados" title="Permanent link">&para;</a></h3>
+<p>Homoiconicidade (do grego <em>homo</em>, que significa "o mesmo", e <em>icon</em>, que significa "representação") é uma propriedade de linguagens de programação onde "o código é escrito nas próprias estruturas de dados da linguagem" (<em>Clojure in Action</em>).</p>
+<p>Para um iniciante, isso se traduz em algo muito concreto: a mesma sintaxe que você usa para criar uma lista de dados é a sintaxe que você usa para escrever seu código. Uma lista de Clojure é um conjunto de itens entre parênteses, e uma chamada de função também é um conjunto de itens entre parênteses.</p>
+<h3 id="62-a-diferenca-entre-dados-e-execucao">6.2. A Diferença entre Dados e Execução<a class="headerlink" href="#62-a-diferenca-entre-dados-e-execucao" title="Permanent link">&para;</a></h3>
+<p>Como Clojure sabe quando uma lista é apenas uma lista e quando é um código para executar? A resposta está no <code>quote</code> (ou seu atalho, a apóstrofo <code>'</code>).</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a><span class="c1">;; A apóstrofo (&#39;) &quot;cita&quot; a lista, tratando-a como dados.</span>
+<a id="__codelineno-19-2" name="__codelineno-19-2" href="#__codelineno-19-2"></a><span class="c1">;; O resultado é a própria lista.</span>
+<a id="__codelineno-19-3" name="__codelineno-19-3" href="#__codelineno-19-3"></a><span class="o">&#39;</span><span class="p">(</span><span class="nb">+ </span><span class="mi">1</span><span class="w"> </span><span class="mi">2</span><span class="p">)</span>
+<a id="__codelineno-19-4" name="__codelineno-19-4" href="#__codelineno-19-4"></a><span class="c1">; =&gt; (+ 1 2)</span>
+<a id="__codelineno-19-5" name="__codelineno-19-5" href="#__codelineno-19-5"></a>
+<a id="__codelineno-19-6" name="__codelineno-19-6" href="#__codelineno-19-6"></a><span class="c1">;; Sem a apóstrofo, a lista é executada como código.</span>
+<a id="__codelineno-19-7" name="__codelineno-19-7" href="#__codelineno-19-7"></a><span class="c1">;; O resultado é a soma.</span>
+<a id="__codelineno-19-8" name="__codelineno-19-8" href="#__codelineno-19-8"></a><span class="p">(</span><span class="nb">+ </span><span class="mi">1</span><span class="w"> </span><span class="mi">2</span><span class="p">)</span>
+<a id="__codelineno-19-9" name="__codelineno-19-9" href="#__codelineno-19-9"></a><span class="c1">; =&gt; 3</span>
+</code></pre></div>
+<p>O <code>quote</code> instrui Clojure a <em>não avaliar</em> a expressão seguinte, mas sim a tratá-la como uma estrutura de dados literal.</p>
+<h3 id="63-por-que-isso-e-importante">6.3. Por que isso é importante?<a class="headerlink" href="#63-por-que-isso-e-importante" title="Permanent link">&para;</a></h3>
+<p>A homoiconicidade é o que torna a metaprogramação em Clojure tão natural e poderosa. Como o seu código é apenas uma estrutura de dados (uma lista), você pode escrever programas que criam, analisam e manipulam outros programas com a mesma facilidade com que manipula dados. Essa capacidade é a base dos <strong>macros</strong>, que permitem estender a sintaxe da linguagem de formas que são impossíveis em muitas outras linguagens.</p>
+<p>Parabéns! Você completou uma introdução aos conceitos fundamentais de Clojure. Estes são os alicerces sobre os quais todo o resto é construído.</p>
+<h2 id="7-conclusao-sua-jornada-apenas-comecou">7. Conclusão: Sua Jornada Apenas Começou<a class="headerlink" href="#7-conclusao-sua-jornada-apenas-comecou" title="Permanent link">&para;</a></h2>
+<p>Você deu os primeiros e mais importantes passos no mundo da programação funcional com Clojure. Mais do que uma coleção de funcionalidades, os conceitos que você aprendeu formam um sistema coeso onde cada parte fortalece as outras. A <strong>sintaxe uniforme</strong> de Lisp é o que torna a <strong>homoiconicidade</strong> (código como dados) uma realidade prática. Essa propriedade, por sua vez, permite que a linguagem seja construída em torno de <strong>funções</strong> como blocos de construção primários. A ênfase em <strong>imutabilidade</strong> e no <strong>escopo local</strong> com <code>let</code> garante que essas funções sejam previsíveis e seguras. Vamos revisar como esses pilares se sustentam mutuamente:</p>
+<ol>
+<li><strong>Imutabilidade:</strong> Os dados não mudam. Em vez disso, novas versões são criadas, levando a um código mais seguro e previsível.</li>
+<li><strong>Sintaxe Uniforme:</strong> A notação prefixada <code>(função ...)</code> aplica-se a tudo, desde operações matemáticas a chamadas de função, simplificando a gramática da linguagem.</li>
+<li><strong>Funções são o Coração:</strong> A principal atividade em Clojure é criar pequenas e reutilizáveis funções, preferencialmente puras, usando <code>defn</code>.</li>
+<li><strong>Escopo Local é Rei:</strong> Usar <code>let</code> para criar nomes locais é a prática padrão para manter o código limpo, organizado e livre de efeitos colaterais inesperados.</li>
+<li><strong>Código é Dados:</strong> A homoiconicidade é o "superpoder" de Clojure, permitindo uma metaprogramação poderosa e uma expressividade única.</li>
+</ol>
+<p>Estes são os blocos de construção essenciais. Com essa base sólida, você está mais do que preparado(a) para explorar as estruturas de dados de Clojure, seu modelo de concorrência e o vasto ecossistema de bibliotecas à sua disposição. A jornada é desafiadora, mas incrivelmente recompensadora. Continue curioso(a) e continue codificando!</p>
+<h2 id="8-pratica-guiada">8. Prática Guiada<a class="headerlink" href="#8-pratica-guiada" title="Permanent link">&para;</a></h2>
+<h3 id="41-exercicio-1-operacoes-simples-com-simbolos">4.1. Exercício 1: Operações Simples com Símbolos<a class="headerlink" href="#41-exercicio-1-operacoes-simples-com-simbolos" title="Permanent link">&para;</a></h3>
+<p>Vamos reforçar os conceitos de <code>def</code> e notação prefixa.</p>
+<ol>
+<li><strong>Passo 1:</strong> Defina um símbolo global <code>preco-base</code> com o valor <code>85</code> usando <code>def</code>.</li>
+<li><strong>Passo 2:</strong> Defina outro símbolo global <code>taxa-fixa</code> com o valor <code>15</code> usando <code>def</code>.</li>
+<li><strong>Passo 3:</strong> Use a notação prefixa para somar os dois símbolos e imprima o resultado com <code>println</code>.</li>
+</ol>
+<h3 id="codigo-da-solucao">Código da Solução<a class="headerlink" href="#codigo-da-solucao" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-20-1" name="__codelineno-20-1" href="#__codelineno-20-1"></a><span class="p">(</span><span class="k">def </span><span class="nv">preco-base</span><span class="w"> </span><span class="mi">85</span><span class="p">)</span>
+<a id="__codelineno-20-2" name="__codelineno-20-2" href="#__codelineno-20-2"></a><span class="p">(</span><span class="k">def </span><span class="nv">taxa-fixa</span><span class="w"> </span><span class="mi">15</span><span class="p">)</span>
+<a id="__codelineno-20-3" name="__codelineno-20-3" href="#__codelineno-20-3"></a><span class="p">(</span><span class="nb">println </span><span class="p">(</span><span class="nb">+ </span><span class="nv">preco-base</span><span class="w"> </span><span class="nv">taxa-fixa</span><span class="p">))</span>
+</code></pre></div>
+<h3 id="42-exercicio-2-funcao-com-escopo-local">4.2. Exercício 2: Função com Escopo Local<a class="headerlink" href="#42-exercicio-2-funcao-com-escopo-local" title="Permanent link">&para;</a></h3>
+<p>Agora, vamos praticar a definição de funções com escopo local usando <code>defn</code> e <code>let</code>.</p>
+<ol>
+<li><strong>Passo 1:</strong> Defina uma função chamada <code>calcula-total-com-desconto</code> que recebe um parâmetro <code>valor-bruto</code>.</li>
+<li><strong>Passo 2:</strong> Dentro da função, use <code>let</code> para definir um símbolo local <code>desconto-fixo</code> com o valor <code>10</code>.</li>
+<li><strong>Passo 3:</strong> O corpo do <code>let</code> deve calcular e retornar a subtração do <code>desconto-fixo</code> do <code>valor-bruto</code>.</li>
+<li><strong>Passo 4:</strong> Invoque a função com o valor <code>100</code> e imprima o resultado na tela usando <code>println</code>.</li>
+</ol>
+<h3 id="codigo-da-solucao_1">Código da Solução<a class="headerlink" href="#codigo-da-solucao_1" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-21-1" name="__codelineno-21-1" href="#__codelineno-21-1"></a><span class="p">(</span><span class="kd">defn </span><span class="nv">calcula-total-com-desconto</span><span class="w"> </span><span class="p">[</span><span class="nv">valor-bruto</span><span class="p">]</span>
+<a id="__codelineno-21-2" name="__codelineno-21-2" href="#__codelineno-21-2"></a><span class="w">  </span><span class="p">(</span><span class="k">let </span><span class="p">[</span><span class="nv">desconto-fixo</span><span class="w"> </span><span class="mi">10</span><span class="p">]</span>
+<a id="__codelineno-21-3" name="__codelineno-21-3" href="#__codelineno-21-3"></a><span class="w">    </span><span class="p">(</span><span class="nb">- </span><span class="nv">valor-bruto</span><span class="w"> </span><span class="nv">desconto-fixo</span><span class="p">)))</span>
+<a id="__codelineno-21-4" name="__codelineno-21-4" href="#__codelineno-21-4"></a>
+<a id="__codelineno-21-5" name="__codelineno-21-5" href="#__codelineno-21-5"></a><span class="c1">;; Invocando a função</span>
+<a id="__codelineno-21-6" name="__codelineno-21-6" href="#__codelineno-21-6"></a><span class="p">(</span><span class="nb">println </span><span class="p">(</span><span class="nf">calcula-total-com-desconto</span><span class="w"> </span><span class="mi">100</span><span class="p">))</span>
+</code></pre></div>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Voltar ao topo
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.top", "navigation.sections", "toc.integrate", "content.code.annotate", "content.code.copy"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copiado para \u00e1rea de transfer\u00eancia", "clipboard.copy": "Copiar para \u00e1rea de transfer\u00eancia", "search.result.more.one": "Mais 1 nesta p\u00e1gina", "search.result.more.other": "Mais # nesta p\u00e1gina", "search.result.none": "Nenhum resultado encontrado", "search.result.one": "1 resultado encontrado", "search.result.other": "# resultados encontrados", "search.result.placeholder": "Digite para iniciar a busca", "search.result.term.missing": "Ausente", "select.version": "Selecione a vers\u00e3o"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+        <script src="https://unpkg.com/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+    
+  </body>
+</html>

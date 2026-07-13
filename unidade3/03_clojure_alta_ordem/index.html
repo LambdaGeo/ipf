@@ -1,0 +1,1909 @@
+
+<!doctype html>
+<html lang="pt" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Livro didático da disciplina de Introdução à Programação Funcional: Haskell, Clojure e Elixir em três unidades de 20 horas.
+">
+      
+      
+        <meta name="author" content="Sergio Souza Costa">
+      
+      
+      
+        <link rel="prev" href="../02_clojure_colecoes/">
+      
+      
+        <link rel="next" href="../04_clojure_threading_mapas_complexos/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+    
+    
+      
+        <title>Cap 17: Clojure — Alta Ordem - Introdução à Programação Funcional</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="teal" data-md-color-accent="green">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#funcoes-de-alta-ordem" class="md-skip">
+          Ir para o conteúdo
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Cabeçalho">
+    <a href="../.." title="Introdução à Programação Funcional" class="md-header__button md-logo" aria-label="Introdução à Programação Funcional" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Introdução à Programação Funcional
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Cap 17: Clojure — Alta Ordem
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="teal" data-md-color-accent="green"  aria-hidden="true"  type="radio" name="__palette" id="__palette_0">
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Buscar" placeholder="Buscar" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Pesquisar">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Limpar" aria-label="Limpar" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Inicializando a pesquisa
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+  
+
+<nav class="md-nav md-nav--primary md-nav--integrated" aria-label="Navegação" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Introdução à Programação Funcional" class="md-nav__button md-logo" aria-label="Introdução à Programação Funcional" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Introdução à Programação Funcional
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Apresentação
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Unidade 1 — Paradigmas e Haskell Básico (20h)
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Unidade 1 — Paradigmas e Haskell Básico (20h)
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../unidade1/00_plano_unidade1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Plano da Unidade 1
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../unidade1/01_paradigmas/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cap 1: Introdução aos Paradigmas
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../unidade1/02_instalacao/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cap 2: Instalação do Ambiente
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../unidade1/03_fundamentos/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cap 3: Fundamentos e o GHCi
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../unidade1/04_tipos_classes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cap 4: Tipos e Classes
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../unidade1/05_funcoes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cap 5: Funções e Pattern Matching
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../unidade1/06_listas/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cap 6: Listas, Recursão e Compreensão
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../unidade1/07_alta_ordem/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cap 7: Funções de Alta Ordem
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../unidade1/08_exercicios/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cap 8: Exercícios Resolvidos
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Unidade 2 — Haskell Avançado e Qualidade (20h)
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Unidade 2 — Haskell Avançado e Qualidade (20h)
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../unidade2/00_plano_unidade2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Plano da Unidade 2
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../unidade2/01_declarando_tipos_classes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cap 9: Tipos Algébricos e Typeclasses
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../unidade2/02_programas_interativos/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cap 10: Programas Interativos (IO)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../unidade2/03_exercicios_avancados/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cap 11: Exercícios Avançados
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../unidade2/04_haskell_moderno/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cap 12: Projetos Modernos com Stack
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../unidade2/05_biblioteca_json/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cap 13: A Biblioteca JSON
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../unidade2/06_testes_qualidade/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cap 14: Testes com QuickCheck
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../unidade2/07_avaliacao/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Trabalho Prático: hs2json
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Unidade 3 — Clojure e Elixir (20h)
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Unidade 3 — Clojure e Elixir (20h)
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../00_plano_unidade3/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Plano da Unidade 3
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../01_clojure_fundamentos/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cap 15: Clojure — Fundamentos
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../02_clojure_colecoes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cap 16: Clojure — Vetores e Mapas
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cap 17: Clojure — Alta Ordem
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cap 17: Clojure — Alta Ordem
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Índice">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Índice
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1-introducao-funcoes-como-superpoderes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Introdução: Funções como Superpoderes
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-funcoes-como-cidadaos-de-primeira-classe-as-hofs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Funções como Cidadãos de Primeira Classe: As HOFs
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. Funções como Cidadãos de Primeira Classe: As HOFs">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#11-o-que-significa-cidadao-de-primeira-classe" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.1. O que significa "Cidadão de Primeira Classe"?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#12-hofs-em-acao-e" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.2. HOFs em Ação: , e
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-funcoes-na-hora-o-poder-das-lambdas-funcoes-anonimas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Funções "na Hora": O Poder das Lambdas (Funções Anônimas)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. Funções &#34;na Hora&#34;: O Poder das Lambdas (Funções Anônimas)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21-a-necessidade-de-funcoes-descartaveis" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.1. A Necessidade de Funções Descartáveis
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#22-a-sintaxe-abreviada" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.2. A Sintaxe Abreviada:
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#compondo-tudo-com-threading" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🔄 Compondo tudo com threading (&gt;&gt;)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#resumo-rapido" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ✅ Resumo rápido
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-construindo-logica-com-blocos-a-composicao-de-funcoes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Construindo Lógica com Blocos: A Composição de Funções
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4. Construindo Lógica com Blocos: A Composição de Funções">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#31-exemplo-pratico-criando-a-funcao-oposta-com-comp" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.1. Exemplo Prático: Criando a Função Oposta com comp
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-conclusao-a-triade-da-programacao-funcional-expressiva" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Conclusão: A Tríade da Programação Funcional Expressiva
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../04_clojure_threading_mapas_complexos/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cap 18: Clojure — Threading Macros
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../05_clojure_lazy_sequences/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cap 19: Clojure — Lazy Sequences
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../06_clojure_metaprogramacao/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cap 20: Clojure — Macros
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../07_clojure_interop/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cap 21: Clojure — Interop com Java
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../08_clojure_revisao/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cap 22: Clojure — Revisão de Pilares
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../09_clojure_exercicios/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cap 23: Clojure — Exercícios Resolvidos
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../10_clojure_tutorial_todo/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Trabalho Clojure: ToDo Full-Stack
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../11_elixir_fundamentos/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cap 24: Elixir — Fundamentos
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../12_elixir_colecoes_pattern_matching/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cap 25: Elixir — Pattern Matching
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../13_elixir_modulos_funcoes_testes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cap 26: Elixir — Módulos e Testes
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../14_elixir_processos/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cap 27: Elixir — Processos e Concorrência
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../15_elixir_metaprogramacao/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cap 28: Elixir — Metaprogramação
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../16_elixir_tutorial_todo/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Trabalho Elixir: ToDo com LiveView
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="funcoes-de-alta-ordem">Funções de alta ordem<a class="headerlink" href="#funcoes-de-alta-ordem" title="Permanent link">&para;</a></h1>
+<h2 id="1-introducao-funcoes-como-superpoderes">1. Introdução: Funções como Superpoderes<a class="headerlink" href="#1-introducao-funcoes-como-superpoderes" title="Permanent link">&para;</a></h2>
+<p>Uma das ideias mais poderosas da programação funcional em Clojure é o tratamento de <strong>funções como dados</strong>. Isso significa que uma função não é apenas um bloco de código que executa uma tarefa; ela pode ser tratada como qualquer outro valor, como um número ou uma string.</p>
+<p>Pense nisso da seguinte forma: assim como você pode passar o número <code>100</code> para uma função que calcula um total, em Clojure, você pode passar a <em>própria função</em> <code>soma</code> como um argumento. Dizemos que as funções são <strong>"cidadãos de primeira classe"</strong>, pois elas têm os mesmos direitos e privilégios que outros tipos de dados na linguagem.</p>
+<p>Este documento explora três conceitos centrais que desbloqueiam esse superpoder e permitem escrever código mais limpo, flexível e expressivo:</p>
+<ol>
+<li><strong>Funções de Alta Ordem (HOFs):</strong> Funções que operam sobre outras funções.</li>
+<li><strong>Funções Anônimas (Lambdas):</strong> Funções "descartáveis" criadas no momento do uso. Não precisam ser associadas a um nome.</li>
+<li><strong>Composição de Funções:</strong> A arte de construir novas funções combinando as existentes.</li>
+</ol>
+<h2 id="2-funcoes-como-cidadaos-de-primeira-classe-as-hofs">2. Funções como Cidadãos de Primeira Classe: As HOFs<a class="headerlink" href="#2-funcoes-como-cidadaos-de-primeira-classe-as-hofs" title="Permanent link">&para;</a></h2>
+<h3 id="11-o-que-significa-cidadao-de-primeira-classe">1.1. O que significa "Cidadão de Primeira Classe"?<a class="headerlink" href="#11-o-que-significa-cidadao-de-primeira-classe" title="Permanent link">&para;</a></h3>
+<p>Em Clojure, quando dizemos que as funções são "cidadãos de primeira classe", queremos dizer que elas podem ser:</p>
+<ul>
+<li><strong>Passadas como argumentos</strong> para outras funções.</li>
+<li><strong>Retornadas como resultado</strong> de outras funções.</li>
+<li><strong>Armazenadas em estruturas de dados</strong> ou <strong>atribuídas a um símbolo (variável)</strong> com <code>def</code>, assim como qualquer outro valor.</li>
+</ul>
+<p>Uma <strong>Função de Alta Ordem (HOF - High-Order Function)</strong> é simplesmente uma função que aproveita essa característica, seja recebendo outra função como argumento, seja retornando uma nova função como resultado.</p>
+<p>Veja um exemplo prático. A função <code>valor-descontado</code> abaixo foi projetada para receber não apenas o valor a ser descontado, mas também a <em>própria regra</em> que decide se o desconto deve ser aplicado.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="p">(</span><span class="kd">defn </span><span class="nv">mais-caro-que-100?</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="w">  </span><span class="p">[</span><span class="nv">valor-bruto</span><span class="p">]</span>
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="w">  </span><span class="p">(</span><span class="nb">&gt; </span><span class="nv">valor-bruto</span><span class="w"> </span><span class="mi">100</span><span class="p">))</span>
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="p">(</span><span class="kd">defn </span><span class="nv">valor-descontado</span>
+<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="w">  </span><span class="s">&quot;Retorna o valor com desconto de 10% se deve aplicar desconto.&quot;</span>
+<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="w">  </span><span class="p">[</span><span class="nv">aplica?</span><span class="w"> </span><span class="nv">valor-bruto</span><span class="p">]</span><span class="w"> </span><span class="c1">; &#39;aplica?&#39; é um parâmetro que espera uma função</span>
+<a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a><span class="w">  </span><span class="p">(</span><span class="k">if </span><span class="p">(</span><span class="nf">aplica?</span><span class="w"> </span><span class="nv">valor-bruto</span><span class="p">)</span>
+<a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a><span class="w">    </span><span class="p">(</span><span class="nb">* </span><span class="nv">valor-bruto</span><span class="w"> </span><span class="mf">0.9</span><span class="p">)</span>
+<a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a><span class="w">    </span><span class="nv">valor-bruto</span><span class="p">))</span>
+<a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a>
+<a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a><span class="c1">;; Passando a função `mais-caro-que-100?` como argumento</span>
+<a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a><span class="p">(</span><span class="nb">println </span><span class="p">(</span><span class="nf">valor-descontado</span><span class="w"> </span><span class="nv">mais-caro-que-100?</span><span class="w"> </span><span class="mi">1000</span><span class="p">))</span><span class="w"> </span><span class="c1">; Retorna 900.0</span>
+<a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a><span class="p">(</span><span class="nb">println </span><span class="p">(</span><span class="nf">valor-descontado</span><span class="w"> </span><span class="nv">mais-caro-que-100?</span><span class="w"> </span><span class="mi">100</span><span class="p">))</span><span class="w">  </span><span class="c1">; Retorna 100</span>
+</code></pre></div>
+<p>Neste caso, <code>valor-descontado</code> é uma HOF porque aceita a função <code>mais-caro-que-100?</code> como seu primeiro argumento, <code>aplica?</code>.</p>
+<h3 id="12-hofs-em-acao-e">1.2. HOFs em Ação: , e<a class="headerlink" href="#12-hofs-em-acao-e" title="Permanent link">&para;</a></h3>
+<p><code>map</code>, <code>filter</code> e <code>reduce</code> são a tríade clássica de HOFs para processamento de coleções em Clojure. Todas recebem uma função como primeiro argumento para operar sobre os elementos de uma coleção.</p>
+<p>Para os exemplos a seguir, considere a coleção <code>precos</code> e uma versão de <code>valor-descontado</code> que aplica o desconto com base em uma regra fixa, além da função predicado <code>aplica-desconto?</code>:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="p">(</span><span class="k">def </span><span class="nv">precos</span><span class="w"> </span><span class="p">[</span><span class="mi">30</span><span class="w"> </span><span class="mi">700</span><span class="w"> </span><span class="mi">1000</span><span class="p">])</span>
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="p">(</span><span class="kd">defn </span><span class="nv">aplica-desconto?</span>
+<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="w">  </span><span class="p">[</span><span class="nv">valor-bruto</span><span class="p">]</span>
+<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="w">  </span><span class="p">(</span><span class="nb">&gt; </span><span class="nv">valor-bruto</span><span class="w"> </span><span class="mi">100</span><span class="p">))</span>
+<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>
+<a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a><span class="p">(</span><span class="kd">defn </span><span class="nv">valor-descontado</span>
+<a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a><span class="w">  </span><span class="s">&quot;Retorna o valor com desconto de 10% se o valor bruto for estritamente maior que 100.&quot;</span>
+<a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a><span class="w">  </span><span class="p">[</span><span class="nv">valor-bruto</span><span class="p">]</span>
+<a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a><span class="w">  </span><span class="p">(</span><span class="k">if </span><span class="p">(</span><span class="nf">aplica-desconto?</span><span class="w"> </span><span class="nv">valor-bruto</span><span class="p">)</span>
+<a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a><span class="w">    </span><span class="p">(</span><span class="nb">* </span><span class="nv">valor-bruto</span><span class="w"> </span><span class="mf">0.9</span><span class="p">)</span>
+<a id="__codelineno-1-12" name="__codelineno-1-12" href="#__codelineno-1-12"></a><span class="w">    </span><span class="nv">valor-bruto</span><span class="p">))</span>
+</code></pre></div>
+<p>✅ <code>map</code>: aplica uma função a cada item da coleção</p>
+<p>A função <code>map</code> aplica <code>valor-descontado</code> a <strong>cada elemento</strong> da coleção <code>precos</code>.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="p">(</span><span class="nb">map </span><span class="nv">valor-descontado</span><span class="w"> </span><span class="nv">precos</span><span class="p">)</span>
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="c1">;=&gt; (30 630.0 900.0)</span>
+</code></pre></div>
+<p>📌 O que aconteceu aqui:</p>
+<ul>
+<li>O preço <code>30</code> permanece igual (não recebe desconto).</li>
+<li>Os preços <code>700</code> e <code>1000</code> são descontados em 10%.</li>
+</ul>
+<hr />
+<p>✅ <code>filter</code>: seleciona apenas os elementos que satisfazem uma condição</p>
+<p>A função <code>filter</code> usa o predicado <code>aplica-desconto?</code> para <strong>filtrar</strong> apenas os preços elegíveis para desconto.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="p">(</span><span class="nb">filter </span><span class="nv">aplica-desconto?</span><span class="w"> </span><span class="nv">precos</span><span class="p">)</span>
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="c1">;=&gt; (700 1000)</span>
+</code></pre></div>
+<p>📌 Resultado: Apenas os valores <strong>estritamente maiores que 100</strong> são mantidos.</p>
+<hr />
+<p>✅ <code>reduce</code>: reduz a coleção a um único valor</p>
+<p>A função <code>reduce</code> combina os valores da coleção em <strong>um único resultado</strong>. Exemplo: somar todos os preços.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="p">(</span><span class="nb">reduce + </span><span class="nv">precos</span><span class="p">)</span>
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="c1">;=&gt; 1730</span>
+</code></pre></div>
+<p>📌 Como funciona internamente:</p>
+<ol>
+<li>Soma os dois primeiros: <code>(+ 30 700)</code> → <code>730</code></li>
+<li>Soma o resultado com o próximo: <code>(+ 730 1000)</code> → <code>1730</code></li>
+</ol>
+<p>O uso de HOFs é incrivelmente poderoso, mas definir uma função nomeada com <code>defn</code> para cada pequena operação pode ser verboso. É aqui que as funções anônimas entram em cena.</p>
+<h2 id="3-funcoes-na-hora-o-poder-das-lambdas-funcoes-anonimas">3. Funções "na Hora": O Poder das Lambdas (Funções Anônimas)<a class="headerlink" href="#3-funcoes-na-hora-o-poder-das-lambdas-funcoes-anonimas" title="Permanent link">&para;</a></h2>
+<h3 id="21-a-necessidade-de-funcoes-descartaveis">2.1. A Necessidade de Funções Descartáveis<a class="headerlink" href="#21-a-necessidade-de-funcoes-descartaveis" title="Permanent link">&para;</a></h3>
+<p>Muitas vezes, a lógica que queremos passar para uma HOF é tão simples e usada em um único lugar que não vale a pena dar-lhe um nome formal com <code>defn</code>. Para esses casos, Clojure oferece as <strong>funções anônimas</strong>, também conhecidas como <strong>lambdas</strong>.</p>
+<p>A forma <code>fn</code> permite criar uma função "na hora", sem associá-la a um símbolo.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="c1">;; Em vez de definir uma função `mais-caro-que-100?` separadamente,</span>
+<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="c1">;; criamos a mesma lógica diretamente na chamada com `fn`.</span>
+<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>
+<a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a><span class="p">(</span><span class="nb">println </span><span class="p">(</span><span class="nf">valor-descontado</span><span class="w"> </span><span class="p">(</span><span class="k">fn </span><span class="p">[</span><span class="nv">valor-bruto</span><span class="p">]</span><span class="w"> </span><span class="p">(</span><span class="nb">&gt; </span><span class="nv">valor-bruto</span><span class="w"> </span><span class="mi">100</span><span class="p">))</span><span class="w"> </span><span class="mi">1000</span><span class="p">))</span>
+</code></pre></div>
+<p>Essa função anônima <code>(fn [valor-bruto] (&gt; valor-bruto 100))</code> existe apenas como argumento para <code>valor-descontado</code> e é descartada em seguida.</p>
+<h3 id="22-a-sintaxe-abreviada">2.2. A Sintaxe Abreviada:<a class="headerlink" href="#22-a-sintaxe-abreviada" title="Permanent link">&para;</a></h3>
+<p>Para tornar as lambdas ainda mais concisas, Clojure oferece uma sintaxe abreviada <code>#()</code>, ideal para funções de uma única expressão. Dentro dela, os parâmetros são referenciados implicitamente:</p>
+<ul>
+<li><code>%</code> refere-se ao primeiro (e único) argumento.</li>
+<li><code>%1</code>, <code>%2</code>, etc., referem-se ao primeiro, segundo e demais argumentos, caso haja mais de um.</li>
+</ul>
+<p>A lógica <code>(fn [valor-bruto] (&gt; valor-bruto 100))</code> pode ser reescrita de forma muito mais compacta:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="o">#</span><span class="p">(</span><span class="nb">&gt; </span><span class="nv">%</span><span class="w"> </span><span class="mi">100</span><span class="p">)</span>
+</code></pre></div>
+<p>A tabela a seguir compara as três maneiras de definir a mesma lógica de verificação de preço:</p>
+<table>
+<thead>
+<tr>
+<th>Forma</th>
+<th>Exemplo de Código</th>
+<th>Principal Vantagem</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>defn</code></td>
+<td><code>(defn mais-caro-que-100? [valor-bruto] (&gt; valor-bruto 100))</code></td>
+<td>Reutilizável, nome claro, fácil de testar.</td>
+</tr>
+<tr>
+<td><code>fn</code></td>
+<td><code>(fn [valor-bruto] (&gt; valor-bruto 100))</code></td>
+<td>Descartável, não polui o namespace com nomes.</td>
+</tr>
+<tr>
+<td><code>#()</code></td>
+<td><code>#(&gt; % 100)</code></td>
+<td>Extremamente concisa para lógicas simples.</td>
+</tr>
+</tbody>
+</table>
+<p>⚡ Versões com funções anônimas</p>
+<p>Para operações simples, podemos usar <strong>funções anônimas</strong> com a sintaxe <code>#()</code>:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="p">(</span><span class="nb">map </span><span class="o">#</span><span class="p">(</span><span class="k">if </span><span class="p">(</span><span class="nb">&gt; </span><span class="nv">%</span><span class="w"> </span><span class="mi">100</span><span class="p">)</span><span class="w"> </span><span class="p">(</span><span class="nb">* </span><span class="nv">%</span><span class="w"> </span><span class="mf">0.9</span><span class="p">)</span><span class="w"> </span><span class="nv">%</span><span class="p">)</span><span class="w"> </span><span class="nv">precos</span><span class="p">)</span>
+<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="c1">;=&gt; (30 630.0 900.0)</span>
+<a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a>
+<a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a><span class="p">(</span><span class="nb">filter </span><span class="o">#</span><span class="p">(</span><span class="nb">&gt; </span><span class="nv">%</span><span class="w"> </span><span class="mi">100</span><span class="p">)</span><span class="w"> </span><span class="nv">precos</span><span class="p">)</span>
+<a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a><span class="c1">;=&gt; (700 1000)</span>
+<a id="__codelineno-7-6" name="__codelineno-7-6" href="#__codelineno-7-6"></a>
+<a id="__codelineno-7-7" name="__codelineno-7-7" href="#__codelineno-7-7"></a><span class="p">(</span><span class="nb">reduce + </span><span class="nv">precos</span><span class="p">)</span>
+<a id="__codelineno-7-8" name="__codelineno-7-8" href="#__codelineno-7-8"></a><span class="c1">;=&gt; 1730</span>
+</code></pre></div>
+<h3 id="compondo-tudo-com-threading">🔄 Compondo tudo com threading (<code>&gt;&gt;</code>)<a class="headerlink" href="#compondo-tudo-com-threading" title="Permanent link">&para;</a></h3>
+<p>Você pode encadear operações de forma elegante usando o operador <code>-&gt;&gt;</code>:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="p">(</span><span class="nf">-&gt;&gt;</span><span class="w"> </span><span class="nv">precos</span>
+<a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a><span class="w">     </span><span class="p">(</span><span class="nb">filter </span><span class="nv">aplica-desconto?</span><span class="p">)</span>
+<a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a><span class="w">     </span><span class="p">(</span><span class="nb">map </span><span class="nv">valor-descontado</span><span class="p">)</span>
+<a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a><span class="w">     </span><span class="p">(</span><span class="nb">reduce </span><span class="nv">+</span><span class="p">))</span>
+<a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a><span class="c1">;=&gt; 1530.0</span>
+</code></pre></div>
+<p>📌 Neste exemplo:</p>
+<ul>
+<li>Filtramos os preços com desconto</li>
+<li>Aplicamos o desconto</li>
+<li>Somamos o total com desconto</li>
+</ul>
+<h3 id="resumo-rapido">✅ Resumo rápido<a class="headerlink" href="#resumo-rapido" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Função</th>
+<th>O que faz</th>
+<th>Exemplo com <code>precos</code></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>map</code></td>
+<td>Transforma cada item</td>
+<td><code>(map valor-descontado precos)</code></td>
+</tr>
+<tr>
+<td><code>filter</code></td>
+<td>Filtra itens com base em condição</td>
+<td><code>(filter aplica-desconto? precos)</code></td>
+</tr>
+<tr>
+<td><code>reduce</code></td>
+<td>Reduz coleção a um único valor</td>
+<td><code>(reduce + precos)</code></td>
+</tr>
+</tbody>
+</table>
+<p>A flexibilidade de criar funções rapidamente com lambdas nos leva ao próximo passo: combiná-las para criar comportamentos mais complexos.</p>
+<h2 id="4-construindo-logica-com-blocos-a-composicao-de-funcoes">4. Construindo Lógica com Blocos: A Composição de Funções<a class="headerlink" href="#4-construindo-logica-com-blocos-a-composicao-de-funcoes" title="Permanent link">&para;</a></h2>
+<p><strong>Composição de funções</strong> é o ato de combinar múltiplas funções para criar uma nova, que representa a aplicação sequencial delas. Em vez de aninhar chamadas de função, como <code>(not (gratuito? item))</code>, podemos usar uma HOF para construir uma função que faça isso por nós.</p>
+<p>A principal ferramenta para composição em Clojure é a HOF <code>comp</code>.</p>
+<h3 id="31-exemplo-pratico-criando-a-funcao-oposta-com-comp">3.1. Exemplo Prático: Criando a Função Oposta com <code>comp</code><a class="headerlink" href="#31-exemplo-pratico-criando-a-funcao-oposta-com-comp" title="Permanent link">&para;</a></h3>
+<p>Imagine que temos uma função chamada <code>gratuito?</code> que verifica se um item <strong>não tem custo</strong> — ou seja, retorna <code>true</code> se o item for gratuito, e <code>false</code> caso contrário.</p>
+<p>Agora, queremos criar a função oposta, chamada <code>pago?</code>, que retorna <code>true</code> para itens pagos e <code>false</code> para itens gratuitos.</p>
+<p>Em vez de escrever toda a lógica novamente, podemos usar a função de alta ordem <code>comp</code> para <strong>compor</strong> a função <code>gratuito?</code> com a função <code>not</code> (que inverte um valor booleano).</p>
+<p>Como fazer isso?</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="p">(</span><span class="k">def </span><span class="nv">pago?</span><span class="w"> </span><span class="p">(</span><span class="nb">comp not </span><span class="nv">gratuito?</span><span class="p">))</span>
+</code></pre></div>
+<hr />
+<p>O que está acontecendo aqui?</p>
+<p>Vamos entender passo a passo essa única linha:</p>
+<ol>
+<li><strong><code>comp</code> recebe duas funções</strong>:<ul>
+<li>A função da esquerda: <code>not</code></li>
+<li>A função da direita: <code>gratuito?</code></li>
+</ul>
+</li>
+<li><strong><code>comp</code> cria uma nova função</strong> — uma função anônima que, quando chamada,<ul>
+<li>Primeiro chama a função da direita (<code>gratuito?</code>) com o argumento recebido.</li>
+<li>Depois passa o resultado dessa chamada para a função da esquerda (<code>not</code>).</li>
+</ul>
+</li>
+<li><strong><code>def</code> associa essa nova função ao nome <code>pago?</code></strong>, para que possamos reutilizá-la no nosso código.</li>
+</ol>
+<hr />
+<p>Visualizando o fluxo</p>
+<p>Quando chamamos:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="p">(</span><span class="nf">pago?</span><span class="w"> </span><span class="nv">item</span><span class="p">)</span>
+</code></pre></div>
+<p>A execução acontece assim:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="p">(</span><span class="nb">not </span><span class="p">(</span><span class="nf">gratuito?</span><span class="w"> </span><span class="nv">item</span><span class="p">))</span>
+</code></pre></div>
+<p>Ou seja, <code>gratuito?</code> verifica se o item é gratuito, e <code>not</code> inverte o resultado, dizendo se o item é pago.</p>
+<hr />
+<p>Por que isso é legal?</p>
+<ul>
+<li>
+<p><strong><code>comp</code> é uma função de alta ordem:</strong></p>
+<p>Ela <strong>recebe funções como entrada</strong> e <strong>retorna uma nova função</strong> — exatamente a definição de HOF.</p>
+</li>
+<li>
+<p><strong>Reutilização e clareza:</strong></p>
+<p>Em vez de repetir lógica, você reutiliza funções existentes e as combina para criar comportamento novo.</p>
+</li>
+<li>
+<p><strong>Código mais limpo e declarativo:</strong></p>
+<p>Você descreve <em>o que</em> quer fazer (compor funções) em vez de <em>como</em> fazer passo a passo.</p>
+</li>
+</ul>
+<hr />
+<p>Exemplo completo para testar</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="p">(</span><span class="kd">defn </span><span class="nv">gratuito?</span><span class="w"> </span><span class="p">[</span><span class="nv">item</span><span class="p">]</span>
+<a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a><span class="w">  </span><span class="p">(</span><span class="nb">= </span><span class="p">(</span><span class="ss">:preco</span><span class="w"> </span><span class="nv">item</span><span class="p">)</span><span class="w"> </span><span class="mi">0</span><span class="p">))</span>
+<a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a>
+<a id="__codelineno-12-4" name="__codelineno-12-4" href="#__codelineno-12-4"></a><span class="p">(</span><span class="k">def </span><span class="nv">pago?</span><span class="w"> </span><span class="p">(</span><span class="nb">comp not </span><span class="nv">gratuito?</span><span class="p">))</span>
+<a id="__codelineno-12-5" name="__codelineno-12-5" href="#__codelineno-12-5"></a>
+<a id="__codelineno-12-6" name="__codelineno-12-6" href="#__codelineno-12-6"></a><span class="p">(</span><span class="nf">pago?</span><span class="w"> </span><span class="p">{</span><span class="ss">:nome</span><span class="w"> </span><span class="s">&quot;Caneta&quot;</span><span class="w"> </span><span class="ss">:preco</span><span class="w"> </span><span class="mi">0</span><span class="p">})</span>
+<a id="__codelineno-12-7" name="__codelineno-12-7" href="#__codelineno-12-7"></a><span class="c1">;=&gt; false</span>
+<a id="__codelineno-12-8" name="__codelineno-12-8" href="#__codelineno-12-8"></a>
+<a id="__codelineno-12-9" name="__codelineno-12-9" href="#__codelineno-12-9"></a><span class="p">(</span><span class="nf">pago?</span><span class="w"> </span><span class="p">{</span><span class="ss">:nome</span><span class="w"> </span><span class="s">&quot;Livro&quot;</span><span class="w"> </span><span class="ss">:preco</span><span class="w"> </span><span class="mi">25</span><span class="p">})</span>
+<a id="__codelineno-12-10" name="__codelineno-12-10" href="#__codelineno-12-10"></a><span class="c1">;=&gt; true</span>
+</code></pre></div>
+<h2 id="5-conclusao-a-triade-da-programacao-funcional-expressiva">5. Conclusão: A Tríade da Programação Funcional Expressiva<a class="headerlink" href="#5-conclusao-a-triade-da-programacao-funcional-expressiva" title="Permanent link">&para;</a></h2>
+<p>As Funções de Alta Ordem, as Lambdas e a Composição de Funções formam uma tríade que define a expressividade do código funcional em Clojure. Elas trabalham em perfeita sinergia:</p>
+<ul>
+<li><strong>HOFs</strong> (<code>map</code>, <code>filter</code>, <code>reduce</code>) fornecem os padrões de abstração para operar sobre dados.</li>
+<li><strong>Lambdas</strong> (<code>fn</code>, <code>#()</code>) oferecem a conveniência para usar essas abstrações de forma concisa e localizada.</li>
+<li><strong>Composição</strong> (<code>comp</code>) permite construir novas abstrações e lógicas a partir das existentes, como se fossem blocos de montar.</li>
+</ul>
+<p>Dominar esses três conceitos é um passo fundamental para evoluir de apenas escrever código que funciona para escrever código Clojure que é verdadeiramente limpo, reutilizável e elegante.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Voltar ao topo
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.top", "navigation.sections", "toc.integrate", "content.code.annotate", "content.code.copy"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copiado para \u00e1rea de transfer\u00eancia", "clipboard.copy": "Copiar para \u00e1rea de transfer\u00eancia", "search.result.more.one": "Mais 1 nesta p\u00e1gina", "search.result.more.other": "Mais # nesta p\u00e1gina", "search.result.none": "Nenhum resultado encontrado", "search.result.one": "1 resultado encontrado", "search.result.other": "# resultados encontrados", "search.result.placeholder": "Digite para iniciar a busca", "search.result.term.missing": "Ausente", "select.version": "Selecione a vers\u00e3o"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+        <script src="https://unpkg.com/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+    
+  </body>
+</html>

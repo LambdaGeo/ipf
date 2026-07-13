@@ -1,0 +1,3015 @@
+
+<!doctype html>
+<html lang="pt" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Livro didático da disciplina de Introdução à Programação Funcional: Haskell, Clojure e Elixir em três unidades de 20 horas.
+">
+      
+      
+        <meta name="author" content="Sergio Souza Costa">
+      
+      
+      
+        <link rel="prev" href="../12_elixir_colecoes_pattern_matching/">
+      
+      
+        <link rel="next" href="../14_elixir_processos/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+    
+    
+      
+        <title>Cap 26: Elixir — Módulos e Testes - Introdução à Programação Funcional</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="teal" data-md-color-accent="green">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#modulo-funcoes-e-testes" class="md-skip">
+          Ir para o conteúdo
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Cabeçalho">
+    <a href="../.." title="Introdução à Programação Funcional" class="md-header__button md-logo" aria-label="Introdução à Programação Funcional" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Introdução à Programação Funcional
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Cap 26: Elixir — Módulos e Testes
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="teal" data-md-color-accent="green"  aria-hidden="true"  type="radio" name="__palette" id="__palette_0">
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Buscar" placeholder="Buscar" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Pesquisar">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Limpar" aria-label="Limpar" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Inicializando a pesquisa
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+  
+
+<nav class="md-nav md-nav--primary md-nav--integrated" aria-label="Navegação" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Introdução à Programação Funcional" class="md-nav__button md-logo" aria-label="Introdução à Programação Funcional" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Introdução à Programação Funcional
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Apresentação
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Unidade 1 — Paradigmas e Haskell Básico (20h)
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Unidade 1 — Paradigmas e Haskell Básico (20h)
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../unidade1/00_plano_unidade1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Plano da Unidade 1
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../unidade1/01_paradigmas/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cap 1: Introdução aos Paradigmas
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../unidade1/02_instalacao/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cap 2: Instalação do Ambiente
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../unidade1/03_fundamentos/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cap 3: Fundamentos e o GHCi
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../unidade1/04_tipos_classes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cap 4: Tipos e Classes
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../unidade1/05_funcoes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cap 5: Funções e Pattern Matching
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../unidade1/06_listas/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cap 6: Listas, Recursão e Compreensão
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../unidade1/07_alta_ordem/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cap 7: Funções de Alta Ordem
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../unidade1/08_exercicios/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cap 8: Exercícios Resolvidos
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Unidade 2 — Haskell Avançado e Qualidade (20h)
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Unidade 2 — Haskell Avançado e Qualidade (20h)
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../unidade2/00_plano_unidade2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Plano da Unidade 2
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../unidade2/01_declarando_tipos_classes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cap 9: Tipos Algébricos e Typeclasses
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../unidade2/02_programas_interativos/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cap 10: Programas Interativos (IO)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../unidade2/03_exercicios_avancados/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cap 11: Exercícios Avançados
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../unidade2/04_haskell_moderno/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cap 12: Projetos Modernos com Stack
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../unidade2/05_biblioteca_json/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cap 13: A Biblioteca JSON
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../unidade2/06_testes_qualidade/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cap 14: Testes com QuickCheck
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../unidade2/07_avaliacao/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Trabalho Prático: hs2json
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Unidade 3 — Clojure e Elixir (20h)
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Unidade 3 — Clojure e Elixir (20h)
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../00_plano_unidade3/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Plano da Unidade 3
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../01_clojure_fundamentos/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cap 15: Clojure — Fundamentos
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../02_clojure_colecoes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cap 16: Clojure — Vetores e Mapas
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../03_clojure_alta_ordem/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cap 17: Clojure — Alta Ordem
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../04_clojure_threading_mapas_complexos/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cap 18: Clojure — Threading Macros
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../05_clojure_lazy_sequences/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cap 19: Clojure — Lazy Sequences
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../06_clojure_metaprogramacao/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cap 20: Clojure — Macros
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../07_clojure_interop/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cap 21: Clojure — Interop com Java
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../08_clojure_revisao/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cap 22: Clojure — Revisão de Pilares
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../09_clojure_exercicios/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cap 23: Clojure — Exercícios Resolvidos
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../10_clojure_tutorial_todo/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Trabalho Clojure: ToDo Full-Stack
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../11_elixir_fundamentos/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cap 24: Elixir — Fundamentos
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../12_elixir_colecoes_pattern_matching/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cap 25: Elixir — Pattern Matching
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cap 26: Elixir — Módulos e Testes
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cap 26: Elixir — Módulos e Testes
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Índice">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Índice
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1-o-ambiente-de-trabalho-mix" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. O Ambiente de Trabalho (Mix)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1. O Ambiente de Trabalho (Mix)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#passo-1-criando-o-projeto" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🛠️ Passo 1: Criando o Projeto
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#11-aridade-a-identidade-da-funcao-vs-sobrecarga" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.1. Aridade: A Identidade da Função (vs. Sobrecarga)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-organizacao-e-namespaces-o-modulo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Organização e Namespaces (O Módulo)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. Organização e Namespaces (O Módulo)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21-teoria-modulos-como-namespaces" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.1. Teoria: Módulos como Namespaces
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#22-a-regra-de-ouro-arquivos-vs-modulos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.2. A Regra de Ouro: Arquivos vs. Módulos
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#passo-2-criando-o-modulo-de-boletim" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🛠️ Passo 2: Criando o Módulo de Boletim
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#vamos-testar" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ⚡ Vamos testar?
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-pattern-matching-e-guards-o-superpoder-do-elixir" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Pattern Matching e Guards: O Superpoder do Elixir
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. Pattern Matching e Guards: O Superpoder do Elixir">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#31-teoria-o-diferencial-da-beam" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.1. Teoria: O Diferencial da BEAM
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#32-o-papel-dos-guards-when" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.2. O Papel dos Guards (when)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#passo-3-implementando-as-regras-de-aprovacao" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🛠️ Passo 3: Implementando as Regras de Aprovação
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#a-regra-de-ouro-a-ordem-importa" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ⚠️ A Regra de Ouro: A Ordem Importa
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#vamos-testar_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ⚡ Vamos testar?
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-encapsulamento-e-funcoes-privadas-defp" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Encapsulamento e Funções Privadas (defp)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4. Encapsulamento e Funções Privadas (defp)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#passo-4-escondendo-a-logica" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🛠️ Passo 4: Escondendo a Lógica
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#vamos-testar-a-seguranca" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ⚡ Vamos testar a Segurança?
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-o-operador-pipe-e-a-linha-de-producao" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. O Operador Pipe (|&gt;) e a Linha de Produção
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5. O Operador Pipe (|&gt;) e a Linha de Produção">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#51-teoria-como-o-pipe-funciona" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.1. Teoria: Como o Pipe Funciona?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#passo-5-refatorando-para-pipeline" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🛠️ Passo 5: Refatorando para Pipeline
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-documentacao-escrevendo-lendo-e-publicando" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. Documentação: Escrevendo, Lendo e Publicando 📖
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="6. Documentação: Escrevendo, Lendo e Publicando 📖">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#passo-61-escrevendo-a-documentacao" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🛠️ Passo 6.1: Escrevendo a Documentação
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#passo-62-lendo-no-terminal-o-modo-hacker" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🛠️ Passo 6.2: Lendo no Terminal (O Modo "Hacker") 💻
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#passo-63-gerando-o-site-html-o-modo-profissional" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🛠️ Passo 6.3: Gerando o Site HTML (O Modo Profissional) 🌐
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#64-o-segredo-do-iex-doctests" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.4. O Segredo do iex&gt; (Doctests) 🕵️
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#65-ativando-os-testes-onde-colocar-o-doctest" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.5. Ativando os Testes (Onde colocar o doctest?)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#passo-a-passo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🛠️ Passo a Passo:
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-testes-de-unidade-o-junit-do-elixir" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. Testes de Unidade (O "JUnit" do Elixir) 🧪
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="7. Testes de Unidade (O &#34;JUnit&#34; do Elixir) 🧪">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#passo-71-criando-cenarios-de-teste" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🛠️ Passo 7.1: Criando Cenários de Teste
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rodando-a-bateria-completa" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ⚡ Rodando a Bateria Completa
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#8-reutilizacao-de-codigo-use-import-e-require" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8. Reutilização de Código: use, import e require 🧩
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="8. Reutilização de Código: use, import e require 🧩">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#81-o-use-a-injecao-de-codigo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.1. O use (A Injeção de Código)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#passo-81-criando-nosso-proprio-use" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🛠️ Passo 8.1: Criando nosso próprio use
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#82-o-import-trazendo-para-perto-com-seguranca" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.2. O import (Trazendo para Perto com Segurança)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#a-analogia-para-quem-vem-de-fora" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🏛️ A Analogia para quem vem de fora
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#usando-only-lista-branca-e-except-lista-negra" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🛠️ Usando only (Lista Branca) e except (Lista Negra)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#resumo-da-etiqueta-do-import" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Resumo da Etiqueta do Import
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#83-o-require-macros-e-compilacao" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.3. O require (Macros e Compilação)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#84-organizacao-de-codigo-o-poder-do-alias" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.4 Organização de Código: O Poder do alias 🏷️
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#81-o-que-ele-faz" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.1. O que ele faz?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#a-analogia-javapython" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🏛️ A Analogia (Java/Python)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#passo-81-simplificando-nomes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🛠️ Passo 8.1: Simplificando Nomes
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#82-formas-de-usar-o-alias" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.2. Formas de usar o Alias
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#dica-de-engenharia-alias-vs-import" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        💡 Dica de Engenharia: Alias vs Import
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#85-resumo-da-opera-comparativo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.5. Resumo da Ópera (Comparativo)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../14_elixir_processos/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cap 27: Elixir — Processos e Concorrência
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../15_elixir_metaprogramacao/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cap 28: Elixir — Metaprogramação
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../16_elixir_tutorial_todo/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Trabalho Elixir: ToDo com LiveView
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="modulo-funcoes-e-testes">Modulo, Funções e testes<a class="headerlink" href="#modulo-funcoes-e-testes" title="Permanent link">&para;</a></h1>
+<p>Caro aluno, hoje vamos mudar a forma como você pensa sobre organizar código. Se você vem de Java, C# ou Python, você está acostumado a pensar em <strong>Classes</strong> (que guardam dados e comportamentos). Em Elixir, nós separamos isso:</p>
+<ol>
+<li><strong>Dados</strong> são imutáveis e transparentes.</li>
+<li><strong>Módulos</strong> são apenas agrupadores de funções.</li>
+<li><strong>Funções</strong> transformam dados.</li>
+</ol>
+<p>Vamos construir um sistema de <strong>Avaliação Escolar</strong> do zero.</p>
+<h2 id="1-o-ambiente-de-trabalho-mix">1. O Ambiente de Trabalho (Mix)<a class="headerlink" href="#1-o-ambiente-de-trabalho-mix" title="Permanent link">&para;</a></h2>
+<p>Em engenharia de software, não criamos arquivos soltos. Precisamos de uma estrutura padrão para compilação, testes e dependências. Em Elixir, essa ferramenta é o <strong>Mix</strong>.</p>
+<h3 id="passo-1-criando-o-projeto">🛠️ Passo 1: Criando o Projeto<a class="headerlink" href="#passo-1-criando-o-projeto" title="Permanent link">&para;</a></h3>
+<p>Abra seu terminal e digite o comando abaixo. Ele vai criar a estrutura de pastas padrão da indústria.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nx">mix</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">escola_elixir</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="nx">cd</span><span class="w"> </span><span class="nx">escola_elixir</span>
+</code></pre></div>
+<p>Ao rodar o comando <code>mix new</code>, o Elixir não cria apenas pastas aleatórias. Ele estabelece uma convenção arquitetural usada por toda a comunidade. Entender isso agora vai te salvar horas no futuro.</p>
+<p>Abra a pasta no VS Code. Você verá:</p>
+<ul>
+<li>📂 <strong><code>lib/</code> (A Fábrica):</strong><ul>
+<li>Aqui vive 100% do seu código de produção.</li>
+<li><strong>Diferença importante:</strong> Em Elixir, compilamos os arquivos <code>.ex</code> (Elixir files).</li>
+<li>O Mix compila tudo o que está aqui para bytecode da BEAM para garantir performance máxima.</li>
+<li><em>Regra de Ouro:</em> A estrutura de pastas dentro de <code>lib</code> deve espelhar o nome dos seus módulos. Se o módulo é <code>Escola.Financeiro.Boleto</code>, o arquivo deve ser <code>lib/escola/financeiro/boleto.ex</code>.</li>
+</ul>
+</li>
+<li>📂 <strong><code>test/</code> (O Controle de Qualidade):</strong><ul>
+<li>Aqui vivem seus scripts de teste.</li>
+<li>Observe que a extensão é <code>.exs</code> (Elixir <strong>Script</strong>).</li>
+<li><strong>Por que <code>.exs</code>?</strong> Arquivos de teste não precisam ser compilados para bytecode otimizado, pois eles mudam com frequência e rodam apenas em desenvolvimento. O Elixir os interpreta em tempo de execução, o que é mais rápido para o ciclo de desenvolvimento (escreve -&gt; testa -&gt; reescreve).</li>
+</ul>
+</li>
+<li>📄 <strong><code>mix.exs</code> (O Gerente do Projeto):</strong><ul>
+<li>Este é o coração da configuração. É o equivalente ao <code>pom.xml</code> (Maven/Java) ou <code>package.json</code> (Node.js).</li>
+<li>Ele tem duas responsabilidades principais:<ol>
+<li><strong>Project:</strong> Define versão (<code>0.1.0</code>), nome da app e configurações do compilador.</li>
+<li><strong>Deps:</strong> Lista as bibliotecas externas (dependências) que seu projeto vai baixar e usar.</li>
+</ol>
+</li>
+</ul>
+</li>
+<li><em>(Oculto/Gitignore)</em> 📂 <strong><code>_build</code> e <code>deps</code></strong>:<ul>
+<li>Você verá essas pastas aparecerem depois de compilar. Não mexa nelas. <code>deps</code> é onde as bibliotecas baixadas ficam, e <code>_build</code> é onde estão os arquivos compilados (binários). Nunca commite essas pastas no Git.</li>
+</ul>
+</li>
+</ul>
+<h3 id="11-aridade-a-identidade-da-funcao-vs-sobrecarga">1.1. Aridade: A Identidade da Função (vs. Sobrecarga)<a class="headerlink" href="#11-aridade-a-identidade-da-funcao-vs-sobrecarga" title="Permanent link">&para;</a></h3>
+<p>Se você vem de linguagens como Java, C# ou C++, provavelmente está acostumado com o conceito de <strong>Sobrecarga de Métodos (Method Overloading)</strong>. Nessas linguagens, você pode ter vários métodos com o mesmo nome, e o compilador decide qual usar analisando os tipos e a quantidade de argumentos. Para o sistema, eles são variações do mesmo comportamento.</p>
+<p>Em Elixir (e na máquina virtual Erlang/BEAM), o conceito é diferente e mais estrito. Nós chamamos de <strong>Aridade</strong>.</p>
+<p>A aridade é o número de argumentos que uma função aceita. Em Elixir, o nome da função + a aridade formam a <strong>identidade única</strong> daquela função.</p>
+<table>
+<thead>
+<tr>
+<th><strong>Conceito</strong></th>
+<th><strong>Linguagem OO (Java/C#)</strong></th>
+<th><strong>Elixir</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Definição</strong></td>
+<td><code>calcular(int a)</code> e <code>calcular(int a, int b)</code></td>
+<td><code>calcular/1</code> e <code>calcular/2</code></td>
+</tr>
+<tr>
+<td><strong>Identidade</strong></td>
+<td>São o mesmo método, apenas “sobrecarregado”.</td>
+<td>São duas funções completamente distintas.</td>
+</tr>
+<tr>
+<td><strong>Resolução</strong></td>
+<td>O compilador infere pelos tipos dos argumentos.</td>
+<td>O runtime busca a função exata pelo <strong>nome</strong> e <strong>número de argumentos</strong> (arity).</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition tip">
+<p class="admonition-title">Por que isso importa ?</p>
+<p>Ao ler uma documentação ou um erro no terminal, você verá algo como <code>undefined function calcular/1</code>. Isso diz especificamente: "Eu até conheço a <code>calcular/2</code>, mas você chamou uma versão de 1 argumento que não existe". Tratar funções de aridades diferentes como entidades diferentes nos dá precisão absoluta no rastreamento de execução.</p>
+</div>
+<h2 id="2-organizacao-e-namespaces-o-modulo">2. Organização e Namespaces (O Módulo)<a class="headerlink" href="#2-organizacao-e-namespaces-o-modulo" title="Permanent link">&para;</a></h2>
+<p>Antes de escrevermos o código, precisamos entender <strong>onde</strong> ele vai morar.</p>
+<h3 id="21-teoria-modulos-como-namespaces">2.1. Teoria: Módulos como Namespaces<a class="headerlink" href="#21-teoria-modulos-como-namespaces" title="Permanent link">&para;</a></h3>
+<p>Se você vem do Java ou C#, está acostumado com <strong>Packages</strong> ou <strong>Namespaces</strong> (ex: <code>br.com.escola.financeiro.Boleto</code>). Isso serve para garantir que o seu "Boleto" não se confunda com o "Boleto" de outra biblioteca que você instalou.</p>
+<p>Em Elixir, usamos a <strong>Notação de Ponto</strong> para criar essa hierarquia.
+O módulo não é apenas o nome da funcionalidade, é o <strong>endereço</strong> dela no sistema.</p>
+<ul>
+<li><code>EscolaElixir</code> -&gt; É o nosso namespace raiz (O nome do app).</li>
+<li><code>EscolaElixir.Boletim</code> -&gt; É um submódulo específico.</li>
+</ul>
+<h3 id="22-a-regra-de-ouro-arquivos-vs-modulos">2.2. A Regra de Ouro: Arquivos vs. Módulos<a class="headerlink" href="#22-a-regra-de-ouro-arquivos-vs-modulos" title="Permanent link">&para;</a></h3>
+<p>Para manter a sanidade mental em grandes projetos, o Elixir adota uma convenção estrita de mapeamento entre o <strong>Sistema de Arquivos</strong> e o <strong>Nome do Código</strong>.</p>
+<table>
+<thead>
+<tr>
+<th><strong>Contexto</strong></th>
+<th><strong>Convenção</strong></th>
+<th><strong>Exemplo</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>No Código (Módulo)</strong></td>
+<td>CamelCase (PascalCase)</td>
+<td><code>EscolaElixir.Boletim</code></td>
+</tr>
+<tr>
+<td><strong>No Arquivo (Pasta)</strong></td>
+<td>snake_case</td>
+<td><code>lib/escola_elixir/boletim.ex</code></td>
+</tr>
+</tbody>
+</table>
+<div class="admonition tip">
+<p class="admonition-title">Por que minúsculo no arquivo?</p>
+<p>Sistemas operacionais (Windows vs Linux) tratam letras maiúsculas/minúsculas de formas diferentes. Usar sempre <code>snake_case</code> nos arquivos evita bugs bizarros de "Arquivo não encontrado" ao fazer deploy em servidores Linux.</p>
+</div>
+<h3 id="passo-2-criando-o-modulo-de-boletim">🛠️ Passo 2: Criando o Módulo de Boletim<a class="headerlink" href="#passo-2-criando-o-modulo-de-boletim" title="Permanent link">&para;</a></h3>
+<p>Agora vamos aplicar a teoria. Observe que vamos traduzir os pontos (<code>.</code>) do nome do módulo para barras (<code>/</code>) no sistema de pastas.</p>
+<ol>
+<li>Crie a pasta: <code>lib/escola_elixir</code> (caso não exista).</li>
+<li>Crie o arquivo: <code>lib/escola_elixir/boletim.ex</code>.</li>
+</ol>
+<p>Digite o código abaixo:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="c1"># O nome do módulo reflete a hierarquia: App -&gt; Contexto</span>
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="kd">defmodule</span><span class="w"> </span><span class="nc">EscolaElixir.Boletim</span><span class="w"> </span><span class="k">do</span>
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="w">  </span><span class="na">@moduledoc</span><span class="w"> </span><span class="sh">&quot;&quot;&quot;</span>
+<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="w">  </span><span class="sh">Módulo responsável por cálculos de notas.</span>
+<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="w">  </span><span class="sh">&quot;&quot;&quot;</span>
+<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>
+<a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a><span class="w">  </span><span class="c1"># def define uma função pública (visível para qualquer outro módulo)</span>
+<a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a><span class="w">  </span><span class="kd">def</span><span class="w"> </span><span class="n">calcular_media</span><span class="p">(</span><span class="n">nota1</span><span class="p">,</span><span class="w"> </span><span class="n">nota2</span><span class="p">,</span><span class="w"> </span><span class="n">nota3</span><span class="p">)</span><span class="w"> </span><span class="k">do</span>
+<a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a><span class="w">    </span><span class="p">(</span><span class="n">nota1</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">nota2</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">nota3</span><span class="p">)</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="mi">3</span>
+<a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a><span class="w">  </span><span class="k">end</span>
+<a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a><span class="k">end</span>
+</code></pre></div>
+<h3 id="vamos-testar">⚡ Vamos testar?<a class="headerlink" href="#vamos-testar" title="Permanent link">&para;</a></h3>
+<p>Como alteramos a estrutura de arquivos, precisamos garantir que o Mix encontre tudo.</p>
+<ol>
+<li>
+<p>No terminal, dentro da pasta do projeto, inicie o ambiente interativo:Bash</p>
+<p><code>iex -S mix</code></p>
+<p><em>(O <code>-S mix</code> diz: "Carregue o IEx, mas antes compile e traga todo o meu projeto Mix junto".)</em></p>
+</li>
+<li>
+<p>Chame a função pelo seu <strong>endereço completo</strong> (Namespace):Elixir</p>
+<p><code>iex&gt; EscolaElixir.Boletim.calcular_media(10, 5, 6)
+7.0</code></p>
+</li>
+</ol>
+<p>No vscode:</p>
+<p><img alt="image.png" src="../Modulo%2C%20Fun%C3%A7%C3%B5es%20e%20testes/image.png" /></p>
+<p><strong>Se funcionou, parabéns!</strong> Você acabou de criar sua primeira estrutura modular respeitando os padrões de engenharia da comunidade Elixir.</p>
+<h2 id="3-pattern-matching-e-guards-o-superpoder-do-elixir">3. Pattern Matching e Guards: O Superpoder do Elixir<a class="headerlink" href="#3-pattern-matching-e-guards-o-superpoder-do-elixir" title="Permanent link">&para;</a></h2>
+<p>Aqui chegamos ao divisor de águas. Se em Java ou Python o fluxo de controle é imperativo (<em>"Se x for isso, faça aquilo"</em>), em Elixir e Erlang ele é declarativo (<em>"Para este x, a resposta é essa"</em>).</p>
+<h3 id="31-teoria-o-diferencial-da-beam">3.1. Teoria: O Diferencial da BEAM<a class="headerlink" href="#31-teoria-o-diferencial-da-beam" title="Permanent link">&para;</a></h3>
+<p>Na maioria das linguagens, você entra na função e depois decide o que fazer com vários <code>if/else</code>.
+Em Elixir, <strong>a decisão acontece antes da função começar.</strong></p>
+<p>Imagine que sua função tem várias "portas de entrada".</p>
+<ol>
+<li>O dado chega.</li>
+<li>O Elixir tenta encaixar o dado na <strong>Porta 1</strong>. Encaixou? Entra e executa.</li>
+<li>Não encaixou? Tenta a <strong>Porta 2</strong>.</li>
+<li>E assim por diante.</li>
+</ol>
+<p>Isso elimina a complexidade ciclomática (ninhos de <code>if</code>) e torna o código extremamente legível.</p>
+<h3 id="32-o-papel-dos-guards-when">3.2. O Papel dos Guards (<code>when</code>)<a class="headerlink" href="#32-o-papel-dos-guards-when" title="Permanent link">&para;</a></h3>
+<p>O Pattern Matching sozinho é ótimo para igualdade exata (ex: "A nota é 10?"). Mas e se precisarmos de comparações, como "A nota é maior que 7"?</p>
+<p>O Pattern Matching <strong>não sabe fazer contas</strong>. Ele só compara formas.
+Para cobrir essa lacuna, usamos <strong>Guards</strong> (a palavra-chave <code>when</code>).</p>
+<ul>
+<li><strong>Pattern Matching:</strong> Verifica a <em>forma</em> e <em>valores exatos</em>.</li>
+<li><strong>Guards:</strong> Refinam a entrada com testes lógicos (<code>&gt;</code>, <code>&lt;</code>, <code>is_integer</code>, etc).</li>
+</ul>
+<p>É como um segurança na porta da balada:</p>
+<ol>
+<li><strong>Pattern:</strong> "Você tem ingresso?" (Verifica se o dado existe).</li>
+<li><strong>Guard:</strong> "Você é maior de 18 anos?" (Valida a condição).</li>
+</ol>
+<hr />
+<h3 id="passo-3-implementando-as-regras-de-aprovacao">🛠️ Passo 3: Implementando as Regras de Aprovação<a class="headerlink" href="#passo-3-implementando-as-regras-de-aprovacao" title="Permanent link">&para;</a></h3>
+<p>Vamos ver isso na prática. Edite o arquivo <code>lib/escola_elixir/boletim.ex</code>.
+Apague ou modifique a lógica antiga para usar <strong>Cláusulas de Função</strong>.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="w">  </span><span class="c1"># --- Lógica de Situação ---</span>
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="w">  </span><span class="c1"># PORTA 1: Match Exato (Pattern Matching Puro)</span>
+<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="w">  </span><span class="c1"># O Elixir verifica: &quot;O argumento é exatamente o float 10.0?&quot;</span>
+<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="w">  </span><span class="c1"># Se for, entra aqui e ignora o resto.</span>
+<a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a><span class="w">  </span><span class="kd">def</span><span class="w"> </span><span class="n">verificar_situacao</span><span class="p">(</span><span class="mf">10.0</span><span class="p">),</span><span class="w"> </span><span class="ss">do</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Aprovado com Louvor&quot;</span>
+<a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a>
+<a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a><span class="w">  </span><span class="c1"># PORTA 2: Match com Guard (Refinamento)</span>
+<a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a><span class="w">  </span><span class="c1"># O pattern &quot;media&quot; aceita qualquer coisa, mas o GUARD barra se não for &gt;= 7.</span>
+<a id="__codelineno-2-10" name="__codelineno-2-10" href="#__codelineno-2-10"></a><span class="w">  </span><span class="kd">def</span><span class="w"> </span><span class="n">verificar_situacao</span><span class="p">(</span><span class="n">media</span><span class="p">)</span><span class="w"> </span><span class="ow">when</span><span class="w"> </span><span class="n">media</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="mf">7.0</span><span class="w"> </span><span class="k">do</span>
+<a id="__codelineno-2-11" name="__codelineno-2-11" href="#__codelineno-2-11"></a><span class="w">    </span><span class="s2">&quot;Aprovado&quot;</span>
+<a id="__codelineno-2-12" name="__codelineno-2-12" href="#__codelineno-2-12"></a><span class="w">  </span><span class="k">end</span>
+<a id="__codelineno-2-13" name="__codelineno-2-13" href="#__codelineno-2-13"></a>
+<a id="__codelineno-2-14" name="__codelineno-2-14" href="#__codelineno-2-14"></a><span class="w">  </span><span class="c1"># PORTA 3: Outro Guard</span>
+<a id="__codelineno-2-15" name="__codelineno-2-15" href="#__codelineno-2-15"></a><span class="w">  </span><span class="c1"># Note que não precisamos testar se é &lt; 7, pois se chegou aqui,</span>
+<a id="__codelineno-2-16" name="__codelineno-2-16" href="#__codelineno-2-16"></a><span class="w">  </span><span class="c1"># é porque falhou na porta anterior!</span>
+<a id="__codelineno-2-17" name="__codelineno-2-17" href="#__codelineno-2-17"></a><span class="w">  </span><span class="kd">def</span><span class="w"> </span><span class="n">verificar_situacao</span><span class="p">(</span><span class="n">media</span><span class="p">)</span><span class="w"> </span><span class="ow">when</span><span class="w"> </span><span class="n">media</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="mf">5.0</span><span class="w"> </span><span class="k">do</span>
+<a id="__codelineno-2-18" name="__codelineno-2-18" href="#__codelineno-2-18"></a><span class="w">    </span><span class="s2">&quot;Recuperação&quot;</span>
+<a id="__codelineno-2-19" name="__codelineno-2-19" href="#__codelineno-2-19"></a><span class="w">  </span><span class="k">end</span>
+<a id="__codelineno-2-20" name="__codelineno-2-20" href="#__codelineno-2-20"></a>
+<a id="__codelineno-2-21" name="__codelineno-2-21" href="#__codelineno-2-21"></a><span class="w">  </span><span class="c1"># PORTA 4: O &quot;Catch-all&quot; (Pega-tudo)</span>
+<a id="__codelineno-2-22" name="__codelineno-2-22" href="#__codelineno-2-22"></a><span class="w">  </span><span class="c1"># Se nada acima funcionou, cai aqui.</span>
+<a id="__codelineno-2-23" name="__codelineno-2-23" href="#__codelineno-2-23"></a><span class="w">  </span><span class="c1"># O underscore (_media) avisa ao compilador: &quot;Sei que tem um dado, mas não vou usá-lo&quot;.</span>
+<a id="__codelineno-2-24" name="__codelineno-2-24" href="#__codelineno-2-24"></a><span class="w">  </span><span class="kd">def</span><span class="w"> </span><span class="n">verificar_situacao</span><span class="p">(</span><span class="n">_media</span><span class="p">),</span><span class="w"> </span><span class="ss">do</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Reprovado&quot;</span>
+</code></pre></div>
+<h3 id="a-regra-de-ouro-a-ordem-importa">⚠️ A Regra de Ouro: A Ordem Importa<a class="headerlink" href="#a-regra-de-ouro-a-ordem-importa" title="Permanent link">&para;</a></h3>
+<p>Em linguagens com <code>Overloading</code> (Sobrecarga), o compilador escolhe o método mais específico. <strong>Em Elixir, não.</strong> O Elixir é sequencial (top-down).</p>
+<p>Se você colocar a regra do "Reprovado" (que aceita qualquer coisa) no topo do arquivo, <strong>nenhum aluno passará de ano</strong>, pois o Elixir vai casar tudo na primeira regra e parar de procurar.</p>
+<h3 id="vamos-testar_1">⚡ Vamos testar?<a class="headerlink" href="#vamos-testar_1" title="Permanent link">&para;</a></h3>
+<p>No terminal (IEx), você não precisa sair e entrar de novo. Use o comando <code>recompile()</code>:</p>
+<ol>
+<li>
+<p>Recompile o projeto:Elixir</p>
+<p><code>iex&gt; recompile()</code></p>
+</li>
+<li>
+<p>Teste as diferentes “portas”:</p>
+<p>`iex&gt; EscolaElixir.Boletim.verificar_situacao(10.0)
+"Aprovado com Louvor"</p>
+<p>iex&gt; EscolaElixir.Boletim.verificar_situacao(7.5)
+"Aprovado"</p>
+<p>iex&gt; EscolaElixir.Boletim.verificar_situacao(6.0)
+"Recuperação"</p>
+<p>iex&gt; EscolaElixir.Boletim.verificar_situacao(3.0)
+"Reprovado"`</p>
+</li>
+</ol>
+<p>Veja como o código fica limpo? Sem chaves aninhadas <code>{{}}</code>, sem <code>else if</code>, apenas uma lista de regras de negócio claras.</p>
+<h2 id="4-encapsulamento-e-funcoes-privadas-defp">4. Encapsulamento e Funções Privadas (<code>defp</code>)<a class="headerlink" href="#4-encapsulamento-e-funcoes-privadas-defp" title="Permanent link">&para;</a></h2>
+<p>Na engenharia de software, existe um princípio vital: <strong>Exponha apenas o necessário.</strong>
+Imagine um restaurante: o cliente escolhe o prato no cardápio (API Pública), mas ele não entra na cozinha para cortar a cebola (Implementação Privada).</p>
+<p>Em Elixir, usamos:</p>
+<ul>
+<li><code>def</code>: Para o que deve ser acessível de fora (O Cardápio).</li>
+<li><code>defp</code>: Para funções auxiliares internas (A Cozinha).</li>
+</ul>
+<h3 id="passo-4-escondendo-a-logica">🛠️ Passo 4: Escondendo a Lógica<a class="headerlink" href="#passo-4-escondendo-a-logica" title="Permanent link">&para;</a></h3>
+<p>Vamos refatorar nosso código. Queremos que o usuário chame apenas <code>gerar_relatorio</code>, e o módulo se vire para calcular a média e verificar a regra.</p>
+<p>Edite <code>lib/escola_elixir/boletim.ex</code>. Mude a visibilidade das funções de lógica para <code>defp</code> e crie a função pública:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="kd">defmodule</span><span class="w"> </span><span class="nc">EscolaElixir.Boletim</span><span class="w"> </span><span class="k">do</span>
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="w">  </span><span class="c1"># --- API PÚBLICA (A única coisa que o mundo externo vê) ---</span>
+<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>
+<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="w">  </span><span class="kd">def</span><span class="w"> </span><span class="n">gerar_relatorio</span><span class="p">(</span><span class="n">n1</span><span class="p">,</span><span class="w"> </span><span class="n">n2</span><span class="p">,</span><span class="w"> </span><span class="n">n3</span><span class="p">)</span><span class="w"> </span><span class="k">do</span>
+<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a><span class="w">    </span><span class="c1"># Abordagem Clássica (Estilo Imperativo/Procedural)</span>
+<a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a><span class="w">    </span><span class="c1"># Salvamos o resultado em variáveis passo a passo</span>
+<a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a><span class="w">    </span><span class="n">lista_notas</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="n">n1</span><span class="p">,</span><span class="w"> </span><span class="n">n2</span><span class="p">,</span><span class="w"> </span><span class="n">n3</span><span class="p">]</span>
+<a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a><span class="w">    </span><span class="n">media</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">calcular_media_interna</span><span class="p">(</span><span class="n">lista_notas</span><span class="p">)</span>
+<a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a><span class="w">    </span><span class="n">situacao</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">verificar_situacao</span><span class="p">(</span><span class="n">media</span><span class="p">)</span>
+<a id="__codelineno-3-10" name="__codelineno-3-10" href="#__codelineno-3-10"></a>
+<a id="__codelineno-3-11" name="__codelineno-3-11" href="#__codelineno-3-11"></a><span class="w">    </span><span class="n">situacao</span><span class="w"> </span><span class="c1"># Retorna a última linha</span>
+<a id="__codelineno-3-12" name="__codelineno-3-12" href="#__codelineno-3-12"></a><span class="w">  </span><span class="k">end</span>
+<a id="__codelineno-3-13" name="__codelineno-3-13" href="#__codelineno-3-13"></a>
+<a id="__codelineno-3-14" name="__codelineno-3-14" href="#__codelineno-3-14"></a><span class="w">  </span><span class="c1"># --- FUNÇÕES PRIVADAS (O motor interno) ---</span>
+<a id="__codelineno-3-15" name="__codelineno-3-15" href="#__codelineno-3-15"></a>
+<a id="__codelineno-3-16" name="__codelineno-3-16" href="#__codelineno-3-16"></a><span class="w">  </span><span class="c1"># Mudei de &#39;def&#39; para &#39;defp&#39;. Tente chamar isso no IEx e veja o erro!</span>
+<a id="__codelineno-3-17" name="__codelineno-3-17" href="#__codelineno-3-17"></a><span class="w">  </span><span class="kd">defp</span><span class="w"> </span><span class="n">calcular_media_interna</span><span class="p">(</span><span class="n">lista_notas</span><span class="p">)</span><span class="w"> </span><span class="k">do</span>
+<a id="__codelineno-3-18" name="__codelineno-3-18" href="#__codelineno-3-18"></a><span class="w">    </span><span class="nc">Enum</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">lista_notas</span><span class="p">)</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">length</span><span class="p">(</span><span class="n">lista_notas</span><span class="p">)</span>
+<a id="__codelineno-3-19" name="__codelineno-3-19" href="#__codelineno-3-19"></a><span class="w">  </span><span class="k">end</span>
+<a id="__codelineno-3-20" name="__codelineno-3-20" href="#__codelineno-3-20"></a>
+<a id="__codelineno-3-21" name="__codelineno-3-21" href="#__codelineno-3-21"></a><span class="w">  </span><span class="c1"># Estas funções também viraram privadas</span>
+<a id="__codelineno-3-22" name="__codelineno-3-22" href="#__codelineno-3-22"></a><span class="w">  </span><span class="kd">defp</span><span class="w"> </span><span class="n">verificar_situacao</span><span class="p">(</span><span class="mf">10.0</span><span class="p">),</span><span class="w"> </span><span class="ss">do</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Aprovado com Louvor&quot;</span>
+<a id="__codelineno-3-23" name="__codelineno-3-23" href="#__codelineno-3-23"></a><span class="w">  </span><span class="kd">defp</span><span class="w"> </span><span class="n">verificar_situacao</span><span class="p">(</span><span class="n">media</span><span class="p">)</span><span class="w"> </span><span class="ow">when</span><span class="w"> </span><span class="n">media</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="mf">7.0</span><span class="p">,</span><span class="w"> </span><span class="ss">do</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Aprovado&quot;</span>
+<a id="__codelineno-3-24" name="__codelineno-3-24" href="#__codelineno-3-24"></a><span class="w">  </span><span class="kd">defp</span><span class="w"> </span><span class="n">verificar_situacao</span><span class="p">(</span><span class="n">media</span><span class="p">)</span><span class="w"> </span><span class="ow">when</span><span class="w"> </span><span class="n">media</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="mf">5.0</span><span class="p">,</span><span class="w"> </span><span class="ss">do</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Recuperação&quot;</span>
+<a id="__codelineno-3-25" name="__codelineno-3-25" href="#__codelineno-3-25"></a><span class="w">  </span><span class="kd">defp</span><span class="w"> </span><span class="n">verificar_situacao</span><span class="p">(</span><span class="bp">_</span><span class="p">),</span><span class="w"> </span><span class="ss">do</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Reprovado&quot;</span>
+<a id="__codelineno-3-26" name="__codelineno-3-26" href="#__codelineno-3-26"></a><span class="k">end</span>
+</code></pre></div>
+<h3 id="vamos-testar-a-seguranca">⚡ Vamos testar a Segurança?<a class="headerlink" href="#vamos-testar-a-seguranca" title="Permanent link">&para;</a></h3>
+<p>Essa é a hora de provar que o <code>defp</code> funciona.</p>
+<ol>
+<li>Recompile: <code>recompile()</code></li>
+<li>
+<p>Tente chamar a função pública (deve funcionar):Elixir</p>
+<p><code>iex&gt; EscolaElixir.Boletim.gerar_relatorio(8, 8, 8)
+"Aprovado"</code></p>
+</li>
+<li>
+<p>Agora, tente chamar a função privada (deve falhar):Elixir</p>
+<p><code>iex&gt; EscolaElixir.Boletim.verificar_situacao(5.0)
+** (UndefinedFunctionError) function EscolaElixir.Boletim.verificar_situacao/1 is undefined or private</code></p>
+</li>
+</ol>
+<p>Viu? O erro diz <strong>"undefined or private"</strong>. Você encapsulou a lógica com sucesso.</p>
+<h2 id="5-o-operador-pipe-e-a-linha-de-producao">5. O Operador Pipe (<code>|&gt;</code>) e a Linha de Produção<a class="headerlink" href="#5-o-operador-pipe-e-a-linha-de-producao" title="Permanent link">&para;</a></h2>
+<p>Agora olhe para a função <code>gerar_relatorio</code> que escrevemos acima. Ela tem muitas variáveis temporárias (<code>lista_notas</code>, <code>media</code>, <code>situacao</code>). Em sistemas grandes, isso fica difícil de ler.</p>
+<p>Em Programação Funcional, pensamos em <strong>Transformação de Dados</strong>. O dado entra bruto e passa por uma "Esteira de Fábrica", sofrendo modificações em cada etapa.</p>
+<p>Para isso, o Elixir tem o <strong>Operador Pipe</strong> (<code>|&gt;</code>).</p>
+<h3 id="51-teoria-como-o-pipe-funciona">5.1. Teoria: Como o Pipe Funciona?<a class="headerlink" href="#51-teoria-como-o-pipe-funciona" title="Permanent link">&para;</a></h3>
+<p>O operador <code>|&gt;</code> pega o resultado da expressão à esquerda e o injeta como o <strong>primeiro argumento</strong> da função à direita.</p>
+<ul>
+<li><strong>Sem Pipe (Leitura de dentro para fora):</strong><code>funcao_C(funcao_B(funcao_A(dado)))</code><em>(Difícil de ler, parece matemática complexa)</em></li>
+<li><strong>Com Pipe (Leitura natural):</strong><code>dado |&gt; funcao_A() |&gt; funcao_B() |&gt; funcao_C()</code><em>(Lê-se: Pegue o dado, passe na A, depois na B, depois na C)</em></li>
+</ul>
+<h3 id="passo-5-refatorando-para-pipeline">🛠️ Passo 5: Refatorando para Pipeline<a class="headerlink" href="#passo-5-refatorando-para-pipeline" title="Permanent link">&para;</a></h3>
+<p>Vamos limpar nossa função pública. Edite o <code>gerar_relatorio</code> no <code>lib/escola_elixir/boletim.ex</code>:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="w">  </span><span class="kd">def</span><span class="w"> </span><span class="n">gerar_relatorio</span><span class="p">(</span><span class="n">n1</span><span class="p">,</span><span class="w"> </span><span class="n">n2</span><span class="p">,</span><span class="w"> </span><span class="n">n3</span><span class="p">)</span><span class="w"> </span><span class="k">do</span>
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="w">    </span><span class="c1"># O dado flui visualmente de cima para baixo</span>
+<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="w">    </span><span class="p">[</span><span class="n">n1</span><span class="p">,</span><span class="w"> </span><span class="n">n2</span><span class="p">,</span><span class="w"> </span><span class="n">n3</span><span class="p">]</span>
+<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="w">    </span><span class="o">|&gt;</span><span class="w"> </span><span class="n">calcular_media_interna</span><span class="p">()</span>
+<a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a><span class="w">    </span><span class="o">|&gt;</span><span class="w"> </span><span class="n">verificar_situacao</span><span class="p">()</span>
+<a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a><span class="w">  </span><span class="k">end</span>
+</code></pre></div>
+<div class="admonition tip">
+<p class="admonition-title">Por que isso é melhor ?</p>
+<ol>
+<li><strong>Clareza Cognitiva:</strong> Você vê a ordem exata das operações.</li>
+<li><strong>Imutabilidade:</strong> Não criamos variáveis desnecessárias que poderiam ser alteradas por engano.</li>
+<li><strong>Debug:</strong> É muito fácil comentar uma linha do pipe para testar o fluxo.</li>
+</ol>
+<p><strong>Teste novamente no IEx (<code>recompile()</code>)</strong>. O comportamento externo é idêntico, mas o código interno agora é "Elixir Idiomático".</p>
+</div>
+<h2 id="6-documentacao-escrevendo-lendo-e-publicando">6. Documentação: Escrevendo, Lendo e Publicando 📖<a class="headerlink" href="#6-documentacao-escrevendo-lendo-e-publicando" title="Permanent link">&para;</a></h2>
+<p>Em Engenharia de Software com Elixir, a documentação tem três propósitos:</p>
+<ol>
+<li><strong>Explicação:</strong> Para humanos lerem.</li>
+<li><strong>Teste:</strong> Para o computador validar (<code>Doctests</code>).</li>
+<li><strong>Visualização:</strong> Para gerar sites estáticos navegáveis.</li>
+</ol>
+<h3 id="passo-61-escrevendo-a-documentacao">🛠️ Passo 6.1: Escrevendo a Documentação<a class="headerlink" href="#passo-61-escrevendo-a-documentacao" title="Permanent link">&para;</a></h3>
+<p>Primeiro, garantimos que o código fonte tenha as diretivas <code>@moduledoc</code> e <code>@doc</code>. (Como você já fez acima, vamos manter o foco, mas observe o código abaixo).</p>
+<p>Edite <code>lib/escola_elixir/boletim.ex</code>:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="kd">defmodule</span><span class="w"> </span><span class="nc">EscolaElixir.Boletim</span><span class="w"> </span><span class="k">do</span>
+<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="w">  </span><span class="na">@moduledoc</span><span class="w"> </span><span class="sh">&quot;&quot;&quot;</span>
+<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="w">  </span><span class="sh">Módulo responsável pela lógica de avaliação de alunos.</span>
+<a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a>
+<a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a><span class="sh">  Esta é a **API pública** que o restante do sistema deve usar.</span>
+<a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a><span class="w">  </span><span class="sh">&quot;&quot;&quot;</span>
+<a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a>
+<a id="__codelineno-5-8" name="__codelineno-5-8" href="#__codelineno-5-8"></a><span class="w">  </span><span class="na">@doc</span><span class="w"> </span><span class="sh">&quot;&quot;&quot;</span>
+<a id="__codelineno-5-9" name="__codelineno-5-9" href="#__codelineno-5-9"></a><span class="w">  </span><span class="sh">Gera uma string com a situação final do aluno baseada em 3 notas.</span>
+<a id="__codelineno-5-10" name="__codelineno-5-10" href="#__codelineno-5-10"></a>
+<a id="__codelineno-5-11" name="__codelineno-5-11" href="#__codelineno-5-11"></a><span class="sh">  </span><span class="err">##</span><span class="sh"> Exemplo de Uso (Doctest)</span>
+<a id="__codelineno-5-12" name="__codelineno-5-12" href="#__codelineno-5-12"></a>
+<a id="__codelineno-5-13" name="__codelineno-5-13" href="#__codelineno-5-13"></a><span class="sh">      iex&gt; EscolaElixir.Boletim.gerar_relatorio(10, 10, 10)</span>
+<a id="__codelineno-5-14" name="__codelineno-5-14" href="#__codelineno-5-14"></a><span class="sh">      &quot;Aprovado com Louvor&quot;</span>
+<a id="__codelineno-5-15" name="__codelineno-5-15" href="#__codelineno-5-15"></a>
+<a id="__codelineno-5-16" name="__codelineno-5-16" href="#__codelineno-5-16"></a><span class="sh">      iex&gt; EscolaElixir.Boletim.gerar_relatorio(5, 5, 5)</span>
+<a id="__codelineno-5-17" name="__codelineno-5-17" href="#__codelineno-5-17"></a><span class="sh">      &quot;Recuperação&quot;</span>
+<a id="__codelineno-5-18" name="__codelineno-5-18" href="#__codelineno-5-18"></a>
+<a id="__codelineno-5-19" name="__codelineno-5-19" href="#__codelineno-5-19"></a><span class="sh">  O resultado é o status final após o processamento da pipeline.</span>
+<a id="__codelineno-5-20" name="__codelineno-5-20" href="#__codelineno-5-20"></a><span class="w">  </span><span class="sh">&quot;&quot;&quot;</span>
+<a id="__codelineno-5-21" name="__codelineno-5-21" href="#__codelineno-5-21"></a><span class="w">  </span><span class="kd">def</span><span class="w"> </span><span class="n">gerar_relatorio</span><span class="p">(</span><span class="n">n1</span><span class="p">,</span><span class="w"> </span><span class="n">n2</span><span class="p">,</span><span class="w"> </span><span class="n">n3</span><span class="p">)</span><span class="w"> </span><span class="k">do</span>
+<a id="__codelineno-5-22" name="__codelineno-5-22" href="#__codelineno-5-22"></a><span class="w">    </span><span class="c1"># ... código anterior (pipeline) continua aqui ...</span>
+<a id="__codelineno-5-23" name="__codelineno-5-23" href="#__codelineno-5-23"></a><span class="w">    </span><span class="p">[</span><span class="n">n1</span><span class="p">,</span><span class="w"> </span><span class="n">n2</span><span class="p">,</span><span class="w"> </span><span class="n">n3</span><span class="p">]</span>
+<a id="__codelineno-5-24" name="__codelineno-5-24" href="#__codelineno-5-24"></a><span class="w">    </span><span class="o">|&gt;</span><span class="w"> </span><span class="n">calcular_media_interna</span><span class="p">()</span>
+<a id="__codelineno-5-25" name="__codelineno-5-25" href="#__codelineno-5-25"></a><span class="w">    </span><span class="o">|&gt;</span><span class="w"> </span><span class="n">verificar_situacao</span><span class="p">()</span>
+<a id="__codelineno-5-26" name="__codelineno-5-26" href="#__codelineno-5-26"></a><span class="w">  </span><span class="k">end</span>
+<a id="__codelineno-5-27" name="__codelineno-5-27" href="#__codelineno-5-27"></a>
+<a id="__codelineno-5-28" name="__codelineno-5-28" href="#__codelineno-5-28"></a><span class="w">  </span><span class="c1"># ... funções privadas continuam ...</span>
+<a id="__codelineno-5-29" name="__codelineno-5-29" href="#__codelineno-5-29"></a><span class="k">end</span>
+</code></pre></div>
+<h3 id="passo-62-lendo-no-terminal-o-modo-hacker">🛠️ Passo 6.2: Lendo no Terminal (O Modo "Hacker") 💻<a class="headerlink" href="#passo-62-lendo-no-terminal-o-modo-hacker" title="Permanent link">&para;</a></h3>
+<p>Enquanto você está programando, você não quer sair do terminal para ler um PDF ou site. O Elixir tem o helper <strong><code>h</code></strong> (help) embutido.</p>
+<ol>
+<li>
+<p>Vá ao seu terminal e rode o projeto:Bash</p>
+<p><code>iex -S mix</code></p>
+</li>
+<li>
+<p>Para ler a documentação do <strong>Módulo</strong> (<code>@moduledoc</code>), digite:Elixir</p>
+<p><code>iex&gt; h EscolaElixir.Boletim</code></p>
+<p><em>O terminal vai imprimir o texto que você escreveu no <code>@moduledoc</code>, formatado e colorido.</em></p>
+</li>
+<li>
+<p>Para ler a documentação da <strong>Função</strong> (<code>@doc</code>), digite:Elixir</p>
+<p><code>iex&gt; h EscolaElixir.Boletim.gerar_relatorio</code></p>
+<p><em>O terminal mostrará a explicação, os argumentos e os exemplos.</em></p>
+</li>
+</ol>
+<blockquote>
+<p>Dica de Produtividade: Isso funciona para qualquer módulo da linguagem. Tente digitar h Enum ou h Enum.map para ver como a documentação oficial do Elixir é feita.
+</p>
+</blockquote>
+<h3 id="passo-63-gerando-o-site-html-o-modo-profissional">🛠️ Passo 6.3: Gerando o Site HTML (O Modo Profissional) 🌐<a class="headerlink" href="#passo-63-gerando-o-site-html-o-modo-profissional" title="Permanent link">&para;</a></h3>
+<p>Para entregar o projeto ou compartilhar com outros times, geramos uma página HTML estática (igual à documentação oficial do Elixir). Para isso, precisamos instalar uma ferramenta chamada <strong>ExDoc</strong>.</p>
+<p><strong>1. Adicionando a Dependência</strong>
+Abra o arquivo <code>mix.exs</code> na raiz do projeto. Procure a função <code>deps</code> (lá no final do arquivo) e adicione a linha do <code>ex_doc</code>:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="w">  </span><span class="kd">defp</span><span class="w"> </span><span class="n">deps</span><span class="w"> </span><span class="k">do</span>
+<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="w">    </span><span class="p">[</span>
+<a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="w">      </span><span class="c1"># Adicione esta linha dentro da lista:</span>
+<a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a><span class="w">      </span><span class="p">{</span><span class="ss">:ex_doc</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;~&gt; 0.31&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">only</span><span class="p">:</span><span class="w"> </span><span class="ss">:dev</span><span class="p">,</span><span class="w"> </span><span class="ss">runtime</span><span class="p">:</span><span class="w"> </span><span class="no">false</span><span class="p">}</span>
+<a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a><span class="w">    </span><span class="p">]</span>
+<a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a><span class="w">  </span><span class="k">end</span>
+</code></pre></div>
+<p><strong>2. Instalando e Gerando</strong>
+Volte ao terminal (saia do IEx com CTRL+C, CTRL+C) e execute:</p>
+<ol>
+<li>
+<p>Baixar a biblioteca nova:Bash</p>
+<p><code>mix deps.get</code></p>
+</li>
+<li>
+<p>Compilar e gerar a documentação:Bash</p>
+<p><code>mix docs</code></p>
+</li>
+</ol>
+<p><strong>3. Visualizando o Resultado</strong>
+O comando acima criou uma pasta nova chamada <code>doc/</code> dentro do seu projeto.</p>
+<ul>
+<li>Abra a pasta <code>doc</code> no seu gerenciador de arquivos.</li>
+<li>Dê um duplo clique no arquivo <strong><code>index.html</code></strong>.</li>
+</ul>
+<p><strong>O que você verá:</strong>
+Uma página web moderna, com barra lateral de navegação, busca instantânea e modo escuro, contendo exatamente o texto e os exemplos que você escreveu no código.</p>
+<p><img alt="image.png" src="../Modulo%2C%20Fun%C3%A7%C3%B5es%20e%20testes/image%201.png" /></p>
+<hr />
+<h3 id="64-o-segredo-do-iex-doctests">6.4. O Segredo do <code>iex&gt;</code> (Doctests) 🕵️<a class="headerlink" href="#64-o-segredo-do-iex-doctests" title="Permanent link">&para;</a></h3>
+<p>Pare um minuto e olhe para o código que você acabou de escrever dentro do <code>@doc</code>.</p>
+<p>Você deve ter notado que usamos o prefixo <code>iex&gt;</code> antes das chamadas de função.
+À primeira vista, isso parece apenas um exemplo visual, uma "colinha" para quem for ler a documentação saber como usar sua função.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="w">  </span><span class="c1">## Exemplo de Uso</span>
+<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="w">      </span><span class="n">iex</span><span class="o">&gt;</span><span class="w"> </span><span class="nc">EscolaElixir.Boletim</span><span class="o">.</span><span class="n">gerar_relatorio</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="w"> </span><span class="mi">10</span><span class="p">,</span><span class="w"> </span><span class="mi">10</span><span class="p">)</span>
+<a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a><span class="w">      </span><span class="s2">&quot;Aprovado com Louvor&quot;</span>
+</code></pre></div>
+<p><strong>Mas aqui está a genialidade do Elixir:</strong>
+Isso não é apenas texto. Isso é código executável.
+O compilador olha para essa linha e entende:</p>
+<ol>
+<li><strong>Ação:</strong> "Vou rodar <code>EscolaElixir.Boletim.gerar_relatorio(10, 10, 10)</code>".</li>
+<li><strong>Expectativa:</strong> "O resultado <strong>TEM</strong> que ser <code>"Aprovado com Louvor"</code>".</li>
+</ol>
+<p>Se o código retornar qualquer outra coisa, o teste falha. Isso garante que a sua documentação nunca minta. Chamamos isso de <strong>Doctest</strong>.</p>
+<hr />
+<h3 id="65-ativando-os-testes-onde-colocar-o-doctest">6.5. Ativando os Testes (Onde colocar o <code>doctest</code>?)<a class="headerlink" href="#65-ativando-os-testes-onde-colocar-o-doctest" title="Permanent link">&para;</a></h3>
+<p>Se você rodar <code>mix test</code> agora, vai perceber que o Elixir <strong>ainda não está testando</strong> o seu Módulo Boletim. Ele provavelmente mostará apenas 1 teste (o padrão do projeto).</p>
+<p>Por quê? Porque precisamos avisar ao framework de testes (ExUnit) para ler a documentação daquele módulo específico.</p>
+<p><strong>A Regra da Engenharia:</strong>
+Para cada arquivo na pasta <code>lib/</code>, criamos um arquivo correspondente na pasta <code>test/</code>.</p>
+<h3 id="passo-a-passo">🛠️ Passo a Passo:<a class="headerlink" href="#passo-a-passo" title="Permanent link">&para;</a></h3>
+<ol>
+<li>Crie um novo arquivo: <code>test/escola_elixir/boletim_test.exs</code><em>(Note que a pasta espelha a estrutura da <code>lib</code> e o arquivo termina em <code>_test.exs</code>)</em>.</li>
+<li>Digite o código abaixo. É aqui que ligamos a chave dos Doctests:</li>
+</ol>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="kd">defmodule</span><span class="w"> </span><span class="nc">EscolaElixir.BoletimTest</span><span class="w"> </span><span class="k">do</span>
+<a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a><span class="w">  </span><span class="kn">use</span><span class="w"> </span><span class="nc">ExUnit.Case</span>
+<a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a>
+<a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a><span class="w">  </span><span class="c1"># A MÁGICA ACONTECE AQUI:</span>
+<a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a><span class="w">  </span><span class="c1"># Esta linha diz: &quot;Vá no módulo Boletim, leia a documentação</span>
+<a id="__codelineno-8-6" name="__codelineno-8-6" href="#__codelineno-8-6"></a><span class="w">  </span><span class="c1"># e execute todas as linhas que começam com iex&gt;&quot;</span>
+<a id="__codelineno-8-7" name="__codelineno-8-7" href="#__codelineno-8-7"></a><span class="w">  </span><span class="n">doctest</span><span class="w"> </span><span class="nc">EscolaElixir.Boletim</span>
+<a id="__codelineno-8-8" name="__codelineno-8-8" href="#__codelineno-8-8"></a><span class="k">end</span>
+</code></pre></div>
+<ol>
+<li>
+<p>Agora, vá ao terminal e rode:Bash</p>
+<p><code>mix test</code></p>
+</li>
+</ol>
+<p><strong>O Resultado:</strong>
+Agora você deve ver algo como <code>2 doctests</code> (ou mais) passando.
+Isso prova que o texto que você escreveu para humanos também serviu para o computador testar seu código.</p>
+<hr />
+<h2 id="7-testes-de-unidade-o-junit-do-elixir">7. Testes de Unidade (O "JUnit" do Elixir) 🧪<a class="headerlink" href="#7-testes-de-unidade-o-junit-do-elixir" title="Permanent link">&para;</a></h2>
+<p>Agora você pode perguntar: <em>"Professor, se eu já tenho o Doctest, para que preciso de mais testes?"</em></p>
+<p>O <strong>Doctest</strong> serve para documentar o "caminho feliz" (o uso básico). Mas você não quer poluir sua documentação com 50 linhas de exemplos testando erros, valores nulos ou casos complexos.</p>
+<p>Para isso, usamos os <strong>Testes de Unidade</strong> padrão. É o equivalente ao que você faria com <strong>JUnit</strong> (Java) ou <strong>PyTest</strong> (Python). Eles ficam no mesmo arquivo de teste, mas dentro de blocos <code>test</code>.</p>
+<h3 id="passo-71-criando-cenarios-de-teste">🛠️ Passo 7.1: Criando Cenários de Teste<a class="headerlink" href="#passo-71-criando-cenarios-de-teste" title="Permanent link">&para;</a></h3>
+<p>Vamos expandir o arquivo <code>test/escola_elixir/boletim_test.exs</code> que acabamos de criar. Vamos adicionar testes para garantir que as regras de limite (notas 5 e 7) funcionam exatmente como esperado.</p>
+<p>Edite o arquivo:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="kd">defmodule</span><span class="w"> </span><span class="nc">EscolaElixir.BoletimTest</span><span class="w"> </span><span class="k">do</span>
+<a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a><span class="w">  </span><span class="kn">use</span><span class="w"> </span><span class="nc">ExUnit.Case</span>
+<a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a>
+<a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a><span class="w">  </span><span class="c1"># 1. Valida a documentação</span>
+<a id="__codelineno-9-5" name="__codelineno-9-5" href="#__codelineno-9-5"></a><span class="w">  </span><span class="n">doctest</span><span class="w"> </span><span class="nc">EscolaElixir.Boletim</span>
+<a id="__codelineno-9-6" name="__codelineno-9-6" href="#__codelineno-9-6"></a>
+<a id="__codelineno-9-7" name="__codelineno-9-7" href="#__codelineno-9-7"></a><span class="w">  </span><span class="c1"># 2. Testes de Unidade (Cenários Específicos)</span>
+<a id="__codelineno-9-8" name="__codelineno-9-8" href="#__codelineno-9-8"></a>
+<a id="__codelineno-9-9" name="__codelineno-9-9" href="#__codelineno-9-9"></a><span class="w">  </span><span class="n">test</span><span class="w"> </span><span class="s2">&quot;deve reprovar aluno quando a média for muito baixa&quot;</span><span class="w"> </span><span class="k">do</span>
+<a id="__codelineno-9-10" name="__codelineno-9-10" href="#__codelineno-9-10"></a><span class="w">    </span><span class="c1"># Arrange &amp; Act (Preparar e Agir)</span>
+<a id="__codelineno-9-11" name="__codelineno-9-11" href="#__codelineno-9-11"></a><span class="w">    </span><span class="n">resultado</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">EscolaElixir.Boletim</span><span class="o">.</span><span class="n">gerar_relatorio</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">)</span>
+<a id="__codelineno-9-12" name="__codelineno-9-12" href="#__codelineno-9-12"></a>
+<a id="__codelineno-9-13" name="__codelineno-9-13" href="#__codelineno-9-13"></a><span class="w">    </span><span class="c1"># Assert (Verificar) - O equivalente ao assertEquals do Java</span>
+<a id="__codelineno-9-14" name="__codelineno-9-14" href="#__codelineno-9-14"></a><span class="w">    </span><span class="n">assert</span><span class="w"> </span><span class="n">resultado</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">&quot;Reprovado&quot;</span>
+<a id="__codelineno-9-15" name="__codelineno-9-15" href="#__codelineno-9-15"></a><span class="w">  </span><span class="k">end</span>
+<a id="__codelineno-9-16" name="__codelineno-9-16" href="#__codelineno-9-16"></a>
+<a id="__codelineno-9-17" name="__codelineno-9-17" href="#__codelineno-9-17"></a><span class="w">  </span><span class="n">test</span><span class="w"> </span><span class="s2">&quot;deve garantir recuperação no limite exato da nota 5.0&quot;</span><span class="w"> </span><span class="k">do</span>
+<a id="__codelineno-9-18" name="__codelineno-9-18" href="#__codelineno-9-18"></a><span class="w">    </span><span class="c1"># Queremos ter certeza que 5.0 não reprova e nem aprova, vai para recuperação</span>
+<a id="__codelineno-9-19" name="__codelineno-9-19" href="#__codelineno-9-19"></a><span class="w">    </span><span class="n">resultado</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">EscolaElixir.Boletim</span><span class="o">.</span><span class="n">gerar_relatorio</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w"> </span><span class="mi">5</span><span class="p">)</span>
+<a id="__codelineno-9-20" name="__codelineno-9-20" href="#__codelineno-9-20"></a><span class="w">    </span><span class="n">assert</span><span class="w"> </span><span class="n">resultado</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">&quot;Recuperação&quot;</span>
+<a id="__codelineno-9-21" name="__codelineno-9-21" href="#__codelineno-9-21"></a><span class="w">  </span><span class="k">end</span>
+<a id="__codelineno-9-22" name="__codelineno-9-22" href="#__codelineno-9-22"></a><span class="k">end</span>
+</code></pre></div>
+<h3 id="rodando-a-bateria-completa">⚡ Rodando a Bateria Completa<a class="headerlink" href="#rodando-a-bateria-completa" title="Permanent link">&para;</a></h3>
+<p>Volte ao terminal:</p>
+<p><code>mix test</code></p>
+<p>Agora o Mix vai executar tudo junto:</p>
+<ol>
+<li>Vai ler os exemplos da documentação (<code>doctest</code>).</li>
+<li>Vai rodar os blocos de teste (<code>test</code>).</li>
+</ol>
+<p>Se tudo ficar verde, você atingiu um nível profissional de qualidade de código: documentado e testado em camadas.</p>
+<h2 id="8-reutilizacao-de-codigo-use-import-e-require">8. Reutilização de Código: <code>use</code>, <code>import</code> e <code>require</code> 🧩<a class="headerlink" href="#8-reutilizacao-de-codigo-use-import-e-require" title="Permanent link">&para;</a></h2>
+<p>Você deve ter notado que no nosso arquivo de teste escrevemos:
+<code>use ExUnit.Case</code></p>
+<p>Se você vem de Java, pensou: <em>"Ah, isso é um <code>extends TestCase</code>!"</em>.
+<strong>Cuidado.</strong> Em Elixir não existe herança de classes. O que aconteceu ali não foi uma relação de Pai/Filho.</p>
+<p>Vamos desmistificar as três formas de interagir com outros módulos.</p>
+<h3 id="81-o-use-a-injecao-de-codigo">8.1. O <code>use</code> (A Injeção de Código)<a class="headerlink" href="#81-o-use-a-injecao-de-codigo" title="Permanent link">&para;</a></h3>
+<p>O <code>use</code> é a ferramenta mais agressiva de acoplamento. Ele é uma <strong>Macro</strong>.
+Quando você diz <code>use ExUnit.Case</code>, você está dizendo ao compilador:</p>
+<blockquote>
+<p>"Vá até o módulo ExUnit.Case, copie o código que está configurado lá e injete dentro do meu arquivo agora."
+</p>
+</blockquote>
+<p>É por isso que as palavras mágicas <code>test</code> e <code>assert</code> aparecem no seu arquivo de teste sem você tê-las definido. Elas foram injetadas.</p>
+<h3 id="passo-81-criando-nosso-proprio-use">🛠️ Passo 8.1: Criando nosso próprio <code>use</code><a class="headerlink" href="#passo-81-criando-nosso-proprio-use" title="Permanent link">&para;</a></h3>
+<p>Vamos supor que todos os sistemas da escola precisem ter uma função de copyright padrão. Em vez de copiar e colar em todo arquivo, criamos um injetor.</p>
+<ol>
+<li>Crie o arquivo <code>lib/escola_elixir/sistema.ex</code>:</li>
+</ol>
+<p>Elixir</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="kd">defmodule</span><span class="w"> </span><span class="nc">EscolaElixir.Sistema</span><span class="w"> </span><span class="k">do</span>
+<a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a><span class="w">  </span><span class="c1"># A mágica acontece aqui. __using__ é o que o &#39;use&#39; procura para executar.</span>
+<a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a><span class="w">  </span><span class="kd">defmacro</span><span class="w"> </span><span class="n">__using__</span><span class="p">(</span><span class="n">_opts</span><span class="p">)</span><span class="w"> </span><span class="k">do</span>
+<a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a><span class="w">    </span><span class="k">quote</span><span class="w"> </span><span class="k">do</span>
+<a id="__codelineno-10-5" name="__codelineno-10-5" href="#__codelineno-10-5"></a><span class="w">      </span><span class="c1"># Tudo que estiver aqui dentro será &quot;transplantado&quot; para quem usar este módulo</span>
+<a id="__codelineno-10-6" name="__codelineno-10-6" href="#__codelineno-10-6"></a><span class="w">      </span><span class="kd">def</span><span class="w"> </span><span class="n">copyright</span><span class="w"> </span><span class="k">do</span>
+<a id="__codelineno-10-7" name="__codelineno-10-7" href="#__codelineno-10-7"></a><span class="w">        </span><span class="s2">&quot;Sistema Escolar v1.0 - Todos os direitos reservados&quot;</span>
+<a id="__codelineno-10-8" name="__codelineno-10-8" href="#__codelineno-10-8"></a><span class="w">      </span><span class="k">end</span>
+<a id="__codelineno-10-9" name="__codelineno-10-9" href="#__codelineno-10-9"></a><span class="w">    </span><span class="k">end</span>
+<a id="__codelineno-10-10" name="__codelineno-10-10" href="#__codelineno-10-10"></a><span class="w">  </span><span class="k">end</span>
+<a id="__codelineno-10-11" name="__codelineno-10-11" href="#__codelineno-10-11"></a><span class="k">end</span>
+</code></pre></div>
+<ol>
+<li>Agora, injete isso no <code>lib/escola_elixir/boletim.ex</code>. Adicione a linha no topo:</li>
+</ol>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="kd">defmodule</span><span class="w"> </span><span class="nc">EscolaElixir.Boletim</span><span class="w"> </span><span class="k">do</span>
+<a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a><span class="w">  </span><span class="kn">use</span><span class="w"> </span><span class="nc">EscolaElixir.Sistema</span><span class="w">  </span><span class="c1"># &lt;--- A Injeção acontece aqui!</span>
+<a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a><span class="w">  </span><span class="c1"># ... resto do código ...</span>
+<a id="__codelineno-11-4" name="__codelineno-11-4" href="#__codelineno-11-4"></a><span class="k">end</span>
+</code></pre></div>
+<ol>
+<li>
+<p><strong>Teste no IEx (<code>recompile()</code>):</strong>Elixir</p>
+<p><code>iex&gt; EscolaElixir.Boletim.copyright()
+"Sistema Escolar v1.0 - Todos os direitos reservados"</code></p>
+<p>Veja: A função nasceu dentro do Boletim, mesmo sem termos escrito ela lá explicitamente.</p>
+</li>
+</ol>
+<h3 id="82-o-import-trazendo-para-perto-com-seguranca">8.2. O <code>import</code> (Trazendo para Perto com Segurança)<a class="headerlink" href="#82-o-import-trazendo-para-perto-com-seguranca" title="Permanent link">&para;</a></h3>
+<p>Diferente do <code>use</code> (que injeta código), o <code>import</code> apenas permite que você chame as funções de outro módulo sem digitar o nome completo dele.</p>
+<p>Mas cuidado: importar um módulo inteiro pode trazer centenas de funções e causar conflito com as suas. Por isso, usamos filtros.</p>
+<h3 id="a-analogia-para-quem-vem-de-fora">🏛️ A Analogia para quem vem de fora<a class="headerlink" href="#a-analogia-para-quem-vem-de-fora" title="Permanent link">&para;</a></h3>
+<p>Para entender o <code>import</code> do Elixir, compare com o que você já conhece:</p>
+<table>
+<thead>
+<tr>
+<th><strong>Linguagem</strong></th>
+<th><strong>Sintaxe</strong></th>
+<th><strong>O equivalente em Elixir</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Java</strong></td>
+<td><code>import static java.lang.Math.*;</code></td>
+<td><code>import Math</code> <em>(Importa tudo – perigoso)</em></td>
+</tr>
+<tr>
+<td><strong>Java</strong></td>
+<td><code>import static java.lang.Math.sqrt;</code></td>
+<td><code>import Math, only: [sqrt: 1]</code> <em>(Importa só um – recomendado)</em></td>
+</tr>
+<tr>
+<td><strong>Python</strong></td>
+<td><code>from math import *</code></td>
+<td><code>import :math</code></td>
+</tr>
+<tr>
+<td><strong>Python</strong></td>
+<td><code>from math import sqrt</code></td>
+<td><code>import :math, only: [sqrt: 1]</code></td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>Nota Técnica: Em Elixir, quando filtramos, precisamos informar a Aridade (número de argumentos) da função. Não basta dizer o nome.
+</p>
+</blockquote>
+<h3 id="usando-only-lista-branca-e-except-lista-negra">🛠️ Usando <code>only</code> (Lista Branca) e <code>except</code> (Lista Negra)<a class="headerlink" href="#usando-only-lista-branca-e-except-lista-negra" title="Permanent link">&para;</a></h3>
+<p>Vamos ver na prática com o módulo <code>List</code> do Elixir, que tem muitas funções.</p>
+<p><strong>1. <code>only:</code> (Traga APENAS estes)</strong>
+Esta é a forma recomendada. Você declara explicitamente o que seu código vai usar.</p>
+<p>Elixir</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="kd">defmodule</span><span class="w"> </span><span class="nc">MinhaLista</span><span class="w"> </span><span class="k">do</span>
+<a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a><span class="w">  </span><span class="c1"># Quero usar a função &#39;last/1&#39; e &#39;duplicate/2&#39; do módulo List</span>
+<a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a><span class="w">  </span><span class="c1"># sem digitar &quot;List.&quot; toda vez.</span>
+<a id="__codelineno-12-4" name="__codelineno-12-4" href="#__codelineno-12-4"></a><span class="w">  </span><span class="kn">import</span><span class="w"> </span><span class="nc">List</span><span class="p">,</span><span class="w"> </span><span class="ss">only</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="ss">last</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="ss">duplicate</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">]</span>
+<a id="__codelineno-12-5" name="__codelineno-12-5" href="#__codelineno-12-5"></a>
+<a id="__codelineno-12-6" name="__codelineno-12-6" href="#__codelineno-12-6"></a><span class="w">  </span><span class="kd">def</span><span class="w"> </span><span class="n">duplicar_ultimo</span><span class="p">(</span><span class="n">lista</span><span class="p">)</span><span class="w"> </span><span class="k">do</span>
+<a id="__codelineno-12-7" name="__codelineno-12-7" href="#__codelineno-12-7"></a><span class="w">    </span><span class="n">ultimo_item</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">last</span><span class="p">(</span><span class="n">lista</span><span class="p">)</span><span class="w">       </span><span class="c1"># Chamada direta (veio do import)</span>
+<a id="__codelineno-12-8" name="__codelineno-12-8" href="#__codelineno-12-8"></a><span class="w">    </span><span class="n">duplicate</span><span class="p">(</span><span class="n">ultimo_item</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">)</span><span class="w">       </span><span class="c1"># Chamada direta</span>
+<a id="__codelineno-12-9" name="__codelineno-12-9" href="#__codelineno-12-9"></a><span class="w">  </span><span class="k">end</span>
+<a id="__codelineno-12-10" name="__codelineno-12-10" href="#__codelineno-12-10"></a>
+<a id="__codelineno-12-11" name="__codelineno-12-11" href="#__codelineno-12-11"></a><span class="w">  </span><span class="kd">def</span><span class="w"> </span><span class="n">pegar_primeiro</span><span class="p">(</span><span class="n">lista</span><span class="p">)</span><span class="w"> </span><span class="k">do</span>
+<a id="__codelineno-12-12" name="__codelineno-12-12" href="#__codelineno-12-12"></a><span class="w">    </span><span class="n">first</span><span class="p">(</span><span class="n">lista</span><span class="p">)</span><span class="w"> </span><span class="c1"># ERRO! A função &#39;first&#39; não foi importada na lista &#39;only&#39;.</span>
+<a id="__codelineno-12-13" name="__codelineno-12-13" href="#__codelineno-12-13"></a><span class="w">  </span><span class="k">end</span>
+<a id="__codelineno-12-14" name="__codelineno-12-14" href="#__codelineno-12-14"></a><span class="k">end</span>
+</code></pre></div>
+<p><strong>2. <code>except:</code> (Traga tudo, EXCETO estes)</strong>
+Menos comum, mas útil quando você quer importar um módulo quase todo, mas ele tem uma função com o mesmo nome de uma função sua.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a><span class="kd">defmodule</span><span class="w"> </span><span class="nc">MeuCalculo</span><span class="w"> </span><span class="k">do</span>
+<a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a><span class="w">  </span><span class="c1"># O módulo Integer tem a macro is_even e is_odd.</span>
+<a id="__codelineno-13-3" name="__codelineno-13-3" href="#__codelineno-13-3"></a><span class="w">  </span><span class="c1"># Vamos supor que eu já tenha uma função chamada is_odd aqui.</span>
+<a id="__codelineno-13-4" name="__codelineno-13-4" href="#__codelineno-13-4"></a><span class="w">  </span><span class="kn">import</span><span class="w"> </span><span class="nc">Integer</span><span class="p">,</span><span class="w"> </span><span class="ss">except</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="ss">is_odd</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">]</span>
+<a id="__codelineno-13-5" name="__codelineno-13-5" href="#__codelineno-13-5"></a>
+<a id="__codelineno-13-6" name="__codelineno-13-6" href="#__codelineno-13-6"></a><span class="w">  </span><span class="kd">def</span><span class="w"> </span><span class="n">verificar</span><span class="p">(</span><span class="n">n</span><span class="p">)</span><span class="w"> </span><span class="k">do</span>
+<a id="__codelineno-13-7" name="__codelineno-13-7" href="#__codelineno-13-7"></a><span class="w">    </span><span class="n">is_even</span><span class="p">(</span><span class="n">n</span><span class="p">)</span><span class="w"> </span><span class="c1"># Funciona (veio do Integer)</span>
+<a id="__codelineno-13-8" name="__codelineno-13-8" href="#__codelineno-13-8"></a><span class="w">  </span><span class="k">end</span>
+<a id="__codelineno-13-9" name="__codelineno-13-9" href="#__codelineno-13-9"></a>
+<a id="__codelineno-13-10" name="__codelineno-13-10" href="#__codelineno-13-10"></a><span class="w">  </span><span class="kd">def</span><span class="w"> </span><span class="n">is_odd</span><span class="p">(</span><span class="n">n</span><span class="p">)</span><span class="w"> </span><span class="k">do</span>
+<a id="__codelineno-13-11" name="__codelineno-13-11" href="#__codelineno-13-11"></a><span class="w">    </span><span class="s2">&quot;Esta é a MINHA função, não a do Integer&quot;</span>
+<a id="__codelineno-13-12" name="__codelineno-13-12" href="#__codelineno-13-12"></a><span class="w">  </span><span class="k">end</span>
+<a id="__codelineno-13-13" name="__codelineno-13-13" href="#__codelineno-13-13"></a><span class="k">end</span>
+</code></pre></div>
+<p><strong>3. <code>only: :functions</code> ou <code>only: :macros</code></strong>
+Às vezes queremos importar apenas as funções e deixar as macros de fora (ou vice-versa).
+Exemplo: <code>import Integer, only: :macros</code> (Traz <code>is_odd</code>, <code>is_even</code>, mas não traz funções normais).</p>
+<hr />
+<h3 id="resumo-da-etiqueta-do-import">Resumo da Etiqueta do Import<a class="headerlink" href="#resumo-da-etiqueta-do-import" title="Permanent link">&para;</a></h3>
+<p>Como engenheiro de software, siga esta regra de ouro:</p>
+<ol>
+<li><strong>Prefira <code>alias</code>:</strong> <code>List.last(lista)</code> é explícito e fácil de ler.</li>
+<li><strong>Se usar <code>import</code>:</strong> Use sempre <code>only: [...]</code>. Isso diz para o próximo programador exatamente de onde aquela função misteriosa veio.</li>
+<li><strong>Evite <code>import</code> limpo:</strong> Fazer <code>import List</code> polui seu escopo e deixa seu código frágil a mudanças futuras no módulo importado.</li>
+</ol>
+<h3 id="83-o-require-macros-e-compilacao">8.3. O <code>require</code> (Macros e Compilação)<a class="headerlink" href="#83-o-require-macros-e-compilacao" title="Permanent link">&para;</a></h3>
+<p>Este é o que mais confunde quem vem de fora.
+Em Elixir, existem funções normais e existem <strong>Macros</strong> (código que escreve código).</p>
+<p>Se você quiser usar uma Macro definida em outro módulo, você é <strong>obrigado</strong> a avisar o compilador antes, usando <code>require</code>. Isso garante que o módulo da macro seja compilado antes do módulo que a usa.</p>
+<p>Exemplo clássico: O módulo <code>Integer</code> tem uma macro chamada <code>is_odd</code> (é ímpar).</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a><span class="kd">defmodule</span><span class="w"> </span><span class="nc">TesteImpar</span><span class="w"> </span><span class="k">do</span>
+<a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a><span class="w">  </span><span class="kn">require</span><span class="w"> </span><span class="nc">Integer</span><span class="w"> </span><span class="c1"># Sem isso, o código abaixo falha!</span>
+<a id="__codelineno-14-3" name="__codelineno-14-3" href="#__codelineno-14-3"></a>
+<a id="__codelineno-14-4" name="__codelineno-14-4" href="#__codelineno-14-4"></a><span class="w">  </span><span class="kd">def</span><span class="w"> </span><span class="n">impar?</span><span class="p">(</span><span class="n">numero</span><span class="p">)</span><span class="w"> </span><span class="k">do</span>
+<a id="__codelineno-14-5" name="__codelineno-14-5" href="#__codelineno-14-5"></a><span class="w">    </span><span class="nc">Integer</span><span class="o">.</span><span class="n">is_odd</span><span class="p">(</span><span class="n">numero</span><span class="p">)</span>
+<a id="__codelineno-14-6" name="__codelineno-14-6" href="#__codelineno-14-6"></a><span class="w">  </span><span class="k">end</span>
+<a id="__codelineno-14-7" name="__codelineno-14-7" href="#__codelineno-14-7"></a><span class="k">end</span>
+</code></pre></div>
+<p>Se você esquecer o <code>require</code>, o Elixir vai reclamar: <em>"Você está tentando invocar a macro Integer.is_odd/1 mas não a requisitou"</em>.</p>
+<hr />
+<h3 id="84-organizacao-de-codigo-o-poder-do-alias">8.4 Organização de Código: O Poder do <code>alias</code> 🏷️<a class="headerlink" href="#84-organizacao-de-codigo-o-poder-do-alias" title="Permanent link">&para;</a></h3>
+<p>À medida que nosso sistema cresce, os nomes dos módulos tendem a ficar longos e aninhados para respeitar a hierarquia de pastas.</p>
+<p>Exemplo: EscolaElixir.Financeiro.Pagamentos.BoletoBancario.</p>
+<p>Ninguém quer digitar isso toda vez que for chamar uma função.</p>
+<p>Para isso existe o alias (Apelido).</p>
+<h3 id="81-o-que-ele-faz">8.1. O que ele faz?<a class="headerlink" href="#81-o-que-ele-faz" title="Permanent link">&para;</a></h3>
+<p>Ele cria um "atalho" para o nome do módulo dentro do arquivo atual.</p>
+<p>Importante: Ele NÃO traz as funções para o escopo (como o import). Ele apenas encurta o nome do módulo.</p>
+<h3 id="a-analogia-javapython">🏛️ A Analogia (Java/Python)<a class="headerlink" href="#a-analogia-javapython" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th><strong>Linguagem</strong></th>
+<th><strong>Sintaxe Original</strong></th>
+<th><strong>O equivalente em Elixir</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Java</strong></td>
+<td><code>import java.util.List;</code></td>
+<td></td>
+</tr>
+<tr>
+<td><em>(Agora posso escrever <code>List</code> em vez de <code>java.util.List</code>)</em></td>
+<td><code>alias Java.Util.List</code></td>
+<td></td>
+</tr>
+<tr>
+<td><strong>Python</strong></td>
+<td><code>import pandas as pd</code></td>
+<td><code>alias Pandas, as: Pd</code></td>
+</tr>
+<tr>
+<td><strong>C#</strong></td>
+<td><code>using List = System.Collections.Generic.List;</code></td>
+<td><code>alias System.Collections.Generic.List</code></td>
+</tr>
+</tbody>
+</table>
+<h3 id="passo-81-simplificando-nomes">🛠️ Passo 8.1: Simplificando Nomes<a class="headerlink" href="#passo-81-simplificando-nomes" title="Permanent link">&para;</a></h3>
+<p>Vamos supor que, no nosso teste, estejamos cansados de digitar <code>EscolaElixir.Boletim</code> toda hora.</p>
+<p>Edite o arquivo <code>test/escola_elixir/boletim_test.exs</code>:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a><span class="kd">defmodule</span><span class="w"> </span><span class="nc">EscolaElixir.BoletimTest</span><span class="w"> </span><span class="k">do</span>
+<a id="__codelineno-15-2" name="__codelineno-15-2" href="#__codelineno-15-2"></a><span class="w">  </span><span class="kn">use</span><span class="w"> </span><span class="nc">ExUnit.Case</span>
+<a id="__codelineno-15-3" name="__codelineno-15-3" href="#__codelineno-15-3"></a>
+<a id="__codelineno-15-4" name="__codelineno-15-4" href="#__codelineno-15-4"></a><span class="w">  </span><span class="c1"># 1. Cria o apelido.</span>
+<a id="__codelineno-15-5" name="__codelineno-15-5" href="#__codelineno-15-5"></a><span class="w">  </span><span class="c1"># A partir desta linha, &quot;Boletim&quot; significa &quot;EscolaElixir.Boletim&quot;</span>
+<a id="__codelineno-15-6" name="__codelineno-15-6" href="#__codelineno-15-6"></a><span class="w">  </span><span class="kn">alias</span><span class="w"> </span><span class="nc">EscolaElixir.Boletim</span>
+<a id="__codelineno-15-7" name="__codelineno-15-7" href="#__codelineno-15-7"></a>
+<a id="__codelineno-15-8" name="__codelineno-15-8" href="#__codelineno-15-8"></a><span class="w">  </span><span class="n">test</span><span class="w"> </span><span class="s2">&quot;deve aprovar com alias&quot;</span><span class="w"> </span><span class="k">do</span>
+<a id="__codelineno-15-9" name="__codelineno-15-9" href="#__codelineno-15-9"></a><span class="w">    </span><span class="c1"># Veja como ficou mais limpo:</span>
+<a id="__codelineno-15-10" name="__codelineno-15-10" href="#__codelineno-15-10"></a><span class="w">    </span><span class="n">resultado</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">Boletim</span><span class="o">.</span><span class="n">gerar_relatorio</span><span class="p">(</span><span class="mi">7</span><span class="p">,</span><span class="w"> </span><span class="mi">7</span><span class="p">,</span><span class="w"> </span><span class="mi">7</span><span class="p">)</span>
+<a id="__codelineno-15-11" name="__codelineno-15-11" href="#__codelineno-15-11"></a><span class="w">    </span><span class="n">assert</span><span class="w"> </span><span class="n">resultado</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">&quot;Aprovado&quot;</span>
+<a id="__codelineno-15-12" name="__codelineno-15-12" href="#__codelineno-15-12"></a><span class="w">  </span><span class="k">end</span>
+<a id="__codelineno-15-13" name="__codelineno-15-13" href="#__codelineno-15-13"></a><span class="k">end</span>
+</code></pre></div>
+<h3 id="82-formas-de-usar-o-alias">8.2. Formas de usar o Alias<a class="headerlink" href="#82-formas-de-usar-o-alias" title="Permanent link">&para;</a></h3>
+<p>Existem três maneiras comuns de escrever um alias:</p>
+<ol>
+<li>O Alias Implícito (Padrão da Indústria)</li>
+</ol>
+<p>Quando você omite o as:, o Elixir assume que o apelido será a última parte do nome.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a><span class="kn">alias</span><span class="w"> </span><span class="nc">EscolaElixir.Boletim</span>
+<a id="__codelineno-16-2" name="__codelineno-16-2" href="#__codelineno-16-2"></a><span class="c1"># O apelido automático é: Boletim</span>
+</code></pre></div>
+<ol>
+<li>O Alias Explícito (Renomeando)</li>
+</ol>
+<p>Útil quando você tem dois módulos com o mesmo nome final (ex: Escola.User e Twitter.User).</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a><span class="kn">alias</span><span class="w"> </span><span class="nc">EscolaElixir.Boletim</span><span class="p">,</span><span class="w"> </span><span class="ss">as</span><span class="p">:</span><span class="w"> </span><span class="nc">Notas</span>
+<a id="__codelineno-17-2" name="__codelineno-17-2" href="#__codelineno-17-2"></a><span class="c1"># Agora chamo: Notas.gerar_relatorio(...)</span>
+</code></pre></div>
+<ol>
+<li>O Multi-Alias (Agrupando)</li>
+</ol>
+<p>Quando você quer trazer vários módulos do mesmo "pai".</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a><span class="kn">alias</span><span class="w"> </span><span class="nc">EscolaElixir</span><span class="o">.</span><span class="p">{</span><span class="nc">Boletim</span><span class="p">,</span><span class="w"> </span><span class="nc">Sistema</span><span class="p">,</span><span class="w"> </span><span class="nc">Financeiro</span><span class="p">}</span>
+<a id="__codelineno-18-2" name="__codelineno-18-2" href="#__codelineno-18-2"></a><span class="c1"># Equivalente a escrever 3 linhas de alias separadas.</span>
+</code></pre></div>
+<h3 id="dica-de-engenharia-alias-vs-import">💡 Dica de Engenharia: Alias vs Import<a class="headerlink" href="#dica-de-engenharia-alias-vs-import" title="Permanent link">&para;</a></h3>
+<p>Muitos iniciantes perguntam: <em>"Por que não usar <code>import</code> logo de cara e economizar ainda mais digitação?"</em></p>
+<ul>
+<li><strong>Com <code>alias</code>:</strong> <code>Boletim.gerar_relatorio()</code><ul>
+<li>Eu sei exatamente que essa função pertence ao módulo Boletim. O código é explícito.</li>
+</ul>
+</li>
+<li><strong>Com <code>import</code>:</strong> <code>gerar_relatorio()</code><ul>
+<li>De onde veio isso? Do meu módulo? Do módulo importado? De uma macro?</li>
+<li>Em sistemas com 50 arquivos, o <code>import</code> cria confusão mental.</li>
+</ul>
+</li>
+</ul>
+<p><strong>Regra:</strong> Use <code>alias</code> sempre que puder. Deixe o <code>import</code> apenas para bibliotecas matemáticas ou de testes.</p>
+<h3 id="85-resumo-da-opera-comparativo">8.5. Resumo da Ópera (Comparativo)<a class="headerlink" href="#85-resumo-da-opera-comparativo" title="Permanent link">&para;</a></h3>
+<p>Para organizar sua cabeça de engenheiro, aqui está a hierarquia de acoplamento:</p>
+<table>
+<thead>
+<tr>
+<th><strong>Comando</strong></th>
+<th><strong>O que faz?</strong></th>
+<th><strong>Analogia Java/C#</strong></th>
+<th><strong>Frequência de uso</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>alias</strong></td>
+<td>Apelida o módulo. Ex.: <code>alias Escola.Boletim</code> permite usar <code>Boletim.gerar...</code></td>
+<td><code>import package.Class</code></td>
+<td><strong>Muito Alta (90% dos casos)</strong></td>
+</tr>
+<tr>
+<td><strong>import</strong></td>
+<td>Traz funções para o escopo atual <strong>sem prefixo</strong>.</td>
+<td><code>import static package.Class.*</code></td>
+<td><strong>Baixa (use com moderação)</strong></td>
+</tr>
+<tr>
+<td><strong>require</strong></td>
+<td>Garante compilação para usar <strong>macros</strong>.</td>
+<td>Não tem equivalente direto.</td>
+<td><strong>Média (só para macros)</strong></td>
+</tr>
+<tr>
+<td><strong>use</strong></td>
+<td>Injeta código e pode alterar o comportamento do módulo.</td>
+<td>~Herança (mas via <em>injeção</em>/mixins)</td>
+<td><strong>Média (frameworks e libs)</strong></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Próximo Passo:</strong> Agora que entendemos como criar código (Módulos/Funções), garantir qualidade (Testes/Docs) e reutilizar estruturas (<code>use</code>/<code>import</code>), estamos prontos para o <strong>Grand Finale</strong>: O Desafio Prático "Motor de Compras".</p>
+<h1 id="desafio-final-o-motor-de-e-commerce-geekstore">🎓 Desafio Final: O Motor de E-commerce (GeekStore)<a class="headerlink" href="#desafio-final-o-motor-de-e-commerce-geekstore" title="Permanent link">&para;</a></h1>
+<p><strong>O Cenário:</strong>
+Você foi contratado para criar o módulo de "Checkout" da <em>GeekStore</em>. O sistema recebe uma lista de produtos e precisa cuspir a nota fiscal final.
+Você deve entregar código limpo, testado e documentado.</p>
+<hr />
+<h3 id="passo-1-o-setup-profissional-mix">🛠️ Passo 1: O Setup Profissional (Mix)<a class="headerlink" href="#passo-1-o-setup-profissional-mix" title="Permanent link">&para;</a></h3>
+<p>Não vamos fazer arquivos soltos. Crie um projeto novo.
+No terminal:</p>
+<p>Bash</p>
+<p><code>mix new geek_store
+cd geek_store</code></p>
+<hr />
+<h3 id="passo-2-a-arquitetura-do-modulo">🛠️ Passo 2: A Arquitetura do Módulo<a class="headerlink" href="#passo-2-a-arquitetura-do-modulo" title="Permanent link">&para;</a></h3>
+<p>Crie o arquivo <code>lib/geek_store/caixa.ex</code>.
+Vamos começar definindo o módulo e usando <strong>boas práticas de importação</strong>.</p>
+<p><strong>Requisito de Engenharia:</strong>
+Queremos arredondar os preços finais para 2 casas decimais. O módulo <code>Float</code> tem a função <code>round/2</code>.</p>
+<ul>
+<li>Em vez de escrever <code>Float.round(valor, 2)</code> toda hora, use um <strong>import seguro</strong> (<code>only:</code>) para trazer apenas essa função.</li>
+</ul>
+<p>Elixir</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a><span class="kd">defmodule</span><span class="w"> </span><span class="nc">GeekStore.Caixa</span><span class="w"> </span><span class="k">do</span>
+<a id="__codelineno-19-2" name="__codelineno-19-2" href="#__codelineno-19-2"></a><span class="w">  </span><span class="c1"># --- 1. DOCUMENTAÇÃO DO MÓDULO ---</span>
+<a id="__codelineno-19-3" name="__codelineno-19-3" href="#__codelineno-19-3"></a><span class="w">  </span><span class="na">@moduledoc</span><span class="w"> </span><span class="sh">&quot;&quot;&quot;</span>
+<a id="__codelineno-19-4" name="__codelineno-19-4" href="#__codelineno-19-4"></a><span class="w">  </span><span class="sh">Responsável pelo processamento de compras e cálculo de descontos da GeekStore.</span>
+<a id="__codelineno-19-5" name="__codelineno-19-5" href="#__codelineno-19-5"></a><span class="w">  </span><span class="sh">&quot;&quot;&quot;</span>
+<a id="__codelineno-19-6" name="__codelineno-19-6" href="#__codelineno-19-6"></a>
+<a id="__codelineno-19-7" name="__codelineno-19-7" href="#__codelineno-19-7"></a><span class="w">  </span><span class="c1"># --- 2. IMPORTAÇÃO SEGURA ---</span>
+<a id="__codelineno-19-8" name="__codelineno-19-8" href="#__codelineno-19-8"></a><span class="w">  </span><span class="c1"># Trazemos apenas a função round/2. Se usássemos &quot;import Float&quot;, traríamos lixo desnecessário.</span>
+<a id="__codelineno-19-9" name="__codelineno-19-9" href="#__codelineno-19-9"></a><span class="w">  </span><span class="kn">import</span><span class="w"> </span><span class="nc">Float</span><span class="p">,</span><span class="w"> </span><span class="ss">only</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="ss">round</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">]</span>
+<a id="__codelineno-19-10" name="__codelineno-19-10" href="#__codelineno-19-10"></a>
+<a id="__codelineno-19-11" name="__codelineno-19-11" href="#__codelineno-19-11"></a><span class="w">  </span><span class="c1"># --- 3. API PÚBLICA (DOCUMENTADA COM DOCTESTS) ---</span>
+<a id="__codelineno-19-12" name="__codelineno-19-12" href="#__codelineno-19-12"></a><span class="w">  </span><span class="na">@doc</span><span class="w"> </span><span class="sh">&quot;&quot;&quot;</span>
+<a id="__codelineno-19-13" name="__codelineno-19-13" href="#__codelineno-19-13"></a><span class="w">  </span><span class="sh">Recebe uma lista de itens (mapas) e retorna o recibo final.</span>
+<a id="__codelineno-19-14" name="__codelineno-19-14" href="#__codelineno-19-14"></a>
+<a id="__codelineno-19-15" name="__codelineno-19-15" href="#__codelineno-19-15"></a><span class="sh">  </span><span class="err">##</span><span class="sh"> Regras de Negócio</span>
+<a id="__codelineno-19-16" name="__codelineno-19-16" href="#__codelineno-19-16"></a><span class="sh">  - Compras acima de R$ 500.00: 10% de desconto.</span>
+<a id="__codelineno-19-17" name="__codelineno-19-17" href="#__codelineno-19-17"></a><span class="sh">  - Compras acima de R$ 200.00: 5% de desconto.</span>
+<a id="__codelineno-19-18" name="__codelineno-19-18" href="#__codelineno-19-18"></a><span class="sh">  - Abaixo disso: Sem desconto.</span>
+<a id="__codelineno-19-19" name="__codelineno-19-19" href="#__codelineno-19-19"></a>
+<a id="__codelineno-19-20" name="__codelineno-19-20" href="#__codelineno-19-20"></a><span class="sh">  </span><span class="err">##</span><span class="sh"> Exemplos (Doctests)</span>
+<a id="__codelineno-19-21" name="__codelineno-19-21" href="#__codelineno-19-21"></a>
+<a id="__codelineno-19-22" name="__codelineno-19-22" href="#__codelineno-19-22"></a><span class="sh">      iex&gt; lista = [%{preco: 100.0}, %{preco: 150.0}]</span>
+<a id="__codelineno-19-23" name="__codelineno-19-23" href="#__codelineno-19-23"></a><span class="sh">      iex&gt; GeekStore.Caixa.fechar_conta(lista)</span>
+<a id="__codelineno-19-24" name="__codelineno-19-24" href="#__codelineno-19-24"></a><span class="sh">      %{total: 250.0, desconto: 12.5, a_pagar: 237.5}</span>
+<a id="__codelineno-19-25" name="__codelineno-19-25" href="#__codelineno-19-25"></a>
+<a id="__codelineno-19-26" name="__codelineno-19-26" href="#__codelineno-19-26"></a><span class="w">  </span><span class="sh">&quot;&quot;&quot;</span>
+<a id="__codelineno-19-27" name="__codelineno-19-27" href="#__codelineno-19-27"></a><span class="w">  </span><span class="kd">def</span><span class="w"> </span><span class="n">fechar_conta</span><span class="p">(</span><span class="n">itens</span><span class="p">)</span><span class="w"> </span><span class="k">do</span>
+<a id="__codelineno-19-28" name="__codelineno-19-28" href="#__codelineno-19-28"></a><span class="w">    </span><span class="c1"># SEU CÓDIGO AQUI: Use o Pipeline (|&gt;)</span>
+<a id="__codelineno-19-29" name="__codelineno-19-29" href="#__codelineno-19-29"></a><span class="w">    </span><span class="c1"># Fluxo sugerido:</span>
+<a id="__codelineno-19-30" name="__codelineno-19-30" href="#__codelineno-19-30"></a><span class="w">    </span><span class="c1"># 1. itens |&gt; somar_total()</span>
+<a id="__codelineno-19-31" name="__codelineno-19-31" href="#__codelineno-19-31"></a><span class="w">    </span><span class="c1"># 2.       |&gt; aplicar_desconto()</span>
+<a id="__codelineno-19-32" name="__codelineno-19-32" href="#__codelineno-19-32"></a><span class="w">    </span><span class="c1"># 3.       |&gt; formatar_recibo()</span>
+<a id="__codelineno-19-33" name="__codelineno-19-33" href="#__codelineno-19-33"></a><span class="w">  </span><span class="k">end</span>
+<a id="__codelineno-19-34" name="__codelineno-19-34" href="#__codelineno-19-34"></a>
+<a id="__codelineno-19-35" name="__codelineno-19-35" href="#__codelineno-19-35"></a><span class="w">  </span><span class="c1"># --- 4. FUNÇÕES PRIVADAS (defp) ---</span>
+<a id="__codelineno-19-36" name="__codelineno-19-36" href="#__codelineno-19-36"></a><span class="w">  </span><span class="c1"># Implemente a lógica suja aqui embaixo.</span>
+<a id="__codelineno-19-37" name="__codelineno-19-37" href="#__codelineno-19-37"></a><span class="w">  </span><span class="c1"># Lembre-se: Use Pattern Matching e Guards para decidir o desconto!</span>
+<a id="__codelineno-19-38" name="__codelineno-19-38" href="#__codelineno-19-38"></a><span class="k">end</span>
+</code></pre></div>
+<hr />
+<h3 id="passo-3-implementando-a-logica-sua-vez">🛠️ Passo 3: Implementando a Lógica (Sua Vez!)<a class="headerlink" href="#passo-3-implementando-a-logica-sua-vez" title="Permanent link">&para;</a></h3>
+<p>Tente implementar antes de ver a resposta. Lembre-se:</p>
+<ol>
+<li><strong>Imutabilidade:</strong> Não tente criar uma variável <code>soma = 0</code> e ir somando. Use <code>Enum.sum</code> ou <code>Enum.map</code>.</li>
+<li><strong>Guards:</strong> Use <code>when valor &gt;= 500</code> nas funções privadas de desconto.</li>
+<li>
+<p><strong>Pipeline:</strong> Conecte tudo na função pública.</p>
+</li>
+<li>
+<p>🔑 Gabarito Comentado (A Solução do Professor)</p>
+<p>Aqui está como um engenheiro Elixir resolveria, aplicando todos os conceitos da aula.</p>
+<p><strong>Arquivo:</strong> <code>lib/geek_store/caixa.ex</code></p>
+<p>Elixir</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-20-1" name="__codelineno-20-1" href="#__codelineno-20-1"></a><span class="kd">defmodule</span><span class="w"> </span><span class="nc">GeekStore.Caixa</span><span class="w"> </span><span class="k">do</span>
+<a id="__codelineno-20-2" name="__codelineno-20-2" href="#__codelineno-20-2"></a><span class="w">  </span><span class="na">@moduledoc</span><span class="w"> </span><span class="sh">&quot;&quot;&quot;</span>
+<a id="__codelineno-20-3" name="__codelineno-20-3" href="#__codelineno-20-3"></a><span class="w">  </span><span class="sh">Responsável pelo processamento de compras e cálculo de descontos.</span>
+<a id="__codelineno-20-4" name="__codelineno-20-4" href="#__codelineno-20-4"></a><span class="w">  </span><span class="sh">&quot;&quot;&quot;</span>
+<a id="__codelineno-20-5" name="__codelineno-20-5" href="#__codelineno-20-5"></a>
+<a id="__codelineno-20-6" name="__codelineno-20-6" href="#__codelineno-20-6"></a><span class="w">  </span><span class="c1"># Importamos apenas o que precisamos para não poluir o namespace</span>
+<a id="__codelineno-20-7" name="__codelineno-20-7" href="#__codelineno-20-7"></a><span class="w">  </span><span class="kn">import</span><span class="w"> </span><span class="nc">Float</span><span class="p">,</span><span class="w"> </span><span class="ss">only</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="ss">round</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">]</span>
+<a id="__codelineno-20-8" name="__codelineno-20-8" href="#__codelineno-20-8"></a>
+<a id="__codelineno-20-9" name="__codelineno-20-9" href="#__codelineno-20-9"></a><span class="w">  </span><span class="na">@doc</span><span class="w"> </span><span class="sh">&quot;&quot;&quot;</span>
+<a id="__codelineno-20-10" name="__codelineno-20-10" href="#__codelineno-20-10"></a><span class="w">  </span><span class="sh">Gera a nota fiscal final com descontos aplicados.</span>
+<a id="__codelineno-20-11" name="__codelineno-20-11" href="#__codelineno-20-11"></a>
+<a id="__codelineno-20-12" name="__codelineno-20-12" href="#__codelineno-20-12"></a><span class="sh">  </span><span class="err">##</span><span class="sh"> Exemplos</span>
+<a id="__codelineno-20-13" name="__codelineno-20-13" href="#__codelineno-20-13"></a>
+<a id="__codelineno-20-14" name="__codelineno-20-14" href="#__codelineno-20-14"></a><span class="sh">      iex&gt; itens = [%{preco: 100.0}, %{preco: 100.0}] </span><span class="err">#</span><span class="sh"> Total 200</span>
+<a id="__codelineno-20-15" name="__codelineno-20-15" href="#__codelineno-20-15"></a><span class="sh">      iex&gt; GeekStore.Caixa.fechar_conta(itens)</span>
+<a id="__codelineno-20-16" name="__codelineno-20-16" href="#__codelineno-20-16"></a><span class="sh">      %{total: 200.0, desconto: 10.0, a_pagar: 190.0}</span>
+<a id="__codelineno-20-17" name="__codelineno-20-17" href="#__codelineno-20-17"></a>
+<a id="__codelineno-20-18" name="__codelineno-20-18" href="#__codelineno-20-18"></a><span class="w">  </span><span class="sh">&quot;&quot;&quot;</span>
+<a id="__codelineno-20-19" name="__codelineno-20-19" href="#__codelineno-20-19"></a><span class="w">  </span><span class="kd">def</span><span class="w"> </span><span class="n">fechar_conta</span><span class="p">(</span><span class="n">itens</span><span class="p">)</span><span class="w"> </span><span class="k">do</span>
+<a id="__codelineno-20-20" name="__codelineno-20-20" href="#__codelineno-20-20"></a><span class="w">    </span><span class="c1"># O pipeline conta a história do dado</span>
+<a id="__codelineno-20-21" name="__codelineno-20-21" href="#__codelineno-20-21"></a><span class="w">    </span><span class="n">itens</span>
+<a id="__codelineno-20-22" name="__codelineno-20-22" href="#__codelineno-20-22"></a><span class="w">    </span><span class="o">|&gt;</span><span class="w"> </span><span class="n">calcular_total_bruto</span><span class="p">()</span>
+<a id="__codelineno-20-23" name="__codelineno-20-23" href="#__codelineno-20-23"></a><span class="w">    </span><span class="o">|&gt;</span><span class="w"> </span><span class="n">calcular_valores_finais</span><span class="p">()</span>
+<a id="__codelineno-20-24" name="__codelineno-20-24" href="#__codelineno-20-24"></a><span class="w">  </span><span class="k">end</span>
+<a id="__codelineno-20-25" name="__codelineno-20-25" href="#__codelineno-20-25"></a>
+<a id="__codelineno-20-26" name="__codelineno-20-26" href="#__codelineno-20-26"></a><span class="w">  </span><span class="c1"># --- ÁREA RESTRITA (Privada) ---</span>
+<a id="__codelineno-20-27" name="__codelineno-20-27" href="#__codelineno-20-27"></a>
+<a id="__codelineno-20-28" name="__codelineno-20-28" href="#__codelineno-20-28"></a><span class="w">  </span><span class="kd">defp</span><span class="w"> </span><span class="n">calcular_total_bruto</span><span class="p">(</span><span class="n">itens</span><span class="p">)</span><span class="w"> </span><span class="k">do</span>
+<a id="__codelineno-20-29" name="__codelineno-20-29" href="#__codelineno-20-29"></a><span class="w">    </span><span class="c1"># Transformamos a lista de Mapas em uma lista de números e somamos</span>
+<a id="__codelineno-20-30" name="__codelineno-20-30" href="#__codelineno-20-30"></a><span class="w">    </span><span class="n">itens</span>
+<a id="__codelineno-20-31" name="__codelineno-20-31" href="#__codelineno-20-31"></a><span class="w">    </span><span class="o">|&gt;</span><span class="w"> </span><span class="nc">Enum</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="k">fn</span><span class="w"> </span><span class="n">item</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">item</span><span class="o">.</span><span class="n">preco</span><span class="w"> </span><span class="k">end</span><span class="p">)</span>
+<a id="__codelineno-20-32" name="__codelineno-20-32" href="#__codelineno-20-32"></a><span class="w">    </span><span class="o">|&gt;</span><span class="w"> </span><span class="nc">Enum</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+<a id="__codelineno-20-33" name="__codelineno-20-33" href="#__codelineno-20-33"></a><span class="w">  </span><span class="k">end</span>
+<a id="__codelineno-20-34" name="__codelineno-20-34" href="#__codelineno-20-34"></a>
+<a id="__codelineno-20-35" name="__codelineno-20-35" href="#__codelineno-20-35"></a><span class="w">  </span><span class="c1"># Aqui aplicamos as regras de negócio.</span>
+<a id="__codelineno-20-36" name="__codelineno-20-36" href="#__codelineno-20-36"></a><span class="w">  </span><span class="c1"># Recebe o total bruto e retorna o mapa final.</span>
+<a id="__codelineno-20-37" name="__codelineno-20-37" href="#__codelineno-20-37"></a><span class="w">  </span><span class="kd">defp</span><span class="w"> </span><span class="n">calcular_valores_finais</span><span class="p">(</span><span class="n">total</span><span class="p">)</span><span class="w"> </span><span class="k">do</span>
+<a id="__codelineno-20-38" name="__codelineno-20-38" href="#__codelineno-20-38"></a><span class="w">    </span><span class="n">valor_desconto</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">obter_desconto</span><span class="p">(</span><span class="n">total</span><span class="p">)</span>
+<a id="__codelineno-20-39" name="__codelineno-20-39" href="#__codelineno-20-39"></a><span class="w">    </span><span class="n">a_pagar</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">total</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">valor_desconto</span>
+<a id="__codelineno-20-40" name="__codelineno-20-40" href="#__codelineno-20-40"></a>
+<a id="__codelineno-20-41" name="__codelineno-20-41" href="#__codelineno-20-41"></a><span class="w">    </span><span class="p">%{</span>
+<a id="__codelineno-20-42" name="__codelineno-20-42" href="#__codelineno-20-42"></a><span class="w">      </span><span class="ss">total</span><span class="p">:</span><span class="w"> </span><span class="n">round</span><span class="p">(</span><span class="n">total</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">),</span><span class="w">        </span><span class="c1"># Usando a função importada</span>
+<a id="__codelineno-20-43" name="__codelineno-20-43" href="#__codelineno-20-43"></a><span class="w">      </span><span class="ss">desconto</span><span class="p">:</span><span class="w"> </span><span class="n">round</span><span class="p">(</span><span class="n">valor_desconto</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">),</span>
+<a id="__codelineno-20-44" name="__codelineno-20-44" href="#__codelineno-20-44"></a><span class="w">      </span><span class="ss">a_pagar</span><span class="p">:</span><span class="w"> </span><span class="n">round</span><span class="p">(</span><span class="n">a_pagar</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">)</span>
+<a id="__codelineno-20-45" name="__codelineno-20-45" href="#__codelineno-20-45"></a><span class="w">    </span><span class="p">}</span>
+<a id="__codelineno-20-46" name="__codelineno-20-46" href="#__codelineno-20-46"></a><span class="w">  </span><span class="k">end</span>
+<a id="__codelineno-20-47" name="__codelineno-20-47" href="#__codelineno-20-47"></a>
+<a id="__codelineno-20-48" name="__codelineno-20-48" href="#__codelineno-20-48"></a><span class="w">  </span><span class="c1"># Pattern Matching + Guards (A ordem importa!)</span>
+<a id="__codelineno-20-49" name="__codelineno-20-49" href="#__codelineno-20-49"></a><span class="w">  </span><span class="kd">defp</span><span class="w"> </span><span class="n">obter_desconto</span><span class="p">(</span><span class="n">total</span><span class="p">)</span><span class="w"> </span><span class="ow">when</span><span class="w"> </span><span class="n">total</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="mi">500</span><span class="p">,</span><span class="w"> </span><span class="ss">do</span><span class="p">:</span><span class="w"> </span><span class="n">total</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mf">0.10</span>
+<a id="__codelineno-20-50" name="__codelineno-20-50" href="#__codelineno-20-50"></a><span class="w">  </span><span class="kd">defp</span><span class="w"> </span><span class="n">obter_desconto</span><span class="p">(</span><span class="n">total</span><span class="p">)</span><span class="w"> </span><span class="ow">when</span><span class="w"> </span><span class="n">total</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="mi">200</span><span class="p">,</span><span class="w"> </span><span class="ss">do</span><span class="p">:</span><span class="w"> </span><span class="n">total</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mf">0.05</span>
+<a id="__codelineno-20-51" name="__codelineno-20-51" href="#__codelineno-20-51"></a><span class="w">  </span><span class="kd">defp</span><span class="w"> </span><span class="n">obter_desconto</span><span class="p">(</span><span class="n">_total</span><span class="p">),</span><span class="w"> </span><span class="ss">do</span><span class="p">:</span><span class="w"> </span><span class="mf">0.0</span>
+<a id="__codelineno-20-52" name="__codelineno-20-52" href="#__codelineno-20-52"></a><span class="k">end</span>
+</code></pre></div>
+<hr />
+<h3 id="passo-4-o-teste-unitario-aplicando-alias-e-use">🛠️ Passo 4: O Teste Unitário (Aplicando <code>alias</code> e <code>use</code>)<a class="headerlink" href="#passo-4-o-teste-unitario-aplicando-alias-e-use" title="Permanent link">&para;</a></h3>
+<p>Agora vamos criar o arquivo de teste para garantir a robustez.
+Aqui você vai usar:</p>
+<ol>
+<li><code>use ExUnit.Case</code>: Injeção do framework.</li>
+<li><code>doctest</code>: Validar a documentação.</li>
+<li><code>alias</code>: Para não ter que digitar <code>GeekStore.Caixa</code> toda vez.</li>
+</ol>
+<p>Crie o arquivo: <code>test/geek_store/caixa_test.exs</code></p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-21-1" name="__codelineno-21-1" href="#__codelineno-21-1"></a><span class="kd">defmodule</span><span class="w"> </span><span class="nc">GeekStore.CaixaTest</span><span class="w"> </span><span class="k">do</span>
+<a id="__codelineno-21-2" name="__codelineno-21-2" href="#__codelineno-21-2"></a><span class="w">  </span><span class="c1"># 1. INJEÇÃO: Traz &#39;test&#39;, &#39;assert&#39;, &#39;describe&#39; para este módulo</span>
+<a id="__codelineno-21-3" name="__codelineno-21-3" href="#__codelineno-21-3"></a><span class="w">  </span><span class="kn">use</span><span class="w"> </span><span class="nc">ExUnit.Case</span>
+<a id="__codelineno-21-4" name="__codelineno-21-4" href="#__codelineno-21-4"></a>
+<a id="__codelineno-21-5" name="__codelineno-21-5" href="#__codelineno-21-5"></a><span class="w">  </span><span class="c1"># 2. DOCTEST: Valida os exemplos &quot;iex&gt;&quot; escritos no arquivo .ex</span>
+<a id="__codelineno-21-6" name="__codelineno-21-6" href="#__codelineno-21-6"></a><span class="w">  </span><span class="n">doctest</span><span class="w"> </span><span class="nc">GeekStore.Caixa</span>
+<a id="__codelineno-21-7" name="__codelineno-21-7" href="#__codelineno-21-7"></a>
+<a id="__codelineno-21-8" name="__codelineno-21-8" href="#__codelineno-21-8"></a><span class="w">  </span><span class="c1"># 3. ORGANIZAÇÃO: Cria o apelido. Agora &quot;Caixa&quot; = &quot;GeekStore.Caixa&quot;</span>
+<a id="__codelineno-21-9" name="__codelineno-21-9" href="#__codelineno-21-9"></a><span class="w">  </span><span class="kn">alias</span><span class="w"> </span><span class="nc">GeekStore.Caixa</span>
+<a id="__codelineno-21-10" name="__codelineno-21-10" href="#__codelineno-21-10"></a>
+<a id="__codelineno-21-11" name="__codelineno-21-11" href="#__codelineno-21-11"></a><span class="w">  </span><span class="n">test</span><span class="w"> </span><span class="s2">&quot;compra simples sem desconto&quot;</span><span class="w"> </span><span class="k">do</span>
+<a id="__codelineno-21-12" name="__codelineno-21-12" href="#__codelineno-21-12"></a><span class="w">    </span><span class="n">itens</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[%{</span><span class="ss">preco</span><span class="p">:</span><span class="w"> </span><span class="mf">50.0</span><span class="p">},</span><span class="w"> </span><span class="p">%{</span><span class="ss">preco</span><span class="p">:</span><span class="w"> </span><span class="mf">40.0</span><span class="p">}]</span>
+<a id="__codelineno-21-13" name="__codelineno-21-13" href="#__codelineno-21-13"></a><span class="w">    </span><span class="n">resultado</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">Caixa</span><span class="o">.</span><span class="n">fechar_conta</span><span class="p">(</span><span class="n">itens</span><span class="p">)</span><span class="w"> </span><span class="c1"># Usando o Alias!</span>
+<a id="__codelineno-21-14" name="__codelineno-21-14" href="#__codelineno-21-14"></a>
+<a id="__codelineno-21-15" name="__codelineno-21-15" href="#__codelineno-21-15"></a><span class="w">    </span><span class="n">assert</span><span class="w"> </span><span class="n">resultado</span><span class="o">.</span><span class="n">a_pagar</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mf">90.0</span>
+<a id="__codelineno-21-16" name="__codelineno-21-16" href="#__codelineno-21-16"></a><span class="w">    </span><span class="n">assert</span><span class="w"> </span><span class="n">resultado</span><span class="o">.</span><span class="n">desconto</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mf">0.0</span>
+<a id="__codelineno-21-17" name="__codelineno-21-17" href="#__codelineno-21-17"></a><span class="w">  </span><span class="k">end</span>
+<a id="__codelineno-21-18" name="__codelineno-21-18" href="#__codelineno-21-18"></a>
+<a id="__codelineno-21-19" name="__codelineno-21-19" href="#__codelineno-21-19"></a><span class="w">  </span><span class="n">test</span><span class="w"> </span><span class="s2">&quot;compra VIP com 10% de desconto&quot;</span><span class="w"> </span><span class="k">do</span>
+<a id="__codelineno-21-20" name="__codelineno-21-20" href="#__codelineno-21-20"></a><span class="w">    </span><span class="n">itens</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[%{</span><span class="ss">preco</span><span class="p">:</span><span class="w"> </span><span class="mf">1000.0</span><span class="p">}]</span>
+<a id="__codelineno-21-21" name="__codelineno-21-21" href="#__codelineno-21-21"></a><span class="w">    </span><span class="n">resultado</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">Caixa</span><span class="o">.</span><span class="n">fechar_conta</span><span class="p">(</span><span class="n">itens</span><span class="p">)</span>
+<a id="__codelineno-21-22" name="__codelineno-21-22" href="#__codelineno-21-22"></a>
+<a id="__codelineno-21-23" name="__codelineno-21-23" href="#__codelineno-21-23"></a><span class="w">    </span><span class="c1"># Verifica lógica: 1000 - 100 = 900</span>
+<a id="__codelineno-21-24" name="__codelineno-21-24" href="#__codelineno-21-24"></a><span class="w">    </span><span class="n">assert</span><span class="w"> </span><span class="n">resultado</span><span class="o">.</span><span class="n">a_pagar</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mf">900.0</span>
+<a id="__codelineno-21-25" name="__codelineno-21-25" href="#__codelineno-21-25"></a><span class="w">  </span><span class="k">end</span>
+<a id="__codelineno-21-26" name="__codelineno-21-26" href="#__codelineno-21-26"></a><span class="k">end</span>
+</code></pre></div>
+<hr />
+<h3 id="a-validacao-final">🏁 A Validação Final<a class="headerlink" href="#a-validacao-final" title="Permanent link">&para;</a></h3>
+<p>Vá ao terminal e execute o comando supremo:</p>
+<p>Bash</p>
+<p><code>mix test</code></p>
+<p><strong>O que deve acontecer:</strong></p>
+<ol>
+<li>O Mix compila seu código (<code>lib</code>).</li>
+<li>O Mix lê seu arquivo de teste (<code>test</code>).</li>
+<li>O <code>doctest</code> roda os exemplos da documentação.</li>
+<li>O <code>test</code> roda os cenários específicos.</li>
+</ol>
+<p>Se você vir as letras verdes, <strong>Parabéns!</strong> 🚀</p>
+<h3 id="recaptulando-o-que-voce-construiu">Recaptulando o que você construiu:<a class="headerlink" href="#recaptulando-o-que-voce-construiu" title="Permanent link">&para;</a></h3>
+<ul>
+<li>[x]  <strong>Projeto Mix:</strong> Estrutura profissional.</li>
+<li>[x]  <strong>Namespace:</strong> <code>GeekStore.Caixa</code>.</li>
+<li>[x]  <strong>Import Seguro:</strong> Usou <code>only:</code> para trazer <code>round/2</code>.</li>
+<li>[x]  <strong>Pipeline:</strong> Lógica clara com <code>|&gt;</code>.</li>
+<li>[x]  <strong>Guards:</strong> Substituiu <code>if/else</code> por lógica declarativa.</li>
+<li>[x]  <strong>Alias:</strong> Simplificou o teste.</li>
+<li>[x]  <strong>Doctest:</strong> Documentação que não mente.</li>
+</ul>
+<p>Você acabou de escrever código Elixir com nível de produção.</p>
+</li>
+</ol>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Voltar ao topo
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.top", "navigation.sections", "toc.integrate", "content.code.annotate", "content.code.copy"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copiado para \u00e1rea de transfer\u00eancia", "clipboard.copy": "Copiar para \u00e1rea de transfer\u00eancia", "search.result.more.one": "Mais 1 nesta p\u00e1gina", "search.result.more.other": "Mais # nesta p\u00e1gina", "search.result.none": "Nenhum resultado encontrado", "search.result.one": "1 resultado encontrado", "search.result.other": "# resultados encontrados", "search.result.placeholder": "Digite para iniciar a busca", "search.result.term.missing": "Ausente", "select.version": "Selecione a vers\u00e3o"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+        <script src="https://unpkg.com/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+    
+  </body>
+</html>

@@ -1,0 +1,1937 @@
+
+<!doctype html>
+<html lang="pt" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Livro didático da disciplina de Introdução à Programação Funcional: Haskell, Clojure e Elixir em três unidades de 20 horas.
+">
+      
+      
+        <meta name="author" content="Sergio Souza Costa">
+      
+      
+      
+        <link rel="prev" href="../02_instalacao/">
+      
+      
+        <link rel="next" href="../04_tipos_classes/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+    
+    
+      
+        <title>Cap 3: Fundamentos e o GHCi - Introdução à Programação Funcional</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="teal" data-md-color-accent="green">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#fundamentos-do-haskell-e-o-interpretador-ghci" class="md-skip">
+          Ir para o conteúdo
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Cabeçalho">
+    <a href="../.." title="Introdução à Programação Funcional" class="md-header__button md-logo" aria-label="Introdução à Programação Funcional" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Introdução à Programação Funcional
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Cap 3: Fundamentos e o GHCi
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="teal" data-md-color-accent="green"  aria-hidden="true"  type="radio" name="__palette" id="__palette_0">
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Buscar" placeholder="Buscar" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Pesquisar">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Limpar" aria-label="Limpar" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Inicializando a pesquisa
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+  
+
+<nav class="md-nav md-nav--primary md-nav--integrated" aria-label="Navegação" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Introdução à Programação Funcional" class="md-nav__button md-logo" aria-label="Introdução à Programação Funcional" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Introdução à Programação Funcional
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Apresentação
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Unidade 1 — Paradigmas e Haskell Básico (20h)
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Unidade 1 — Paradigmas e Haskell Básico (20h)
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../00_plano_unidade1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Plano da Unidade 1
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../01_paradigmas/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cap 1: Introdução aos Paradigmas
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../02_instalacao/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cap 2: Instalação do Ambiente
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cap 3: Fundamentos e o GHCi
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cap 3: Fundamentos e o GHCi
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Índice">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Índice
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1-a-mudanca-de-paradigma-mutacao-vs-definicao" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. A Mudança de Paradigma: Mutação vs. Definição
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-o-interpretador-ghci-seu-laboratorio-interativo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. O Interpretador GHCi: Seu Laboratório Interativo
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. O Interpretador GHCi: Seu Laboratório Interativo">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#comandos-essenciais-do-ghci" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Comandos Essenciais do GHCi
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#a-variavel-especial-it" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        A variável especial it
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-aritmetica-basica-no-ghci" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Aritmética Básica no GHCi
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. Aritmética Básica no GHCi">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#parenteses-e-numeros-negativos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Parênteses e Números Negativos
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#precedencia-e-associatividade-dos-operadores" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Precedência e Associatividade dos Operadores
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-algebra-booleana-e-operadores-de-comparacao" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Álgebra Booleana e Operadores de Comparação
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4. Álgebra Booleana e Operadores de Comparação">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#operadores-logicos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Operadores Lógicos:
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#operadores-de-comparacao" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Operadores de Comparação:
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-aplicacao-de-funcoes-espacos-em-vez-de-parenteses" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Aplicação de Funções: Espaços em Vez de Parênteses
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5. Aplicação de Funções: Espaços em Vez de Parênteses">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#precedencia-de-aplicacao-de-funcoes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Precedência de Aplicação de Funções
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-definicoes-locais-let-e-where" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. Definições Locais: let e where
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="6. Definições Locais: let e where">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-clausulas-let-in" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Cláusulas let ... in ...
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-clausulas-where" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Cláusulas where
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-avaliacao-preguicosa-na-pratica-substituicao-e-thunks" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. Avaliação Preguiçosa na Prática: Substituição e Thunks
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../04_tipos_classes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cap 4: Tipos e Classes
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../05_funcoes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cap 5: Funções e Pattern Matching
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../06_listas/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cap 6: Listas, Recursão e Compreensão
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../07_alta_ordem/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cap 7: Funções de Alta Ordem
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../08_exercicios/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cap 8: Exercícios Resolvidos
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Unidade 2 — Haskell Avançado e Qualidade (20h)
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Unidade 2 — Haskell Avançado e Qualidade (20h)
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../unidade2/00_plano_unidade2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Plano da Unidade 2
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../unidade2/01_declarando_tipos_classes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cap 9: Tipos Algébricos e Typeclasses
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../unidade2/02_programas_interativos/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cap 10: Programas Interativos (IO)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../unidade2/03_exercicios_avancados/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cap 11: Exercícios Avançados
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../unidade2/04_haskell_moderno/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cap 12: Projetos Modernos com Stack
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../unidade2/05_biblioteca_json/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cap 13: A Biblioteca JSON
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../unidade2/06_testes_qualidade/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cap 14: Testes com QuickCheck
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../unidade2/07_avaliacao/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Trabalho Prático: hs2json
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Unidade 3 — Clojure e Elixir (20h)
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Unidade 3 — Clojure e Elixir (20h)
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../unidade3/00_plano_unidade3/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Plano da Unidade 3
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../unidade3/01_clojure_fundamentos/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cap 15: Clojure — Fundamentos
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../unidade3/02_clojure_colecoes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cap 16: Clojure — Vetores e Mapas
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../unidade3/03_clojure_alta_ordem/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cap 17: Clojure — Alta Ordem
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../unidade3/04_clojure_threading_mapas_complexos/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cap 18: Clojure — Threading Macros
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../unidade3/05_clojure_lazy_sequences/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cap 19: Clojure — Lazy Sequences
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../unidade3/06_clojure_metaprogramacao/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cap 20: Clojure — Macros
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../unidade3/07_clojure_interop/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cap 21: Clojure — Interop com Java
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../unidade3/08_clojure_revisao/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cap 22: Clojure — Revisão de Pilares
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../unidade3/09_clojure_exercicios/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cap 23: Clojure — Exercícios Resolvidos
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../unidade3/10_clojure_tutorial_todo/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Trabalho Clojure: ToDo Full-Stack
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../unidade3/11_elixir_fundamentos/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cap 24: Elixir — Fundamentos
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../unidade3/12_elixir_colecoes_pattern_matching/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cap 25: Elixir — Pattern Matching
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../unidade3/13_elixir_modulos_funcoes_testes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cap 26: Elixir — Módulos e Testes
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../unidade3/14_elixir_processos/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cap 27: Elixir — Processos e Concorrência
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../unidade3/15_elixir_metaprogramacao/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cap 28: Elixir — Metaprogramação
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../unidade3/16_elixir_tutorial_todo/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Trabalho Elixir: ToDo com LiveView
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="fundamentos-do-haskell-e-o-interpretador-ghci">Fundamentos do Haskell e o Interpretador GHCi<a class="headerlink" href="#fundamentos-do-haskell-e-o-interpretador-ghci" title="Permanent link">&para;</a></h1>
+<p>Neste capítulo, daremos os primeiros passos práticos na linguagem Haskell. Em vez de focarmos em programas completos e complexos, utilizaremos o ambiente interativo <strong>GHCi</strong> para conversar com o compilador em tempo real. Esta abordagem de desenvolvimento orientada a feedback facilitará a compreensão dos fundamentos da sintaxe, regras de avaliação e a transição mental de paradigmas.</p>
+<hr />
+<h2 id="1-a-mudanca-de-paradigma-mutacao-vs-definicao">1. A Mudança de Paradigma: Mutação vs. Definição<a class="headerlink" href="#1-a-mudanca-de-paradigma-mutacao-vs-definicao" title="Permanent link">&para;</a></h2>
+<p>Para quem vem de linguagens imperativas (como Python, Java ou C), a primeira barreira no aprendizado do paradigma funcional é a forma como lidamos com a atribuição de valores. Considere o seguinte código comum em linguagens imperativas:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="c1"># Em Python</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="n">x</span> <span class="o">=</span> <span class="mi">0</span>
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="n">x</span> <span class="o">=</span> <span class="n">x</span> <span class="o">+</span> <span class="mi">1</span>
+</code></pre></div>
+<p>Em Python, a instrução <code>x = x + 1</code> significa: <em>"Pegue o valor atual na célula de memória referenciada por <code>x</code>, adicione 1 a ele, e salve o novo valor de volta na mesma célula de memória"</em>.</p>
+<p>Em Haskell, se tentarmos escrever algo equivalente:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="c1">-- Em Haskell</span>
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="nf">x</span><span class="w"> </span><span class="ow">=</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span>
+</code></pre></div>
+<p>O compilador interpretará isso como uma <strong>definição matemática</strong>: <em>"x é igual a x + 1"</em>. Em termos matemáticos, a equação <span class="arithmatex">\(x = x + 1\)</span> não possui solução finita. Se tentarmos avaliar o valor de <code>x</code> no interpretador GHCi, o Haskell (devido à sua avaliação preguiçosa) substituirá recursivamente <code>x</code> por seu próprio corpo indefinidamente:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="nf">x</span><span class="w"> </span><span class="ow">=</span><span class="w"> </span><span class="p">(</span><span class="n">x</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span>
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="nf">x</span><span class="w"> </span><span class="ow">=</span><span class="w"> </span><span class="p">((</span><span class="n">x</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span>
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="c1">-- ... causando uma recursão infinita e estourando a pilha de execução (stack overflow)</span>
+</code></pre></div>
+<p>Da mesma forma, se definirmos:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="nf">x</span><span class="w"> </span><span class="ow">=</span><span class="w"> </span><span class="mi">0</span>
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="nf">x</span><span class="w"> </span><span class="ow">=</span><span class="w"> </span><span class="mi">1</span>
+</code></pre></div>
+<p>O Haskell rejeitará o código com um erro de compilação, acusando múltiplas definições conflitantes para o mesmo identificador <code>x</code>. </p>
+<div class="admonition info">
+<p class="admonition-title">Info</p>
+<p>Em Haskell, identificadores são <strong>constantes matemáticas imutáveis</strong>, e não caixas de memória que podem mudar de valor ao longo do tempo. Uma vez que definimos o valor de um identificador, ele é fixo e garantido para toda a vida útil do escopo.</p>
+</div>
+<hr />
+<h2 id="2-o-interpretador-ghci-seu-laboratorio-interativo">2. O Interpretador GHCi: Seu Laboratório Interativo<a class="headerlink" href="#2-o-interpretador-ghci-seu-laboratorio-interativo" title="Permanent link">&para;</a></h2>
+<p>O Glasgow Haskell Compiler (GHC) possui um console interativo chamado <strong>GHCi</strong>. Nele, podemos digitar expressões Haskell, avaliá-las imediatamente, inspecionar tipos de dados e depurar nosso código. Se você estiver familiarizado com o console interativo do Python (<code>python</code>) ou Ruby (<code>irb</code>), o GHCi desempenha um papel semelhante.</p>
+<h3 id="comandos-essenciais-do-ghci">Comandos Essenciais do GHCi<a class="headerlink" href="#comandos-essenciais-do-ghci" title="Permanent link">&para;</a></h3>
+<p>Todos os comandos específicos do GHCi começam com um caractere de dois pontos (<code>:</code>):</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Comando</th>
+<th style="text-align: left;">Atalho</th>
+<th style="text-align: left;">Descrição</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><code>:load &lt;arquivo&gt;</code></td>
+<td style="text-align: left;"><code>:l</code></td>
+<td style="text-align: left;">Carrega um arquivo de código-fonte Haskell no REPL.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>:reload</code></td>
+<td style="text-align: left;"><code>:r</code></td>
+<td style="text-align: left;">Recarrega todos os arquivos atualmente abertos (útil após edições).</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>:type &lt;expressão&gt;</code></td>
+<td style="text-align: left;"><code>:t</code></td>
+<td style="text-align: left;">Inspeciona o tipo de dados de uma expressão ou função.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>:info &lt;nome&gt;</code></td>
+<td style="text-align: left;"><code>:i</code></td>
+<td style="text-align: left;">Exibe informações detalhadas sobre um identificador, operador ou classe de tipos.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>:quit</code></td>
+<td style="text-align: left;"><code>:q</code></td>
+<td style="text-align: left;">Sai do interpretador GHCi.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>:module +&lt;Mod&gt;</code></td>
+<td style="text-align: left;"><code>:m</code></td>
+<td style="text-align: left;">Carrega um módulo adicional da biblioteca (ex: <code>:m +Data.List</code>).</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>:set +t</code></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;">Passa a exibir o tipo de cada expressão avaliada (<code>:unset +t</code> desativa).</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>:?</code></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;">Abre o menu de ajuda interativa detalhada.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="a-variavel-especial-it">A variável especial <code>it</code><a class="headerlink" href="#a-variavel-especial-it" title="Permanent link">&para;</a></h3>
+<p>O GHCi guarda o resultado da última expressão avaliada em uma variável especial chamada <strong><code>it</code></strong>. Isso permite usar o resultado anterior na próxima expressão:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="kt">Prelude</span><span class="o">&gt;</span><span class="w"> </span><span class="s">&quot;foo&quot;</span>
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="s">&quot;foo&quot;</span>
+<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="kt">Prelude</span><span class="o">&gt;</span><span class="w"> </span><span class="n">it</span><span class="w"> </span><span class="o">++</span><span class="w"> </span><span class="s">&quot;bar&quot;</span>
+<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="s">&quot;foobar&quot;</span>
+</code></pre></div>
+<p>Se a avaliação de uma expressão falhar, o valor de <code>it</code> não muda — então podemos experimentar expressões potencialmente inválidas com segurança. Combinando o <code>it</code> com as setas do teclado (que recuperam e editam as linhas anteriores), ganhamos uma ótima forma de experimentação interativa: o custo de errar é baixíssimo. Aproveite para cometer erros baratos e abundantes enquanto explora a linguagem!</p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p><strong>Permaneça sem medo diante das mensagens de erro.</strong> As mensagens do GHC podem parecer longas e intimidadoras no início (<code>No instance for (Num Bool)...</code>), mas elas têm uma finalidade: apontam a localização exata do problema e frequentemente sugerem uma correção. Elas nos fazem executar uma certa quantidade de depuração <em>antecipada</em>, antes mesmo de rodar o programa. No começo, descubra apenas o suficiente para progredir; com a experiência, as partes obscuras das mensagens se tornarão naturais.</p>
+</div>
+<hr />
+<h2 id="3-aritmetica-basica-no-ghci">3. Aritmética Básica no GHCi<a class="headerlink" href="#3-aritmetica-basica-no-ghci" title="Permanent link">&para;</a></h2>
+<p>Ao abrir o GHCi executando <code>stack ghci</code> no seu terminal, você será recebido pelo prompt <code>Prelude&gt;</code> (o módulo base de funções carregadas por padrão). Podemos usar o interpretador diretamente como uma calculadora de alta precisão:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="kt">Prelude</span><span class="o">&gt;</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">15</span>
+<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="mi">17</span>
+<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="kt">Prelude</span><span class="o">&gt;</span><span class="w"> </span><span class="mi">49</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">100</span>
+<a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a><span class="mi">4900</span>
+<a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a><span class="kt">Prelude</span><span class="o">&gt;</span><span class="w"> </span><span class="mi">1892</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">1472</span>
+<a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a><span class="mi">420</span>
+<a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a><span class="kt">Prelude</span><span class="o">&gt;</span><span class="w"> </span><span class="mi">5</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="mi">2</span>
+<a id="__codelineno-5-8" name="__codelineno-5-8" href="#__codelineno-5-8"></a><span class="mf">2.5</span>
+</code></pre></div>
+<p>Note que operadores aritméticos tradicionais (<code>+</code>, <code>-</code>, <code>*</code>, <code>/</code>) possuem regras de precedência padrão matemáticas (multiplicação e divisão possuem prioridade sobre soma e subtração).</p>
+<h3 id="parenteses-e-numeros-negativos">Parênteses e Números Negativos<a class="headerlink" href="#parenteses-e-numeros-negativos" title="Permanent link">&para;</a></h3>
+<p>Diferentemente de outras linguagens, o operador <code>-</code> pode ser ambíguo em Haskell. Quando queremos utilizar um número negativo em uma expressão, devemos <strong>obrigatoriamente envolvê-lo entre parênteses</strong>:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="kt">Prelude</span><span class="o">&gt;</span><span class="w"> </span><span class="mi">5</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="o">-</span><span class="mi">3</span>
+<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="c1">-- ERRO! O compilador tentará aplicar o operador &quot;+&quot; e o operador &quot;-&quot; consecutivamente.</span>
+<a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a>
+<a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a><span class="kt">Prelude</span><span class="o">&gt;</span><span class="w"> </span><span class="mi">5</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="p">(</span><span class="o">-</span><span class="mi">3</span><span class="p">)</span>
+<a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a><span class="mi">2</span>
+</code></pre></div>
+<p>Envolver os números negativos em parênteses evita que o compilador confunda o sinal do número com a aplicação do operador de subtração.</p>
+<p>Esse tratamento incomum dos números negativos representa um <em>trade-off</em> fundamentado: Haskell permite definir novos operadores a qualquer momento (um recurso que usaremos bastante), e os projetistas da linguagem aceitaram uma sintaxe um pouco mais pesada para números negativos em troca desse poder expressivo.</p>
+<h3 id="precedencia-e-associatividade-dos-operadores">Precedência e Associatividade dos Operadores<a class="headerlink" href="#precedencia-e-associatividade-dos-operadores" title="Permanent link">&para;</a></h3>
+<p>Haskell atribui valores numéricos de precedência aos operadores, de 1 (menor) a 9 (maior). Um operador de maior precedência é aplicado antes de um de menor precedência. Podemos inspecionar a precedência de qualquer operador no GHCi com o comando <code>:info</code>:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="kt">Prelude</span><span class="o">&gt;</span><span class="w"> </span><span class="kt">:</span><span class="n">info</span><span class="w"> </span><span class="p">(</span><span class="o">+</span><span class="p">)</span>
+<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="o">...</span>
+<a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a><span class="kr">infixl</span><span class="w"> </span><span class="mi">6</span><span class="w"> </span><span class="o">+</span>
+<a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a><span class="kt">Prelude</span><span class="o">&gt;</span><span class="w"> </span><span class="kt">:</span><span class="n">info</span><span class="w"> </span><span class="p">(</span><span class="o">*</span><span class="p">)</span>
+<a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a><span class="o">...</span>
+<a id="__codelineno-7-6" name="__codelineno-7-6" href="#__codelineno-7-6"></a><span class="kr">infixl</span><span class="w"> </span><span class="mi">7</span><span class="w"> </span><span class="o">*</span>
+<a id="__codelineno-7-7" name="__codelineno-7-7" href="#__codelineno-7-7"></a><span class="kt">Prelude</span><span class="o">&gt;</span><span class="w"> </span><span class="kt">:</span><span class="n">info</span><span class="w"> </span><span class="p">(</span><span class="o">^</span><span class="p">)</span>
+<a id="__codelineno-7-8" name="__codelineno-7-8" href="#__codelineno-7-8"></a><span class="o">...</span>
+<a id="__codelineno-7-9" name="__codelineno-7-9" href="#__codelineno-7-9"></a><span class="kr">infixr</span><span class="w"> </span><span class="mi">8</span><span class="w"> </span><span class="o">^</span>
+</code></pre></div>
+<p>A linha <code>infixl 6 +</code> indica que <code>(+)</code> tem precedência 6 e é <strong>associativo à esquerda</strong> (<code>infixl</code>); já <code>(^)</code> é <strong>associativo à direita</strong> (<code>infixr</code>). Como <code>(*)</code> tem precedência 7, maior que a do <code>(+)</code>, a expressão <code>1 + 4 * 4</code> é avaliada como <code>1 + (4 * 4)</code>.</p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>Não é necessário memorizar as regras de precedência: na dúvida, adicione parênteses. Expressões complexas que dependem totalmente da precedência dos operadores são fontes notórias de bugs — a presença de alguns parênteses ajuda os futuros leitores (incluindo você mesmo) a entender a intenção.</p>
+</div>
+<hr />
+<h2 id="4-algebra-booleana-e-operadores-de-comparacao">4. Álgebra Booleana e Operadores de Comparação<a class="headerlink" href="#4-algebra-booleana-e-operadores-de-comparacao" title="Permanent link">&para;</a></h2>
+<p>O GHCi também nos permite computar expressões lógicas e relacionais. Os booleanos em Haskell são representados pelos construtores de valor <code>True</code> e <code>False</code> (sensíveis a maiúsculas/minúsculas).</p>
+<h3 id="operadores-logicos">Operadores Lógicos:<a class="headerlink" href="#operadores-logicos" title="Permanent link">&para;</a></h3>
+<ul>
+<li><code>&amp;&amp;</code> (conjunção / E lógico)</li>
+<li><code>||</code> (disjunção / OU lógico)</li>
+<li><code>not</code> (negação lógica - note que é uma função, não um operador simbólico)</li>
+</ul>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="kt">Prelude</span><span class="o">&gt;</span><span class="w"> </span><span class="kt">True</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="kt">False</span>
+<a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a><span class="kt">False</span>
+<a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a><span class="kt">Prelude</span><span class="o">&gt;</span><span class="w"> </span><span class="kt">False</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="kt">True</span>
+<a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a><span class="kt">True</span>
+<a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a><span class="kt">Prelude</span><span class="o">&gt;</span><span class="w"> </span><span class="n">not</span><span class="w"> </span><span class="kt">True</span>
+<a id="__codelineno-8-6" name="__codelineno-8-6" href="#__codelineno-8-6"></a><span class="kt">False</span>
+</code></pre></div>
+<h3 id="operadores-de-comparacao">Operadores de Comparação:<a class="headerlink" href="#operadores-de-comparacao" title="Permanent link">&para;</a></h3>
+<p>Para comparar valores numéricos ou textuais, utilizamos os operadores relacionais padrão:
+* <code>==</code> (igualdade)
+* <code>/=</code> (desigualdade / diferente de - diferente do tradicional <code>!=</code> de outras linguagens)
+* <code>&gt;</code>, <code>&gt;=</code>, <code>&lt;</code>, <code>&lt;=</code> (maior, maior-ou-igual, menor, menor-ou-igual)</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="kt">Prelude</span><span class="o">&gt;</span><span class="w"> </span><span class="mi">5</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">5</span>
+<a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a><span class="kt">True</span>
+<a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a><span class="kt">Prelude</span><span class="o">&gt;</span><span class="w"> </span><span class="mi">10</span><span class="w"> </span><span class="o">/=</span><span class="w"> </span><span class="mi">9</span>
+<a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a><span class="kt">True</span>
+<a id="__codelineno-9-5" name="__codelineno-9-5" href="#__codelineno-9-5"></a><span class="kt">Prelude</span><span class="o">&gt;</span><span class="w"> </span><span class="sc">&#39;a&#39;</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="sc">&#39;b&#39;</span>
+<a id="__codelineno-9-6" name="__codelineno-9-6" href="#__codelineno-9-6"></a><span class="kt">False</span>
+</code></pre></div>
+<hr />
+<h2 id="5-aplicacao-de-funcoes-espacos-em-vez-de-parenteses">5. Aplicação de Funções: Espaços em Vez de Parênteses<a class="headerlink" href="#5-aplicacao-de-funcoes-espacos-em-vez-de-parenteses" title="Permanent link">&para;</a></h2>
+<p>Uma das maiores diferenças sintáticas em Haskell é a <strong>aplicação de funções</strong>. Em matemática tradicional e linguagens tradicionais, chamamos funções passando argumentos entre parênteses e separados por vírgulas, como <code>f(x, y)</code>. </p>
+<p>Em Haskell, <strong>parênteses e vírgulas não são usados para passar argumentos</strong>. Em vez disso, aplicamos uma função simplesmente separando seu nome e seus argumentos por <strong>espaços</strong>:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="kt">Prelude</span><span class="o">&gt;</span><span class="w"> </span><span class="n">min</span><span class="w"> </span><span class="mi">9</span><span class="w"> </span><span class="mi">10</span>
+<a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a><span class="mi">9</span>
+<a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a><span class="kt">Prelude</span><span class="o">&gt;</span><span class="w"> </span><span class="n">max</span><span class="w"> </span><span class="mi">3</span><span class="w"> </span><span class="mi">2</span>
+<a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a><span class="mi">3</span>
+<a id="__codelineno-10-5" name="__codelineno-10-5" href="#__codelineno-10-5"></a><span class="kt">Prelude</span><span class="o">&gt;</span><span class="w"> </span><span class="n">compare</span><span class="w"> </span><span class="mi">5</span><span class="w"> </span><span class="mi">10</span>
+<a id="__codelineno-10-6" name="__codelineno-10-6" href="#__codelineno-10-6"></a><span class="kt">LT</span>
+</code></pre></div>
+<p>A função <code>min</code> recebe dois argumentos numéricos e retorna o menor. A função <code>compare</code> recebe dois argumentos comparáveis e retorna um tipo chamado <code>Ordering</code> (que pode ser <code>LT</code> - Less Than, <code>GT</code> - Greater Than, ou <code>EQ</code> - Equal).</p>
+<h3 id="precedencia-de-aplicacao-de-funcoes">Precedência de Aplicação de Funções<a class="headerlink" href="#precedencia-de-aplicacao-de-funcoes" title="Permanent link">&para;</a></h3>
+<p>A aplicação de função em Haskell possui a <strong>maior prioridade de todas</strong>. Isso significa que a expressão <code>f x + 1</code> é avaliada como <code>(f x) + 1</code>, e não como <code>f (x + 1)</code>.</p>
+<p>Se desejarmos passar o resultado de uma operação como argumento para uma função, devemos delimitar explicitamente o argumento com parênteses:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="kt">Prelude</span><span class="o">&gt;</span><span class="w"> </span><span class="n">succ</span><span class="w"> </span><span class="mi">5</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span>
+<a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a><span class="mi">7</span>
+<a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a><span class="c1">-- Avaliado como: (succ 5) + 1 = 6 + 1 = 7</span>
+<a id="__codelineno-11-4" name="__codelineno-11-4" href="#__codelineno-11-4"></a>
+<a id="__codelineno-11-5" name="__codelineno-11-5" href="#__codelineno-11-5"></a><span class="kt">Prelude</span><span class="o">&gt;</span><span class="w"> </span><span class="n">succ</span><span class="w"> </span><span class="p">(</span><span class="mi">5</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span>
+<a id="__codelineno-11-6" name="__codelineno-11-6" href="#__codelineno-11-6"></a><span class="mi">7</span>
+<a id="__codelineno-11-7" name="__codelineno-11-7" href="#__codelineno-11-7"></a><span class="c1">-- Avaliado como: succ 6 = 7</span>
+</code></pre></div>
+<hr />
+<h2 id="6-definicoes-locais-let-e-where">6. Definições Locais: <code>let</code> e <code>where</code><a class="headerlink" href="#6-definicoes-locais-let-e-where" title="Permanent link">&para;</a></h2>
+<p>Quando escrevemos programas funcionais reais, frequentemente precisamos declarar constantes auxiliares ou subdividir problemas complexos em pequenos blocos nomeados. Em Haskell, fazemos isso por meio de dois construtores de escopo local: <strong><code>let</code></strong> e <strong><code>where</code></strong>.</p>
+<h3 id="1-clausulas-let-in">1. Cláusulas <code>let ... in ...</code><a class="headerlink" href="#1-clausulas-let-in" title="Permanent link">&para;</a></h3>
+<p>A estrutura <code>let</code> define ligações locais que podem ser referenciadas apenas dentro da expressão demarcada pelo bloco <code>in</code>. É uma expressão declarativa e pode ser usada em qualquer lugar onde uma expressão normal seja válida:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="nf">calcularRetangulo</span><span class="w"> </span><span class="ow">::</span><span class="w"> </span><span class="kt">Float</span><span class="w"> </span><span class="ow">-&gt;</span><span class="w"> </span><span class="kt">Float</span><span class="w"> </span><span class="ow">-&gt;</span><span class="w"> </span><span class="kt">Float</span>
+<a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a><span class="nf">calcularRetangulo</span><span class="w"> </span><span class="n">largura</span><span class="w"> </span><span class="n">altura</span><span class="w"> </span><span class="ow">=</span><span class="w"> </span>
+<a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a><span class="w">    </span><span class="kr">let</span><span class="w"> </span><span class="n">area</span><span class="w"> </span><span class="ow">=</span><span class="w"> </span><span class="n">largura</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">altura</span>
+<a id="__codelineno-12-4" name="__codelineno-12-4" href="#__codelineno-12-4"></a><span class="w">        </span><span class="n">perimetro</span><span class="w"> </span><span class="ow">=</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="p">(</span><span class="n">largura</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">altura</span><span class="p">)</span>
+<a id="__codelineno-12-5" name="__codelineno-12-5" href="#__codelineno-12-5"></a><span class="w">    </span><span class="kr">in</span><span class="w"> </span><span class="n">area</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">perimetro</span>
+</code></pre></div>
+<h3 id="2-clausulas-where">2. Cláusulas <code>where</code><a class="headerlink" href="#2-clausulas-where" title="Permanent link">&para;</a></h3>
+<p>A cláusula <code>where</code> é anexada no final de uma definição de função e permite declarar variáveis locais visíveis para todo o escopo de equações e guardas daquela função. É altamente idiomática em Haskell por manter o corpo da função principal limpo e focado no topo:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a><span class="nf">calcularRetanguloWhere</span><span class="w"> </span><span class="ow">::</span><span class="w"> </span><span class="kt">Float</span><span class="w"> </span><span class="ow">-&gt;</span><span class="w"> </span><span class="kt">Float</span><span class="w"> </span><span class="ow">-&gt;</span><span class="w"> </span><span class="kt">Float</span>
+<a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a><span class="nf">calcularRetanguloWhere</span><span class="w"> </span><span class="n">largura</span><span class="w"> </span><span class="n">altura</span><span class="w"> </span><span class="ow">=</span><span class="w"> </span><span class="n">area</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">perimetro</span>
+<a id="__codelineno-13-3" name="__codelineno-13-3" href="#__codelineno-13-3"></a><span class="w">  </span><span class="kr">where</span>
+<a id="__codelineno-13-4" name="__codelineno-13-4" href="#__codelineno-13-4"></a><span class="w">    </span><span class="n">area</span><span class="w"> </span><span class="ow">=</span><span class="w"> </span><span class="n">largura</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">altura</span>
+<a id="__codelineno-13-5" name="__codelineno-13-5" href="#__codelineno-13-5"></a><span class="w">    </span><span class="n">perimetro</span><span class="w"> </span><span class="ow">=</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="p">(</span><span class="n">largura</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">altura</span><span class="p">)</span>
+</code></pre></div>
+<hr />
+<h2 id="7-avaliacao-preguicosa-na-pratica-substituicao-e-thunks">7. Avaliação Preguiçosa na Prática: Substituição e <em>Thunks</em><a class="headerlink" href="#7-avaliacao-preguicosa-na-pratica-substituicao-e-thunks" title="Permanent link">&para;</a></h2>
+<p>Como o Haskell avalia uma expressão como <code>isOdd (1 + 2)</code>, onde:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a><span class="nf">isOdd</span><span class="w"> </span><span class="n">n</span><span class="w"> </span><span class="ow">=</span><span class="w"> </span><span class="n">mod</span><span class="w"> </span><span class="n">n</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">1</span>
+</code></pre></div>
+<p>Em uma linguagem de avaliação <strong>estrita</strong> (C, Python, Java), os argumentos são avaliados <em>antes</em> da função ser aplicada: primeiro <code>1 + 2</code> viraria <code>3</code>, depois <code>isOdd</code> seria chamada com <code>3</code>.</p>
+<p>Haskell escolhe outro caminho: a avaliação <strong>não-estrita</strong> (preguiçosa). A subexpressão <code>1 + 2</code> <em>não</em> é reduzida imediatamente para <code>3</code>. Em vez disso, é criada uma "promessa" de que, quando o valor for realmente necessário, ele será calculado. O registro usado para rastrear essa expressão não avaliada é chamado de <strong>thunk</strong>. Se o resultado nunca for usado, o cálculo nunca acontece.</p>
+<p>Uma consequência elegante: operadores de "curto-circuito" não precisam de suporte especial da linguagem. Em Haskell, <code>(||)</code> é uma função comum — se o operando esquerdo avaliar para <code>True</code>, o direito simplesmente nunca é avaliado:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a><span class="nf">meuOu</span><span class="w"> </span><span class="ow">::</span><span class="w"> </span><span class="kt">Bool</span><span class="w"> </span><span class="ow">-&gt;</span><span class="w"> </span><span class="kt">Bool</span><span class="w"> </span><span class="ow">-&gt;</span><span class="w"> </span><span class="kt">Bool</span>
+<a id="__codelineno-15-2" name="__codelineno-15-2" href="#__codelineno-15-2"></a><span class="nf">meuOu</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="ow">=</span><span class="w"> </span><span class="kr">if</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="kr">then</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="kr">else</span><span class="w"> </span><span class="n">b</span>
+</code></pre></div>
+<p>A expressão <code>meuOu True (length [1..] &gt; 0)</code> retorna <code>True</code> sem travar, mesmo com uma lista infinita no segundo argumento — algo impossível de escrever como função comum em uma linguagem estrita.</p>
+<p>Um bom modelo mental para entender a avaliação em Haskell é a <strong>substituição e reescrita</strong>: substitua cada nome pela sua definição, repetidamente, avaliando apenas o suficiente de cada expressão para determinar o valor final.</p>
+<p>No próximo capítulo, exploraremos como o sistema de tipos estáticos do Haskell garante que essas expressões operem de forma segura e otimizada.</p>
+<hr />
+<blockquote>
+<p><strong>Nota de atribuição:</strong> partes deste capítulo adaptam material de <em>Real World Haskell</em>, de Bryan O'Sullivan, Don Stewart e John Goerzen (<a href="http://book.realworldhaskell.org/read/">book.realworldhaskell.org</a>), sob a licença <a href="http://creativecommons.org/licenses/by-nc/3.0/">Creative Commons Attribution-Noncommercial 3.0</a>.</p>
+</blockquote>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Voltar ao topo
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.top", "navigation.sections", "toc.integrate", "content.code.annotate", "content.code.copy"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copiado para \u00e1rea de transfer\u00eancia", "clipboard.copy": "Copiar para \u00e1rea de transfer\u00eancia", "search.result.more.one": "Mais 1 nesta p\u00e1gina", "search.result.more.other": "Mais # nesta p\u00e1gina", "search.result.none": "Nenhum resultado encontrado", "search.result.one": "1 resultado encontrado", "search.result.other": "# resultados encontrados", "search.result.placeholder": "Digite para iniciar a busca", "search.result.term.missing": "Ausente", "select.version": "Selecione a vers\u00e3o"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+        <script src="https://unpkg.com/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+    
+  </body>
+</html>

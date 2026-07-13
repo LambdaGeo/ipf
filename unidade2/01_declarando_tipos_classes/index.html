@@ -1,0 +1,1849 @@
+
+<!doctype html>
+<html lang="pt" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Livro didático da disciplina de Introdução à Programação Funcional: Haskell, Clojure e Elixir em três unidades de 20 horas.
+">
+      
+      
+        <meta name="author" content="Sergio Souza Costa">
+      
+      
+      
+        <link rel="prev" href="../00_plano_unidade2/">
+      
+      
+        <link rel="next" href="../02_programas_interativos/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+    
+    
+      
+        <title>Cap 9: Tipos Algébricos e Typeclasses - Introdução à Programação Funcional</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="teal" data-md-color-accent="green">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#declaracao-de-tipos-algebricos-e-classes-de-tipos-adts" class="md-skip">
+          Ir para o conteúdo
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Cabeçalho">
+    <a href="../.." title="Introdução à Programação Funcional" class="md-header__button md-logo" aria-label="Introdução à Programação Funcional" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Introdução à Programação Funcional
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Cap 9: Tipos Algébricos e Typeclasses
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="teal" data-md-color-accent="green"  aria-hidden="true"  type="radio" name="__palette" id="__palette_0">
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Buscar" placeholder="Buscar" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Pesquisar">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Limpar" aria-label="Limpar" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Inicializando a pesquisa
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+  
+
+<nav class="md-nav md-nav--primary md-nav--integrated" aria-label="Navegação" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Introdução à Programação Funcional" class="md-nav__button md-logo" aria-label="Introdução à Programação Funcional" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Introdução à Programação Funcional
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Apresentação
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Unidade 1 — Paradigmas e Haskell Básico (20h)
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Unidade 1 — Paradigmas e Haskell Básico (20h)
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../unidade1/00_plano_unidade1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Plano da Unidade 1
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../unidade1/01_paradigmas/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cap 1: Introdução aos Paradigmas
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../unidade1/02_instalacao/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cap 2: Instalação do Ambiente
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../unidade1/03_fundamentos/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cap 3: Fundamentos e o GHCi
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../unidade1/04_tipos_classes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cap 4: Tipos e Classes
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../unidade1/05_funcoes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cap 5: Funções e Pattern Matching
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../unidade1/06_listas/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cap 6: Listas, Recursão e Compreensão
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../unidade1/07_alta_ordem/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cap 7: Funções de Alta Ordem
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../unidade1/08_exercicios/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cap 8: Exercícios Resolvidos
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Unidade 2 — Haskell Avançado e Qualidade (20h)
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Unidade 2 — Haskell Avançado e Qualidade (20h)
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../00_plano_unidade2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Plano da Unidade 2
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cap 9: Tipos Algébricos e Typeclasses
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cap 9: Tipos Algébricos e Typeclasses
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Índice">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Índice
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1-sinonimos-de-tipos-criando-apelidos-type" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Sinônimos de Tipos: Criando Apelidos (type)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-tipos-novos-com-isolamento-newtype" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Tipos Novos com Isolamento: newtype
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-tipos-algebricos-de-dados-adts-data" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Tipos Algébricos de Dados (ADTs) (data)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. Tipos Algébricos de Dados (ADTs) (data)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-tipos-soma-enumeracoes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Tipos Soma (Enumerações)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-tipos-produto" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Tipos Produto
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#analogia-com-outras-linguagens" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Analogia com Outras Linguagens
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#adts-vs-tuplas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ADTs vs. Tuplas
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-sintaxe-de-registro-record-syntax" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Sintaxe de Registro (Record Syntax)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4. Sintaxe de Registro (Record Syntax)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#vantagens-da-sintaxe-de-registro" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Vantagens da Sintaxe de Registro:
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-tipos-parametrizados-e-o-maybe" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Tipos Parametrizados e o Maybe
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5. Tipos Parametrizados e o Maybe">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#tratando-erros-error-vs-maybe" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Tratando Erros: error vs. Maybe
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-tipos-recursivos-modelando-estruturas-de-dados" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. Tipos Recursivos: Modelando Estruturas de Dados
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-implementando-classes-de-tipos-personalizadas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. Implementando Classes de Tipos Personalizadas
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="7. Implementando Classes de Tipos Personalizadas">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#declarando-instancias-instance" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Declarando Instâncias (instance)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#derivacao-automatica-deriving" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Derivação Automática (deriving)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../02_programas_interativos/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cap 10: Programas Interativos (IO)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../03_exercicios_avancados/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cap 11: Exercícios Avançados
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../04_haskell_moderno/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cap 12: Projetos Modernos com Stack
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../05_biblioteca_json/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cap 13: A Biblioteca JSON
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../06_testes_qualidade/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cap 14: Testes com QuickCheck
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../07_avaliacao/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Trabalho Prático: hs2json
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Unidade 3 — Clojure e Elixir (20h)
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Unidade 3 — Clojure e Elixir (20h)
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../unidade3/00_plano_unidade3/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Plano da Unidade 3
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../unidade3/01_clojure_fundamentos/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cap 15: Clojure — Fundamentos
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../unidade3/02_clojure_colecoes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cap 16: Clojure — Vetores e Mapas
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../unidade3/03_clojure_alta_ordem/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cap 17: Clojure — Alta Ordem
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../unidade3/04_clojure_threading_mapas_complexos/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cap 18: Clojure — Threading Macros
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../unidade3/05_clojure_lazy_sequences/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cap 19: Clojure — Lazy Sequences
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../unidade3/06_clojure_metaprogramacao/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cap 20: Clojure — Macros
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../unidade3/07_clojure_interop/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cap 21: Clojure — Interop com Java
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../unidade3/08_clojure_revisao/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cap 22: Clojure — Revisão de Pilares
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../unidade3/09_clojure_exercicios/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cap 23: Clojure — Exercícios Resolvidos
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../unidade3/10_clojure_tutorial_todo/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Trabalho Clojure: ToDo Full-Stack
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../unidade3/11_elixir_fundamentos/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cap 24: Elixir — Fundamentos
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../unidade3/12_elixir_colecoes_pattern_matching/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cap 25: Elixir — Pattern Matching
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../unidade3/13_elixir_modulos_funcoes_testes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cap 26: Elixir — Módulos e Testes
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../unidade3/14_elixir_processos/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cap 27: Elixir — Processos e Concorrência
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../unidade3/15_elixir_metaprogramacao/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cap 28: Elixir — Metaprogramação
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../unidade3/16_elixir_tutorial_todo/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Trabalho Elixir: ToDo com LiveView
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="declaracao-de-tipos-algebricos-e-classes-de-tipos-adts">Declaração de Tipos Algébricos e Classes de Tipos (ADTs)<a class="headerlink" href="#declaracao-de-tipos-algebricos-e-classes-de-tipos-adts" title="Permanent link">&para;</a></h1>
+<p>No desenvolvimento de sistemas complexos, a capacidade de modelar o domínio do problema por meio de tipos precisos é uma das maiores vantagens do Haskell. Neste capítulo, estudaremos como estender o sistema de tipos definindo <strong>Sinônimos de Tipos</strong>, <strong>Tipos Algébricos de Dados (ADTs)</strong>, <strong>Sintaxe de Registro (Records)</strong> e como criar ou estender <strong>Classes de Tipos</strong> (Typeclasses).</p>
+<hr />
+<h2 id="1-sinonimos-de-tipos-criando-apelidos-type">1. Sinônimos de Tipos: Criando Apelidos (<code>type</code>)<a class="headerlink" href="#1-sinonimos-de-tipos-criando-apelidos-type" title="Permanent link">&para;</a></h2>
+<p>A forma mais simples de definir um novo tipo em Haskell é por meio de um <strong>Sinônimo de Tipo</strong> utilizando a palavra-chave <code>type</code>. Um sinônimo funciona apenas como um apelido legível para um tipo existente, facilitando a documentação e legibilidade do código:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="kr">type</span><span class="w"> </span><span class="kt">Coordenada</span><span class="w"> </span><span class="ow">=</span><span class="w"> </span><span class="p">(</span><span class="kt">Double</span><span class="p">,</span><span class="w"> </span><span class="kt">Double</span><span class="p">)</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="kr">type</span><span class="w"> </span><span class="kt">ID</span><span class="w"> </span><span class="ow">=</span><span class="w"> </span><span class="kt">Int</span>
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="kr">type</span><span class="w"> </span><span class="kt">Pessoa</span><span class="w"> </span><span class="ow">=</span><span class="w"> </span><span class="p">(</span><span class="kt">ID</span><span class="p">,</span><span class="w"> </span><span class="kt">String</span><span class="p">,</span><span class="w"> </span><span class="kt">Coordenada</span><span class="p">)</span>
+</code></pre></div>
+<p>Os sinônimos de tipo podem aceitar parâmetros de tipo, funcionando de forma genérica:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="kr">type</span><span class="w"> </span><span class="kt">Par</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="ow">=</span><span class="w"> </span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="n">a</span><span class="p">)</span>
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="kr">type</span><span class="w"> </span><span class="kt">ListaAssoc</span><span class="w"> </span><span class="n">k</span><span class="w"> </span><span class="n">v</span><span class="w"> </span><span class="ow">=</span><span class="w"> </span><span class="p">[(</span><span class="n">k</span><span class="p">,</span><span class="w"> </span><span class="n">v</span><span class="p">)]</span>
+</code></pre></div>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Como os sinônimos de tipo são apenas "apelidos", o compilador não impede que você passe um par comum <code>(Double, Double)</code> para uma função que espera uma <code>Coordenada</code>. Para obter isolamento completo e segurança de tipos em tempo de compilação, devemos utilizar <code>newtype</code> ou <code>data</code>.</p>
+</div>
+<blockquote>
+<p>Além disso, sinônimos de tipo <strong>não podem ser recursivos</strong> (por exemplo, tentar declarar <code>type Arvore = (Int, [Arvore])</code> resultará em erro).</p>
+</blockquote>
+<hr />
+<h2 id="2-tipos-novos-com-isolamento-newtype">2. Tipos Novos com Isolamento: <code>newtype</code><a class="headerlink" href="#2-tipos-novos-com-isolamento-newtype" title="Permanent link">&para;</a></h2>
+<p>Quando queremos um tipo <strong>distinto</strong> (não apenas um apelido) que envolve exatamente <strong>um construtor com um único campo</strong>, usamos <code>newtype</code>:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="kr">newtype</span><span class="w"> </span><span class="kt">Dolar</span><span class="w"> </span><span class="ow">=</span><span class="w"> </span><span class="kt">Dolar</span><span class="w"> </span><span class="kt">Float</span>
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="kr">newtype</span><span class="w"> </span><span class="kt">CustomerID</span><span class="w"> </span><span class="ow">=</span><span class="w"> </span><span class="kt">CustomerID</span><span class="w"> </span><span class="kt">Int</span>
+</code></pre></div>
+<p>Diferentemente de <code>type</code>, o compilador trata <code>Dolar</code> e <code>Float</code> como tipos incompatíveis — impossível passar um <code>Float</code> cru onde se espera <code>Dolar</code>. Diferentemente de <code>data</code>, o <code>newtype</code> não tem custo em tempo de execução: o "envelope" existe apenas em tempo de compilação e é removido pelo compilador. É a ferramenta ideal para dar segurança de tipos a valores primitivos (IDs, moedas, unidades de medida).</p>
+<hr />
+<h2 id="3-tipos-algebricos-de-dados-adts-data">3. Tipos Algébricos de Dados (ADTs) (<code>data</code>)<a class="headerlink" href="#3-tipos-algebricos-de-dados-adts-data" title="Permanent link">&para;</a></h2>
+<p>Para criar tipos de dados inteiramente novos com seus próprios construtores de valor, utilizamos a palavra-chave <strong><code>data</code></strong>. Um <strong>Tipo Algébrico de Dados</strong> é composto por uma combinação de dois padrões matemáticos: <strong>Tipos Soma</strong> (alternativas) e <strong>Tipos Produto</strong> (combinações).</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>               ┌────────────────────────┐
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>               │    Tipos Algébricos    │
+<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>               │      de Dados          │
+<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>               └──────────┬─────────────┘
+<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a>                          │
+<a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a>            ┌─────────────┴─────────────┐
+<a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a>            ▼                           ▼
+<a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a>       [Tipo Soma]                [Tipo Produto]
+<a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a>      (Alternativas)              (Combinações)
+<a id="__codelineno-3-10" name="__codelineno-3-10" href="#__codelineno-3-10"></a>  Vermelho | Verde | Azul       Circulo Float | Retangulo Float Float
+</code></pre></div>
+<h3 id="1-tipos-soma-enumeracoes">1. Tipos Soma (Enumerações)<a class="headerlink" href="#1-tipos-soma-enumeracoes" title="Permanent link">&para;</a></h3>
+<p>Representam valores que podem assumir uma entre várias alternativas distintas:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="kr">data</span><span class="w"> </span><span class="kt">Cor</span><span class="w"> </span><span class="ow">=</span><span class="w"> </span><span class="kt">Vermelho</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="kt">Verde</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="kt">Azul</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="kt">Amarelo</span>
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="kr">data</span><span class="w"> </span><span class="kt">Resposta</span><span class="w"> </span><span class="ow">=</span><span class="w"> </span><span class="kt">Sim</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="kt">Nao</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="kt">Talvez</span>
+</code></pre></div>
+<p>Aqui, <code>Vermelho</code>, <code>Verde</code>, <code>Sim</code> e <code>Nao</code> são chamados de <strong>Construtores de Valor</strong>. Eles funcionam como constantes que representam os dados concretos do tipo.</p>
+<h3 id="2-tipos-produto">2. Tipos Produto<a class="headerlink" href="#2-tipos-produto" title="Permanent link">&para;</a></h3>
+<p>Representam valores compostos por múltiplos campos de dados combinados:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="kr">data</span><span class="w"> </span><span class="kt">Forma</span><span class="w"> </span><span class="ow">=</span><span class="w"> </span><span class="kt">Circulo</span><span class="w"> </span><span class="kt">Float</span>
+<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="w">           </span><span class="o">|</span><span class="w"> </span><span class="kt">Retangulo</span><span class="w"> </span><span class="kt">Float</span><span class="w"> </span><span class="kt">Float</span>
+<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="w">           </span><span class="o">|</span><span class="w"> </span><span class="kt">Quadrado</span><span class="w"> </span><span class="kt">Float</span>
+</code></pre></div>
+<p>O tipo <code>Forma</code> possui três construtores de valor. O construtor <code>Circulo</code> carrega um <code>Float</code> (o raio). O construtor <code>Retangulo</code> carrega dois valores <code>Float</code> (largura e altura). Podemos usar casamento de padrões para inspecionar e extrair esses valores:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="nf">area</span><span class="w"> </span><span class="ow">::</span><span class="w"> </span><span class="kt">Forma</span><span class="w"> </span><span class="ow">-&gt;</span><span class="w"> </span><span class="kt">Float</span>
+<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="nf">area</span><span class="w"> </span><span class="p">(</span><span class="kt">Circulo</span><span class="w"> </span><span class="n">r</span><span class="p">)</span><span class="w">       </span><span class="ow">=</span><span class="w"> </span><span class="n">pi</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">r</span><span class="w"> </span><span class="o">^</span><span class="w"> </span><span class="mi">2</span>
+<a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="nf">area</span><span class="w"> </span><span class="p">(</span><span class="kt">Retangulo</span><span class="w"> </span><span class="n">l</span><span class="w"> </span><span class="n">a</span><span class="p">)</span><span class="w">   </span><span class="ow">=</span><span class="w"> </span><span class="n">l</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">a</span>
+<a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a><span class="nf">area</span><span class="w"> </span><span class="p">(</span><span class="kt">Quadrado</span><span class="w"> </span><span class="n">l</span><span class="p">)</span><span class="w">      </span><span class="ow">=</span><span class="w"> </span><span class="n">l</span><span class="w"> </span><span class="o">^</span><span class="w"> </span><span class="mi">2</span>
+</code></pre></div>
+<h3 id="analogia-com-outras-linguagens">Analogia com Outras Linguagens<a class="headerlink" href="#analogia-com-outras-linguagens" title="Permanent link">&para;</a></h3>
+<p>Os ADTs unificam, em um único mecanismo, várias construções que outras linguagens oferecem separadamente:</p>
+<ul>
+<li><strong><code>struct</code> do C / classe de dados</strong>: um ADT com um único construtor e vários campos agrupa valores relacionados — a diferença é que os campos em Haskell são posicionais e anônimos (a menos que usemos a sintaxe de registro, a seguir).</li>
+<li><strong><code>enum</code> do C/Java</strong>: um tipo soma de construtores sem argumentos (<code>data Cor = Vermelho | Verde | Azul</code>) representa valores simbólicos — mas, ao contrário do C, os construtores <strong>não</strong> são inteiros disfarçados, e o compilador impede misturá-los com números.</li>
+<li><strong><code>union</code> do C</strong>: um tipo soma com argumentos é uma "união disjunta" <strong>segura</strong>: o valor lembra qual construtor o criou, e o pattern matching nos obriga a tratar cada caso — em C, é o programador quem precisa rastrear manualmente qual alternativa a união contém, uma fonte clássica de bugs.</li>
+</ul>
+<h3 id="adts-vs-tuplas">ADTs vs. Tuplas<a class="headerlink" href="#adts-vs-tuplas" title="Permanent link">&para;</a></h3>
+<p>Dois pares <code>(String, String)</code> são sempre do mesmo tipo, mesmo que um represente um animal e outro um móvel — o sistema de tipos não pode nos proteger da mistura. Já dois ADTs estruturalmente idênticos com nomes diferentes são tipos <strong>distintos</strong>:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="kr">data</span><span class="w"> </span><span class="kt">Cetaceo</span><span class="w"> </span><span class="ow">=</span><span class="w"> </span><span class="kt">Cetaceo</span><span class="w"> </span><span class="kt">String</span><span class="w"> </span><span class="kt">String</span>
+<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="kr">data</span><span class="w"> </span><span class="kt">Movel</span><span class="w">   </span><span class="ow">=</span><span class="w"> </span><span class="kt">Movel</span><span class="w"> </span><span class="kt">String</span><span class="w"> </span><span class="kt">String</span>
+</code></pre></div>
+<p>Regra prática: se você usa um valor composto amplamente no código, declare um <code>data</code> — ganha segurança de tipos e legibilidade; para usos pequenos e localizados, uma tupla resolve.</p>
+<hr />
+<h2 id="4-sintaxe-de-registro-record-syntax">4. Sintaxe de Registro (Record Syntax)<a class="headerlink" href="#4-sintaxe-de-registro-record-syntax" title="Permanent link">&para;</a></h2>
+<p>Quando definimos tipos produto com muitos campos, acessar os valores por posição em casamento de padrões torna-se confuso e propenso a erros. Para resolver isso, Haskell fornece a <strong>Sintaxe de Registro</strong> (<em>Record Syntax</em>), que permite nomear os campos:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="kr">data</span><span class="w"> </span><span class="kt">Usuario</span><span class="w"> </span><span class="ow">=</span><span class="w"> </span><span class="kt">Usuario</span><span class="w"> </span>
+<a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a><span class="w">  </span><span class="p">{</span><span class="w"> </span><span class="n">nome</span><span class="w">    </span><span class="ow">::</span><span class="w"> </span><span class="kt">String</span>
+<a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a><span class="w">  </span><span class="p">,</span><span class="w"> </span><span class="n">idade</span><span class="w">   </span><span class="ow">::</span><span class="w"> </span><span class="kt">Int</span>
+<a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a><span class="w">  </span><span class="p">,</span><span class="w"> </span><span class="n">ativo</span><span class="w">   </span><span class="ow">::</span><span class="w"> </span><span class="kt">Bool</span>
+<a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a><span class="w">  </span><span class="p">}</span><span class="w"> </span><span class="kr">deriving</span><span class="w"> </span><span class="p">(</span><span class="kt">Show</span><span class="p">,</span><span class="w"> </span><span class="kt">Eq</span><span class="p">)</span>
+</code></pre></div>
+<h3 id="vantagens-da-sintaxe-de-registro">Vantagens da Sintaxe de Registro:<a class="headerlink" href="#vantagens-da-sintaxe-de-registro" title="Permanent link">&para;</a></h3>
+<ol>
+<li><strong>Funções Seletoras Automáticas</strong>: O compilador cria automaticamente funções com o nome de cada campo para extrair o valor de um registro. Ex: <code>nome meuUsuario</code> retorna a <code>String</code> do nome.</li>
+<li><strong>Atualização Prática de Registros</strong>: Podemos atualizar campos facilmente por meio de uma sintaxe de cópia imutável:
+   <div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="nf">aniversario</span><span class="w"> </span><span class="ow">::</span><span class="w"> </span><span class="kt">Usuario</span><span class="w"> </span><span class="ow">-&gt;</span><span class="w"> </span><span class="kt">Usuario</span>
+<a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a><span class="nf">aniversario</span><span class="w"> </span><span class="n">u</span><span class="w"> </span><span class="ow">=</span><span class="w"> </span><span class="n">u</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">idade</span><span class="w"> </span><span class="ow">=</span><span class="w"> </span><span class="n">idade</span><span class="w"> </span><span class="n">u</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="p">}</span>
+</code></pre></div></li>
+</ol>
+<hr />
+<h2 id="5-tipos-parametrizados-e-o-maybe">5. Tipos Parametrizados e o <code>Maybe</code><a class="headerlink" href="#5-tipos-parametrizados-e-o-maybe" title="Permanent link">&para;</a></h2>
+<p>Assim como as listas, nossos próprios tipos podem ser <strong>polimórficos</strong>: basta introduzir variáveis de tipo na declaração. O exemplo mais importante do Prelude é o tipo <code>Maybe</code>, que representa um valor que pode estar presente ou ausente:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="kr">data</span><span class="w"> </span><span class="kt">Maybe</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="ow">=</span><span class="w"> </span><span class="kt">Just</span><span class="w"> </span><span class="n">a</span>
+<a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a><span class="w">             </span><span class="o">|</span><span class="w"> </span><span class="kt">Nothing</span>
+</code></pre></div>
+<p>A variável <code>a</code> indica que <code>Maybe</code> recebe outro tipo como parâmetro: <code>Maybe Int</code>, <code>Maybe String</code>, <code>Maybe [Bool]</code> são tipos distintos construídos a partir dele.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="kt">Prelude</span><span class="o">&gt;</span><span class="w"> </span><span class="kt">Just</span><span class="w"> </span><span class="mf">1.5</span>
+<a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a><span class="kt">Just</span><span class="w"> </span><span class="mf">1.5</span>
+<a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a><span class="kt">Prelude</span><span class="o">&gt;</span><span class="w"> </span><span class="kt">:</span><span class="kr">type</span><span class="w"> </span><span class="kt">Just</span><span class="w"> </span><span class="s">&quot;bicicleta&quot;</span>
+<a id="__codelineno-11-4" name="__codelineno-11-4" href="#__codelineno-11-4"></a><span class="kt">Just</span><span class="w"> </span><span class="s">&quot;bicicleta&quot;</span><span class="w"> </span><span class="ow">::</span><span class="w"> </span><span class="kt">Maybe</span><span class="w"> </span><span class="p">[</span><span class="kt">Char</span><span class="p">]</span>
+</code></pre></div>
+<h3 id="tratando-erros-error-vs-maybe">Tratando Erros: <code>error</code> vs. <code>Maybe</code><a class="headerlink" href="#tratando-erros-error-vs-maybe" title="Permanent link">&para;</a></h3>
+<p>Haskell oferece a função <code>error :: String -&gt; a</code>, que aborta a execução imediatamente com uma mensagem. O problema: quem chama a função não consegue distinguir um erro recuperável de uma falha fatal. Compare:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="c1">-- Versão que &quot;explode&quot;:</span>
+<a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a><span class="nf">meuSegundo</span><span class="w"> </span><span class="ow">::</span><span class="w"> </span><span class="p">[</span><span class="n">a</span><span class="p">]</span><span class="w"> </span><span class="ow">-&gt;</span><span class="w"> </span><span class="n">a</span>
+<a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a><span class="nf">meuSegundo</span><span class="w"> </span><span class="n">xs</span><span class="w"> </span><span class="ow">=</span><span class="w"> </span><span class="kr">if</span><span class="w"> </span><span class="n">null</span><span class="w"> </span><span class="p">(</span><span class="n">tail</span><span class="w"> </span><span class="n">xs</span><span class="p">)</span>
+<a id="__codelineno-12-4" name="__codelineno-12-4" href="#__codelineno-12-4"></a><span class="w">                </span><span class="kr">then</span><span class="w"> </span><span class="ne">error</span><span class="w"> </span><span class="s">&quot;lista muito curta&quot;</span>
+<a id="__codelineno-12-5" name="__codelineno-12-5" href="#__codelineno-12-5"></a><span class="w">                </span><span class="kr">else</span><span class="w"> </span><span class="n">head</span><span class="w"> </span><span class="p">(</span><span class="n">tail</span><span class="w"> </span><span class="n">xs</span><span class="p">)</span>
+<a id="__codelineno-12-6" name="__codelineno-12-6" href="#__codelineno-12-6"></a>
+<a id="__codelineno-12-7" name="__codelineno-12-7" href="#__codelineno-12-7"></a><span class="c1">-- Versão total e segura com Maybe:</span>
+<a id="__codelineno-12-8" name="__codelineno-12-8" href="#__codelineno-12-8"></a><span class="nf">segundoSeguro</span><span class="w"> </span><span class="ow">::</span><span class="w"> </span><span class="p">[</span><span class="n">a</span><span class="p">]</span><span class="w"> </span><span class="ow">-&gt;</span><span class="w"> </span><span class="kt">Maybe</span><span class="w"> </span><span class="n">a</span>
+<a id="__codelineno-12-9" name="__codelineno-12-9" href="#__codelineno-12-9"></a><span class="nf">segundoSeguro</span><span class="w"> </span><span class="p">(</span><span class="kr">_</span><span class="kt">:</span><span class="n">x</span><span class="kt">:</span><span class="kr">_</span><span class="p">)</span><span class="w"> </span><span class="ow">=</span><span class="w"> </span><span class="kt">Just</span><span class="w"> </span><span class="n">x</span>
+<a id="__codelineno-12-10" name="__codelineno-12-10" href="#__codelineno-12-10"></a><span class="nf">segundoSeguro</span><span class="w"> </span><span class="kr">_</span><span class="w">       </span><span class="ow">=</span><span class="w"> </span><span class="kt">Nothing</span>
+</code></pre></div>
+<p>Na versão com <code>Maybe</code>, devolvemos <code>Nothing</code> quando a lista é curta demais — e o <strong>chamador</strong> decide o que fazer, em vez de o programa cair. Note também como o pattern matching <code>(_:x:_)</code> torna a versão segura mais concisa: o padrão casa apenas com listas de pelo menos dois elementos, ligando <code>x</code> ao segundo.</p>
+<hr />
+<h2 id="6-tipos-recursivos-modelando-estruturas-de-dados">6. Tipos Recursivos: Modelando Estruturas de Dados<a class="headerlink" href="#6-tipos-recursivos-modelando-estruturas-de-dados" title="Permanent link">&para;</a></h2>
+<p>Os tipos declarados com <code>data</code> podem ser recursivos, ou seja, conter referências a si mesmos em seus campos. Isso nos permite modelar estruturas de dados complexas, como árvores binárias:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a><span class="kr">data</span><span class="w"> </span><span class="kt">Arvore</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="ow">=</span><span class="w"> </span><span class="kt">Folha</span>
+<a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a><span class="w">              </span><span class="o">|</span><span class="w"> </span><span class="kt">No</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="p">(</span><span class="kt">Arvore</span><span class="w"> </span><span class="n">a</span><span class="p">)</span><span class="w"> </span><span class="p">(</span><span class="kt">Arvore</span><span class="w"> </span><span class="n">a</span><span class="p">)</span>
+<a id="__codelineno-13-3" name="__codelineno-13-3" href="#__codelineno-13-3"></a><span class="w">              </span><span class="kr">deriving</span><span class="w"> </span><span class="p">(</span><span class="kt">Show</span><span class="p">,</span><span class="w"> </span><span class="kt">Eq</span><span class="p">)</span>
+</code></pre></div>
+<p>Uma árvore binária ou é um nó com um valor e dois filhos (que também são árvores binárias), ou é uma folha vazia. Em Java, a classe equivalente usaria <code>null</code> para indicar a ausência de um filho; em Haskell não existe <code>null</code> — usamos explicitamente o construtor <code>Folha</code>, e o compilador nos obriga a tratá-lo no pattern matching. Toda uma classe de erros (<code>NullPointerException</code>) simplesmente não existe.</p>
+<p>Podemos processar essa árvore utilizando recursão sobre sua estrutura:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a><span class="nf">altura</span><span class="w"> </span><span class="ow">::</span><span class="w"> </span><span class="kt">Arvore</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="ow">-&gt;</span><span class="w"> </span><span class="kt">Int</span>
+<a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a><span class="nf">altura</span><span class="w"> </span><span class="kt">Folha</span><span class="w">      </span><span class="ow">=</span><span class="w"> </span><span class="mi">0</span>
+<a id="__codelineno-14-3" name="__codelineno-14-3" href="#__codelineno-14-3"></a><span class="nf">altura</span><span class="w"> </span><span class="p">(</span><span class="kt">No</span><span class="w"> </span><span class="kr">_</span><span class="w"> </span><span class="n">e</span><span class="w"> </span><span class="n">d</span><span class="p">)</span><span class="w"> </span><span class="ow">=</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">max</span><span class="w"> </span><span class="p">(</span><span class="n">altura</span><span class="w"> </span><span class="n">e</span><span class="p">)</span><span class="w"> </span><span class="p">(</span><span class="n">altura</span><span class="w"> </span><span class="n">d</span><span class="p">)</span>
+</code></pre></div>
+<hr />
+<h2 id="7-implementando-classes-de-tipos-personalizadas">7. Implementando Classes de Tipos Personalizadas<a class="headerlink" href="#7-implementando-classes-de-tipos-personalizadas" title="Permanent link">&para;</a></h2>
+<p>Vimos na Unidade 1 que classes de tipos (como <code>Eq</code> e <code>Ord</code>) governam comportamentos comuns. Haskell nos permite declarar novas classes de tipos por meio da palavra-chave <code>class</code>:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a><span class="kr">class</span><span class="w"> </span><span class="kt">Serializavel</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="kr">where</span>
+<a id="__codelineno-15-2" name="__codelineno-15-2" href="#__codelineno-15-2"></a><span class="w">  </span><span class="n">serializar</span><span class="w"> </span><span class="ow">::</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="ow">-&gt;</span><span class="w"> </span><span class="kt">String</span>
+</code></pre></div>
+<p>Aqui, declaramos uma classe <code>Serializavel</code> que exige que qualquer tipo participante implemente a função <code>serializar</code>.</p>
+<h3 id="declarando-instancias-instance">Declarando Instâncias (<code>instance</code>)<a class="headerlink" href="#declarando-instancias-instance" title="Permanent link">&para;</a></h3>
+<p>Para fazer um tipo de dados fazer parte de uma classe de tipos, escrevemos uma declaração de <strong><code>instance</code></strong>:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a><span class="kr">instance</span><span class="w"> </span><span class="kt">Serializavel</span><span class="w"> </span><span class="kt">Cor</span><span class="w"> </span><span class="kr">where</span>
+<a id="__codelineno-16-2" name="__codelineno-16-2" href="#__codelineno-16-2"></a><span class="w">  </span><span class="n">serializar</span><span class="w"> </span><span class="kt">Vermelho</span><span class="w"> </span><span class="ow">=</span><span class="w"> </span><span class="s">&quot;#FF0000&quot;</span>
+<a id="__codelineno-16-3" name="__codelineno-16-3" href="#__codelineno-16-3"></a><span class="w">  </span><span class="n">serializar</span><span class="w"> </span><span class="kt">Verde</span><span class="w">    </span><span class="ow">=</span><span class="w"> </span><span class="s">&quot;#00FF00&quot;</span>
+<a id="__codelineno-16-4" name="__codelineno-16-4" href="#__codelineno-16-4"></a><span class="w">  </span><span class="n">serializar</span><span class="w"> </span><span class="kt">Azul</span><span class="w">     </span><span class="ow">=</span><span class="w"> </span><span class="s">&quot;#0000FF&quot;</span>
+<a id="__codelineno-16-5" name="__codelineno-16-5" href="#__codelineno-16-5"></a><span class="w">  </span><span class="n">serializar</span><span class="w"> </span><span class="kt">Amarelo</span><span class="w">  </span><span class="ow">=</span><span class="w"> </span><span class="s">&quot;#FFFF00&quot;</span>
+</code></pre></div>
+<h3 id="derivacao-automatica-deriving">Derivação Automática (<code>deriving</code>)<a class="headerlink" href="#derivacao-automatica-deriving" title="Permanent link">&para;</a></h3>
+<p>Para classes de tipos muito comuns da biblioteca padrão (<code>Show</code>, <code>Read</code>, <code>Eq</code>, <code>Ord</code>), o compilador do Haskell é inteligente o bastante para gerar as implementações de instância automaticamente. Basta adicionar a cláusula <code>deriving</code> no final da declaração do tipo:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a><span class="kr">data</span><span class="w"> </span><span class="kt">Ponto</span><span class="w"> </span><span class="ow">=</span><span class="w"> </span><span class="kt">Ponto</span><span class="w"> </span><span class="kt">Double</span><span class="w"> </span><span class="kt">Double</span>
+<a id="__codelineno-17-2" name="__codelineno-17-2" href="#__codelineno-17-2"></a><span class="w">  </span><span class="kr">deriving</span><span class="w"> </span><span class="p">(</span><span class="kt">Show</span><span class="p">,</span><span class="w"> </span><span class="kt">Eq</span><span class="p">)</span>
+</code></pre></div>
+<p>No próximo capítulo, veremos como utilizar o encapsulamento de tipos algébricos para lidar com a manipulação de Entrada/Saída de forma segura através da Monad de IO.</p>
+<hr />
+<blockquote>
+<p><strong>Nota de atribuição:</strong> partes deste capítulo adaptam material de <em>Real World Haskell</em>, de Bryan O'Sullivan, Don Stewart e John Goerzen (<a href="http://book.realworldhaskell.org/read/">book.realworldhaskell.org</a>), sob a licença <a href="http://creativecommons.org/licenses/by-nc/3.0/">Creative Commons Attribution-Noncommercial 3.0</a>.</p>
+</blockquote>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Voltar ao topo
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.top", "navigation.sections", "toc.integrate", "content.code.annotate", "content.code.copy"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copiado para \u00e1rea de transfer\u00eancia", "clipboard.copy": "Copiar para \u00e1rea de transfer\u00eancia", "search.result.more.one": "Mais 1 nesta p\u00e1gina", "search.result.more.other": "Mais # nesta p\u00e1gina", "search.result.none": "Nenhum resultado encontrado", "search.result.one": "1 resultado encontrado", "search.result.other": "# resultados encontrados", "search.result.placeholder": "Digite para iniciar a busca", "search.result.term.missing": "Ausente", "select.version": "Selecione a vers\u00e3o"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+        <script src="https://unpkg.com/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+    
+  </body>
+</html>
