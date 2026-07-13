@@ -175,6 +175,55 @@ meuDrop n (_:xs)      = meuDrop (n - 1) xs
 
 Essa mudança de estilo nos permite enumerar *de frente* os casos em que a função se comporta de maneira diferente — enterrar as decisões dentro de expressões `if` torna o código mais difícil de ler.
 
+---
+
+## 7. A Regra Offside: Indentação com Significado
+
+Em Haskell, o espaço em branco **tem significado**: a linguagem usa a indentação para delimitar blocos de código, dispensando chaves e pontos-e-vírgulas. Esse mecanismo é chamado de **regra offside**, e vale a pena entendê-lo antes que ele o surpreenda com um `parse error`.
+
+As regras práticas:
+
+1. **Declarações de nível superior devem começar todas na mesma coluna.** A primeira declaração do arquivo pode começar em qualquer coluna; as seguintes devem alinhar-se a ela.
+2. **Uma linha mais indentada que a anterior é uma *continuação*** da declaração anterior — é assim que quebramos definições longas em várias linhas.
+3. **Dentro de `let`, `where` e `do`**, o compilador memoriza a coluna do primeiro item: linhas na mesma coluna iniciam um novo item do bloco; linhas mais à direita continuam o item anterior; linhas mais à esquerda encerram o bloco.
+
+```haskell
+-- Correto: as definições do where alinhadas na mesma coluna
+emprestar valor saldo = if valor < reserva * 0.5
+                        then Just novoSaldo
+                        else Nothing
+    where reserva   = 100
+          novoSaldo = saldo - valor
+```
+
+```haskell
+-- ERRO: a segunda declaração está em coluna diferente da primeira
+    primeiraDeclaracao = 1
+  segundaDeclaracao = 2    -- parse error!
+```
+
+> [!WARNING]
+> **Use espaços, nunca tabs.** Editores interpretam tabulações com larguras diferentes (8 colunas no Unix, 4 no Windows), então um arquivo com tabs pode compilar na sua máquina e quebrar na do colega. O padrão da linguagem assume a convenção Unix — configure seu editor para inserir espaços em arquivos `.hs`.
+
+A propósito: a regra offside não é obrigatória — Haskell aceita estruturação explícita com chaves e pontos-e-vírgulas (`let { a = 1; b = 2 } in a + b`) — mas ela praticamente nunca é usada em programas reais.
+
+### Ocultamento (Shadowing)
+Blocos `let` e `where` podem ser aninhados, e um nome interno pode **ocultar** um nome externo de mesmo identificador:
+
+```haskell
+bar = let x = 1
+      in ((let x = "foo" in x), x)   -- resulta em ("foo", 1)
+```
+
+O `x` interno esconde o externo — mesmo nome, tipo e valor diferentes. O ocultamento também pode esconder **parâmetros da função**, uma fonte clássica de confusão:
+
+```haskell
+quux a = let a = "foo"
+         in a ++ "eek!"    -- o parâmetro 'a' nunca é usado!
+```
+
+Ocultamento leva a bugs sutis; o GHC oferece a opção `-fwarn-name-shadowing` (incluída no `-Wall`) para avisar sempre que um nome ocultar outro.
+
 No próximo capítulo, veremos como aplicar recursão e casamento de padrões sobre estruturas de dados recursivas como **Listas**.
 
 ---

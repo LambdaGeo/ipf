@@ -142,6 +142,41 @@ $ runghc WC < arquivo.txt
 
 Graças à avaliação preguiçosa, o `interact` processa a entrada de forma incremental — funciona até com entradas maiores que a memória. Esse é o desenho recomendado para programas Haskell: **concentre a lógica em funções puras e reduza o código impuro ao mínimo indispensável.** Grande parte do risco em software está na comunicação com o mundo exterior; como o sistema de tipos nos diz exatamente quais partes do código têm efeitos colaterais, a "superfície de ataque" fica pequena e bem vigiada.
 
+---
+
+## 7. Argumentos de Linha de Comando e o Padrão "Núcleo Puro, Casca Impura"
+
+Programas reais frequentemente processam arquivos indicados na linha de comando, em vez de usar a entrada/saída padrão. O módulo `System.Environment` fornece `getArgs :: IO [String]`, que lê os argumentos passados ao executável. Um pequeno *framework* reutilizável para "ler um arquivo, transformar, gravar em outro arquivo":
+
+```haskell
+import System.Environment (getArgs)
+
+interactWith :: (String -> String) -> FilePath -> FilePath -> IO ()
+interactWith function inputFile outputFile = do
+  input <- readFile inputFile
+  writeFile outputFile (function input)
+
+main :: IO ()
+main = mainWith minhaFuncao
+  where
+    mainWith function = do
+      args <- getArgs
+      case args of
+        [entrada, saida] -> interactWith function entrada saida
+        _ -> putStrLn "erro: são necessários exatamente dois argumentos"
+
+    -- troque "id" pela função que você quiser testar
+    minhaFuncao = id
+```
+
+Compilando e executando (em um executável Stack, este seria o conteúdo de `app/Main.hs`):
+
+```bash
+$ stack build && stack exec meu-programa-exe entrada.txt saida.txt
+```
+
+O ponto pedagógico é o **design**, não a sintaxe nova: `interactWith` é o "framework" fixo (I/O), e `minhaFuncao :: String -> String` é a única peça que muda de programa para programa — e é **pura**, portanto testável no GHCi sem tocar em disco algum. Esse é o mesmo padrão do capítulo de [funções de alta ordem](../unidade1/07_alta_ordem.md): isolar a lógica de negócio da mecânica de E/S.
+
 No próximo capítulo, praticaremos esses conceitos avançados de Haskell através de uma coletânea de exercícios sobre tipos e entrada/saída.
 
 ---

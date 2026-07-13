@@ -343,6 +343,25 @@ Prelude Data.List> foldl' (+) 0 [1..1000000]
 
 Em programas reais, prefira sempre `foldl'` a `foldl`.
 
+#### Como o `foldl'` Funciona Por Baixo: a Função `seq`
+O `foldl'` não é mágica — ele usa uma função chamada **`seq`** para *forçar* a avaliação do acumulador a cada passo, em vez de deixá-lo como uma promessa (thunk):
+
+```haskell
+seq :: a -> b -> b
+```
+
+`seq` avalia seu **primeiro** argumento (só o suficiente para saber que não é um erro nem um loop infinito — a chamada *avaliação em forma normal fraca*), descarta o resultado, e retorna o **segundo** argumento. Com isso, podemos definir nosso próprio `foldl'`:
+
+```haskell
+meuFoldl' :: (a -> b -> a) -> a -> [b] -> a
+meuFoldl' _    acc []     = acc
+meuFoldl' step acc (x:xs) =
+    let novo = step acc x
+    in  novo `seq` meuFoldl' step novo xs
+```
+
+A expressão `novo `seq` meuFoldl' step novo xs` força `novo` a ser calculado *imediatamente* — antes da chamada recursiva — impedindo que thunks se acumulem. Esse é o "truque" por trás de toda função "estrita" em Haskell: usar `seq` (ou a anotação `!` de *bang patterns*) para dizer ao compilador "calcule isso agora, não depois".
+
 ### Por que usar `map`, `filter` e `fold` em vez de recursão explícita?
 Porque essas funções são onipresentes e têm comportamento regular e previsível: um leitor entende `foldr (+) 0` de imediato, enquanto uma recursão explícita exige leitura cuidadosa para descobrir o que está acontecendo. Detectar um idioma repetido e abstraí-lo em uma função de alta ordem — escrevendo menos código — é um aspecto central do estilo Haskell.
 

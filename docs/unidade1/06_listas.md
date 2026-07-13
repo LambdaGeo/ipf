@@ -95,6 +95,20 @@ somarLista (x:xs) = x + somarLista xs
 
 Pensar na estrutura da lista — vazia, ou um elemento seguido do restante — e tratar os dois casos separadamente é uma abordagem chamada **recursão estrutural**. O caso não-recursivo (lista vazia) é o **caso base**; o outro é o **caso recursivo** (ou *indutivo*). Essa técnica não se limita a listas: vale para qualquer tipo de dado algébrico, como veremos no Módulo 2.
 
+### Exemplo 2: O Clássico Quicksort em Haskell
+A expressividade do casamento de padrões e da recursão sobre listas permite implementar o famoso algoritmo de ordenação **Quicksort** de forma incrivelmente compacta em Haskell:
+
+```haskell
+quicksort :: Ord a => [a] -> [a]
+quicksort []     = []
+quicksort (x:xs) = quicksort menores ++ [x] ++ quicksort maiores
+  where
+    menores = [a | a <- xs, a <= x]
+    maiores = [a | a <- xs, a >  x]
+```
+
+Nesta função, tomamos a cabeça `x` como o pivô. Usamos compreensões de lista para filtrar os elementos da cauda `xs` que são menores que o pivô (`menores`) e maiores que o pivô (`maiores`), ordenando cada uma dessas partes de forma recursiva antes de juntar tudo.
+
 ### Recursão de Cauda e Acumuladores
 Como Haskell não tem laços `for`/`while`, o equivalente de um loop com variável acumuladora é uma função auxiliar recursiva que carrega o acumulador como parâmetro. Compare com o loop em C que converte uma string de dígitos em inteiro (`acc = acc * 10 + dígito`):
 
@@ -110,23 +124,59 @@ asInt xs = loop 0 xs
 
 Passar `0` inicial equivale a inicializar a variável no começo do loop; cada chamada recursiva consome um elemento e atualiza o acumulador. Como a última coisa que `loop` faz é chamar a si mesma, ela é uma função **recursiva de cauda** (*tail recursive*) — o compilador transforma essas chamadas para executarem em espaço constante (*tail call optimisation*), exatamente como um loop imperativo.
 
-### Exemplo 2: O Clássico Quicksort em Haskell
-A expressividade do casamento de padrões e da recursão sobre listas permite implementar o famoso algoritmo de ordenação **Quicksort** de forma incrivelmente compacta em Haskell:
-
-```haskell
-quicksort :: Ord a => [a] -> [a]
-quicksort []     = []
-quicksort (x:xs) = quicksort menores ++ [x] ++ quicksort maiores
-  where
-    menores = [a | a <- xs, a <= x]
-    maiores = [a | a <- xs, a >  x]
-```
-
-Nesta função, tomamos a cabeça `x` como o pivô. Usamos compreensões de lista para filtrar os elementos da cauda `xs` que são menores que o pivô (`menores`) e maiores que o pivô (`maiores`), ordenando cada uma dessas partes de forma recursiva antes de juntar tudo.
+> [!NOTE]
+> **A convenção do apóstrofo.** O apóstrofo é um caractere válido em nomes Haskell (pronuncia-se "linha", como em matemática). É idiomático usar `acc'` para "o novo valor de `acc`": `loop acc (x:xs) = let acc' = acc * 10 + digitToInt x in loop acc' xs`. Reconheça o padrão ao ler código — mas cuidado, um apóstrofo é fácil de não enxergar.
 
 ---
 
-## 4. Compreensão de Listas
+## 4. Exemplo Trabalhado: `splitLines` Portável
+
+Vamos juntar as peças do capítulo — funções da caixa de ferramentas, pattern matching e recursão — em um problema real. A função `lines` do Prelude divide um texto em linhas, mas só reconhece o `\n` do Unix; um arquivo gerado no Windows (`\r\n`) fica com "sujeira":
+
+```haskell
+Prelude> lines "a\r\nb"
+["a\r","b"]
+```
+
+Vamos escrever uma versão portável, que aceita as duas convenções:
+
+```haskell
+splitLines :: String -> [String]
+splitLines [] = []
+splitLines cs =
+    let (pre, suf) = break isLineTerminator cs
+    in  pre : case suf of
+                ('\r':'\n':rest) -> splitLines rest
+                ('\r':rest)      -> splitLines rest
+                ('\n':rest)      -> splitLines rest
+                _                -> []
+
+isLineTerminator :: Char -> Bool
+isLineTerminator c = c == '\r' || c == '\n'
+```
+
+Como ler este código:
+
+* **`break isLineTerminator cs`** particiona a string no primeiro terminador de linha: `pre` é a linha atual, `suf` é o restante (começando pelo terminador, se houver).
+* O **`case`** inspeciona o sufixo: se começa com `\r\n`, `\r` ou `\n`, descartamos o terminador e continuamos recursivamente em `rest`; se não há terminador (string vazia), encerramos.
+* Note a **organização**: a lógica importante vem primeiro, e a auxiliar `isLineTerminator` fica no final — o nome legível permite entender o código antes mesmo de ler sua definição.
+
+A melhor forma de entender uma função assim é **experimentar as peças no GHCi**:
+
+```haskell
+Prelude> break (== ' ') "foo bar"
+("foo"," bar")
+Prelude> splitLines "foo\r\nbar"
+["foo","bar"]
+Prelude> splitLines "foo"
+["foo"]
+```
+
+Esse hábito de testar cada pedaço interativamente traz um benefício quase acidental: como é complicado testar funções grandes no GHCi, tendemos a escrever **funções menores** — o que melhora ainda mais a legibilidade do código.
+
+---
+
+## 5. Compreensão de Listas
 
 A **Compreensão de Listas** é uma notação matemática poderosa para filtrar e transformar coleções de dados, baseada na definição matemática de conjuntos. Sua sintaxe básica é:
 
@@ -156,7 +206,7 @@ No próximo capítulo, veremos como abstrair loops e processamentos repetitivos 
 
 ---
 
-## 5. Exercícios de Fixação
+## 6. Exercícios de Fixação
 
 Adaptados do *Real World Haskell* (cap. 3 e 4):
 
