@@ -212,45 +212,38 @@ config[:host]  # "localhost"
 > Muito usada para **configurações e opções de funções**.
 > 
 
-<aside>
-💡
+!!! tip "Mapas vs Keyword Lists"
+    Em Elixir, **mapas** e **keyword lists** são coleções de pares chave-valor, mas têm diferenças importantes:
 
-**Mapas vs Keyword Lists**
+    | Característica | Mapas (`%{}`) | Keyword Lists (`[key: value]`) |
+    | --- | --- | --- |
+    | **Sintaxe** | `%{chave => valor}` | `[chave: valor]` |
+    | **Chaves** | Qualquer tipo | Sempre átomos (`:chave`) |
+    | **Ordem** | Não garantida | Mantida (útil quando a ordem importa) |
+    | **Chaves duplicadas** | Não permitidas | Permitidas |
+    | **Acesso** | `map[:chave]` ou `map.chave` | `kw[:chave]` |
+    | **Uso típico** | Dados estruturados complexos | Opções de funções, configurações simples |
 
-Em Elixir, **mapas** e **keyword lists** são coleções de pares chave-valor, mas têm diferenças importantes:
+    **Resumo:**
 
-| Característica | Mapas (`%{}`) | Keyword Lists (`[key: value]`) |
-| --- | --- | --- |
-| **Sintaxe** | `%{chave => valor}` | `[chave: valor]` |
-| **Chaves** | Qualquer tipo | Sempre átomos (`:chave`) |
-| **Ordem** | Não garantida | Mantida (útil quando a ordem importa) |
-| **Chaves duplicadas** | Não permitidas | Permitidas |
-| **Acesso** | `map[:chave]` ou `map.chave` | `kw[:chave]` |
-| **Uso típico** | Dados estruturados complexos | Opções de funções, configurações simples |
+    - Use **mapas** para representar dados estruturados e mutáveis (como registros de pessoas, produtos, etc.).
+    - Use **keyword lists** para passar **opções ou parâmetros de funções**, especialmente quando a ordem importa.
 
-💡 **Resumo:**
+    Exemplo:
 
-- Use **mapas** para representar dados estruturados e mutáveis (como registros de pessoas, produtos, etc.).
-- Use **keyword lists** para passar **opções ou parâmetros de funções**, especialmente quando a ordem importa.
+    ```elixir
+    # Mapa
+    user = %{name: "Ana", age: 30}
+    user[:name]
+    # "Ana"
 
-Exemplo:
+    # Keyword List
+    opts = [host: "localhost", port: 4000]
+    opts[:host]
+    # "localhost"
+    ```
 
-```elixir
-# Mapa
-user = %{name: "Ana", age: 30}
-user[:name]
-# "Ana"
-
-# Keyword List
-opts = [host: "localhost", port: 4000]
-opts[:host]
-# "localhost"
-
-```
-
-> Apesar de parecerem similares, a escolha depende do contexto e da necessidade de ordem ou chaves duplicadas.
-> 
-</aside>
+    Apesar de parecerem similares, a escolha depende do contexto e da necessidade de ordem ou chaves duplicadas.
 
 ---
 

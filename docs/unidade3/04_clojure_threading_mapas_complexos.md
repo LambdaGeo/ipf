@@ -203,12 +203,8 @@ Este exemplo de aplicação irá ilustrar os conceitos de **Mapas Complexos** e 
 
 O cenário baseia-se no processamento de pedidos em um sistema de loja, um domínio que naturalmente exige o uso de estruturas de dados aninhadas e transformações sequenciais complexas.
 
-<aside>
-💡
-
-Se você já trabalhou com Elixir, vai notar uma semelhança interessante: o macro `->` (thread-first) de Clojure é conceitualmente equivalente ao operador `|>` (pipe) em Elixir. Ambos facilitam a leitura encadeando transformações de dados de forma clara e funcional — um ótimo exemplo de como ideias poderosas se espalham entre linguagens funcionais!
-
-</aside>
+!!! tip "Ponte com Elixir"
+    Se você já trabalhou com Elixir, vai notar uma semelhança interessante: o macro `->` (thread-first) de Clojure é conceitualmente equivalente ao operador `|>` (pipe) em Elixir. Ambos facilitam a leitura encadeando transformações de dados de forma clara e funcional — um ótimo exemplo de como ideias poderosas se espalham entre linguagens funcionais!
 
 ## 6. Juntando tudo em um exemplo de Pedidos em uma Loja
 

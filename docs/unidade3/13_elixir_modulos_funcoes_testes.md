@@ -56,13 +56,8 @@ A aridade é o número de argumentos que uma função aceita. Em Elixir, o nome 
 | **Identidade** | São o mesmo método, apenas “sobrecarregado”. | São duas funções completamente distintas. |
 | **Resolução** | O compilador infere pelos tipos dos argumentos. | O runtime busca a função exata pelo **nome** e **número de argumentos** (arity). |
 
-<aside>
-💡
-
-**Por que isso importa ?**
-Ao ler uma documentação ou um erro no terminal, você verá algo como `undefined function calcular/1`. Isso diz especificamente: "Eu até conheço a `calcular/2`, mas você chamou uma versão de 1 argumento que não existe". Tratar funções de aridades diferentes como entidades diferentes nos dá precisão absoluta no rastreamento de execução.
-
-</aside>
+!!! tip "Por que isso importa ?"
+    Ao ler uma documentação ou um erro no terminal, você verá algo como `undefined function calcular/1`. Isso diz especificamente: "Eu até conheço a `calcular/2`, mas você chamou uma versão de 1 argumento que não existe". Tratar funções de aridades diferentes como entidades diferentes nos dá precisão absoluta no rastreamento de execução.
 
 ## 2. Organização e Namespaces (O Módulo)
 
@@ -87,12 +82,8 @@ Para manter a sanidade mental em grandes projetos, o Elixir adota uma convençã
 | **No Código (Módulo)** | CamelCase (PascalCase) | `EscolaElixir.Boletim` |
 | **No Arquivo (Pasta)** | snake_case | `lib/escola_elixir/boletim.ex` |
 
-<aside>
-💡
-
-**Por que minúsculo no arquivo?** Sistemas operacionais (Windows vs Linux) tratam letras maiúsculas/minúsculas de formas diferentes. Usar sempre `snake_case` nos arquivos evita bugs bizarros de "Arquivo não encontrado" ao fazer deploy em servidores Linux.
-
-</aside>
+!!! tip "Por que minúsculo no arquivo?"
+    Sistemas operacionais (Windows vs Linux) tratam letras maiúsculas/minúsculas de formas diferentes. Usar sempre `snake_case` nos arquivos evita bugs bizarros de "Arquivo não encontrado" ao fazer deploy em servidores Linux.
 
 ### 🛠️ Passo 2: Criando o Módulo de Boletim
 
@@ -328,18 +319,12 @@ Vamos limpar nossa função pública. Edite o `gerar_relatorio` no `lib/escola_e
   end
 ```
 
-<aside>
-💡
+!!! tip "Por que isso é melhor ?"
+    1. **Clareza Cognitiva:** Você vê a ordem exata das operações.
+    2. **Imutabilidade:** Não criamos variáveis desnecessárias que poderiam ser alteradas por engano.
+    3. **Debug:** É muito fácil comentar uma linha do pipe para testar o fluxo.
 
-**Por que isso é melhor ?**
-
-1. **Clareza Cognitiva:** Você vê a ordem exata das operações.
-2. **Imutabilidade:** Não criamos variáveis desnecessárias que poderiam ser alteradas por engano.
-3. **Debug:** É muito fácil comentar uma linha do pipe para testar o fluxo.
-
-**Teste novamente no IEx (`recompile()`)**. O comportamento externo é idêntico, mas o código interno agora é "Elixir Idiomático".
-
-</aside>
+    **Teste novamente no IEx (`recompile()`)**. O comportamento externo é idêntico, mas o código interno agora é "Elixir Idiomático".
 
 ## 6. Documentação: Escrevendo, Lendo e Publicando 📖
 

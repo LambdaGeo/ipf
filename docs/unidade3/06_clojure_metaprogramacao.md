@@ -4,19 +4,13 @@
 
 Bem-vindos à nossa aula sobre metaprogramação e macros em Clojure. Este não é apenas um tópico avançado; é a essência do que torna as linguagens da família Lisp, como o Clojure, tão singulares e poderosas. Frequentemente, você ouvirá a expressão "a linguagem de programação programável" para descrever o Lisp. Hoje, vamos desvendar o que isso significa na prática, explorando como o Clojure nos permite não apenas escrever programas, mas também moldar e estender a própria linguagem.
 
-<aside>
-💡
+!!! tip "Metaprogramação além do Clojure"
+    Embora a metaprogramação seja uma característica marcante das linguagens da família Lisp, ela **não é exclusiva do Clojure**. Muitas outras linguagens modernas também oferecem formas de metaprogramação:
 
-**Nota:**
+    - Em linguagens como **Ruby** e **Python**, isso costuma ser feito por meio de reflexão e manipulação dinâmica de classes e objetos.
+    - No **Elixir**, uma linguagem funcional que roda na máquina virtual do Erlang, **macros muito semelhantes às do Clojure** são amplamente utilizadas para gerar código de forma dinâmica e expressiva.
 
-Embora a metaprogramação seja uma característica marcante das linguagens da família Lisp, ela **não é exclusiva do Clojure**. Muitas outras linguagens modernas também oferecem formas de metaprogramação:
-
-- Em linguagens como **Ruby** e **Python**, isso costuma ser feito por meio de reflexão e manipulação dinâmica de classes e objetos.
-- No **Elixir**, uma linguagem funcional que roda na máquina virtual do Erlang, **macros muito semelhantes às do Clojure** são amplamente utilizadas para gerar código de forma dinâmica e expressiva.
-
-No entanto, o que diferencia o Clojure (e o Lisp de forma geral) é a **integração profunda e natural entre código e dados** — uma característica que torna a construção de macros **mais transparente, poderosa e idiomática** do que em quase qualquer outra linguagem.
-
-</aside>
+    No entanto, o que diferencia o Clojure (e o Lisp de forma geral) é a **integração profunda e natural entre código e dados** — uma característica que torna a construção de macros **mais transparente, poderosa e idiomática** do que em quase qualquer outra linguagem.
 
 ## 1.1. O Princípio Fundamental: Código como Dados (Homoiconicidade)
 
