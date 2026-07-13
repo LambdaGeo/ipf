@@ -1,0 +1,66 @@
+name: Publicar Livro (GitHub Pages)
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+  workflow_dispatch:
+
+# Permissões necessárias para publicar no GitHub Pages de forma nativa
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# Permite apenas uma implantação ativa por vez
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
+
+jobs:
+  # Job de compilação/teste
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout do código
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0 # Útil para plugins de revisão de datas baseados no Git
+
+      - name: Configurar o Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: "pip" # Ativa cache de dependências automático se o requirements.txt for encontrado
+
+      - name: Instalar dependências
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Build do Livro (MkDocs)
+        run: mkdocs build
+
+      - name: Upload do artefato para o Pages
+        # Faz o upload apenas se estivermos na branch main e não em uma Pull Request
+        if: github.ref == 'refs/heads/main' && github.event_name != 'pull_request'
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: ./site
+
+  # Job de deploy
+  deploy:
+    # Apenas executa se estivermos na branch main, não em uma Pull Request e se o build terminou com sucesso
+    if: github.ref == 'refs/heads/main' && github.event_name != 'pull_request'
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy para o GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
