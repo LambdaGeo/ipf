@@ -325,7 +325,7 @@ anexa xs ys = foldr (:) ys xs
 
 A classe de funções expressáveis com `foldr` é chamada de **recursiva primitiva** — e um número surpreendente de funções de manipulação de listas se encaixa nela (como desafio avançado: até `foldl` pode ser escrita usando `foldr`!).
 
-### ⚠️ `foldl`, Avaliação Preguiçosa e *Space Leaks*
+### `foldl`, Avaliação Preguiçosa e *Space Leaks*
 Por causa da avaliação preguiçosa, `foldl` não calcula as somas parciais imediatamente — ele acumula uma expressão adiada (*thunk*) cada vez maior: `(((0+1)+2)+3)...`. Para listas grandes, isso consome memória linear e pode estourar a pilha:
 
 ```haskell

@@ -5,7 +5,7 @@ Este capítulo apresenta o **primeiro projeto avaliativo da Unidade 3**: a const
 !!! success "Tutorial completo no blog"
     O passo a passo detalhado — com todos os comandos, códigos, erros esperados e correções — está publicado como tutorial no blog do LambdaGEO:
 
-    👉 **[Clojure e ClojureScript: Construindo uma Aplicação Todo List do Zero](https://lambdageo.github.io/blog/tutorial-clojure-clojurescript-todo-list/)**
+    **[Clojure e ClojureScript: Construindo uma Aplicação Todo List do Zero](https://lambdageo.github.io/blog/tutorial-clojure-clojurescript-todo-list/)**
 
     Este capítulo é apenas a introdução e o contrato de entrega; siga o tutorial para desenvolver o projeto.
 

@@ -12,7 +12,7 @@ Vamos construir um sistema de **Avaliação Escolar** do zero.
 
 Em engenharia de software, não criamos arquivos soltos. Precisamos de uma estrutura padrão para compilação, testes e dependências. Em Elixir, essa ferramenta é o **Mix**.
 
-### 🛠️ Passo 1: Criando o Projeto
+### Passo 1: Criando o Projeto
 
 Abra seu terminal e digite o comando abaixo. Ele vai criar a estrutura de pastas padrão da indústria.
 
@@ -25,21 +25,21 @@ Ao rodar o comando `mix new`, o Elixir não cria apenas pastas aleatórias. Ele 
 
 Abra a pasta no VS Code. Você verá:
 
-- 📂 **`lib/` (A Fábrica):**
+- **`lib/` (A Fábrica):**
     - Aqui vive 100% do seu código de produção.
     - **Diferença importante:** Em Elixir, compilamos os arquivos `.ex` (Elixir files).
     - O Mix compila tudo o que está aqui para bytecode da BEAM para garantir performance máxima.
     - *Regra de Ouro:* A estrutura de pastas dentro de `lib` deve espelhar o nome dos seus módulos. Se o módulo é `Escola.Financeiro.Boleto`, o arquivo deve ser `lib/escola/financeiro/boleto.ex`.
-- 📂 **`test/` (O Controle de Qualidade):**
+- **`test/` (O Controle de Qualidade):**
     - Aqui vivem seus scripts de teste.
     - Observe que a extensão é `.exs` (Elixir **Script**).
     - **Por que `.exs`?** Arquivos de teste não precisam ser compilados para bytecode otimizado, pois eles mudam com frequência e rodam apenas em desenvolvimento. O Elixir os interpreta em tempo de execução, o que é mais rápido para o ciclo de desenvolvimento (escreve -> testa -> reescreve).
-- 📄 **`mix.exs` (O Gerente do Projeto):**
+- **`mix.exs` (O Gerente do Projeto):**
     - Este é o coração da configuração. É o equivalente ao `pom.xml` (Maven/Java) ou `package.json` (Node.js).
     - Ele tem duas responsabilidades principais:
         1. **Project:** Define versão (`0.1.0`), nome da app e configurações do compilador.
         2. **Deps:** Lista as bibliotecas externas (dependências) que seu projeto vai baixar e usar.
-- *(Oculto/Gitignore)* 📂 **`_build` e `deps`**:
+- *(Oculto/Gitignore)* **`_build` e `deps`**:
     - Você verá essas pastas aparecerem depois de compilar. Não mexa nelas. `deps` é onde as bibliotecas baixadas ficam, e `_build` é onde estão os arquivos compilados (binários). Nunca commite essas pastas no Git.
 
 ### 1.1. Aridade: A Identidade da Função (vs. Sobrecarga)
@@ -85,7 +85,7 @@ Para manter a sanidade mental em grandes projetos, o Elixir adota uma convençã
 !!! tip "Por que minúsculo no arquivo?"
     Sistemas operacionais (Windows vs Linux) tratam letras maiúsculas/minúsculas de formas diferentes. Usar sempre `snake_case` nos arquivos evita bugs bizarros de "Arquivo não encontrado" ao fazer deploy em servidores Linux.
 
-### 🛠️ Passo 2: Criando o Módulo de Boletim
+### Passo 2: Criando o Módulo de Boletim
 
 Agora vamos aplicar a teoria. Observe que vamos traduzir os pontos (`.`) do nome do módulo para barras (`/`) no sistema de pastas.
 
@@ -108,7 +108,7 @@ defmodule EscolaElixir.Boletim do
 end
 ```
 
-### ⚡ Vamos testar?
+### Vamos testar?
 
 Como alteramos a estrutura de arquivos, precisamos garantir que o Mix encontre tudo.
 
@@ -165,7 +165,7 @@ Para cobrir essa lacuna, usamos **Guards** (a palavra-chave `when`).
 
 ---
 
-### 🛠️ Passo 3: Implementando as Regras de Aprovação
+### Passo 3: Implementando as Regras de Aprovação
 
 Vamos ver isso na prática. Edite o arquivo `lib/escola_elixir/boletim.ex`.
 Apague ou modifique a lógica antiga para usar **Cláusulas de Função**.
@@ -197,13 +197,13 @@ Apague ou modifique a lógica antiga para usar **Cláusulas de Função**.
   def verificar_situacao(_media), do: "Reprovado"
 ```
 
-### ⚠️ A Regra de Ouro: A Ordem Importa
+### A Regra de Ouro: A Ordem Importa
 
 Em linguagens com `Overloading` (Sobrecarga), o compilador escolhe o método mais específico. **Em Elixir, não.** O Elixir é sequencial (top-down).
 
 Se você colocar a regra do "Reprovado" (que aceita qualquer coisa) no topo do arquivo, **nenhum aluno passará de ano**, pois o Elixir vai casar tudo na primeira regra e parar de procurar.
 
-### ⚡ Vamos testar?
+### Vamos testar?
 
 No terminal (IEx), você não precisa sair e entrar de novo. Use o comando `recompile()`:
 
@@ -238,7 +238,7 @@ Em Elixir, usamos:
 - `def`: Para o que deve ser acessível de fora (O Cardápio).
 - `defp`: Para funções auxiliares internas (A Cozinha).
 
-### 🛠️ Passo 4: Escondendo a Lógica
+### Passo 4: Escondendo a Lógica
 
 Vamos refatorar nosso código. Queremos que o usuário chame apenas `gerar_relatorio`, e o módulo se vire para calcular a média e verificar a regra.
 
@@ -273,7 +273,7 @@ defmodule EscolaElixir.Boletim do
 end
 ```
 
-### ⚡ Vamos testar a Segurança?
+### Vamos testar a Segurança?
 
 Essa é a hora de provar que o `defp` funciona.
 
@@ -306,7 +306,7 @@ O operador `|>` pega o resultado da expressão à esquerda e o injeta como o **p
 - **Sem Pipe (Leitura de dentro para fora):**`funcao_C(funcao_B(funcao_A(dado)))`*(Difícil de ler, parece matemática complexa)*
 - **Com Pipe (Leitura natural):**`dado |> funcao_A() |> funcao_B() |> funcao_C()`*(Lê-se: Pegue o dado, passe na A, depois na B, depois na C)*
 
-### 🛠️ Passo 5: Refatorando para Pipeline
+### Passo 5: Refatorando para Pipeline
 
 Vamos limpar nossa função pública. Edite o `gerar_relatorio` no `lib/escola_elixir/boletim.ex`:
 
@@ -334,7 +334,7 @@ Em Engenharia de Software com Elixir, a documentação tem três propósitos:
 2. **Teste:** Para o computador validar (`Doctests`).
 3. **Visualização:** Para gerar sites estáticos navegáveis.
 
-### 🛠️ Passo 6.1: Escrevendo a Documentação
+### Passo 6.1: Escrevendo a Documentação
 
 Primeiro, garantimos que o código fonte tenha as diretivas `@moduledoc` e `@doc`. (Como você já fez acima, vamos manter o foco, mas observe o código abaixo).
 
@@ -372,7 +372,7 @@ defmodule EscolaElixir.Boletim do
 end
 ```
 
-### 🛠️ Passo 6.2: Lendo no Terminal (O Modo "Hacker") 💻
+### Passo 6.2: Lendo no Terminal (O Modo "Hacker")
 
 Enquanto você está programando, você não quer sair do terminal para ler um PDF ou site. O Elixir tem o helper **`h`** (help) embutido.
 
@@ -396,7 +396,7 @@ Enquanto você está programando, você não quer sair do terminal para ler um P
 > Dica de Produtividade: Isso funciona para qualquer módulo da linguagem. Tente digitar h Enum ou h Enum.map para ver como a documentação oficial do Elixir é feita.
 > 
 
-### 🛠️ Passo 6.3: Gerando o Site HTML (O Modo Profissional) 🌐
+### Passo 6.3: Gerando o Site HTML (O Modo Profissional)
 
 Para entregar o projeto ou compartilhar com outros times, geramos uma página HTML estática (igual à documentação oficial do Elixir). Para isso, precisamos instalar uma ferramenta chamada **ExDoc**.
 
@@ -437,7 +437,7 @@ Uma página web moderna, com barra lateral de navegação, busca instantânea e 
 
 ---
 
-### 6.4. O Segredo do `iex>` (Doctests) 🕵️
+### 6.4. O Segredo do `iex>` (Doctests)
 
 Pare um minuto e olhe para o código que você acabou de escrever dentro do `@doc`.
 
@@ -470,7 +470,7 @@ Por quê? Porque precisamos avisar ao framework de testes (ExUnit) para ler a do
 **A Regra da Engenharia:**
 Para cada arquivo na pasta `lib/`, criamos um arquivo correspondente na pasta `test/`.
 
-### 🛠️ Passo a Passo:
+### Passo a Passo:
 
 1. Crie um novo arquivo: `test/escola_elixir/boletim_test.exs`*(Note que a pasta espelha a estrutura da `lib` e o arquivo termina em `_test.exs`)*.
 2. Digite o código abaixo. É aqui que ligamos a chave dos Doctests:
@@ -505,7 +505,7 @@ O **Doctest** serve para documentar o "caminho feliz" (o uso básico). Mas você
 
 Para isso, usamos os **Testes de Unidade** padrão. É o equivalente ao que você faria com **JUnit** (Java) ou **PyTest** (Python). Eles ficam no mesmo arquivo de teste, mas dentro de blocos `test`.
 
-### 🛠️ Passo 7.1: Criando Cenários de Teste
+### Passo 7.1: Criando Cenários de Teste
 
 Vamos expandir o arquivo `test/escola_elixir/boletim_test.exs` que acabamos de criar. Vamos adicionar testes para garantir que as regras de limite (notas 5 e 7) funcionam exatmente como esperado.
 
@@ -536,7 +536,7 @@ defmodule EscolaElixir.BoletimTest do
 end
 ```
 
-### ⚡ Rodando a Bateria Completa
+### Rodando a Bateria Completa
 
 Volte ao terminal:
 
@@ -569,7 +569,7 @@ Quando você diz `use ExUnit.Case`, você está dizendo ao compilador:
 
 É por isso que as palavras mágicas `test` e `assert` aparecem no seu arquivo de teste sem você tê-las definido. Elas foram injetadas.
 
-### 🛠️ Passo 8.1: Criando nosso próprio `use`
+### Passo 8.1: Criando nosso próprio `use`
 
 Vamos supor que todos os sistemas da escola precisem ter uma função de copyright padrão. Em vez de copiar e colar em todo arquivo, criamos um injetor.
 
@@ -614,7 +614,7 @@ Diferente do `use` (que injeta código), o `import` apenas permite que você cha
 
 Mas cuidado: importar um módulo inteiro pode trazer centenas de funções e causar conflito com as suas. Por isso, usamos filtros.
 
-### 🏛️ A Analogia para quem vem de fora
+### A Analogia para quem vem de fora
 
 Para entender o `import` do Elixir, compare com o que você já conhece:
 
@@ -628,7 +628,7 @@ Para entender o `import` do Elixir, compare com o que você já conhece:
 > Nota Técnica: Em Elixir, quando filtramos, precisamos informar a Aridade (número de argumentos) da função. Não basta dizer o nome.
 > 
 
-### 🛠️ Usando `only` (Lista Branca) e `except` (Lista Negra)
+### Usando `only` (Lista Branca) e `except` (Lista Negra)
 
 Vamos ver na prática com o módulo `List` do Elixir, que tem muitas funções.
 
@@ -710,7 +710,7 @@ Se você esquecer o `require`, o Elixir vai reclamar: *"Você está tentando inv
 
 ---
 
-### 8.4 Organização de Código: O Poder do `alias` 🏷️
+### 8.4 Organização de Código: O Poder do `alias`
 
 À medida que nosso sistema cresce, os nomes dos módulos tendem a ficar longos e aninhados para respeitar a hierarquia de pastas.
 
@@ -726,7 +726,7 @@ Ele cria um "atalho" para o nome do módulo dentro do arquivo atual.
 
 Importante: Ele NÃO traz as funções para o escopo (como o import). Ele apenas encurta o nome do módulo.
 
-### 🏛️ A Analogia (Java/Python)
+### A Analogia (Java/Python)
 
 | **Linguagem** | **Sintaxe Original** | **O equivalente em Elixir** |
 | --- | --- | --- |
@@ -735,7 +735,7 @@ Importante: Ele NÃO traz as funções para o escopo (como o import). Ele apenas
 | **Python** | `import pandas as pd` | `alias Pandas, as: Pd` |
 | **C#** | `using List = System.Collections.Generic.List;` | `alias System.Collections.Generic.List` |
 
-### 🛠️ Passo 8.1: Simplificando Nomes
+### Passo 8.1: Simplificando Nomes
 
 Vamos supor que, no nosso teste, estejamos cansados de digitar `EscolaElixir.Boletim` toda hora.
 
@@ -788,7 +788,7 @@ alias EscolaElixir.{Boletim, Sistema, Financeiro}
 # Equivalente a escrever 3 linhas de alias separadas.
 ```
 
-### 💡 Dica de Engenharia: Alias vs Import
+### Dica de Engenharia: Alias vs Import
 
 Muitos iniciantes perguntam: *"Por que não usar `import` logo de cara e economizar ainda mais digitação?"*
 
@@ -813,7 +813,7 @@ Para organizar sua cabeça de engenheiro, aqui está a hierarquia de acoplamento
 
 **Próximo Passo:** Agora que entendemos como criar código (Módulos/Funções), garantir qualidade (Testes/Docs) e reutilizar estruturas (`use`/`import`), estamos prontos para o **Grand Finale**: O Desafio Prático "Motor de Compras".
 
-# 🎓 Desafio Final: O Motor de E-commerce (GeekStore)
+# Desafio Final: O Motor de E-commerce (GeekStore)
 
 **O Cenário:**
 Você foi contratado para criar o módulo de "Checkout" da *GeekStore*. O sistema recebe uma lista de produtos e precisa cuspir a nota fiscal final.
@@ -821,7 +821,7 @@ Você deve entregar código limpo, testado e documentado.
 
 ---
 
-### 🛠️ Passo 1: O Setup Profissional (Mix)
+### Passo 1: O Setup Profissional (Mix)
 
 Não vamos fazer arquivos soltos. Crie um projeto novo.
 No terminal:
@@ -833,7 +833,7 @@ cd geek_store`
 
 ---
 
-### 🛠️ Passo 2: A Arquitetura do Módulo
+### Passo 2: A Arquitetura do Módulo
 
 Crie o arquivo `lib/geek_store/caixa.ex`.
 Vamos começar definindo o módulo e usando **boas práticas de importação**.
@@ -888,7 +888,7 @@ end
 
 ---
 
-### 🛠️ Passo 3: Implementando a Lógica (Sua Vez!)
+### Passo 3: Implementando a Lógica (Sua Vez!)
 
 Tente implementar antes de ver a resposta. Lembre-se:
 
@@ -896,7 +896,7 @@ Tente implementar antes de ver a resposta. Lembre-se:
 2. **Guards:** Use `when valor >= 500` nas funções privadas de desconto.
 3. **Pipeline:** Conecte tudo na função pública.
 
-- 🔑 Gabarito Comentado (A Solução do Professor)
+- Gabarito Comentado (A Solução do Professor)
     
     Aqui está como um engenheiro Elixir resolveria, aplicando todos os conceitos da aula.
     
@@ -961,7 +961,7 @@ Tente implementar antes de ver a resposta. Lembre-se:
     
     ---
     
-    ### 🛠️ Passo 4: O Teste Unitário (Aplicando `alias` e `use`)
+    ### Passo 4: O Teste Unitário (Aplicando `alias` e `use`)
     
     Agora vamos criar o arquivo de teste para garantir a robustez.
     Aqui você vai usar:
@@ -1003,7 +1003,7 @@ Tente implementar antes de ver a resposta. Lembre-se:
     
     ---
     
-    ### 🏁 A Validação Final
+    ### A Validação Final
     
     Vá ao terminal e execute o comando supremo:
     
@@ -1018,7 +1018,7 @@ Tente implementar antes de ver a resposta. Lembre-se:
     3. O `doctest` roda os exemplos da documentação.
     4. O `test` roda os cenários específicos.
     
-    Se você vir as letras verdes, **Parabéns!** 🚀
+    Se você vir as letras verdes, **Parabéns!**
     
     ### Recaptulando o que você construiu:
     

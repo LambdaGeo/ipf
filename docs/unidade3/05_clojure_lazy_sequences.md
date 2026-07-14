@@ -19,13 +19,13 @@ Esses dados vieram **em partes**, como pequenas listas de contagens:
 
 ```
 
-**🔍 Objetivo:**
+**Objetivo:**
 
 Agrupar todas as ocorrências da mesma palavra, para depois poder somar as contagens.
 
 ---
 
-**🧭 Passo 1 – Juntar todas as sublistas em uma única sequência**
+**Passo 1 – Juntar todas as sublistas em uma única sequência**
 
 ```clojure
 (def dados-unificados (apply concat dados-por-frase))
@@ -41,7 +41,7 @@ Agora `dados-unificados` é:
 
 ---
 
-**🧭 Passo 2 – Agrupar os pares pela palavra (a primeira posição de cada vetor)**
+**Passo 2 – Agrupar os pares pela palavra (a primeira posição de cada vetor)**
 
 ```clojure
 (group-by first dados-unificados)
@@ -61,13 +61,13 @@ Resultado:
 
 ---
 
-**🧠 Explicação:**
+**Explicação:**
 
 - Cada item da lista é um par `["palavra" 1]`.
 - A função `group-by` agrupa esses pares, **usando a palavra como chave** (ou seja, o `first` de cada vetor).
 - O resultado é um **mapa onde cada chave é uma palavra**, e o valor é uma **lista de todas as vezes que essa palavra apareceu** nos dados originais.
 
-**🧾 O Que Fazer Depois?**
+**O Que Fazer Depois?**
 
 Você pode somar as contagens:
 
@@ -285,7 +285,7 @@ Vamos ilustrar o benefício de desempenho e eficiência com um cenário prático
 
 ```
 
-### 🔍 O que acontece, passo a passo:
+### O que acontece, passo a passo:
 
 1. **`first`** pede **um único item** do pipeline.
 2. **`filter`** solicita um elemento de **`map`**.
@@ -297,7 +297,7 @@ Vamos ilustrar o benefício de desempenho e eficiência com um cenário prático
 
 ---
 
-### 🧠 Por que isso é eficiente?
+### Por que isso é eficiente?
 
 Em Clojure, **tanto `map` quanto `filter` são *lazy sequences*** — ou seja, eles **só processam os dados quando necessário**.
 
@@ -315,7 +315,7 @@ Em uma linguagem ou abordagem **gulosa (eager)**, o programa:
 
 ---
 
-### 🧪 Resultado
+### Resultado
 
 Ao executar o código, o retorno será algo como:
 
@@ -328,7 +328,7 @@ E você notará que a execução é praticamente instantânea, porque o pipeline
 
 ---
 
-### 💡 Moral da história
+### Moral da história
 
 Esse exemplo mostra de forma **testável e mensurável** o poder da **avaliação preguiçosa (lazy evaluation)** em Clojure:
 
@@ -393,7 +393,7 @@ Para que o `recur` funcione:
 
 Vamos entender **como transformar** uma função recursiva comum em uma versão com `recur`.
 
-### 🔹 Passo 1 — Função recursiva tradicional
+### Passo 1 — Função recursiva tradicional
 
 ```clojure
 (defn soma [n]
@@ -405,7 +405,7 @@ Vamos entender **como transformar** uma função recursiva comum em uma versão 
 
 Essa versão funciona, mas cria uma nova chamada a cada passo. `(soma 100000)` vai causar `StackOverflowError`.
 
-### 🔹 Passo 2 — Adicionar um acumulador
+### Passo 2 — Adicionar um acumulador
 
 Introduzimos um argumento extra (`acc`) para guardar o resultado parcial:
 
@@ -419,7 +419,7 @@ Introduzimos um argumento extra (`acc`) para guardar o resultado parcial:
 
 Agora acumulamos o resultado, mas ainda empilhamos chamadas.
 
-### 🔹 Passo 3 — Colocar a recursão em posição de cauda
+### Passo 3 — Colocar a recursão em posição de cauda
 
 A chamada recursiva precisa ser **a última operação** da função:
 
@@ -431,7 +431,7 @@ A chamada recursiva precisa ser **a última operação** da função:
 
 ```
 
-### 🔹 Passo 4 — Substituir a chamada por `recur`
+### Passo 4 — Substituir a chamada por `recur`
 
 Por fim, trocamos a chamada explícita pela forma especial:
 

@@ -68,7 +68,7 @@ Para os exemplos a seguir, considere a coleção `precos` e uma versão de `valo
 
 ```
 
-✅ `map`: aplica uma função a cada item da coleção
+`map`: aplica uma função a cada item da coleção
 
 A função `map` aplica `valor-descontado` a **cada elemento** da coleção `precos`.
 
@@ -78,14 +78,14 @@ A função `map` aplica `valor-descontado` a **cada elemento** da coleção `pre
 
 ```
 
-📌 O que aconteceu aqui:
+O que aconteceu aqui:
 
 - O preço `30` permanece igual (não recebe desconto).
 - Os preços `700` e `1000` são descontados em 10%.
 
 ---
 
-✅ `filter`: seleciona apenas os elementos que satisfazem uma condição
+`filter`: seleciona apenas os elementos que satisfazem uma condição
 
 A função `filter` usa o predicado `aplica-desconto?` para **filtrar** apenas os preços elegíveis para desconto.
 
@@ -95,11 +95,11 @@ A função `filter` usa o predicado `aplica-desconto?` para **filtrar** apenas o
 
 ```
 
-📌 Resultado: Apenas os valores **estritamente maiores que 100** são mantidos.
+Resultado: Apenas os valores **estritamente maiores que 100** são mantidos.
 
 ---
 
-✅ `reduce`: reduz a coleção a um único valor
+`reduce`: reduz a coleção a um único valor
 
 A função `reduce` combina os valores da coleção em **um único resultado**. Exemplo: somar todos os preços.
 
@@ -109,7 +109,7 @@ A função `reduce` combina os valores da coleção em **um único resultado**. 
 
 ```
 
-📌 Como funciona internamente:
+Como funciona internamente:
 
 1. Soma os dois primeiros: `(+ 30 700)` → `730`
 2. Soma o resultado com o próximo: `(+ 730 1000)` → `1730`
@@ -156,7 +156,7 @@ A tabela a seguir compara as três maneiras de definir a mesma lógica de verifi
 | `fn` | `(fn [valor-bruto] (> valor-bruto 100))` | Descartável, não polui o namespace com nomes. |
 | `#()` | `#(> % 100)` | Extremamente concisa para lógicas simples. |
 
-⚡ Versões com funções anônimas
+Versões com funções anônimas
 
 Para operações simples, podemos usar **funções anônimas** com a sintaxe `#()`:
 
@@ -172,7 +172,7 @@ Para operações simples, podemos usar **funções anônimas** com a sintaxe `#(
 
 ```
 
-### 🔄 Compondo tudo com threading (`>>`)
+### Compondo tudo com threading (`>>`)
 
 Você pode encadear operações de forma elegante usando o operador `->>`:
 
@@ -185,13 +185,13 @@ Você pode encadear operações de forma elegante usando o operador `->>`:
 
 ```
 
-📌 Neste exemplo:
+Neste exemplo:
 
 - Filtramos os preços com desconto
 - Aplicamos o desconto
 - Somamos o total com desconto
 
-### ✅ Resumo rápido
+### Resumo rápido
 
 | Função | O que faz | Exemplo com `precos` |
 | --- | --- | --- |

@@ -101,7 +101,7 @@ Esta página contém exercícios de fixação sobre tipos algébricos de dados (
 
 [https://profsergiocosta.notion.site/6-Programas-interativos-1d9441f881934142bba7ed420410e978](https://app.notion.com/p/6-Programas-interativos-1d9441f881934142bba7ed420410e978?pvs=21)
 
-### 🔹 Parte 1 – Fundamentos de IO
+### Parte 1 – Fundamentos de IO
 
 1. Escreva um programa que leia um caractere do teclado e o imprima duas vezes na tela.
     
@@ -125,7 +125,7 @@ Esta página contém exercícios de fixação sobre tipos algébricos de dados (
 
 ---
 
-### 🔹 Parte 2 – Lendo e escrevendo Strings
+### Parte 2 – Lendo e escrevendo Strings
 
 1. Implemente uma função que peça o nome do usuário e o cumprimente.
     
@@ -140,7 +140,7 @@ Esta página contém exercícios de fixação sobre tipos algébricos de dados (
 
 ---
 
-### 🔹 Parte 3 – Do notation
+### Parte 3 – Do notation
 
 1. Reescreva o seguinte programa sem usar `do` (usando `>>=`):
     
@@ -155,7 +155,7 @@ Esta página contém exercícios de fixação sobre tipos algébricos de dados (
 
 ---
 
-### 🔹 Parte 4 – Manipulação de arquivos
+### Parte 4 – Manipulação de arquivos
 
 1. Escreva um programa que leia o conteúdo de um arquivo `"entrada.txt"` e imprima na tela.
 2. Crie uma função que copie o conteúdo de `"entrada.txt"` para `"saida.txt"`.
@@ -163,7 +163,7 @@ Esta página contém exercícios de fixação sobre tipos algébricos de dados (
 
 ---
 
-### 🔹 Parte 5 – Desafios
+### Parte 5 – Desafios
 
 1. Implemente um programa que conte quantas linhas existem em um arquivo de texto.
 2. Escreva uma função `main` que:
