@@ -7,6 +7,7 @@ Seja bem-vindo(a) à sua primeira imersão em Clojure!
 Nas Unidades 1 e 2, você trabalhou com **Haskell**, uma linguagem de tipagem estática forte, pura e baseada em avaliação preguiçosa. Em Haskell, a segurança do código vem majoritariamente do compilador, que realiza verificações estritas de tipos antes mesmo de o código ser executado.
 
 Agora, na **Unidade 3**, fazemos uma transição filosófica importante ao entrar no ecossistema **Lisp** com o **Clojure**. Embora ambas as linguagens compartilhem os pilares da programação funcional (como imutabilidade e funções como cidadãs de primeira classe), a abordagem do Clojure é diferente:
+
 1. **Tipagem Dinâmica e Pragmática**: Clojure não realiza checagem de tipos em tempo de compilação da forma estrita do Haskell. Isso confere uma flexibilidade incrível e agilidade de prototipagem.
 2. **Desenvolvimento Focado no REPL**: O REPL (Read-Eval-Print Loop) em Clojure não é apenas um local para testar funções (como o GHCi); ele é o próprio núcleo do desenvolvimento, onde você altera o programa em execução sem precisar reiniciar o processo.
 3. **Código como Dados (Homoiconicidade)**: Em Clojure, a própria sintaxe do código é estruturada como listas e mapas. Isso abre as portas para uma metaprogramação absurdamente poderosa através de **Macros**, algo impossível na sintaxe rígida do Haskell.

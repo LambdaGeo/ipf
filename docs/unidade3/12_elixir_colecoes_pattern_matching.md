@@ -229,6 +229,7 @@ end
 
 > Aqui usamos ^status para garantir que só vamos corresponder quando o status atual for :ok.
 > 
+
 1. **Filtros em listas com pattern matching**
 
 ```elixir

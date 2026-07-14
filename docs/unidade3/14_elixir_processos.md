@@ -437,6 +437,7 @@ Funciona? Sim. Mas é frágil.
 
 Na Etapa A, construímos um servidor "na unha". Funciona? Sim. É seguro para produção? **Não.**
 Como engenheiros, analisamos os riscos daquela abordagem manual:
+
 1. **Boilerplate:** Você teve que escrever a recursão (`loop_do_servidor`) manualmente. Se esquecer uma linha, o servidor morre.
 2. **Timeouts:** Se você mandar uma mensagem e o servidor não responder, seu cliente fica travado para sempre.
 3. **Padronização:** Se cada programador escrever seu próprio loop `receive`, o código do projeto vira uma bagunça imprevisível.
@@ -446,6 +447,7 @@ Para resolver isso, a OTP (Open Telecom Platform) nos dá o **GenServer** (Gener
 
 A maior confusão de quem começa com GenServer é entender **onde** o código está rodando. O módulo do GenServer é dividido em duas partes que rodam em processos diferentes.
 Imagine um **Restaurante**:
+
 1. **Client API (O Garçom):** É a interface pública. Você chama essas funções. Elas rodam no **seu** processo (no terminal ou na requisição HTTP). O trabalho delas é apenas anotar o pedido e gritar para a cozinha.
 2. **Server Callbacks (A Cozinha):** É a implementação interna. Essas funções rodam dentro do **processo do GenServer**. Elas recebem o pedido, cozinham (processam a lógica/estado) e devolvem o prato.
 

@@ -189,6 +189,7 @@ Se você já estudou **Lisp** ou **Clojure**, deve lembrar que lá o código é 
 
 - **Em Clojure:** A AST é uma **Lista**.
 `(+ 1 2)` → O primeiro item é a função, o resto são argumentos.
+
 - **Em Elixir:** A AST é uma **Tupla**.
 O Elixir oferece uma sintaxe mais limpa (sem tantos parênteses), mas por baixo dos panos, ele converte tudo para tuplas de 3 elementos.
 

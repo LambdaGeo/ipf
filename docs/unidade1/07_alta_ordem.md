@@ -7,6 +7,7 @@ Neste capítulo, encerraremos nossa primeira unidade explorando o recurso que co
 ## 1. O que são Funções de Alta Ordem?
 
 Uma **Função de Alta Ordem** é simplesmente uma função que atende a pelo menos um dos seguintes requisitos:
+
 1. Recebe uma ou mais funções como argumento.
 2. Retorna uma função como resultado.
 
