@@ -14,6 +14,7 @@ Abra o seu terminal e execute o comando oficial do GHCup:
 curl --proto '=https' --tlsv1.2 -sSf https://get-ghcup.haskell.org | sh
 ```
 Durante a instalação interativa:
+
 * Pressione **Enter** para aceitar os caminhos padrão do diretório de instalação.
 * Quando perguntado se deseja adicionar os caminhos ao seu `PATH` (no arquivo `.bashrc` ou `.zshrc`), responda **Yes (Y)**.
 * Quando perguntado se deseja instalar o **Stack** (nossa ferramenta de build), responda **Yes (Y)**.

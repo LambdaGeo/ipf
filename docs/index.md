@@ -23,6 +23,7 @@ Cada unidade possui um **plano detalhado** com objetivos de aprendizagem, cronog
 
 ### 📘 Unidade 1: Paradigmas e Haskell Básico (20h)
 Exploramos os fundamentos teóricos do paradigma funcional em comparação aos paradigmas imperativo e orientado a objetos. Utilizando a linguagem **Haskell**, uma linguagem funcional pura com tipagem estática forte, estudamos os conceitos essenciais:
+
 * Fundamentos da sintaxe e ambiente de desenvolvimento (GHCUp, Stack, REPL/GHCi)
 * Funções puras, casamento de padrões (*pattern matching*) e guardas
 * Manipulação e compreensão de listas, e recursão
@@ -32,6 +33,7 @@ Exploramos os fundamentos teóricos do paradigma funcional em comparação aos p
 
 ### 📙 Unidade 2: Haskell Avançado e Qualidade de Código (20h)
 Avançamos para tópicos do ecossistema de produção em Haskell, adaptados às práticas do Haskell moderno:
+
 * Definição de novos tipos algébricos (ADTs) e Typeclasses
 * Programação interativa usando a Monad de Entrada/Saída (`IO`)
 * Estrutura de projetos industriais com **Stack** e gerenciamento de dependências com Cabal/package.yaml
@@ -42,10 +44,12 @@ Avançamos para tópicos do ecossistema de produção em Haskell, adaptados às 
 
 ### 📗 Unidade 3: Clojure e Elixir (20h)
 Na última unidade, exploramos a diversidade do paradigma funcional através de duas linguagens modernas focadas na indústria:
+
 1. **Clojure**: Um dialeto Lisp moderno e pragmático rodando sobre a Máquina Virtual Java (JVM), que traz forte ênfase em imutabilidade e metaprogramação.
 2. **Elixir**: Uma linguagem funcional concorrente que roda sobre a BEAM (Erlang VM), famosa por sua escalabilidade, tolerância a falhas e reatividade em tempo real.
 
 *Avaliação: dois projetos práticos com peso igual (veja o [plano completo da unidade](unidade3/00_plano_unidade3.md)):*
+
 * **Clojure/ClojureScript ToDo List (50%)**: Uma aplicação full-stack com backend Jetty/Reitit, banco SQLite (next.jdbc) e frontend reativo com ClojureScript e Reagent (React 19).
 * **Elixir/Phoenix LiveView ToDo List (50%)**: Uma aplicação de tempo real concorrente onde o frontend e o backend se integram nativamente via WebSockets e LiveView, utilizando Ecto e SQLite.
 

@@ -17,6 +17,7 @@ O projeto deve conter as seguintes funcionalidades mínimas:
 
 ### A. Tipo de Dados e Accessors (`SimpleJSON.hs`)
 O arquivo `src/SimpleJSON.hs` deve definir o tipo algébrico de dados `JValue` que representa JSON, além de funções para extração segura de dados (*accessors*):
+
 * `getString :: JValue -> Maybe String`
 * `getInt :: JValue -> Maybe Int`
 * `getDouble :: JValue -> Maybe Double`
@@ -27,11 +28,13 @@ O arquivo `src/SimpleJSON.hs` deve definir o tipo algébrico de dados `JValue` q
 
 ### B. O Pretty Printer JSON (`Prettify.hs` e `PrettyJSON.hs`)
 Você deve desenvolver uma biblioteca de formatação baseada em um tipo abstrato `Doc`. O renderizador deve:
+
 * Escapar strings corretamente (caracteres Unicode, quebras de linha `\n`, tabs `\t`, etc.).
 * Imprimir objetos JSON formatados com indentação e quebra de linhas para fácil legibilidade.
 
 ### C. Testes com QuickCheck (`test/Spec.hs`)
 O projeto deve conter uma suíte de testes rodando via `stack test` com, no mínimo:
+
 1. Implementação da Typeclass `Arbitrary` para o tipo `JValue` de forma a gerar dados aleatórios corretos e não-recursivos infinitos.
 2. No mínimo **5 propriedades** escritas para testar as invariantes da sua biblioteca (ex: idempotência de renderização, corretude dos escapes de string, corretude de acesso nas funções `get`).
 
