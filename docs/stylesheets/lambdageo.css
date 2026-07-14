@@ -463,4 +463,11 @@ input:focus-visible {
   .md-typeset h1 { font-size: 1.7rem; }
   .md-typeset h2 { font-size: 1.3rem; }
   .md-typeset pre { padding: 0.1rem; }
+
+  /* Material's default mobile gutter (0.8rem) is too tight for long-form
+     reading; give the text more breathing room on phone-sized screens. */
+  .md-content__inner {
+    margin-left: 1.25rem;
+    margin-right: 1.25rem;
+  }
 }
