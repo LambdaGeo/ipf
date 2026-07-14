@@ -46,13 +46,9 @@
     
     
       
-        
-        
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
-        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
-      
     
+    
+      <link rel="stylesheet" href="../../stylesheets/lambdageo.css">
     
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
@@ -70,7 +66,7 @@
     
     
     
-    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="teal" data-md-color-accent="green">
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="custom" data-md-color-accent="custom">
   
     
     <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
@@ -128,7 +124,21 @@
     
     
     
-    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="teal" data-md-color-accent="green"  aria-hidden="true"  type="radio" name="__palette" id="__palette_0">
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="custom" data-md-color-accent="custom"  aria-label="Alternar para modo escuro"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Alternar para modo escuro" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0-7 2.39 3.42C13.65 5.15 12.84 5 12 5s-1.65.15-2.39.42zM3.34 7l4.16-.35A7.2 7.2 0 0 0 5.94 8.5c-.44.74-.69 1.5-.83 2.29zm.02 10 1.76-3.77a7.131 7.131 0 0 0 2.38 4.14zM20.65 7l-1.77 3.79a7.02 7.02 0 0 0-2.38-4.15zm-.01 10-4.14.36c.59-.51 1.12-1.14 1.54-1.86.42-.73.69-1.5.83-2.29zM12 22l-2.41-3.44c.74.27 1.55.44 2.41.44.82 0 1.63-.17 2.37-.44z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="custom" data-md-color-accent="custom"  aria-label="Alternar para modo claro"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Alternar para modo claro" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m17.75 4.09-2.53 1.94.91 3.06-2.63-1.81-2.63 1.81.91-3.06-2.53-1.94L12.44 4l1.06-3 1.06 3zm3.5 6.91-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95zm-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14.4-.4.82-.76 1.27-1.08.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98 3.02 3.01 7.84 3.12 10.98.31"/></svg>
+      </label>
     
   
 </form>
@@ -157,6 +167,11 @@
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
       </label>
       <nav class="md-search__options" aria-label="Pesquisar">
+        
+          <a href="javascript:void(0)" class="md-search__icon md-icon" title="Compartilhar" aria-label="Compartilhar" data-clipboard data-clipboard-text="" data-md-component="search-share" tabindex="-1">
+            
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9a3 3 0 0 0-3 3 3 3 0 0 0 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.15c-.05.21-.08.43-.08.66 0 1.61 1.31 2.91 2.92 2.91s2.92-1.3 2.92-2.91A2.92 2.92 0 0 0 18 16.08"/></svg>
+          </a>
         
         <button type="reset" class="md-search__icon md-icon" title="Limpar" aria-label="Limpar" tabindex="-1">
           
@@ -203,9 +218,7 @@
 
 
 
-  
-
-<nav class="md-nav md-nav--primary md-nav--integrated" aria-label="Navegação" data-md-level="0">
+<nav class="md-nav md-nav--primary" aria-label="Navegação" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
     <a href="../.." title="Introdução à Programação Funcional" class="md-nav__button md-logo" aria-label="Introdução à Programação Funcional" data-md-component="logo">
       
@@ -265,7 +278,9 @@
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2" >
         
           
           <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
@@ -576,7 +591,9 @@
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3" >
         
           
           <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
@@ -1406,7 +1423,7 @@
   <a href="#12-ecto-queries-de-banco-de-dados" class="md-nav__link">
     <span class="md-ellipsis">
       
-        1.2. Ecto (Queries de Banco de Dados) 🛡️
+        1.2. Ecto (Queries de Banco de Dados)
       
     </span>
   </a>
@@ -1417,7 +1434,7 @@
   <a href="#13-phoenix-roteamento-web" class="md-nav__link">
     <span class="md-ellipsis">
       
-        1.3. Phoenix (Roteamento Web) 🌐
+        1.3. Phoenix (Roteamento Web)
       
     </span>
   </a>
@@ -1428,7 +1445,7 @@
   <a href="#14-exunit-testes-inteligentes" class="md-nav__link">
     <span class="md-ellipsis">
       
-        1.4. ExUnit (Testes Inteligentes) 🧪
+        1.4. ExUnit (Testes Inteligentes)
       
     </span>
   </a>
@@ -1456,7 +1473,7 @@
   <a href="#21-a-analogia-do-cinema" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2.1. A Analogia do Cinema 🎬
+        2.1. A Analogia do Cinema
       
     </span>
   </a>
@@ -1467,7 +1484,7 @@
   <a href="#22-a-prova-real-por-que-funcoes-falham-em-controle-de-fluxo" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2.2. A Prova Real: Por que Funções falham em Controle de Fluxo? 💥
+        2.2. A Prova Real: Por que Funções falham em Controle de Fluxo?
       
     </span>
   </a>
@@ -1478,7 +1495,7 @@
   <a href="#o-experimento-do-apagar-banco" class="md-nav__link">
     <span class="md-ellipsis">
       
-        🧪 O Experimento do "Apagar Banco"
+        O Experimento do "Apagar Banco"
       
     </span>
   </a>
@@ -1505,12 +1522,12 @@
   <a href="#3-a-arvore-de-sintaxe-ast" class="md-nav__link">
     <span class="md-ellipsis">
       
-        3. A Árvore de Sintaxe (AST) 🌳
+        3. A Árvore de Sintaxe (AST)
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="3. A Árvore de Sintaxe (AST) 🌳">
+    <nav class="md-nav" aria-label="3. A Árvore de Sintaxe (AST)">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
@@ -1561,7 +1578,7 @@
   <a href="#34-laboratorio-raio-x-com-quote" class="md-nav__link">
     <span class="md-ellipsis">
       
-        3.4. Laboratório: Raio-X com quote 🧪
+        3.4. Laboratório: Raio-X com quote
       
     </span>
   </a>
@@ -1572,7 +1589,7 @@
   <a href="#35-a-dinamica-injetando-valores-com-unquote" class="md-nav__link">
     <span class="md-ellipsis">
       
-        3.5. A Dinâmica: Injetando Valores com unquote 💉
+        3.5. A Dinâmica: Injetando Valores com unquote
       
     </span>
   </a>
@@ -1668,6 +1685,270 @@
               </div>
             
             
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Índice">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Índice
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1-contextualizacao-onde-vivem-as-macros" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Contextualização: Onde vivem as Macros?
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1. Contextualização: Onde vivem as Macros?">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#11-a-propria-linguagem-modulo-kernel" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.1. A Própria Linguagem (Módulo Kernel)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#12-ecto-queries-de-banco-de-dados" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.2. Ecto (Queries de Banco de Dados)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#13-phoenix-roteamento-web" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.3. Phoenix (Roteamento Web)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#14-exunit-testes-inteligentes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.4. ExUnit (Testes Inteligentes)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-teoria-fundamental-funcao-vs-macro-a-linha-do-tempo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Teoria Fundamental: Função vs. Macro (A Linha do Tempo)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. Teoria Fundamental: Função vs. Macro (A Linha do Tempo)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21-a-analogia-do-cinema" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.1. A Analogia do Cinema
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#22-a-prova-real-por-que-funcoes-falham-em-controle-de-fluxo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.2. A Prova Real: Por que Funções falham em Controle de Fluxo?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#o-experimento-do-apagar-banco" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        O Experimento do "Apagar Banco"
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#23-a-solucao-com-macros-lazy-evaluation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.3. A Solução com Macros (Lazy Evaluation)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-a-arvore-de-sintaxe-ast" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. A Árvore de Sintaxe (AST)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. A Árvore de Sintaxe (AST)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#31-a-linha-de-montagem-de-um-compilador" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.1. A Linha de Montagem de um Compilador
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#32-o-diferencial-do-elixir-o-hack-do-sistema" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.2. O Diferencial do Elixir (O "Hack" do Sistema)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#33-a-homoiconicidade-elixir-vs-clojure" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.3. A Homoiconicidade: Elixir vs. Clojure
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#33-anatomia-da-ast-em-elixir" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.3. Anatomia da AST em Elixir
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#34-laboratorio-raio-x-com-quote" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.4. Laboratório: Raio-X com quote
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#35-a-dinamica-injetando-valores-com-unquote" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.5. A Dinâmica: Injetando Valores com unquote
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#o-problema-o-isolamento-do-quote" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        O Problema: O Isolamento do quote
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#a-solucao-a-vacina-unquote" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        A Solução: A "Vacina" unquote
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#resumo-da-ferramenta" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Resumo da Ferramenta
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
           
           
             <div class="md-content" data-md-component="content">
@@ -1693,7 +1974,7 @@ Elas são macros escritas em Elixir!</p>
 <li><strong>Como funciona:</strong> Quando você escreve <code>if</code>, o compilador troca isso por uma estrutura <code>case</code> (que é a primitiva real da linguagem).</li>
 <li><strong>Vantagem:</strong> Isso torna o Elixir infinitamente extensível. Se você não gosta do <code>if</code> do Elixir, você pode criar o seu próprio <code>meu_if</code> e ele se comportará como um cidadão de primeira classe.</li>
 </ul>
-<h3 id="12-ecto-queries-de-banco-de-dados">1.2. Ecto (Queries de Banco de Dados) 🛡️<a class="headerlink" href="#12-ecto-queries-de-banco-de-dados" title="Permanent link">&para;</a></h3>
+<h3 id="12-ecto-queries-de-banco-de-dados">1.2. Ecto (Queries de Banco de Dados)<a class="headerlink" href="#12-ecto-queries-de-banco-de-dados" title="Permanent link">&para;</a></h3>
 <p>O Ecto permite escrever consultas SQL usando sintaxe Elixir.</p>
 <p>Elixir</p>
 <p><code># Isso parece Elixir, mas vira SQL seguro
@@ -1701,14 +1982,14 @@ from u in User, where: u.age &gt; 18</code></p>
 <ul>
 <li><strong>O Poder da Macro:</strong> O Ecto usa macros para analisar seu código em <strong>Tempo de Compilação</strong>. Se você errar o nome de um campo ou tentar uma injeção de SQL, o Ecto detecta isso <em>antes</em> do seu código rodar, prevenindo bugs críticos em produção.</li>
 </ul>
-<h3 id="13-phoenix-roteamento-web">1.3. Phoenix (Roteamento Web) 🌐<a class="headerlink" href="#13-phoenix-roteamento-web" title="Permanent link">&para;</a></h3>
+<h3 id="13-phoenix-roteamento-web">1.3. Phoenix (Roteamento Web)<a class="headerlink" href="#13-phoenix-roteamento-web" title="Permanent link">&para;</a></h3>
 <p>O framework Phoenix usa macros para definir rotas de forma limpa.</p>
 <p>Elixir</p>
 <p><code>get "/users/:id", UserController, :show</code></p>
 <ul>
 <li><strong>O Poder da Macro:</strong> Em tempo de compilação, o Phoenix transforma essa linha bonita em uma função gigante de Pattern Matching ultra-otimizada. Você escreve código legível; a macro gera código performático.</li>
 </ul>
-<h3 id="14-exunit-testes-inteligentes">1.4. ExUnit (Testes Inteligentes) 🧪<a class="headerlink" href="#14-exunit-testes-inteligentes" title="Permanent link">&para;</a></h3>
+<h3 id="14-exunit-testes-inteligentes">1.4. ExUnit (Testes Inteligentes)<a class="headerlink" href="#14-exunit-testes-inteligentes" title="Permanent link">&para;</a></h3>
 <p>Em outras linguagens, você tem <code>assertEquals(a, b)</code>. Em Elixir, temos apenas <code>assert a == b</code>.</p>
 <ul>
 <li><strong>O Poder da Macro:</strong> Como <code>assert</code> é uma macro, ela recebe o código <code>a == b</code> (e não apenas o resultado <code>false</code>). Quando o teste falha, ela consegue dissecar o código e te dizer: <em>"Falhou porque o lado esquerdo era 5 e o direito era 10"</em>. Uma função normal não conseguiria fazer isso.</li>
@@ -1720,7 +2001,7 @@ from u in User, where: u.age &gt; 18</code></p>
 <li><strong>Compile Time (Tempo de Compilação):</strong> O momento em que o código fonte (<code>.ex</code>) é lido e transformado em binário (<code>.beam</code>).</li>
 <li><strong>Runtime (Tempo de Execução):</strong> O momento em que o usuário final está usando o sistema e o binário está rodando na CPU.</li>
 </ol>
-<h3 id="21-a-analogia-do-cinema">2.1. A Analogia do Cinema 🎬<a class="headerlink" href="#21-a-analogia-do-cinema" title="Permanent link">&para;</a></h3>
+<h3 id="21-a-analogia-do-cinema">2.1. A Analogia do Cinema<a class="headerlink" href="#21-a-analogia-do-cinema" title="Permanent link">&para;</a></h3>
 <p>Para visualizar a diferença, pense na produção de um filme:</p>
 <ul>
 <li><strong>A Macro é o Roteirista (Compile Time):</strong>
@@ -1739,10 +2020,10 @@ O ator entra em cena quando a câmera liga. Ele recebe o roteiro pronto e <stron
 </li>
 </ul>
 <hr />
-<h3 id="22-a-prova-real-por-que-funcoes-falham-em-controle-de-fluxo">2.2. A Prova Real: Por que Funções falham em Controle de Fluxo? 💥<a class="headerlink" href="#22-a-prova-real-por-que-funcoes-falham-em-controle-de-fluxo" title="Permanent link">&para;</a></h3>
+<h3 id="22-a-prova-real-por-que-funcoes-falham-em-controle-de-fluxo">2.2. A Prova Real: Por que Funções falham em Controle de Fluxo?<a class="headerlink" href="#22-a-prova-real-por-que-funcoes-falham-em-controle-de-fluxo" title="Permanent link">&para;</a></h3>
 <p>Vamos provar tecnicamente por que você <strong>não</strong> consegue criar estruturas como <code>if</code> ou <code>unless</code> usando funções normais.</p>
 <p>O Elixir (assim como Java, C# e Python) usa <strong>Avaliação Estrita (Eager Evaluation)</strong> para funções. Isso significa que <strong>todos os argumentos são calculados e executados ANTES de entrar na função.</strong></p>
-<h3 id="o-experimento-do-apagar-banco">🧪 O Experimento do "Apagar Banco"<a class="headerlink" href="#o-experimento-do-apagar-banco" title="Permanent link">&para;</a></h3>
+<h3 id="o-experimento-do-apagar-banco">O Experimento do "Apagar Banco"<a class="headerlink" href="#o-experimento-do-apagar-banco" title="Permanent link">&para;</a></h3>
 <p>Imagine que queremos criar nosso próprio <code>meu_if</code>. Vamos tentar fazer isso com uma função (<code>def</code>).</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="kd">defmodule</span><span class="w"> </span><span class="nc">TentativaRuim</span><span class="w"> </span><span class="k">do</span>
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="w">  </span><span class="c1"># Uma função normal que recebe uma condição e dois blocos</span>
@@ -1767,7 +2048,7 @@ Queremos executar a ação de apagar o banco <strong>apenas se</strong> a condi�
 <p>Plaintext</p>
 <p><code>"🔥 APAGANDO O BANCO..."
 "Ufa, salvo."</code></p>
-<p><strong>😱 O Desastre:</strong>
+<p><strong>O Desastre:</strong>
 A mensagem "Apagando o banco" apareceu, mesmo a condição sendo <code>false</code>!</p>
 <p><strong>A Explicação de Engenharia:</strong></p>
 <ol>
@@ -1815,7 +2096,7 @@ Ela não recebe o <em>resultado</em> da execução ("Apagando..."). Ela recebe o
 </tbody>
 </table>
 <hr />
-<h2 id="3-a-arvore-de-sintaxe-ast">3. A Árvore de Sintaxe (AST) 🌳<a class="headerlink" href="#3-a-arvore-de-sintaxe-ast" title="Permanent link">&para;</a></h2>
+<h2 id="3-a-arvore-de-sintaxe-ast">3. A Árvore de Sintaxe (AST)<a class="headerlink" href="#3-a-arvore-de-sintaxe-ast" title="Permanent link">&para;</a></h2>
 <p>Para entender como criar macros, precisamos abrir a "Caixa Preta" do compilador.</p>
 <p>Você, como engenheiro, está acostumado a escrever código como <strong>Texto</strong> (arquivos <code>.c</code>, <code>.java</code>, <code>.ex</code>). Mas o computador não entende texto; ele entende instruções de máquina. Como chegamos de um ponto ao outro?</p>
 <h3 id="31-a-linha-de-montagem-de-um-compilador">3.1. A Linha de Montagem de um Compilador<a class="headerlink" href="#31-a-linha-de-montagem-de-um-compilador" title="Permanent link">&para;</a></h3>
@@ -1889,7 +2170,7 @@ O Elixir oferece uma sintaxe mais limpa (sem tantos parênteses), mas por baixo 
 <li><strong>Argumentos (List):</strong> Os dados ou sub-árvores que a função recebeu.</li>
 </ol>
 <hr />
-<h3 id="34-laboratorio-raio-x-com-quote">3.4. Laboratório: Raio-X com <code>quote</code> 🧪<a class="headerlink" href="#34-laboratorio-raio-x-com-quote" title="Permanent link">&para;</a></h3>
+<h3 id="34-laboratorio-raio-x-com-quote">3.4. Laboratório: Raio-X com <code>quote</code><a class="headerlink" href="#34-laboratorio-raio-x-com-quote" title="Permanent link">&para;</a></h3>
 <p>Vamos usar a macro <code>quote</code> para atuar como o Parser do compilador e ver essa estrutura.</p>
 <p>Abra o <code>iex</code>:</p>
 <p><strong>Experimento A: Matemática Simples</strong></p>
@@ -1920,7 +2201,7 @@ O Elixir oferece uma sintaxe mais limpa (sem tantos parênteses), mas por baixo 
 <a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="c1"># Saída: {:idade, [], Elixir}</span>
 </code></pre></div>
 <hr />
-<h3 id="35-a-dinamica-injetando-valores-com-unquote">3.5. A Dinâmica: Injetando Valores com <code>unquote</code> 💉<a class="headerlink" href="#35-a-dinamica-injetando-valores-com-unquote" title="Permanent link">&para;</a></h3>
+<h3 id="35-a-dinamica-injetando-valores-com-unquote">3.5. A Dinâmica: Injetando Valores com <code>unquote</code><a class="headerlink" href="#35-a-dinamica-injetando-valores-com-unquote" title="Permanent link">&para;</a></h3>
 <p>Agora que você viu que <code>quote</code> transforma <strong>tudo</strong> em uma estrutura de dados estática, surge um problema de engenharia.</p>
 <p>Imagine que você quer gerar um código de soma, mas um dos números vem de uma variável externa.</p>
 <h3 id="o-problema-o-isolamento-do-quote">O Problema: O Isolamento do <code>quote</code><a class="headerlink" href="#o-problema-o-isolamento-do-quote" title="Permanent link">&para;</a></h3>
@@ -1977,14 +2258,14 @@ Lógica: <code>unless(x)</code> é semanticamente idêntico a <code>if(!x)</code
 <hr />
 <h1 id="4-pratica-de-engenharia-criando-a-macro-unless">4. Prática de Engenharia: Criando a Macro <code>unless</code><a class="headerlink" href="#4-pratica-de-engenharia-criando-a-macro-unless" title="Permanent link">&para;</a></h1>
 <p>Neste laboratório, você vai sentir o poder de estender a linguagem. Você não vai criar uma função; você vai criar uma <strong>nova palavra-chave</strong>.</p>
-<h3 id="passo-1-o-ambiente">🛠️ Passo 1: O Ambiente<a class="headerlink" href="#passo-1-o-ambiente" title="Permanent link">&para;</a></h3>
+<h3 id="passo-1-o-ambiente">Passo 1: O Ambiente<a class="headerlink" href="#passo-1-o-ambiente" title="Permanent link">&para;</a></h3>
 <p>Crie um projeto novo para isolarmos nossos experimentos:</p>
 <p>Bash</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="n">mix</span><span class="w"> </span><span class="n">new</span><span class="w"> </span><span class="n">meta_lab</span>
 <a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="n">cd</span><span class="w"> </span><span class="n">meta_lab</span>
 <a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a><span class="n">iex</span><span class="w"> </span><span class="o">-</span><span class="nc">S</span><span class="w"> </span><span class="n">mix</span>
 </code></pre></div>
-<h3 id="passo-2-a-implementacao-defmacro">🛠️ Passo 2: A Implementação (<code>defmacro</code>)<a class="headerlink" href="#passo-2-a-implementacao-defmacro" title="Permanent link">&para;</a></h3>
+<h3 id="passo-2-a-implementacao-defmacro">Passo 2: A Implementação (<code>defmacro</code>)<a class="headerlink" href="#passo-2-a-implementacao-defmacro" title="Permanent link">&para;</a></h3>
 <p>Crie o arquivo <code>lib/estruturas_controle.ex</code>.</p>
 <p>Aqui, usaremos o <code>defmacro</code> em vez de <code>def</code>.
 O compilador sabe que, ao encontrar um <code>defmacro</code>, ele deve executar esse código <strong>durante a compilação</strong> e substituir a chamada pelo resultado (a AST) que ele retornar.</p>
@@ -2006,7 +2287,7 @@ O compilador sabe que, ao encontrar um <code>defmacro</code>, ele deve executar 
 <a id="__codelineno-8-16" name="__codelineno-8-16" href="#__codelineno-8-16"></a><span class="w">  </span><span class="k">end</span>
 <a id="__codelineno-8-17" name="__codelineno-8-17" href="#__codelineno-8-17"></a><span class="k">end</span>
 </code></pre></div>
-<h3 id="passo-3-o-teste-de-fogo-runtime">⚡ Passo 3: O Teste de Fogo (Runtime)<a class="headerlink" href="#passo-3-o-teste-de-fogo-runtime" title="Permanent link">&para;</a></h3>
+<h3 id="passo-3-o-teste-de-fogo-runtime">Passo 3: O Teste de Fogo (Runtime)<a class="headerlink" href="#passo-3-o-teste-de-fogo-runtime" title="Permanent link">&para;</a></h3>
 <p>Abra o terminal do projeto: <code>iex -S mix</code>.</p>
 <p>Para usar macros de outro módulo, somos obrigados a usar <code>require</code>. Isso garante que o módulo da macro seja compilado <strong>antes</strong> do módulo que a usa.</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="c1"># 1. Carregue o módulo</span>
@@ -2025,7 +2306,7 @@ O compilador sabe que, ao encontrar um <code>defmacro</code>, ele deve executar 
 <a id="__codelineno-9-14" name="__codelineno-9-14" href="#__codelineno-9-14"></a><span class="c1"># Saída: nil</span>
 </code></pre></div>
 <hr />
-<h2 id="5-depuracao-o-raio-x-da-expansao">5. Depuração: O Raio-X da Expansão 🕵️‍♂️<a class="headerlink" href="#5-depuracao-o-raio-x-da-expansao" title="Permanent link">&para;</a></h2>
+<h2 id="5-depuracao-o-raio-x-da-expansao">5. Depuração: O Raio-X da Expansão<a class="headerlink" href="#5-depuracao-o-raio-x-da-expansao" title="Permanent link">&para;</a></h2>
 <p>Como engenheiro, você não deve confiar em mágica. Você precisa ver o código gerado.
 O Elixir possui a função <code>Macro.expand/2</code> que simula o trabalho do compilador e te mostra o resultado final.</p>
 <p>Ainda no IEx, digite:</p>
@@ -2066,9 +2347,9 @@ Queremos permitir que outro programador escreva testes usando esta sintaxe limpa
   assert 5 == 5
 end</code></p>
 <hr />
-<h1 id="laboratorio-final-o-framework-minitest">🎓 Laboratório Final: O Framework "MiniTest"<a class="headerlink" href="#laboratorio-final-o-framework-minitest" title="Permanent link">&para;</a></h1>
+<h1 id="laboratorio-final-o-framework-minitest">Laboratório Final: O Framework "MiniTest"<a class="headerlink" href="#laboratorio-final-o-framework-minitest" title="Permanent link">&para;</a></h1>
 <p>Neste laboratório, você vai entender como o Elixir consegue olhar para o código <code>assert 1 == 2</code> e dizer: <em>"Falhou. O lado esquerdo era 1 e o direito era 2"</em>. (Spoiler: Pattern Matching na AST).</p>
-<h3 id="passo-1-criando-o-motor-do-framework">🛠️ Passo 1: Criando o Motor do Framework<a class="headerlink" href="#passo-1-criando-o-motor-do-framework" title="Permanent link">&para;</a></h3>
+<h3 id="passo-1-criando-o-motor-do-framework">Passo 1: Criando o Motor do Framework<a class="headerlink" href="#passo-1-criando-o-motor-do-framework" title="Permanent link">&para;</a></h3>
 <p>Crie um novo projeto (se ainda não estiver em um): <code>mix new mini_framework</code>.
 Crie o arquivo <code>lib/mini_test.ex</code>.</p>
 <p>Vamos construir em 3 partes. Leia os comentários com atenção de cirurgião.</p>
@@ -2121,7 +2402,7 @@ Crie o arquivo <code>lib/mini_test.ex</code>.</p>
 <a id="__codelineno-12-47" name="__codelineno-12-47" href="#__codelineno-12-47"></a><span class="k">end</span>
 </code></pre></div>
 <hr />
-<h3 id="passo-2-o-consumidor-escrevendo-os-testes">🛠️ Passo 2: O Consumidor (Escrevendo os Testes)<a class="headerlink" href="#passo-2-o-consumidor-escrevendo-os-testes" title="Permanent link">&para;</a></h3>
+<h3 id="passo-2-o-consumidor-escrevendo-os-testes">Passo 2: O Consumidor (Escrevendo os Testes)<a class="headerlink" href="#passo-2-o-consumidor-escrevendo-os-testes" title="Permanent link">&para;</a></h3>
 <p>Agora vamos atuar como o usuário final do seu framework.
 Crie o arquivo <code>lib/meus_testes.ex</code>.</p>
 <p>Elixir</p>
@@ -2142,7 +2423,7 @@ Crie o arquivo <code>lib/meus_testes.ex</code>.</p>
 <a id="__codelineno-13-15" name="__codelineno-13-15" href="#__codelineno-13-15"></a><span class="k">end</span>
 </code></pre></div>
 <hr />
-<h3 id="passo-3-execucao-e-analise-iex">⚡ Passo 3: Execução e Análise (IEx)<a class="headerlink" href="#passo-3-execucao-e-analise-iex" title="Permanent link">&para;</a></h3>
+<h3 id="passo-3-execucao-e-analise-iex">Passo 3: Execução e Análise (IEx)<a class="headerlink" href="#passo-3-execucao-e-analise-iex" title="Permanent link">&para;</a></h3>
 <p>Abra o terminal: <code>iex -S mix</code>.</p>
 <p>Lembre-se: As macros rodaram quando você compilou. Agora, o módulo <code>MeusTestes</code> possui duas funções públicas (<code>test_matematica_correta</code> e <code>test_matematica_errada</code>) que foram geradas invisivelmente.</p>
 <p><strong>1. Rodando o teste que passa:</strong></p>
@@ -2163,7 +2444,7 @@ Crie o arquivo <code>lib/meus_testes.ex</code>.</p>
 <a id="__codelineno-17-5" name="__codelineno-17-5" href="#__codelineno-17-5"></a><span class="w">   </span><span class="ss">Direita</span><span class="p">:</span><span class="w">  </span><span class="mi">10</span>
 </code></pre></div>
 <hr />
-<h3 id="a-analise-do-engenheiro-o-pulo-do-gato">🧠 A Análise do Engenheiro (O "Pulo do Gato")<a class="headerlink" href="#a-analise-do-engenheiro-o-pulo-do-gato" title="Permanent link">&para;</a></h3>
+<h3 id="a-analise-do-engenheiro-o-pulo-do-gato">A Análise do Engenheiro (O "Pulo do Gato")<a class="headerlink" href="#a-analise-do-engenheiro-o-pulo-do-gato" title="Permanent link">&para;</a></h3>
 <p>Pare e pense no que aconteceu no teste de falha.</p>
 <p>Se <code>assert</code> fosse uma <strong>Função</strong> normal em Java ou Python:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a><span class="c1"># Python</span>
@@ -2178,7 +2459,7 @@ Crie o arquivo <code>lib/meus_testes.ex</code>.</p>
 </ol>
 <p>Isso é <strong>Introspecção de Código</strong>. É por isso que o Elixir não precisa de bibliotecas de "Assertion" complexas. A própria linguagem entende o código que você escreveu.</p>
 <hr />
-<h3 id="conclusao-do-curso-de-metaprogramacao">🏁 Conclusão do Curso de Metaprogramação<a class="headerlink" href="#conclusao-do-curso-de-metaprogramacao" title="Permanent link">&para;</a></h3>
+<h3 id="conclusao-do-curso-de-metaprogramacao">Conclusão do Curso de Metaprogramação<a class="headerlink" href="#conclusao-do-curso-de-metaprogramacao" title="Permanent link">&para;</a></h3>
 <p>Você acabou de construir a base do <code>ExUnit</code>, um dos frameworks de teste mais elogiados do mundo.</p>
 <p><strong>O que você leva daqui:</strong></p>
 <ol>
@@ -2187,7 +2468,7 @@ Crie o arquivo <code>lib/meus_testes.ex</code>.</p>
 <li><strong>Defmacro:</strong> O momento (Compilação) onde a mágica ocorre.</li>
 <li><strong>Responsabilidade:</strong> Você viu o poder. Use-o para criar ferramentas expressivas (DSLs), mas evite usá-lo para esconder lógica simples.</li>
 </ol>
-<p>Parabéns! Você desbloqueou o nível mais profundo da Engenharia de Software em Elixir. 🚀</p>
+<p>Parabéns! Você desbloqueou o nível mais profundo da Engenharia de Software em Elixir.</p>
 
 
 
@@ -2205,6 +2486,8 @@ Crie o arquivo <code>lib/meus_testes.ex</code>.</p>
             </div>
           
           
+  <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var labels=set.querySelector(".tabbed-labels");for(var tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
+
 <script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
         </div>
         
@@ -2243,7 +2526,7 @@ Crie o arquivo <code>lib/meus_testes.ex</code>.</p>
     
       
       
-      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.top", "navigation.sections", "toc.integrate", "content.code.annotate", "content.code.copy"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copiado para \u00e1rea de transfer\u00eancia", "clipboard.copy": "Copiar para \u00e1rea de transfer\u00eancia", "search.result.more.one": "Mais 1 nesta p\u00e1gina", "search.result.more.other": "Mais # nesta p\u00e1gina", "search.result.none": "Nenhum resultado encontrado", "search.result.one": "1 resultado encontrado", "search.result.other": "# resultados encontrados", "search.result.placeholder": "Digite para iniciar a busca", "search.result.term.missing": "Ausente", "select.version": "Selecione a vers\u00e3o"}, "version": null}</script>
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.instant", "navigation.tracking", "navigation.sections", "navigation.expand", "navigation.top", "search.highlight", "search.share", "content.code.annotate", "content.code.copy", "content.tabs.link", "content.tooltips", "toc.follow"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copiado para \u00e1rea de transfer\u00eancia", "clipboard.copy": "Copiar para \u00e1rea de transfer\u00eancia", "search.result.more.one": "Mais 1 nesta p\u00e1gina", "search.result.more.other": "Mais # nesta p\u00e1gina", "search.result.none": "Nenhum resultado encontrado", "search.result.one": "1 resultado encontrado", "search.result.other": "# resultados encontrados", "search.result.placeholder": "Digite para iniciar a busca", "search.result.term.missing": "Ausente", "select.version": "Selecione a vers\u00e3o"}, "version": null}</script>
     
     
       <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>

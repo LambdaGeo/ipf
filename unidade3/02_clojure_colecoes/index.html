@@ -46,13 +46,9 @@
     
     
       
-        
-        
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
-        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
-      
     
+    
+      <link rel="stylesheet" href="../../stylesheets/lambdageo.css">
     
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
@@ -70,7 +66,7 @@
     
     
     
-    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="teal" data-md-color-accent="green">
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="custom" data-md-color-accent="custom">
   
     
     <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
@@ -128,7 +124,21 @@
     
     
     
-    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="teal" data-md-color-accent="green"  aria-hidden="true"  type="radio" name="__palette" id="__palette_0">
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="custom" data-md-color-accent="custom"  aria-label="Alternar para modo escuro"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Alternar para modo escuro" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0-7 2.39 3.42C13.65 5.15 12.84 5 12 5s-1.65.15-2.39.42zM3.34 7l4.16-.35A7.2 7.2 0 0 0 5.94 8.5c-.44.74-.69 1.5-.83 2.29zm.02 10 1.76-3.77a7.131 7.131 0 0 0 2.38 4.14zM20.65 7l-1.77 3.79a7.02 7.02 0 0 0-2.38-4.15zm-.01 10-4.14.36c.59-.51 1.12-1.14 1.54-1.86.42-.73.69-1.5.83-2.29zM12 22l-2.41-3.44c.74.27 1.55.44 2.41.44.82 0 1.63-.17 2.37-.44z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="custom" data-md-color-accent="custom"  aria-label="Alternar para modo claro"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Alternar para modo claro" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m17.75 4.09-2.53 1.94.91 3.06-2.63-1.81-2.63 1.81.91-3.06-2.53-1.94L12.44 4l1.06-3 1.06 3zm3.5 6.91-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95zm-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14.4-.4.82-.76 1.27-1.08.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98 3.02 3.01 7.84 3.12 10.98.31"/></svg>
+      </label>
     
   
 </form>
@@ -157,6 +167,11 @@
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
       </label>
       <nav class="md-search__options" aria-label="Pesquisar">
+        
+          <a href="javascript:void(0)" class="md-search__icon md-icon" title="Compartilhar" aria-label="Compartilhar" data-clipboard data-clipboard-text="" data-md-component="search-share" tabindex="-1">
+            
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9a3 3 0 0 0-3 3 3 3 0 0 0 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.15c-.05.21-.08.43-.08.66 0 1.61 1.31 2.91 2.92 2.91s2.92-1.3 2.92-2.91A2.92 2.92 0 0 0 18 16.08"/></svg>
+          </a>
         
         <button type="reset" class="md-search__icon md-icon" title="Limpar" aria-label="Limpar" tabindex="-1">
           
@@ -203,9 +218,7 @@
 
 
 
-  
-
-<nav class="md-nav md-nav--primary md-nav--integrated" aria-label="Navegação" data-md-level="0">
+<nav class="md-nav md-nav--primary" aria-label="Navegação" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
     <a href="../.." title="Introdução à Programação Funcional" class="md-nav__button md-logo" aria-label="Introdução à Programação Funcional" data-md-component="logo">
       
@@ -265,7 +278,9 @@
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2" >
         
           
           <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
@@ -576,7 +591,9 @@
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3" >
         
           
           <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
@@ -1064,7 +1081,7 @@
   <a href="#1-usando-o-vetor-como-funcao" class="md-nav__link">
     <span class="md-ellipsis">
       
-        ✅ 1. Usando o vetor como função
+        1. Usando o vetor como função
       
     </span>
   </a>
@@ -1075,7 +1092,7 @@
   <a href="#2-usando-a-funcao-get" class="md-nav__link">
     <span class="md-ellipsis">
       
-        🛡️ 2. Usando a função get
+        2. Usando a função get
       
     </span>
   </a>
@@ -1086,7 +1103,7 @@
   <a href="#conclusao" class="md-nav__link">
     <span class="md-ellipsis">
       
-        📌 Conclusão
+        Conclusão
       
     </span>
   </a>
@@ -1186,7 +1203,7 @@
   <a href="#42-a-funcao-universal-atualizando-valores-com-update" class="md-nav__link">
     <span class="md-ellipsis">
       
-        ✅ 4.2 A Função Universal: Atualizando Valores com update
+        4.2 A Função Universal: Atualizando Valores com update
       
     </span>
   </a>
@@ -1635,6 +1652,237 @@
               </div>
             
             
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Índice">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Índice
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#10-introducao-os-pilares-da-organizacao-de-dados" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.0 Introdução: Os Pilares da Organização de Dados
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#20-vetores-sua-lista-de-dados-ordenada-e-imutavel" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.0 Vetores: Sua Lista de Dados Ordenada e Imutável
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2.0 Vetores: Sua Lista de Dados Ordenada e Imutável">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21-o-que-e-um-vetor-e-como-cria-lo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.1 O que é um Vetor e Como Criá-lo?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#22-acessando-elementos-duas-abordagens-seguras" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.2 Acessando Elementos: Duas Abordagens Seguras
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1-usando-o-vetor-como-funcao" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Usando o vetor como função
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-usando-a-funcao-get" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Usando a função get
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#conclusao" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Conclusão
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#23-lendo-e-modificando-vetores" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.3 Lendo e Modificando Vetores
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#30-mapas-hashmaps-organizando-dados-com-chaves-e-valores" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.0 Mapas (Hashmaps): Organizando Dados com Chaves e Valores
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3.0 Mapas (Hashmaps): Organizando Dados com Chaves e Valores">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#31-o-que-e-um-mapa-e-por-que-usar-keywords" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.1 O que é um Mapa e Por Que Usar Keywords?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#32-explorando-o-conteudo-de-um-mapa" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.2 Explorando o Conteúdo de um Mapa
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#33-recaptulando" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.3 Recaptulando
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#40-manipulacao-imutavel-a-arte-de-transformar-colecoes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.0 Manipulação Imutável: A Arte de Transformar Coleções
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4.0 Manipulação Imutável: A Arte de Transformar Coleções">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#41-modificando-mapas-com-assoc-e-dissoc" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.1 Modificando Mapas com assoc e dissoc
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#42-a-funcao-universal-atualizando-valores-com-update" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.2 A Função Universal: Atualizando Valores com update
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#50-hora-da-pratica" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.0 Hora da Prática!
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#60-conclusao-seus-novos-superpoderes-em-clojure" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.0 Conclusão: Seus Novos Superpoderes em Clojure
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
           
           
             <div class="md-content" data-md-component="content">
@@ -1661,14 +1909,14 @@
 <p>Antes de tudo, vamos definir um vetor com alguns itens de estoque:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="p">(</span><span class="k">def </span><span class="nv">estoque</span><span class="w"> </span><span class="p">[</span><span class="s">&quot;Mochila&quot;</span><span class="w"> </span><span class="s">&quot;Camiseta&quot;</span><span class="p">])</span>
 </code></pre></div>
-<h3 id="1-usando-o-vetor-como-funcao"><strong>✅ 1. Usando o vetor como função</strong><a class="headerlink" href="#1-usando-o-vetor-como-funcao" title="Permanent link">&para;</a></h3>
+<h3 id="1-usando-o-vetor-como-funcao"><strong>1. Usando o vetor como função</strong><a class="headerlink" href="#1-usando-o-vetor-como-funcao" title="Permanent link">&para;</a></h3>
 <p>Essa é a forma <strong>mais rápida e idiomática</strong> de acessar elementos. Em Clojure, vetores se comportam como funções: você pode "chamá-los" com um índice.</p>
-<p>✔️ Exemplo válido:</p>
+<p>Exemplo válido:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="p">(</span><span class="nf">estoque</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span>
 <a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="c1">;=&gt; &quot;Mochila&quot;</span>
 </code></pre></div>
 <p>Aqui estamos pedindo o item no índice 0. Como o índice existe, recebemos "Mochila".</p>
-<p>⚠️ Exemplo inválido:</p>
+<p>Exemplo inválido:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="p">(</span><span class="nf">estoque</span><span class="w"> </span><span class="mi">2</span><span class="p">)</span>
 <a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="c1">;=&gt; IndexOutOfBoundsException</span>
 </code></pre></div>
@@ -1678,23 +1926,23 @@
 </p>
 </blockquote>
 <hr />
-<h3 id="2-usando-a-funcao-get"><strong>🛡️ 2. Usando a função <code>get</code></strong><a class="headerlink" href="#2-usando-a-funcao-get" title="Permanent link">&para;</a></h3>
+<h3 id="2-usando-a-funcao-get"><strong>2. Usando a função <code>get</code></strong><a class="headerlink" href="#2-usando-a-funcao-get" title="Permanent link">&para;</a></h3>
 <p>A função <code>get</code> é uma forma <strong>mais segura</strong> de acessar elementos. Ela aceita:</p>
 <ul>
 <li>a coleção (no caso, o vetor),</li>
 <li>o índice desejado,</li>
 <li>e <strong>opcionalmente</strong>, um valor padrão.</li>
 </ul>
-<p>✔️ Exemplo com índice válido:</p>
+<p>Exemplo com índice válido:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="p">(</span><span class="nb">get </span><span class="nv">estoque</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span>
 <a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="c1">;=&gt; &quot;Camiseta&quot;</span>
 </code></pre></div>
-<p>🤔 Exemplo com índice inválido:</p>
+<p>Exemplo com índice inválido:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="p">(</span><span class="nb">get </span><span class="nv">estoque</span><span class="w"> </span><span class="mi">17</span><span class="p">)</span>
 <a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="c1">;=&gt; nil</span>
 </code></pre></div>
 <p>Diferente da abordagem anterior, <code>get</code> não lança erro se o índice for inválido — apenas retorna <code>nil</code>.</p>
-<p>🛠️ Exemplo com valor padrão:</p>
+<p>Exemplo com valor padrão:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="p">(</span><span class="nb">get </span><span class="nv">estoque</span><span class="w"> </span><span class="mi">17</span><span class="w"> </span><span class="s">&quot;Produto esgotado&quot;</span><span class="p">)</span>
 <a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="c1">;=&gt; &quot;Produto esgotado&quot;</span>
 </code></pre></div>
@@ -1704,19 +1952,19 @@
 </p>
 </blockquote>
 <hr />
-<h3 id="conclusao">📌 Conclusão<a class="headerlink" href="#conclusao" title="Permanent link">&para;</a></h3>
+<h3 id="conclusao">Conclusão<a class="headerlink" href="#conclusao" title="Permanent link">&para;</a></h3>
 <ul>
 <li>Use <strong>o vetor como função</strong> para máxima performance — mas <strong>cuidado com exceções</strong>.</li>
 <li>Use <strong><code>get</code></strong> para acessos <strong>seguros</strong> e mais <strong>flexíveis</strong>, especialmente quando o índice pode não existir.</li>
 </ul>
 <h3 id="23-lendo-e-modificando-vetores">2.3 Lendo e Modificando Vetores<a class="headerlink" href="#23-lendo-e-modificando-vetores" title="Permanent link">&para;</a></h3>
 <p>Para interagir com vetores, duas funções são absolutamente essenciais: <code>count</code> para saber seu tamanho e <code>conj</code> para adicionar elementos.</p>
-<p>🔢 Contando Elementos com <code>count</code></p>
-<p><strong>✅ O que faz?</strong></p>
+<p>Contando Elementos com <code>count</code></p>
+<p><strong>O que faz?</strong></p>
 <p>A função <code>count</code> retorna o número de elementos em um vetor (ou em qualquer coleção, como listas, mapas e sets).</p>
-<p><strong>💡 Por que usar?</strong></p>
+<p><strong>Por que usar?</strong></p>
 <p>É a maneira <strong>mais direta e segura</strong> de verificar o tamanho de uma coleção.</p>
-<p>🧪 Exemplos:</p>
+<p>Exemplos:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="p">(</span><span class="k">def </span><span class="nv">estoque</span><span class="w"> </span><span class="p">[</span><span class="s">&quot;Mochila&quot;</span><span class="w"> </span><span class="s">&quot;Camiseta&quot;</span><span class="w"> </span><span class="s">&quot;Tênis&quot;</span><span class="p">])</span>
 <a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a>
 <a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a><span class="p">(</span><span class="nb">count </span><span class="nv">estoque</span><span class="p">)</span>
@@ -1728,12 +1976,12 @@
 <a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a><span class="c1">;=&gt; 0</span>
 </code></pre></div>
 <hr />
-<p><strong>➕ Adicionando Elementos com <code>conj</code></strong></p>
-<p><strong>✅ O que faz?</strong></p>
+<p><strong>Adicionando Elementos com <code>conj</code></strong></p>
+<p><strong>O que faz?</strong></p>
 <p>A função <code>conj</code> (<em>conjoin</em>) adiciona um elemento a uma coleção. Com vetores, o elemento é <strong>adicionado ao final</strong>.</p>
-<p><strong>💡 Por que usar?</strong></p>
+<p><strong>Por que usar?</strong></p>
 <p>Clojure é uma linguagem funcional e imutável — isso significa que <code>conj</code> <strong>não altera o vetor original</strong>. Em vez disso, retorna <strong>uma nova coleção com o elemento adicionado</strong>.</p>
-<p><strong>🧪 Exemplos:</strong></p>
+<p><strong>Exemplos:</strong></p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="p">(</span><span class="k">def </span><span class="nv">estoque</span><span class="w"> </span><span class="p">[</span><span class="s">&quot;Mochila&quot;</span><span class="w"> </span><span class="s">&quot;Camiseta&quot;</span><span class="p">])</span>
 <a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a>
 <a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a><span class="p">(</span><span class="nb">conj </span><span class="nv">estoque</span><span class="w"> </span><span class="s">&quot;Tênis&quot;</span><span class="p">)</span>
@@ -1757,7 +2005,7 @@
 <p>Isso é diferente de linguagens imperativas onde variáveis são caixas mutáveis. Em Clojure, estamos apenas <strong>atualizando o mapeamento entre um nome e um valor</strong>, sem modificar os dados em si.</p>
 </div>
 <hr />
-<p>🧠 Recapitulando</p>
+<p>Recapitulando</p>
 <ul>
 <li><code>count</code> → conta os elementos de um vetor.</li>
 <li><code>conj</code> → adiciona um elemento <strong>ao final do vetor</strong>, retornando uma nova coleção.</li>
@@ -1771,7 +2019,7 @@
 <div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a><span class="c1">;; Define um mapa de estoque usando keywords como chaves</span>
 <a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a><span class="p">(</span><span class="k">def </span><span class="nv">estoque</span><span class="w"> </span><span class="p">{</span><span class="ss">:mochila</span><span class="w"> </span><span class="mi">10</span><span class="w"> </span><span class="ss">:camiseta</span><span class="w"> </span><span class="mi">5</span><span class="p">})</span>
 </code></pre></div>
-<p>🔹 <strong>Exemplo 1 – Acessando dados com <code>get</code> e com keywords</strong></p>
+<p><strong>Exemplo 1 – Acessando dados com <code>get</code> e com keywords</strong></p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a><span class="p">(</span><span class="k">def </span><span class="nv">estoque</span><span class="w"> </span><span class="p">{</span><span class="ss">:mochila</span><span class="w"> </span><span class="mi">10</span><span class="w"> </span><span class="ss">:camiseta</span><span class="w"> </span><span class="mi">5</span><span class="p">})</span>
 <a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a>
 <a id="__codelineno-14-3" name="__codelineno-14-3" href="#__codelineno-14-3"></a><span class="c1">;; Acessando valores com `get`</span>
@@ -1826,24 +2074,24 @@
 <li><code>keys</code>: Retorna uma sequência com todas as chaves do mapa. É útil para quando você precisa saber quais "rótulos" de dados estão disponíveis.</li>
 <li><code>vals</code>: Retorna uma sequência com todos os valores do mapa. É útil para quando você só se interessa pelos dados em si, e não por suas chaves de associação.</li>
 </ul>
-<p>🔹 Exemplos</p>
+<p>Exemplos</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a><span class="p">(</span><span class="k">def </span><span class="nv">produto</span><span class="w"> </span><span class="p">{</span><span class="ss">:nome</span><span class="w"> </span><span class="s">&quot;Camiseta&quot;</span>
 <a id="__codelineno-18-2" name="__codelineno-18-2" href="#__codelineno-18-2"></a><span class="w">              </span><span class="ss">:preco</span><span class="w"> </span><span class="mf">49.90</span>
 <a id="__codelineno-18-3" name="__codelineno-18-3" href="#__codelineno-18-3"></a><span class="w">              </span><span class="ss">:estoque</span><span class="w"> </span><span class="mi">20</span><span class="p">})</span>
 </code></pre></div>
-<p>🔸 <code>count</code> – Quantidade de pares chave-valor</p>
+<p><code>count</code> – Quantidade de pares chave-valor</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a><span class="p">(</span><span class="nb">count </span><span class="nv">produto</span><span class="p">)</span>
 <a id="__codelineno-19-2" name="__codelineno-19-2" href="#__codelineno-19-2"></a><span class="c1">;; =&gt; 3</span>
 </code></pre></div>
 <p><strong>Explicação:</strong></p>
 <p>O mapa <code>produto</code> tem 3 entradas: <code>:nome</code>, <code>:preco</code> e <code>:estoque</code>.</p>
 <hr />
-<p>🔸 <code>keys</code> – Todas as chaves do mapa</p>
+<p><code>keys</code> – Todas as chaves do mapa</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-20-1" name="__codelineno-20-1" href="#__codelineno-20-1"></a><span class="p">(</span><span class="nb">keys </span><span class="nv">produto</span><span class="p">)</span>
 <a id="__codelineno-20-2" name="__codelineno-20-2" href="#__codelineno-20-2"></a><span class="c1">;; =&gt; (:nome :preco :estoque)</span>
 </code></pre></div>
 <hr />
-<p>🔸 <code>vals</code> – Todos os valores do mapa</p>
+<p><code>vals</code> – Todos os valores do mapa</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-21-1" name="__codelineno-21-1" href="#__codelineno-21-1"></a><span class="p">(</span><span class="nb">vals </span><span class="nv">produto</span><span class="p">)</span>
 <a id="__codelineno-21-2" name="__codelineno-21-2" href="#__codelineno-21-2"></a><span class="c1">;; =&gt; (&quot;Camiseta&quot; 49.90 20)</span>
 </code></pre></div>
@@ -1861,7 +2109,7 @@
 <h3 id="33-recaptulando">3.3 Recaptulando<a class="headerlink" href="#33-recaptulando" title="Permanent link">&para;</a></h3>
 <p>Assim como em vetores, há várias formas de acessar valores em um mapa em Clojure. Cada abordagem tem seu uso ideal. A seguir, exploramos as três formas principais.</p>
 <hr />
-<p>🔹 <strong>1. Usando Keywords como Funções (Forma Idiomática)</strong></p>
+<p><strong>1. Usando Keywords como Funções (Forma Idiomática)</strong></p>
 <p>Essa é a maneira mais comum, legível e preferida em Clojure. Você usa a própria <strong>keyword</strong> como se fosse uma função, passando o mapa como argumento.</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-23-1" name="__codelineno-23-1" href="#__codelineno-23-1"></a><span class="p">(</span><span class="k">def </span><span class="nv">estoque</span><span class="w"> </span><span class="p">{</span><span class="ss">:mochila</span><span class="w"> </span><span class="mi">10</span><span class="w"> </span><span class="ss">:camiseta</span><span class="w"> </span><span class="mi">5</span><span class="p">})</span>
 <a id="__codelineno-23-2" name="__codelineno-23-2" href="#__codelineno-23-2"></a>
@@ -1873,7 +2121,7 @@
 </code></pre></div>
 <p>Essa forma é <strong>segura</strong> e <strong>nunca lança erro</strong> caso a chave não exista — apenas retorna <code>nil</code>.</p>
 <hr />
-<p>🔹 <strong>2. Usando a Função <code>get</code> (Forma Segura com Valor Padrão)</strong></p>
+<p><strong>2. Usando a Função <code>get</code> (Forma Segura com Valor Padrão)</strong></p>
 <p>A função <code>get</code> também retorna o valor associado a uma chave, com a vantagem de permitir fornecer um valor <strong>padrão</strong> caso a chave não exista.</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-24-1" name="__codelineno-24-1" href="#__codelineno-24-1"></a><span class="p">(</span><span class="nb">get </span><span class="nv">estoque</span><span class="w"> </span><span class="ss">:camiseta</span><span class="p">)</span>
 <a id="__codelineno-24-2" name="__codelineno-24-2" href="#__codelineno-24-2"></a><span class="c1">;; =&gt; 5</span>
@@ -1886,14 +2134,14 @@
 </code></pre></div>
 <p>Essa é a melhor opção quando você precisa de um valor padrão explícito ao acessar mapas.</p>
 <hr />
-<p>🔹 <strong>3. Usando o Mapa como Função (Forma Menos Comum)</strong></p>
+<p><strong>3. Usando o Mapa como Função (Forma Menos Comum)</strong></p>
 <p>Em Clojure, <strong>um mapa pode agir como uma função</strong>, recebendo uma chave e retornando seu valor associado.</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-25-1" name="__codelineno-25-1" href="#__codelineno-25-1"></a><span class="p">(</span><span class="nf">estoque</span><span class="w"> </span><span class="ss">:mochila</span><span class="p">)</span>
 <a id="__codelineno-25-2" name="__codelineno-25-2" href="#__codelineno-25-2"></a><span class="c1">;; =&gt; 10</span>
 </code></pre></div>
 <p>Embora seja válida, essa abordagem é <strong>menos usada</strong> por um motivo importante: se o mapa for <code>nil</code>, você terá uma <strong>NullPointerException</strong>. Já <code>get</code> e <code>:keyword</code> são mais seguros nesse sentido.</p>
 <hr />
-<p><strong>💡 Resumindo ..</strong></p>
+<p><strong>Resumindo ..</strong></p>
 <ul>
 <li><strong>Use <code>:keyword</code></strong> como função para acesso simples e idiomático.</li>
 <li><strong>Use <code>get</code></strong> quando quiser segurança e valor padrão.</li>
@@ -1902,9 +2150,9 @@
 <h2 id="40-manipulacao-imutavel-a-arte-de-transformar-colecoes">4.0 Manipulação Imutável: A Arte de Transformar Coleções<a class="headerlink" href="#40-manipulacao-imutavel-a-arte-de-transformar-colecoes" title="Permanent link">&para;</a></h2>
 <h3 id="41-modificando-mapas-com-assoc-e-dissoc">4.1 Modificando Mapas com <code>assoc</code> e <code>dissoc</code><a class="headerlink" href="#41-modificando-mapas-com-assoc-e-dissoc" title="Permanent link">&para;</a></h3>
 <p>Em Clojure, os mapas são <strong>imutáveis</strong>. Isso significa que não alteramos um mapa original, mas sim criamos <strong>uma nova versão modificada</strong> usando funções como <code>assoc</code> e <code>dissoc</code>.</p>
-<p>🔹 <code>assoc</code> – Adiciona ou atualiza uma chave</p>
+<p><code>assoc</code> – Adiciona ou atualiza uma chave</p>
 <p>A função <code>assoc</code> é usada para <strong>inserir</strong> um novo par chave-valor ou <strong>atualizar</strong> uma chave existente.</p>
-<p>➕ Adicionando uma nova chave</p>
+<p>Adicionando uma nova chave</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-26-1" name="__codelineno-26-1" href="#__codelineno-26-1"></a><span class="p">(</span><span class="k">def </span><span class="nv">estoque</span><span class="w"> </span><span class="p">{</span><span class="ss">:mochila</span><span class="w"> </span><span class="mi">10</span><span class="w"> </span><span class="ss">:camiseta</span><span class="w"> </span><span class="mi">5</span><span class="p">})</span>
 <a id="__codelineno-26-2" name="__codelineno-26-2" href="#__codelineno-26-2"></a>
 <a id="__codelineno-26-3" name="__codelineno-26-3" href="#__codelineno-26-3"></a><span class="p">(</span><span class="k">def </span><span class="nv">novo-estoque</span><span class="w"> </span><span class="p">(</span><span class="nb">assoc </span><span class="nv">estoque</span><span class="w"> </span><span class="ss">:cadeira</span><span class="w"> </span><span class="mi">3</span><span class="p">))</span>
@@ -1913,7 +2161,7 @@
 <a id="__codelineno-26-6" name="__codelineno-26-6" href="#__codelineno-26-6"></a><span class="c1">;; =&gt; {:mochila 10, :camiseta 5, :cadeira 3}</span>
 </code></pre></div>
 <p>O mapa original <code>estoque</code> <strong>não foi alterado</strong>. <code>novo-estoque</code> é uma nova versão com a chave <code>:cadeira</code> adicionada.</p>
-<p>✏️ Atualizando uma chave existente</p>
+<p>Atualizando uma chave existente</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-27-1" name="__codelineno-27-1" href="#__codelineno-27-1"></a><span class="p">(</span><span class="k">def </span><span class="nv">estoque-atualizado</span><span class="w"> </span><span class="p">(</span><span class="nb">assoc </span><span class="nv">estoque</span><span class="w"> </span><span class="ss">:mochila</span><span class="w"> </span><span class="mi">1</span><span class="p">))</span>
 <a id="__codelineno-27-2" name="__codelineno-27-2" href="#__codelineno-27-2"></a>
 <a id="__codelineno-27-3" name="__codelineno-27-3" href="#__codelineno-27-3"></a><span class="nv">estoque-atualizado</span>
@@ -1921,7 +2169,7 @@
 </code></pre></div>
 <p>Aqui, <code>:mochila</code> foi atualizada de <code>10</code> para <code>1</code>.</p>
 <hr />
-<p>🔹 <code>dissoc</code> – Remove uma chave</p>
+<p><code>dissoc</code> – Remove uma chave</p>
 <p>A função <code>dissoc</code> é usada para <strong>remover</strong> uma chave (e seu valor) de um mapa.</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-28-1" name="__codelineno-28-1" href="#__codelineno-28-1"></a><span class="p">(</span><span class="k">def </span><span class="nv">estoque-sem-mochila</span><span class="w"> </span><span class="p">(</span><span class="nb">dissoc </span><span class="nv">estoque</span><span class="w"> </span><span class="ss">:mochila</span><span class="p">))</span>
 <a id="__codelineno-28-2" name="__codelineno-28-2" href="#__codelineno-28-2"></a>
@@ -1930,13 +2178,13 @@
 </code></pre></div>
 <p>Assim como <code>assoc</code>, <code>dissoc</code> não altera o mapa original, mas retorna um <strong>novo mapa</strong> sem a chave especificada.</p>
 <hr />
-<p>🧠 Observações Didáticas</p>
+<p>Observações Didáticas</p>
 <ul>
 <li>Essas funções são fundamentais para <strong>trabalhar com dados imutáveis</strong>, que é a base da programação funcional.</li>
 <li>Você pode usar <code>assoc</code> e <code>dissoc</code> em sequência para construir lógicas de atualização mais complexas.</li>
 <li>
 <p>Ambas funcionam com mapas simples ou aninhados (em combinação com <code>assoc-in</code>, <code>update-in</code>, etc.).</p>
-<h3 id="42-a-funcao-universal-atualizando-valores-com-update">✅ 4.2 A Função Universal: Atualizando Valores com <code>update</code><a class="headerlink" href="#42-a-funcao-universal-atualizando-valores-com-update" title="Permanent link">&para;</a></h3>
+<h3 id="42-a-funcao-universal-atualizando-valores-com-update">4.2 A Função Universal: Atualizando Valores com <code>update</code><a class="headerlink" href="#42-a-funcao-universal-atualizando-valores-com-update" title="Permanent link">&para;</a></h3>
 <p>A função <code>update</code> permite modificar um valor <strong>existente</strong> aplicando-lhe uma função, seja num <strong>vetor</strong> (por índice) ou num <strong>mapa</strong> (por chave).</p>
 <p>Essa abordagem evita código imperativo como:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-29-1" name="__codelineno-29-1" href="#__codelineno-29-1"></a><span class="c1">;; Imperativo (errado em Clojure)</span>
@@ -1946,11 +2194,13 @@
 </code></pre></div>
 <p>Com <code>update</code>, tudo isso vira uma linha só.</p>
 <hr />
-<p>🔹 1. Usando <code>update</code> com Mapas</p>
+<ol>
+<li>Usando <code>update</code> com Mapas</li>
+</ol>
 <p>A função recebe:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-30-1" name="__codelineno-30-1" href="#__codelineno-30-1"></a><span class="p">(</span><span class="nf">update</span><span class="w"> </span><span class="nv">mapa</span><span class="w"> </span><span class="ss">:chave</span><span class="w"> </span><span class="nv">funcao</span><span class="p">)</span>
 </code></pre></div>
-<p>✅ Exemplo – Atualizar estoque de produtos</p>
+<p>Exemplo – Atualizar estoque de produtos</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-31-1" name="__codelineno-31-1" href="#__codelineno-31-1"></a><span class="p">(</span><span class="k">def </span><span class="nv">estoque</span><span class="w"> </span><span class="p">{</span><span class="ss">:mochila</span><span class="w"> </span><span class="mi">10</span><span class="w"> </span><span class="ss">:camiseta</span><span class="w"> </span><span class="mi">5</span><span class="p">})</span>
 <a id="__codelineno-31-2" name="__codelineno-31-2" href="#__codelineno-31-2"></a>
 <a id="__codelineno-31-3" name="__codelineno-31-3" href="#__codelineno-31-3"></a><span class="c1">;; Aumentando em 1 a quantidade de mochilas</span>
@@ -1966,9 +2216,11 @@
 </p>
 </blockquote>
 <hr />
-<p>🔹 2. Usando <code>update</code> com Vetores</p>
+<ol>
+<li>Usando <code>update</code> com Vetores</li>
+</ol>
 <p>A lógica é a mesma, mas o primeiro argumento agora é um <strong>índice numérico</strong>.</p>
-<p>✅ Exemplo – Aplicar desconto em um produto</p>
+<p>Exemplo – Aplicar desconto em um produto</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-32-1" name="__codelineno-32-1" href="#__codelineno-32-1"></a><span class="p">(</span><span class="k">def </span><span class="nv">precos</span><span class="w"> </span><span class="p">[</span><span class="mf">100.0</span><span class="w"> </span><span class="mf">200.0</span><span class="w"> </span><span class="mf">150.0</span><span class="p">])</span>
 <a id="__codelineno-32-2" name="__codelineno-32-2" href="#__codelineno-32-2"></a>
 <a id="__codelineno-32-3" name="__codelineno-32-3" href="#__codelineno-32-3"></a><span class="c1">;; Aplicar 10% de desconto no segundo item (índice 1)</span>
@@ -1976,7 +2228,9 @@
 <a id="__codelineno-32-5" name="__codelineno-32-5" href="#__codelineno-32-5"></a><span class="c1">;; =&gt; [100 180 150]</span>
 </code></pre></div>
 <hr />
-<p>🔹 3. <code>update</code> com argumentos adicionais</p>
+<ol>
+<li><code>update</code> com argumentos adicionais</li>
+</ol>
 <p>Você pode passar <strong>argumentos extras</strong> para a função que está sendo aplicada:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-33-1" name="__codelineno-33-1" href="#__codelineno-33-1"></a><span class="p">(</span><span class="nf">update</span><span class="w"> </span><span class="nv">estoque</span><span class="w"> </span><span class="ss">:mochila</span><span class="w"> </span><span class="nb">+ </span><span class="mi">5</span><span class="p">)</span>
 <a id="__codelineno-33-2" name="__codelineno-33-2" href="#__codelineno-33-2"></a><span class="c1">;; =&gt; {:mochila 15, :camiseta 5}</span>
@@ -1986,7 +2240,7 @@
 </p>
 </blockquote>
 <hr />
-<p>🧠 Recapitulando</p>
+<p>Recapitulando</p>
 <ul>
 <li><code>update</code> é a forma idiomática de <strong>ler → transformar → reescrever</strong>, tudo em uma única operação.</li>
 <li>Funciona tanto com <strong>mapas</strong> (por chave) quanto com <strong>vetores</strong> (por índice).</li>
@@ -2030,6 +2284,8 @@
             </div>
           
           
+  <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var labels=set.querySelector(".tabbed-labels");for(var tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
+
 <script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
         </div>
         
@@ -2068,7 +2324,7 @@
     
       
       
-      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.top", "navigation.sections", "toc.integrate", "content.code.annotate", "content.code.copy"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copiado para \u00e1rea de transfer\u00eancia", "clipboard.copy": "Copiar para \u00e1rea de transfer\u00eancia", "search.result.more.one": "Mais 1 nesta p\u00e1gina", "search.result.more.other": "Mais # nesta p\u00e1gina", "search.result.none": "Nenhum resultado encontrado", "search.result.one": "1 resultado encontrado", "search.result.other": "# resultados encontrados", "search.result.placeholder": "Digite para iniciar a busca", "search.result.term.missing": "Ausente", "select.version": "Selecione a vers\u00e3o"}, "version": null}</script>
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.instant", "navigation.tracking", "navigation.sections", "navigation.expand", "navigation.top", "search.highlight", "search.share", "content.code.annotate", "content.code.copy", "content.tabs.link", "content.tooltips", "toc.follow"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copiado para \u00e1rea de transfer\u00eancia", "clipboard.copy": "Copiar para \u00e1rea de transfer\u00eancia", "search.result.more.one": "Mais 1 nesta p\u00e1gina", "search.result.more.other": "Mais # nesta p\u00e1gina", "search.result.none": "Nenhum resultado encontrado", "search.result.one": "1 resultado encontrado", "search.result.other": "# resultados encontrados", "search.result.placeholder": "Digite para iniciar a busca", "search.result.term.missing": "Ausente", "select.version": "Selecione a vers\u00e3o"}, "version": null}</script>
     
     
       <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>

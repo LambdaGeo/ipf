@@ -46,13 +46,9 @@
     
     
       
-        
-        
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
-        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
-      
     
+    
+      <link rel="stylesheet" href="../../stylesheets/lambdageo.css">
     
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
@@ -70,7 +66,7 @@
     
     
     
-    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="teal" data-md-color-accent="green">
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="custom" data-md-color-accent="custom">
   
     
     <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
@@ -128,7 +124,21 @@
     
     
     
-    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="teal" data-md-color-accent="green"  aria-hidden="true"  type="radio" name="__palette" id="__palette_0">
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="custom" data-md-color-accent="custom"  aria-label="Alternar para modo escuro"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Alternar para modo escuro" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0-7 2.39 3.42C13.65 5.15 12.84 5 12 5s-1.65.15-2.39.42zM3.34 7l4.16-.35A7.2 7.2 0 0 0 5.94 8.5c-.44.74-.69 1.5-.83 2.29zm.02 10 1.76-3.77a7.131 7.131 0 0 0 2.38 4.14zM20.65 7l-1.77 3.79a7.02 7.02 0 0 0-2.38-4.15zm-.01 10-4.14.36c.59-.51 1.12-1.14 1.54-1.86.42-.73.69-1.5.83-2.29zM12 22l-2.41-3.44c.74.27 1.55.44 2.41.44.82 0 1.63-.17 2.37-.44z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="custom" data-md-color-accent="custom"  aria-label="Alternar para modo claro"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Alternar para modo claro" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m17.75 4.09-2.53 1.94.91 3.06-2.63-1.81-2.63 1.81.91-3.06-2.53-1.94L12.44 4l1.06-3 1.06 3zm3.5 6.91-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95zm-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14.4-.4.82-.76 1.27-1.08.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98 3.02 3.01 7.84 3.12 10.98.31"/></svg>
+      </label>
     
   
 </form>
@@ -157,6 +167,11 @@
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
       </label>
       <nav class="md-search__options" aria-label="Pesquisar">
+        
+          <a href="javascript:void(0)" class="md-search__icon md-icon" title="Compartilhar" aria-label="Compartilhar" data-clipboard data-clipboard-text="" data-md-component="search-share" tabindex="-1">
+            
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9a3 3 0 0 0-3 3 3 3 0 0 0 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.15c-.05.21-.08.43-.08.66 0 1.61 1.31 2.91 2.92 2.91s2.92-1.3 2.92-2.91A2.92 2.92 0 0 0 18 16.08"/></svg>
+          </a>
         
         <button type="reset" class="md-search__icon md-icon" title="Limpar" aria-label="Limpar" tabindex="-1">
           
@@ -203,9 +218,7 @@
 
 
 
-  
-
-<nav class="md-nav md-nav--primary md-nav--integrated" aria-label="Navegação" data-md-level="0">
+<nav class="md-nav md-nav--primary" aria-label="Navegação" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
     <a href="../.." title="Introdução à Programação Funcional" class="md-nav__button md-logo" aria-label="Introdução à Programação Funcional" data-md-component="logo">
       
@@ -265,7 +278,9 @@
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2" >
         
           
           <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
@@ -576,7 +591,9 @@
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3" >
         
           
           <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
@@ -1282,7 +1299,7 @@
   <a href="#objetivos-de-aprendizagem" class="md-nav__link">
     <span class="md-ellipsis">
       
-        🎯 Objetivos de Aprendizagem
+        Objetivos de Aprendizagem
       
     </span>
   </a>
@@ -1293,7 +1310,7 @@
   <a href="#11-instalacao-e-ambiente-15-min" class="md-nav__link">
     <span class="md-ellipsis">
       
-        🔸 1.1 Instalação e Ambiente (15 min)
+        1.1 Instalação e Ambiente (15 min)
       
     </span>
   </a>
@@ -1304,12 +1321,12 @@
   <a href="#12-tipos-basicos-25-min" class="md-nav__link">
     <span class="md-ellipsis">
       
-        🔸 1.2 Tipos Básicos (25 min)
+        1.2 Tipos Básicos (25 min)
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="🔸 1.2 Tipos Básicos (25 min)">
+    <nav class="md-nav" aria-label="1.2 Tipos Básicos (25 min)">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
@@ -1376,7 +1393,7 @@
   <a href="#13-imutabilidade" class="md-nav__link">
     <span class="md-ellipsis">
       
-        🔸 1.3 Imutabilidade
+        1.3 Imutabilidade
       
     </span>
   </a>
@@ -1387,12 +1404,12 @@
   <a href="#14-colecoes-basicas" class="md-nav__link">
     <span class="md-ellipsis">
       
-        🔸 1.4 Coleções Básicas
+        1.4 Coleções Básicas
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="🔸 1.4 Coleções Básicas">
+    <nav class="md-nav" aria-label="1.4 Coleções Básicas">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
@@ -1448,7 +1465,7 @@
   <a href="#15-operador-pipe" class="md-nav__link">
     <span class="md-ellipsis">
       
-        🔸 1.5 Operador Pipe (|&gt;)
+        1.5 Operador Pipe (|&gt;)
       
     </span>
   </a>
@@ -1459,7 +1476,7 @@
   <a href="#16-introducao-ao-enum" class="md-nav__link">
     <span class="md-ellipsis">
       
-        🔸 1.6 Introdução ao Enum
+        1.6 Introdução ao Enum
       
     </span>
   </a>
@@ -1470,7 +1487,7 @@
   <a href="#exercicios-em-sala" class="md-nav__link">
     <span class="md-ellipsis">
       
-        🔸 Exercícios em Sala
+        Exercícios em Sala
       
     </span>
   </a>
@@ -1481,7 +1498,7 @@
   <a href="#tarefa-para-casa" class="md-nav__link">
     <span class="md-ellipsis">
       
-        🔸 Tarefa para Casa
+        Tarefa para Casa
       
     </span>
   </a>
@@ -1492,7 +1509,7 @@
   <a href="#material-de-apoio" class="md-nav__link">
     <span class="md-ellipsis">
       
-        🔸 Material de Apoio
+        Material de Apoio
       
     </span>
   </a>
@@ -1662,6 +1679,264 @@
               </div>
             
             
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Índice">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Índice
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1-introducao-e-conexao-de-paradigmas-clojure-vs-elixir" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Introdução e Conexão de Paradigmas: Clojure vs Elixir
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#objetivos-de-aprendizagem" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Objetivos de Aprendizagem
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#11-instalacao-e-ambiente-15-min" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.1 Instalação e Ambiente (15 min)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#12-tipos-basicos-25-min" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.2 Tipos Básicos (25 min)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1.2 Tipos Básicos (25 min)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#inteiros-e-operacoes-aritmeticas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Inteiros e Operações Aritméticas
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pontos-flutuantes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Pontos Flutuantes
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#booleanos-e-valores-de-verdade" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Booleanos e Valores de Verdade
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#atomos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Átomos
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#strings" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Strings
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#13-imutabilidade" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.3 Imutabilidade
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#14-colecoes-basicas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.4 Coleções Básicas
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1.4 Coleções Básicas">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#listas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Listas ([ ])
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tuplas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Tuplas ({ })
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#mapas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Mapas (%{ })
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#keyword-lists-chave-valor" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Keyword Lists ([chave: valor])
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#15-operador-pipe" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.5 Operador Pipe (|&gt;)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#16-introducao-ao-enum" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.6 Introdução ao Enum
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#exercicios-em-sala" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Exercícios em Sala
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#tarefa-para-casa" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Tarefa para Casa
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#material-de-apoio" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Material de Apoio
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
           
           
             <div class="md-content" data-md-component="content">
@@ -1683,7 +1958,7 @@
 4. <strong>O Operador Pipe (<code>|&gt;</code>)</strong>: Elixir introduz uma das sintaxes mais elegantes para pipeline de dados, o operador pipe, que permite encadear transformações de dados de forma extremamente legível (similar às threading macros do Clojure, mas integrado na raiz da sintaxe da linguagem).</p>
 <p>Nesta seção, você aprenderá os fundamentos sintáticos e operacionais do Elixir, preparando-se para construir aplicativos web de tempo real com Phoenix LiveView.</p>
 <hr />
-<h2 id="objetivos-de-aprendizagem">🎯 <strong>Objetivos de Aprendizagem</strong><a class="headerlink" href="#objetivos-de-aprendizagem" title="Permanent link">&para;</a></h2>
+<h2 id="objetivos-de-aprendizagem"><strong>Objetivos de Aprendizagem</strong><a class="headerlink" href="#objetivos-de-aprendizagem" title="Permanent link">&para;</a></h2>
 <ul>
 <li>Instalar e configurar o ambiente Elixir</li>
 <li>Dominar o uso do IEx (Interactive Elixir)</li>
@@ -1692,10 +1967,10 @@
 <li>Manipular coleções básicas com <code>Enum</code></li>
 </ul>
 <hr />
-<h2 id="11-instalacao-e-ambiente-15-min">🔸 <strong>1.1 Instalação e Ambiente (15 min)</strong><a class="headerlink" href="#11-instalacao-e-ambiente-15-min" title="Permanent link">&para;</a></h2>
+<h2 id="11-instalacao-e-ambiente-15-min"><strong>1.1 Instalação e Ambiente (15 min)</strong><a class="headerlink" href="#11-instalacao-e-ambiente-15-min" title="Permanent link">&para;</a></h2>
 <p>Exisitem diversas maneiras de instalar o elixir, veja mais detalhes em  https://elixir-lang.org/install.html</p>
 <hr />
-<h2 id="12-tipos-basicos-25-min">🔸 <strong>1.2 Tipos Básicos (25 min)</strong><a class="headerlink" href="#12-tipos-basicos-25-min" title="Permanent link">&para;</a></h2>
+<h2 id="12-tipos-basicos-25-min"><strong>1.2 Tipos Básicos (25 min)</strong><a class="headerlink" href="#12-tipos-basicos-25-min" title="Permanent link">&para;</a></h2>
 <h3 id="inteiros-e-operacoes-aritmeticas"><strong>Inteiros e Operações Aritméticas</strong><a class="headerlink" href="#inteiros-e-operacoes-aritmeticas" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="mi">42</span>
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="mh">0x1F</span><span class="w">  </span><span class="c1"># hexadecimal -&gt; 31</span>
@@ -1764,7 +2039,7 @@
 </p>
 </blockquote>
 <hr />
-<h2 id="13-imutabilidade">🔸 <strong>1.3 Imutabilidade</strong><a class="headerlink" href="#13-imutabilidade" title="Permanent link">&para;</a></h2>
+<h2 id="13-imutabilidade"><strong>1.3 Imutabilidade</strong><a class="headerlink" href="#13-imutabilidade" title="Permanent link">&para;</a></h2>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">]</span>
 <a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="mi">0</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">x</span><span class="p">]</span><span class="w">  </span><span class="c1"># x não é modificado</span>
 <a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="n">x</span><span class="w">  </span><span class="c1"># =&gt; [1, 2, 3]</span>
@@ -1775,7 +2050,7 @@
 </p>
 </blockquote>
 <hr />
-<h2 id="14-colecoes-basicas">🔸 <strong>1.4 Coleções Básicas</strong><a class="headerlink" href="#14-colecoes-basicas" title="Permanent link">&para;</a></h2>
+<h2 id="14-colecoes-basicas"><strong>1.4 Coleções Básicas</strong><a class="headerlink" href="#14-colecoes-basicas" title="Permanent link">&para;</a></h2>
 <h3 id="listas"><strong>Listas (<code>[ ]</code>)</strong><a class="headerlink" href="#listas" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="n">list</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="p">]</span>
 <a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="p">[</span><span class="n">head</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">tail</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">list</span>
@@ -1883,7 +2158,7 @@
 <p>Apesar de parecerem similares, a escolha depende do contexto e da necessidade de ordem ou chaves duplicadas.</p>
 </div>
 <hr />
-<h2 id="15-operador-pipe">🔸 <strong>1.5 Operador Pipe (<code>|&gt;</code>)</strong><a class="headerlink" href="#15-operador-pipe" title="Permanent link">&para;</a></h2>
+<h2 id="15-operador-pipe"><strong>1.5 Operador Pipe (<code>|&gt;</code>)</strong><a class="headerlink" href="#15-operador-pipe" title="Permanent link">&para;</a></h2>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="s2">&quot;  hello world  &quot;</span>
 <a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a><span class="o">|&gt;</span><span class="w"> </span><span class="nc">String</span><span class="o">.</span><span class="n">trim</span><span class="p">()</span>
 <a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a><span class="o">|&gt;</span><span class="w"> </span><span class="nc">String</span><span class="o">.</span><span class="n">upcase</span><span class="p">()</span>
@@ -1900,7 +2175,7 @@
 </p>
 </blockquote>
 <hr />
-<h2 id="16-introducao-ao-enum">🔸 <strong>1.6 Introdução ao Enum</strong><a class="headerlink" href="#16-introducao-ao-enum" title="Permanent link">&para;</a></h2>
+<h2 id="16-introducao-ao-enum"><strong>1.6 Introdução ao Enum</strong><a class="headerlink" href="#16-introducao-ao-enum" title="Permanent link">&para;</a></h2>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a><span class="nc">Enum</span><span class="o">.</span><span class="n">count</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">])</span><span class="w">         </span><span class="c1"># 3</span>
 <a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a><span class="nc">Enum</span><span class="o">.</span><span class="n">empty?</span><span class="p">([])</span><span class="w">               </span><span class="c1"># true</span>
 <a id="__codelineno-13-3" name="__codelineno-13-3" href="#__codelineno-13-3"></a><span class="nc">Enum</span><span class="o">.</span><span class="n">member?</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">],</span><span class="w"> </span><span class="mi">2</span><span class="p">)</span><span class="w">   </span><span class="c1"># true</span>
@@ -1913,24 +2188,24 @@
 </p>
 </blockquote>
 <hr />
-<h2 id="exercicios-em-sala">🔸 <strong>Exercícios em Sala</strong><a class="headerlink" href="#exercicios-em-sala" title="Permanent link">&para;</a></h2>
+<h2 id="exercicios-em-sala"><strong>Exercícios em Sala</strong><a class="headerlink" href="#exercicios-em-sala" title="Permanent link">&para;</a></h2>
 <ol>
 <li>Criar uma lista com números de 1 a 5, usar pipe para <strong>dobrar cada número</strong> e filtrar apenas pares.</li>
 <li>Criar um mapa representando uma pessoa, <strong>adicionar nova chave</strong> usando <code>Map.put</code>.</li>
 </ol>
 <hr />
-<h2 id="tarefa-para-casa">🔸 <strong>Tarefa para Casa</strong><a class="headerlink" href="#tarefa-para-casa" title="Permanent link">&para;</a></h2>
+<h2 id="tarefa-para-casa"><strong>Tarefa para Casa</strong><a class="headerlink" href="#tarefa-para-casa" title="Permanent link">&para;</a></h2>
 <ol>
 <li>Ler as lições “Basics” do Elixir School em português.</li>
 <li>Fazer exercícios do Exercism: "Hello World", "Two Fer", "Reverse String".</li>
 <li>Praticar no IEx: criar <strong>10 pipelines diferentes</strong> usando <code>Enum</code>.</li>
 </ol>
 <hr />
-<h2 id="material-de-apoio">🔸 <strong>Material de Apoio</strong><a class="headerlink" href="#material-de-apoio" title="Permanent link">&para;</a></h2>
+<h2 id="material-de-apoio"><strong>Material de Apoio</strong><a class="headerlink" href="#material-de-apoio" title="Permanent link">&para;</a></h2>
 <ul>
-<li><a href="https://elixirschool.com/pt/lessons/basics/basics">📘 Elixir School - Básico</a></li>
-<li><a href="https://hexdocs.pm/elixir/introduction.html">📘 HexDocs - Getting Started</a></li>
-<li><a href="https://exercism.org/tracks/elixir">🧪 Exercism - Trilha Elixir</a></li>
+<li><a href="https://elixirschool.com/pt/lessons/basics/basics">Elixir School - Básico</a></li>
+<li><a href="https://hexdocs.pm/elixir/introduction.html">HexDocs - Getting Started</a></li>
+<li><a href="https://exercism.org/tracks/elixir">Exercism - Trilha Elixir</a></li>
 </ul>
 <hr />
 
@@ -1950,6 +2225,8 @@
             </div>
           
           
+  <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var labels=set.querySelector(".tabbed-labels");for(var tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
+
 <script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
         </div>
         
@@ -1988,7 +2265,7 @@
     
       
       
-      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.top", "navigation.sections", "toc.integrate", "content.code.annotate", "content.code.copy"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copiado para \u00e1rea de transfer\u00eancia", "clipboard.copy": "Copiar para \u00e1rea de transfer\u00eancia", "search.result.more.one": "Mais 1 nesta p\u00e1gina", "search.result.more.other": "Mais # nesta p\u00e1gina", "search.result.none": "Nenhum resultado encontrado", "search.result.one": "1 resultado encontrado", "search.result.other": "# resultados encontrados", "search.result.placeholder": "Digite para iniciar a busca", "search.result.term.missing": "Ausente", "select.version": "Selecione a vers\u00e3o"}, "version": null}</script>
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.instant", "navigation.tracking", "navigation.sections", "navigation.expand", "navigation.top", "search.highlight", "search.share", "content.code.annotate", "content.code.copy", "content.tabs.link", "content.tooltips", "toc.follow"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copiado para \u00e1rea de transfer\u00eancia", "clipboard.copy": "Copiar para \u00e1rea de transfer\u00eancia", "search.result.more.one": "Mais 1 nesta p\u00e1gina", "search.result.more.other": "Mais # nesta p\u00e1gina", "search.result.none": "Nenhum resultado encontrado", "search.result.one": "1 resultado encontrado", "search.result.other": "# resultados encontrados", "search.result.placeholder": "Digite para iniciar a busca", "search.result.term.missing": "Ausente", "select.version": "Selecione a vers\u00e3o"}, "version": null}</script>
     
     
       <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>

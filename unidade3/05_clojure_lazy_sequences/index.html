@@ -46,13 +46,9 @@
     
     
       
-        
-        
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
-        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
-      
     
+    
+      <link rel="stylesheet" href="../../stylesheets/lambdageo.css">
     
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
@@ -70,7 +66,7 @@
     
     
     
-    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="teal" data-md-color-accent="green">
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="custom" data-md-color-accent="custom">
   
     
     <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
@@ -128,7 +124,21 @@
     
     
     
-    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="teal" data-md-color-accent="green"  aria-hidden="true"  type="radio" name="__palette" id="__palette_0">
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="custom" data-md-color-accent="custom"  aria-label="Alternar para modo escuro"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Alternar para modo escuro" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0-7 2.39 3.42C13.65 5.15 12.84 5 12 5s-1.65.15-2.39.42zM3.34 7l4.16-.35A7.2 7.2 0 0 0 5.94 8.5c-.44.74-.69 1.5-.83 2.29zm.02 10 1.76-3.77a7.131 7.131 0 0 0 2.38 4.14zM20.65 7l-1.77 3.79a7.02 7.02 0 0 0-2.38-4.15zm-.01 10-4.14.36c.59-.51 1.12-1.14 1.54-1.86.42-.73.69-1.5.83-2.29zM12 22l-2.41-3.44c.74.27 1.55.44 2.41.44.82 0 1.63-.17 2.37-.44z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="custom" data-md-color-accent="custom"  aria-label="Alternar para modo claro"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Alternar para modo claro" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m17.75 4.09-2.53 1.94.91 3.06-2.63-1.81-2.63 1.81.91-3.06-2.53-1.94L12.44 4l1.06-3 1.06 3zm3.5 6.91-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95zm-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14.4-.4.82-.76 1.27-1.08.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98 3.02 3.01 7.84 3.12 10.98.31"/></svg>
+      </label>
     
   
 </form>
@@ -157,6 +167,11 @@
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
       </label>
       <nav class="md-search__options" aria-label="Pesquisar">
+        
+          <a href="javascript:void(0)" class="md-search__icon md-icon" title="Compartilhar" aria-label="Compartilhar" data-clipboard data-clipboard-text="" data-md-component="search-share" tabindex="-1">
+            
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9a3 3 0 0 0-3 3 3 3 0 0 0 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.15c-.05.21-.08.43-.08.66 0 1.61 1.31 2.91 2.92 2.91s2.92-1.3 2.92-2.91A2.92 2.92 0 0 0 18 16.08"/></svg>
+          </a>
         
         <button type="reset" class="md-search__icon md-icon" title="Limpar" aria-label="Limpar" tabindex="-1">
           
@@ -203,9 +218,7 @@
 
 
 
-  
-
-<nav class="md-nav md-nav--primary md-nav--integrated" aria-label="Navegação" data-md-level="0">
+<nav class="md-nav md-nav--primary" aria-label="Navegação" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
     <a href="../.." title="Introdução à Programação Funcional" class="md-nav__button md-logo" aria-label="Introdução à Programação Funcional" data-md-component="logo">
       
@@ -265,7 +278,9 @@
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2" >
         
           
           <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
@@ -576,7 +591,9 @@
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3" >
         
           
           <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
@@ -1259,7 +1276,7 @@
   <a href="#o-que-acontece-passo-a-passo" class="md-nav__link">
     <span class="md-ellipsis">
       
-        🔍 O que acontece, passo a passo:
+        O que acontece, passo a passo:
       
     </span>
   </a>
@@ -1270,7 +1287,7 @@
   <a href="#por-que-isso-e-eficiente" class="md-nav__link">
     <span class="md-ellipsis">
       
-        🧠 Por que isso é eficiente?
+        Por que isso é eficiente?
       
     </span>
   </a>
@@ -1281,7 +1298,7 @@
   <a href="#resultado" class="md-nav__link">
     <span class="md-ellipsis">
       
-        🧪 Resultado
+        Resultado
       
     </span>
   </a>
@@ -1292,7 +1309,7 @@
   <a href="#moral-da-historia" class="md-nav__link">
     <span class="md-ellipsis">
       
-        💡 Moral da história
+        Moral da história
       
     </span>
   </a>
@@ -1364,7 +1381,7 @@
   <a href="#passo-1-funcao-recursiva-tradicional" class="md-nav__link">
     <span class="md-ellipsis">
       
-        🔹 Passo 1 — Função recursiva tradicional
+        Passo 1 — Função recursiva tradicional
       
     </span>
   </a>
@@ -1375,7 +1392,7 @@
   <a href="#passo-2-adicionar-um-acumulador" class="md-nav__link">
     <span class="md-ellipsis">
       
-        🔹 Passo 2 — Adicionar um acumulador
+        Passo 2 — Adicionar um acumulador
       
     </span>
   </a>
@@ -1386,7 +1403,7 @@
   <a href="#passo-3-colocar-a-recursao-em-posicao-de-cauda" class="md-nav__link">
     <span class="md-ellipsis">
       
-        🔹 Passo 3 — Colocar a recursão em posição de cauda
+        Passo 3 — Colocar a recursão em posição de cauda
       
     </span>
   </a>
@@ -1397,7 +1414,7 @@
   <a href="#passo-4-substituir-a-chamada-por-recur" class="md-nav__link">
     <span class="md-ellipsis">
       
-        🔹 Passo 4 — Substituir a chamada por recur
+        Passo 4 — Substituir a chamada por recur
       
     </span>
   </a>
@@ -1784,6 +1801,386 @@
               </div>
             
             
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Índice">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Índice
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1-agrupamento-e-agregacao-de-dados" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Agrupamento e Agregação de Dados
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1. Agrupamento e Agregação de Dados">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#11-a-importancia-estrategica-da-agregacao" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.1. A Importância Estratégica da Agregação
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#12-a-funcao" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.2. A Função
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#13-caso-de-uso-analise-de-carrinhos-de-compras" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.3. Caso de Uso: Análise de Carrinhos de Compras
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-ordenacao-e-manipulacao-de-colecoes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Ordenação e Manipulação de Coleções
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. Ordenação e Manipulação de Coleções">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21-a-necessidade-de-ordenar-e-selecionar-dados" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.1. A Necessidade de Ordenar e Selecionar Dados
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#22-ordenacao-com-e-inversao-com" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.2. Ordenação com e Inversão com
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#23-acesso-posicional-e-limitacao-de-resultados" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.3. Acesso Posicional e Limitação de Resultados
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#24-combinando-operacoes-com-o-macro" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.4. Combinando Operações com o Macro
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-a-eficiencia-das-lazy-sequences-sequencias-preguicosas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. A Eficiência das Lazy Sequences (Sequências Preguiçosas)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. A Eficiência das Lazy Sequences (Sequências Preguiçosas)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#31-o-que-sao-lazy-sequences" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.1. O que são Lazy Sequences?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#32-lidando-com-o-infinito" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.2. Lidando com o Infinito
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#33-o-beneficio-pratico-da-preguica" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.3. O Benefício Prático da Preguiça
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#o-que-acontece-passo-a-passo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        O que acontece, passo a passo:
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#por-que-isso-e-eficiente" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Por que isso é eficiente?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#resultado" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Resultado
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#moral-da-historia" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Moral da história
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#34-contraste-funcoes-lazy-vs-eager" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.4. Contraste: Funções Lazy vs. Eager
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-recursao-e-otimizacao-de-cauda-em-clojure" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Recursão e Otimização de Cauda em Clojure
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5. Recursão e Otimização de Cauda em Clojure">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#51-o-problema-comum-o-custo-da-pilha" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.1 O Problema Comum: O Custo da Pilha
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#52-a-solucao-de-clojure-recur-e-a-otimizacao-de-chamada-de-cauda" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.2 A Solução de Clojure: recur e a Otimização de Chamada de Cauda
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#53-transformando-uma-funcao-recursiva-em-recur-passo-a-passo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.3 Transformando uma Função Recursiva em recur (passo a passo)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#passo-1-funcao-recursiva-tradicional" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Passo 1 — Função recursiva tradicional
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#passo-2-adicionar-um-acumulador" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Passo 2 — Adicionar um acumulador
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#passo-3-colocar-a-recursao-em-posicao-de-cauda" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Passo 3 — Colocar a recursão em posição de cauda
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#passo-4-substituir-a-chamada-por-recur" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Passo 4 — Substituir a chamada por recur
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#54-como-o-recur-sabe-o-que-repetir" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.4 Como o recur “sabe” o que repetir
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#55-iteracoes-locais-com-looprecur" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.5 Iterações Locais com loop/recur
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#56-conclusao" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.6 Conclusão
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#conclusao" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Conclusão
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
           
           
             <div class="md-content" data-md-component="content">
@@ -1805,17 +2202,17 @@
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="w">                       </span><span class="p">[[</span><span class="s">&quot;vez&quot;</span><span class="w"> </span><span class="mi">1</span><span class="p">]</span><span class="w"> </span><span class="p">[</span><span class="s">&quot;um&quot;</span><span class="w"> </span><span class="mi">1</span><span class="p">]</span><span class="w"> </span><span class="p">[</span><span class="s">&quot;rei&quot;</span><span class="w"> </span><span class="mi">1</span><span class="p">]]</span>
 <a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="w">                       </span><span class="p">[[</span><span class="s">&quot;era&quot;</span><span class="w"> </span><span class="mi">1</span><span class="p">]</span><span class="w"> </span><span class="p">[</span><span class="s">&quot;um&quot;</span><span class="w"> </span><span class="mi">1</span><span class="p">]]))</span>
 </code></pre></div>
-<p><strong>🔍 Objetivo:</strong></p>
+<p><strong>Objetivo:</strong></p>
 <p>Agrupar todas as ocorrências da mesma palavra, para depois poder somar as contagens.</p>
 <hr />
-<p><strong>🧭 Passo 1 – Juntar todas as sublistas em uma única sequência</strong></p>
+<p><strong>Passo 1 – Juntar todas as sublistas em uma única sequência</strong></p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="p">(</span><span class="k">def </span><span class="nv">dados-unificados</span><span class="w"> </span><span class="p">(</span><span class="nb">apply concat </span><span class="nv">dados-por-frase</span><span class="p">))</span>
 </code></pre></div>
 <p>Agora <code>dados-unificados</code> é:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="p">([</span><span class="s">&quot;era&quot;</span><span class="w"> </span><span class="mi">1</span><span class="p">]</span><span class="w"> </span><span class="p">[</span><span class="s">&quot;uma&quot;</span><span class="w"> </span><span class="mi">1</span><span class="p">]</span><span class="w"> </span><span class="p">[</span><span class="s">&quot;vez&quot;</span><span class="w"> </span><span class="mi">1</span><span class="p">]</span><span class="w"> </span><span class="p">[</span><span class="s">&quot;um&quot;</span><span class="w"> </span><span class="mi">1</span><span class="p">]</span><span class="w"> </span><span class="p">[</span><span class="s">&quot;rei&quot;</span><span class="w"> </span><span class="mi">1</span><span class="p">]</span><span class="w"> </span><span class="p">[</span><span class="s">&quot;era&quot;</span><span class="w"> </span><span class="mi">1</span><span class="p">]</span><span class="w"> </span><span class="p">[</span><span class="s">&quot;um&quot;</span><span class="w"> </span><span class="mi">1</span><span class="p">])</span>
 </code></pre></div>
 <hr />
-<p><strong>🧭 Passo 2 – Agrupar os pares pela palavra (a primeira posição de cada vetor)</strong></p>
+<p><strong>Passo 2 – Agrupar os pares pela palavra (a primeira posição de cada vetor)</strong></p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="p">(</span><span class="nf">group-by</span><span class="w"> </span><span class="nb">first </span><span class="nv">dados-unificados</span><span class="p">)</span>
 </code></pre></div>
 <p>Resultado:</p>
@@ -1826,13 +2223,13 @@
 <a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a><span class="w"> </span><span class="s">&quot;rei&quot;</span><span class="w">  </span><span class="p">[[</span><span class="s">&quot;rei&quot;</span><span class="w"> </span><span class="mi">1</span><span class="p">]]}</span>
 </code></pre></div>
 <hr />
-<p><strong>🧠 Explicação:</strong></p>
+<p><strong>Explicação:</strong></p>
 <ul>
 <li>Cada item da lista é um par <code>["palavra" 1]</code>.</li>
 <li>A função <code>group-by</code> agrupa esses pares, <strong>usando a palavra como chave</strong> (ou seja, o <code>first</code> de cada vetor).</li>
 <li>O resultado é um <strong>mapa onde cada chave é uma palavra</strong>, e o valor é uma <strong>lista de todas as vezes que essa palavra apareceu</strong> nos dados originais.</li>
 </ul>
-<p><strong>🧾 O Que Fazer Depois?</strong></p>
+<p><strong>O Que Fazer Depois?</strong></p>
 <p>Você pode somar as contagens:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="p">(</span><span class="k">def </span><span class="nv">agrupado</span><span class="w"> </span><span class="p">(</span><span class="nf">group-by</span><span class="w"> </span><span class="nb">first </span><span class="nv">dados-unificados</span><span class="p">))</span>
 <a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>
@@ -1968,7 +2365,7 @@
 <a id="__codelineno-18-14" name="__codelineno-18-14" href="#__codelineno-18-14"></a><span class="w">  </span><span class="p">(</span><span class="nb">filter </span><span class="p">(</span><span class="nb">comp </span><span class="nv">primo?</span><span class="w"> </span><span class="ss">:valor</span><span class="p">)</span>
 <a id="__codelineno-18-15" name="__codelineno-18-15" href="#__codelineno-18-15"></a><span class="w">          </span><span class="p">(</span><span class="nb">map </span><span class="nv">detalhes-numero</span><span class="w"> </span><span class="p">(</span><span class="nb">range </span><span class="mi">1</span><span class="nv">e6</span><span class="p">))))</span>
 </code></pre></div>
-<h3 id="o-que-acontece-passo-a-passo">🔍 O que acontece, passo a passo:<a class="headerlink" href="#o-que-acontece-passo-a-passo" title="Permanent link">&para;</a></h3>
+<h3 id="o-que-acontece-passo-a-passo">O que acontece, passo a passo:<a class="headerlink" href="#o-que-acontece-passo-a-passo" title="Permanent link">&para;</a></h3>
 <ol>
 <li><strong><code>first</code></strong> pede <strong>um único item</strong> do pipeline.</li>
 <li><strong><code>filter</code></strong> solicita um elemento de <strong><code>map</code></strong>.</li>
@@ -1981,7 +2378,7 @@
 <li><strong><code>first</code></strong>, tendo recebido o que precisava, <strong>encerra o pipeline</strong> imediatamente.</li>
 </ol>
 <hr />
-<h3 id="por-que-isso-e-eficiente">🧠 Por que isso é eficiente?<a class="headerlink" href="#por-que-isso-e-eficiente" title="Permanent link">&para;</a></h3>
+<h3 id="por-que-isso-e-eficiente">Por que isso é eficiente?<a class="headerlink" href="#por-que-isso-e-eficiente" title="Permanent link">&para;</a></h3>
 <p>Em Clojure, <strong>tanto <code>map</code> quanto <code>filter</code> são <em>lazy sequences</em></strong> — ou seja, eles <strong>só processam os dados quando necessário</strong>.</p>
 <p>O <code>first</code> pede elementos <strong>um a um</strong>, e a computação <strong>para assim que encontra o primeiro primo</strong>, sem precisar:</p>
 <ul>
@@ -1996,13 +2393,13 @@
 <li>E só então pegaria o primeiro resultado — desperdiçando memória e tempo.</li>
 </ul>
 <hr />
-<h3 id="resultado">🧪 Resultado<a class="headerlink" href="#resultado" title="Permanent link">&para;</a></h3>
+<h3 id="resultado">Resultado<a class="headerlink" href="#resultado" title="Permanent link">&para;</a></h3>
 <p>Ao executar o código, o retorno será algo como:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a><span class="p">{</span><span class="ss">:valor</span><span class="w"> </span><span class="mi">2</span>,<span class="w"> </span><span class="ss">:par?</span><span class="w"> </span><span class="nv">true</span><span class="p">}</span>
 </code></pre></div>
 <p>E você notará que a execução é praticamente instantânea, porque o pipeline parou logo após encontrar o <strong>primeiro número primo (2)</strong> — os demais milhões de elementos <strong>nem foram processados</strong>.</p>
 <hr />
-<h3 id="moral-da-historia">💡 Moral da história<a class="headerlink" href="#moral-da-historia" title="Permanent link">&para;</a></h3>
+<h3 id="moral-da-historia">Moral da história<a class="headerlink" href="#moral-da-historia" title="Permanent link">&para;</a></h3>
 <p>Esse exemplo mostra de forma <strong>testável e mensurável</strong> o poder da <strong>avaliação preguiçosa (lazy evaluation)</strong> em Clojure:</p>
 <ul>
 <li>As funções <code>map</code>, <code>filter</code>, <code>take</code>, <code>drop</code>, <code>first</code> e outras <strong>trabalham sob demanda</strong>.</li>
@@ -2059,14 +2456,14 @@
 <hr />
 <h3 id="53-transformando-uma-funcao-recursiva-em-recur-passo-a-passo">5.3 Transformando uma Função Recursiva em <code>recur</code> (passo a passo)<a class="headerlink" href="#53-transformando-uma-funcao-recursiva-em-recur-passo-a-passo" title="Permanent link">&para;</a></h3>
 <p>Vamos entender <strong>como transformar</strong> uma função recursiva comum em uma versão com <code>recur</code>.</p>
-<h3 id="passo-1-funcao-recursiva-tradicional">🔹 Passo 1 — Função recursiva tradicional<a class="headerlink" href="#passo-1-funcao-recursiva-tradicional" title="Permanent link">&para;</a></h3>
+<h3 id="passo-1-funcao-recursiva-tradicional">Passo 1 — Função recursiva tradicional<a class="headerlink" href="#passo-1-funcao-recursiva-tradicional" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-21-1" name="__codelineno-21-1" href="#__codelineno-21-1"></a><span class="p">(</span><span class="kd">defn </span><span class="nv">soma</span><span class="w"> </span><span class="p">[</span><span class="nv">n</span><span class="p">]</span>
 <a id="__codelineno-21-2" name="__codelineno-21-2" href="#__codelineno-21-2"></a><span class="w">  </span><span class="p">(</span><span class="k">if </span><span class="p">(</span><span class="nb">zero? </span><span class="nv">n</span><span class="p">)</span>
 <a id="__codelineno-21-3" name="__codelineno-21-3" href="#__codelineno-21-3"></a><span class="w">    </span><span class="mi">0</span>
 <a id="__codelineno-21-4" name="__codelineno-21-4" href="#__codelineno-21-4"></a><span class="w">    </span><span class="p">(</span><span class="nb">+ </span><span class="nv">n</span><span class="w"> </span><span class="p">(</span><span class="nf">soma</span><span class="w"> </span><span class="p">(</span><span class="nb">dec </span><span class="nv">n</span><span class="p">)))))</span>
 </code></pre></div>
 <p>Essa versão funciona, mas cria uma nova chamada a cada passo. <code>(soma 100000)</code> vai causar <code>StackOverflowError</code>.</p>
-<h3 id="passo-2-adicionar-um-acumulador">🔹 Passo 2 — Adicionar um acumulador<a class="headerlink" href="#passo-2-adicionar-um-acumulador" title="Permanent link">&para;</a></h3>
+<h3 id="passo-2-adicionar-um-acumulador">Passo 2 — Adicionar um acumulador<a class="headerlink" href="#passo-2-adicionar-um-acumulador" title="Permanent link">&para;</a></h3>
 <p>Introduzimos um argumento extra (<code>acc</code>) para guardar o resultado parcial:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-22-1" name="__codelineno-22-1" href="#__codelineno-22-1"></a><span class="p">(</span><span class="kd">defn </span><span class="nv">soma</span><span class="w"> </span><span class="p">[</span><span class="nv">n</span><span class="w"> </span><span class="nv">acc</span><span class="p">]</span>
 <a id="__codelineno-22-2" name="__codelineno-22-2" href="#__codelineno-22-2"></a><span class="w">  </span><span class="p">(</span><span class="k">if </span><span class="p">(</span><span class="nb">zero? </span><span class="nv">n</span><span class="p">)</span>
@@ -2074,14 +2471,14 @@
 <a id="__codelineno-22-4" name="__codelineno-22-4" href="#__codelineno-22-4"></a><span class="w">    </span><span class="p">(</span><span class="nb">+ </span><span class="nv">n</span><span class="w"> </span><span class="p">(</span><span class="nf">soma</span><span class="w"> </span><span class="p">(</span><span class="nb">dec </span><span class="nv">n</span><span class="p">)</span><span class="w"> </span><span class="p">(</span><span class="nb">+ </span><span class="nv">acc</span><span class="w"> </span><span class="nv">n</span><span class="p">)))))</span><span class="w"> </span><span class="c1">; ainda recursiva normal</span>
 </code></pre></div>
 <p>Agora acumulamos o resultado, mas ainda empilhamos chamadas.</p>
-<h3 id="passo-3-colocar-a-recursao-em-posicao-de-cauda">🔹 Passo 3 — Colocar a recursão em posição de cauda<a class="headerlink" href="#passo-3-colocar-a-recursao-em-posicao-de-cauda" title="Permanent link">&para;</a></h3>
+<h3 id="passo-3-colocar-a-recursao-em-posicao-de-cauda">Passo 3 — Colocar a recursão em posição de cauda<a class="headerlink" href="#passo-3-colocar-a-recursao-em-posicao-de-cauda" title="Permanent link">&para;</a></h3>
 <p>A chamada recursiva precisa ser <strong>a última operação</strong> da função:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-23-1" name="__codelineno-23-1" href="#__codelineno-23-1"></a><span class="p">(</span><span class="kd">defn </span><span class="nv">soma</span><span class="w"> </span><span class="p">[</span><span class="nv">n</span><span class="w"> </span><span class="nv">acc</span><span class="p">]</span>
 <a id="__codelineno-23-2" name="__codelineno-23-2" href="#__codelineno-23-2"></a><span class="w">  </span><span class="p">(</span><span class="k">if </span><span class="p">(</span><span class="nb">zero? </span><span class="nv">n</span><span class="p">)</span>
 <a id="__codelineno-23-3" name="__codelineno-23-3" href="#__codelineno-23-3"></a><span class="w">    </span><span class="nv">acc</span>
 <a id="__codelineno-23-4" name="__codelineno-23-4" href="#__codelineno-23-4"></a><span class="w">    </span><span class="p">(</span><span class="nf">soma</span><span class="w"> </span><span class="p">(</span><span class="nb">dec </span><span class="nv">n</span><span class="p">)</span><span class="w"> </span><span class="p">(</span><span class="nb">+ </span><span class="nv">acc</span><span class="w"> </span><span class="nv">n</span><span class="p">))))</span><span class="w">  </span><span class="c1">;; agora está em cauda</span>
 </code></pre></div>
-<h3 id="passo-4-substituir-a-chamada-por-recur">🔹 Passo 4 — Substituir a chamada por <code>recur</code><a class="headerlink" href="#passo-4-substituir-a-chamada-por-recur" title="Permanent link">&para;</a></h3>
+<h3 id="passo-4-substituir-a-chamada-por-recur">Passo 4 — Substituir a chamada por <code>recur</code><a class="headerlink" href="#passo-4-substituir-a-chamada-por-recur" title="Permanent link">&para;</a></h3>
 <p>Por fim, trocamos a chamada explícita pela forma especial:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-24-1" name="__codelineno-24-1" href="#__codelineno-24-1"></a><span class="p">(</span><span class="kd">defn </span><span class="nv">soma</span><span class="w"> </span><span class="p">[</span><span class="nv">n</span><span class="w"> </span><span class="nv">acc</span><span class="p">]</span>
 <a id="__codelineno-24-2" name="__codelineno-24-2" href="#__codelineno-24-2"></a><span class="w">  </span><span class="p">(</span><span class="k">if </span><span class="p">(</span><span class="nb">zero? </span><span class="nv">n</span><span class="p">)</span>
@@ -2140,6 +2537,8 @@
             </div>
           
           
+  <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var labels=set.querySelector(".tabbed-labels");for(var tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
+
 <script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
         </div>
         
@@ -2178,7 +2577,7 @@
     
       
       
-      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.top", "navigation.sections", "toc.integrate", "content.code.annotate", "content.code.copy"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copiado para \u00e1rea de transfer\u00eancia", "clipboard.copy": "Copiar para \u00e1rea de transfer\u00eancia", "search.result.more.one": "Mais 1 nesta p\u00e1gina", "search.result.more.other": "Mais # nesta p\u00e1gina", "search.result.none": "Nenhum resultado encontrado", "search.result.one": "1 resultado encontrado", "search.result.other": "# resultados encontrados", "search.result.placeholder": "Digite para iniciar a busca", "search.result.term.missing": "Ausente", "select.version": "Selecione a vers\u00e3o"}, "version": null}</script>
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.instant", "navigation.tracking", "navigation.sections", "navigation.expand", "navigation.top", "search.highlight", "search.share", "content.code.annotate", "content.code.copy", "content.tabs.link", "content.tooltips", "toc.follow"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copiado para \u00e1rea de transfer\u00eancia", "clipboard.copy": "Copiar para \u00e1rea de transfer\u00eancia", "search.result.more.one": "Mais 1 nesta p\u00e1gina", "search.result.more.other": "Mais # nesta p\u00e1gina", "search.result.none": "Nenhum resultado encontrado", "search.result.one": "1 resultado encontrado", "search.result.other": "# resultados encontrados", "search.result.placeholder": "Digite para iniciar a busca", "search.result.term.missing": "Ausente", "select.version": "Selecione a vers\u00e3o"}, "version": null}</script>
     
     
       <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>

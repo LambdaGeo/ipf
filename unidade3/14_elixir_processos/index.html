@@ -46,13 +46,9 @@
     
     
       
-        
-        
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
-        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
-      
     
+    
+      <link rel="stylesheet" href="../../stylesheets/lambdageo.css">
     
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
@@ -70,7 +66,7 @@
     
     
     
-    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="teal" data-md-color-accent="green">
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="custom" data-md-color-accent="custom">
   
     
     <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
@@ -128,7 +124,21 @@
     
     
     
-    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="teal" data-md-color-accent="green"  aria-hidden="true"  type="radio" name="__palette" id="__palette_0">
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="custom" data-md-color-accent="custom"  aria-label="Alternar para modo escuro"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Alternar para modo escuro" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0-7 2.39 3.42C13.65 5.15 12.84 5 12 5s-1.65.15-2.39.42zM3.34 7l4.16-.35A7.2 7.2 0 0 0 5.94 8.5c-.44.74-.69 1.5-.83 2.29zm.02 10 1.76-3.77a7.131 7.131 0 0 0 2.38 4.14zM20.65 7l-1.77 3.79a7.02 7.02 0 0 0-2.38-4.15zm-.01 10-4.14.36c.59-.51 1.12-1.14 1.54-1.86.42-.73.69-1.5.83-2.29zM12 22l-2.41-3.44c.74.27 1.55.44 2.41.44.82 0 1.63-.17 2.37-.44z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="custom" data-md-color-accent="custom"  aria-label="Alternar para modo claro"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Alternar para modo claro" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m17.75 4.09-2.53 1.94.91 3.06-2.63-1.81-2.63 1.81.91-3.06-2.53-1.94L12.44 4l1.06-3 1.06 3zm3.5 6.91-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95zm-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14.4-.4.82-.76 1.27-1.08.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98 3.02 3.01 7.84 3.12 10.98.31"/></svg>
+      </label>
     
   
 </form>
@@ -157,6 +167,11 @@
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
       </label>
       <nav class="md-search__options" aria-label="Pesquisar">
+        
+          <a href="javascript:void(0)" class="md-search__icon md-icon" title="Compartilhar" aria-label="Compartilhar" data-clipboard data-clipboard-text="" data-md-component="search-share" tabindex="-1">
+            
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9a3 3 0 0 0-3 3 3 3 0 0 0 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.15c-.05.21-.08.43-.08.66 0 1.61 1.31 2.91 2.92 2.91s2.92-1.3 2.92-2.91A2.92 2.92 0 0 0 18 16.08"/></svg>
+          </a>
         
         <button type="reset" class="md-search__icon md-icon" title="Limpar" aria-label="Limpar" tabindex="-1">
           
@@ -203,9 +218,7 @@
 
 
 
-  
-
-<nav class="md-nav md-nav--primary md-nav--integrated" aria-label="Navegação" data-md-level="0">
+<nav class="md-nav md-nav--primary" aria-label="Navegação" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
     <a href="../.." title="Introdução à Programação Funcional" class="md-nav__button md-logo" aria-label="Introdução à Programação Funcional" data-md-component="logo">
       
@@ -265,7 +278,9 @@
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2" >
         
           
           <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
@@ -576,7 +591,9 @@
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3" >
         
           
           <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
@@ -1393,6 +1410,24 @@
               </div>
             
             
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Índice">
+  
+  
+  
+    
+  
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
           
           
             <div class="md-content" data-md-component="content">
@@ -1404,7 +1439,7 @@
 
 
 <h1 id="processos">Processos<a class="headerlink" href="#processos" title="Permanent link">&para;</a></h1>
-<h1 id="modulo-1-fundamentos-de-computacao-concorrente-na-beam">🎓 Módulo 1: Fundamentos de Computação Concorrente na BEAM<a class="headerlink" href="#modulo-1-fundamentos-de-computacao-concorrente-na-beam" title="Permanent link">&para;</a></h1>
+<h1 id="modulo-1-fundamentos-de-computacao-concorrente-na-beam">Módulo 1: Fundamentos de Computação Concorrente na BEAM<a class="headerlink" href="#modulo-1-fundamentos-de-computacao-concorrente-na-beam" title="Permanent link">&para;</a></h1>
 <p><strong>Objetivo:</strong> Compreender o modelo de execução da Máquina Virtual Erlang (BEAM) e contrastá-lo com os modelos tradicionais de Threads de SO e Green Threads (Go).</p>
 <p><strong>1. O Problema da Concorrência Tradicional</strong></p>
 <p>Na engenharia de software clássica (Java, C++, C#), a unidade de concorrência é a <strong>Thread do Sistema Operacional (OS Thread)</strong>.
@@ -1490,7 +1525,7 @@ Dentro dessas threads, a BEAM roda seus próprios escalonadores (Schedulers).
 • Enviar mensagem para o PID <code>&lt;0.100.0&gt;</code> (na mesma máquina).
 • Enviar mensagem para o PID <code>&lt;50.100.0&gt;</code> (em um servidor no Japão).
 <strong>O código é exatamente o mesmo.</strong> Isso torna o Elixir uma linguagem naturalmente orientada a sistemas distribuídos (Clusters).</p>
-<h1 id="modulo-2-laboratorio-de-anatomia-de-processos">🧪 Módulo 2: Laboratório de Anatomia de Processos<a class="headerlink" href="#modulo-2-laboratorio-de-anatomia-de-processos" title="Permanent link">&para;</a></h1>
+<h1 id="modulo-2-laboratorio-de-anatomia-de-processos">Módulo 2: Laboratório de Anatomia de Processos<a class="headerlink" href="#modulo-2-laboratorio-de-anatomia-de-processos" title="Permanent link">&para;</a></h1>
 <p><strong>Objetivo:</strong> Manipular as primitivas de concorrência da BEAM (<code>spawn</code>, <code>send</code>, <code>receive</code>) e entender o ciclo de vida de um processo.</p>
 <h3 id="1-preparacao-do-ambiente">1. Preparação do Ambiente<a class="headerlink" href="#1-preparacao-do-ambiente" title="Permanent link">&para;</a></h3>
 <p>Abra seu terminal. Vamos criar um projeto chamado <code>lab_concorrencia</code>.
@@ -1507,7 +1542,7 @@ Isso carrega o ambiente do Mix, que será útil para compilar os módulos que cr
 <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="n">self</span><span class="p">()</span>
 </code></pre></div>
 <p><strong>Saída esperada:</strong> <code>#PID&lt;0.152.0&gt;</code> (Os números podem variar).</p>
-<p><strong>👨‍🏫 Análise do Professor:</strong></p>
+<p><strong>Análise do Professor:</strong></p>
 <ul>
 <li>Este é o endereço do <strong>próprio terminal IEx</strong>. Sim, o shell onde você digita é um Processo Elixir rodando sobre a BEAM.</li>
 <li>O formato <code>&lt;A.B.C&gt;</code> geralmente indica:<ul>
@@ -1528,7 +1563,7 @@ Isso carrega o ambiente do Mix, que será útil para compilar os módulos que cr
 <div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="nc">Process</span><span class="o">.</span><span class="n">alive?</span><span class="p">(</span><span class="n">pid_calculadora</span><span class="p">)</span>
 <a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="c1"># Saída: false</span>
 </code></pre></div>
-<p><strong>👨‍🏫 O Conceito de Ciclo de Vida:</strong>
+<p><strong>O Conceito de Ciclo de Vida:</strong>
 Por que ele morreu?
 Diferente de uma Thread Java que pode ficar "idle" (ociosa) gastando recursos, um Processo Elixir é estritamente funcional.</p>
 <ol>
@@ -1538,7 +1573,7 @@ Diferente de uma Thread Java que pode ficar "idle" (ociosa) gastando recursos, u
 <li>O Garbage Collector limpa a memória dele imediatamente.</li>
 </ol>
 <hr />
-<h3 id="4-comunicacao-assincrona-send-e-a-mailbox">4. Comunicação Assíncrona: <code>send</code> e a Mailbox 📬<a class="headerlink" href="#4-comunicacao-assincrona-send-e-a-mailbox" title="Permanent link">&para;</a></h3>
+<h3 id="4-comunicacao-assincrona-send-e-a-mailbox">4. Comunicação Assíncrona: <code>send</code> e a Mailbox<a class="headerlink" href="#4-comunicacao-assincrona-send-e-a-mailbox" title="Permanent link">&para;</a></h3>
 <p>Todo processo nasce com uma <strong>Caixa de Correio (Mailbox)</strong> interna.
 O envio de mensagens em Elixir é <strong>Assíncrono (Non-blocking)</strong>.</p>
 <p>Vamos usar o seu próprio processo do IEx (<code>self()</code>) para testar.</p>
@@ -1565,7 +1600,7 @@ Use a função de debug <code>flush()</code>:Elixir</p>
 </code></pre></div>
 </li>
 </ol>
-<p><strong>👨‍🏫 Análise do Engenheiro:</strong>
+<p><strong>Análise do Engenheiro:</strong>
 A mensagem ficou armazenada na Heap do processo. O <code>send</code> apenas deposita a mensagem e retorna o controle imediatamente para a CPU. O remetente não sabe se a mensagem foi lida. Isso é o fundamento do desacoplamento em sistemas distribuídos.</p>
 <hr />
 <h3 id="5-sincronizacao-receive-o-bloqueio">5. Sincronização: <code>receive</code> (O Bloqueio)<a class="headerlink" href="#5-sincronizacao-receive-o-bloqueio" title="Permanent link">&para;</a></h3>
@@ -1605,7 +1640,7 @@ A mensagem ficou armazenada na Heap do processo. O <code>send</code> apenas depo
 </code></pre></div>
 <p><em>Ele processou o <code>ping</code>, acabou o bloco <code>receive</code>, saiu da função e morreu.</em></p>
 <hr />
-<h3 id="6-a-persistencia-recursao-de-cauda-o-servidor">6. A Persistência: Recursão de Cauda (O Servidor) 🔄<a class="headerlink" href="#6-a-persistencia-recursao-de-cauda-o-servidor" title="Permanent link">&para;</a></h3>
+<h3 id="6-a-persistencia-recursao-de-cauda-o-servidor">6. A Persistência: Recursão de Cauda (O Servidor)<a class="headerlink" href="#6-a-persistencia-recursao-de-cauda-o-servidor" title="Permanent link">&para;</a></h3>
 <p>Para criar um sistema (como um Banco ou Webserver), o processo não pode morrer após uma mensagem. Ele deve voltar ao estado de espera.
 Em linguagens imperativas, usaríamos <code>while(true)</code>. Em Elixir, usamos <strong>Recursão</strong>.</p>
 <p>Como estamos dentro do projeto <code>lab_concorrencia</code>, vamos criar um arquivo real para isso.</p>
@@ -1690,16 +1725,16 @@ O aluno aprendeu:</p>
 <li>Que o recebimento trava o processo (<code>receive</code>).</li>
 <li>Que servidores são apenas loops recursivos infinitos.</li>
 </ol>
-<h1 id="modulo-3-construindo-um-servidor-de-conta">🏭 Módulo 3: Construindo um Servidor de Conta<a class="headerlink" href="#modulo-3-construindo-um-servidor-de-conta" title="Permanent link">&para;</a></h1>
+<h1 id="modulo-3-construindo-um-servidor-de-conta">Módulo 3: Construindo um Servidor de Conta<a class="headerlink" href="#modulo-3-construindo-um-servidor-de-conta" title="Permanent link">&para;</a></h1>
 <p><strong>Objetivo:</strong> Implementar um processo com estado persistente (Stateful). Faremos isso em duas etapas:</p>
 <ol>
 <li><strong>A Versão "Raiz" (Manual):</strong> Para entender onde o estado mora (recursão).</li>
 <li><strong>A Versão "Profissional" (GenServer):</strong> Para ganhar robustez e padronização.</li>
 </ol>
 <hr />
-<h2 id="1-etapa-a-o-servidor-manual-entendendo-o-loop">1. Etapa A: O Servidor Manual (Entendendo o Loop) 🔨<a class="headerlink" href="#1-etapa-a-o-servidor-manual-entendendo-o-loop" title="Permanent link">&para;</a></h2>
+<h2 id="1-etapa-a-o-servidor-manual-entendendo-o-loop">1. Etapa A: O Servidor Manual (Entendendo o Loop)<a class="headerlink" href="#1-etapa-a-o-servidor-manual-entendendo-o-loop" title="Permanent link">&para;</a></h2>
 <p>Antes de usarmos ferramentas prontas, vamos criar uma conta bancária usando apenas primitivas: <code>spawn</code>, <code>receive</code> e recursão. Isso vai provar para você que <strong>não existe mágica</strong>, apenas engenharia.</p>
-<h3 id="passo-1-o-loop-de-estado">🛠️ Passo 1: O Loop de Estado<a class="headerlink" href="#passo-1-o-loop-de-estado" title="Permanent link">&para;</a></h3>
+<h3 id="passo-1-o-loop-de-estado">Passo 1: O Loop de Estado<a class="headerlink" href="#passo-1-o-loop-de-estado" title="Permanent link">&para;</a></h3>
 <p>Crie o arquivo <code>lib/conta_manual.ex</code>.</p>
 <p>Neste código, observe que o <strong>saldo</strong> não é uma variável global. Ele é um <strong>argumento</strong> que é passado de uma volta do loop para a próxima.</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-20-1" name="__codelineno-20-1" href="#__codelineno-20-1"></a><span class="kd">defmodule</span><span class="w"> </span><span class="nc">ContaManual</span><span class="w"> </span><span class="k">do</span>
@@ -1730,7 +1765,7 @@ O aluno aprendeu:</p>
 <a id="__codelineno-20-26" name="__codelineno-20-26" href="#__codelineno-20-26"></a><span class="w">  </span><span class="k">end</span>
 <a id="__codelineno-20-27" name="__codelineno-20-27" href="#__codelineno-20-27"></a><span class="k">end</span>
 </code></pre></div>
-<h3 id="testando-a-versao-manual-iex">⚡ Testando a Versão Manual (IEx)<a class="headerlink" href="#testando-a-versao-manual-iex" title="Permanent link">&para;</a></h3>
+<h3 id="testando-a-versao-manual-iex">Testando a Versão Manual (IEx)<a class="headerlink" href="#testando-a-versao-manual-iex" title="Permanent link">&para;</a></h3>
 <p>Abra o terminal e veja a dificuldade de comunicação:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-21-1" name="__codelineno-21-1" href="#__codelineno-21-1"></a><span class="c1"># 1. Iniciar</span>
 <a id="__codelineno-21-2" name="__codelineno-21-2" href="#__codelineno-21-2"></a><span class="nv">pid</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>ContaManual.iniciar<span class="o">(</span><span class="m">0</span><span class="o">)</span>
@@ -1754,7 +1789,7 @@ Funciona? Sim. Mas é frágil.</p>
 <li>É muito código repetitivo ("Boilerplate").</li>
 </ul>
 <hr />
-<h2 id="2-etapa-b-o-padrao-ouro-genserver">2. Etapa B: O Padrão Ouro (<code>GenServer</code>) 🏆<a class="headerlink" href="#2-etapa-b-o-padrao-ouro-genserver" title="Permanent link">&para;</a></h2>
+<h2 id="2-etapa-b-o-padrao-ouro-genserver">2. Etapa B: O Padrão Ouro (<code>GenServer</code>)<a class="headerlink" href="#2-etapa-b-o-padrao-ouro-genserver" title="Permanent link">&para;</a></h2>
 <p>Na Etapa A, construímos um servidor "na unha". Funciona? Sim. É seguro para produção? <strong>Não.</strong>
 Como engenheiros, analisamos os riscos daquela abordagem manual:
 1. <strong>Boilerplate:</strong> Você teve que escrever a recursão (<code>loop_do_servidor</code>) manualmente. Se esquecer uma linha, o servidor morre.
@@ -1781,13 +1816,13 @@ Imagine um <strong>Restaurante</strong>:
 <tr>
 <td>Síncrono</td>
 <td><strong>Call</strong></td>
-<td>Ligar para a Pizzaria 📞</td>
+<td>Ligar para a Pizzaria</td>
 <td>Você fica esperando a resposta. Se não atender em 5s (timeout), gera erro. <strong>Garante consistência.</strong></td>
 </tr>
 <tr>
 <td>Assíncrono</td>
 <td><strong>Cast</strong></td>
-<td>Mandar um e-mail 📧</td>
+<td>Mandar um e-mail</td>
 <td>Você envia e não espera retorno. Pode ser lido agora ou mais tarde. <strong>Garante performance (“fire and forget”).</strong></td>
 </tr>
 </tbody>
@@ -1799,7 +1834,7 @@ Implementar o módulo ContaBancaria onde:
 • O <strong>Estado</strong> (Saldo) é gerenciado automaticamente pelo GenServer.
 • <strong>Depósitos</strong> usam <code>cast</code> (pois o banco aceita seu dinheiro na hora, sem bloquear).
 • <strong>Saques</strong> e <strong>Consultas</strong> usam <code>call</code> (pois você precisa da resposta imediata).</p>
-<h3 id="passo-2-a-implementacao-profissional">🛠️ Passo 2: A Implementação Profissional<a class="headerlink" href="#passo-2-a-implementacao-profissional" title="Permanent link">&para;</a></h3>
+<h3 id="passo-2-a-implementacao-profissional">Passo 2: A Implementação Profissional<a class="headerlink" href="#passo-2-a-implementacao-profissional" title="Permanent link">&para;</a></h3>
 <p>Vamos criar o módulo <code>ContaBancaria</code> (a versão final) dentro do projeto.</p>
 <p>Crie o arquivo <code>lib/conta_bancaria.ex</code>.
 <em>Note como <code>loop(novo_saldo)</code> vira <code>{:noreply, novo_saldo}</code>.</em></p>
@@ -1872,7 +1907,7 @@ Implementar o módulo ContaBancaria onde:
 <a id="__codelineno-22-66" name="__codelineno-22-66" href="#__codelineno-22-66"></a><span class="w">  </span><span class="k">end</span>
 <a id="__codelineno-22-67" name="__codelineno-22-67" href="#__codelineno-22-67"></a><span class="k">end</span>
 </code></pre></div>
-<h3 id="nota-de-engenharia-o-que-e-esse-impl-true">📝 Nota de Engenharia: O que é esse <code>@impl true</code>?<a class="headerlink" href="#nota-de-engenharia-o-que-e-esse-impl-true" title="Permanent link">&para;</a></h3>
+<h3 id="nota-de-engenharia-o-que-e-esse-impl-true">Nota de Engenharia: O que é esse <code>@impl true</code>?<a class="headerlink" href="#nota-de-engenharia-o-que-e-esse-impl-true" title="Permanent link">&para;</a></h3>
 <p>Você deve ter notado que, antes das funções <code>handle_call</code> e <code>handle_cast</code>, colocamos o atributo <code>@impl true</code>.</p>
 <p>Se você vem do <strong>Java</strong> ou <strong>C#</strong>, isso é exatamente equivalente ao <strong><code>@Override</code></strong>.</p>
 <h3 id="para-que-serve">Para que serve?<a class="headerlink" href="#para-que-serve" title="Permanent link">&para;</a></h3>
@@ -1895,7 +1930,7 @@ Imagine que você digitou errado o nome da função (escreveu <code>handle_cat</
 </li>
 </ul>
 <p><strong>Regra de Ouro:</strong> Sempre use <code>@impl true</code> nos callbacks (<code>init</code>, <code>handle_call</code>, <code>handle_cast</code>, <code>terminate</code>). É o cinto de segurança do seu código.</p>
-<h3 id="testando-a-versao-genserver">⚡ Testando a Versão GenServer<a class="headerlink" href="#testando-a-versao-genserver" title="Permanent link">&para;</a></h3>
+<h3 id="testando-a-versao-genserver">Testando a Versão GenServer<a class="headerlink" href="#testando-a-versao-genserver" title="Permanent link">&para;</a></h3>
 <p>Volte ao terminal (<code>recompile()</code>). Veja como a experiência de uso (Developer Experience) é superior.</p>
 <p>Elixir</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-23-1" name="__codelineno-23-1" href="#__codelineno-23-1"></a><span class="c1"># 1. Abrir conta</span>
@@ -1925,7 +1960,7 @@ Imagine que você digitou errado o nome da função (escreveu <code>handle_cat</
 <hr />
 <p><strong>Professor:</strong> Agora temos um sistema funcional e limpo.
 Mas, como engenheiros, devemos ser pessimistas. <strong>E se houver um bug no código?</strong> E se dividirmos por zero? O processo vai morrer. O dinheiro vai sumir.</p>
-<h1 id="modulo-4-supervisores-e-tolerancia-a-falhas">🛡️ Módulo 4: Supervisores e Tolerância a Falhas<a class="headerlink" href="#modulo-4-supervisores-e-tolerancia-a-falhas" title="Permanent link">&para;</a></h1>
+<h1 id="modulo-4-supervisores-e-tolerancia-a-falhas">Módulo 4: Supervisores e Tolerância a Falhas<a class="headerlink" href="#modulo-4-supervisores-e-tolerancia-a-falhas" title="Permanent link">&para;</a></h1>
 <p><strong>Objetivo:</strong> Transformar nosso processo isolado em uma <strong>Árvore de Supervisão</strong> (Supervision Tree), criando um sistema que se cura sozinho (Self-healing).</p>
 <h2 id="1-teoria-o-supervisor">1. Teoria: O Supervisor<a class="headerlink" href="#1-teoria-o-supervisor" title="Permanent link">&para;</a></h2>
 <p>Um Supervisor é um processo especial. A única função dele é vigiar outros processos (chamados de <em>children</em> ou filhos).</p>
@@ -1936,9 +1971,9 @@ Mas, como engenheiros, devemos ser pessimistas. <strong>E se houver um bug no c�
 <li><strong>:one_for_all (Um por Todos):</strong> Se o processo A morrer, mate o B e o C, e reinicie todos. (Usado quando os processos dependem estritamente um do outro).</li>
 </ul>
 <hr />
-<h2 id="2-laboratorio-pratico-preparando-o-crash">2. Laboratório Prático: Preparando o Crash 💥<a class="headerlink" href="#2-laboratorio-pratico-preparando-o-crash" title="Permanent link">&para;</a></h2>
+<h2 id="2-laboratorio-pratico-preparando-o-crash">2. Laboratório Prático: Preparando o Crash<a class="headerlink" href="#2-laboratorio-pratico-preparando-o-crash" title="Permanent link">&para;</a></h2>
 <p>Para testar a resiliência, precisamos de uma forma de "quebrar" nossa conta bancária propositalmente.</p>
-<h3 id="passo-1-adicionando-o-botao-de-autodestruicao">🛠️ Passo 1: Adicionando o Botão de Autodestruição<a class="headerlink" href="#passo-1-adicionando-o-botao-de-autodestruicao" title="Permanent link">&para;</a></h3>
+<h3 id="passo-1-adicionando-o-botao-de-autodestruicao">Passo 1: Adicionando o Botão de Autodestruição<a class="headerlink" href="#passo-1-adicionando-o-botao-de-autodestruicao" title="Permanent link">&para;</a></h3>
 <p>Edite o arquivo <code>lib/conta_bancaria.ex</code>. Vamos adicionar uma função que causa um erro fatal (divisão por zero ou <code>raise</code>).</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-24-1" name="__codelineno-24-1" href="#__codelineno-24-1"></a><span class="kd">defmodule</span><span class="w"> </span><span class="nc">ContaBancaria</span><span class="w"> </span><span class="k">do</span>
 <a id="__codelineno-24-2" name="__codelineno-24-2" href="#__codelineno-24-2"></a><span class="w">  </span><span class="kn">use</span><span class="w"> </span><span class="nc">GenServer</span>
@@ -1962,7 +1997,7 @@ Mas, como engenheiros, devemos ser pessimistas. <strong>E se houver um bug no c�
 <a id="__codelineno-24-20" name="__codelineno-24-20" href="#__codelineno-24-20"></a><span class="k">end</span>
 </code></pre></div>
 <hr />
-<h3 id="passo-2-transformando-o-projeto-em-uma-aplicacao">🛠️ Passo 2: Transformando o Projeto em uma Aplicação<a class="headerlink" href="#passo-2-transformando-o-projeto-em-uma-aplicacao" title="Permanent link">&para;</a></h3>
+<h3 id="passo-2-transformando-o-projeto-em-uma-aplicacao">Passo 2: Transformando o Projeto em uma Aplicação<a class="headerlink" href="#passo-2-transformando-o-projeto-em-uma-aplicacao" title="Permanent link">&para;</a></h3>
 <p>Quando criamos o projeto com <code>mix new lab_concorrencia</code>, ele veio "pelado". Precisamos dizer ao Mix que este projeto tem um ponto de entrada (uma Application Callback).</p>
 <ol>
 <li>Crie o arquivo <code>lib/lab_concorrencia/application.ex</code>:</li>
@@ -2003,7 +2038,7 @@ Abra o arquivo <code>mix.exs</code> na raiz, procure a função <code>applicatio
 <a id="__codelineno-26-7" name="__codelineno-26-7" href="#__codelineno-26-7"></a><span class="w">  </span><span class="k">end</span>
 </code></pre></div>
 <hr />
-<h3 id="passo-3-o-teste-de-imortalidade-e-a-correcao-do-contrato">🛠️ Passo 3: O Teste de Imortalidade (e a Correção do Contrato) 🧪<a class="headerlink" href="#passo-3-o-teste-de-imortalidade-e-a-correcao-do-contrato" title="Permanent link">&para;</a></h3>
+<h3 id="passo-3-o-teste-de-imortalidade-e-a-correcao-do-contrato">Passo 3: O Teste de Imortalidade (e a Correção do Contrato)<a class="headerlink" href="#passo-3-o-teste-de-imortalidade-e-a-correcao-do-contrato" title="Permanent link">&para;</a></h3>
 <p>Agora que configuramos nosso Supervisor no <code>Application.ex</code>, a teoria diz que ele deve iniciar a conta automaticamente. Vamos testar?</p>
 <p><strong>1. O Erro Esperado (A Falha de Contrato)</strong>
 Reinicie o terminal (<code>iex -S mix</code>).
@@ -2012,7 +2047,7 @@ Ao fazer isso, você provavelmente será recebido por uma mensagem de erro assus
 <a id="__codelineno-27-2" name="__codelineno-27-2" href="#__codelineno-27-2"></a>an<span class="w"> </span>exception<span class="w"> </span>was<span class="w"> </span>raised:<span class="w"> </span>**<span class="w"> </span><span class="o">(</span>UndefinedFunctionError<span class="o">)</span><span class="w"> </span>
 <a id="__codelineno-27-3" name="__codelineno-27-3" href="#__codelineno-27-3"></a><span class="k">function</span><span class="w"> </span>ContaBancaria.start_link/1<span class="w"> </span>is<span class="w"> </span>undefined<span class="w"> </span>or<span class="w"> </span>private
 </code></pre></div>
-<p><strong>👨‍🏫 O Diagnóstico de Engenharia:</strong>
+<p><strong>O Diagnóstico de Engenharia:</strong>
 Por que falhou?
 Quando dissemos ao Supervisor para cuidar do filho <code>{ContaBancaria, 1000}</code>, o Supervisor assumiu o comportamento padrão da OTP: ele tentou procurar e executar uma função chamada <strong>obrigatoriamente</strong> de <code>start_link</code>.</p>
 <p>Mas espere! No passo anterior, nós demos o nome criativo de <code>abrir_conta</code>.</p>
@@ -2057,7 +2092,7 @@ Garanta que a conta está funcionando:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-30-1" name="__codelineno-30-1" href="#__codelineno-30-1"></a><span class="nc">ContaBancaria</span><span class="o">.</span><span class="n">ver_saldo</span><span class="p">(</span><span class="n">pid_da_conta</span><span class="p">)</span>
 <a id="__codelineno-30-2" name="__codelineno-30-2" href="#__codelineno-30-2"></a><span class="c1"># 1000 (O valor inicial configurado no Application.ex)</span>
 </code></pre></div>
-<p><strong>C. 💣 O GRANDE MOMENTO: A Sabotagem:</strong>
+<p><strong>C. O GRANDE MOMENTO: A Sabotagem:</strong>
 Vamos invocar a função <code>causar_bug</code> que criamos. Prepare-se para o erro vermelho (que agora é sinal de sucesso).</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-31-1" name="__codelineno-31-1" href="#__codelineno-31-1"></a><span class="nc">ContaBancaria</span><span class="o">.</span><span class="n">causar_bug</span><span class="p">(</span><span class="n">pid_da_conta</span><span class="p">)</span>
 </code></pre></div>
@@ -2104,10 +2139,10 @@ Porque processos guardam estado em <strong>Memória RAM</strong>. Se o processo 
 <p>Isso é a base de sistemas como WhatsApp e Discord.</p>
 <p>Em um sistema real com milhares de processos, nós não ficamos anotando PIDs (<code>#PID&lt;0.155.0&gt;</code>) num caderninho. PIDs são efêmeros; eles mudam toda vez que o processo morre e renasce. Precisamos de um <strong>Nome Fixo</strong> (DNS interno). Vamos resolver isso ?</p>
 <hr />
-<h1 id="processos-nomeados-named-processes">🏷️ Processos Nomeados (Named Processes)<a class="headerlink" href="#processos-nomeados-named-processes" title="Permanent link">&para;</a></h1>
+<h1 id="processos-nomeados-named-processes">Processos Nomeados (Named Processes)<a class="headerlink" href="#processos-nomeados-named-processes" title="Permanent link">&para;</a></h1>
 <p><strong>O Problema:</strong> Quando o Supervisor reinicia a <code>ContaBancaria</code> após um crash, o PID muda. Se o seu código dependia do PID antigo, ele quebra.</p>
 <p><strong>A Solução:</strong> Registramos o processo com um nome (geralmente um Átomo). Assim, mandamos mensagens para o <strong>Nome</strong>, e o Elixir descobre quem é o PID atual daquele nome.</p>
-<h3 id="passo-1-atualizando-o-codigo">🛠️ Passo 1: Atualizando o Código<a class="headerlink" href="#passo-1-atualizando-o-codigo" title="Permanent link">&para;</a></h3>
+<h3 id="passo-1-atualizando-o-codigo">Passo 1: Atualizando o Código<a class="headerlink" href="#passo-1-atualizando-o-codigo" title="Permanent link">&para;</a></h3>
 <p>Abra <code>lib/conta_bancaria.ex</code>. Vamos fazer apenas duas pequenas alterações:</p>
 <ol>
 <li>No <code>start_link</code>, vamos adicionar a opção <code>name</code>.</li>
@@ -2146,7 +2181,7 @@ Porque processos guardam estado em <strong>Memória RAM</strong>. Se o processo 
 <a id="__codelineno-35-30" name="__codelineno-35-30" href="#__codelineno-35-30"></a><span class="w">  </span><span class="c1"># ... (O resto do código e callbacks continuam IGUAIS) ...</span>
 <a id="__codelineno-35-31" name="__codelineno-35-31" href="#__codelineno-35-31"></a><span class="k">end</span>
 </code></pre></div>
-<h3 id="passo-2-o-teste-definitivo">🛠️ Passo 2: O Teste Definitivo<a class="headerlink" href="#passo-2-o-teste-definitivo" title="Permanent link">&para;</a></h3>
+<h3 id="passo-2-o-teste-definitivo">Passo 2: O Teste Definitivo<a class="headerlink" href="#passo-2-o-teste-definitivo" title="Permanent link">&para;</a></h3>
 <p>Reinicie seu terminal (<code>iex -S mix</code>) e veja a mágica da <strong>Transparência de Localização</strong>.</p>
 <ol>
 <li>
@@ -2176,18 +2211,18 @@ Porque processos guardam estado em <strong>Memória RAM</strong>. Se o processo 
 <li>Quando você chamou <code>ver_saldo()</code>, o Elixir mandou a mensagem para o novo PID automaticamente.</li>
 </ol>
 <p>Isso é <strong>Alta Disponibilidade</strong>. O cliente nem percebeu que o servidor caiu e voltou.</p>
-<h1 id="modulo-intermediario-especialistas-agent-e-task">🛠️ Módulo Intermediário: Especialistas (<code>Agent</code> e <code>Task</code>)<a class="headerlink" href="#modulo-intermediario-especialistas-agent-e-task" title="Permanent link">&para;</a></h1>
+<h1 id="modulo-intermediario-especialistas-agent-e-task">Módulo Intermediário: Especialistas (<code>Agent</code> e <code>Task</code>)<a class="headerlink" href="#modulo-intermediario-especialistas-agent-e-task" title="Permanent link">&para;</a></h1>
 <p>Em alguns casos, ao invés de usar <strong>GenServer</strong> (que faz tudo), podemos usar seus "irmãos menores". Eles são processos especializados:</p>
 <ol>
 <li><strong><code>Agent</code></strong>: Especialista em <strong>Guardar Estado</strong> (Simples).</li>
 <li><strong><code>Task</code></strong>: Especialista em <strong>Processamento Paralelo</strong> (Cálculo).</li>
 </ol>
 <hr />
-<h2 id="1-o-agent-o-cofre-de-estado">1. O <code>Agent</code> (O Cofre de Estado) 💼<a class="headerlink" href="#1-o-agent-o-cofre-de-estado" title="Permanent link">&para;</a></h2>
+<h2 id="1-o-agent-o-cofre-de-estado">1. O <code>Agent</code> (O Cofre de Estado)<a class="headerlink" href="#1-o-agent-o-cofre-de-estado" title="Permanent link">&para;</a></h2>
 <p>Imagine que você só quer guardar um valor (como uma configuração global ou um contador) e ler/atualizar isso de forma segura entre vários processos.
 Criar um <code>GenServer</code> inteiro com <code>handle_call</code> e <code>handle_cast</code> só para isso é "matar formiga com bazuca".</p>
 <p>O <strong>Agent</strong> abstrai tudo isso.</p>
-<h3 id="pratica-o-cofre-do-banco">🛠️ Prática: O Cofre do Banco<a class="headerlink" href="#pratica-o-cofre-do-banco" title="Permanent link">&para;</a></h3>
+<h3 id="pratica-o-cofre-do-banco">Prática: O Cofre do Banco<a class="headerlink" href="#pratica-o-cofre-do-banco" title="Permanent link">&para;</a></h3>
 <p>Vamos criar um cofre que guarda as reservas totais do banco.
 Crie o arquivo <code>lib/cofre.ex</code>:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-38-1" name="__codelineno-38-1" href="#__codelineno-38-1"></a><span class="kd">defmodule</span><span class="w"> </span><span class="nc">Cofre</span><span class="w"> </span><span class="k">do</span>
@@ -2211,7 +2246,7 @@ Crie o arquivo <code>lib/cofre.ex</code>:</p>
 <a id="__codelineno-38-19" name="__codelineno-38-19" href="#__codelineno-38-19"></a><span class="w">  </span><span class="k">end</span>
 <a id="__codelineno-38-20" name="__codelineno-38-20" href="#__codelineno-38-20"></a><span class="k">end</span>
 </code></pre></div>
-<h3 id="teste-no-terminal-iex-s-mix">⚡ Teste no Terminal (<code>iex -S mix</code>)<a class="headerlink" href="#teste-no-terminal-iex-s-mix" title="Permanent link">&para;</a></h3>
+<h3 id="teste-no-terminal-iex-s-mix">Teste no Terminal (<code>iex -S mix</code>)<a class="headerlink" href="#teste-no-terminal-iex-s-mix" title="Permanent link">&para;</a></h3>
 <p>Olhe como é simples (sem callbacks complexos):</p>
 <p>Elixir</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-39-1" name="__codelineno-39-1" href="#__codelineno-39-1"></a><span class="c1"># 1. Iniciar com 50 mil reais</span>
@@ -2228,11 +2263,11 @@ Crie o arquivo <code>lib/cofre.ex</code>:</p>
 </code></pre></div>
 <p><strong>Conceito de Engenharia:</strong> O <code>Agent</code> garante <strong>Atomicidade</strong>. Se 100 processos tentarem atualizar o cofre ao mesmo tempo, o Agent coloca todos em fila e atende um por um. Não há risco de corromper o dado.</p>
 <hr />
-<h2 id="2-a-task-o-trabalhador-assincrono">2. A <code>Task</code> (O Trabalhador Assíncrono) 👷<a class="headerlink" href="#2-a-task-o-trabalhador-assincrono" title="Permanent link">&para;</a></h2>
+<h2 id="2-a-task-o-trabalhador-assincrono">2. A <code>Task</code> (O Trabalhador Assíncrono)<a class="headerlink" href="#2-a-task-o-trabalhador-assincrono" title="Permanent link">&para;</a></h2>
 <p>E se precisarmos fazer algo demorado (ex: enviar e-mail de confirmação ou gerar PDF) e não quisermos travar o nosso Banco?</p>
 <p>Lembre-se: O Elixir é síncrono por padrão. Se você colocar um <code>sleep(5000)</code> no meio do código, tudo para.
 A <strong>Task</strong> serve para jogar esse trabalho para um processo descartável secundário.</p>
-<h3 id="pratica-o-notificador">🛠️ Prática: O Notificador<a class="headerlink" href="#pratica-o-notificador" title="Permanent link">&para;</a></h3>
+<h3 id="pratica-o-notificador">Prática: O Notificador<a class="headerlink" href="#pratica-o-notificador" title="Permanent link">&para;</a></h3>
 <p>Crie o arquivo <code>lib/notificador.ex</code>:</p>
 <p>Elixir</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-40-1" name="__codelineno-40-1" href="#__codelineno-40-1"></a><span class="kd">defmodule</span><span class="w"> </span><span class="nc">Notificador</span><span class="w"> </span><span class="k">do</span>
@@ -2246,7 +2281,7 @@ A <strong>Task</strong> serve para jogar esse trabalho para um processo descart�
 <a id="__codelineno-40-9" name="__codelineno-40-9" href="#__codelineno-40-9"></a><span class="w">  </span><span class="k">end</span>
 <a id="__codelineno-40-10" name="__codelineno-40-10" href="#__codelineno-40-10"></a><span class="k">end</span>
 </code></pre></div>
-<h3 id="teste-comparativo-iex">⚡ Teste Comparativo (IEx)<a class="headerlink" href="#teste-comparativo-iex" title="Permanent link">&para;</a></h3>
+<h3 id="teste-comparativo-iex">Teste Comparativo (IEx)<a class="headerlink" href="#teste-comparativo-iex" title="Permanent link">&para;</a></h3>
 <p><strong>Cenário A: O jeito travado (Sem Task)</strong>
 Rode isso e veja seu terminal congelar:</p>
 <p>Elixir</p>
@@ -2278,30 +2313,30 @@ Agora vamos usar <code>Task.start/1</code>.</p>
 <td><strong>spawn</strong></td>
 <td>Célula-tronco</td>
 <td>Baixo nível, criar processos brutos (evitar em produção).</td>
-<td>💀 Alta (Manual)</td>
+<td>Alta (Manual)</td>
 </tr>
 <tr>
 <td><strong>Task</strong></td>
 <td>Freelancer</td>
 <td>Tarefas pontuais, paralelas e descartáveis (cálculos, emails).</td>
-<td>⭐ Baixa</td>
+<td>Baixa</td>
 </tr>
 <tr>
 <td><strong>Agent</strong></td>
 <td>Armário / Cofre</td>
 <td>Guardar e compartilhar um estado simples.</td>
-<td>⭐ Baixa</td>
+<td>Baixa</td>
 </tr>
 <tr>
 <td><strong>GenServer</strong></td>
 <td>Gerente</td>
 <td>Lógica de negócio complexa, estado robusto e longa vida.</td>
-<td>⭐⭐ Média</td>
+<td>Média</td>
 </tr>
 </tbody>
 </table>
 <hr />
-<h1 id="revisao-geral-do-modulo">🎓 Revisão Geral do Modulo<a class="headerlink" href="#revisao-geral-do-modulo" title="Permanent link">&para;</a></h1>
+<h1 id="revisao-geral-do-modulo">Revisão Geral do Modulo<a class="headerlink" href="#revisao-geral-do-modulo" title="Permanent link">&para;</a></h1>
 <p>Parabéns, caro aluno. Você completou a jornada fundamental da plataforma BEAM.
 Vamos recapitular o modelo mental que você construiu, pois é isso que importa na sua carreira.</p>
 <h3 id="1-o-paradigma-funcional">1. O Paradigma Funcional<a class="headerlink" href="#1-o-paradigma-funcional" title="Permanent link">&para;</a></h3>
@@ -2331,7 +2366,7 @@ Vamos recapitular o modelo mental que você construiu, pois é isso que importa 
 <li><strong>Árvore de Supervisão:</strong> A arquitetura hierárquica do sistema. Se um worker falha, o supervisor local resolve. Se o supervisor falha, o supervisor dele resolve.</li>
 </ul>
 <hr />
-<h3 id="proximos-passos-na-sua-carreira">🚀 Próximos Passos na sua Carreira<a class="headerlink" href="#proximos-passos-na-sua-carreira" title="Permanent link">&para;</a></h3>
+<h3 id="proximos-passos-na-sua-carreira">Próximos Passos na sua Carreira<a class="headerlink" href="#proximos-passos-na-sua-carreira" title="Permanent link">&para;</a></h3>
 <p>Agora que você domina a base, para onde ir?</p>
 <ol>
 <li><strong>Phoenix Framework:</strong> É o "Django/Rails" do Elixir, mas capaz de aguentar milhões de conexões WebSocket simultâneas (graças aos Processos que você acabou de aprender!).</li>
@@ -2358,6 +2393,8 @@ Vamos recapitular o modelo mental que você construiu, pois é isso que importa 
             </div>
           
           
+  <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var labels=set.querySelector(".tabbed-labels");for(var tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
+
 <script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
         </div>
         
@@ -2396,7 +2433,7 @@ Vamos recapitular o modelo mental que você construiu, pois é isso que importa 
     
       
       
-      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.top", "navigation.sections", "toc.integrate", "content.code.annotate", "content.code.copy"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copiado para \u00e1rea de transfer\u00eancia", "clipboard.copy": "Copiar para \u00e1rea de transfer\u00eancia", "search.result.more.one": "Mais 1 nesta p\u00e1gina", "search.result.more.other": "Mais # nesta p\u00e1gina", "search.result.none": "Nenhum resultado encontrado", "search.result.one": "1 resultado encontrado", "search.result.other": "# resultados encontrados", "search.result.placeholder": "Digite para iniciar a busca", "search.result.term.missing": "Ausente", "select.version": "Selecione a vers\u00e3o"}, "version": null}</script>
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.instant", "navigation.tracking", "navigation.sections", "navigation.expand", "navigation.top", "search.highlight", "search.share", "content.code.annotate", "content.code.copy", "content.tabs.link", "content.tooltips", "toc.follow"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copiado para \u00e1rea de transfer\u00eancia", "clipboard.copy": "Copiar para \u00e1rea de transfer\u00eancia", "search.result.more.one": "Mais 1 nesta p\u00e1gina", "search.result.more.other": "Mais # nesta p\u00e1gina", "search.result.none": "Nenhum resultado encontrado", "search.result.one": "1 resultado encontrado", "search.result.other": "# resultados encontrados", "search.result.placeholder": "Digite para iniciar a busca", "search.result.term.missing": "Ausente", "select.version": "Selecione a vers\u00e3o"}, "version": null}</script>
     
     
       <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
