@@ -16,7 +16,7 @@ Nesta seção, você aprenderá os fundamentos sintáticos e operacionais do Eli
 
 ---
 
-## 🎯 **Objetivos de Aprendizagem**
+## **Objetivos de Aprendizagem**
 
 - Instalar e configurar o ambiente Elixir
 - Dominar o uso do IEx (Interactive Elixir)
@@ -26,13 +26,13 @@ Nesta seção, você aprenderá os fundamentos sintáticos e operacionais do Eli
 
 ---
 
-## 🔸 **1.1 Instalação e Ambiente (15 min)**
+## **1.1 Instalação e Ambiente (15 min)**
 
 Exisitem diversas maneiras de instalar o elixir, veja mais detalhes em  https://elixir-lang.org/install.html
 
 ---
 
-## 🔸 **1.2 Tipos Básicos (25 min)**
+## **1.2 Tipos Básicos (25 min)**
 
 ### **Inteiros e Operações Aritméticas**
 
@@ -128,7 +128,7 @@ String.length("Olá")      # 3
 
 ---
 
-## 🔸 **1.3 Imutabilidade**
+## **1.3 Imutabilidade**
 
 ```elixir
 x = [1, 2, 3]
@@ -143,7 +143,7 @@ y  # => [0, 1, 2, 3]
 
 ---
 
-## 🔸 **1.4 Coleções Básicas**
+## **1.4 Coleções Básicas**
 
 ### **Listas (`[ ]`)**
 
@@ -247,7 +247,7 @@ config[:host]  # "localhost"
 
 ---
 
-## 🔸 **1.5 Operador Pipe (`|>`)**
+## **1.5 Operador Pipe (`|>`)**
 
 ```elixir
 "  hello world  "
@@ -268,7 +268,7 @@ config[:host]  # "localhost"
 
 ---
 
-## 🔸 **1.6 Introdução ao Enum**
+## **1.6 Introdução ao Enum**
 
 ```elixir
 Enum.count([1, 2, 3])         # 3
@@ -285,14 +285,14 @@ Enum.filter([1, 2, 3, 4], fn x -> rem(x,2)==0 end)  # [2,4]
 
 ---
 
-## 🔸 **Exercícios em Sala**
+## **Exercícios em Sala**
 
 1. Criar uma lista com números de 1 a 5, usar pipe para **dobrar cada número** e filtrar apenas pares.
 2. Criar um mapa representando uma pessoa, **adicionar nova chave** usando `Map.put`.
 
 ---
 
-## 🔸 **Tarefa para Casa**
+## **Tarefa para Casa**
 
 1. Ler as lições “Basics” do Elixir School em português.
 2. Fazer exercícios do Exercism: "Hello World", "Two Fer", "Reverse String".
@@ -300,10 +300,10 @@ Enum.filter([1, 2, 3, 4], fn x -> rem(x,2)==0 end)  # [2,4]
 
 ---
 
-## 🔸 **Material de Apoio**
+## **Material de Apoio**
 
-- [📘 Elixir School - Básico](https://elixirschool.com/pt/lessons/basics/basics)
-- [📘 HexDocs - Getting Started](https://hexdocs.pm/elixir/introduction.html)
-- [🧪 Exercism - Trilha Elixir](https://exercism.org/tracks/elixir)
+- [Elixir School - Básico](https://elixirschool.com/pt/lessons/basics/basics)
+- [HexDocs - Getting Started](https://hexdocs.pm/elixir/introduction.html)
+- [Exercism - Trilha Elixir](https://exercism.org/tracks/elixir)
 
 ---
