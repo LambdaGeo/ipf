@@ -9,6 +9,7 @@ As listas são a estrutura de dados mais fundamental e amplamente utilizada na p
 Em Haskell, uma lista é uma coleção homogênea de elementos, o que significa que **todos os elementos devem ter exatamente o mesmo tipo**. A estrutura de dados de uma lista é inerentemente **recursiva** e implementada como uma lista simplesmente encadeada.
 
 Uma lista em Haskell é definida formalmente por dois construtores:
+
 1. **Lista Vazia (`[]`)**: Representa a ausência de elementos.
 2. **O Construtor Cons (`:`)**: Um operador que recebe um elemento (a cabeça) e o anexa no início de outra lista (a cauda).
 
@@ -84,6 +85,7 @@ Como a estrutura de uma lista é definida pelo construtor de cabeça/cauda (`:`)
 
 ### Exemplo 1: Somando elementos de uma lista
 Para calcular a soma de uma lista de números recursivamente, definimos dois casos:
+
 1. **Caso Base**: A soma de uma lista vazia `[]` é `0`.
 2. **Caso Recursivo**: A soma de uma lista não vazia `(x:xs)` é a cabeça `x` somada ao resultado da chamada recursiva para a cauda `xs`.
 

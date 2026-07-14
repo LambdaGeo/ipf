@@ -9,6 +9,7 @@ A ferramenta padrão da indústria hoje é o **Stack**.
 ## 🚀 O que é o Stack?
 
 O **Stack** é um programa para gerenciar projetos Haskell. Ele se encarrega de:
+
 1. Instalar a versão correta do compilador GHC automaticamente para cada projeto (isolando-a de outras no sistema).
 2. Baixar e gerenciar dependências utilizando o **Stackage**, um repositório curado onde todas as bibliotecas são testadas juntas para garantir compatibilidade.
 3. Compilar, rodar executáveis e executar suítes de testes de forma simples.
@@ -98,6 +99,7 @@ Na Unidade 1, você trabalhou com arquivos soltos compilados pelo `ghc` ou carre
 No entanto, no desenvolvimento real, lidamos com código dividido em múltiplos arquivos (módulos), dependências externas (como bibliotecas HTTP, bancos de dados ou frameworks de teste) e testes de unidade automatizados.
 
 Nesta **Unidade 2**, usamos o **Stack** para unificar duas práticas fundamentais:
+
 1. **Modelagem de Dados (SimpleJSON)**: Onde aplicamos os conceitos de tipos de dados algébricos e pattern matching para construir uma biblioteca de parsing e manipulação de objetos JSON reais (baseado no Capítulo 5 do *Real World Haskell*).
 2. **Garantia de Qualidade (QuickCheck)**: Onde mostramos como testar propriedades matemáticas da nossa biblioteca de maneira automatizada (baseado no Capítulo 11 do *Real World Haskell*).
 

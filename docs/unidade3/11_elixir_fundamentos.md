@@ -7,6 +7,7 @@ Seja bem-vindo(a) à introdução ao Elixir!
 Após explorar o ecossistema Lisp com o **Clojure**, que roda na JVM e foca fortemente em processamento de dados imutáveis com S-expressions e metaprogramação, passamos para a segunda metade da Unidade 3, onde estudamos a linguagem **Elixir**.
 
 Ambas as linguagens compartilham princípios funcionais cruciais, como imutabilidade e funções puras, mas diferem amplamente na sua plataforma e propósito de concorrência:
+
 1. **VM do Erlang (BEAM) vs JVM**: A JVM do Clojure foi desenhada para alta performance de computação bruta em thread pools. A BEAM do Elixir foi desenhada para sistemas distribuídos altamente tolerantes a falhas e concorrentes com milhões de processos leves de baixo consumo de memória.
 2. **Modelo de Atores vs Memória Compartilhada**: Clojure lida com concorrência usando referências de estado imutável com STM (Software Transactional Memory) ou Atoms sobre threads compartilhadas. Elixir utiliza o **Modelo de Atores**, onde processos são totalmente isolados e não compartilham nenhuma memória entre si, comunicando-se exclusivamente via troca de mensagens assíncronas.
 3. **Sintaxe Amigável**: Elixir possui uma sintaxe influenciada por Ruby, muito mais familiar e acessível para desenvolvedores de linguagens imperativas do que as S-expressions do Clojure, mas mantendo a pureza funcional sob o capô.
@@ -99,6 +100,7 @@ nil  # também considerado "falsy"
 > 
 > Servem para:
 > 
+
 - Representar **estados** (`:ok`, `:error`)
 - Rótulos simbólicos e flags
 - Identificadores em estruturas de dados

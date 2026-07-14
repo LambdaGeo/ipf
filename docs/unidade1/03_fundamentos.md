@@ -154,6 +154,7 @@ False
 
 ### Operadores de Comparação:
 Para comparar valores numéricos ou textuais, utilizamos os operadores relacionais padrão:
+
 * `==` (igualdade)
 * `/=` (desigualdade / diferente de - diferente do tradicional `!=` de outras linguagens)
 * `>`, `>=`, `<`, `<=` (maior, maior-ou-igual, menor, menor-ou-igual)
