@@ -1,10 +1,10 @@
 # Coleções Avançadas e Pattern Matching
 
-**⏱️ Duração:** 1h40m
+**Duração:** 1h40m
 
-**📚 Tópicos:** Enum avançado, comprehensions, pattern matching, controle de fluxo
+**Tópicos:** Enum avançado, comprehensions, pattern matching, controle de fluxo
 
-## 🎯 **Objetivos de Aprendizagem**
+## **Objetivos de Aprendizagem**
 
 - Dominar operações avançadas com `Enum`
 - Aplicar list comprehensions
@@ -13,7 +13,7 @@
 
 ---
 
-## 🔸 **2.0 Pattern Matching** (30 min)
+## **2.0 Pattern Matching** (30 min)
 
 O **pattern matching** é um dos recursos centrais de Elixir.
 
@@ -32,7 +32,7 @@ x = 1
 
 ```
 
-## 🔸 **2.1 Enum Avançado** (30 min)
+## **2.1 Enum Avançado** (30 min)
 
 O módulo `Enum` é uma das ferramentas mais poderosas da linguagem Elixir. Ele fornece funções para **iterar, transformar, filtrar e reduzir coleções** de forma declarativa e funcional.
 
@@ -96,7 +96,7 @@ Enum.min_max([3, 1, 4, 2])
 
 ---
 
-## 🔸 **2.2 List Comprehensions** (20 min)
+## **2.2 List Comprehensions** (20 min)
 
 As **list comprehensions** são uma forma concisa e expressiva de gerar e transformar coleções em Elixir.
 
@@ -151,7 +151,7 @@ for row <- matrix, x <- row, do: x * 2
 
 ---
 
-## 🔸 **2.3 Pattern Matching com Estruturas**
+## **2.3 Pattern Matching com Estruturas**
 
 O pattern matching pode ser usado para **desestruturar listas, tuplas e mapas**, extraindo apenas as partes relevantes.
 
@@ -173,7 +173,7 @@ O pattern matching pode ser usado para **desestruturar listas, tuplas e mapas**,
 
 ---
 
-## 🔸 **Pin Operator (`^`)**
+## **Pin Operator (`^`)**
 
 O **pin operator (`^`)** serve para **“fixar” o valor atual de uma variável durante um pattern match**, evitando que ela seja sobrescrita.
 
@@ -267,7 +267,7 @@ role_check.(:user)   # "Outro usuário"
 
 ---
 
-## 🔸 **2.4 Funções Anônimas e Pattern Matching** (20 min)
+## **2.4 Funções Anônimas e Pattern Matching** (20 min)
 
 Em Elixir, funções anônimas (`fn ... end`) podem ter **várias cláusulas**, cada uma com seu **pattern matching** e **guard**.
 
@@ -301,7 +301,7 @@ greet.(123)
 
 ```
 
-### ✅ **O que está acontecendo**
+### **O que está acontecendo**
 
 1. **Pattern Matching:**
     - Cada cláusula da função tenta “encaixar” o argumento recebido.
@@ -317,7 +317,7 @@ greet.(123)
 
     ```elixir
     greet = fn name -> "Olá, #{name}!" end
-    greet.("João")  # ✅ Chamada correta
+    greet.("João")  # Chamada correta
     ```
 
     Sem o ponto, o Elixir procura por uma função nomeada no módulo, e não funcionará.
@@ -329,7 +329,7 @@ greet.(123)
 
 ---
 
-## 🔸 **2.5 Estruturas de Controle** (20 min)
+## **2.5 Estruturas de Controle** (20 min)
 
 Embora Elixir seja uma linguagem funcional, ela oferece **estruturas de controle de fluxo** para lidar com múltiplos cenários de decisão.
 
@@ -392,7 +392,7 @@ end
 
 ---
 
-## 🧪 **Exercícios em Sala**
+## **Exercícios em Sala**
 
 ### 1. **Comprehension Complexa**
 
@@ -414,7 +414,7 @@ end
 
 ---
 
-## 🏠 **Tarefa para Casa**
+## **Tarefa para Casa**
 
 1. Fazer os exercícios do Exercism:
     - **"List Ops"**

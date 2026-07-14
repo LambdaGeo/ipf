@@ -31,11 +31,11 @@ Antes de tudo, vamos definir um vetor com alguns itens de estoque:
 
 ```
 
-### **✅ 1. Usando o vetor como função**
+### **1. Usando o vetor como função**
 
 Essa é a forma **mais rápida e idiomática** de acessar elementos. Em Clojure, vetores se comportam como funções: você pode "chamá-los" com um índice.
 
-✔️ Exemplo válido:
+Exemplo válido:
 
 ```clojure
 (estoque 0)
@@ -45,7 +45,7 @@ Essa é a forma **mais rápida e idiomática** de acessar elementos. Em Clojure,
 
 Aqui estamos pedindo o item no índice 0. Como o índice existe, recebemos "Mochila".
 
-⚠️ Exemplo inválido:
+Exemplo inválido:
 
 ```clojure
 (estoque 2)
@@ -59,7 +59,7 @@ O índice 2 **não existe**, então isso **lança uma exceção** e pode interro
 
 ---
 
-### **🛡️ 2. Usando a função `get`**
+### **2. Usando a função `get`**
 
 A função `get` é uma forma **mais segura** de acessar elementos. Ela aceita:
 
@@ -67,7 +67,7 @@ A função `get` é uma forma **mais segura** de acessar elementos. Ela aceita:
 - o índice desejado,
 - e **opcionalmente**, um valor padrão.
 
-✔️ Exemplo com índice válido:
+Exemplo com índice válido:
 
 ```clojure
 (get estoque 1)
@@ -75,7 +75,7 @@ A função `get` é uma forma **mais segura** de acessar elementos. Ela aceita:
 
 ```
 
-🤔 Exemplo com índice inválido:
+Exemplo com índice inválido:
 
 ```clojure
 (get estoque 17)
@@ -85,7 +85,7 @@ A função `get` é uma forma **mais segura** de acessar elementos. Ela aceita:
 
 Diferente da abordagem anterior, `get` não lança erro se o índice for inválido — apenas retorna `nil`.
 
-🛠️ Exemplo com valor padrão:
+Exemplo com valor padrão:
 
 ```clojure
 (get estoque 17 "Produto esgotado")
@@ -100,7 +100,7 @@ Se o índice não existir, o valor `"Produto esgotado"` será retornado.
 
 ---
 
-### 📌 Conclusão
+### Conclusão
 
 - Use **o vetor como função** para máxima performance — mas **cuidado com exceções**.
 - Use **`get`** para acessos **seguros** e mais **flexíveis**, especialmente quando o índice pode não existir.
@@ -109,17 +109,17 @@ Se o índice não existir, o valor `"Produto esgotado"` será retornado.
 
 Para interagir com vetores, duas funções são absolutamente essenciais: `count` para saber seu tamanho e `conj` para adicionar elementos.
 
-🔢 Contando Elementos com `count`
+Contando Elementos com `count`
 
-**✅ O que faz?**
+**O que faz?**
 
 A função `count` retorna o número de elementos em um vetor (ou em qualquer coleção, como listas, mapas e sets).
 
-**💡 Por que usar?**
+**Por que usar?**
 
 É a maneira **mais direta e segura** de verificar o tamanho de uma coleção.
 
-🧪 Exemplos:
+Exemplos:
 
 ```clojure
 (def estoque ["Mochila" "Camiseta" "Tênis"])
@@ -141,17 +141,17 @@ Você também pode usar `count` em coleções vazias:
 
 ---
 
-**➕ Adicionando Elementos com `conj`**
+**Adicionando Elementos com `conj`**
 
-**✅ O que faz?**
+**O que faz?**
 
 A função `conj` (*conjoin*) adiciona um elemento a uma coleção. Com vetores, o elemento é **adicionado ao final**.
 
-**💡 Por que usar?**
+**Por que usar?**
 
 Clojure é uma linguagem funcional e imutável — isso significa que `conj` **não altera o vetor original**. Em vez disso, retorna **uma nova coleção com o elemento adicionado**.
 
-**🧪 Exemplos:**
+**Exemplos:**
 
 ```clojure
 (def estoque ["Mochila" "Camiseta"])
@@ -192,7 +192,7 @@ estoque
 
 ---
 
-🧠 Recapitulando
+Recapitulando
 
 - `count` → conta os elementos de um vetor.
 - `conj` → adiciona um elemento **ao final do vetor**, retornando uma nova coleção.
@@ -215,7 +215,7 @@ Embora seja possível usar strings como chaves, a boa prática fundamental em Cl
 
 ```
 
-🔹 **Exemplo 1 – Acessando dados com `get` e com keywords**
+**Exemplo 1 – Acessando dados com `get` e com keywords**
 
 ```clojure
 (def estoque {:mochila 10 :camiseta 5})
@@ -283,7 +283,7 @@ Para inspecionar o conteúdo de um mapa, três funções são essenciais:
 - `keys`: Retorna uma sequência com todas as chaves do mapa. É útil para quando você precisa saber quais "rótulos" de dados estão disponíveis.
 - `vals`: Retorna uma sequência com todos os valores do mapa. É útil para quando você só se interessa pelos dados em si, e não por suas chaves de associação.
 
-🔹 Exemplos
+Exemplos
 
 ```clojure
 (def produto {:nome "Camiseta"
@@ -291,7 +291,7 @@ Para inspecionar o conteúdo de um mapa, três funções são essenciais:
               :estoque 20})
 ```
 
-🔸 `count` – Quantidade de pares chave-valor
+`count` – Quantidade de pares chave-valor
 
 ```clojure
 (count produto)
@@ -304,7 +304,7 @@ O mapa `produto` tem 3 entradas: `:nome`, `:preco` e `:estoque`.
 
 ---
 
-🔸 `keys` – Todas as chaves do mapa
+`keys` – Todas as chaves do mapa
 
 ```clojure
 (keys produto)
@@ -314,7 +314,7 @@ O mapa `produto` tem 3 entradas: `:nome`, `:preco` e `:estoque`.
 
 ---
 
-🔸 `vals` – Todos os valores do mapa
+`vals` – Todos os valores do mapa
 
 ```clojure
 (vals produto)
@@ -343,7 +343,7 @@ Assim como em vetores, há várias formas de acessar valores em um mapa em Cloju
 
 ---
 
-🔹 **1. Usando Keywords como Funções (Forma Idiomática)**
+**1. Usando Keywords como Funções (Forma Idiomática)**
 
 Essa é a maneira mais comum, legível e preferida em Clojure. Você usa a própria **keyword** como se fosse uma função, passando o mapa como argumento.
 
@@ -362,7 +362,7 @@ Essa forma é **segura** e **nunca lança erro** caso a chave não exista — ap
 
 ---
 
-🔹 **2. Usando a Função `get` (Forma Segura com Valor Padrão)**
+**2. Usando a Função `get` (Forma Segura com Valor Padrão)**
 
 A função `get` também retorna o valor associado a uma chave, com a vantagem de permitir fornecer um valor **padrão** caso a chave não exista.
 
@@ -382,7 +382,7 @@ Essa é a melhor opção quando você precisa de um valor padrão explícito ao 
 
 ---
 
-🔹 **3. Usando o Mapa como Função (Forma Menos Comum)**
+**3. Usando o Mapa como Função (Forma Menos Comum)**
 
 Em Clojure, **um mapa pode agir como uma função**, recebendo uma chave e retornando seu valor associado.
 
@@ -396,7 +396,7 @@ Embora seja válida, essa abordagem é **menos usada** por um motivo importante:
 
 ---
 
-**💡 Resumindo ..**
+**Resumindo ..**
 
 - **Use `:keyword`** como função para acesso simples e idiomático.
 - **Use `get`** quando quiser segurança e valor padrão.
@@ -408,11 +408,11 @@ Embora seja válida, essa abordagem é **menos usada** por um motivo importante:
 
 Em Clojure, os mapas são **imutáveis**. Isso significa que não alteramos um mapa original, mas sim criamos **uma nova versão modificada** usando funções como `assoc` e `dissoc`.
 
-🔹 `assoc` – Adiciona ou atualiza uma chave
+`assoc` – Adiciona ou atualiza uma chave
 
 A função `assoc` é usada para **inserir** um novo par chave-valor ou **atualizar** uma chave existente.
 
-➕ Adicionando uma nova chave
+Adicionando uma nova chave
 
 ```clojure
 (def estoque {:mochila 10 :camiseta 5})
@@ -426,7 +426,7 @@ novo-estoque
 
 O mapa original `estoque` **não foi alterado**. `novo-estoque` é uma nova versão com a chave `:cadeira` adicionada.
 
-✏️ Atualizando uma chave existente
+Atualizando uma chave existente
 
 ```clojure
 (def estoque-atualizado (assoc estoque :mochila 1))
@@ -440,7 +440,7 @@ Aqui, `:mochila` foi atualizada de `10` para `1`.
 
 ---
 
-🔹 `dissoc` – Remove uma chave
+`dissoc` – Remove uma chave
 
 A função `dissoc` é usada para **remover** uma chave (e seu valor) de um mapa.
 
@@ -456,13 +456,13 @@ Assim como `assoc`, `dissoc` não altera o mapa original, mas retorna um **novo 
 
 ---
 
-🧠 Observações Didáticas
+Observações Didáticas
 
 - Essas funções são fundamentais para **trabalhar com dados imutáveis**, que é a base da programação funcional.
 - Você pode usar `assoc` e `dissoc` em sequência para construir lógicas de atualização mais complexas.
 - Ambas funcionam com mapas simples ou aninhados (em combinação com `assoc-in`, `update-in`, etc.).
     
-    ### ✅ 4.2 A Função Universal: Atualizando Valores com `update`
+    ### 4.2 A Função Universal: Atualizando Valores com `update`
     
     A função `update` permite modificar um valor **existente** aplicando-lhe uma função, seja num **vetor** (por índice) ou num **mapa** (por chave).
     
@@ -480,7 +480,7 @@ Assim como `assoc`, `dissoc` não altera o mapa original, mas retorna um **novo 
     
     ---
     
-    🔹 1. Usando `update` com Mapas
+    1. Usando `update` com Mapas
     
     A função recebe:
     
@@ -489,7 +489,7 @@ Assim como `assoc`, `dissoc` não altera o mapa original, mas retorna um **novo 
     
     ```
     
-    ✅ Exemplo – Atualizar estoque de produtos
+    Exemplo – Atualizar estoque de produtos
     
     ```clojure
     (def estoque {:mochila 10 :camiseta 5})
@@ -509,11 +509,11 @@ Assim como `assoc`, `dissoc` não altera o mapa original, mas retorna um **novo 
     
     ---
     
-    🔹 2. Usando `update` com Vetores
+    2. Usando `update` com Vetores
     
     A lógica é a mesma, mas o primeiro argumento agora é um **índice numérico**.
     
-    ✅ Exemplo – Aplicar desconto em um produto
+    Exemplo – Aplicar desconto em um produto
     
     ```clojure
     (def precos [100.0 200.0 150.0])
@@ -526,7 +526,7 @@ Assim como `assoc`, `dissoc` não altera o mapa original, mas retorna um **novo 
     
     ---
     
-    🔹 3. `update` com argumentos adicionais
+    3. `update` com argumentos adicionais
     
     Você pode passar **argumentos extras** para a função que está sendo aplicada:
     
@@ -541,7 +541,7 @@ Assim como `assoc`, `dissoc` não altera o mapa original, mas retorna um **novo 
     
     ---
     
-    🧠 Recapitulando
+    Recapitulando
     
     - `update` é a forma idiomática de **ler → transformar → reescrever**, tudo em uma única operação.
     - Funciona tanto com **mapas** (por chave) quanto com **vetores** (por índice).

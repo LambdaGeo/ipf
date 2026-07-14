@@ -1,6 +1,6 @@
 # Processos
 
-# 🎓 Módulo 1: Fundamentos de Computação Concorrente na BEAM
+# Módulo 1: Fundamentos de Computação Concorrente na BEAM
 
 **Objetivo:** Compreender o modelo de execução da Máquina Virtual Erlang (BEAM) e contrastá-lo com os modelos tradicionais de Threads de SO e Green Threads (Go).
 
@@ -74,7 +74,7 @@ Como processos se comunicam apenas por mensagens enviadas para um endereço (PID
 • Enviar mensagem para o PID `<50.100.0>` (em um servidor no Japão).
 **O código é exatamente o mesmo.** Isso torna o Elixir uma linguagem naturalmente orientada a sistemas distribuídos (Clusters).
 
-# 🧪 Módulo 2: Laboratório de Anatomia de Processos
+# Módulo 2: Laboratório de Anatomia de Processos
 
 **Objetivo:** Manipular as primitivas de concorrência da BEAM (`spawn`, `send`, `receive`) e entender o ciclo de vida de um processo.
 
@@ -105,7 +105,7 @@ self()
 
 **Saída esperada:** `#PID<0.152.0>` (Os números podem variar).
 
-**👨‍🏫 Análise do Professor:**
+**Análise do Professor:**
 
 - Este é o endereço do **próprio terminal IEx**. Sim, o shell onde você digita é um Processo Elixir rodando sobre a BEAM.
 - O formato `<A.B.C>` geralmente indica:
@@ -133,7 +133,7 @@ Process.alive?(pid_calculadora)
 # Saída: false
 ```
 
-**👨‍🏫 O Conceito de Ciclo de Vida:**
+**O Conceito de Ciclo de Vida:**
 Por que ele morreu?
 Diferente de uma Thread Java que pode ficar "idle" (ociosa) gastando recursos, um Processo Elixir é estritamente funcional.
 
@@ -144,7 +144,7 @@ Diferente de uma Thread Java que pode ficar "idle" (ociosa) gastando recursos, u
 
 ---
 
-### 4. Comunicação Assíncrona: `send` e a Mailbox 📬
+### 4. Comunicação Assíncrona: `send` e a Mailbox
 
 Todo processo nasce com uma **Caixa de Correio (Mailbox)** interna.
 O envio de mensagens em Elixir é **Assíncrono (Non-blocking)**.
@@ -177,7 +177,7 @@ Use a função de debug `flush()`:Elixir
     ```
     
 
-**👨‍🏫 Análise do Engenheiro:**
+**Análise do Engenheiro:**
 A mensagem ficou armazenada na Heap do processo. O `send` apenas deposita a mensagem e retorna o controle imediatamente para a CPU. O remetente não sabe se a mensagem foi lida. Isso é o fundamento do desacoplamento em sistemas distribuídos.
 
 ---
@@ -240,7 +240,7 @@ Process.alive?(pid_ping)
 
 ---
 
-### 6. A Persistência: Recursão de Cauda (O Servidor) 🔄
+### 6. A Persistência: Recursão de Cauda (O Servidor)
 
 Para criar um sistema (como um Banco ou Webserver), o processo não pode morrer após uma mensagem. Ele deve voltar ao estado de espera.
 Em linguagens imperativas, usaríamos `while(true)`. Em Elixir, usamos **Recursão**.
@@ -355,7 +355,7 @@ O aluno aprendeu:
 3. Que o recebimento trava o processo (`receive`).
 4. Que servidores são apenas loops recursivos infinitos.
 
-# 🏭 Módulo 3: Construindo um Servidor de Conta
+# Módulo 3: Construindo um Servidor de Conta
 
 **Objetivo:** Implementar um processo com estado persistente (Stateful). Faremos isso em duas etapas:
 
@@ -364,11 +364,11 @@ O aluno aprendeu:
 
 ---
 
-## 1. Etapa A: O Servidor Manual (Entendendo o Loop) 🔨
+## 1. Etapa A: O Servidor Manual (Entendendo o Loop)
 
 Antes de usarmos ferramentas prontas, vamos criar uma conta bancária usando apenas primitivas: `spawn`, `receive` e recursão. Isso vai provar para você que **não existe mágica**, apenas engenharia.
 
-### 🛠️ Passo 1: O Loop de Estado
+### Passo 1: O Loop de Estado
 
 Crie o arquivo `lib/conta_manual.ex`.
 
@@ -404,7 +404,7 @@ defmodule ContaManual do
 end
 ```
 
-### ⚡ Testando a Versão Manual (IEx)
+### Testando a Versão Manual (IEx)
 
 Abra o terminal e veja a dificuldade de comunicação:
 
@@ -433,7 +433,7 @@ Funciona? Sim. Mas é frágil.
 
 ---
 
-## 2. Etapa B: O Padrão Ouro (`GenServer`) 🏆
+## 2. Etapa B: O Padrão Ouro (`GenServer`)
 
 Na Etapa A, construímos um servidor "na unha". Funciona? Sim. É seguro para produção? **Não.**
 Como engenheiros, analisamos os riscos daquela abordagem manual:
@@ -455,8 +455,8 @@ Em sistemas distribuídos, a forma como enviamos mensagens define a confiabilida
 
 | Tipo | O Verbo | Analogia do Mundo Real | Comportamento Técnico |
 | --- | --- | --- | --- |
-| Síncrono | **Call** | Ligar para a Pizzaria 📞 | Você fica esperando a resposta. Se não atender em 5s (timeout), gera erro. **Garante consistência.** |
-| Assíncrono | **Cast** | Mandar um e-mail 📧 | Você envia e não espera retorno. Pode ser lido agora ou mais tarde. **Garante performance (“fire and forget”).** |
+| Síncrono | **Call** | Ligar para a Pizzaria | Você fica esperando a resposta. Se não atender em 5s (timeout), gera erro. **Garante consistência.** |
+| Assíncrono | **Cast** | Mandar um e-mail | Você envia e não espera retorno. Pode ser lido agora ou mais tarde. **Garante performance (“fire and forget”).** |
 
 **3. Laboratório Prático: O Banco Profissional**
 
@@ -467,7 +467,7 @@ Implementar o módulo ContaBancaria onde:
 • **Depósitos** usam `cast` (pois o banco aceita seu dinheiro na hora, sem bloquear).
 • **Saques** e **Consultas** usam `call` (pois você precisa da resposta imediata).
 
-### 🛠️ Passo 2: A Implementação Profissional
+### Passo 2: A Implementação Profissional
 
 Vamos criar o módulo `ContaBancaria` (a versão final) dentro do projeto.
 
@@ -546,7 +546,7 @@ defmodule ContaBancaria do
 end
 ```
 
-### 📝 Nota de Engenharia: O que é esse `@impl true`?
+### Nota de Engenharia: O que é esse `@impl true`?
 
 Você deve ter notado que, antes das funções `handle_call` e `handle_cast`, colocamos o atributo `@impl true`.
 
@@ -572,7 +572,7 @@ Imagine que você digitou errado o nome da função (escreveu `handle_cat` em ve
 
 **Regra de Ouro:** Sempre use `@impl true` nos callbacks (`init`, `handle_call`, `handle_cast`, `terminate`). É o cinto de segurança do seu código.
 
-### ⚡ Testando a Versão GenServer
+### Testando a Versão GenServer
 
 Volte ao terminal (`recompile()`). Veja como a experiência de uso (Developer Experience) é superior.
 
@@ -611,7 +611,7 @@ Por que migramos do manual para o GenServer?
 **Professor:** Agora temos um sistema funcional e limpo.
 Mas, como engenheiros, devemos ser pessimistas. **E se houver um bug no código?** E se dividirmos por zero? O processo vai morrer. O dinheiro vai sumir.
 
-# 🛡️ Módulo 4: Supervisores e Tolerância a Falhas
+# Módulo 4: Supervisores e Tolerância a Falhas
 
 **Objetivo:** Transformar nosso processo isolado em uma **Árvore de Supervisão** (Supervision Tree), criando um sistema que se cura sozinho (Self-healing).
 
@@ -628,11 +628,11 @@ Se um filho morre (crash), o Supervisor percebe o sinal de saída (`EXIT`) e apl
 
 ---
 
-## 2. Laboratório Prático: Preparando o Crash 💥
+## 2. Laboratório Prático: Preparando o Crash
 
 Para testar a resiliência, precisamos de uma forma de "quebrar" nossa conta bancária propositalmente.
 
-### 🛠️ Passo 1: Adicionando o Botão de Autodestruição
+### Passo 1: Adicionando o Botão de Autodestruição
 
 Edite o arquivo `lib/conta_bancaria.ex`. Vamos adicionar uma função que causa um erro fatal (divisão por zero ou `raise`).
 
@@ -661,7 +661,7 @@ end
 
 ---
 
-### 🛠️ Passo 2: Transformando o Projeto em uma Aplicação
+### Passo 2: Transformando o Projeto em uma Aplicação
 
 Quando criamos o projeto com `mix new lab_concorrencia`, ele veio "pelado". Precisamos dizer ao Mix que este projeto tem um ponto de entrada (uma Application Callback).
 
@@ -708,7 +708,7 @@ Abra o arquivo `mix.exs` na raiz, procure a função `application` e altere para
 
 ---
 
-### 🛠️ Passo 3: O Teste de Imortalidade (e a Correção do Contrato) 🧪
+### Passo 3: O Teste de Imortalidade (e a Correção do Contrato)
 
 Agora que configuramos nosso Supervisor no `Application.ex`, a teoria diz que ele deve iniciar a conta automaticamente. Vamos testar?
 
@@ -722,7 +722,7 @@ an exception was raised: ** (UndefinedFunctionError)
 function ContaBancaria.start_link/1 is undefined or private
 ```
 
-**👨‍🏫 O Diagnóstico de Engenharia:**
+**O Diagnóstico de Engenharia:**
 Por que falhou?
 Quando dissemos ao Supervisor para cuidar do filho `{ContaBancaria, 1000}`, o Supervisor assumiu o comportamento padrão da OTP: ele tentou procurar e executar uma função chamada **obrigatoriamente** de `start_link`.
 
@@ -781,7 +781,7 @@ ContaBancaria.ver_saldo(pid_da_conta)
 # 1000 (O valor inicial configurado no Application.ex)
 ```
 
-**C. 💣 O GRANDE MOMENTO: A Sabotagem:**
+**C. O GRANDE MOMENTO: A Sabotagem:**
 Vamos invocar a função `causar_bug` que criamos. Prepare-se para o erro vermelho (que agora é sinal de sucesso).
 
 ```elixir
@@ -850,13 +850,13 @@ Em um sistema real com milhares de processos, nós não ficamos anotando PIDs (`
 
 ---
 
-# 🏷️ Processos Nomeados (Named Processes)
+# Processos Nomeados (Named Processes)
 
 **O Problema:** Quando o Supervisor reinicia a `ContaBancaria` após um crash, o PID muda. Se o seu código dependia do PID antigo, ele quebra.
 
 **A Solução:** Registramos o processo com um nome (geralmente um Átomo). Assim, mandamos mensagens para o **Nome**, e o Elixir descobre quem é o PID atual daquele nome.
 
-### 🛠️ Passo 1: Atualizando o Código
+### Passo 1: Atualizando o Código
 
 Abra `lib/conta_bancaria.ex`. Vamos fazer apenas duas pequenas alterações:
 
@@ -899,7 +899,7 @@ defmodule ContaBancaria do
 end
 ```
 
-### 🛠️ Passo 2: O Teste Definitivo
+### Passo 2: O Teste Definitivo
 
 Reinicie seu terminal (`iex -S mix`) e veja a mágica da **Transparência de Localização**.
 
@@ -933,7 +933,7 @@ Reinicie seu terminal (`iex -S mix`) e veja a mágica da **Transparência de Loc
 
 Isso é **Alta Disponibilidade**. O cliente nem percebeu que o servidor caiu e voltou.
 
-# 🛠️ Módulo Intermediário: Especialistas (`Agent` e `Task`)
+# Módulo Intermediário: Especialistas (`Agent` e `Task`)
 
 Em alguns casos, ao invés de usar **GenServer** (que faz tudo), podemos usar seus "irmãos menores". Eles são processos especializados:
 
@@ -942,14 +942,14 @@ Em alguns casos, ao invés de usar **GenServer** (que faz tudo), podemos usar se
 
 ---
 
-## 1. O `Agent` (O Cofre de Estado) 💼
+## 1. O `Agent` (O Cofre de Estado)
 
 Imagine que você só quer guardar um valor (como uma configuração global ou um contador) e ler/atualizar isso de forma segura entre vários processos.
 Criar um `GenServer` inteiro com `handle_call` e `handle_cast` só para isso é "matar formiga com bazuca".
 
 O **Agent** abstrai tudo isso.
 
-### 🛠️ Prática: O Cofre do Banco
+### Prática: O Cofre do Banco
 
 Vamos criar um cofre que guarda as reservas totais do banco.
 Crie o arquivo `lib/cofre.ex`:
@@ -977,7 +977,7 @@ defmodule Cofre do
 end
 ```
 
-### ⚡ Teste no Terminal (`iex -S mix`)
+### Teste no Terminal (`iex -S mix`)
 
 Olhe como é simples (sem callbacks complexos):
 
@@ -1001,14 +1001,14 @@ Cofre.ver_total()
 
 ---
 
-## 2. A `Task` (O Trabalhador Assíncrono) 👷
+## 2. A `Task` (O Trabalhador Assíncrono)
 
 E se precisarmos fazer algo demorado (ex: enviar e-mail de confirmação ou gerar PDF) e não quisermos travar o nosso Banco?
 
 Lembre-se: O Elixir é síncrono por padrão. Se você colocar um `sleep(5000)` no meio do código, tudo para.
 A **Task** serve para jogar esse trabalho para um processo descartável secundário.
 
-### 🛠️ Prática: O Notificador
+### Prática: O Notificador
 
 Crie o arquivo `lib/notificador.ex`:
 
@@ -1027,7 +1027,7 @@ defmodule Notificador do
 end
 ```
 
-### ⚡ Teste Comparativo (IEx)
+### Teste Comparativo (IEx)
 
 **Cenário A: O jeito travado (Sem Task)**
 Rode isso e veja seu terminal congelar:
@@ -1059,14 +1059,14 @@ Task.start(fn -> Notificador.enviar_email("Maria") end)
 
 | Ferramenta | Analogia | Uso Principal | Complexidade |
 | --- | --- | --- | --- |
-| **spawn** | Célula-tronco | Baixo nível, criar processos brutos (evitar em produção). | 💀 Alta (Manual) |
-| **Task** | Freelancer | Tarefas pontuais, paralelas e descartáveis (cálculos, emails). | ⭐ Baixa |
-| **Agent** | Armário / Cofre | Guardar e compartilhar um estado simples. | ⭐ Baixa |
-| **GenServer** | Gerente | Lógica de negócio complexa, estado robusto e longa vida. | ⭐⭐ Média |
+| **spawn** | Célula-tronco | Baixo nível, criar processos brutos (evitar em produção). | Alta (Manual) |
+| **Task** | Freelancer | Tarefas pontuais, paralelas e descartáveis (cálculos, emails). | Baixa |
+| **Agent** | Armário / Cofre | Guardar e compartilhar um estado simples. | Baixa |
+| **GenServer** | Gerente | Lógica de negócio complexa, estado robusto e longa vida. | Média |
 
 ---
 
-# 🎓 Revisão Geral do Modulo
+# Revisão Geral do Modulo
 
 Parabéns, caro aluno. Você completou a jornada fundamental da plataforma BEAM.
 Vamos recapitular o modelo mental que você construiu, pois é isso que importa na sua carreira.
@@ -1100,7 +1100,7 @@ Não reinventamos a roda. Usamos abstrações:
 
 ---
 
-### 🚀 Próximos Passos na sua Carreira
+### Próximos Passos na sua Carreira
 
 Agora que você domina a base, para onde ir?
 

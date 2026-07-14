@@ -122,7 +122,7 @@ Conteúdo: [https://profsergiocosta.notion.site/3-Fun-es-c7eaa942530f4ccbaadd0ae
 
 ## 📗 Lista 3: Funções de Alta Ordem e Composição
 
-### 🔹 Parte 1 – Aquecendo com HOFs
+### Parte 1 – Aquecendo com HOFs
 
 1. Defina a função `duasVezes :: (a -> a) -> a -> a` e teste com:
     - `duasVezes (*3) 2`
@@ -136,7 +136,7 @@ Conteúdo: [https://profsergiocosta.notion.site/3-Fun-es-c7eaa942530f4ccbaadd0ae
 
 ---
 
-### 🔹 Parte 2 – Map
+### Parte 2 – Map
 
 1. Use `map` para:
     - Somar 1 a todos os elementos da lista `[10,20,30]`
@@ -145,7 +145,7 @@ Conteúdo: [https://profsergiocosta.notion.site/3-Fun-es-c7eaa942530f4ccbaadd0ae
 
 ---
 
-### 🔹 Parte 3 – Filter
+### Parte 3 – Filter
 
 1. Use `filter` para:
     - Selecionar apenas os números maiores que 100 da lista `[50,150,200,80,120]`.
@@ -157,7 +157,7 @@ Conteúdo: [https://profsergiocosta.notion.site/3-Fun-es-c7eaa942530f4ccbaadd0ae
 
 ---
 
-### 🔹 Parte 4 – Fold (Reduce)
+### Parte 4 – Fold (Reduce)
 
 1. Reescreva com `foldr`:
     - A soma (`sum`) de uma lista
@@ -167,7 +167,7 @@ Conteúdo: [https://profsergiocosta.notion.site/3-Fun-es-c7eaa942530f4ccbaadd0ae
 
 ---
 
-### 🔹 Parte 5 – Outras HOFs
+### Parte 5 – Outras HOFs
 
 1. Use:
     - `all` para verificar se todos os números de `[2,4,6,8]` são pares.
@@ -177,7 +177,7 @@ Conteúdo: [https://profsergiocosta.notion.site/3-Fun-es-c7eaa942530f4ccbaadd0ae
 
 ---
 
-### 🔹 Parte 6 – Composição
+### Parte 6 – Composição
 
 1. Defina `dobroMaisUm = (+1) . (*2)` e teste em `[1..5]` com `map`.
 2. Escreva uma função `processaLista :: [Int] -> [Int]` que:

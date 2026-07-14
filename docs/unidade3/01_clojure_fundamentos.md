@@ -322,7 +322,7 @@ Exemplos comuns incluem:
 
 Com todos esses blocos de construção em mãos — sintaxe, nomes, funções e condicionais — estamos prontos para descobrir o conceito mais poderoso e distintivo de Clojure e da família Lisp.
 
-🔹 **Exemplo 1 – Imprimir apenas se o número for positivo**
+**Exemplo 1 – Imprimir apenas se o número for positivo**
 
 ```clojure
 (defn mostrar-se-positivo [n]
@@ -342,7 +342,7 @@ Com todos esses blocos de construção em mãos — sintaxe, nomes, funções e 
 
 ```
 
-🔹 **Exemplo 2 – Atualizar estado apenas se uma chave existir**
+**Exemplo 2 – Atualizar estado apenas se uma chave existir**
 
 ```clojure
 (defn atualizar-nome [usuario]
@@ -369,7 +369,7 @@ Com todos esses blocos de construção em mãos — sintaxe, nomes, funções e 
 
 ---
 
-🔹 **Exemplo 3 – Combinar com Predicados**
+**Exemplo 3 – Combinar com Predicados**
 
 ```clojure
 (defn alertar-se-vazio [colecao]
@@ -389,7 +389,7 @@ Com todos esses blocos de construção em mãos — sintaxe, nomes, funções e 
 
 ```
 
-📌 Recapitulando
+Recapitulando
 
 - `if` → usa-se quando há **caso "senão"**.
 - `when` → para **executar algo apenas se a condição for verdadeira**, com possibilidade de múltiplas expressões.

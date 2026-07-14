@@ -5,7 +5,7 @@ Neste capítulo, aprenderemos a metodologia de **Testes Baseados em Propriedades
 !!! success "Tutorial completo no blog"
     O passo a passo — configuração da suíte no `package.yaml`, todas as propriedades, a instância `Arbitrary` do `JValue` e a medição de cobertura — está na **Parte 2** do tutorial no blog do LambdaGEO:
 
-    👉 **[Construindo e Testando uma Biblioteca Haskell: JSON, Pretty Printing e QuickCheck](https://lambdageo.github.io/blog/tutorial-haskell-json-quickcheck/)**
+    **[Construindo e Testando uma Biblioteca Haskell: JSON, Pretty Printing e QuickCheck](https://lambdageo.github.io/blog/tutorial-haskell-json-quickcheck/)**
 
     Este capítulo apresenta os conceitos; siga o tutorial para implementar a suíte completa.
 

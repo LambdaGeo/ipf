@@ -5,7 +5,7 @@ Neste capítulo, iniciamos o projeto central da Unidade 2: uma biblioteca comple
 !!! success "Tutorial completo no blog"
     O passo a passo detalhado — do `stack new` até o pacote final, com todos os módulos, códigos e explicações — está publicado como tutorial no blog do LambdaGEO:
 
-    👉 **[Construindo e Testando uma Biblioteca Haskell: JSON, Pretty Printing e QuickCheck](https://lambdageo.github.io/blog/tutorial-haskell-json-quickcheck/)**
+    **[Construindo e Testando uma Biblioteca Haskell: JSON, Pretty Printing e QuickCheck](https://lambdageo.github.io/blog/tutorial-haskell-json-quickcheck/)**
 
     Este capítulo apresenta os conceitos e as decisões de projeto; siga a **Parte 1** do tutorial para construir a biblioteca.
 

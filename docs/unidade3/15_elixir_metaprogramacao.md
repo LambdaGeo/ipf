@@ -21,7 +21,7 @@ Elas são macros escritas em Elixir!
 - **Como funciona:** Quando você escreve `if`, o compilador troca isso por uma estrutura `case` (que é a primitiva real da linguagem).
 - **Vantagem:** Isso torna o Elixir infinitamente extensível. Se você não gosta do `if` do Elixir, você pode criar o seu próprio `meu_if` e ele se comportará como um cidadão de primeira classe.
 
-### 1.2. Ecto (Queries de Banco de Dados) 🛡️
+### 1.2. Ecto (Queries de Banco de Dados)
 
 O Ecto permite escrever consultas SQL usando sintaxe Elixir.
 
@@ -32,7 +32,7 @@ from u in User, where: u.age > 18`
 
 - **O Poder da Macro:** O Ecto usa macros para analisar seu código em **Tempo de Compilação**. Se você errar o nome de um campo ou tentar uma injeção de SQL, o Ecto detecta isso *antes* do seu código rodar, prevenindo bugs críticos em produção.
 
-### 1.3. Phoenix (Roteamento Web) 🌐
+### 1.3. Phoenix (Roteamento Web)
 
 O framework Phoenix usa macros para definir rotas de forma limpa.
 
@@ -42,7 +42,7 @@ Elixir
 
 - **O Poder da Macro:** Em tempo de compilação, o Phoenix transforma essa linha bonita em uma função gigante de Pattern Matching ultra-otimizada. Você escreve código legível; a macro gera código performático.
 
-### 1.4. ExUnit (Testes Inteligentes) 🧪
+### 1.4. ExUnit (Testes Inteligentes)
 
 Em outras linguagens, você tem `assertEquals(a, b)`. Em Elixir, temos apenas `assert a == b`.
 
@@ -57,7 +57,7 @@ Na Engenharia de Software com Elixir, existem dois momentos distintos:
 1. **Compile Time (Tempo de Compilação):** O momento em que o código fonte (`.ex`) é lido e transformado em binário (`.beam`).
 2. **Runtime (Tempo de Execução):** O momento em que o usuário final está usando o sistema e o binário está rodando na CPU.
 
-### 2.1. A Analogia do Cinema 🎬
+### 2.1. A Analogia do Cinema
 
 Para visualizar a diferença, pense na produção de um filme:
 
@@ -74,13 +74,13 @@ O ator entra em cena quando a câmera liga. Ele recebe o roteiro pronto e **tem 
 
 ---
 
-### 2.2. A Prova Real: Por que Funções falham em Controle de Fluxo? 💥
+### 2.2. A Prova Real: Por que Funções falham em Controle de Fluxo?
 
 Vamos provar tecnicamente por que você **não** consegue criar estruturas como `if` ou `unless` usando funções normais.
 
 O Elixir (assim como Java, C# e Python) usa **Avaliação Estrita (Eager Evaluation)** para funções. Isso significa que **todos os argumentos são calculados e executados ANTES de entrar na função.**
 
-### 🧪 O Experimento do "Apagar Banco"
+### O Experimento do "Apagar Banco"
 
 Imagine que queremos criar nosso próprio `meu_if`. Vamos tentar fazer isso com uma função (`def`).
 
@@ -116,7 +116,7 @@ Plaintext
 `"🔥 APAGANDO O BANCO..."
 "Ufa, salvo."`
 
-**😱 O Desastre:**
+**O Desastre:**
 A mensagem "Apagando o banco" apareceu, mesmo a condição sendo `false`!
 
 **A Explicação de Engenharia:**
@@ -147,7 +147,7 @@ Quando o programa roda (Runtime), o código perigoso nem existe mais naquela tri
 
 ---
 
-## 3. A Árvore de Sintaxe (AST) 🌳
+## 3. A Árvore de Sintaxe (AST)
 
 Para entender como criar macros, precisamos abrir a "Caixa Preta" do compilador.
 
@@ -213,7 +213,7 @@ Em Elixir, quase todo código vira uma tupla com este formato exato:
 
 ---
 
-### 3.4. Laboratório: Raio-X com `quote` 🧪
+### 3.4. Laboratório: Raio-X com `quote`
 
 Vamos usar a macro `quote` para atuar como o Parser do compilador e ver essa estrutura.
 
@@ -259,7 +259,7 @@ quote do: idade
 
 ---
 
-### 3.5. A Dinâmica: Injetando Valores com `unquote` 💉
+### 3.5. A Dinâmica: Injetando Valores com `unquote`
 
 Agora que você viu que `quote` transforma **tudo** em uma estrutura de dados estática, surge um problema de engenharia.
 
@@ -338,7 +338,7 @@ Lógica: `unless(x)` é semanticamente idêntico a `if(!x)`.
 
 Neste laboratório, você vai sentir o poder de estender a linguagem. Você não vai criar uma função; você vai criar uma **nova palavra-chave**.
 
-### 🛠️ Passo 1: O Ambiente
+### Passo 1: O Ambiente
 
 Crie um projeto novo para isolarmos nossos experimentos:
 
@@ -350,7 +350,7 @@ cd meta_lab
 iex -S mix
 ```
 
-### 🛠️ Passo 2: A Implementação (`defmacro`)
+### Passo 2: A Implementação (`defmacro`)
 
 Crie o arquivo `lib/estruturas_controle.ex`.
 
@@ -377,7 +377,7 @@ defmodule EstruturasControle do
 end
 ```
 
-### ⚡ Passo 3: O Teste de Fogo (Runtime)
+### Passo 3: O Teste de Fogo (Runtime)
 
 Abra o terminal do projeto: `iex -S mix`.
 
@@ -402,7 +402,7 @@ end
 
 ---
 
-## 5. Depuração: O Raio-X da Expansão 🕵️‍♂️
+## 5. Depuração: O Raio-X da Expansão
 
 Como engenheiro, você não deve confiar em mágica. Você precisa ver o código gerado.
 O Elixir possui a função `Macro.expand/2` que simula o trabalho do compilador e te mostra o resultado final.
@@ -460,11 +460,11 @@ end`
 
 ---
 
-# 🎓 Laboratório Final: O Framework "MiniTest"
+# Laboratório Final: O Framework "MiniTest"
 
 Neste laboratório, você vai entender como o Elixir consegue olhar para o código `assert 1 == 2` e dizer: *"Falhou. O lado esquerdo era 1 e o direito era 2"*. (Spoiler: Pattern Matching na AST).
 
-### 🛠️ Passo 1: Criando o Motor do Framework
+### Passo 1: Criando o Motor do Framework
 
 Crie um novo projeto (se ainda não estiver em um): `mix new mini_framework`.
 Crie o arquivo `lib/mini_test.ex`.
@@ -523,7 +523,7 @@ end
 
 ---
 
-### 🛠️ Passo 2: O Consumidor (Escrevendo os Testes)
+### Passo 2: O Consumidor (Escrevendo os Testes)
 
 Agora vamos atuar como o usuário final do seu framework.
 Crie o arquivo `lib/meus_testes.ex`.
@@ -550,7 +550,7 @@ end
 
 ---
 
-### ⚡ Passo 3: Execução e Análise (IEx)
+### Passo 3: Execução e Análise (IEx)
 
 Abra o terminal: `iex -S mix`.
 
@@ -587,7 +587,7 @@ MeusTestes.test_matematica_errada()
 
 ---
 
-### 🧠 A Análise do Engenheiro (O "Pulo do Gato")
+### A Análise do Engenheiro (O "Pulo do Gato")
 
 Pare e pense no que aconteceu no teste de falha.
 
@@ -610,7 +610,7 @@ Isso é **Introspecção de Código**. É por isso que o Elixir não precisa de 
 
 ---
 
-### 🏁 Conclusão do Curso de Metaprogramação
+### Conclusão do Curso de Metaprogramação
 
 Você acabou de construir a base do `ExUnit`, um dos frameworks de teste mais elogiados do mundo.
 
@@ -621,4 +621,4 @@ Você acabou de construir a base do `ExUnit`, um dos frameworks de teste mais el
 3. **Defmacro:** O momento (Compilação) onde a mágica ocorre.
 4. **Responsabilidade:** Você viu o poder. Use-o para criar ferramentas expressivas (DSLs), mas evite usá-lo para esconder lógica simples.
 
-Parabéns! Você desbloqueou o nível mais profundo da Engenharia de Software em Elixir. 🚀
+Parabéns! Você desbloqueou o nível mais profundo da Engenharia de Software em Elixir.

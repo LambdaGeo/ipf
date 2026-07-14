@@ -10,21 +10,41 @@ site_dir: site
 theme:
   name: material
   language: pt
+  font: false
   features:
-    - navigation.top
+    - navigation.instant
+    - navigation.tracking
     - navigation.sections
-    - toc.integrate
+    - navigation.expand
+    - navigation.top
+    - search.highlight
+    - search.share
     - content.code.annotate
     - content.code.copy
+    - content.tabs.link
+    - content.tooltips
+    - toc.follow
   palette:
-    - scheme: default
-      primary: teal
-      accent: green
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      primary: custom
+      accent: custom
+      toggle:
+        icon: material/weather-sunny
+        name: Alternar para modo escuro
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      primary: custom
+      accent: custom
+      toggle:
+        icon: material/weather-night
+        name: Alternar para modo claro
 
 plugins:
   - search
 
 markdown_extensions:
+  - attr_list
   - admonition
   - pymdownx.details
   - pymdownx.arithmatex:
@@ -37,6 +57,9 @@ markdown_extensions:
   - tables
   - toc:
       permalink: true
+
+extra_css:
+  - stylesheets/lambdageo.css
 
 extra_javascript:
   - https://unpkg.com/mathjax@3/es5/tex-mml-chtml.js
