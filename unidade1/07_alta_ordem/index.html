@@ -1975,9 +1975,11 @@
 <p>Neste capítulo, encerraremos nossa primeira unidade explorando o recurso que confere a máxima expressividade ao paradigma funcional: as <strong>Funções de Alta Ordem</strong> (<em>Higher-Order Functions</em>). Ao tratar funções como valores comuns, aprenderemos a parametrizar comportamentos, reutilizar padrões de iteração genéricos (<code>map</code>, <code>filter</code>, <code>fold</code>) e encadear transformações de dados de maneira matemática através da composição — descobrindo, no caminho, como <em>pensar sobre loops</em> em uma linguagem que não os possui.</p>
 <hr />
 <h2 id="1-o-que-sao-funcoes-de-alta-ordem">1. O que são Funções de Alta Ordem?<a class="headerlink" href="#1-o-que-sao-funcoes-de-alta-ordem" title="Permanent link">&para;</a></h2>
-<p>Uma <strong>Função de Alta Ordem</strong> é simplesmente uma função que atende a pelo menos um dos seguintes requisitos:
-1. Recebe uma ou mais funções como argumento.
-2. Retorna uma função como resultado.</p>
+<p>Uma <strong>Função de Alta Ordem</strong> é simplesmente uma função que atende a pelo menos um dos seguintes requisitos:</p>
+<ol>
+<li>Recebe uma ou mais funções como argumento.</li>
+<li>Retorna uma função como resultado.</li>
+</ol>
 <p>Essa flexibilidade é viabilizada pelo fato de que, em Haskell, as funções são <strong>Cidadãs de Primeira Classe</strong> (<em>First-Class Citizens</em>). Elas podem ser armazenadas em estruturas de dados, passadas como parâmetros e manipuladas exatamente como inteiros, booleanos ou strings.</p>
 <p>Considere a função <code>duasVezes</code>, que recebe uma função <code>f</code> e aplica essa função consecutivamente a um valor <code>x</code>:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nf">duasVezes</span><span class="w"> </span><span class="ow">::</span><span class="w"> </span><span class="p">(</span><span class="n">a</span><span class="w"> </span><span class="ow">-&gt;</span><span class="w"> </span><span class="n">a</span><span class="p">)</span><span class="w"> </span><span class="ow">-&gt;</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="ow">-&gt;</span><span class="w"> </span><span class="n">a</span>

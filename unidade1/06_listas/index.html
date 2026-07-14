@@ -1932,9 +1932,11 @@
 <hr />
 <h2 id="1-o-que-e-uma-lista-em-haskell">1. O que é uma Lista em Haskell?<a class="headerlink" href="#1-o-que-e-uma-lista-em-haskell" title="Permanent link">&para;</a></h2>
 <p>Em Haskell, uma lista é uma coleção homogênea de elementos, o que significa que <strong>todos os elementos devem ter exatamente o mesmo tipo</strong>. A estrutura de dados de uma lista é inerentemente <strong>recursiva</strong> e implementada como uma lista simplesmente encadeada.</p>
-<p>Uma lista em Haskell é definida formalmente por dois construtores:
-1. <strong>Lista Vazia (<code>[]</code>)</strong>: Representa a ausência de elementos.
-2. <strong>O Construtor Cons (<code>:</code>)</strong>: Um operador que recebe um elemento (a cabeça) e o anexa no início de outra lista (a cauda).</p>
+<p>Uma lista em Haskell é definida formalmente por dois construtores:</p>
+<ol>
+<li><strong>Lista Vazia (<code>[]</code>)</strong>: Representa a ausência de elementos.</li>
+<li><strong>O Construtor Cons (<code>:</code>)</strong>: Um operador que recebe um elemento (a cabeça) e o anexa no início de outra lista (a cauda).</li>
+</ol>
 <p>Por exemplo, a lista <code>[1, 2, 3, 4]</code> é avaliada de forma encadeada como:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nf">lista</span><span class="w"> </span><span class="ow">=</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="kt">:</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="kt">:</span><span class="w"> </span><span class="mi">3</span><span class="w"> </span><span class="kt">:</span><span class="w"> </span><span class="mi">4</span><span class="w"> </span><span class="kt">:</span><span class="w"> </span><span class="kt">[]</span>
 </code></pre></div>
@@ -1999,9 +2001,11 @@
 <h2 id="3-pattern-matching-e-recursao-sobre-listas">3. Pattern Matching e Recursão sobre Listas<a class="headerlink" href="#3-pattern-matching-e-recursao-sobre-listas" title="Permanent link">&para;</a></h2>
 <p>Como a estrutura de uma lista é definida pelo construtor de cabeça/cauda (<code>:</code>), podemos utilizar o casamento de padrões para separar a cabeça do restante da lista utilizando a notação <code>(x:xs)</code> (onde <code>x</code> é a cabeça e <code>xs</code> é a cauda).</p>
 <h3 id="exemplo-1-somando-elementos-de-uma-lista">Exemplo 1: Somando elementos de uma lista<a class="headerlink" href="#exemplo-1-somando-elementos-de-uma-lista" title="Permanent link">&para;</a></h3>
-<p>Para calcular a soma de uma lista de números recursivamente, definimos dois casos:
-1. <strong>Caso Base</strong>: A soma de uma lista vazia <code>[]</code> é <code>0</code>.
-2. <strong>Caso Recursivo</strong>: A soma de uma lista não vazia <code>(x:xs)</code> é a cabeça <code>x</code> somada ao resultado da chamada recursiva para a cauda <code>xs</code>.</p>
+<p>Para calcular a soma de uma lista de números recursivamente, definimos dois casos:</p>
+<ol>
+<li><strong>Caso Base</strong>: A soma de uma lista vazia <code>[]</code> é <code>0</code>.</li>
+<li><strong>Caso Recursivo</strong>: A soma de uma lista não vazia <code>(x:xs)</code> é a cabeça <code>x</code> somada ao resultado da chamada recursiva para a cauda <code>xs</code>.</li>
+</ol>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="nf">somarLista</span><span class="w"> </span><span class="ow">::</span><span class="w"> </span><span class="kt">Num</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="ow">=&gt;</span><span class="w"> </span><span class="p">[</span><span class="n">a</span><span class="p">]</span><span class="w"> </span><span class="ow">-&gt;</span><span class="w"> </span><span class="n">a</span>
 <a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="nf">somarLista</span><span class="w"> </span><span class="kt">[]</span><span class="w">     </span><span class="ow">=</span><span class="w"> </span><span class="mi">0</span>
 <a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="nf">somarLista</span><span class="w"> </span><span class="p">(</span><span class="n">x</span><span class="kt">:</span><span class="n">xs</span><span class="p">)</span><span class="w"> </span><span class="ow">=</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">somarLista</span><span class="w"> </span><span class="n">xs</span>

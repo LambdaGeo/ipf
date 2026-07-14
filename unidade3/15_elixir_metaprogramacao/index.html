@@ -2130,10 +2130,14 @@ O Elixir pausa o processo exatamente entre o passo 2 e o 3. Ele te entrega a AST
 <p>Linguagens que permitem acessar e modificar sua própria AST facilmente são chamadas de <strong>Homoicônicas</strong>.</p>
 <p>Se você já estudou <strong>Lisp</strong> ou <strong>Clojure</strong>, deve lembrar que lá o código é cheio de parênteses. Isso acontece porque, nessas linguagens, você escreve a AST manualmente usando Listas.</p>
 <ul>
-<li><strong>Em Clojure:</strong> A AST é uma <strong>Lista</strong>.
-<code>(+ 1 2)</code> → O primeiro item é a função, o resto são argumentos.</li>
-<li><strong>Em Elixir:</strong> A AST é uma <strong>Tupla</strong>.
-O Elixir oferece uma sintaxe mais limpa (sem tantos parênteses), mas por baixo dos panos, ele converte tudo para tuplas de 3 elementos.</li>
+<li>
+<p><strong>Em Clojure:</strong> A AST é uma <strong>Lista</strong>.
+<code>(+ 1 2)</code> → O primeiro item é a função, o resto são argumentos.</p>
+</li>
+<li>
+<p><strong>Em Elixir:</strong> A AST é uma <strong>Tupla</strong>.
+O Elixir oferece uma sintaxe mais limpa (sem tantos parênteses), mas por baixo dos panos, ele converte tudo para tuplas de 3 elementos.</p>
+</li>
 </ul>
 <p><strong>Comparativo Visual:</strong></p>
 <table>

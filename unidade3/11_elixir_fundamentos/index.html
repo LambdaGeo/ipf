@@ -1951,11 +1951,13 @@
 <h2 id="1-introducao-e-conexao-de-paradigmas-clojure-vs-elixir">1. Introdução e Conexão de Paradigmas: Clojure vs Elixir<a class="headerlink" href="#1-introducao-e-conexao-de-paradigmas-clojure-vs-elixir" title="Permanent link">&para;</a></h2>
 <p>Seja bem-vindo(a) à introdução ao Elixir!</p>
 <p>Após explorar o ecossistema Lisp com o <strong>Clojure</strong>, que roda na JVM e foca fortemente em processamento de dados imutáveis com S-expressions e metaprogramação, passamos para a segunda metade da Unidade 3, onde estudamos a linguagem <strong>Elixir</strong>.</p>
-<p>Ambas as linguagens compartilham princípios funcionais cruciais, como imutabilidade e funções puras, mas diferem amplamente na sua plataforma e propósito de concorrência:
-1. <strong>VM do Erlang (BEAM) vs JVM</strong>: A JVM do Clojure foi desenhada para alta performance de computação bruta em thread pools. A BEAM do Elixir foi desenhada para sistemas distribuídos altamente tolerantes a falhas e concorrentes com milhões de processos leves de baixo consumo de memória.
-2. <strong>Modelo de Atores vs Memória Compartilhada</strong>: Clojure lida com concorrência usando referências de estado imutável com STM (Software Transactional Memory) ou Atoms sobre threads compartilhadas. Elixir utiliza o <strong>Modelo de Atores</strong>, onde processos são totalmente isolados e não compartilham nenhuma memória entre si, comunicando-se exclusivamente via troca de mensagens assíncronas.
-3. <strong>Sintaxe Amigável</strong>: Elixir possui uma sintaxe influenciada por Ruby, muito mais familiar e acessível para desenvolvedores de linguagens imperativas do que as S-expressions do Clojure, mas mantendo a pureza funcional sob o capô.
-4. <strong>O Operador Pipe (<code>|&gt;</code>)</strong>: Elixir introduz uma das sintaxes mais elegantes para pipeline de dados, o operador pipe, que permite encadear transformações de dados de forma extremamente legível (similar às threading macros do Clojure, mas integrado na raiz da sintaxe da linguagem).</p>
+<p>Ambas as linguagens compartilham princípios funcionais cruciais, como imutabilidade e funções puras, mas diferem amplamente na sua plataforma e propósito de concorrência:</p>
+<ol>
+<li><strong>VM do Erlang (BEAM) vs JVM</strong>: A JVM do Clojure foi desenhada para alta performance de computação bruta em thread pools. A BEAM do Elixir foi desenhada para sistemas distribuídos altamente tolerantes a falhas e concorrentes com milhões de processos leves de baixo consumo de memória.</li>
+<li><strong>Modelo de Atores vs Memória Compartilhada</strong>: Clojure lida com concorrência usando referências de estado imutável com STM (Software Transactional Memory) ou Atoms sobre threads compartilhadas. Elixir utiliza o <strong>Modelo de Atores</strong>, onde processos são totalmente isolados e não compartilham nenhuma memória entre si, comunicando-se exclusivamente via troca de mensagens assíncronas.</li>
+<li><strong>Sintaxe Amigável</strong>: Elixir possui uma sintaxe influenciada por Ruby, muito mais familiar e acessível para desenvolvedores de linguagens imperativas do que as S-expressions do Clojure, mas mantendo a pureza funcional sob o capô.</li>
+<li><strong>O Operador Pipe (<code>|&gt;</code>)</strong>: Elixir introduz uma das sintaxes mais elegantes para pipeline de dados, o operador pipe, que permite encadear transformações de dados de forma extremamente legível (similar às threading macros do Clojure, mas integrado na raiz da sintaxe da linguagem).</li>
+</ol>
 <p>Nesta seção, você aprenderá os fundamentos sintáticos e operacionais do Elixir, preparando-se para construir aplicativos web de tempo real com Phoenix LiveView.</p>
 <hr />
 <h2 id="objetivos-de-aprendizagem"><strong>Objetivos de Aprendizagem</strong><a class="headerlink" href="#objetivos-de-aprendizagem" title="Permanent link">&para;</a></h2>
@@ -2017,13 +2019,14 @@
 </code></pre></div>
 <blockquote>
 <p>Átomos são constantes nomeadas, cujo nome é o próprio valor.</p>
-<p>Servem para:</p>
+<p>Servem para:
+</p>
+</blockquote>
 <ul>
 <li>Representar <strong>estados</strong> (<code>:ok</code>, <code>:error</code>)</li>
 <li>Rótulos simbólicos e flags</li>
 <li>Identificadores em estruturas de dados</li>
 </ul>
-</blockquote>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="nc">File</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="s2">&quot;dados.txt&quot;</span><span class="p">)</span>
 <a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="c1"># {:ok, &quot;conteúdo&quot;} ou {:error, :enoent}</span>
 </code></pre></div>

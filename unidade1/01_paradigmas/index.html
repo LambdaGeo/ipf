@@ -1812,17 +1812,23 @@
 <p>Um paradigma de programação é um estilo ou uma forma de estruturar e organizar o raciocínio para resolver problemas através do código. Não se trata apenas de sintaxe, mas de um modelo mental sobre como os dados e as operações sobre esses dados devem se relacionar.</p>
 <p>Os três paradigmas dominantes no desenvolvimento de software são:</p>
 <h3 id="1-paradigma-imperativo">1. Paradigma Imperativo<a class="headerlink" href="#1-paradigma-imperativo" title="Permanent link">&para;</a></h3>
-<p>O modelo mental imperativo é focado em <strong>como</strong> fazer. O programa é visto como uma sequência de comandos que alteram o estado global da memória passo a passo.
-* <strong>Características</strong>: Variáveis mutáveis, loops explicitos (<code>for</code>, <code>while</code>), estruturas condicionais e execução sequencial.
-* <strong>Analogia</strong>: Uma receita de bolo passo a passo: <em>"Adicione 2 ovos, bata por 5 minutos, adicione farinha..."</em></p>
+<p>O modelo mental imperativo é focado em <strong>como</strong> fazer. O programa é visto como uma sequência de comandos que alteram o estado global da memória passo a passo.</p>
+<ul>
+<li><strong>Características</strong>: Variáveis mutáveis, loops explicitos (<code>for</code>, <code>while</code>), estruturas condicionais e execução sequencial.</li>
+<li><strong>Analogia</strong>: Uma receita de bolo passo a passo: <em>"Adicione 2 ovos, bata por 5 minutos, adicione farinha..."</em></li>
+</ul>
 <h3 id="2-paradigma-orientado-a-objetos-poo">2. Paradigma Orientado a Objetos (POO)<a class="headerlink" href="#2-paradigma-orientado-a-objetos-poo" title="Permanent link">&para;</a></h3>
-<p>Uma evolução do imperativo que agrupa estados (atributos) e comportamentos (métodos) em unidades conceituais chamadas <strong>objetos</strong>.
-* <strong>Características</strong>: Encapsulamento, herança, polimorfismo. O estado do sistema é distribuído entre vários objetos que interagem enviando mensagens entre si.
-* <strong>Analogia</strong>: Um teatro onde cada ator (objeto) tem seu próprio papel (método) e memória interna (atributos), conversando com outros atores.</p>
+<p>Uma evolução do imperativo que agrupa estados (atributos) e comportamentos (métodos) em unidades conceituais chamadas <strong>objetos</strong>.</p>
+<ul>
+<li><strong>Características</strong>: Encapsulamento, herança, polimorfismo. O estado do sistema é distribuído entre vários objetos que interagem enviando mensagens entre si.</li>
+<li><strong>Analogia</strong>: Um teatro onde cada ator (objeto) tem seu próprio papel (método) e memória interna (atributos), conversando com outros atores.</li>
+</ul>
 <h3 id="3-paradigma-declarativo-funcional">3. Paradigma Declarativo / Funcional<a class="headerlink" href="#3-paradigma-declarativo-funcional" title="Permanent link">&para;</a></h3>
-<p>O modelo mental funcional é focado em <strong>o que</strong> deve ser feito, e não em como. Os programas são construídos através da composição de funções matemáticas puras, sem alteração de estado global ou dados mutáveis.
-* <strong>Características</strong>: Imutabilidade, funções como cidadãs de primeira classe, ausência de efeitos colaterais (<em>side effects</em>) e avaliação preguiçosa (<em>lazy evaluation</em>).
-* <strong>Analogia</strong>: Uma linha de montagem matemática. Dados entram por um lado, passam por transformações (funções) e saem como novos dados do outro lado, sem alterar os dados originais.</p>
+<p>O modelo mental funcional é focado em <strong>o que</strong> deve ser feito, e não em como. Os programas são construídos através da composição de funções matemáticas puras, sem alteração de estado global ou dados mutáveis.</p>
+<ul>
+<li><strong>Características</strong>: Imutabilidade, funções como cidadãs de primeira classe, ausência de efeitos colaterais (<em>side effects</em>) e avaliação preguiçosa (<em>lazy evaluation</em>).</li>
+<li><strong>Analogia</strong>: Uma linha de montagem matemática. Dados entram por um lado, passam por transformações (funções) e saem como novos dados do outro lado, sem alterar os dados originais.</li>
+</ul>
 <hr />
 <h2 id="historico-do-paradigma-funcional">📌 Histórico do Paradigma Funcional<a class="headerlink" href="#historico-do-paradigma-funcional" title="Permanent link">&para;</a></h2>
 <p>A programação funcional baseia-se no <strong>Cálculo Lambda (λ-cálculo)</strong>, um formalismo matemático criado pelo lógico <strong>Alonzo Church</strong> na década de 1930 para estudar a computabilidade. Curiosamente, o cálculo lambda surgiu na mesma época em que <strong>Alan Turing</strong> criou a Máquina de Turing.</p>
@@ -1845,16 +1851,20 @@
 <hr />
 <h2 id="pilares-da-programacao-funcional">🛡️ Pilares da Programação Funcional<a class="headerlink" href="#pilares-da-programacao-funcional" title="Permanent link">&para;</a></h2>
 <h3 id="1-pureza-funcional-e-efeitos-colaterais">1. Pureza Funcional e Efeitos Colaterais<a class="headerlink" href="#1-pureza-funcional-e-efeitos-colaterais" title="Permanent link">&para;</a></h3>
-<p>Uma função é dita <strong>pura</strong> se ela atende a dois requisitos básicos:
-1. Retorna sempre o mesmo valor para os mesmos argumentos (determinismo).
-2. Não causa efeitos colaterais visíveis (como modificar uma variável global, escrever em arquivos, alterar parâmetros recebidos ou imprimir texto na tela).</p>
+<p>Uma função é dita <strong>pura</strong> se ela atende a dois requisitos básicos:</p>
+<ol>
+<li>Retorna sempre o mesmo valor para os mesmos argumentos (determinismo).</li>
+<li>Não causa efeitos colaterais visíveis (como modificar uma variável global, escrever em arquivos, alterar parâmetros recebidos ou imprimir texto na tela).</li>
+</ol>
 <h3 id="2-imutabilidade">2. Imutabilidade<a class="headerlink" href="#2-imutabilidade" title="Permanent link">&para;</a></h3>
 <p>Uma vez que um valor é criado, ele nunca muda. Para "alterar" um dado, criamos uma nova versão dele aplicando uma função. Isso elimina completamente problemas de concorrência e condições de corrida (<em>race conditions</em>), pois múltiplos threads podem ler o mesmo dado sem medo de que ele seja modificado no meio do caminho.</p>
 <h3 id="3-funcoes-como-cidadas-de-primeira-classe">3. Funções como Cidadãs de Primeira Classe<a class="headerlink" href="#3-funcoes-como-cidadas-de-primeira-classe" title="Permanent link">&para;</a></h3>
-<p>Em linguagens funcionais, funções são tratadas como qualquer outro tipo de dado:
-* Podem ser passadas como argumentos para outras funções.
-* Podem ser retornadas por outras funções.
-* Podem ser armazenadas em variáveis ou coleções de dados.</p>
+<p>Em linguagens funcionais, funções são tratadas como qualquer outro tipo de dado:</p>
+<ul>
+<li>Podem ser passadas como argumentos para outras funções.</li>
+<li>Podem ser retornadas por outras funções.</li>
+<li>Podem ser armazenadas em variáveis ou coleções de dados.</li>
+</ul>
 <p>Funções que recebem ou retornam outras funções são chamadas de <strong>Funções de Alta Ordem</strong> (<em>High-Order Functions</em>).</p>
 <h3 id="4-avaliacao-preguicosa-lazy-evaluation">4. Avaliação Preguiçosa (<em>Lazy Evaluation</em>)<a class="headerlink" href="#4-avaliacao-preguicosa-lazy-evaluation" title="Permanent link">&para;</a></h3>
 <p>Em Haskell, os cálculos são adiados até que seus resultados sejam realmente necessários. Esse recurso não é apenas um modo de postergar a avaliação: ele afeta profundamente a forma como escrevemos programas.</p>

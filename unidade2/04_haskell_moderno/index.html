@@ -1632,10 +1632,12 @@
 <p>A ferramenta padrão da indústria hoje é o <strong>Stack</strong>.</p>
 <hr />
 <h2 id="o-que-e-o-stack">🚀 O que é o Stack?<a class="headerlink" href="#o-que-e-o-stack" title="Permanent link">&para;</a></h2>
-<p>O <strong>Stack</strong> é um programa para gerenciar projetos Haskell. Ele se encarrega de:
-1. Instalar a versão correta do compilador GHC automaticamente para cada projeto (isolando-a de outras no sistema).
-2. Baixar e gerenciar dependências utilizando o <strong>Stackage</strong>, um repositório curado onde todas as bibliotecas são testadas juntas para garantir compatibilidade.
-3. Compilar, rodar executáveis e executar suítes de testes de forma simples.</p>
+<p>O <strong>Stack</strong> é um programa para gerenciar projetos Haskell. Ele se encarrega de:</p>
+<ol>
+<li>Instalar a versão correta do compilador GHC automaticamente para cada projeto (isolando-a de outras no sistema).</li>
+<li>Baixar e gerenciar dependências utilizando o <strong>Stackage</strong>, um repositório curado onde todas as bibliotecas são testadas juntas para garantir compatibilidade.</li>
+<li>Compilar, rodar executáveis e executar suítes de testes de forma simples.</li>
+</ol>
 <hr />
 <h2 id="estrutura-de-um-projeto-stack">📁 Estrutura de um Projeto Stack<a class="headerlink" href="#estrutura-de-um-projeto-stack" title="Permanent link">&para;</a></h2>
 <p>Quando criamos um projeto novo rodando <code>stack new hs2json</code>, o Stack gera a seguinte árvore de diretórios:</p>
@@ -1726,9 +1728,11 @@
 <h2 id="transicao-da-teoria-academica-para-o-desenvolvimento-modular">🔗 Transição: Da Teoria Acadêmica para o Desenvolvimento Modular<a class="headerlink" href="#transicao-da-teoria-academica-para-o-desenvolvimento-modular" title="Permanent link">&para;</a></h2>
 <p>Na Unidade 1, você trabalhou com arquivos soltos compilados pelo <code>ghc</code> ou carregados no <code>ghci</code>. Essa abordagem é ideal para focar na sintaxe e conceitos puros da linguagem (como casamento de padrões, listas e recursão). </p>
 <p>No entanto, no desenvolvimento real, lidamos com código dividido em múltiplos arquivos (módulos), dependências externas (como bibliotecas HTTP, bancos de dados ou frameworks de teste) e testes de unidade automatizados.</p>
-<p>Nesta <strong>Unidade 2</strong>, usamos o <strong>Stack</strong> para unificar duas práticas fundamentais:
-1. <strong>Modelagem de Dados (SimpleJSON)</strong>: Onde aplicamos os conceitos de tipos de dados algébricos e pattern matching para construir uma biblioteca de parsing e manipulação de objetos JSON reais (baseado no Capítulo 5 do <em>Real World Haskell</em>).
-2. <strong>Garantia de Qualidade (QuickCheck)</strong>: Onde mostramos como testar propriedades matemáticas da nossa biblioteca de maneira automatizada (baseado no Capítulo 11 do <em>Real World Haskell</em>).</p>
+<p>Nesta <strong>Unidade 2</strong>, usamos o <strong>Stack</strong> para unificar duas práticas fundamentais:</p>
+<ol>
+<li><strong>Modelagem de Dados (SimpleJSON)</strong>: Onde aplicamos os conceitos de tipos de dados algébricos e pattern matching para construir uma biblioteca de parsing e manipulação de objetos JSON reais (baseado no Capítulo 5 do <em>Real World Haskell</em>).</li>
+<li><strong>Garantia de Qualidade (QuickCheck)</strong>: Onde mostramos como testar propriedades matemáticas da nossa biblioteca de maneira automatizada (baseado no Capítulo 11 do <em>Real World Haskell</em>).</li>
+</ol>
 <p>No próximo capítulo, iniciaremos a construção da nossa biblioteca <code>SimpleJSON</code>, aplicando as estruturas de projeto do Stack apresentadas aqui.</p>
 
 

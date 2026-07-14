@@ -1791,16 +1791,20 @@ Funciona? Sim. Mas é frágil.</p>
 <hr />
 <h2 id="2-etapa-b-o-padrao-ouro-genserver">2. Etapa B: O Padrão Ouro (<code>GenServer</code>)<a class="headerlink" href="#2-etapa-b-o-padrao-ouro-genserver" title="Permanent link">&para;</a></h2>
 <p>Na Etapa A, construímos um servidor "na unha". Funciona? Sim. É seguro para produção? <strong>Não.</strong>
-Como engenheiros, analisamos os riscos daquela abordagem manual:
-1. <strong>Boilerplate:</strong> Você teve que escrever a recursão (<code>loop_do_servidor</code>) manualmente. Se esquecer uma linha, o servidor morre.
-2. <strong>Timeouts:</strong> Se você mandar uma mensagem e o servidor não responder, seu cliente fica travado para sempre.
-3. <strong>Padronização:</strong> Se cada programador escrever seu próprio loop <code>receive</code>, o código do projeto vira uma bagunça imprevisível.
-Para resolver isso, a OTP (Open Telecom Platform) nos dá o <strong>GenServer</strong> (Generic Server). Ele abstrai a recursão, o tratamento de erros e o ciclo de vida do processo.</p>
+Como engenheiros, analisamos os riscos daquela abordagem manual:</p>
+<ol>
+<li><strong>Boilerplate:</strong> Você teve que escrever a recursão (<code>loop_do_servidor</code>) manualmente. Se esquecer uma linha, o servidor morre.</li>
+<li><strong>Timeouts:</strong> Se você mandar uma mensagem e o servidor não responder, seu cliente fica travado para sempre.</li>
+<li><strong>Padronização:</strong> Se cada programador escrever seu próprio loop <code>receive</code>, o código do projeto vira uma bagunça imprevisível.
+Para resolver isso, a OTP (Open Telecom Platform) nos dá o <strong>GenServer</strong> (Generic Server). Ele abstrai a recursão, o tratamento de erros e o ciclo de vida do processo.</li>
+</ol>
 <p><strong>2.1. Teoria: A Fronteira do Processo (Client vs Server)</strong></p>
 <p>A maior confusão de quem começa com GenServer é entender <strong>onde</strong> o código está rodando. O módulo do GenServer é dividido em duas partes que rodam em processos diferentes.
-Imagine um <strong>Restaurante</strong>:
-1. <strong>Client API (O Garçom):</strong> É a interface pública. Você chama essas funções. Elas rodam no <strong>seu</strong> processo (no terminal ou na requisição HTTP). O trabalho delas é apenas anotar o pedido e gritar para a cozinha.
-2. <strong>Server Callbacks (A Cozinha):</strong> É a implementação interna. Essas funções rodam dentro do <strong>processo do GenServer</strong>. Elas recebem o pedido, cozinham (processam a lógica/estado) e devolvem o prato.</p>
+Imagine um <strong>Restaurante</strong>:</p>
+<ol>
+<li><strong>Client API (O Garçom):</strong> É a interface pública. Você chama essas funções. Elas rodam no <strong>seu</strong> processo (no terminal ou na requisição HTTP). O trabalho delas é apenas anotar o pedido e gritar para a cozinha.</li>
+<li><strong>Server Callbacks (A Cozinha):</strong> É a implementação interna. Essas funções rodam dentro do <strong>processo do GenServer</strong>. Elas recebem o pedido, cozinham (processam a lógica/estado) e devolvem o prato.</li>
+</ol>
 <p><strong>2.2. Os Protocolos de Comunicação (<code>Call</code> vs <code>Cast</code>)</strong></p>
 <p>Em sistemas distribuídos, a forma como enviamos mensagens define a confiabilidade do sistema. O GenServer padroniza isso em dois verbos:</p>
 <table>

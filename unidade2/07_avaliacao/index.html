@@ -1617,22 +1617,28 @@
 <p>Você deverá criar um projeto Stack chamado <code>hs2json</code> estruturado como uma biblioteca reutilizável e uma suíte de testes robusta.</p>
 <p>O projeto deve conter as seguintes funcionalidades mínimas:</p>
 <h3 id="a-tipo-de-dados-e-accessors-simplejsonhs">A. Tipo de Dados e Accessors (<code>SimpleJSON.hs</code>)<a class="headerlink" href="#a-tipo-de-dados-e-accessors-simplejsonhs" title="Permanent link">&para;</a></h3>
-<p>O arquivo <code>src/SimpleJSON.hs</code> deve definir o tipo algébrico de dados <code>JValue</code> que representa JSON, além de funções para extração segura de dados (<em>accessors</em>):
-* <code>getString :: JValue -&gt; Maybe String</code>
-* <code>getInt :: JValue -&gt; Maybe Int</code>
-* <code>getDouble :: JValue -&gt; Maybe Double</code>
-* <code>getBool :: JValue -&gt; Maybe Bool</code>
-* <code>getObject :: JValue -&gt; Maybe [(String, JValue)]</code>
-* <code>getArray :: JValue -&gt; Maybe [JValue]</code>
-* <code>isNull :: JValue -&gt; Bool</code></p>
+<p>O arquivo <code>src/SimpleJSON.hs</code> deve definir o tipo algébrico de dados <code>JValue</code> que representa JSON, além de funções para extração segura de dados (<em>accessors</em>):</p>
+<ul>
+<li><code>getString :: JValue -&gt; Maybe String</code></li>
+<li><code>getInt :: JValue -&gt; Maybe Int</code></li>
+<li><code>getDouble :: JValue -&gt; Maybe Double</code></li>
+<li><code>getBool :: JValue -&gt; Maybe Bool</code></li>
+<li><code>getObject :: JValue -&gt; Maybe [(String, JValue)]</code></li>
+<li><code>getArray :: JValue -&gt; Maybe [JValue]</code></li>
+<li><code>isNull :: JValue -&gt; Bool</code></li>
+</ul>
 <h3 id="b-o-pretty-printer-json-prettifyhs-e-prettyjsonhs">B. O Pretty Printer JSON (<code>Prettify.hs</code> e <code>PrettyJSON.hs</code>)<a class="headerlink" href="#b-o-pretty-printer-json-prettifyhs-e-prettyjsonhs" title="Permanent link">&para;</a></h3>
-<p>Você deve desenvolver uma biblioteca de formatação baseada em um tipo abstrato <code>Doc</code>. O renderizador deve:
-* Escapar strings corretamente (caracteres Unicode, quebras de linha <code>\n</code>, tabs <code>\t</code>, etc.).
-* Imprimir objetos JSON formatados com indentação e quebra de linhas para fácil legibilidade.</p>
+<p>Você deve desenvolver uma biblioteca de formatação baseada em um tipo abstrato <code>Doc</code>. O renderizador deve:</p>
+<ul>
+<li>Escapar strings corretamente (caracteres Unicode, quebras de linha <code>\n</code>, tabs <code>\t</code>, etc.).</li>
+<li>Imprimir objetos JSON formatados com indentação e quebra de linhas para fácil legibilidade.</li>
+</ul>
 <h3 id="c-testes-com-quickcheck-testspechs">C. Testes com QuickCheck (<code>test/Spec.hs</code>)<a class="headerlink" href="#c-testes-com-quickcheck-testspechs" title="Permanent link">&para;</a></h3>
-<p>O projeto deve conter uma suíte de testes rodando via <code>stack test</code> com, no mínimo:
-1. Implementação da Typeclass <code>Arbitrary</code> para o tipo <code>JValue</code> de forma a gerar dados aleatórios corretos e não-recursivos infinitos.
-2. No mínimo <strong>5 propriedades</strong> escritas para testar as invariantes da sua biblioteca (ex: idempotência de renderização, corretude dos escapes de string, corretude de acesso nas funções <code>get</code>).</p>
+<p>O projeto deve conter uma suíte de testes rodando via <code>stack test</code> com, no mínimo:</p>
+<ol>
+<li>Implementação da Typeclass <code>Arbitrary</code> para o tipo <code>JValue</code> de forma a gerar dados aleatórios corretos e não-recursivos infinitos.</li>
+<li>No mínimo <strong>5 propriedades</strong> escritas para testar as invariantes da sua biblioteca (ex: idempotência de renderização, corretude dos escapes de string, corretude de acesso nas funções <code>get</code>).</li>
+</ol>
 <hr />
 <h2 id="requisitos-do-repositorio-e-entrega">⚙️ Requisitos do Repositório e Entrega<a class="headerlink" href="#requisitos-do-repositorio-e-entrega" title="Permanent link">&para;</a></h2>
 <ol>
