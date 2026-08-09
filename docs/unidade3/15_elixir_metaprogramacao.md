@@ -25,10 +25,10 @@ Elas são macros escritas em Elixir!
 
 O Ecto permite escrever consultas SQL usando sintaxe Elixir.
 
-Elixir
-
-`# Isso parece Elixir, mas vira SQL seguro
-from u in User, where: u.age > 18`
+```elixir
+# Isso parece Elixir, mas vira SQL seguro
+from u in User, where: u.age > 18
+```
 
 - **O Poder da Macro:** O Ecto usa macros para analisar seu código em **Tempo de Compilação**. Se você errar o nome de um campo ou tentar uma injeção de SQL, o Ecto detecta isso *antes* do seu código rodar, prevenindo bugs críticos em produção.
 
@@ -36,9 +36,9 @@ from u in User, where: u.age > 18`
 
 O framework Phoenix usa macros para definir rotas de forma limpa.
 
-Elixir
-
-`get "/users/:id", UserController, :show`
+```elixir
+get "/users/:id", UserController, :show
+```
 
 - **O Poder da Macro:** Em tempo de compilação, o Phoenix transforma essa linha bonita em uma função gigante de Pattern Matching ultra-otimizada. Você escreve código legível; a macro gera código performático.
 
@@ -99,8 +99,6 @@ end
 
 Agora, vamos simular um cenário perigoso no terminal (`iex`):
 Queremos executar a ação de apagar o banco **apenas se** a condição for `true`.
-
-Elixir
 
 ```elixir
 condicao = false
@@ -299,8 +297,6 @@ Pense em interpolação de Strings.
 - `quote` é como as aspas `""`.
 - `unquote` é como a interpolação `#{}`.
 
-Elixir
-
 ```elixir
 # String
 nome = "João"
@@ -343,9 +339,7 @@ Neste laboratório, você vai sentir o poder de estender a linguagem. Você não
 
 Crie um projeto novo para isolarmos nossos experimentos:
 
-Bash
-
-```elixir
+```bash
 mix new meta_lab
 cd meta_lab
 iex -S mix
@@ -406,7 +400,7 @@ end
 ## 5. Depuração: O Raio-X da Expansão
 
 Como engenheiro, você não deve confiar em mágica. Você precisa ver o código gerado.
-O Elixir possui a função `Macro.expand/2` que simula o trabalho do compilador e te mostra o resultado final.
+O Elixir possui a função `Macro.expand_once/2`, que simula um único passo do trabalho do compilador e te mostra o resultado imediato da expansão da nossa macro.
 
 Ainda no IEx, digite:
 
@@ -416,8 +410,8 @@ ast = quote do
   EstruturasControle.unless(true, do: IO.puts("Oi"))
 end
 
-# 2. Agora, pedimos para o Elixir expandir essa macro
-codigo_gerado = Macro.expand(ast, __ENV__)
+# 2. Agora, pedimos para o Elixir expandir essa macro UMA vez
+codigo_gerado = Macro.expand_once(ast, __ENV__)
 
 # 3. Vamos converter a AST de volta para String para lermos
 Macro.to_string(codigo_gerado) |> IO.puts
@@ -434,7 +428,16 @@ end
 **Conclusão Visual:**
 Veja que o `unless` desapareceu completamente!
 O que sobrou foi um `if` nativo com a negação `!`.
-É exatamente esse código que o processador vai executar no final das contas. A macro é apenas um **Gerador de Código** em tempo de compilação.
+
+!!! warning "`expand_once` vs. `expand`"
+    Se você usar `Macro.expand/2` em vez de `Macro.expand_once/2`, o Elixir não para no `if`: como `if` **também é uma macro** definida no `Kernel`, `Macro.expand/2` continua expandindo recursivamente até não haver mais nenhuma macro para expandir, chegando à forma primitiva real:
+    ```elixir
+    case !true do
+      x when Kernel.in(x, [false, nil]) -> nil
+      _ -> IO.puts("Oi")
+    end
+    ```
+    Use `expand_once` quando quiser ver "um passo de cada vez" (bom para entender sua própria macro); use `expand` quando quiser ver a forma final que o compilador realmente executa.
 
 ---
 
@@ -453,11 +456,11 @@ Vamos reconstruir, do zero, uma versão simplificada do **ExUnit**, o framework 
 **O Objetivo de Engenharia:**
 Queremos permitir que outro programador escreva testes usando esta sintaxe limpa, que não parece Elixir padrão:
 
-Elixir
-
-`testar "soma basica" do
+```elixir
+testar "soma basica" do
   assert 5 == 5
-end`
+end
+```
 
 ---
 
@@ -528,8 +531,6 @@ end
 
 Agora vamos atuar como o usuário final do seu framework.
 Crie o arquivo `lib/meus_testes.ex`.
-
-Elixir
 
 ```elixir
 defmodule MeusTestes do

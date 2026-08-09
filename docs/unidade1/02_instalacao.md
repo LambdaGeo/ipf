@@ -45,13 +45,13 @@ stack ghci
 
 Para a atividade, crie o projeto hs2json
 
-```jsx
+```bash
 stack new hs2json
 ```
 
 Esse comando irá criar uma pasta, nesse caso com o nome hs2json, com alguns arquivos básicos.
 
-![](Instalando%20via%20stack/Untitled%204.png)
+![](img-instalacao-stack/Untitled%204.png)
 
 Abrindo a pasta no VisualStudio code, observe uma pasta src, que poderá ter módulos, e outros arquivo do projeto. Em app tem o programa principal, que é o Main.hs nesse caso. 
 

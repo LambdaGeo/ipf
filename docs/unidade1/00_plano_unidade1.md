@@ -31,7 +31,7 @@ Ao final desta unidade, o estudante deverá ser capaz de:
 | 6 | 2h | Listas: construção, recursão sobre listas e compreensão de listas | [Listas](06_listas.md) |
 | 7 | 2h | Prática dirigida em laboratório: recursão e listas | [Listas](06_listas.md) |
 | 8 | 2h | Funções de alta ordem: `map`, `filter`, `fold`, composição e aplicação parcial | [Funções de Alta Ordem](07_alta_ordem.md) |
-| 9 | 2h | Resolução comentada de exercícios e preparação para a avaliação | [Exercícios Resolvidos](08_exercicios.md) |
+| 9 | 2h | Resolução comentada em sala das listas de exercícios e preparação para a avaliação | [Lista de Exercícios](08_exercicios.md) |
 | 10 | 2h | Revisão geral e **avaliação escrita da unidade** | — |
 
 ## Metodologia
