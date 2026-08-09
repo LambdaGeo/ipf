@@ -7,7 +7,7 @@
 | **Unidade** | 2 de 3 |
 | **Carga horária** | 20 horas (10 aulas de 2h) |
 | **Pré-requisitos** | Unidade 1 concluída (Haskell básico: funções, listas, alta ordem) |
-| **Linguagem** | Haskell (projetos com Stack, QuickCheck, HSpec) |
+| **Linguagem** | Haskell (projetos com Stack e QuickCheck) |
 
 ## Objetivos de aprendizagem
 
@@ -30,7 +30,7 @@ Ao final desta unidade, o estudante deverá ser capaz de:
 | 5 | 2h | Haskell moderno: Stack, package.yaml, módulos e dependências | [Projetos Modernos com Stack](04_haskell_moderno.md) |
 | 6 | 2h | Biblioteca JSON — parte 1: modelagem do tipo `JValue` e serialização | [Escrevendo a Biblioteca JSON](05_biblioteca_json.md) |
 | 7 | 2h | Biblioteca JSON — parte 2: pretty-printing e refinamento da API | [Escrevendo a Biblioteca JSON](05_biblioteca_json.md) |
-| 8 | 2h | Testes baseados em propriedades com QuickCheck e HSpec | [Testes com QuickCheck](06_testes_qualidade.md) |
+| 8 | 2h | Testes baseados em propriedades com QuickCheck | [Testes com QuickCheck](06_testes_qualidade.md) |
 | 9 | 2h | Laboratório orientado: desenvolvimento do trabalho prático | [Trabalho Prático](07_avaliacao.md) |
 | 10 | 2h | Entrega, apresentação e defesa dos trabalhos | [Trabalho Prático](07_avaliacao.md) |
 

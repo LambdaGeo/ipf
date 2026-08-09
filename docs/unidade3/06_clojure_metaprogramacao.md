@@ -1,6 +1,6 @@
 # Metaprogramação e Macros em Clojure
 
-# 1. Introdução: A Filosofia Lisp em Clojure
+## 1. Introdução: A Filosofia Lisp em Clojure
 
 Bem-vindos à nossa aula sobre metaprogramação e macros em Clojure. Este não é apenas um tópico avançado; é a essência do que torna as linguagens da família Lisp, como o Clojure, tão singulares e poderosas. Frequentemente, você ouvirá a expressão "a linguagem de programação programável" para descrever o Lisp. Hoje, vamos desvendar o que isso significa na prática, explorando como o Clojure nos permite não apenas escrever programas, mas também moldar e estender a própria linguagem.
 
@@ -12,7 +12,7 @@ Bem-vindos à nossa aula sobre metaprogramação e macros em Clojure. Este não 
 
     No entanto, o que diferencia o Clojure (e o Lisp de forma geral) é a **integração profunda e natural entre código e dados** — uma característica que torna a construção de macros **mais transparente, poderosa e idiomática** do que em quase qualquer outra linguagem.
 
-## 1.1. O Princípio Fundamental: Código como Dados (Homoiconicidade)
+### 1.1. O Princípio Fundamental: Código como Dados (Homoiconicidade)
 
 O conceito central que possibilita tudo o que faremos hoje é a **homoiconicidade**. Este termo, que soa complexo, descreve uma ideia elegantemente simples: o código-fonte em Clojure não é apenas um texto que um compilador precisa analisar; ele é escrito diretamente com as próprias estruturas de dados da linguagem.
 
@@ -41,11 +41,11 @@ Para entender onde as macros se encaixam, é crucial compreender como o Clojure 
 
 É nesta segunda fase, a de expansão, que as macros operam, dando-nos o poder de reescrever o código antes mesmo que ele seja avaliado.
 
-# 2. O Que é uma Macro?
+## 2. O Que é uma Macro?
 
 Formalmente, uma macro é uma função especial que é executada durante a fase de compilação (expansão). Ela recebe código como seus argumentos — na forma de estruturas de dados do Clojure — e seu trabalho é retornar uma nova estrutura de dados de código. Esta nova estrutura é então substituída no lugar da chamada original da macro e, finalmente, avaliada pelo Clojure.
 
-## 2.1. A Diferença Crucial: Funções vs. Macros
+### 2.1. A Diferença Crucial: Funções vs. Macros
 
 A distinção mais importante que um programador Clojure deve internalizar é a diferença entre uma função e uma macro. Embora a sintaxe para defini-las seja semelhante, seu comportamento é fundamentalmente distinto.
 
@@ -75,7 +75,7 @@ Agora, veja o que acontece com a macro:
 
 A `minha-macro` não recebe o *resultado* da divisão. Ela recebe a própria estrutura de dados, a lista `(/ 1 0)`. A macro pode então analisar essa lista, transformá-la ou simplesmente ignorá-la. A avaliação só ocorrerá no código que a macro *retornar*. Essa "não avaliação" dos argumentos é o superpoder das macros.
 
-## 2.2. A Primeira Macro:
+### 2.2. A Primeira Macro: `defmacro`
 
 Para definir uma macro, usamos `defmacro`, que tem uma sintaxe muito parecida com `defn`. Vamos criar uma macro didática que nos permite escrever expressões matemáticas com notação infixa, como `(1 + 2)`, e as transforma na notação prefixa que o Clojure entende, `(+ 1 2)`.
 
@@ -99,11 +99,11 @@ O que acontece aqui?
 6. O Clojure substitui a chamada original `(infix (1 + 2))` pelo código retornado `(+ 1 2)`.
 7. Finalmente, o avaliador executa `(+ 1 2)` e obtém `3`.
 
-# 3. Construindo Macros: Ferramentas e Técnicas
+## 3. Construindo Macros: Ferramentas e Técnicas
 
 Manipular código manualmente usando funções como `list`, `first` e `second` funciona para exemplos simples, mas pode se tornar verboso e propenso a erros rapidamente. Felizmente, o Clojure oferece um conjunto de ferramentas idiomáticas, centradas na *syntax quote*, para construir código dentro de macros de forma muito mais clara e concisa.
 
-## 3.1. A Forma Idiomática: Syntax Quote (`)
+### 3.1. A Forma Idiomática: Syntax Quote (`)
 
 O **acento grave** ( ``` ), também chamado de **backquote**, permite criar um **template de código** em Clojure.
 
@@ -120,7 +120,7 @@ Isso é especialmente útil em **macros**, onde queremos gerar expressões Cloju
 
 Observe que a `syntax-quote` é inteligente: ela qualifica os símbolos com seus namespaces (`clojure.core/+`) para evitar ambiguidades. Isso torna o código gerado mais robusto.
 
-## 3.2. Inserindo Valores: Unquote (~)
+### 3.2. Inserindo Valores: Unquote (~)
 
 A *syntax quote* cria um template literal. Mas e se quisermos injetar um valor de uma variável ou o resultado de uma expressão dentro desse template? Para isso, usamos o til (`~`), ou *unquote*. O *unquote* nos permite "escapar" temporariamente do template para avaliar uma expressão e inserir seu resultado.
 
@@ -140,7 +140,7 @@ Vamos reescrever nossa macro `infix` de forma muito mais legível:
 
 Este código é muito mais fácil de ler porque a estrutura da macro se assemelha muito mais à estrutura do código que ela gera.
 
-## 3.3. Injetando Sequências: Unquote Splicing (~@)
+### 3.3. Injetando Sequências: Unquote Splicing (~@)
 
 O que acontece se quisermos injetar os *elementos* de uma lista dentro do nosso template, em vez da lista inteira? Se usarmos `~`, a lista será inserida como um único item. Para "desempacotar" ou "espalhar" os elementos de uma sequência, usamos o *unquote splicing*, representado por til-arroba (`~@`).
 
@@ -158,11 +158,11 @@ O `&` no argumento `& exprs` instrui o Clojure a coletar todas as formas subsequ
 - Usar `(do ~exprs)` geraria `(do ((println "Olá") (println "Mundo")))`, o que é um código inválido.
 - Usar `(do ~@exprs)` gera `(do (println "Olá") (println "Mundo"))`, que é exatamente o que queremos.
 
-# 4. Padrões de Uso e Exemplos Práticos
+## 4. Padrões de Uso e Exemplos Práticos
 
 As macros não são apenas curiosidades acadêmicas; elas são usadas em todo o ecossistema Clojure para estender a linguagem, criar DSLs (Domain-Specific Languages), reduzir código repetitivo (boilerplate) e até mesmo para otimizações de performance, movendo cálculos de tempo de execução para tempo de compilação.
 
-## 4.1. Criando Novas Estruturas de Controle
+### 4.1. Criando Novas Estruturas de Controle
 
 Muitas estruturas de controle que parecem nativas em Clojure, como `when` ou `cond`, são na verdade macros. Vamos implementar `unless`, que é uma estrutura comum em linguagens como Ruby. A forma geral é `(unless teste ...corpo...)`, que executa o corpo somente se o teste for falso.
 
@@ -182,7 +182,7 @@ Muitas estruturas de controle que parecem nativas em Clojure, como `when` ou `co
 
 Isso demonstra a filosofia Lisp em sua plenitude. Muitas estruturas que parecem ser parte do núcleo da linguagem, como `when`, são na verdade macros. Se inspecionarmos sua expansão, vemos a transformação em ação: `(macroexpand-1 '(when true (println "ok")))` resulta em `(if true (do (println "ok")))`. O que parece uma funcionalidade nativa é apenas uma abstração inteligente, construída com as mesmas ferramentas que estamos aprendendo, materializando a ideia da "linguagem de programação programável".
 
-## 4.2. Eliminando Código Repetitivo (Boilerplate)
+### 4.2. Eliminando Código Repetitivo (Boilerplate)
 
 Macros são excelentes para abstrair padrões de código que se repetem. Imagine que, em seus testes, você frequentemente escreve o seguinte padrão para verificar uma condição e lançar um erro detalhado:
 
@@ -213,11 +213,11 @@ Isso é verboso e propenso a erros de copiar e colar. Podemos criar uma macro `a
 
 A macro não apenas torna o código mais curto, mas também melhora a mensagem de erro. Note o uso de `'~expr`. Dentro de uma syntax quote, esta forma insere a expressão original, `expr`, de forma literal (quoted), permitindo que a mensagem de erro mostre exatamente o código que falhou — algo que uma função jamais conseguiria fazer.
 
-# 5. Armadilhas Comuns e Boas Práticas
+## 5. Armadilhas Comuns e Boas Práticas
 
 Com grande poder vem grande responsabilidade. A metaprogramação é uma ferramenta poderosa, mas que introduz uma nova camada de complexidade. É fundamental estar ciente das armadilhas comuns para escrever macros que sejam robustas, previsíveis e que não causem surpresas desagradáveis para seus usuários.
 
-## 5.1. O Perigo da Captura de Variáveis (Higiene)
+### 5.1. O Perigo da Captura de Variáveis (Higiene)
 
 Um dos problemas mais sutis em macros é a **captura de variável** (*variable capture*). Isso ocorre quando um símbolo introduzido pela macro acidentalmente colide com um símbolo no código que é passado para a macro. Macros que não levam isso em conta são chamadas de "não higiênicas".
 
@@ -242,7 +242,7 @@ Agora, vejamos um uso problemático desta macro:
 
 O programador que utiliza a macro espera que o código imprima "O valor de x é: sou o x de fora". No entanto, a macro expande para `(let [x "sou o x de fora"] (let [x 10] (println "O valor de x é:" x)))`. Como o `let` interno da macro também usa o símbolo `x`, ele "captura" a variável `x` usada no `println`, fazendo com que o programa imprima, inesperadamente, "O valor de x é: 10". Este é o verdadeiro perigo da captura de variáveis.
 
-## 5.2. A Solução: e Auto-gensym ()
+### 5.2. A Solução: `gensym` e Auto-gensym (`#`)
 
 Para evitar a captura de variáveis, precisamos garantir que os símbolos que criamos dentro de nossas macros sejam únicos.
 
@@ -266,7 +266,7 @@ Vamos corrigir nossa macro para torná-la higiênica:
 
 O código expandido agora se parece com `(let [x__123__auto__ 10] (println "O valor de x é:" x))`. O `x` externo não é mais capturado, e a macro se comporta como o usuário esperava.
 
-## 5.3. Depurando Macros com
+### 5.3. Depurando Macros com `macroexpand-1`
 
 Como uma macro transforma seu código antes da avaliação, a depuração pode ser desafiadora. A ferramenta mais importante em seu arsenal é `macroexpand-1`. Esta função recebe uma chamada de macro (entre aspas) e mostra exatamente qual código ela gera após um único passo de expansão. Isso permite que você inspecione a saída da sua macro e verifique se ela está correta, sem precisar executá-la.
 
@@ -280,7 +280,7 @@ Como uma macro transforma seu código antes da avaliação, a depuração pode s
 
 Ver o código expandido torna muito mais fácil diagnosticar problemas na lógica da sua macro.
 
-# 6. Tópico Relacionado: Macros de Leitura (Reader Macros)
+## 6. Tópico Relacionado: Macros de Leitura (Reader Macros)
 
 É importante não confundir as macros que acabamos de ver com as **macros de leitura** (*reader macros*). Enquanto as macros normais operam na fase de expansão, as macros de leitura são caracteres especiais que modificam o comportamento do próprio *leitor* (a primeira fase). Elas ensinam o Clojure a transformar texto em estruturas de dados de maneiras especiais.
 
@@ -291,7 +291,7 @@ As macros de leitura mais comuns são parte integrante da sintaxe do Clojure:
 - `#_` (discard): Instrui o leitor a ignorar completamente a próxima forma de código. É extremamente útil para comentar blocos de código.
 - `#(...)`: Sintaxe curta para uma função anônima. `#(> % 5)` expande para `(fn [p1__324_] (> p1__324_ 5))`.
 
-# 7. Conclusão: O Poder de Estender a Linguagem
+## 7. Conclusão: O Poder de Estender a Linguagem
 
 Hoje, vimos que as macros são a principal ferramenta de metaprogramação em Clojure, um mecanismo que permite que o programador ensine novos truques à linguagem. Elas são a razão pela qual o Lisp é considerado "a linguagem de programação programável". Ao manipular o código como dados, podemos criar novas sintaxes, construir linguagens específicas de domínio (DSLs) elegantes, eliminar código repetitivo e, em última análise, escrever programas mais expressivos e poderosos. Dominar macros é o passo decisivo para deixar de ser apenas um *usuário* da linguagem e se tornar um *arquiteto* da linguagem, moldando-a para resolver problemas de forma mais direta e elegante.
 

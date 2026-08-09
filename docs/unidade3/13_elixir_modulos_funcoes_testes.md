@@ -1,6 +1,6 @@
-# Modulo, Funções e testes
+# Módulos, Funções e Testes
 
-Caro aluno, hoje vamos mudar a forma como você pensa sobre organizar código. Se você vem de Java, C# ou Python, você está acostumado a pensar em **Classes** (que guardam dados e comportamentos). Em Elixir, nós separamos isso:
+Vamos mudar a forma como você pensa sobre organizar código. Se você vem de Java, C# ou Python, você está acostumado a pensar em **Classes** (que guardam dados e comportamentos). Em Elixir, nós separamos isso:
 
 1. **Dados** são imutáveis e transparentes.
 2. **Módulos** são apenas agrupadores de funções.
@@ -16,7 +16,7 @@ Em engenharia de software, não criamos arquivos soltos. Precisamos de uma estru
 
 Abra seu terminal e digite o comando abaixo. Ele vai criar a estrutura de pastas padrão da indústria.
 
-```jsx
+```bash
 mix new escola_elixir
 cd escola_elixir
 ```
@@ -126,7 +126,7 @@ Como alteramos a estrutura de arquivos, precisamos garantir que o Mix encontre t
 
 No vscode:
 
-![image.png](Modulo,%20Fun%C3%A7%C3%B5es%20e%20testes/image.png)
+![image.png](img-elixir-modulos/image.png)
 
 **Se funcionou, parabéns!** Você acabou de criar sua primeira estrutura modular respeitando os padrões de engenharia da comunidade Elixir.
 
@@ -433,7 +433,7 @@ O comando acima criou uma pasta nova chamada `doc/` dentro do seu projeto.
 **O que você verá:**
 Uma página web moderna, com barra lateral de navegação, busca instantânea e modo escuro, contendo exatamente o texto e os exemplos que você escreveu no código.
 
-![image.png](Modulo,%20Fun%C3%A7%C3%B5es%20e%20testes/image%201.png)
+![image.png](img-elixir-modulos/image%201.png)
 
 ---
 
@@ -575,8 +575,6 @@ Vamos supor que todos os sistemas da escola precisem ter uma função de copyrig
 
 1. Crie o arquivo `lib/escola_elixir/sistema.ex`:
 
-Elixir
-
 ```elixir
 defmodule EscolaElixir.Sistema do
   # A mágica acontece aqui. __using__ é o que o 'use' procura para executar.
@@ -634,8 +632,6 @@ Vamos ver na prática com o módulo `List` do Elixir, que tem muitas funções.
 
 **1. `only:` (Traga APENAS estes)**
 Esta é a forma recomendada. Você declara explicitamente o que seu código vai usar.
-
-Elixir
 
 ```elixir
 defmodule MinhaLista do
@@ -826,10 +822,10 @@ Você deve entregar código limpo, testado e documentado.
 Não vamos fazer arquivos soltos. Crie um projeto novo.
 No terminal:
 
-Bash
-
-`mix new geek_store
-cd geek_store`
+```bash
+mix new geek_store
+cd geek_store
+```
 
 ---
 
@@ -842,8 +838,6 @@ Vamos começar definindo o módulo e usando **boas práticas de importação**.
 Queremos arredondar os preços finais para 2 casas decimais. O módulo `Float` tem a função `round/2`.
 
 - Em vez de escrever `Float.round(valor, 2)` toda hora, use um **import seguro** (`only:`) para trazer apenas essa função.
-
-Elixir
 
 ```elixir
 defmodule GeekStore.Caixa do

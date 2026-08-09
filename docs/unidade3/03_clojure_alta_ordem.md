@@ -14,7 +14,7 @@ Este documento explora três conceitos centrais que desbloqueiam esse superpoder
 
 ## 2. Funções como Cidadãos de Primeira Classe: As HOFs
 
-### 1.1. O que significa "Cidadão de Primeira Classe"?
+### 2.1. O que significa "Cidadão de Primeira Classe"?
 
 Em Clojure, quando dizemos que as funções são "cidadãos de primeira classe", queremos dizer que elas podem ser:
 
@@ -46,7 +46,7 @@ Veja um exemplo prático. A função `valor-descontado` abaixo foi projetada par
 
 Neste caso, `valor-descontado` é uma HOF porque aceita a função `mais-caro-que-100?` como seu primeiro argumento, `aplica?`.
 
-### 1.2. HOFs em Ação: , e
+### 2.2. HOFs em Ação: `map`, `filter` e `reduce`
 
 `map`, `filter` e `reduce` são a tríade clássica de HOFs para processamento de coleções em Clojure. Todas recebem uma função como primeiro argumento para operar sobre os elementos de uma coleção.
 
@@ -118,7 +118,7 @@ O uso de HOFs é incrivelmente poderoso, mas definir uma função nomeada com `d
 
 ## 3. Funções "na Hora": O Poder das Lambdas (Funções Anônimas)
 
-### 2.1. A Necessidade de Funções Descartáveis
+### 3.1. A Necessidade de Funções Descartáveis
 
 Muitas vezes, a lógica que queremos passar para uma HOF é tão simples e usada em um único lugar que não vale a pena dar-lhe um nome formal com `defn`. Para esses casos, Clojure oferece as **funções anônimas**, também conhecidas como **lambdas**.
 
@@ -134,7 +134,7 @@ A forma `fn` permite criar uma função "na hora", sem associá-la a um símbolo
 
 Essa função anônima `(fn [valor-bruto] (> valor-bruto 100))` existe apenas como argumento para `valor-descontado` e é descartada em seguida.
 
-### 2.2. A Sintaxe Abreviada:
+### 3.2. A Sintaxe Abreviada: `#()`
 
 Para tornar as lambdas ainda mais concisas, Clojure oferece uma sintaxe abreviada `#()`, ideal para funções de uma única expressão. Dentro dela, os parâmetros são referenciados implicitamente:
 
@@ -172,7 +172,7 @@ Para operações simples, podemos usar **funções anônimas** com a sintaxe `#(
 
 ```
 
-### Compondo tudo com threading (`>>`)
+### Compondo tudo com threading (`->>`)
 
 Você pode encadear operações de forma elegante usando o operador `->>`:
 
@@ -207,7 +207,7 @@ A flexibilidade de criar funções rapidamente com lambdas nos leva ao próximo 
 
 A principal ferramenta para composição em Clojure é a HOF `comp`.
 
-### 3.1. Exemplo Prático: Criando a Função Oposta com `comp`
+### 4.1. Exemplo Prático: Criando a Função Oposta com `comp`
 
 Imagine que temos uma função chamada `gratuito?` que verifica se um item **não tem custo** — ou seja, retorna `true` se o item for gratuito, e `false` caso contrário.
 

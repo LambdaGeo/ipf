@@ -23,7 +23,7 @@ A programação funcional é mais do que um conjunto de técnicas; é uma maneir
 
 No coração do paradigma funcional está uma ideia simples, mas profunda. Como descrito em *Clojure in Action*, a programação funcional "trata a computação como a aplicação de funções matemáticas". Em um programa funcional, idealmente, não há estado que se altera arbitrariamente. Para um iniciante, isso significa que seu código se torna muito mais previsível. Uma função, quando chamada com os mesmos argumentos, sempre retornará o mesmo resultado, tornando o comportamento do programa mais fácil de entender e depurar.
 
-### 1.2. O Pilar da Imutabilidade
+### 1.3. O Pilar da Imutabilidade
 
 Em Clojure, a imutabilidade é a regra, não a exceção. Isso significa que as estruturas de dados principais, como vetores e mapas, "uma vez criadas, não podem ser alteradas" (*Clojure in Action*).
 
@@ -51,7 +51,7 @@ O **REPL** (Read-Eval-Print Loop ou Ciclo de Leitura-Avaliação-Impressão) é 
 
 Podemos usar o [https://tryclojure.org/](https://tryclojure.org/) como nossso REPL
 
-![image.png](Fundamentos%20em%20Clojure/image.png)
+![image.png](img-clojure-fundamentos/image.png)
 
 ### 2.1. Preparando o Ambiente de Desenvolvimento
 
@@ -85,7 +85,7 @@ Agora que você entende a estrutura básica de uma chamada de função, vamos ve
 
 Para escrever programas úteis, precisamos de uma forma de nomear valores e conceitos. Clojure nos oferece algumas ferramentas para isso, cada uma com um propósito específico.
 
-### 3.1. Nomes Globais com
+### 3.1. Nomes Globais com `def`
 
 A forma `def` é usada para criar nomes globais, chamados de "Vars". Esses nomes são definidos no nível mais alto do seu programa e são acessíveis de qualquer lugar. Use `def` para coisas que precisam ter um significado constante em todo o seu projeto.
 
@@ -94,7 +94,7 @@ A forma `def` é usada para criar nomes globais, chamados de "Vars". Esses nomes
 
 ```
 
-### 3.2. Nomes Locais com
+### 3.2. Nomes Locais com `let`
 
 A forma `let` é a maneira preferida e mais comum de criar nomes em Clojure. Diferente de `def`, `let` cria nomes com **escopo local**, o que significa que eles só existem dentro do bloco `let`.
 
@@ -131,7 +131,7 @@ Após aprender a nomear valores, o próximo passo lógico é aprender a nomear e
 
 As funções são os blocos de construção fundamentais de qualquer programa Clojure. É através delas que a lógica do seu programa toma forma.
 
-### 4.1. A Anatomia de uma Função com
+### 4.1. A Anatomia de uma Função com `defn`
 
 Usamos o macro `defn` para definir uma nova função. Sua estrutura básica é muito clara:
 
@@ -185,7 +185,7 @@ Com a capacidade de criar funções, precisamos agora de ferramentas para contro
 
 Podemos testar no onecompiler.com
 
-![image.png](Fundamentos%20em%20Clojure/image%201.png)
+![image.png](img-clojure-fundamentos/image%201.png)
 
 ## 5. Tomando Decisões no Código
 
@@ -218,7 +218,7 @@ Se `teste-condicional` for verdadeiro, ele avalia e retorna `expressao-se-verdad
 
 ```
 
-### 5.2. A Verdade em Clojure: e
+### 5.2. A Verdade em Clojure: `false` e `nil`
 
 O conceito de "verdade" (ou *truthiness*) em Clojure é extremamente simples e consistente. Como diz *Getting Clojure*:
 
@@ -444,7 +444,7 @@ Estes são os blocos de construção essenciais. Com essa base sólida, você es
 
 ## 8. Prática Guiada
 
-### 4.1. Exercício 1: Operações Simples com Símbolos
+### 8.1. Exercício 1: Operações Simples com Símbolos
 
 Vamos reforçar os conceitos de `def` e notação prefixa.
 
@@ -461,7 +461,7 @@ Vamos reforçar os conceitos de `def` e notação prefixa.
 
 ```
 
-### 4.2. Exercício 2: Função com Escopo Local
+### 8.2. Exercício 2: Função com Escopo Local
 
 Agora, vamos praticar a definição de funções com escopo local usando `defn` e `let`.
 

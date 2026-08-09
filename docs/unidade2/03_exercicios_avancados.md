@@ -53,7 +53,7 @@ Esta página contém exercícios de fixação sobre tipos algébricos de dados (
 
 ### **4. Pattern Matching**
 
-1. Reescreva a função `area` do exercício 8 usando **pattern matching**.
+1. Reescreva a função `area` do exercício 3.3 (tipo `Forma`) usando **pattern matching**.
 2. Escreva uma função `ehFimDeSemana :: DiaSemana -> Bool` usando pattern matching.
 3. Crie uma função `descricaoConta :: Conta -> String` que descreva a conta (`"Conta Corrente: R$..."` ou `"Conta Poupança: R$... com juros..."`).
 4. Escreva uma função `somaPontos :: Ponto -> Ponto -> Ponto` usando pattern matching em tuplas.
@@ -98,8 +98,6 @@ Esta página contém exercícios de fixação sobre tipos algébricos de dados (
 ---
 
 ## 📓 Lista 5: Entrada/Saída (IO) e Programação Interativa
-
-[https://profsergiocosta.notion.site/6-Programas-interativos-1d9441f881934142bba7ed420410e978](https://app.notion.com/p/6-Programas-interativos-1d9441f881934142bba7ed420410e978?pvs=21)
 
 ### Parte 1 – Fundamentos de IO
 
@@ -159,7 +157,7 @@ Esta página contém exercícios de fixação sobre tipos algébricos de dados (
 
 1. Escreva um programa que leia o conteúdo de um arquivo `"entrada.txt"` e imprima na tela.
 2. Crie uma função que copie o conteúdo de `"entrada.txt"` para `"saida.txt"`.
-3. Adapte o programa de remoção de stopwords (do exemplo) para que o nome dos arquivos de entrada e saída seja pedido ao usuário via teclado.
+3. Usando o padrão `interactWith` do capítulo de [Programas Interativos](02_programas_interativos.md), escreva uma função `removerStopwords :: String -> String` que remove de um texto as palavras "e", "de", "a" e "o" (uma por linha na saída), e adapte `interactWith` para que o nome dos arquivos de entrada e saída seja pedido ao usuário via teclado, em vez de vir da linha de comando.
 
 ---
 
