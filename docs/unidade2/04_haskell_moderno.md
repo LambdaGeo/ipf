@@ -2,7 +2,7 @@
 
 No desenvolvimento industrial de Haskell, não compilamos arquivos avulsos usando `ghc` manualmente como no ambiente acadêmico. Em vez disso, utilizamos ferramentas de build modernas que gerenciam dependências, garantem reprodutibilidade e automatizam compilações e testes.
 
-A ferramenta padrão da indústria hoje é o **Stack**.
+Neste livro, usaremos o **Stack** como ferramenta de build: ele resolve as dependências automaticamente por meio de *resolvers* do Stackage, o que o torna especialmente amigável para quem está aprendendo. Vale saber que, no ecossistema Haskell mais amplo, **Cabal** (hoje tipicamente usado junto do GHCup) é a outra escolha popular e é a recomendação oficial atual do haskell.org — os dois convivem na comunidade, e as habilidades aprendidas com Stack transferem-se diretamente para Cabal.
 
 ---
 

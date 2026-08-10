@@ -476,8 +476,6 @@ Vamos criar o módulo `ContaBancaria` (a versão final) dentro do projeto.
 Crie o arquivo `lib/conta_bancaria.ex`.
 *Note como `loop(novo_saldo)` vira `{:noreply, novo_saldo}`.*
 
-Elixir
-
 ```elixir
 defmodule ContaBancaria do
   # 1. Injeta o comportamento de GenServer (o loop invisível)
@@ -578,8 +576,6 @@ Imagine que você digitou errado o nome da função (escreveu `handle_cat` em ve
 
 Volte ao terminal (`recompile()`). Veja como a experiência de uso (Developer Experience) é superior.
 
-Elixir
-
 ```elixir
 # 1. Abrir conta
 {:ok, pid} = ContaBancaria.abrir_conta(1000)
@@ -669,8 +665,6 @@ Quando criamos o projeto com `mix new lab_concorrencia`, ele veio "pelado". Prec
 
 1. Crie o arquivo `lib/lab_concorrencia/application.ex`:
 
-Elixir
-
 ```elixir
 defmodule LabConcorrencia.Application do
   # Transforma este módulo em uma Application (ponto de partida do sistema)
@@ -737,8 +731,6 @@ Mas espere! No passo anterior, nós demos o nome criativo de `abrir_conta`.
 Vamos renomear nossa função de inicialização para seguir o padrão da indústria.
 
 Edite o arquivo `lib/conta_bancaria.ex`:
-
-Elixir
 
 ```elixir
 defmodule ContaBancaria do
@@ -865,8 +857,6 @@ Abra `lib/conta_bancaria.ex`. Vamos fazer apenas duas pequenas alterações:
 1. No `start_link`, vamos adicionar a opção `name`.
 2. Na API do cliente, vamos permitir chamar pelo nome.
 
-Elixir
-
 ```elixir
 defmodule ContaBancaria do
   use GenServer
@@ -983,8 +973,6 @@ end
 
 Olhe como é simples (sem callbacks complexos):
 
-Elixir
-
 ```elixir
 # 1. Iniciar com 50 mil reais
 Cofre.start_link(50_000)
@@ -1014,8 +1002,6 @@ A **Task** serve para jogar esse trabalho para um processo descartável secundá
 
 Crie o arquivo `lib/notificador.ex`:
 
-Elixir
-
 ```elixir
 defmodule Notificador do
   def enviar_email(cliente) do
@@ -1034,8 +1020,6 @@ end
 **Cenário A: O jeito travado (Sem Task)**
 Rode isso e veja seu terminal congelar:
 
-Elixir
-
 ```elixir
 Notificador.enviar_email("Joao")
 # ... (você não consegue digitar nada por 3 segundos) ...
@@ -1046,8 +1030,6 @@ Notificador.enviar_email("Joao")
 
 **Cenário B: O jeito fluido (Com Task)**
 Agora vamos usar `Task.start/1`.
-
-Elixir
 
 ```elixir
 Task.start(fn -> Notificador.enviar_email("Maria") end)

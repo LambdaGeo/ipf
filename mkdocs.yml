@@ -76,7 +76,7 @@ nav:
     - "Cap 5: Funções e Pattern Matching":         unidade1/05_funcoes.md
     - "Cap 6: Listas, Recursão e Compreensão":     unidade1/06_listas.md
     - "Cap 7: Funções de Alta Ordem":              unidade1/07_alta_ordem.md
-    - "Cap 8: Exercícios Resolvidos":              unidade1/08_exercicios.md
+    - "Cap 8: Lista de Exercícios":                unidade1/08_exercicios.md
 
   - Unidade 2 — Haskell Avançado e Qualidade (20h):
     - "Plano da Unidade 2":                        unidade2/00_plano_unidade2.md
@@ -98,7 +98,7 @@ nav:
     - "Cap 20: Clojure — Macros":                  unidade3/06_clojure_metaprogramacao.md
     - "Cap 21: Clojure — Interop com Java":        unidade3/07_clojure_interop.md
     - "Cap 22: Clojure — Revisão de Pilares":      unidade3/08_clojure_revisao.md
-    - "Cap 23: Clojure — Exercícios Resolvidos":   unidade3/09_clojure_exercicios.md
+    - "Cap 23: Clojure — Lista de Exercícios":     unidade3/09_clojure_exercicios.md
     - "Trabalho Clojure: ToDo Full-Stack":         unidade3/10_clojure_tutorial_todo.md
     - "Cap 24: Elixir — Fundamentos":              unidade3/11_elixir_fundamentos.md
     - "Cap 25: Elixir — Pattern Matching":         unidade3/12_elixir_colecoes_pattern_matching.md

@@ -7,8 +7,6 @@ Esta página contém todas as listas de exercícios práticos da Unidade 1, serv
 
 ## 📘 Lista 1: Funções Básicas e Recursão em Haskell
 
-Conteúdo: [https://profsergiocosta.notion.site/3-Fun-es-c7eaa942530f4ccbaadd0aed2f9ec13e](https://app.notion.com/p/3-Fun-es-c7eaa942530f4ccbaadd0aed2f9ec13e?pvs=21)
-
 ### 1. Funções básicas
 
 1. Defina uma função `quad` que receba um número e devolva o seu quadrado.

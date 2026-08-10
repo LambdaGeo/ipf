@@ -37,7 +37,7 @@ Essa abordagem de "dados como dados" é uma das grandes forças do Clojure, perm
 
 Agora que entendemos como estruturar dados complexos, vamos aprender as maneiras idiomáticas de acessar e modificar informações nesses mapas aninhados, sempre respeitando o princípio da imutabilidade.
 
-### 2.1. Acesso por Composição de Keywords
+### 3.1. Acesso por Composição de Keywords
 
 Como *keywords* em Clojure podem atuar como funções que procuram a si mesmas dentro de um mapa, podemos encadear essas chamadas de função para navegar em estruturas aninhadas.
 
@@ -52,7 +52,7 @@ Para acessar a média mensal do usuário `kyle`, lemos a expressão "de dentro p
 
 Embora seja uma abordagem direta, ela tem suas limitações. Fica verbosa para estruturas muito profundas e, mais importante, lançará um `NullPointerException` se qualquer nível intermediário no caminho não existir.
 
-### 2.2. Acesso e Atualização Seguros com e
+### 3.2. Acesso e Atualização Seguros com `get-in` e `update-in`
 
 Clojure fornece funções robustas e idiomáticas para lidar com estruturas profundas: `get-in` e `update-in`. Ambas utilizam um vetor de chaves que especifica o "caminho" até o valor desejado, tornando o código mais legível e seguro.
 
@@ -155,7 +155,7 @@ Considere este exemplo, que calcula o fatorial de 5. Para entendê-lo, você pre
 
 Clojure oferece as macros de threading (`->>` e `->`) para transformar esse código em um fluxo de operações linear e legível, de cima para baixo.
 
-### 4.1. A Macro Thread-Last ()
+### 5.1. A Macro Thread-Last (`->>`)
 
 A macro `->>` (lê-se "thread-last") pega o resultado de uma expressão e o insere como o **último** argumento da próxima expressão.
 
@@ -182,7 +182,7 @@ A versão com `->>` lê-se como um pipeline de transformações ou uma receita p
 
 **Caso de Uso Ideal:** A `->>` é perfeita para operações de coleções e sequências (`map`, `filter`, `reduce`), pois essas funções esperam a coleção como seu último argumento.
 
-### 4.2. A Macro Thread-First ()
+### 5.2. A Macro Thread-First (`->`)
 
 A macro `->` (lê-se "thread-first") é a contraparte da `->>`. Ela pega o resultado de cada expressão e o insere como o **primeiro** argumento da próxima.
 
@@ -214,7 +214,7 @@ Um mapa complexo é uma estrutura de dados (tipicamente um mapa) cujos valores s
 
 Primeiro, definimos a estrutura aninhada de um pedido:
 
-```
+```clojure
 (def pedido-exemplo
   {:cliente "Alice"
    :id-pedido 1234
@@ -229,7 +229,7 @@ Em Clojure, as *keywords* (palavras-chave) funcionam como funções, permitindo 
 
 Para obter a quantidade de mochilas no pedido:
 
-```
+```clojure
 ;; Acesso encadeado (navegando por camadas)
 (:quantidade (:mochila (:itens pedido-exemplo)))
 ;; => 2
@@ -240,7 +240,7 @@ Para obter a quantidade de mochilas no pedido:
 
 Como os dados são **imutáveis**, qualquer "alteração" resulta em um novo mapa. Para modificar valores em níveis mais profundos, utilizamos a função `update-in`:
 
-```
+```clojure
 ;; Aumenta a quantidade de mochilas em 1
 (def novo-pedido-exemplo
   (update-in pedido-exemplo [:itens :mochila :quantidade] inc))
@@ -253,17 +253,17 @@ Como os dados são **imutáveis**, qualquer "alteração" resulta em um novo map
 
 Aqui, `inc` é aplicado ao valor atual, e o resultado substitui o valor na estrutura, retornando um novo mapa.
 
-### Threading Macros: `>` e `>>`
+### Threading Macros: `->` e `->>`
 
 Os *threading macros* (ou macros de encadeamento) são essenciais para melhorar a legibilidade do código funcional em Clojure, permitindo que as transformações sejam lidas sequencialmente, de cima para baixo (como uma "pipeline"). Isso contrasta com a leitura "de dentro para fora" das expressões aninhadas.
 
-**`>` (Thread First)**
+**`->` (Thread First)**
 
 O macro `->` (Thread First) insere o resultado da expressão anterior como o **primeiro argumento** da próxima expressão. É útil para navegações e encadeamentos lineares, como acessos a estruturas de dados:
 
 **Tarefa:** Extrair a quantidade de certificados de um cliente em um mapa aninhado.
 
-```
+```clojure
 (def clientes-map {:15 {:nome "Guilherme"
                          :certificados ["Clojure" "Java"]}})
 
@@ -281,7 +281,7 @@ O macro `->` (Thread First) insere o resultado da expressão anterior como o **p
 
 A leitura de `->` (Thread First) imita a sintaxe de orientação a objetos (`objeto.metodo1().metodo2()`).
 
-**`>>` (Thread Last)**
+**`->>` (Thread Last)**
 
 O macro `->>` (Thread Last) insere o resultado da expressão anterior como o **último argumento** da próxima expressão. Isso o torna ideal para a tríade de funções de coleção (`map`, `filter`, `reduce`), onde a coleção processada é tradicionalmente o último argumento.
 
@@ -300,7 +300,7 @@ Ao iterar sobre um mapa, a função `map` retorna uma sequência de `MapEntry` (
     
     ```
     
-2. **Pipeline de Processamento (Usando `>>`):**
+2. **Pipeline de Processamento (Usando `->>`):**
 A função `total-do-pedido` pega o mapa de pedidos, extrai a sequência de itens, mapeia o preço de cada item e, finalmente, reduz essa sequência a um único valor (a soma).
     
     ```
@@ -327,7 +327,7 @@ Para este exemplo, assumimos que temos a função `todos-os-pedidos` que retorna
 
 A transformação completa, utilizando `->>` para encadear as etapas do processamento de dados:
 
-```
+```clojure
 ;; Estrutura de Mapas Complexos: Mapas de Pedidos (usando a convenção de namespace l.db)
 (->> (l.db/todos-os-pedidos) ; 1. Pega todos os pedidos (vetor de mapas)
      (group-by :usuario)      ; 2. Agrupa os pedidos pelo keyword :usuario, gerando um mapa (usuario-id -> [pedidos])
@@ -343,10 +343,10 @@ Este é um exemplo clássico de como o `->>` permite criar uma sequência de tra
 
 - **Mapas Complexos:** A estrutura de `pedido-exemplo` demonstra mapas aninhados.
 - **Acesso Profundo:** Uso de *keywords* como funções e `update-in`.
-- **Threading (`>` e `>>`):** O `>>` facilita a leitura de pipelines de processamento de coleções (`vals`, `map`, `reduce`).
+- **Threading (`->` e `->>`):** O `->>` facilita a leitura de pipelines de processamento de coleções (`vals`, `map`, `reduce`).
 - **Processamento de Mapas:** O uso de `vals` e a desestruturação `[_ item-detalhes]` lida com a iteração sobre `MapEntry` ao aplicar `map` a um mapa.
 
-### 7. Conclusão
+## 7. Conclusão
 
 Ao final desta exploração, você agora possui um conjunto de ferramentas poderoso e idiomático para trabalhar com dados complexos em Clojure. Você aprendeu a:
 

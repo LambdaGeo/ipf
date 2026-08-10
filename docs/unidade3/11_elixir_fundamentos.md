@@ -170,7 +170,7 @@ list = [1, 2, 3, 4]
 ```elixir
 person = {"João", 25, :engineer}
 elem(person, 0)  # "João"
-put_elem(person, 1, 26)  # {"João", 26, :engineer"}
+put_elem(person, 1, 26)  # {"João", 26, :engineer}
 
 ```
 
@@ -261,7 +261,7 @@ config[:host]  # "localhost"
 |> Enum.filter(&(&1 > 2))
 |> Enum.map(&(&1 * 2))
 |> Enum.sum()
-# 18
+# 24
 
 ```
 

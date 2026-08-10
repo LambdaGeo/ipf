@@ -240,7 +240,7 @@ Embora seja possível usar strings como chaves, a boa prática fundamental em Cl
 
 Acessando dados em mapas aninhados com get-in
 
-```sql
+```clojure
 (def usuario {:nome "João"
               :idade 30
               :endereco {:cidade "São Paulo"
@@ -520,7 +520,9 @@ Observações Didáticas
     
     ;; Aplicar 10% de desconto no segundo item (índice 1)
     (update precos 1 #(Math/round (* 0.9 %)))
-    ;; => [100 180 150]
+    ;; => [100.0 180 150.0]
+    ;; Atenção: Math/round converte apenas o elemento atualizado para long;
+    ;; os demais elementos permanecem Double, pois update só toca no índice indicado.
     
     ```
     
