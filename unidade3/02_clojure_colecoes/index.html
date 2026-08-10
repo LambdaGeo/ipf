@@ -24,7 +24,7 @@
       
       
       <link rel="icon" href="../../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
     
     
       
@@ -32,7 +32,7 @@
       
     
     
-      <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
+      <link rel="stylesheet" href="../../assets/stylesheets/main.ec1eaa64.min.css">
       
         
         <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
@@ -550,7 +550,7 @@
   <span class="md-ellipsis">
     
   
-    Cap 8: Exercícios Resolvidos
+    Cap 8: Lista de Exercícios
   
 
     
@@ -1428,7 +1428,7 @@
   <span class="md-ellipsis">
     
   
-    Cap 23: Clojure — Exercícios Resolvidos
+    Cap 23: Clojure — Lista de Exercícios
   
 
     
@@ -2039,14 +2039,14 @@
 <a id="__codelineno-14-17" name="__codelineno-14-17" href="#__codelineno-14-17"></a><span class="c1">;; =&gt; 0</span>
 </code></pre></div>
 <p>Acessando dados em mapas aninhados com get-in</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a><span class="p">(</span><span class="n">def</span><span class="w"> </span><span class="n">usuario</span><span class="w"> </span><span class="err">{</span><span class="p">:</span><span class="n">nome</span><span class="w"> </span><span class="ss">&quot;João&quot;</span>
-<a id="__codelineno-15-2" name="__codelineno-15-2" href="#__codelineno-15-2"></a><span class="w">              </span><span class="p">:</span><span class="n">idade</span><span class="w"> </span><span class="mi">30</span>
-<a id="__codelineno-15-3" name="__codelineno-15-3" href="#__codelineno-15-3"></a><span class="w">              </span><span class="p">:</span><span class="n">endereco</span><span class="w"> </span><span class="err">{</span><span class="p">:</span><span class="n">cidade</span><span class="w"> </span><span class="ss">&quot;São Paulo&quot;</span>
-<a id="__codelineno-15-4" name="__codelineno-15-4" href="#__codelineno-15-4"></a><span class="w">                         </span><span class="p">:</span><span class="n">cep</span><span class="w"> </span><span class="ss">&quot;01000-000&quot;</span><span class="err">}}</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a><span class="p">(</span><span class="k">def </span><span class="nv">usuario</span><span class="w"> </span><span class="p">{</span><span class="ss">:nome</span><span class="w"> </span><span class="s">&quot;João&quot;</span>
+<a id="__codelineno-15-2" name="__codelineno-15-2" href="#__codelineno-15-2"></a><span class="w">              </span><span class="ss">:idade</span><span class="w"> </span><span class="mi">30</span>
+<a id="__codelineno-15-3" name="__codelineno-15-3" href="#__codelineno-15-3"></a><span class="w">              </span><span class="ss">:endereco</span><span class="w"> </span><span class="p">{</span><span class="ss">:cidade</span><span class="w"> </span><span class="s">&quot;São Paulo&quot;</span>
+<a id="__codelineno-15-4" name="__codelineno-15-4" href="#__codelineno-15-4"></a><span class="w">                         </span><span class="ss">:cep</span><span class="w"> </span><span class="s">&quot;01000-000&quot;</span><span class="p">}})</span>
 <a id="__codelineno-15-5" name="__codelineno-15-5" href="#__codelineno-15-5"></a>
-<a id="__codelineno-15-6" name="__codelineno-15-6" href="#__codelineno-15-6"></a><span class="p">;;</span><span class="w"> </span><span class="n">Acessando</span><span class="w"> </span><span class="n">o</span><span class="w"> </span><span class="n">CEP</span>
-<a id="__codelineno-15-7" name="__codelineno-15-7" href="#__codelineno-15-7"></a><span class="p">(</span><span class="k">get</span><span class="o">-</span><span class="k">in</span><span class="w"> </span><span class="n">usuario</span><span class="w"> </span><span class="p">[:</span><span class="n">endereco</span><span class="w"> </span><span class="p">:</span><span class="n">cep</span><span class="p">])</span>
-<a id="__codelineno-15-8" name="__codelineno-15-8" href="#__codelineno-15-8"></a><span class="p">;;</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="ss">&quot;01000-000&quot;</span>
+<a id="__codelineno-15-6" name="__codelineno-15-6" href="#__codelineno-15-6"></a><span class="c1">;; Acessando o CEP</span>
+<a id="__codelineno-15-7" name="__codelineno-15-7" href="#__codelineno-15-7"></a><span class="p">(</span><span class="nf">get-in</span><span class="w"> </span><span class="nv">usuario</span><span class="w"> </span><span class="p">[</span><span class="ss">:endereco</span><span class="w"> </span><span class="ss">:cep</span><span class="p">])</span>
+<a id="__codelineno-15-8" name="__codelineno-15-8" href="#__codelineno-15-8"></a><span class="c1">;; =&gt; &quot;01000-000&quot;</span>
 </code></pre></div>
 <div class="admonition tip">
 <p class="admonition-title">Tip</p>
@@ -2225,7 +2225,9 @@
 <a id="__codelineno-32-2" name="__codelineno-32-2" href="#__codelineno-32-2"></a>
 <a id="__codelineno-32-3" name="__codelineno-32-3" href="#__codelineno-32-3"></a><span class="c1">;; Aplicar 10% de desconto no segundo item (índice 1)</span>
 <a id="__codelineno-32-4" name="__codelineno-32-4" href="#__codelineno-32-4"></a><span class="p">(</span><span class="nf">update</span><span class="w"> </span><span class="nv">precos</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="o">#</span><span class="p">(</span><span class="nf">Math/round</span><span class="w"> </span><span class="p">(</span><span class="nb">* </span><span class="mf">0.9</span><span class="w"> </span><span class="nv">%</span><span class="p">)))</span>
-<a id="__codelineno-32-5" name="__codelineno-32-5" href="#__codelineno-32-5"></a><span class="c1">;; =&gt; [100 180 150]</span>
+<a id="__codelineno-32-5" name="__codelineno-32-5" href="#__codelineno-32-5"></a><span class="c1">;; =&gt; [100.0 180 150.0]</span>
+<a id="__codelineno-32-6" name="__codelineno-32-6" href="#__codelineno-32-6"></a><span class="c1">;; Atenção: Math/round converte apenas o elemento atualizado para long;</span>
+<a id="__codelineno-32-7" name="__codelineno-32-7" href="#__codelineno-32-7"></a><span class="c1">;; os demais elementos permanecem Double, pois update só toca no índice indicado.</span>
 </code></pre></div>
 <hr />
 <ol>
@@ -2327,7 +2329,7 @@
       <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.instant", "navigation.tracking", "navigation.sections", "navigation.expand", "navigation.top", "search.highlight", "search.share", "content.code.annotate", "content.code.copy", "content.tabs.link", "content.tooltips", "toc.follow"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copiado para \u00e1rea de transfer\u00eancia", "clipboard.copy": "Copiar para \u00e1rea de transfer\u00eancia", "search.result.more.one": "Mais 1 nesta p\u00e1gina", "search.result.more.other": "Mais # nesta p\u00e1gina", "search.result.none": "Nenhum resultado encontrado", "search.result.one": "1 resultado encontrado", "search.result.other": "# resultados encontrados", "search.result.placeholder": "Digite para iniciar a busca", "search.result.term.missing": "Ausente", "select.version": "Selecione a vers\u00e3o"}, "version": null}</script>
     
     
-      <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      <script src="../../assets/javascripts/bundle.d7400e89.min.js"></script>
       
         <script src="https://unpkg.com/mathjax@3/es5/tex-mml-chtml.js"></script>
       

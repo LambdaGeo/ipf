@@ -24,7 +24,7 @@
       
       
       <link rel="icon" href="../../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
     
     
       
@@ -32,7 +32,7 @@
       
     
     
-      <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
+      <link rel="stylesheet" href="../../assets/stylesheets/main.ec1eaa64.min.css">
       
         
         <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
@@ -550,7 +550,7 @@
   <span class="md-ellipsis">
     
   
-    Cap 8: Exercícios Resolvidos
+    Cap 8: Lista de Exercícios
   
 
     
@@ -1094,6 +1094,24 @@
         
       
       
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cap 20: Clojure — Macros
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
       <a href="./" class="md-nav__link md-nav__link--active">
         
   
@@ -1110,6 +1128,275 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Índice">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Índice
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1-introducao-a-filosofia-lisp-em-clojure" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Introdução: A Filosofia Lisp em Clojure
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1. Introdução: A Filosofia Lisp em Clojure">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#11-o-principio-fundamental-codigo-como-dados-homoiconicidade" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.1. O Princípio Fundamental: Código como Dados (Homoiconicidade)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#12-o-processo-de-avaliacao-do-clojure" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.2. O Processo de Avaliação do Clojure
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-o-que-e-uma-macro" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. O Que é uma Macro?
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. O Que é uma Macro?">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21-a-diferenca-crucial-funcoes-vs-macros" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.1. A Diferença Crucial: Funções vs. Macros
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#22-a-primeira-macro-defmacro" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.2. A Primeira Macro: defmacro
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-construindo-macros-ferramentas-e-tecnicas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Construindo Macros: Ferramentas e Técnicas
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. Construindo Macros: Ferramentas e Técnicas">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#31-a-forma-idiomatica-syntax-quote" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.1. A Forma Idiomática: Syntax Quote (`)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#32-inserindo-valores-unquote" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.2. Inserindo Valores: Unquote (~)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#33-injetando-sequencias-unquote-splicing" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.3. Injetando Sequências: Unquote Splicing (~@)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-padroes-de-uso-e-exemplos-praticos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Padrões de Uso e Exemplos Práticos
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4. Padrões de Uso e Exemplos Práticos">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#41-criando-novas-estruturas-de-controle" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.1. Criando Novas Estruturas de Controle
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#42-eliminando-codigo-repetitivo-boilerplate" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.2. Eliminando Código Repetitivo (Boilerplate)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-armadilhas-comuns-e-boas-praticas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Armadilhas Comuns e Boas Práticas
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5. Armadilhas Comuns e Boas Práticas">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#51-o-perigo-da-captura-de-variaveis-higiene" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.1. O Perigo da Captura de Variáveis (Higiene)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#52-a-solucao-gensym-e-auto-gensym" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.2. A Solução: gensym e Auto-gensym (#)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#53-depurando-macros-com-macroexpand-1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.3. Depurando Macros com macroexpand-1
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-topico-relacionado-macros-de-leitura-reader-macros" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. Tópico Relacionado: Macros de Leitura (Reader Macros)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-conclusao-o-poder-de-estender-a-linguagem" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. Conclusão: O Poder de Estender a Linguagem
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#veja-mais" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Veja Mais
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
       
     </li>
   
@@ -1186,7 +1473,7 @@
   <span class="md-ellipsis">
     
   
-    Cap 23: Clojure — Exercícios Resolvidos
+    Cap 23: Clojure — Lista de Exercícios
   
 
     
@@ -1423,6 +1710,264 @@
     
   
   
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Índice
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1-introducao-a-filosofia-lisp-em-clojure" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Introdução: A Filosofia Lisp em Clojure
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1. Introdução: A Filosofia Lisp em Clojure">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#11-o-principio-fundamental-codigo-como-dados-homoiconicidade" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.1. O Princípio Fundamental: Código como Dados (Homoiconicidade)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#12-o-processo-de-avaliacao-do-clojure" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.2. O Processo de Avaliação do Clojure
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-o-que-e-uma-macro" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. O Que é uma Macro?
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. O Que é uma Macro?">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21-a-diferenca-crucial-funcoes-vs-macros" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.1. A Diferença Crucial: Funções vs. Macros
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#22-a-primeira-macro-defmacro" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.2. A Primeira Macro: defmacro
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-construindo-macros-ferramentas-e-tecnicas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Construindo Macros: Ferramentas e Técnicas
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. Construindo Macros: Ferramentas e Técnicas">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#31-a-forma-idiomatica-syntax-quote" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.1. A Forma Idiomática: Syntax Quote (`)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#32-inserindo-valores-unquote" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.2. Inserindo Valores: Unquote (~)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#33-injetando-sequencias-unquote-splicing" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.3. Injetando Sequências: Unquote Splicing (~@)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-padroes-de-uso-e-exemplos-praticos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Padrões de Uso e Exemplos Práticos
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4. Padrões de Uso e Exemplos Práticos">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#41-criando-novas-estruturas-de-controle" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.1. Criando Novas Estruturas de Controle
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#42-eliminando-codigo-repetitivo-boilerplate" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.2. Eliminando Código Repetitivo (Boilerplate)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-armadilhas-comuns-e-boas-praticas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Armadilhas Comuns e Boas Práticas
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5. Armadilhas Comuns e Boas Práticas">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#51-o-perigo-da-captura-de-variaveis-higiene" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.1. O Perigo da Captura de Variáveis (Higiene)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#52-a-solucao-gensym-e-auto-gensym" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.2. A Solução: gensym e Auto-gensym (#)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#53-depurando-macros-com-macroexpand-1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.3. Depurando Macros com macroexpand-1
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-topico-relacionado-macros-de-leitura-reader-macros" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. Tópico Relacionado: Macros de Leitura (Reader Macros)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-conclusao-o-poder-de-estender-a-linguagem" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. Conclusão: O Poder de Estender a Linguagem
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#veja-mais" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Veja Mais
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
 </nav>
                   </div>
                 </div>
@@ -1439,7 +1984,7 @@
 
 
 <h1 id="metaprogramacao-e-macros-em-clojure">Metaprogramação e Macros em Clojure<a class="headerlink" href="#metaprogramacao-e-macros-em-clojure" title="Permanent link">&para;</a></h1>
-<h1 id="1-introducao-a-filosofia-lisp-em-clojure">1. Introdução: A Filosofia Lisp em Clojure<a class="headerlink" href="#1-introducao-a-filosofia-lisp-em-clojure" title="Permanent link">&para;</a></h1>
+<h2 id="1-introducao-a-filosofia-lisp-em-clojure">1. Introdução: A Filosofia Lisp em Clojure<a class="headerlink" href="#1-introducao-a-filosofia-lisp-em-clojure" title="Permanent link">&para;</a></h2>
 <p>Bem-vindos à nossa aula sobre metaprogramação e macros em Clojure. Este não é apenas um tópico avançado; é a essência do que torna as linguagens da família Lisp, como o Clojure, tão singulares e poderosas. Frequentemente, você ouvirá a expressão "a linguagem de programação programável" para descrever o Lisp. Hoje, vamos desvendar o que isso significa na prática, explorando como o Clojure nos permite não apenas escrever programas, mas também moldar e estender a própria linguagem.</p>
 <div class="admonition tip">
 <p class="admonition-title">Metaprogramação além do Clojure</p>
@@ -1450,7 +1995,7 @@
 </ul>
 <p>No entanto, o que diferencia o Clojure (e o Lisp de forma geral) é a <strong>integração profunda e natural entre código e dados</strong> — uma característica que torna a construção de macros <strong>mais transparente, poderosa e idiomática</strong> do que em quase qualquer outra linguagem.</p>
 </div>
-<h2 id="11-o-principio-fundamental-codigo-como-dados-homoiconicidade">1.1. O Princípio Fundamental: Código como Dados (Homoiconicidade)<a class="headerlink" href="#11-o-principio-fundamental-codigo-como-dados-homoiconicidade" title="Permanent link">&para;</a></h2>
+<h3 id="11-o-principio-fundamental-codigo-como-dados-homoiconicidade">1.1. O Princípio Fundamental: Código como Dados (Homoiconicidade)<a class="headerlink" href="#11-o-principio-fundamental-codigo-como-dados-homoiconicidade" title="Permanent link">&para;</a></h3>
 <p>O conceito central que possibilita tudo o que faremos hoje é a <strong>homoiconicidade</strong>. Este termo, que soa complexo, descreve uma ideia elegantemente simples: o código-fonte em Clojure não é apenas um texto que um compilador precisa analisar; ele é escrito diretamente com as próprias estruturas de dados da linguagem.</p>
 <p>Vamos analisar uma expressão fundamental em Clojure:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="p">(</span><span class="nb">+ </span><span class="mi">1</span><span class="w"> </span><span class="mi">2</span><span class="p">)</span>
@@ -1470,9 +2015,9 @@
 <li><strong>Avaliação (Evaluate):</strong> O avaliador do Clojure pega a estrutura de dados final (pós-expansão de macros) e a executa. No caso de uma lista como <code>(+ 1 2)</code>, ele identifica o primeiro elemento (<code>+</code>) como uma função e a aplica aos argumentos restantes (<code>1</code> e <code>2</code>), retornando o valor <code>3</code>.</li>
 </ol>
 <p>É nesta segunda fase, a de expansão, que as macros operam, dando-nos o poder de reescrever o código antes mesmo que ele seja avaliado.</p>
-<h1 id="2-o-que-e-uma-macro">2. O Que é uma Macro?<a class="headerlink" href="#2-o-que-e-uma-macro" title="Permanent link">&para;</a></h1>
+<h2 id="2-o-que-e-uma-macro">2. O Que é uma Macro?<a class="headerlink" href="#2-o-que-e-uma-macro" title="Permanent link">&para;</a></h2>
 <p>Formalmente, uma macro é uma função especial que é executada durante a fase de compilação (expansão). Ela recebe código como seus argumentos — na forma de estruturas de dados do Clojure — e seu trabalho é retornar uma nova estrutura de dados de código. Esta nova estrutura é então substituída no lugar da chamada original da macro e, finalmente, avaliada pelo Clojure.</p>
-<h2 id="21-a-diferenca-crucial-funcoes-vs-macros">2.1. A Diferença Crucial: Funções vs. Macros<a class="headerlink" href="#21-a-diferenca-crucial-funcoes-vs-macros" title="Permanent link">&para;</a></h2>
+<h3 id="21-a-diferenca-crucial-funcoes-vs-macros">2.1. A Diferença Crucial: Funções vs. Macros<a class="headerlink" href="#21-a-diferenca-crucial-funcoes-vs-macros" title="Permanent link">&para;</a></h3>
 <p>A distinção mais importante que um programador Clojure deve internalizar é a diferença entre uma função e uma macro. Embora a sintaxe para defini-las seja semelhante, seu comportamento é fundamentalmente distinto.</p>
 <table>
 <thead>
@@ -1510,7 +2055,7 @@
 <a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="p">(</span><span class="nf">minha-macro</span><span class="w"> </span><span class="p">(</span><span class="nb">/ </span><span class="mi">1</span><span class="w"> </span><span class="mi">0</span><span class="p">))</span>
 </code></pre></div>
 <p>A <code>minha-macro</code> não recebe o <em>resultado</em> da divisão. Ela recebe a própria estrutura de dados, a lista <code>(/ 1 0)</code>. A macro pode então analisar essa lista, transformá-la ou simplesmente ignorá-la. A avaliação só ocorrerá no código que a macro <em>retornar</em>. Essa "não avaliação" dos argumentos é o superpoder das macros.</p>
-<h2 id="22-a-primeira-macro">2.2. A Primeira Macro:<a class="headerlink" href="#22-a-primeira-macro" title="Permanent link">&para;</a></h2>
+<h3 id="22-a-primeira-macro-defmacro">2.2. A Primeira Macro: <code>defmacro</code><a class="headerlink" href="#22-a-primeira-macro-defmacro" title="Permanent link">&para;</a></h3>
 <p>Para definir uma macro, usamos <code>defmacro</code>, que tem uma sintaxe muito parecida com <code>defn</code>. Vamos criar uma macro didática que nos permite escrever expressões matemáticas com notação infixa, como <code>(1 + 2)</code>, e as transforma na notação prefixa que o Clojure entende, <code>(+ 1 2)</code>.</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="p">(</span><span class="kd">defmacro </span><span class="nv">infix</span><span class="w"> </span><span class="p">[</span><span class="nv">form</span><span class="p">]</span>
 <a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="w">  </span><span class="p">(</span><span class="nb">list </span><span class="p">(</span><span class="nb">second </span><span class="nv">form</span><span class="p">)</span><span class="w"> </span><span class="p">(</span><span class="nb">first </span><span class="nv">form</span><span class="p">)</span><span class="w"> </span><span class="p">(</span><span class="nb">last </span><span class="nv">form</span><span class="p">)))</span>
@@ -1529,9 +2074,9 @@
 <li>O Clojure substitui a chamada original <code>(infix (1 + 2))</code> pelo código retornado <code>(+ 1 2)</code>.</li>
 <li>Finalmente, o avaliador executa <code>(+ 1 2)</code> e obtém <code>3</code>.</li>
 </ol>
-<h1 id="3-construindo-macros-ferramentas-e-tecnicas">3. Construindo Macros: Ferramentas e Técnicas<a class="headerlink" href="#3-construindo-macros-ferramentas-e-tecnicas" title="Permanent link">&para;</a></h1>
+<h2 id="3-construindo-macros-ferramentas-e-tecnicas">3. Construindo Macros: Ferramentas e Técnicas<a class="headerlink" href="#3-construindo-macros-ferramentas-e-tecnicas" title="Permanent link">&para;</a></h2>
 <p>Manipular código manualmente usando funções como <code>list</code>, <code>first</code> e <code>second</code> funciona para exemplos simples, mas pode se tornar verboso e propenso a erros rapidamente. Felizmente, o Clojure oferece um conjunto de ferramentas idiomáticas, centradas na <em>syntax quote</em>, para construir código dentro de macros de forma muito mais clara e concisa.</p>
-<h2 id="31-a-forma-idiomatica-syntax-quote">3.1. A Forma Idiomática: Syntax Quote (`)<a class="headerlink" href="#31-a-forma-idiomatica-syntax-quote" title="Permanent link">&para;</a></h2>
+<h3 id="31-a-forma-idiomatica-syntax-quote">3.1. A Forma Idiomática: Syntax Quote (`)<a class="headerlink" href="#31-a-forma-idiomatica-syntax-quote" title="Permanent link">&para;</a></h3>
 <p>O <strong>acento grave</strong> ( ``` ), também chamado de <strong>backquote</strong>, permite criar um <strong>template de código</strong> em Clojure.</p>
 <p>Em vez de construir uma lista manualmente com <code>list</code>, <code>cons</code> ou concatenação de símbolos, você pode simplesmente <strong>escrever o código como ele deve parecer</strong>, e prefixá-lo com o <strong>acento grave</strong>.</p>
 <p>Isso é especialmente útil em <strong>macros</strong>, onde queremos gerar expressões Clojure como dados.</p>
@@ -1540,7 +2085,7 @@
 <a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="c1">;; =&gt; (clojure.core/+ 1 2)</span>
 </code></pre></div>
 <p>Observe que a <code>syntax-quote</code> é inteligente: ela qualifica os símbolos com seus namespaces (<code>clojure.core/+</code>) para evitar ambiguidades. Isso torna o código gerado mais robusto.</p>
-<h2 id="32-inserindo-valores-unquote">3.2. Inserindo Valores: Unquote (~)<a class="headerlink" href="#32-inserindo-valores-unquote" title="Permanent link">&para;</a></h2>
+<h3 id="32-inserindo-valores-unquote">3.2. Inserindo Valores: Unquote (~)<a class="headerlink" href="#32-inserindo-valores-unquote" title="Permanent link">&para;</a></h3>
 <p>A <em>syntax quote</em> cria um template literal. Mas e se quisermos injetar um valor de uma variável ou o resultado de uma expressão dentro desse template? Para isso, usamos o til (<code>~</code>), ou <em>unquote</em>. O <em>unquote</em> nos permite "escapar" temporariamente do template para avaliar uma expressão e inserir seu resultado.</p>
 <p>Vamos reescrever nossa macro <code>infix</code> de forma muito mais legível:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="p">(</span><span class="kd">defmacro </span><span class="nv">infix</span><span class="w"> </span><span class="p">[</span><span class="nv">form</span><span class="p">]</span>
@@ -1553,7 +2098,7 @@
 <a id="__codelineno-5-8" name="__codelineno-5-8" href="#__codelineno-5-8"></a><span class="c1">;; =&gt; 50</span>
 </code></pre></div>
 <p>Este código é muito mais fácil de ler porque a estrutura da macro se assemelha muito mais à estrutura do código que ela gera.</p>
-<h2 id="33-injetando-sequencias-unquote-splicing">3.3. Injetando Sequências: Unquote Splicing (~@)<a class="headerlink" href="#33-injetando-sequencias-unquote-splicing" title="Permanent link">&para;</a></h2>
+<h3 id="33-injetando-sequencias-unquote-splicing">3.3. Injetando Sequências: Unquote Splicing (~@)<a class="headerlink" href="#33-injetando-sequencias-unquote-splicing" title="Permanent link">&para;</a></h3>
 <p>O que acontece se quisermos injetar os <em>elementos</em> de uma lista dentro do nosso template, em vez da lista inteira? Se usarmos <code>~</code>, a lista será inserida como um único item. Para "desempacotar" ou "espalhar" os elementos de uma sequência, usamos o <em>unquote splicing</em>, representado por til-arroba (<code>~@</code>).</p>
 <p>Um exemplo clássico é a implementação da macro <code>unless</code>, que pode ter um corpo com múltiplas expressões. Queremos que essas expressões sejam agrupadas dentro de um bloco <code>(do ...)</code> no código gerado.</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="p">(</span><span class="kd">defmacro </span><span class="nv">unless</span><span class="w"> </span><span class="p">[</span><span class="nb">test </span><span class="o">&amp;</span><span class="w"> </span><span class="nv">exprs</span><span class="p">]</span><span class="w"> </span><span class="c1">; O &#39;&amp;&#39; coleta todas as expressões do corpo em uma lista &#39;exprs&#39;</span>
@@ -1565,9 +2110,9 @@
 <li>Usar <code>(do ~exprs)</code> geraria <code>(do ((println "Olá") (println "Mundo")))</code>, o que é um código inválido.</li>
 <li>Usar <code>(do ~@exprs)</code> gera <code>(do (println "Olá") (println "Mundo"))</code>, que é exatamente o que queremos.</li>
 </ul>
-<h1 id="4-padroes-de-uso-e-exemplos-praticos">4. Padrões de Uso e Exemplos Práticos<a class="headerlink" href="#4-padroes-de-uso-e-exemplos-praticos" title="Permanent link">&para;</a></h1>
+<h2 id="4-padroes-de-uso-e-exemplos-praticos">4. Padrões de Uso e Exemplos Práticos<a class="headerlink" href="#4-padroes-de-uso-e-exemplos-praticos" title="Permanent link">&para;</a></h2>
 <p>As macros não são apenas curiosidades acadêmicas; elas são usadas em todo o ecossistema Clojure para estender a linguagem, criar DSLs (Domain-Specific Languages), reduzir código repetitivo (boilerplate) e até mesmo para otimizações de performance, movendo cálculos de tempo de execução para tempo de compilação.</p>
-<h2 id="41-criando-novas-estruturas-de-controle">4.1. Criando Novas Estruturas de Controle<a class="headerlink" href="#41-criando-novas-estruturas-de-controle" title="Permanent link">&para;</a></h2>
+<h3 id="41-criando-novas-estruturas-de-controle">4.1. Criando Novas Estruturas de Controle<a class="headerlink" href="#41-criando-novas-estruturas-de-controle" title="Permanent link">&para;</a></h3>
 <p>Muitas estruturas de controle que parecem nativas em Clojure, como <code>when</code> ou <code>cond</code>, são na verdade macros. Vamos implementar <code>unless</code>, que é uma estrutura comum em linguagens como Ruby. A forma geral é <code>(unless teste ...corpo...)</code>, que executa o corpo somente se o teste for falso.</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="c1">;; Definição completa da macro &#39;unless&#39;</span>
 <a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="p">(</span><span class="kd">defmacro </span><span class="nv">unless</span><span class="w"> </span><span class="p">[</span><span class="nb">test </span><span class="o">&amp;</span><span class="w"> </span><span class="nv">body</span><span class="p">]</span>
@@ -1581,7 +2126,7 @@
 <a id="__codelineno-7-10" name="__codelineno-7-10" href="#__codelineno-7-10"></a><span class="w">    </span><span class="p">(</span><span class="nb">println </span><span class="s">&quot;Melhor levar um casaco.&quot;</span><span class="p">)))</span>
 </code></pre></div>
 <p>Isso demonstra a filosofia Lisp em sua plenitude. Muitas estruturas que parecem ser parte do núcleo da linguagem, como <code>when</code>, são na verdade macros. Se inspecionarmos sua expansão, vemos a transformação em ação: <code>(macroexpand-1 '(when true (println "ok")))</code> resulta em <code>(if true (do (println "ok")))</code>. O que parece uma funcionalidade nativa é apenas uma abstração inteligente, construída com as mesmas ferramentas que estamos aprendendo, materializando a ideia da "linguagem de programação programável".</p>
-<h2 id="42-eliminando-codigo-repetitivo-boilerplate">4.2. Eliminando Código Repetitivo (Boilerplate)<a class="headerlink" href="#42-eliminando-codigo-repetitivo-boilerplate" title="Permanent link">&para;</a></h2>
+<h3 id="42-eliminando-codigo-repetitivo-boilerplate">4.2. Eliminando Código Repetitivo (Boilerplate)<a class="headerlink" href="#42-eliminando-codigo-repetitivo-boilerplate" title="Permanent link">&para;</a></h3>
 <p>Macros são excelentes para abstrair padrões de código que se repetem. Imagine que, em seus testes, você frequentemente escreve o seguinte padrão para verificar uma condição e lançar um erro detalhado:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="c1">;; Antes: Código repetitivo</span>
 <a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a><span class="p">(</span><span class="nb">if-not </span><span class="p">(</span><span class="nf">alguma-condicao-complexa</span><span class="p">)</span>
@@ -1602,9 +2147,9 @@
 <a id="__codelineno-9-12" name="__codelineno-9-12" href="#__codelineno-9-12"></a><span class="c1">;; Lança: java.lang.RuntimeException: Assertiva falhou: (&lt; 1 0)</span>
 </code></pre></div>
 <p>A macro não apenas torna o código mais curto, mas também melhora a mensagem de erro. Note o uso de <code>'~expr</code>. Dentro de uma syntax quote, esta forma insere a expressão original, <code>expr</code>, de forma literal (quoted), permitindo que a mensagem de erro mostre exatamente o código que falhou — algo que uma função jamais conseguiria fazer.</p>
-<h1 id="5-armadilhas-comuns-e-boas-praticas">5. Armadilhas Comuns e Boas Práticas<a class="headerlink" href="#5-armadilhas-comuns-e-boas-praticas" title="Permanent link">&para;</a></h1>
+<h2 id="5-armadilhas-comuns-e-boas-praticas">5. Armadilhas Comuns e Boas Práticas<a class="headerlink" href="#5-armadilhas-comuns-e-boas-praticas" title="Permanent link">&para;</a></h2>
 <p>Com grande poder vem grande responsabilidade. A metaprogramação é uma ferramenta poderosa, mas que introduz uma nova camada de complexidade. É fundamental estar ciente das armadilhas comuns para escrever macros que sejam robustas, previsíveis e que não causem surpresas desagradáveis para seus usuários.</p>
-<h2 id="51-o-perigo-da-captura-de-variaveis-higiene">5.1. O Perigo da Captura de Variáveis (Higiene)<a class="headerlink" href="#51-o-perigo-da-captura-de-variaveis-higiene" title="Permanent link">&para;</a></h2>
+<h3 id="51-o-perigo-da-captura-de-variaveis-higiene">5.1. O Perigo da Captura de Variáveis (Higiene)<a class="headerlink" href="#51-o-perigo-da-captura-de-variaveis-higiene" title="Permanent link">&para;</a></h3>
 <p>Um dos problemas mais sutis em macros é a <strong>captura de variável</strong> (<em>variable capture</em>). Isso ocorre quando um símbolo introduzido pela macro acidentalmente colide com um símbolo no código que é passado para a macro. Macros que não levam isso em conta são chamadas de "não higiênicas".</p>
 <p>Considere esta macro, que cria uma ligação para o símbolo <code>x</code>:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="c1">;; Macro NÃO higiênica que &quot;captura&quot; o símbolo `x`</span>
@@ -1618,7 +2163,7 @@
 <a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a><span class="w">    </span><span class="p">(</span><span class="nb">println </span><span class="s">&quot;O valor de x é:&quot;</span><span class="w"> </span><span class="nv">x</span><span class="p">)))</span>
 </code></pre></div>
 <p>O programador que utiliza a macro espera que o código imprima "O valor de x é: sou o x de fora". No entanto, a macro expande para <code>(let [x "sou o x de fora"] (let [x 10] (println "O valor de x é:" x)))</code>. Como o <code>let</code> interno da macro também usa o símbolo <code>x</code>, ele "captura" a variável <code>x</code> usada no <code>println</code>, fazendo com que o programa imprima, inesperadamente, "O valor de x é: 10". Este é o verdadeiro perigo da captura de variáveis.</p>
-<h2 id="52-a-solucao-e-auto-gensym">5.2. A Solução: e Auto-gensym ()<a class="headerlink" href="#52-a-solucao-e-auto-gensym" title="Permanent link">&para;</a></h2>
+<h3 id="52-a-solucao-gensym-e-auto-gensym">5.2. A Solução: <code>gensym</code> e Auto-gensym (<code>#</code>)<a class="headerlink" href="#52-a-solucao-gensym-e-auto-gensym" title="Permanent link">&para;</a></h3>
 <p>Para evitar a captura de variáveis, precisamos garantir que os símbolos que criamos dentro de nossas macros sejam únicos.</p>
 <ol>
 <li><strong><code>gensym</code></strong>: A função <code>(gensym)</code> gera um símbolo único a cada chamada (ex: <code>G__1234</code>). Podemos usá-la para criar nomes de variáveis seguros dentro de uma macro.</li>
@@ -1636,7 +2181,7 @@
 <a id="__codelineno-12-9" name="__codelineno-12-9" href="#__codelineno-12-9"></a><span class="c1">;; Imprime: &quot;O valor de x é: sou o x de fora&quot;</span>
 </code></pre></div>
 <p>O código expandido agora se parece com <code>(let [x__123__auto__ 10] (println "O valor de x é:" x))</code>. O <code>x</code> externo não é mais capturado, e a macro se comporta como o usuário esperava.</p>
-<h2 id="53-depurando-macros-com">5.3. Depurando Macros com<a class="headerlink" href="#53-depurando-macros-com" title="Permanent link">&para;</a></h2>
+<h3 id="53-depurando-macros-com-macroexpand-1">5.3. Depurando Macros com <code>macroexpand-1</code><a class="headerlink" href="#53-depurando-macros-com-macroexpand-1" title="Permanent link">&para;</a></h3>
 <p>Como uma macro transforma seu código antes da avaliação, a depuração pode ser desafiadora. A ferramenta mais importante em seu arsenal é <code>macroexpand-1</code>. Esta função recebe uma chamada de macro (entre aspas) e mostra exatamente qual código ela gera após um único passo de expansão. Isso permite que você inspecione a saída da sua macro e verifique se ela está correta, sem precisar executá-la.</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a><span class="p">(</span><span class="nb">macroexpand-1 </span><span class="o">&#39;</span><span class="p">(</span><span class="nf">unless</span><span class="w"> </span><span class="p">(</span><span class="nb">= </span><span class="mi">2</span><span class="w"> </span><span class="mi">2</span><span class="p">)</span><span class="w"> </span><span class="p">(</span><span class="nb">println </span><span class="s">&quot;Nunca&quot;</span><span class="p">)))</span>
 <a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a>
@@ -1644,7 +2189,7 @@
 <a id="__codelineno-13-4" name="__codelineno-13-4" href="#__codelineno-13-4"></a><span class="c1">;; (if (clojure.core/not (= 2 2)) (do (println &quot;Nunca&quot;)))</span>
 </code></pre></div>
 <p>Ver o código expandido torna muito mais fácil diagnosticar problemas na lógica da sua macro.</p>
-<h1 id="6-topico-relacionado-macros-de-leitura-reader-macros">6. Tópico Relacionado: Macros de Leitura (Reader Macros)<a class="headerlink" href="#6-topico-relacionado-macros-de-leitura-reader-macros" title="Permanent link">&para;</a></h1>
+<h2 id="6-topico-relacionado-macros-de-leitura-reader-macros">6. Tópico Relacionado: Macros de Leitura (Reader Macros)<a class="headerlink" href="#6-topico-relacionado-macros-de-leitura-reader-macros" title="Permanent link">&para;</a></h2>
 <p>É importante não confundir as macros que acabamos de ver com as <strong>macros de leitura</strong> (<em>reader macros</em>). Enquanto as macros normais operam na fase de expansão, as macros de leitura são caracteres especiais que modificam o comportamento do próprio <em>leitor</em> (a primeira fase). Elas ensinam o Clojure a transformar texto em estruturas de dados de maneiras especiais.</p>
 <p>As macros de leitura mais comuns são parte integrante da sintaxe do Clojure:</p>
 <ul>
@@ -1653,7 +2198,7 @@
 <li><code>#_</code> (discard): Instrui o leitor a ignorar completamente a próxima forma de código. É extremamente útil para comentar blocos de código.</li>
 <li><code>#(...)</code>: Sintaxe curta para uma função anônima. <code>#(&gt; % 5)</code> expande para <code>(fn [p1__324_] (&gt; p1__324_ 5))</code>.</li>
 </ul>
-<h1 id="7-conclusao-o-poder-de-estender-a-linguagem">7. Conclusão: O Poder de Estender a Linguagem<a class="headerlink" href="#7-conclusao-o-poder-de-estender-a-linguagem" title="Permanent link">&para;</a></h1>
+<h2 id="7-conclusao-o-poder-de-estender-a-linguagem">7. Conclusão: O Poder de Estender a Linguagem<a class="headerlink" href="#7-conclusao-o-poder-de-estender-a-linguagem" title="Permanent link">&para;</a></h2>
 <p>Hoje, vimos que as macros são a principal ferramenta de metaprogramação em Clojure, um mecanismo que permite que o programador ensine novos truques à linguagem. Elas são a razão pela qual o Lisp é considerado "a linguagem de programação programável". Ao manipular o código como dados, podemos criar novas sintaxes, construir linguagens específicas de domínio (DSLs) elegantes, eliminar código repetitivo e, em última análise, escrever programas mais expressivos e poderosos. Dominar macros é o passo decisivo para deixar de ser apenas um <em>usuário</em> da linguagem e se tornar um <em>arquiteto</em> da linguagem, moldando-a para resolver problemas de forma mais direta e elegante.</p>
 <h2 id="veja-mais">Veja Mais<a class="headerlink" href="#veja-mais" title="Permanent link">&para;</a></h2>
 <p>https://www.youtube.com/watch?v=BGdfOGT4_HE</p>
@@ -1717,7 +2262,7 @@
       <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.instant", "navigation.tracking", "navigation.sections", "navigation.expand", "navigation.top", "search.highlight", "search.share", "content.code.annotate", "content.code.copy", "content.tabs.link", "content.tooltips", "toc.follow"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copiado para \u00e1rea de transfer\u00eancia", "clipboard.copy": "Copiar para \u00e1rea de transfer\u00eancia", "search.result.more.one": "Mais 1 nesta p\u00e1gina", "search.result.more.other": "Mais # nesta p\u00e1gina", "search.result.none": "Nenhum resultado encontrado", "search.result.one": "1 resultado encontrado", "search.result.other": "# resultados encontrados", "search.result.placeholder": "Digite para iniciar a busca", "search.result.term.missing": "Ausente", "select.version": "Selecione a vers\u00e3o"}, "version": null}</script>
     
     
-      <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      <script src="../../assets/javascripts/bundle.d7400e89.min.js"></script>
       
         <script src="https://unpkg.com/mathjax@3/es5/tex-mml-chtml.js"></script>
       

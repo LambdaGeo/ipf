@@ -24,7 +24,7 @@
       
       
       <link rel="icon" href="../../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
     
     
       
@@ -32,7 +32,7 @@
       
     
     
-      <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
+      <link rel="stylesheet" href="../../assets/stylesheets/main.ec1eaa64.min.css">
       
         
         <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
@@ -550,7 +550,7 @@
   <span class="md-ellipsis">
     
   
-    Cap 8: Exercícios Resolvidos
+    Cap 8: Lista de Exercícios
   
 
     
@@ -1176,7 +1176,7 @@
   <span class="md-ellipsis">
     
   
-    Cap 23: Clojure — Exercícios Resolvidos
+    Cap 23: Clojure — Lista de Exercícios
   
 
     
@@ -1976,16 +1976,16 @@ Elas são macros escritas em Elixir!</p>
 </ul>
 <h3 id="12-ecto-queries-de-banco-de-dados">1.2. Ecto (Queries de Banco de Dados)<a class="headerlink" href="#12-ecto-queries-de-banco-de-dados" title="Permanent link">&para;</a></h3>
 <p>O Ecto permite escrever consultas SQL usando sintaxe Elixir.</p>
-<p>Elixir</p>
-<p><code># Isso parece Elixir, mas vira SQL seguro
-from u in User, where: u.age &gt; 18</code></p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="c1"># Isso parece Elixir, mas vira SQL seguro</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="n">from</span><span class="w"> </span><span class="n">u</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="nc">User</span><span class="p">,</span><span class="w"> </span><span class="ss">where</span><span class="p">:</span><span class="w"> </span><span class="n">u</span><span class="o">.</span><span class="n">age</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">18</span>
+</code></pre></div>
 <ul>
 <li><strong>O Poder da Macro:</strong> O Ecto usa macros para analisar seu código em <strong>Tempo de Compilação</strong>. Se você errar o nome de um campo ou tentar uma injeção de SQL, o Ecto detecta isso <em>antes</em> do seu código rodar, prevenindo bugs críticos em produção.</li>
 </ul>
 <h3 id="13-phoenix-roteamento-web">1.3. Phoenix (Roteamento Web)<a class="headerlink" href="#13-phoenix-roteamento-web" title="Permanent link">&para;</a></h3>
 <p>O framework Phoenix usa macros para definir rotas de forma limpa.</p>
-<p>Elixir</p>
-<p><code>get "/users/:id", UserController, :show</code></p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="n">get</span><span class="w"> </span><span class="s2">&quot;/users/:id&quot;</span><span class="p">,</span><span class="w"> </span><span class="nc">UserController</span><span class="p">,</span><span class="w"> </span><span class="ss">:show</span>
+</code></pre></div>
 <ul>
 <li><strong>O Poder da Macro:</strong> Em tempo de compilação, o Phoenix transforma essa linha bonita em uma função gigante de Pattern Matching ultra-otimizada. Você escreve código legível; a macro gera código performático.</li>
 </ul>
@@ -2025,24 +2025,23 @@ O ator entra em cena quando a câmera liga. Ele recebe o roteiro pronto e <stron
 <p>O Elixir (assim como Java, C# e Python) usa <strong>Avaliação Estrita (Eager Evaluation)</strong> para funções. Isso significa que <strong>todos os argumentos são calculados e executados ANTES de entrar na função.</strong></p>
 <h3 id="o-experimento-do-apagar-banco">O Experimento do "Apagar Banco"<a class="headerlink" href="#o-experimento-do-apagar-banco" title="Permanent link">&para;</a></h3>
 <p>Imagine que queremos criar nosso próprio <code>meu_if</code>. Vamos tentar fazer isso com uma função (<code>def</code>).</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="kd">defmodule</span><span class="w"> </span><span class="nc">TentativaRuim</span><span class="w"> </span><span class="k">do</span>
-<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="w">  </span><span class="c1"># Uma função normal que recebe uma condição e dois blocos</span>
-<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="w">  </span><span class="kd">def</span><span class="w"> </span><span class="n">meu_if</span><span class="p">(</span><span class="n">condicao</span><span class="p">,</span><span class="w"> </span><span class="n">bloco_verdadeiro</span><span class="p">,</span><span class="w"> </span><span class="n">bloco_falso</span><span class="p">)</span><span class="w"> </span><span class="k">do</span>
-<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="n">condicao</span><span class="w"> </span><span class="k">do</span>
-<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="w">      </span><span class="n">bloco_verdadeiro</span>
-<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="w">    </span><span class="k">else</span>
-<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="w">      </span><span class="n">bloco_falso</span>
-<a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a><span class="w">    </span><span class="k">end</span>
-<a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a><span class="w">  </span><span class="k">end</span>
-<a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a><span class="k">end</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="kd">defmodule</span><span class="w"> </span><span class="nc">TentativaRuim</span><span class="w"> </span><span class="k">do</span>
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="w">  </span><span class="c1"># Uma função normal que recebe uma condição e dois blocos</span>
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="w">  </span><span class="kd">def</span><span class="w"> </span><span class="n">meu_if</span><span class="p">(</span><span class="n">condicao</span><span class="p">,</span><span class="w"> </span><span class="n">bloco_verdadeiro</span><span class="p">,</span><span class="w"> </span><span class="n">bloco_falso</span><span class="p">)</span><span class="w"> </span><span class="k">do</span>
+<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="n">condicao</span><span class="w"> </span><span class="k">do</span>
+<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="w">      </span><span class="n">bloco_verdadeiro</span>
+<a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a><span class="w">    </span><span class="k">else</span>
+<a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a><span class="w">      </span><span class="n">bloco_falso</span>
+<a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a><span class="w">    </span><span class="k">end</span>
+<a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a><span class="w">  </span><span class="k">end</span>
+<a id="__codelineno-2-10" name="__codelineno-2-10" href="#__codelineno-2-10"></a><span class="k">end</span>
 </code></pre></div>
 <p>Agora, vamos simular um cenário perigoso no terminal (<code>iex</code>):
 Queremos executar a ação de apagar o banco <strong>apenas se</strong> a condição for <code>true</code>.</p>
-<p>Elixir</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="n">condicao</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="no">false</span>
-<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>
-<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="c1"># Chamando a função:</span>
-<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="nc">TentativaRuim</span><span class="o">.</span><span class="n">meu_if</span><span class="p">(</span><span class="n">condicao</span><span class="p">,</span><span class="w"> </span><span class="nc">IO</span><span class="o">.</span><span class="n">puts</span><span class="p">(</span><span class="s2">&quot;🔥 APAGANDO O BANCO...&quot;</span><span class="p">),</span><span class="w"> </span><span class="nc">IO</span><span class="o">.</span><span class="n">puts</span><span class="p">(</span><span class="s2">&quot;Ufa, salvo.&quot;</span><span class="p">))</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="n">condicao</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="no">false</span>
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>
+<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="c1"># Chamando a função:</span>
+<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="nc">TentativaRuim</span><span class="o">.</span><span class="n">meu_if</span><span class="p">(</span><span class="n">condicao</span><span class="p">,</span><span class="w"> </span><span class="nc">IO</span><span class="o">.</span><span class="n">puts</span><span class="p">(</span><span class="s2">&quot;🔥 APAGANDO O BANCO...&quot;</span><span class="p">),</span><span class="w"> </span><span class="nc">IO</span><span class="o">.</span><span class="n">puts</span><span class="p">(</span><span class="s2">&quot;Ufa, salvo.&quot;</span><span class="p">))</span>
 </code></pre></div>
 <p><strong>Resultado no Terminal:</strong></p>
 <p>Plaintext</p>
@@ -2178,10 +2177,10 @@ O Elixir oferece uma sintaxe mais limpa (sem tantos parênteses), mas por baixo 
 <p>Vamos usar a macro <code>quote</code> para atuar como o Parser do compilador e ver essa estrutura.</p>
 <p>Abra o <code>iex</code>:</p>
 <p><strong>Experimento A: Matemática Simples</strong></p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="c1"># O Elixir lê &quot;1 + 2&quot; e transforma nisto:</span>
-<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="k">quote</span><span class="w"> </span><span class="ss">do</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">2</span>
-<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>
-<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="c1"># Saída: {:+, [context: Elixir, import: Kernel], [1, 2]}</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="c1"># O Elixir lê &quot;1 + 2&quot; e transforma nisto:</span>
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="k">quote</span><span class="w"> </span><span class="ss">do</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">2</span>
+<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>
+<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="c1"># Saída: {:+, [context: Elixir, import: Kernel], [1, 2]}</span>
 </code></pre></div>
 <ul>
 <li>Operação: <code>:+</code></li>
@@ -2189,20 +2188,20 @@ O Elixir oferece uma sintaxe mais limpa (sem tantos parênteses), mas por baixo 
 </ul>
 <p>Experimento B: Funções aninhadas</p>
 <p>Veja como a árvore cresce para baixo.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="k">quote</span><span class="w"> </span><span class="ss">do</span><span class="p">:</span><span class="w"> </span><span class="n">soma</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="n">div</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">))</span>
-<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>
-<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="c1"># Saída:</span>
-<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="c1"># {</span>
-<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a><span class="c1">#   :soma, </span>
-<a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a><span class="c1">#   [...], </span>
-<a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a><span class="c1">#   [1, {:div, [...], [10, 2]}]  &lt;-- Olha a sub-árvore aqui!</span>
-<a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a><span class="c1"># }</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="k">quote</span><span class="w"> </span><span class="ss">do</span><span class="p">:</span><span class="w"> </span><span class="n">soma</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="n">div</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">))</span>
+<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>
+<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="c1"># Saída:</span>
+<a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a><span class="c1"># {</span>
+<a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a><span class="c1">#   :soma, </span>
+<a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a><span class="c1">#   [...], </span>
+<a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a><span class="c1">#   [1, {:div, [...], [10, 2]}]  &lt;-- Olha a sub-árvore aqui!</span>
+<a id="__codelineno-5-8" name="__codelineno-5-8" href="#__codelineno-5-8"></a><span class="c1"># }</span>
 </code></pre></div>
 <p>Perceba que o segundo argumento não é o número <code>5</code>. É outra tupla (nó da árvore) representando a divisão.</p>
 <p>Experimento C: Variáveis</p>
 <p>Até variáveis são representadas por tuplas na AST.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="k">quote</span><span class="w"> </span><span class="ss">do</span><span class="p">:</span><span class="w"> </span><span class="n">idade</span>
-<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="c1"># Saída: {:idade, [], Elixir}</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="k">quote</span><span class="w"> </span><span class="ss">do</span><span class="p">:</span><span class="w"> </span><span class="n">idade</span>
+<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="c1"># Saída: {:idade, [], Elixir}</span>
 </code></pre></div>
 <hr />
 <h3 id="35-a-dinamica-injetando-valores-com-unquote">3.5. A Dinâmica: Injetando Valores com <code>unquote</code><a class="headerlink" href="#35-a-dinamica-injetando-valores-com-unquote" title="Permanent link">&para;</a></h3>
@@ -2210,14 +2209,14 @@ O Elixir oferece uma sintaxe mais limpa (sem tantos parênteses), mas por baixo 
 <p>Imagine que você quer gerar um código de soma, mas um dos números vem de uma variável externa.</p>
 <h3 id="o-problema-o-isolamento-do-quote">O Problema: O Isolamento do <code>quote</code><a class="headerlink" href="#o-problema-o-isolamento-do-quote" title="Permanent link">&para;</a></h3>
 <p>Vamos ao laboratório (IEx):</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="n">numero_externo</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">50</span>
-<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>
-<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="c1"># Tentativa ingênua:</span>
-<a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a><span class="n">ast</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">quote</span><span class="w"> </span><span class="k">do</span>
-<a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a><span class="w">  </span><span class="mi">1</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">numero_externo</span>
-<a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a><span class="k">end</span>
-<a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a>
-<a id="__codelineno-5-8" name="__codelineno-5-8" href="#__codelineno-5-8"></a><span class="c1"># Saída: {:+, [...], [1, {:numero_externo, [], Elixir}]}</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="n">numero_externo</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">50</span>
+<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a>
+<a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a><span class="c1"># Tentativa ingênua:</span>
+<a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a><span class="n">ast</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">quote</span><span class="w"> </span><span class="k">do</span>
+<a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a><span class="w">  </span><span class="mi">1</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">numero_externo</span>
+<a id="__codelineno-7-6" name="__codelineno-7-6" href="#__codelineno-7-6"></a><span class="k">end</span>
+<a id="__codelineno-7-7" name="__codelineno-7-7" href="#__codelineno-7-7"></a>
+<a id="__codelineno-7-8" name="__codelineno-7-8" href="#__codelineno-7-8"></a><span class="c1"># Saída: {:+, [...], [1, {:numero_externo, [], Elixir}]}</span>
 </code></pre></div>
 <p><strong>Analise a AST:</strong> O Elixir não leu o valor <code>50</code>. Ele criou uma AST que diz: <em>"Some 1 com uma variável chamada <code>numero_externo</code>"</em>.
 Se você tentar rodar esse código em um lugar onde a variável <code>numero_externo</code> não existe, vai dar erro de <code>undefined variable</code>.</p>
@@ -2234,17 +2233,16 @@ Pense em interpolação de Strings.</p>
 <li><code>quote</code> é como as aspas <code>""</code>.</li>
 <li><code>unquote</code> é como a interpolação <code>#{}</code>.</li>
 </ul>
-<p>Elixir</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="c1"># String</span>
-<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="n">nome</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;João&quot;</span>
-<a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="n">frase</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;Olá </span><span class="si">#{</span><span class="n">nome</span><span class="si">}</span><span class="s2">&quot;</span><span class="w">  </span><span class="c1"># Resultado: &quot;Olá João&quot;</span>
-<a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a>
-<a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a><span class="c1"># AST (Macro)</span>
-<a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a><span class="n">valor</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">50</span>
-<a id="__codelineno-6-7" name="__codelineno-6-7" href="#__codelineno-6-7"></a><span class="n">ast</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">quote</span><span class="w"> </span><span class="k">do</span>
-<a id="__codelineno-6-8" name="__codelineno-6-8" href="#__codelineno-6-8"></a><span class="w">  </span><span class="mi">1</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="k">unquote</span><span class="p">(</span><span class="n">valor</span><span class="p">)</span>
-<a id="__codelineno-6-9" name="__codelineno-6-9" href="#__codelineno-6-9"></a><span class="k">end</span>
-<a id="__codelineno-6-10" name="__codelineno-6-10" href="#__codelineno-6-10"></a><span class="c1"># Resultado da AST: {:+, [...], [1, 5]}</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="c1"># String</span>
+<a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a><span class="n">nome</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;João&quot;</span>
+<a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a><span class="n">frase</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;Olá </span><span class="si">#{</span><span class="n">nome</span><span class="si">}</span><span class="s2">&quot;</span><span class="w">  </span><span class="c1"># Resultado: &quot;Olá João&quot;</span>
+<a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a>
+<a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a><span class="c1"># AST (Macro)</span>
+<a id="__codelineno-8-6" name="__codelineno-8-6" href="#__codelineno-8-6"></a><span class="n">valor</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">50</span>
+<a id="__codelineno-8-7" name="__codelineno-8-7" href="#__codelineno-8-7"></a><span class="n">ast</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">quote</span><span class="w"> </span><span class="k">do</span>
+<a id="__codelineno-8-8" name="__codelineno-8-8" href="#__codelineno-8-8"></a><span class="w">  </span><span class="mi">1</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="k">unquote</span><span class="p">(</span><span class="n">valor</span><span class="p">)</span>
+<a id="__codelineno-8-9" name="__codelineno-8-9" href="#__codelineno-8-9"></a><span class="k">end</span>
+<a id="__codelineno-8-10" name="__codelineno-8-10" href="#__codelineno-8-10"></a><span class="c1"># Resultado da AST: {:+, [...], [1, 5]}</span>
 </code></pre></div>
 <p><strong>Olhe a diferença:</strong> Agora o segundo argumento da soma é o <strong>número 5</strong>, e não uma referência a uma variável.</p>
 <hr />
@@ -2264,76 +2262,84 @@ Lógica: <code>unless(x)</code> é semanticamente idêntico a <code>if(!x)</code
 <p>Neste laboratório, você vai sentir o poder de estender a linguagem. Você não vai criar uma função; você vai criar uma <strong>nova palavra-chave</strong>.</p>
 <h3 id="passo-1-o-ambiente">Passo 1: O Ambiente<a class="headerlink" href="#passo-1-o-ambiente" title="Permanent link">&para;</a></h3>
 <p>Crie um projeto novo para isolarmos nossos experimentos:</p>
-<p>Bash</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="n">mix</span><span class="w"> </span><span class="n">new</span><span class="w"> </span><span class="n">meta_lab</span>
-<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="n">cd</span><span class="w"> </span><span class="n">meta_lab</span>
-<a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a><span class="n">iex</span><span class="w"> </span><span class="o">-</span><span class="nc">S</span><span class="w"> </span><span class="n">mix</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>mix<span class="w"> </span>new<span class="w"> </span>meta_lab
+<a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a><span class="nb">cd</span><span class="w"> </span>meta_lab
+<a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a>iex<span class="w"> </span>-S<span class="w"> </span>mix
 </code></pre></div>
 <h3 id="passo-2-a-implementacao-defmacro">Passo 2: A Implementação (<code>defmacro</code>)<a class="headerlink" href="#passo-2-a-implementacao-defmacro" title="Permanent link">&para;</a></h3>
 <p>Crie o arquivo <code>lib/estruturas_controle.ex</code>.</p>
 <p>Aqui, usaremos o <code>defmacro</code> em vez de <code>def</code>.
 O compilador sabe que, ao encontrar um <code>defmacro</code>, ele deve executar esse código <strong>durante a compilação</strong> e substituir a chamada pelo resultado (a AST) que ele retornar.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="kd">defmodule</span><span class="w"> </span><span class="nc">EstruturasControle</span><span class="w"> </span><span class="k">do</span>
-<a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a><span class="w">  </span><span class="c1"># A macro recebe a AST da condição e a AST do bloco &#39;do&#39;</span>
-<a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a><span class="w">  </span><span class="kd">defmacro</span><span class="w"> </span><span class="k">unless</span><span class="p">(</span><span class="n">condicao</span><span class="p">,</span><span class="w"> </span><span class="ss">do</span><span class="p">:</span><span class="w"> </span><span class="n">bloco</span><span class="p">)</span><span class="w"> </span><span class="k">do</span>
-<a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a><span class="w">    </span><span class="c1"># O quote abre o modo &quot;Roteirista&quot;: vamos gerar código.</span>
-<a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a><span class="w">    </span><span class="k">quote</span><span class="w"> </span><span class="k">do</span>
-<a id="__codelineno-8-6" name="__codelineno-8-6" href="#__codelineno-8-6"></a><span class="w">      </span><span class="c1"># Aqui dentro, escrevemos o código FINAL que queremos gerar.</span>
-<a id="__codelineno-8-7" name="__codelineno-8-7" href="#__codelineno-8-7"></a><span class="w">      </span><span class="c1"># Transformamos o &#39;unless&#39; em um &#39;if&#39; com a lógica invertida (!).</span>
-<a id="__codelineno-8-8" name="__codelineno-8-8" href="#__codelineno-8-8"></a>
-<a id="__codelineno-8-9" name="__codelineno-8-9" href="#__codelineno-8-9"></a><span class="w">      </span><span class="c1"># IMPORTANTE: Usamos unquote() para injetar o que o usuário digitou.</span>
-<a id="__codelineno-8-10" name="__codelineno-8-10" href="#__codelineno-8-10"></a><span class="w">      </span><span class="c1"># Se não usássemos unquote, o Elixir procuraria uma variável chamada </span>
-<a id="__codelineno-8-11" name="__codelineno-8-11" href="#__codelineno-8-11"></a><span class="w">      </span><span class="c1"># &#39;condicao&#39; no escopo, e não a expressão que o usuário passou (ex: 1 &gt; 2).</span>
-<a id="__codelineno-8-12" name="__codelineno-8-12" href="#__codelineno-8-12"></a><span class="w">      </span><span class="k">if</span><span class="w"> </span><span class="o">!</span><span class="k">unquote</span><span class="p">(</span><span class="n">condicao</span><span class="p">)</span><span class="w"> </span><span class="k">do</span>
-<a id="__codelineno-8-13" name="__codelineno-8-13" href="#__codelineno-8-13"></a><span class="w">        </span><span class="k">unquote</span><span class="p">(</span><span class="n">bloco</span><span class="p">)</span>
-<a id="__codelineno-8-14" name="__codelineno-8-14" href="#__codelineno-8-14"></a><span class="w">      </span><span class="k">end</span>
-<a id="__codelineno-8-15" name="__codelineno-8-15" href="#__codelineno-8-15"></a><span class="w">    </span><span class="k">end</span>
-<a id="__codelineno-8-16" name="__codelineno-8-16" href="#__codelineno-8-16"></a><span class="w">  </span><span class="k">end</span>
-<a id="__codelineno-8-17" name="__codelineno-8-17" href="#__codelineno-8-17"></a><span class="k">end</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="kd">defmodule</span><span class="w"> </span><span class="nc">EstruturasControle</span><span class="w"> </span><span class="k">do</span>
+<a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a><span class="w">  </span><span class="c1"># A macro recebe a AST da condição e a AST do bloco &#39;do&#39;</span>
+<a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a><span class="w">  </span><span class="kd">defmacro</span><span class="w"> </span><span class="k">unless</span><span class="p">(</span><span class="n">condicao</span><span class="p">,</span><span class="w"> </span><span class="ss">do</span><span class="p">:</span><span class="w"> </span><span class="n">bloco</span><span class="p">)</span><span class="w"> </span><span class="k">do</span>
+<a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a><span class="w">    </span><span class="c1"># O quote abre o modo &quot;Roteirista&quot;: vamos gerar código.</span>
+<a id="__codelineno-10-5" name="__codelineno-10-5" href="#__codelineno-10-5"></a><span class="w">    </span><span class="k">quote</span><span class="w"> </span><span class="k">do</span>
+<a id="__codelineno-10-6" name="__codelineno-10-6" href="#__codelineno-10-6"></a><span class="w">      </span><span class="c1"># Aqui dentro, escrevemos o código FINAL que queremos gerar.</span>
+<a id="__codelineno-10-7" name="__codelineno-10-7" href="#__codelineno-10-7"></a><span class="w">      </span><span class="c1"># Transformamos o &#39;unless&#39; em um &#39;if&#39; com a lógica invertida (!).</span>
+<a id="__codelineno-10-8" name="__codelineno-10-8" href="#__codelineno-10-8"></a>
+<a id="__codelineno-10-9" name="__codelineno-10-9" href="#__codelineno-10-9"></a><span class="w">      </span><span class="c1"># IMPORTANTE: Usamos unquote() para injetar o que o usuário digitou.</span>
+<a id="__codelineno-10-10" name="__codelineno-10-10" href="#__codelineno-10-10"></a><span class="w">      </span><span class="c1"># Se não usássemos unquote, o Elixir procuraria uma variável chamada </span>
+<a id="__codelineno-10-11" name="__codelineno-10-11" href="#__codelineno-10-11"></a><span class="w">      </span><span class="c1"># &#39;condicao&#39; no escopo, e não a expressão que o usuário passou (ex: 1 &gt; 2).</span>
+<a id="__codelineno-10-12" name="__codelineno-10-12" href="#__codelineno-10-12"></a><span class="w">      </span><span class="k">if</span><span class="w"> </span><span class="o">!</span><span class="k">unquote</span><span class="p">(</span><span class="n">condicao</span><span class="p">)</span><span class="w"> </span><span class="k">do</span>
+<a id="__codelineno-10-13" name="__codelineno-10-13" href="#__codelineno-10-13"></a><span class="w">        </span><span class="k">unquote</span><span class="p">(</span><span class="n">bloco</span><span class="p">)</span>
+<a id="__codelineno-10-14" name="__codelineno-10-14" href="#__codelineno-10-14"></a><span class="w">      </span><span class="k">end</span>
+<a id="__codelineno-10-15" name="__codelineno-10-15" href="#__codelineno-10-15"></a><span class="w">    </span><span class="k">end</span>
+<a id="__codelineno-10-16" name="__codelineno-10-16" href="#__codelineno-10-16"></a><span class="w">  </span><span class="k">end</span>
+<a id="__codelineno-10-17" name="__codelineno-10-17" href="#__codelineno-10-17"></a><span class="k">end</span>
 </code></pre></div>
 <h3 id="passo-3-o-teste-de-fogo-runtime">Passo 3: O Teste de Fogo (Runtime)<a class="headerlink" href="#passo-3-o-teste-de-fogo-runtime" title="Permanent link">&para;</a></h3>
 <p>Abra o terminal do projeto: <code>iex -S mix</code>.</p>
 <p>Para usar macros de outro módulo, somos obrigados a usar <code>require</code>. Isso garante que o módulo da macro seja compilado <strong>antes</strong> do módulo que a usa.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="c1"># 1. Carregue o módulo</span>
-<a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a><span class="kn">require</span><span class="w"> </span><span class="nc">EstruturasControle</span>
-<a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a>
-<a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a><span class="c1"># 2. Teste a lógica (1 == 2 é Falso, então o unless deve executar)</span>
-<a id="__codelineno-9-5" name="__codelineno-9-5" href="#__codelineno-9-5"></a><span class="nc">EstruturasControle</span><span class="o">.</span><span class="k">unless</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="k">do</span>
-<a id="__codelineno-9-6" name="__codelineno-9-6" href="#__codelineno-9-6"></a><span class="w">  </span><span class="nc">IO</span><span class="o">.</span><span class="n">puts</span><span class="w"> </span><span class="s2">&quot;Funcionou! A matemática ainda é lógica.&quot;</span>
-<a id="__codelineno-9-7" name="__codelineno-9-7" href="#__codelineno-9-7"></a><span class="k">end</span>
-<a id="__codelineno-9-8" name="__codelineno-9-8" href="#__codelineno-9-8"></a><span class="c1"># Saída: &quot;Funcionou! A matemática ainda é lógica.&quot;</span>
-<a id="__codelineno-9-9" name="__codelineno-9-9" href="#__codelineno-9-9"></a>
-<a id="__codelineno-9-10" name="__codelineno-9-10" href="#__codelineno-9-10"></a><span class="c1"># 3. Teste o inverso (1 == 1 é Verdadeiro, o unless deve ignorar)</span>
-<a id="__codelineno-9-11" name="__codelineno-9-11" href="#__codelineno-9-11"></a><span class="nc">EstruturasControle</span><span class="o">.</span><span class="k">unless</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="k">do</span>
-<a id="__codelineno-9-12" name="__codelineno-9-12" href="#__codelineno-9-12"></a><span class="w">  </span><span class="nc">IO</span><span class="o">.</span><span class="n">puts</span><span class="w"> </span><span class="s2">&quot;Isso não deve aparecer.&quot;</span>
-<a id="__codelineno-9-13" name="__codelineno-9-13" href="#__codelineno-9-13"></a><span class="k">end</span>
-<a id="__codelineno-9-14" name="__codelineno-9-14" href="#__codelineno-9-14"></a><span class="c1"># Saída: nil</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="c1"># 1. Carregue o módulo</span>
+<a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a><span class="kn">require</span><span class="w"> </span><span class="nc">EstruturasControle</span>
+<a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a>
+<a id="__codelineno-11-4" name="__codelineno-11-4" href="#__codelineno-11-4"></a><span class="c1"># 2. Teste a lógica (1 == 2 é Falso, então o unless deve executar)</span>
+<a id="__codelineno-11-5" name="__codelineno-11-5" href="#__codelineno-11-5"></a><span class="nc">EstruturasControle</span><span class="o">.</span><span class="k">unless</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="k">do</span>
+<a id="__codelineno-11-6" name="__codelineno-11-6" href="#__codelineno-11-6"></a><span class="w">  </span><span class="nc">IO</span><span class="o">.</span><span class="n">puts</span><span class="w"> </span><span class="s2">&quot;Funcionou! A matemática ainda é lógica.&quot;</span>
+<a id="__codelineno-11-7" name="__codelineno-11-7" href="#__codelineno-11-7"></a><span class="k">end</span>
+<a id="__codelineno-11-8" name="__codelineno-11-8" href="#__codelineno-11-8"></a><span class="c1"># Saída: &quot;Funcionou! A matemática ainda é lógica.&quot;</span>
+<a id="__codelineno-11-9" name="__codelineno-11-9" href="#__codelineno-11-9"></a>
+<a id="__codelineno-11-10" name="__codelineno-11-10" href="#__codelineno-11-10"></a><span class="c1"># 3. Teste o inverso (1 == 1 é Verdadeiro, o unless deve ignorar)</span>
+<a id="__codelineno-11-11" name="__codelineno-11-11" href="#__codelineno-11-11"></a><span class="nc">EstruturasControle</span><span class="o">.</span><span class="k">unless</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="k">do</span>
+<a id="__codelineno-11-12" name="__codelineno-11-12" href="#__codelineno-11-12"></a><span class="w">  </span><span class="nc">IO</span><span class="o">.</span><span class="n">puts</span><span class="w"> </span><span class="s2">&quot;Isso não deve aparecer.&quot;</span>
+<a id="__codelineno-11-13" name="__codelineno-11-13" href="#__codelineno-11-13"></a><span class="k">end</span>
+<a id="__codelineno-11-14" name="__codelineno-11-14" href="#__codelineno-11-14"></a><span class="c1"># Saída: nil</span>
 </code></pre></div>
 <hr />
 <h2 id="5-depuracao-o-raio-x-da-expansao">5. Depuração: O Raio-X da Expansão<a class="headerlink" href="#5-depuracao-o-raio-x-da-expansao" title="Permanent link">&para;</a></h2>
 <p>Como engenheiro, você não deve confiar em mágica. Você precisa ver o código gerado.
-O Elixir possui a função <code>Macro.expand/2</code> que simula o trabalho do compilador e te mostra o resultado final.</p>
+O Elixir possui a função <code>Macro.expand_once/2</code>, que simula um único passo do trabalho do compilador e te mostra o resultado imediato da expansão da nossa macro.</p>
 <p>Ainda no IEx, digite:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="c1"># 1. Vamos criar a AST da nossa chamada, sem executar</span>
-<a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a><span class="n">ast</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">quote</span><span class="w"> </span><span class="k">do</span>
-<a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a><span class="w">  </span><span class="nc">EstruturasControle</span><span class="o">.</span><span class="k">unless</span><span class="p">(</span><span class="no">true</span><span class="p">,</span><span class="w"> </span><span class="ss">do</span><span class="p">:</span><span class="w"> </span><span class="nc">IO</span><span class="o">.</span><span class="n">puts</span><span class="p">(</span><span class="s2">&quot;Oi&quot;</span><span class="p">))</span>
-<a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a><span class="k">end</span>
-<a id="__codelineno-10-5" name="__codelineno-10-5" href="#__codelineno-10-5"></a>
-<a id="__codelineno-10-6" name="__codelineno-10-6" href="#__codelineno-10-6"></a><span class="c1"># 2. Agora, pedimos para o Elixir expandir essa macro</span>
-<a id="__codelineno-10-7" name="__codelineno-10-7" href="#__codelineno-10-7"></a><span class="n">codigo_gerado</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">Macro</span><span class="o">.</span><span class="n">expand</span><span class="p">(</span><span class="n">ast</span><span class="p">,</span><span class="w"> </span><span class="bp">__ENV__</span><span class="p">)</span>
-<a id="__codelineno-10-8" name="__codelineno-10-8" href="#__codelineno-10-8"></a>
-<a id="__codelineno-10-9" name="__codelineno-10-9" href="#__codelineno-10-9"></a><span class="c1"># 3. Vamos converter a AST de volta para String para lermos</span>
-<a id="__codelineno-10-10" name="__codelineno-10-10" href="#__codelineno-10-10"></a><span class="nc">Macro</span><span class="o">.</span><span class="n">to_string</span><span class="p">(</span><span class="n">codigo_gerado</span><span class="p">)</span><span class="w"> </span><span class="o">|&gt;</span><span class="w"> </span><span class="nc">IO</span><span class="o">.</span><span class="n">puts</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="c1"># 1. Vamos criar a AST da nossa chamada, sem executar</span>
+<a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a><span class="n">ast</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">quote</span><span class="w"> </span><span class="k">do</span>
+<a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a><span class="w">  </span><span class="nc">EstruturasControle</span><span class="o">.</span><span class="k">unless</span><span class="p">(</span><span class="no">true</span><span class="p">,</span><span class="w"> </span><span class="ss">do</span><span class="p">:</span><span class="w"> </span><span class="nc">IO</span><span class="o">.</span><span class="n">puts</span><span class="p">(</span><span class="s2">&quot;Oi&quot;</span><span class="p">))</span>
+<a id="__codelineno-12-4" name="__codelineno-12-4" href="#__codelineno-12-4"></a><span class="k">end</span>
+<a id="__codelineno-12-5" name="__codelineno-12-5" href="#__codelineno-12-5"></a>
+<a id="__codelineno-12-6" name="__codelineno-12-6" href="#__codelineno-12-6"></a><span class="c1"># 2. Agora, pedimos para o Elixir expandir essa macro UMA vez</span>
+<a id="__codelineno-12-7" name="__codelineno-12-7" href="#__codelineno-12-7"></a><span class="n">codigo_gerado</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">Macro</span><span class="o">.</span><span class="n">expand_once</span><span class="p">(</span><span class="n">ast</span><span class="p">,</span><span class="w"> </span><span class="bp">__ENV__</span><span class="p">)</span>
+<a id="__codelineno-12-8" name="__codelineno-12-8" href="#__codelineno-12-8"></a>
+<a id="__codelineno-12-9" name="__codelineno-12-9" href="#__codelineno-12-9"></a><span class="c1"># 3. Vamos converter a AST de volta para String para lermos</span>
+<a id="__codelineno-12-10" name="__codelineno-12-10" href="#__codelineno-12-10"></a><span class="nc">Macro</span><span class="o">.</span><span class="n">to_string</span><span class="p">(</span><span class="n">codigo_gerado</span><span class="p">)</span><span class="w"> </span><span class="o">|&gt;</span><span class="w"> </span><span class="nc">IO</span><span class="o">.</span><span class="n">puts</span>
 </code></pre></div>
 <p><strong>Resultado no Terminal:</strong></p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="k">if</span><span class="w"> </span><span class="o">!</span><span class="no">true</span><span class="w"> </span><span class="k">do</span>
-<a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a><span class="w">  </span><span class="nc">IO</span><span class="o">.</span><span class="n">puts</span><span class="p">(</span><span class="s2">&quot;Oi&quot;</span><span class="p">)</span>
-<a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a><span class="k">end</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a><span class="k">if</span><span class="w"> </span><span class="o">!</span><span class="no">true</span><span class="w"> </span><span class="k">do</span>
+<a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a><span class="w">  </span><span class="nc">IO</span><span class="o">.</span><span class="n">puts</span><span class="p">(</span><span class="s2">&quot;Oi&quot;</span><span class="p">)</span>
+<a id="__codelineno-13-3" name="__codelineno-13-3" href="#__codelineno-13-3"></a><span class="k">end</span>
 </code></pre></div>
 <p><strong>Conclusão Visual:</strong>
 Veja que o <code>unless</code> desapareceu completamente!
-O que sobrou foi um <code>if</code> nativo com a negação <code>!</code>.
-É exatamente esse código que o processador vai executar no final das contas. A macro é apenas um <strong>Gerador de Código</strong> em tempo de compilação.</p>
+O que sobrou foi um <code>if</code> nativo com a negação <code>!</code>.</p>
+<div class="admonition warning">
+<p class="admonition-title"><code>expand_once</code> vs. <code>expand</code></p>
+<p>Se você usar <code>Macro.expand/2</code> em vez de <code>Macro.expand_once/2</code>, o Elixir não para no <code>if</code>: como <code>if</code> <strong>também é uma macro</strong> definida no <code>Kernel</code>, <code>Macro.expand/2</code> continua expandindo recursivamente até não haver mais nenhuma macro para expandir, chegando à forma primitiva real:
+<div class="highlight"><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a><span class="k">case</span><span class="w"> </span><span class="o">!</span><span class="no">true</span><span class="w"> </span><span class="k">do</span>
+<a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a><span class="w">  </span><span class="n">x</span><span class="w"> </span><span class="ow">when</span><span class="w"> </span><span class="nc">Kernel</span><span class="o">.</span><span class="ow">in</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="p">[</span><span class="no">false</span><span class="p">,</span><span class="w"> </span><span class="no">nil</span><span class="p">])</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="no">nil</span>
+<a id="__codelineno-14-3" name="__codelineno-14-3" href="#__codelineno-14-3"></a><span class="w">  </span><span class="bp">_</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="nc">IO</span><span class="o">.</span><span class="n">puts</span><span class="p">(</span><span class="s2">&quot;Oi&quot;</span><span class="p">)</span>
+<a id="__codelineno-14-4" name="__codelineno-14-4" href="#__codelineno-14-4"></a><span class="k">end</span>
+</code></pre></div>
+Use <code>expand_once</code> quando quiser ver "um passo de cada vez" (bom para entender sua própria macro); use <code>expand</code> quando quiser ver a forma final que o compilador realmente executa.</p>
+</div>
 <hr />
 <p><strong>Professor:</strong> Com isso, fechamos o ciclo básico de Metaprogramação:</p>
 <ol>
@@ -2346,10 +2352,10 @@ O que sobrou foi um <code>if</code> nativo com a negação <code>!</code>.
 <p>Vamos reconstruir, do zero, uma versão simplificada do <strong>ExUnit</strong>, o framework de testes do Elixir.</p>
 <p><strong>O Objetivo de Engenharia:</strong>
 Queremos permitir que outro programador escreva testes usando esta sintaxe limpa, que não parece Elixir padrão:</p>
-<p>Elixir</p>
-<p><code>testar "soma basica" do
-  assert 5 == 5
-end</code></p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a><span class="n">testar</span><span class="w"> </span><span class="s2">&quot;soma basica&quot;</span><span class="w"> </span><span class="k">do</span>
+<a id="__codelineno-15-2" name="__codelineno-15-2" href="#__codelineno-15-2"></a><span class="w">  </span><span class="n">assert</span><span class="w"> </span><span class="mi">5</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">5</span>
+<a id="__codelineno-15-3" name="__codelineno-15-3" href="#__codelineno-15-3"></a><span class="k">end</span>
+</code></pre></div>
 <hr />
 <h1 id="laboratorio-final-o-framework-minitest">Laboratório Final: O Framework "MiniTest"<a class="headerlink" href="#laboratorio-final-o-framework-minitest" title="Permanent link">&para;</a></h1>
 <p>Neste laboratório, você vai entender como o Elixir consegue olhar para o código <code>assert 1 == 2</code> e dizer: <em>"Falhou. O lado esquerdo era 1 e o direito era 2"</em>. (Spoiler: Pattern Matching na AST).</p>
@@ -2357,102 +2363,101 @@ end</code></p>
 <p>Crie um novo projeto (se ainda não estiver em um): <code>mix new mini_framework</code>.
 Crie o arquivo <code>lib/mini_test.ex</code>.</p>
 <p>Vamos construir em 3 partes. Leia os comentários com atenção de cirurgião.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="kd">defmodule</span><span class="w"> </span><span class="nc">MiniTest</span><span class="w"> </span><span class="k">do</span>
-<a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a><span class="w">  </span><span class="c1"># PARTE 1: A Injeção (__using__)</span>
-<a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a><span class="w">  </span><span class="c1"># Quando alguém der &quot;use MiniTest&quot;, este código roda.</span>
-<a id="__codelineno-12-4" name="__codelineno-12-4" href="#__codelineno-12-4"></a><span class="w">  </span><span class="kd">defmacro</span><span class="w"> </span><span class="n">__using__</span><span class="p">(</span><span class="n">_opts</span><span class="p">)</span><span class="w"> </span><span class="k">do</span>
-<a id="__codelineno-12-5" name="__codelineno-12-5" href="#__codelineno-12-5"></a><span class="w">    </span><span class="k">quote</span><span class="w"> </span><span class="k">do</span>
-<a id="__codelineno-12-6" name="__codelineno-12-6" href="#__codelineno-12-6"></a><span class="w">      </span><span class="c1"># Injetamos o import automaticamente para o usuário não precisar fazer.</span>
-<a id="__codelineno-12-7" name="__codelineno-12-7" href="#__codelineno-12-7"></a><span class="w">      </span><span class="kn">import</span><span class="w"> </span><span class="nc">MiniTest</span>
-<a id="__codelineno-12-8" name="__codelineno-12-8" href="#__codelineno-12-8"></a><span class="w">    </span><span class="k">end</span>
-<a id="__codelineno-12-9" name="__codelineno-12-9" href="#__codelineno-12-9"></a><span class="w">  </span><span class="k">end</span>
-<a id="__codelineno-12-10" name="__codelineno-12-10" href="#__codelineno-12-10"></a>
-<a id="__codelineno-12-11" name="__codelineno-12-11" href="#__codelineno-12-11"></a><span class="w">  </span><span class="c1"># PARTE 2: Definindo o Teste</span>
-<a id="__codelineno-12-12" name="__codelineno-12-12" href="#__codelineno-12-12"></a><span class="w">  </span><span class="c1"># Recebe uma descrição (string) e o bloco de código.</span>
-<a id="__codelineno-12-13" name="__codelineno-12-13" href="#__codelineno-12-13"></a><span class="w">  </span><span class="kd">defmacro</span><span class="w"> </span><span class="n">testar</span><span class="p">(</span><span class="n">descricao</span><span class="p">,</span><span class="w"> </span><span class="ss">do</span><span class="p">:</span><span class="w"> </span><span class="n">bloco</span><span class="p">)</span><span class="w"> </span><span class="k">do</span>
-<a id="__codelineno-12-14" name="__codelineno-12-14" href="#__codelineno-12-14"></a><span class="w">    </span><span class="c1"># Engenharia: Precisamos transformar a string &quot;soma x&quot; em um nome de função :test_soma_x</span>
-<a id="__codelineno-12-15" name="__codelineno-12-15" href="#__codelineno-12-15"></a><span class="w">    </span><span class="n">nome_limpo</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">String</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="n">descricao</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot; &quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;_&quot;</span><span class="p">)</span><span class="w"> </span><span class="o">|&gt;</span><span class="w"> </span><span class="nc">String</span><span class="o">.</span><span class="n">downcase</span><span class="p">()</span>
-<a id="__codelineno-12-16" name="__codelineno-12-16" href="#__codelineno-12-16"></a><span class="w">    </span><span class="n">nome_funcao</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">String</span><span class="o">.</span><span class="n">to_atom</span><span class="p">(</span><span class="s2">&quot;test_</span><span class="si">#{</span><span class="n">nome_limpo</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-<a id="__codelineno-12-17" name="__codelineno-12-17" href="#__codelineno-12-17"></a>
-<a id="__codelineno-12-18" name="__codelineno-12-18" href="#__codelineno-12-18"></a><span class="w">    </span><span class="k">quote</span><span class="w"> </span><span class="k">do</span>
-<a id="__codelineno-12-19" name="__codelineno-12-19" href="#__codelineno-12-19"></a><span class="w">      </span><span class="c1"># Geramos uma função pública dinamicamente com esse nome!</span>
-<a id="__codelineno-12-20" name="__codelineno-12-20" href="#__codelineno-12-20"></a><span class="w">      </span><span class="kd">def</span><span class="w"> </span><span class="k">unquote</span><span class="p">(</span><span class="n">nome_funcao</span><span class="p">)()</span><span class="w"> </span><span class="k">do</span>
-<a id="__codelineno-12-21" name="__codelineno-12-21" href="#__codelineno-12-21"></a><span class="w">        </span><span class="nc">IO</span><span class="o">.</span><span class="n">puts</span><span class="p">(</span><span class="s2">&quot;🧪 Executando: </span><span class="si">#{</span><span class="k">unquote</span><span class="p">(</span><span class="n">descricao</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-<a id="__codelineno-12-22" name="__codelineno-12-22" href="#__codelineno-12-22"></a><span class="w">        </span><span class="k">unquote</span><span class="p">(</span><span class="n">bloco</span><span class="p">)</span>
-<a id="__codelineno-12-23" name="__codelineno-12-23" href="#__codelineno-12-23"></a><span class="w">      </span><span class="k">end</span>
-<a id="__codelineno-12-24" name="__codelineno-12-24" href="#__codelineno-12-24"></a><span class="w">    </span><span class="k">end</span>
-<a id="__codelineno-12-25" name="__codelineno-12-25" href="#__codelineno-12-25"></a><span class="w">  </span><span class="k">end</span>
-<a id="__codelineno-12-26" name="__codelineno-12-26" href="#__codelineno-12-26"></a>
-<a id="__codelineno-12-27" name="__codelineno-12-27" href="#__codelineno-12-27"></a><span class="w">  </span><span class="c1"># PARTE 3: O Assert Inteligente (A Mágica da AST)</span>
-<a id="__codelineno-12-28" name="__codelineno-12-28" href="#__codelineno-12-28"></a><span class="w">  </span><span class="c1"># Aqui usamos Pattern Matching para &quot;desmontar&quot; a comparação ==</span>
-<a id="__codelineno-12-29" name="__codelineno-12-29" href="#__codelineno-12-29"></a><span class="w">  </span><span class="kd">defmacro</span><span class="w"> </span><span class="n">assert</span><span class="p">({</span><span class="ss">:==</span><span class="p">,</span><span class="w"> </span><span class="n">_contexto</span><span class="p">,</span><span class="w"> </span><span class="p">[</span><span class="n">esquerda</span><span class="p">,</span><span class="w"> </span><span class="n">direita</span><span class="p">]})</span><span class="w"> </span><span class="k">do</span>
-<a id="__codelineno-12-30" name="__codelineno-12-30" href="#__codelineno-12-30"></a><span class="w">    </span><span class="k">quote</span><span class="w"> </span><span class="k">do</span>
-<a id="__codelineno-12-31" name="__codelineno-12-31" href="#__codelineno-12-31"></a><span class="w">      </span><span class="c1"># 1. Calculamos os valores reais</span>
-<a id="__codelineno-12-32" name="__codelineno-12-32" href="#__codelineno-12-32"></a><span class="w">      </span><span class="n">valor_esq</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">unquote</span><span class="p">(</span><span class="n">esquerda</span><span class="p">)</span>
-<a id="__codelineno-12-33" name="__codelineno-12-33" href="#__codelineno-12-33"></a><span class="w">      </span><span class="n">valor_dir</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">unquote</span><span class="p">(</span><span class="n">direita</span><span class="p">)</span>
-<a id="__codelineno-12-34" name="__codelineno-12-34" href="#__codelineno-12-34"></a>
-<a id="__codelineno-12-35" name="__codelineno-12-35" href="#__codelineno-12-35"></a><span class="w">      </span><span class="c1"># 2. Fazemos a verificação</span>
-<a id="__codelineno-12-36" name="__codelineno-12-36" href="#__codelineno-12-36"></a><span class="w">      </span><span class="k">if</span><span class="w"> </span><span class="n">valor_esq</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">valor_dir</span><span class="w"> </span><span class="k">do</span>
-<a id="__codelineno-12-37" name="__codelineno-12-37" href="#__codelineno-12-37"></a><span class="w">        </span><span class="nc">IO</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;.&quot;</span><span class="p">)</span><span class="w"> </span><span class="c1"># Sucesso (ponto verde)</span>
-<a id="__codelineno-12-38" name="__codelineno-12-38" href="#__codelineno-12-38"></a><span class="w">      </span><span class="k">else</span>
-<a id="__codelineno-12-39" name="__codelineno-12-39" href="#__codelineno-12-39"></a><span class="w">        </span><span class="c1"># 3. Falha rica em detalhes!</span>
-<a id="__codelineno-12-40" name="__codelineno-12-40" href="#__codelineno-12-40"></a><span class="w">        </span><span class="nc">IO</span><span class="o">.</span><span class="n">puts</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">❌ FALHA no teste!&quot;</span><span class="p">)</span>
-<a id="__codelineno-12-41" name="__codelineno-12-41" href="#__codelineno-12-41"></a><span class="w">        </span><span class="nc">IO</span><span class="o">.</span><span class="n">puts</span><span class="p">(</span><span class="s2">&quot;   Esquerda: </span><span class="si">#{</span><span class="n">valor_esq</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-<a id="__codelineno-12-42" name="__codelineno-12-42" href="#__codelineno-12-42"></a><span class="w">        </span><span class="nc">IO</span><span class="o">.</span><span class="n">puts</span><span class="p">(</span><span class="s2">&quot;   Direita:  </span><span class="si">#{</span><span class="n">valor_dir</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-<a id="__codelineno-12-43" name="__codelineno-12-43" href="#__codelineno-12-43"></a><span class="w">        </span><span class="c1"># Só conseguimos mostrar isso porque temos acesso à AST separada!</span>
-<a id="__codelineno-12-44" name="__codelineno-12-44" href="#__codelineno-12-44"></a><span class="w">      </span><span class="k">end</span>
-<a id="__codelineno-12-45" name="__codelineno-12-45" href="#__codelineno-12-45"></a><span class="w">    </span><span class="k">end</span>
-<a id="__codelineno-12-46" name="__codelineno-12-46" href="#__codelineno-12-46"></a><span class="w">  </span><span class="k">end</span>
-<a id="__codelineno-12-47" name="__codelineno-12-47" href="#__codelineno-12-47"></a><span class="k">end</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a><span class="kd">defmodule</span><span class="w"> </span><span class="nc">MiniTest</span><span class="w"> </span><span class="k">do</span>
+<a id="__codelineno-16-2" name="__codelineno-16-2" href="#__codelineno-16-2"></a><span class="w">  </span><span class="c1"># PARTE 1: A Injeção (__using__)</span>
+<a id="__codelineno-16-3" name="__codelineno-16-3" href="#__codelineno-16-3"></a><span class="w">  </span><span class="c1"># Quando alguém der &quot;use MiniTest&quot;, este código roda.</span>
+<a id="__codelineno-16-4" name="__codelineno-16-4" href="#__codelineno-16-4"></a><span class="w">  </span><span class="kd">defmacro</span><span class="w"> </span><span class="n">__using__</span><span class="p">(</span><span class="n">_opts</span><span class="p">)</span><span class="w"> </span><span class="k">do</span>
+<a id="__codelineno-16-5" name="__codelineno-16-5" href="#__codelineno-16-5"></a><span class="w">    </span><span class="k">quote</span><span class="w"> </span><span class="k">do</span>
+<a id="__codelineno-16-6" name="__codelineno-16-6" href="#__codelineno-16-6"></a><span class="w">      </span><span class="c1"># Injetamos o import automaticamente para o usuário não precisar fazer.</span>
+<a id="__codelineno-16-7" name="__codelineno-16-7" href="#__codelineno-16-7"></a><span class="w">      </span><span class="kn">import</span><span class="w"> </span><span class="nc">MiniTest</span>
+<a id="__codelineno-16-8" name="__codelineno-16-8" href="#__codelineno-16-8"></a><span class="w">    </span><span class="k">end</span>
+<a id="__codelineno-16-9" name="__codelineno-16-9" href="#__codelineno-16-9"></a><span class="w">  </span><span class="k">end</span>
+<a id="__codelineno-16-10" name="__codelineno-16-10" href="#__codelineno-16-10"></a>
+<a id="__codelineno-16-11" name="__codelineno-16-11" href="#__codelineno-16-11"></a><span class="w">  </span><span class="c1"># PARTE 2: Definindo o Teste</span>
+<a id="__codelineno-16-12" name="__codelineno-16-12" href="#__codelineno-16-12"></a><span class="w">  </span><span class="c1"># Recebe uma descrição (string) e o bloco de código.</span>
+<a id="__codelineno-16-13" name="__codelineno-16-13" href="#__codelineno-16-13"></a><span class="w">  </span><span class="kd">defmacro</span><span class="w"> </span><span class="n">testar</span><span class="p">(</span><span class="n">descricao</span><span class="p">,</span><span class="w"> </span><span class="ss">do</span><span class="p">:</span><span class="w"> </span><span class="n">bloco</span><span class="p">)</span><span class="w"> </span><span class="k">do</span>
+<a id="__codelineno-16-14" name="__codelineno-16-14" href="#__codelineno-16-14"></a><span class="w">    </span><span class="c1"># Engenharia: Precisamos transformar a string &quot;soma x&quot; em um nome de função :test_soma_x</span>
+<a id="__codelineno-16-15" name="__codelineno-16-15" href="#__codelineno-16-15"></a><span class="w">    </span><span class="n">nome_limpo</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">String</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="n">descricao</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot; &quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;_&quot;</span><span class="p">)</span><span class="w"> </span><span class="o">|&gt;</span><span class="w"> </span><span class="nc">String</span><span class="o">.</span><span class="n">downcase</span><span class="p">()</span>
+<a id="__codelineno-16-16" name="__codelineno-16-16" href="#__codelineno-16-16"></a><span class="w">    </span><span class="n">nome_funcao</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">String</span><span class="o">.</span><span class="n">to_atom</span><span class="p">(</span><span class="s2">&quot;test_</span><span class="si">#{</span><span class="n">nome_limpo</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<a id="__codelineno-16-17" name="__codelineno-16-17" href="#__codelineno-16-17"></a>
+<a id="__codelineno-16-18" name="__codelineno-16-18" href="#__codelineno-16-18"></a><span class="w">    </span><span class="k">quote</span><span class="w"> </span><span class="k">do</span>
+<a id="__codelineno-16-19" name="__codelineno-16-19" href="#__codelineno-16-19"></a><span class="w">      </span><span class="c1"># Geramos uma função pública dinamicamente com esse nome!</span>
+<a id="__codelineno-16-20" name="__codelineno-16-20" href="#__codelineno-16-20"></a><span class="w">      </span><span class="kd">def</span><span class="w"> </span><span class="k">unquote</span><span class="p">(</span><span class="n">nome_funcao</span><span class="p">)()</span><span class="w"> </span><span class="k">do</span>
+<a id="__codelineno-16-21" name="__codelineno-16-21" href="#__codelineno-16-21"></a><span class="w">        </span><span class="nc">IO</span><span class="o">.</span><span class="n">puts</span><span class="p">(</span><span class="s2">&quot;🧪 Executando: </span><span class="si">#{</span><span class="k">unquote</span><span class="p">(</span><span class="n">descricao</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<a id="__codelineno-16-22" name="__codelineno-16-22" href="#__codelineno-16-22"></a><span class="w">        </span><span class="k">unquote</span><span class="p">(</span><span class="n">bloco</span><span class="p">)</span>
+<a id="__codelineno-16-23" name="__codelineno-16-23" href="#__codelineno-16-23"></a><span class="w">      </span><span class="k">end</span>
+<a id="__codelineno-16-24" name="__codelineno-16-24" href="#__codelineno-16-24"></a><span class="w">    </span><span class="k">end</span>
+<a id="__codelineno-16-25" name="__codelineno-16-25" href="#__codelineno-16-25"></a><span class="w">  </span><span class="k">end</span>
+<a id="__codelineno-16-26" name="__codelineno-16-26" href="#__codelineno-16-26"></a>
+<a id="__codelineno-16-27" name="__codelineno-16-27" href="#__codelineno-16-27"></a><span class="w">  </span><span class="c1"># PARTE 3: O Assert Inteligente (A Mágica da AST)</span>
+<a id="__codelineno-16-28" name="__codelineno-16-28" href="#__codelineno-16-28"></a><span class="w">  </span><span class="c1"># Aqui usamos Pattern Matching para &quot;desmontar&quot; a comparação ==</span>
+<a id="__codelineno-16-29" name="__codelineno-16-29" href="#__codelineno-16-29"></a><span class="w">  </span><span class="kd">defmacro</span><span class="w"> </span><span class="n">assert</span><span class="p">({</span><span class="ss">:==</span><span class="p">,</span><span class="w"> </span><span class="n">_contexto</span><span class="p">,</span><span class="w"> </span><span class="p">[</span><span class="n">esquerda</span><span class="p">,</span><span class="w"> </span><span class="n">direita</span><span class="p">]})</span><span class="w"> </span><span class="k">do</span>
+<a id="__codelineno-16-30" name="__codelineno-16-30" href="#__codelineno-16-30"></a><span class="w">    </span><span class="k">quote</span><span class="w"> </span><span class="k">do</span>
+<a id="__codelineno-16-31" name="__codelineno-16-31" href="#__codelineno-16-31"></a><span class="w">      </span><span class="c1"># 1. Calculamos os valores reais</span>
+<a id="__codelineno-16-32" name="__codelineno-16-32" href="#__codelineno-16-32"></a><span class="w">      </span><span class="n">valor_esq</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">unquote</span><span class="p">(</span><span class="n">esquerda</span><span class="p">)</span>
+<a id="__codelineno-16-33" name="__codelineno-16-33" href="#__codelineno-16-33"></a><span class="w">      </span><span class="n">valor_dir</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">unquote</span><span class="p">(</span><span class="n">direita</span><span class="p">)</span>
+<a id="__codelineno-16-34" name="__codelineno-16-34" href="#__codelineno-16-34"></a>
+<a id="__codelineno-16-35" name="__codelineno-16-35" href="#__codelineno-16-35"></a><span class="w">      </span><span class="c1"># 2. Fazemos a verificação</span>
+<a id="__codelineno-16-36" name="__codelineno-16-36" href="#__codelineno-16-36"></a><span class="w">      </span><span class="k">if</span><span class="w"> </span><span class="n">valor_esq</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">valor_dir</span><span class="w"> </span><span class="k">do</span>
+<a id="__codelineno-16-37" name="__codelineno-16-37" href="#__codelineno-16-37"></a><span class="w">        </span><span class="nc">IO</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;.&quot;</span><span class="p">)</span><span class="w"> </span><span class="c1"># Sucesso (ponto verde)</span>
+<a id="__codelineno-16-38" name="__codelineno-16-38" href="#__codelineno-16-38"></a><span class="w">      </span><span class="k">else</span>
+<a id="__codelineno-16-39" name="__codelineno-16-39" href="#__codelineno-16-39"></a><span class="w">        </span><span class="c1"># 3. Falha rica em detalhes!</span>
+<a id="__codelineno-16-40" name="__codelineno-16-40" href="#__codelineno-16-40"></a><span class="w">        </span><span class="nc">IO</span><span class="o">.</span><span class="n">puts</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">❌ FALHA no teste!&quot;</span><span class="p">)</span>
+<a id="__codelineno-16-41" name="__codelineno-16-41" href="#__codelineno-16-41"></a><span class="w">        </span><span class="nc">IO</span><span class="o">.</span><span class="n">puts</span><span class="p">(</span><span class="s2">&quot;   Esquerda: </span><span class="si">#{</span><span class="n">valor_esq</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<a id="__codelineno-16-42" name="__codelineno-16-42" href="#__codelineno-16-42"></a><span class="w">        </span><span class="nc">IO</span><span class="o">.</span><span class="n">puts</span><span class="p">(</span><span class="s2">&quot;   Direita:  </span><span class="si">#{</span><span class="n">valor_dir</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<a id="__codelineno-16-43" name="__codelineno-16-43" href="#__codelineno-16-43"></a><span class="w">        </span><span class="c1"># Só conseguimos mostrar isso porque temos acesso à AST separada!</span>
+<a id="__codelineno-16-44" name="__codelineno-16-44" href="#__codelineno-16-44"></a><span class="w">      </span><span class="k">end</span>
+<a id="__codelineno-16-45" name="__codelineno-16-45" href="#__codelineno-16-45"></a><span class="w">    </span><span class="k">end</span>
+<a id="__codelineno-16-46" name="__codelineno-16-46" href="#__codelineno-16-46"></a><span class="w">  </span><span class="k">end</span>
+<a id="__codelineno-16-47" name="__codelineno-16-47" href="#__codelineno-16-47"></a><span class="k">end</span>
 </code></pre></div>
 <hr />
 <h3 id="passo-2-o-consumidor-escrevendo-os-testes">Passo 2: O Consumidor (Escrevendo os Testes)<a class="headerlink" href="#passo-2-o-consumidor-escrevendo-os-testes" title="Permanent link">&para;</a></h3>
 <p>Agora vamos atuar como o usuário final do seu framework.
 Crie o arquivo <code>lib/meus_testes.ex</code>.</p>
-<p>Elixir</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a><span class="kd">defmodule</span><span class="w"> </span><span class="nc">MeusTestes</span><span class="w"> </span><span class="k">do</span>
-<a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a><span class="w">  </span><span class="c1"># 1. Injeta nosso framework (roda o __using__)</span>
-<a id="__codelineno-13-3" name="__codelineno-13-3" href="#__codelineno-13-3"></a><span class="w">  </span><span class="kn">use</span><span class="w"> </span><span class="nc">MiniTest</span>
-<a id="__codelineno-13-4" name="__codelineno-13-4" href="#__codelineno-13-4"></a>
-<a id="__codelineno-13-5" name="__codelineno-13-5" href="#__codelineno-13-5"></a><span class="w">  </span><span class="c1"># 2. Nossa DSL em ação</span>
-<a id="__codelineno-13-6" name="__codelineno-13-6" href="#__codelineno-13-6"></a><span class="w">  </span><span class="n">testar</span><span class="w"> </span><span class="s2">&quot;matematica correta&quot;</span><span class="w"> </span><span class="k">do</span>
-<a id="__codelineno-13-7" name="__codelineno-13-7" href="#__codelineno-13-7"></a><span class="w">    </span><span class="n">assert</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">2</span>
-<a id="__codelineno-13-8" name="__codelineno-13-8" href="#__codelineno-13-8"></a><span class="w">    </span><span class="n">assert</span><span class="w"> </span><span class="mi">10</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">20</span>
-<a id="__codelineno-13-9" name="__codelineno-13-9" href="#__codelineno-13-9"></a><span class="w">  </span><span class="k">end</span>
-<a id="__codelineno-13-10" name="__codelineno-13-10" href="#__codelineno-13-10"></a>
-<a id="__codelineno-13-11" name="__codelineno-13-11" href="#__codelineno-13-11"></a><span class="w">  </span><span class="n">testar</span><span class="w"> </span><span class="s2">&quot;matematica errada&quot;</span><span class="w"> </span><span class="k">do</span>
-<a id="__codelineno-13-12" name="__codelineno-13-12" href="#__codelineno-13-12"></a><span class="w">    </span><span class="c1"># Este teste vai falhar propositalmente</span>
-<a id="__codelineno-13-13" name="__codelineno-13-13" href="#__codelineno-13-13"></a><span class="w">    </span><span class="n">assert</span><span class="w"> </span><span class="mi">5</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">10</span>
-<a id="__codelineno-13-14" name="__codelineno-13-14" href="#__codelineno-13-14"></a><span class="w">  </span><span class="k">end</span>
-<a id="__codelineno-13-15" name="__codelineno-13-15" href="#__codelineno-13-15"></a><span class="k">end</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a><span class="kd">defmodule</span><span class="w"> </span><span class="nc">MeusTestes</span><span class="w"> </span><span class="k">do</span>
+<a id="__codelineno-17-2" name="__codelineno-17-2" href="#__codelineno-17-2"></a><span class="w">  </span><span class="c1"># 1. Injeta nosso framework (roda o __using__)</span>
+<a id="__codelineno-17-3" name="__codelineno-17-3" href="#__codelineno-17-3"></a><span class="w">  </span><span class="kn">use</span><span class="w"> </span><span class="nc">MiniTest</span>
+<a id="__codelineno-17-4" name="__codelineno-17-4" href="#__codelineno-17-4"></a>
+<a id="__codelineno-17-5" name="__codelineno-17-5" href="#__codelineno-17-5"></a><span class="w">  </span><span class="c1"># 2. Nossa DSL em ação</span>
+<a id="__codelineno-17-6" name="__codelineno-17-6" href="#__codelineno-17-6"></a><span class="w">  </span><span class="n">testar</span><span class="w"> </span><span class="s2">&quot;matematica correta&quot;</span><span class="w"> </span><span class="k">do</span>
+<a id="__codelineno-17-7" name="__codelineno-17-7" href="#__codelineno-17-7"></a><span class="w">    </span><span class="n">assert</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">2</span>
+<a id="__codelineno-17-8" name="__codelineno-17-8" href="#__codelineno-17-8"></a><span class="w">    </span><span class="n">assert</span><span class="w"> </span><span class="mi">10</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">20</span>
+<a id="__codelineno-17-9" name="__codelineno-17-9" href="#__codelineno-17-9"></a><span class="w">  </span><span class="k">end</span>
+<a id="__codelineno-17-10" name="__codelineno-17-10" href="#__codelineno-17-10"></a>
+<a id="__codelineno-17-11" name="__codelineno-17-11" href="#__codelineno-17-11"></a><span class="w">  </span><span class="n">testar</span><span class="w"> </span><span class="s2">&quot;matematica errada&quot;</span><span class="w"> </span><span class="k">do</span>
+<a id="__codelineno-17-12" name="__codelineno-17-12" href="#__codelineno-17-12"></a><span class="w">    </span><span class="c1"># Este teste vai falhar propositalmente</span>
+<a id="__codelineno-17-13" name="__codelineno-17-13" href="#__codelineno-17-13"></a><span class="w">    </span><span class="n">assert</span><span class="w"> </span><span class="mi">5</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">10</span>
+<a id="__codelineno-17-14" name="__codelineno-17-14" href="#__codelineno-17-14"></a><span class="w">  </span><span class="k">end</span>
+<a id="__codelineno-17-15" name="__codelineno-17-15" href="#__codelineno-17-15"></a><span class="k">end</span>
 </code></pre></div>
 <hr />
 <h3 id="passo-3-execucao-e-analise-iex">Passo 3: Execução e Análise (IEx)<a class="headerlink" href="#passo-3-execucao-e-analise-iex" title="Permanent link">&para;</a></h3>
 <p>Abra o terminal: <code>iex -S mix</code>.</p>
 <p>Lembre-se: As macros rodaram quando você compilou. Agora, o módulo <code>MeusTestes</code> possui duas funções públicas (<code>test_matematica_correta</code> e <code>test_matematica_errada</code>) que foram geradas invisivelmente.</p>
 <p><strong>1. Rodando o teste que passa:</strong></p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a><span class="nc">MeusTestes</span><span class="o">.</span><span class="n">test_matematica_correta</span><span class="p">()</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a><span class="nc">MeusTestes</span><span class="o">.</span><span class="n">test_matematica_correta</span><span class="p">()</span>
 </code></pre></div>
 <p><strong>Saída:</strong></p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a><span class="err">🧪</span><span class="w"> </span><span class="ss">Executando</span><span class="p">:</span><span class="w"> </span><span class="n">matematica</span><span class="w"> </span><span class="n">correta</span>
-<a id="__codelineno-15-2" name="__codelineno-15-2" href="#__codelineno-15-2"></a><span class="o">..</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a><span class="err">🧪</span><span class="w"> </span><span class="ss">Executando</span><span class="p">:</span><span class="w"> </span><span class="n">matematica</span><span class="w"> </span><span class="n">correta</span>
+<a id="__codelineno-19-2" name="__codelineno-19-2" href="#__codelineno-19-2"></a><span class="o">..</span>
 </code></pre></div>
 <p><strong>2. Rodando o teste que falha:</strong></p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a><span class="nc">MeusTestes</span><span class="o">.</span><span class="n">test_matematica_errada</span><span class="p">()</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-20-1" name="__codelineno-20-1" href="#__codelineno-20-1"></a><span class="nc">MeusTestes</span><span class="o">.</span><span class="n">test_matematica_errada</span><span class="p">()</span>
 </code></pre></div>
 <p><strong>Saída:</strong></p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a><span class="err">🧪</span><span class="w"> </span><span class="ss">Executando</span><span class="p">:</span><span class="w"> </span><span class="n">matematica</span><span class="w"> </span><span class="n">errada</span>
-<a id="__codelineno-17-2" name="__codelineno-17-2" href="#__codelineno-17-2"></a>
-<a id="__codelineno-17-3" name="__codelineno-17-3" href="#__codelineno-17-3"></a><span class="err">❌</span><span class="w"> </span><span class="nc">FALHA</span><span class="w"> </span><span class="n">no</span><span class="w"> </span><span class="n">teste!</span>
-<a id="__codelineno-17-4" name="__codelineno-17-4" href="#__codelineno-17-4"></a><span class="w">   </span><span class="ss">Esquerda</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span>
-<a id="__codelineno-17-5" name="__codelineno-17-5" href="#__codelineno-17-5"></a><span class="w">   </span><span class="ss">Direita</span><span class="p">:</span><span class="w">  </span><span class="mi">10</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-21-1" name="__codelineno-21-1" href="#__codelineno-21-1"></a><span class="err">🧪</span><span class="w"> </span><span class="ss">Executando</span><span class="p">:</span><span class="w"> </span><span class="n">matematica</span><span class="w"> </span><span class="n">errada</span>
+<a id="__codelineno-21-2" name="__codelineno-21-2" href="#__codelineno-21-2"></a>
+<a id="__codelineno-21-3" name="__codelineno-21-3" href="#__codelineno-21-3"></a><span class="err">❌</span><span class="w"> </span><span class="nc">FALHA</span><span class="w"> </span><span class="n">no</span><span class="w"> </span><span class="n">teste!</span>
+<a id="__codelineno-21-4" name="__codelineno-21-4" href="#__codelineno-21-4"></a><span class="w">   </span><span class="ss">Esquerda</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span>
+<a id="__codelineno-21-5" name="__codelineno-21-5" href="#__codelineno-21-5"></a><span class="w">   </span><span class="ss">Direita</span><span class="p">:</span><span class="w">  </span><span class="mi">10</span>
 </code></pre></div>
 <hr />
 <h3 id="a-analise-do-engenheiro-o-pulo-do-gato">A Análise do Engenheiro (O "Pulo do Gato")<a class="headerlink" href="#a-analise-do-engenheiro-o-pulo-do-gato" title="Permanent link">&para;</a></h3>
 <p>Pare e pense no que aconteceu no teste de falha.</p>
 <p>Se <code>assert</code> fosse uma <strong>Função</strong> normal em Java ou Python:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a><span class="c1"># Python</span>
-<a id="__codelineno-18-2" name="__codelineno-18-2" href="#__codelineno-18-2"></a><span class="n">assert</span><span class="p">(</span><span class="mi">5</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">10</span><span class="p">)</span><span class="w"> </span><span class="c1"># Recebe False</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-22-1" name="__codelineno-22-1" href="#__codelineno-22-1"></a><span class="c1"># Python</span>
+<a id="__codelineno-22-2" name="__codelineno-22-2" href="#__codelineno-22-2"></a><span class="n">assert</span><span class="p">(</span><span class="mi">5</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">10</span><span class="p">)</span><span class="w"> </span><span class="c1"># Recebe False</span>
 </code></pre></div>
 <p>A função receberia apenas <code>False</code>. Ela não saberia que os números eram 5 e 10. Ela só poderia dizer: "Falhou".</p>
 <p>Como <code>assert</code> é uma <strong>Macro</strong> em Elixir:</p>
@@ -2533,7 +2538,7 @@ Crie o arquivo <code>lib/meus_testes.ex</code>.</p>
       <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.instant", "navigation.tracking", "navigation.sections", "navigation.expand", "navigation.top", "search.highlight", "search.share", "content.code.annotate", "content.code.copy", "content.tabs.link", "content.tooltips", "toc.follow"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copiado para \u00e1rea de transfer\u00eancia", "clipboard.copy": "Copiar para \u00e1rea de transfer\u00eancia", "search.result.more.one": "Mais 1 nesta p\u00e1gina", "search.result.more.other": "Mais # nesta p\u00e1gina", "search.result.none": "Nenhum resultado encontrado", "search.result.one": "1 resultado encontrado", "search.result.other": "# resultados encontrados", "search.result.placeholder": "Digite para iniciar a busca", "search.result.term.missing": "Ausente", "select.version": "Selecione a vers\u00e3o"}, "version": null}</script>
     
     
-      <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      <script src="../../assets/javascripts/bundle.d7400e89.min.js"></script>
       
         <script src="https://unpkg.com/mathjax@3/es5/tex-mml-chtml.js"></script>
       

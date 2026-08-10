@@ -24,7 +24,7 @@
       
       
       <link rel="icon" href="../../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
     
     
       
@@ -32,7 +32,7 @@
       
     
     
-      <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
+      <link rel="stylesheet" href="../../assets/stylesheets/main.ec1eaa64.min.css">
       
         
         <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
@@ -550,7 +550,7 @@
   <span class="md-ellipsis">
     
   
-    Cap 8: Exercícios Resolvidos
+    Cap 8: Lista de Exercícios
   
 
     
@@ -1176,7 +1176,7 @@
   <span class="md-ellipsis">
     
   
-    Cap 23: Clojure — Exercícios Resolvidos
+    Cap 23: Clojure — Lista de Exercícios
   
 
     
@@ -1842,7 +1842,6 @@ Implementar o módulo ContaBancaria onde:
 <p>Vamos criar o módulo <code>ContaBancaria</code> (a versão final) dentro do projeto.</p>
 <p>Crie o arquivo <code>lib/conta_bancaria.ex</code>.
 <em>Note como <code>loop(novo_saldo)</code> vira <code>{:noreply, novo_saldo}</code>.</em></p>
-<p>Elixir</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-22-1" name="__codelineno-22-1" href="#__codelineno-22-1"></a><span class="kd">defmodule</span><span class="w"> </span><span class="nc">ContaBancaria</span><span class="w"> </span><span class="k">do</span>
 <a id="__codelineno-22-2" name="__codelineno-22-2" href="#__codelineno-22-2"></a><span class="w">  </span><span class="c1"># 1. Injeta o comportamento de GenServer (o loop invisível)</span>
 <a id="__codelineno-22-3" name="__codelineno-22-3" href="#__codelineno-22-3"></a><span class="w">  </span><span class="kn">use</span><span class="w"> </span><span class="nc">GenServer</span>
@@ -1936,7 +1935,6 @@ Imagine que você digitou errado o nome da função (escreveu <code>handle_cat</
 <p><strong>Regra de Ouro:</strong> Sempre use <code>@impl true</code> nos callbacks (<code>init</code>, <code>handle_call</code>, <code>handle_cast</code>, <code>terminate</code>). É o cinto de segurança do seu código.</p>
 <h3 id="testando-a-versao-genserver">Testando a Versão GenServer<a class="headerlink" href="#testando-a-versao-genserver" title="Permanent link">&para;</a></h3>
 <p>Volte ao terminal (<code>recompile()</code>). Veja como a experiência de uso (Developer Experience) é superior.</p>
-<p>Elixir</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-23-1" name="__codelineno-23-1" href="#__codelineno-23-1"></a><span class="c1"># 1. Abrir conta</span>
 <a id="__codelineno-23-2" name="__codelineno-23-2" href="#__codelineno-23-2"></a><span class="p">{</span><span class="ss">:ok</span><span class="p">,</span><span class="w"> </span><span class="n">pid</span><span class="p">}</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">ContaBancaria</span><span class="o">.</span><span class="n">abrir_conta</span><span class="p">(</span><span class="mi">1000</span><span class="p">)</span>
 <a id="__codelineno-23-3" name="__codelineno-23-3" href="#__codelineno-23-3"></a>
@@ -2006,7 +2004,6 @@ Mas, como engenheiros, devemos ser pessimistas. <strong>E se houver um bug no c�
 <ol>
 <li>Crie o arquivo <code>lib/lab_concorrencia/application.ex</code>:</li>
 </ol>
-<p>Elixir</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-25-1" name="__codelineno-25-1" href="#__codelineno-25-1"></a><span class="kd">defmodule</span><span class="w"> </span><span class="nc">LabConcorrencia.Application</span><span class="w"> </span><span class="k">do</span>
 <a id="__codelineno-25-2" name="__codelineno-25-2" href="#__codelineno-25-2"></a><span class="w">  </span><span class="c1"># Transforma este módulo em uma Application (ponto de partida do sistema)</span>
 <a id="__codelineno-25-3" name="__codelineno-25-3" href="#__codelineno-25-3"></a><span class="w">  </span><span class="kn">use</span><span class="w"> </span><span class="nc">Application</span>
@@ -2062,7 +2059,6 @@ Quando dissemos ao Supervisor para cuidar do filho <code>{ContaBancaria, 1000}</
 <p><strong>2. A Solução (Obedecendo a Convenção)</strong>
 Vamos renomear nossa função de inicialização para seguir o padrão da indústria.</p>
 <p>Edite o arquivo <code>lib/conta_bancaria.ex</code>:</p>
-<p>Elixir</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-28-1" name="__codelineno-28-1" href="#__codelineno-28-1"></a><span class="kd">defmodule</span><span class="w"> </span><span class="nc">ContaBancaria</span><span class="w"> </span><span class="k">do</span>
 <a id="__codelineno-28-2" name="__codelineno-28-2" href="#__codelineno-28-2"></a><span class="w">  </span><span class="kn">use</span><span class="w"> </span><span class="nc">GenServer</span>
 <a id="__codelineno-28-3" name="__codelineno-28-3" href="#__codelineno-28-3"></a>
@@ -2152,7 +2148,6 @@ Porque processos guardam estado em <strong>Memória RAM</strong>. Se o processo 
 <li>No <code>start_link</code>, vamos adicionar a opção <code>name</code>.</li>
 <li>Na API do cliente, vamos permitir chamar pelo nome.</li>
 </ol>
-<p>Elixir</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-35-1" name="__codelineno-35-1" href="#__codelineno-35-1"></a><span class="kd">defmodule</span><span class="w"> </span><span class="nc">ContaBancaria</span><span class="w"> </span><span class="k">do</span>
 <a id="__codelineno-35-2" name="__codelineno-35-2" href="#__codelineno-35-2"></a><span class="w">  </span><span class="kn">use</span><span class="w"> </span><span class="nc">GenServer</span>
 <a id="__codelineno-35-3" name="__codelineno-35-3" href="#__codelineno-35-3"></a>
@@ -2252,7 +2247,6 @@ Crie o arquivo <code>lib/cofre.ex</code>:</p>
 </code></pre></div>
 <h3 id="teste-no-terminal-iex-s-mix">Teste no Terminal (<code>iex -S mix</code>)<a class="headerlink" href="#teste-no-terminal-iex-s-mix" title="Permanent link">&para;</a></h3>
 <p>Olhe como é simples (sem callbacks complexos):</p>
-<p>Elixir</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-39-1" name="__codelineno-39-1" href="#__codelineno-39-1"></a><span class="c1"># 1. Iniciar com 50 mil reais</span>
 <a id="__codelineno-39-2" name="__codelineno-39-2" href="#__codelineno-39-2"></a><span class="nc">Cofre</span><span class="o">.</span><span class="n">start_link</span><span class="p">(</span><span class="mi">50_000</span><span class="p">)</span>
 <a id="__codelineno-39-3" name="__codelineno-39-3" href="#__codelineno-39-3"></a>
@@ -2273,7 +2267,6 @@ Crie o arquivo <code>lib/cofre.ex</code>:</p>
 A <strong>Task</strong> serve para jogar esse trabalho para um processo descartável secundário.</p>
 <h3 id="pratica-o-notificador">Prática: O Notificador<a class="headerlink" href="#pratica-o-notificador" title="Permanent link">&para;</a></h3>
 <p>Crie o arquivo <code>lib/notificador.ex</code>:</p>
-<p>Elixir</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-40-1" name="__codelineno-40-1" href="#__codelineno-40-1"></a><span class="kd">defmodule</span><span class="w"> </span><span class="nc">Notificador</span><span class="w"> </span><span class="k">do</span>
 <a id="__codelineno-40-2" name="__codelineno-40-2" href="#__codelineno-40-2"></a><span class="w">  </span><span class="kd">def</span><span class="w"> </span><span class="n">enviar_email</span><span class="p">(</span><span class="n">cliente</span><span class="p">)</span><span class="w"> </span><span class="k">do</span>
 <a id="__codelineno-40-3" name="__codelineno-40-3" href="#__codelineno-40-3"></a><span class="w">    </span><span class="nc">IO</span><span class="o">.</span><span class="n">puts</span><span class="p">(</span><span class="s2">&quot;📧 Iniciando envio de email para </span><span class="si">#{</span><span class="n">cliente</span><span class="si">}</span><span class="s2">...&quot;</span><span class="p">)</span>
@@ -2288,7 +2281,6 @@ A <strong>Task</strong> serve para jogar esse trabalho para um processo descart�
 <h3 id="teste-comparativo-iex">Teste Comparativo (IEx)<a class="headerlink" href="#teste-comparativo-iex" title="Permanent link">&para;</a></h3>
 <p><strong>Cenário A: O jeito travado (Sem Task)</strong>
 Rode isso e veja seu terminal congelar:</p>
-<p>Elixir</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-41-1" name="__codelineno-41-1" href="#__codelineno-41-1"></a><span class="nc">Notificador</span><span class="o">.</span><span class="n">enviar_email</span><span class="p">(</span><span class="s2">&quot;Joao&quot;</span><span class="p">)</span>
 <a id="__codelineno-41-2" name="__codelineno-41-2" href="#__codelineno-41-2"></a><span class="c1"># ... (você não consegue digitar nada por 3 segundos) ...</span>
 <a id="__codelineno-41-3" name="__codelineno-41-3" href="#__codelineno-41-3"></a><span class="c1"># &quot;✅ Email enviado...&quot;</span>
@@ -2296,7 +2288,6 @@ Rode isso e veja seu terminal congelar:</p>
 <p><em>Em um servidor web, isso seria desastroso. O usuário ficaria vendo a ampulheta girar.</em></p>
 <p><strong>Cenário B: O jeito fluido (Com Task)</strong>
 Agora vamos usar <code>Task.start/1</code>.</p>
-<p>Elixir</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-42-1" name="__codelineno-42-1" href="#__codelineno-42-1"></a><span class="nc">Task</span><span class="o">.</span><span class="n">start</span><span class="p">(</span><span class="k">fn</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="nc">Notificador</span><span class="o">.</span><span class="n">enviar_email</span><span class="p">(</span><span class="s2">&quot;Maria&quot;</span><span class="p">)</span><span class="w"> </span><span class="k">end</span><span class="p">)</span>
 <a id="__codelineno-42-2" name="__codelineno-42-2" href="#__codelineno-42-2"></a><span class="c1"># {:ok, #PID&lt;0.165.0&gt;}</span>
 <a id="__codelineno-42-3" name="__codelineno-42-3" href="#__codelineno-42-3"></a><span class="c1"># O terminal libera IMEDIATAMENTE! Você pode continuar digitando.</span>
@@ -2440,7 +2431,7 @@ Vamos recapitular o modelo mental que você construiu, pois é isso que importa 
       <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.instant", "navigation.tracking", "navigation.sections", "navigation.expand", "navigation.top", "search.highlight", "search.share", "content.code.annotate", "content.code.copy", "content.tabs.link", "content.tooltips", "toc.follow"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copiado para \u00e1rea de transfer\u00eancia", "clipboard.copy": "Copiar para \u00e1rea de transfer\u00eancia", "search.result.more.one": "Mais 1 nesta p\u00e1gina", "search.result.more.other": "Mais # nesta p\u00e1gina", "search.result.none": "Nenhum resultado encontrado", "search.result.one": "1 resultado encontrado", "search.result.other": "# resultados encontrados", "search.result.placeholder": "Digite para iniciar a busca", "search.result.term.missing": "Ausente", "select.version": "Selecione a vers\u00e3o"}, "version": null}</script>
     
     
-      <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      <script src="../../assets/javascripts/bundle.d7400e89.min.js"></script>
       
         <script src="https://unpkg.com/mathjax@3/es5/tex-mml-chtml.js"></script>
       
