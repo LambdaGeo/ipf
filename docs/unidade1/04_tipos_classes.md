@@ -10,7 +10,7 @@ Na ciência da computação e na matemática, os sistemas de tipos servem para i
 
 > "Sistemas de tipos são geralmente formulados como coleções de regras para verificar a 'consistência' dos programas." (Benjamin Pierce, 2004)
 
-> "O propósito fundamental de um sistema de tipos é prevenir a ocorrência de erros de execução durante a execução de um programa." (Luca Cardelli, 2004)
+> "O propósito fundamental de um sistema de tipos é prevenir a ocorrência de erros de execução durante a execução de um programa." ([Luca Cardelli, 2004](https://www.classes.cs.uchicago.edu/archive/2012/spring/22300-1/papers/Cardelli-Wegner.pdf))
 
 No nível mais baixo da computação, a memória do computador lida apenas com bytes brutos, sem qualquer estrutura inerente. O sistema de tipos fornece a **abstração** necessária para atribuirmos significado a esses bytes. Ele nos permite dizer que *"estes bytes representam texto"*, *"aqueles bytes representam um número decimal"*, e assim por diante. Ao introduzir essa abstração, o sistema de tipos impede misturas acidentais que causariam comportamentos indefinidos no software.
 
