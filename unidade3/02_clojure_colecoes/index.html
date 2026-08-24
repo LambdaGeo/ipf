@@ -1927,20 +1927,20 @@
 <h3 id="21-o-que-e-um-vetor-e-como-cria-lo">2.1 O que é um Vetor e Como Criá-lo?<a class="headerlink" href="#21-o-que-e-um-vetor-e-como-cria-lo" title="Permanent link">&para;</a></h3>
 <p>Um vetor em Clojure é uma coleção ordenada de elementos, muito similar a um <em>array</em> ou lista em outras linguagens de programação. Sua principal característica é o acesso rápido a qualquer elemento através de um índice numérico (começando em zero).</p>
 <p>Para criar um vetor, utilizamos colchetes <code>[]</code> e separamos os elementos por espaços. Podemos definir um símbolo para referenciar nosso vetor usando <code>def</code>.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="c1">;; Define um vetor chamado &#39;estoque&#39; com dois produtos.</span>
-<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="p">(</span><span class="k">def </span><span class="nv">estoque</span><span class="w"> </span><span class="p">[</span><span class="s">&quot;Mochila&quot;</span>,<span class="w"> </span><span class="s">&quot;Camiseta&quot;</span><span class="p">])</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="c1">;; Define um vetor chamado 'estoque' com dois produtos.</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="p">(</span><span class="k">def </span><span class="nv">estoque</span><span class="w"> </span><span class="p">[</span><span class="s">"Mochila"</span>,<span class="w"> </span><span class="s">"Camiseta"</span><span class="p">])</span>
 </code></pre></div>
 <p><strong>Nota de Estilo:</strong> A vírgula <code>,</code> em Clojure é tratada como um espaço em branco (<code>whitespace</code>). Embora opcional, usá-la entre os elementos de uma coleção na mesma linha é uma boa prática que melhora a legibilidade do código.</p>
 <h3 id="22-acessando-elementos-duas-abordagens-seguras">2.2 Acessando Elementos: Duas Abordagens Seguras<a class="headerlink" href="#22-acessando-elementos-duas-abordagens-seguras" title="Permanent link">&para;</a></h3>
 <p>Em Clojure, vetores são coleções indexadas, e você pode acessar seus elementos de duas formas principais: <strong>usando o vetor como função</strong> ou usando a <strong>função <code>get</code></strong>.</p>
 <p>Antes de tudo, vamos definir um vetor com alguns itens de estoque:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="p">(</span><span class="k">def </span><span class="nv">estoque</span><span class="w"> </span><span class="p">[</span><span class="s">&quot;Mochila&quot;</span><span class="w"> </span><span class="s">&quot;Camiseta&quot;</span><span class="p">])</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="p">(</span><span class="k">def </span><span class="nv">estoque</span><span class="w"> </span><span class="p">[</span><span class="s">"Mochila"</span><span class="w"> </span><span class="s">"Camiseta"</span><span class="p">])</span>
 </code></pre></div>
 <h3 id="1-usando-o-vetor-como-funcao"><strong>1. Usando o vetor como função</strong><a class="headerlink" href="#1-usando-o-vetor-como-funcao" title="Permanent link">&para;</a></h3>
 <p>Essa é a forma <strong>mais rápida e idiomática</strong> de acessar elementos. Em Clojure, vetores se comportam como funções: você pode "chamá-los" com um índice.</p>
 <p>Exemplo válido:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="p">(</span><span class="nf">estoque</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span>
-<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="c1">;=&gt; &quot;Mochila&quot;</span>
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="c1">;=&gt; "Mochila"</span>
 </code></pre></div>
 <p>Aqui estamos pedindo o item no índice 0. Como o índice existe, recebemos "Mochila".</p>
 <p>Exemplo inválido:</p>
@@ -1962,7 +1962,7 @@
 </ul>
 <p>Exemplo com índice válido:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="p">(</span><span class="nb">get </span><span class="nv">estoque</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span>
-<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="c1">;=&gt; &quot;Camiseta&quot;</span>
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="c1">;=&gt; "Camiseta"</span>
 </code></pre></div>
 <p>Exemplo com índice inválido:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="p">(</span><span class="nb">get </span><span class="nv">estoque</span><span class="w"> </span><span class="mi">17</span><span class="p">)</span>
@@ -1970,8 +1970,8 @@
 </code></pre></div>
 <p>Diferente da abordagem anterior, <code>get</code> não lança erro se o índice for inválido — apenas retorna <code>nil</code>.</p>
 <p>Exemplo com valor padrão:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="p">(</span><span class="nb">get </span><span class="nv">estoque</span><span class="w"> </span><span class="mi">17</span><span class="w"> </span><span class="s">&quot;Produto esgotado&quot;</span><span class="p">)</span>
-<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="c1">;=&gt; &quot;Produto esgotado&quot;</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="p">(</span><span class="nb">get </span><span class="nv">estoque</span><span class="w"> </span><span class="mi">17</span><span class="w"> </span><span class="s">"Produto esgotado"</span><span class="p">)</span>
+<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="c1">;=&gt; "Produto esgotado"</span>
 </code></pre></div>
 <p>Se o índice não existir, o valor <code>"Produto esgotado"</code> será retornado.</p>
 <blockquote>
@@ -1992,7 +1992,7 @@
 <p><strong>Por que usar?</strong></p>
 <p>É a maneira <strong>mais direta e segura</strong> de verificar o tamanho de uma coleção.</p>
 <p>Exemplos:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="p">(</span><span class="k">def </span><span class="nv">estoque</span><span class="w"> </span><span class="p">[</span><span class="s">&quot;Mochila&quot;</span><span class="w"> </span><span class="s">&quot;Camiseta&quot;</span><span class="w"> </span><span class="s">&quot;Tênis&quot;</span><span class="p">])</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="p">(</span><span class="k">def </span><span class="nv">estoque</span><span class="w"> </span><span class="p">[</span><span class="s">"Mochila"</span><span class="w"> </span><span class="s">"Camiseta"</span><span class="w"> </span><span class="s">"Tênis"</span><span class="p">])</span>
 <a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a>
 <a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a><span class="p">(</span><span class="nb">count </span><span class="nv">estoque</span><span class="p">)</span>
 <a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a><span class="c1">;=&gt; 3</span>
@@ -2009,21 +2009,21 @@
 <p><strong>Por que usar?</strong></p>
 <p>Clojure é uma linguagem funcional e imutável — isso significa que <code>conj</code> <strong>não altera o vetor original</strong>. Em vez disso, retorna <strong>uma nova coleção com o elemento adicionado</strong>.</p>
 <p><strong>Exemplos:</strong></p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="p">(</span><span class="k">def </span><span class="nv">estoque</span><span class="w"> </span><span class="p">[</span><span class="s">&quot;Mochila&quot;</span><span class="w"> </span><span class="s">&quot;Camiseta&quot;</span><span class="p">])</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="p">(</span><span class="k">def </span><span class="nv">estoque</span><span class="w"> </span><span class="p">[</span><span class="s">"Mochila"</span><span class="w"> </span><span class="s">"Camiseta"</span><span class="p">])</span>
 <a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a>
-<a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a><span class="p">(</span><span class="nb">conj </span><span class="nv">estoque</span><span class="w"> </span><span class="s">&quot;Tênis&quot;</span><span class="p">)</span>
-<a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a><span class="c1">;=&gt; [&quot;Mochila&quot; &quot;Camiseta&quot; &quot;Tênis&quot;]</span>
+<a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a><span class="p">(</span><span class="nb">conj </span><span class="nv">estoque</span><span class="w"> </span><span class="s">"Tênis"</span><span class="p">)</span>
+<a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a><span class="c1">;=&gt; ["Mochila" "Camiseta" "Tênis"]</span>
 </code></pre></div>
 <p>O vetor original continua o mesmo:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="nv">estoque</span>
-<a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a><span class="c1">;=&gt; [&quot;Mochila&quot; &quot;Camiseta&quot;]</span>
+<a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a><span class="c1">;=&gt; ["Mochila" "Camiseta"]</span>
 </code></pre></div>
 <p>Se quiser atualizar a variável com o novo valor, você pode fazer isso com <code>def</code> novamente (ou <code>defonce</code>, <code>let</code>, etc., dependendo do contexto):</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="p">(</span><span class="k">def </span><span class="nv">estoque</span><span class="w"> </span><span class="p">(</span><span class="nb">conj </span><span class="nv">estoque</span><span class="w"> </span><span class="s">&quot;Tênis&quot;</span><span class="p">))</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="p">(</span><span class="k">def </span><span class="nv">estoque</span><span class="w"> </span><span class="p">(</span><span class="nb">conj </span><span class="nv">estoque</span><span class="w"> </span><span class="s">"Tênis"</span><span class="p">))</span>
 </code></pre></div>
 <p>Agora sim, <code>estoque</code> contém o novo item:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="nv">estoque</span>
-<a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a><span class="c1">;=&gt; [&quot;Mochila&quot; &quot;Camiseta&quot; &quot;Tênis&quot;]</span>
+<a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a><span class="c1">;=&gt; ["Mochila" "Camiseta" "Tênis"]</span>
 </code></pre></div>
 <div class="admonition tip">
 <p class="admonition-title">Rebinding, não mutação</p>
@@ -2066,14 +2066,14 @@
 <a id="__codelineno-14-17" name="__codelineno-14-17" href="#__codelineno-14-17"></a><span class="c1">;; =&gt; 0</span>
 </code></pre></div>
 <p>Acessando dados em mapas aninhados com get-in</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a><span class="p">(</span><span class="k">def </span><span class="nv">usuario</span><span class="w"> </span><span class="p">{</span><span class="ss">:nome</span><span class="w"> </span><span class="s">&quot;João&quot;</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a><span class="p">(</span><span class="k">def </span><span class="nv">usuario</span><span class="w"> </span><span class="p">{</span><span class="ss">:nome</span><span class="w"> </span><span class="s">"João"</span>
 <a id="__codelineno-15-2" name="__codelineno-15-2" href="#__codelineno-15-2"></a><span class="w">              </span><span class="ss">:idade</span><span class="w"> </span><span class="mi">30</span>
-<a id="__codelineno-15-3" name="__codelineno-15-3" href="#__codelineno-15-3"></a><span class="w">              </span><span class="ss">:endereco</span><span class="w"> </span><span class="p">{</span><span class="ss">:cidade</span><span class="w"> </span><span class="s">&quot;São Paulo&quot;</span>
-<a id="__codelineno-15-4" name="__codelineno-15-4" href="#__codelineno-15-4"></a><span class="w">                         </span><span class="ss">:cep</span><span class="w"> </span><span class="s">&quot;01000-000&quot;</span><span class="p">}})</span>
+<a id="__codelineno-15-3" name="__codelineno-15-3" href="#__codelineno-15-3"></a><span class="w">              </span><span class="ss">:endereco</span><span class="w"> </span><span class="p">{</span><span class="ss">:cidade</span><span class="w"> </span><span class="s">"São Paulo"</span>
+<a id="__codelineno-15-4" name="__codelineno-15-4" href="#__codelineno-15-4"></a><span class="w">                         </span><span class="ss">:cep</span><span class="w"> </span><span class="s">"01000-000"</span><span class="p">}})</span>
 <a id="__codelineno-15-5" name="__codelineno-15-5" href="#__codelineno-15-5"></a>
 <a id="__codelineno-15-6" name="__codelineno-15-6" href="#__codelineno-15-6"></a><span class="c1">;; Acessando o CEP</span>
 <a id="__codelineno-15-7" name="__codelineno-15-7" href="#__codelineno-15-7"></a><span class="p">(</span><span class="nf">get-in</span><span class="w"> </span><span class="nv">usuario</span><span class="w"> </span><span class="p">[</span><span class="ss">:endereco</span><span class="w"> </span><span class="ss">:cep</span><span class="p">])</span>
-<a id="__codelineno-15-8" name="__codelineno-15-8" href="#__codelineno-15-8"></a><span class="c1">;; =&gt; &quot;01000-000&quot;</span>
+<a id="__codelineno-15-8" name="__codelineno-15-8" href="#__codelineno-15-8"></a><span class="c1">;; =&gt; "01000-000"</span>
 </code></pre></div>
 <div class="admonition tip">
 <p class="admonition-title">Tip</p>
@@ -2088,7 +2088,7 @@
 </code></pre></div>
 <p>iterando sobre mapas</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a><span class="p">(</span><span class="nb">doseq </span><span class="p">[[</span><span class="nv">item</span><span class="w"> </span><span class="nv">quantidade</span><span class="p">]</span><span class="w"> </span><span class="nv">estoque</span><span class="p">]</span>
-<a id="__codelineno-17-2" name="__codelineno-17-2" href="#__codelineno-17-2"></a><span class="w">  </span><span class="p">(</span><span class="nb">println </span><span class="s">&quot;Item:&quot;</span><span class="w"> </span><span class="nv">item</span><span class="w"> </span><span class="s">&quot;-&gt; Quantidade:&quot;</span><span class="w"> </span><span class="nv">quantidade</span><span class="p">))</span>
+<a id="__codelineno-17-2" name="__codelineno-17-2" href="#__codelineno-17-2"></a><span class="w">  </span><span class="p">(</span><span class="nb">println </span><span class="s">"Item:"</span><span class="w"> </span><span class="nv">item</span><span class="w"> </span><span class="s">"-&gt; Quantidade:"</span><span class="w"> </span><span class="nv">quantidade</span><span class="p">))</span>
 <a id="__codelineno-17-3" name="__codelineno-17-3" href="#__codelineno-17-3"></a>
 <a id="__codelineno-17-4" name="__codelineno-17-4" href="#__codelineno-17-4"></a><span class="c1">;; Saída:</span>
 <a id="__codelineno-17-5" name="__codelineno-17-5" href="#__codelineno-17-5"></a><span class="c1">;; Item: :mochila -&gt; Quantidade: 10</span>
@@ -2102,7 +2102,7 @@
 <li><code>vals</code>: Retorna uma sequência com todos os valores do mapa. É útil para quando você só se interessa pelos dados em si, e não por suas chaves de associação.</li>
 </ul>
 <p>Exemplos</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a><span class="p">(</span><span class="k">def </span><span class="nv">produto</span><span class="w"> </span><span class="p">{</span><span class="ss">:nome</span><span class="w"> </span><span class="s">&quot;Camiseta&quot;</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a><span class="p">(</span><span class="k">def </span><span class="nv">produto</span><span class="w"> </span><span class="p">{</span><span class="ss">:nome</span><span class="w"> </span><span class="s">"Camiseta"</span>
 <a id="__codelineno-18-2" name="__codelineno-18-2" href="#__codelineno-18-2"></a><span class="w">              </span><span class="ss">:preco</span><span class="w"> </span><span class="mf">49.90</span>
 <a id="__codelineno-18-3" name="__codelineno-18-3" href="#__codelineno-18-3"></a><span class="w">              </span><span class="ss">:estoque</span><span class="w"> </span><span class="mi">20</span><span class="p">})</span>
 </code></pre></div>
@@ -2120,16 +2120,16 @@
 <hr />
 <p><code>vals</code> – Todos os valores do mapa</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-21-1" name="__codelineno-21-1" href="#__codelineno-21-1"></a><span class="p">(</span><span class="nb">vals </span><span class="nv">produto</span><span class="p">)</span>
-<a id="__codelineno-21-2" name="__codelineno-21-2" href="#__codelineno-21-2"></a><span class="c1">;; =&gt; (&quot;Camiseta&quot; 49.90 20)</span>
+<a id="__codelineno-21-2" name="__codelineno-21-2" href="#__codelineno-21-2"></a><span class="c1">;; =&gt; ("Camiseta" 49.90 20)</span>
 </code></pre></div>
 <p><strong>Explicação:</strong></p>
 <p>Essa é a sequência dos valores armazenados nas chaves, na mesma ordem que as chaves retornadas por <code>keys</code>.</p>
 <p>Exercício</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-22-1" name="__codelineno-22-1" href="#__codelineno-22-1"></a><span class="p">(</span><span class="k">def </span><span class="nv">aluno</span><span class="w"> </span><span class="p">{</span><span class="ss">:nome</span><span class="w"> </span><span class="s">&quot;Joana&quot;</span><span class="w"> </span><span class="ss">:idade</span><span class="w"> </span><span class="mi">22</span><span class="w"> </span><span class="ss">:curso</span><span class="w"> </span><span class="s">&quot;Engenharia&quot;</span><span class="p">})</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-22-1" name="__codelineno-22-1" href="#__codelineno-22-1"></a><span class="p">(</span><span class="k">def </span><span class="nv">aluno</span><span class="w"> </span><span class="p">{</span><span class="ss">:nome</span><span class="w"> </span><span class="s">"Joana"</span><span class="w"> </span><span class="ss">:idade</span><span class="w"> </span><span class="mi">22</span><span class="w"> </span><span class="ss">:curso</span><span class="w"> </span><span class="s">"Engenharia"</span><span class="p">})</span>
 <a id="__codelineno-22-2" name="__codelineno-22-2" href="#__codelineno-22-2"></a>
 <a id="__codelineno-22-3" name="__codelineno-22-3" href="#__codelineno-22-3"></a><span class="c1">;; Perguntas:</span>
 <a id="__codelineno-22-4" name="__codelineno-22-4" href="#__codelineno-22-4"></a><span class="c1">;; 1. Quantos dados temos sobre a aluna?</span>
-<a id="__codelineno-22-5" name="__codelineno-22-5" href="#__codelineno-22-5"></a><span class="c1">;; 2. Quais são os &quot;rótulos&quot; dessas informações?</span>
+<a id="__codelineno-22-5" name="__codelineno-22-5" href="#__codelineno-22-5"></a><span class="c1">;; 2. Quais são os "rótulos" dessas informações?</span>
 <a id="__codelineno-22-6" name="__codelineno-22-6" href="#__codelineno-22-6"></a><span class="c1">;; 3. Quais são os valores?</span>
 <a id="__codelineno-22-7" name="__codelineno-22-7" href="#__codelineno-22-7"></a><span class="c1">;; 4. Imprima cada chave com seu valor correspondente.</span>
 </code></pre></div>

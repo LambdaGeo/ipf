@@ -2353,7 +2353,7 @@
 <li>Todas as operações seguem essa mesma lógica:</li>
 <li>Longe de serem um problema, os parênteses são, como afirma <em>Clojure in Action</em>, "uma grande fonte das capacidades de Clojure", pois permitem que o código seja tratado como uma estrutura de dados, algo que exploraremos mais adiante.</li>
 </ol>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="p">(</span><span class="nb">println </span><span class="s">&quot;Bem vindo ao sistema de estoque&quot;</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="p">(</span><span class="nb">println </span><span class="s">"Bem vindo ao sistema de estoque"</span><span class="p">)</span>
 </code></pre></div>
 <p>Agora que você entende a estrutura básica de uma chamada de função, vamos ver como podemos dar nomes aos valores que usamos.</p>
 <h2 id="3-dando-nomes-as-coisas-simbolos-escopo-e-keywords">3. Dando Nomes às Coisas: Símbolos, Escopo e Keywords<a class="headerlink" href="#3-dando-nomes-as-coisas-simbolos-escopo-e-keywords" title="Permanent link">&para;</a></h2>
@@ -2369,16 +2369,16 @@
 <li><strong>Clareza:</strong> Permite dar nomes a valores intermediários, tornando o código mais legível.</li>
 <li><strong>Eficiência:</strong> Permite que uma expressão seja avaliada apenas uma vez e seu resultado reutilizado várias vezes dentro do bloco.</li>
 </ol>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="p">(</span><span class="k">def </span><span class="nv">nome-global</span><span class="w"> </span><span class="s">&quot;Rosanthony&quot;</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="p">(</span><span class="k">def </span><span class="nv">nome-global</span><span class="w"> </span><span class="s">"Rosanthony"</span><span class="p">)</span>
 <a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>
 <a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="p">(</span><span class="nb">println </span><span class="nv">nome-global</span><span class="p">)</span>
-<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="c1">; =&gt; &quot;Rosanthony&quot;</span>
+<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="c1">; =&gt; "Rosanthony"</span>
 <a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a>
-<a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a><span class="p">(</span><span class="k">let </span><span class="p">[</span><span class="nv">nome-local</span><span class="w"> </span><span class="s">&quot;Bloodthunder&quot;</span><span class="p">]</span>
-<a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a><span class="w">  </span><span class="p">(</span><span class="nb">println </span><span class="nv">nome-local</span><span class="p">)</span><span class="w">    </span><span class="c1">; =&gt; &quot;Bloodthunder&quot;</span>
+<a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a><span class="p">(</span><span class="k">let </span><span class="p">[</span><span class="nv">nome-local</span><span class="w"> </span><span class="s">"Bloodthunder"</span><span class="p">]</span>
+<a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a><span class="w">  </span><span class="p">(</span><span class="nb">println </span><span class="nv">nome-local</span><span class="p">)</span><span class="w">    </span><span class="c1">; =&gt; "Bloodthunder"</span>
 <a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a><span class="w">  </span><span class="p">(</span><span class="nb">println </span><span class="nv">nome-global</span><span class="p">))</span><span class="w"> </span><span class="c1">; A variável global ainda é acessível aqui</span>
 <a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a>
-<a id="__codelineno-2-10" name="__codelineno-2-10" href="#__codelineno-2-10"></a><span class="c1">;; A linha abaixo causaria um erro, pois &#39;nome-local&#39; não existe fora do bloco &#39;let&#39;.</span>
+<a id="__codelineno-2-10" name="__codelineno-2-10" href="#__codelineno-2-10"></a><span class="c1">;; A linha abaixo causaria um erro, pois 'nome-local' não existe fora do bloco 'let'.</span>
 <a id="__codelineno-2-11" name="__codelineno-2-11" href="#__codelineno-2-11"></a><span class="c1">;; (println nome-local)</span>
 </code></pre></div>
 <div class="admonition tip">
@@ -2427,19 +2427,19 @@
 <div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="p">(</span><span class="kd">defn </span><span class="nv">minha-funcao</span>
 <a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="w">  </span><span class="c1">;; Corpo para 0 argumentos</span>
 <a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="w">  </span><span class="p">([]</span>
-<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="w">   </span><span class="s">&quot;Fui chamada sem argumentos!&quot;</span><span class="p">)</span>
+<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="w">   </span><span class="s">"Fui chamada sem argumentos!"</span><span class="p">)</span>
 <a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a>
 <a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a><span class="w">  </span><span class="c1">;; Corpo para 1 argumento</span>
 <a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a><span class="w">  </span><span class="p">([</span><span class="nv">x</span><span class="p">]</span>
-<a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a><span class="w">   </span><span class="p">(</span><span class="nb">str </span><span class="s">&quot;Recebi o argumento: &quot;</span><span class="w"> </span><span class="nv">x</span><span class="p">))</span>
+<a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a><span class="w">   </span><span class="p">(</span><span class="nb">str </span><span class="s">"Recebi o argumento: "</span><span class="w"> </span><span class="nv">x</span><span class="p">))</span>
 <a id="__codelineno-4-9" name="__codelineno-4-9" href="#__codelineno-4-9"></a>
 <a id="__codelineno-4-10" name="__codelineno-4-10" href="#__codelineno-4-10"></a><span class="w">  </span><span class="c1">;; Corpo para 2 argumentos</span>
 <a id="__codelineno-4-11" name="__codelineno-4-11" href="#__codelineno-4-11"></a><span class="w">  </span><span class="p">([</span><span class="nv">x</span><span class="w"> </span><span class="nv">y</span><span class="p">]</span>
-<a id="__codelineno-4-12" name="__codelineno-4-12" href="#__codelineno-4-12"></a><span class="w">   </span><span class="p">(</span><span class="nb">str </span><span class="s">&quot;Recebi dois argumentos: &quot;</span><span class="w"> </span><span class="nv">x</span><span class="w"> </span><span class="s">&quot; e &quot;</span><span class="w"> </span><span class="nv">y</span><span class="p">)))</span>
+<a id="__codelineno-4-12" name="__codelineno-4-12" href="#__codelineno-4-12"></a><span class="w">   </span><span class="p">(</span><span class="nb">str </span><span class="s">"Recebi dois argumentos: "</span><span class="w"> </span><span class="nv">x</span><span class="w"> </span><span class="s">" e "</span><span class="w"> </span><span class="nv">y</span><span class="p">)))</span>
 <a id="__codelineno-4-13" name="__codelineno-4-13" href="#__codelineno-4-13"></a>
-<a id="__codelineno-4-14" name="__codelineno-4-14" href="#__codelineno-4-14"></a><span class="p">(</span><span class="nb">println </span><span class="p">(</span><span class="nf">minha-funcao</span><span class="p">))</span><span class="w">          </span><span class="c1">; =&gt; &quot;Fui chamada sem argumentos!&quot;</span>
-<a id="__codelineno-4-15" name="__codelineno-4-15" href="#__codelineno-4-15"></a><span class="p">(</span><span class="nb">println </span><span class="p">(</span><span class="nf">minha-funcao</span><span class="w"> </span><span class="s">&quot;olá&quot;</span><span class="p">))</span><span class="w">    </span><span class="c1">; =&gt; &quot;Recebi o argumento: olá&quot;</span>
-<a id="__codelineno-4-16" name="__codelineno-4-16" href="#__codelineno-4-16"></a><span class="p">(</span><span class="nb">println </span><span class="p">(</span><span class="nf">minha-funcao</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="mi">2</span><span class="p">))</span><span class="w">      </span><span class="c1">; =&gt; &quot;Recebi dois argumentos: 1 e 2&quot;</span>
+<a id="__codelineno-4-14" name="__codelineno-4-14" href="#__codelineno-4-14"></a><span class="p">(</span><span class="nb">println </span><span class="p">(</span><span class="nf">minha-funcao</span><span class="p">))</span><span class="w">          </span><span class="c1">; =&gt; "Fui chamada sem argumentos!"</span>
+<a id="__codelineno-4-15" name="__codelineno-4-15" href="#__codelineno-4-15"></a><span class="p">(</span><span class="nb">println </span><span class="p">(</span><span class="nf">minha-funcao</span><span class="w"> </span><span class="s">"olá"</span><span class="p">))</span><span class="w">    </span><span class="c1">; =&gt; "Recebi o argumento: olá"</span>
+<a id="__codelineno-4-16" name="__codelineno-4-16" href="#__codelineno-4-16"></a><span class="p">(</span><span class="nb">println </span><span class="p">(</span><span class="nf">minha-funcao</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="mi">2</span><span class="p">))</span><span class="w">      </span><span class="c1">; =&gt; "Recebi dois argumentos: 1 e 2"</span>
 </code></pre></div>
 <p>Com a capacidade de criar funções, precisamos agora de ferramentas para controlar o fluxo de execução dentro delas, tomando decisões baseadas em certas condições.</p>
 <p>Podemos testar no onecompiler.com</p>
@@ -2452,15 +2452,15 @@
 <p>Se <code>teste-condicional</code> for verdadeiro, ele avalia e retorna <code>expressao-se-verdadeiro</code>. Caso contrário, avalia e retorna <code>expressao-se-falso</code>.</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="p">(</span><span class="kd">defn </span><span class="nv">verificar-maioridade</span><span class="w"> </span><span class="p">[</span><span class="nv">idade</span><span class="p">]</span>
 <a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="w">  </span><span class="p">(</span><span class="k">if </span><span class="p">(</span><span class="nb">&gt;= </span><span class="nv">idade</span><span class="w"> </span><span class="mi">18</span><span class="p">)</span>
-<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="w">    </span><span class="s">&quot;Você é maior de idade.&quot;</span>
-<a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a><span class="w">    </span><span class="s">&quot;Você é menor de idade.&quot;</span><span class="p">))</span>
+<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="w">    </span><span class="s">"Você é maior de idade."</span>
+<a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a><span class="w">    </span><span class="s">"Você é menor de idade."</span><span class="p">))</span>
 </code></pre></div>
 <p><strong>Uso:</strong></p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="p">(</span><span class="nf">verificar-maioridade</span><span class="w"> </span><span class="mi">20</span><span class="p">)</span>
-<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="c1">;; =&gt; &quot;Você é maior de idade.&quot;</span>
+<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="c1">;; =&gt; "Você é maior de idade."</span>
 <a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a>
 <a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a><span class="p">(</span><span class="nf">verificar-maioridade</span><span class="w"> </span><span class="mi">15</span><span class="p">)</span>
-<a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a><span class="c1">;; =&gt; &quot;Você é menor de idade.&quot;</span>
+<a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a><span class="c1">;; =&gt; "Você é menor de idade."</span>
 </code></pre></div>
 <h3 id="52-a-verdade-em-clojure-false-e-nil">5.2. A Verdade em Clojure: <code>false</code> e <code>nil</code><a class="headerlink" href="#52-a-verdade-em-clojure-false-e-nil" title="Permanent link">&para;</a></h3>
 <p>O conceito de "verdade" (ou <em>truthiness</em>) em Clojure é extremamente simples e consistente. Como diz <em>Getting Clojure</em>:</p>
@@ -2468,21 +2468,21 @@
 <p>Isso significa que números (incluindo <code>0</code>), strings (incluindo as vazias <code>""</code>), e coleções vazias (como <code>[]</code> ou <code>{}</code>) são todos considerados <strong>verdadeiros</strong> em um teste condicional.</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="p">(</span><span class="kd">defn </span><span class="nv">verificar-verdade</span><span class="w"> </span><span class="p">[</span><span class="nv">valor</span><span class="p">]</span>
 <a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="w">  </span><span class="p">(</span><span class="k">if </span><span class="nv">valor</span>
-<a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a><span class="w">    </span><span class="s">&quot;Isto é tratado como VERDADEIRO.&quot;</span>
-<a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a><span class="w">    </span><span class="s">&quot;Isto é tratado como FALSO.&quot;</span><span class="p">))</span>
+<a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a><span class="w">    </span><span class="s">"Isto é tratado como VERDADEIRO."</span>
+<a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a><span class="w">    </span><span class="s">"Isto é tratado como FALSO."</span><span class="p">))</span>
 </code></pre></div>
 <p><strong>Uso:</strong></p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="p">(</span><span class="nf">verificar-verdade</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span>
-<a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a><span class="c1">;; =&gt; &quot;Isto é tratado como VERDADEIRO.&quot;</span>
+<a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a><span class="c1">;; =&gt; "Isto é tratado como VERDADEIRO."</span>
 <a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a>
-<a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a><span class="p">(</span><span class="nf">verificar-verdade</span><span class="w"> </span><span class="s">&quot;&quot;</span><span class="p">)</span>
-<a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a><span class="c1">;; =&gt; &quot;Isto é tratado como VERDADEIRO.&quot;</span>
+<a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a><span class="p">(</span><span class="nf">verificar-verdade</span><span class="w"> </span><span class="s">""</span><span class="p">)</span>
+<a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a><span class="c1">;; =&gt; "Isto é tratado como VERDADEIRO."</span>
 <a id="__codelineno-8-6" name="__codelineno-8-6" href="#__codelineno-8-6"></a>
 <a id="__codelineno-8-7" name="__codelineno-8-7" href="#__codelineno-8-7"></a><span class="p">(</span><span class="nf">verificar-verdade</span><span class="w"> </span><span class="nv">nil</span><span class="p">)</span>
-<a id="__codelineno-8-8" name="__codelineno-8-8" href="#__codelineno-8-8"></a><span class="c1">;; =&gt; &quot;Isto é tratado como FALSO.&quot;</span>
+<a id="__codelineno-8-8" name="__codelineno-8-8" href="#__codelineno-8-8"></a><span class="c1">;; =&gt; "Isto é tratado como FALSO."</span>
 <a id="__codelineno-8-9" name="__codelineno-8-9" href="#__codelineno-8-9"></a>
 <a id="__codelineno-8-10" name="__codelineno-8-10" href="#__codelineno-8-10"></a><span class="p">(</span><span class="nf">verificar-verdade</span><span class="w"> </span><span class="nv">false</span><span class="p">)</span>
-<a id="__codelineno-8-11" name="__codelineno-8-11" href="#__codelineno-8-11"></a><span class="c1">;; =&gt; &quot;Isto é tratado como FALSO.&quot;</span>
+<a id="__codelineno-8-11" name="__codelineno-8-11" href="#__codelineno-8-11"></a><span class="c1">;; =&gt; "Isto é tratado como FALSO."</span>
 </code></pre></div>
 <blockquote>
 <p>Excelente para mostrar que 0, "" e [] são considerados verdadeiros em Clojure!
@@ -2498,17 +2498,17 @@
 </ul>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="p">(</span><span class="kd">defn </span><span class="nv">analisar-colecao</span><span class="w"> </span><span class="p">[</span><span class="nv">col</span><span class="p">]</span>
 <a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a><span class="w">  </span><span class="p">(</span><span class="k">if </span><span class="p">(</span><span class="nf">empty?</span><span class="w"> </span><span class="nv">col</span><span class="p">)</span>
-<a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a><span class="w">    </span><span class="s">&quot;A coleção está vazia.&quot;</span>
-<a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a><span class="w">    </span><span class="s">&quot;A coleção contém elementos.&quot;</span><span class="p">))</span>
+<a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a><span class="w">    </span><span class="s">"A coleção está vazia."</span>
+<a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a><span class="w">    </span><span class="s">"A coleção contém elementos."</span><span class="p">))</span>
 </code></pre></div>
 <p><strong>Uso:</strong></p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="p">(</span><span class="nf">analisar-colecao</span><span class="w"> </span><span class="p">[])</span>
-<a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a><span class="c1">;; =&gt; &quot;A coleção está vazia.&quot;</span>
+<a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a><span class="c1">;; =&gt; "A coleção está vazia."</span>
 <a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a>
 <a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a><span class="p">(</span><span class="nf">analisar-colecao</span><span class="w"> </span><span class="p">[</span><span class="mi">1</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="mi">3</span><span class="p">])</span>
-<a id="__codelineno-10-5" name="__codelineno-10-5" href="#__codelineno-10-5"></a><span class="c1">;; =&gt; &quot;A coleção contém elementos.&quot;</span>
+<a id="__codelineno-10-5" name="__codelineno-10-5" href="#__codelineno-10-5"></a><span class="c1">;; =&gt; "A coleção contém elementos."</span>
 <a id="__codelineno-10-6" name="__codelineno-10-6" href="#__codelineno-10-6"></a>
-<a id="__codelineno-10-7" name="__codelineno-10-7" href="#__codelineno-10-7"></a><span class="p">(</span><span class="nb">string? </span><span class="s">&quot;abc&quot;</span><span class="p">)</span>
+<a id="__codelineno-10-7" name="__codelineno-10-7" href="#__codelineno-10-7"></a><span class="p">(</span><span class="nb">string? </span><span class="s">"abc"</span><span class="p">)</span>
 <a id="__codelineno-10-8" name="__codelineno-10-8" href="#__codelineno-10-8"></a><span class="c1">;; =&gt; true</span>
 <a id="__codelineno-10-9" name="__codelineno-10-9" href="#__codelineno-10-9"></a>
 <a id="__codelineno-10-10" name="__codelineno-10-10" href="#__codelineno-10-10"></a><span class="p">(</span><span class="nb">zero? </span><span class="mi">0</span><span class="p">)</span>
@@ -2523,15 +2523,15 @@
 </blockquote>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="p">(</span><span class="kd">defn </span><span class="nv">saudacao</span><span class="w"> </span><span class="p">[</span><span class="nv">nome</span><span class="p">]</span>
 <a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a><span class="w">  </span><span class="p">(</span><span class="nb">if-let </span><span class="p">[</span><span class="nv">n</span><span class="w"> </span><span class="nv">nome</span><span class="p">]</span>
-<a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a><span class="w">    </span><span class="p">(</span><span class="nb">str </span><span class="s">&quot;Olá, &quot;</span><span class="w"> </span><span class="nv">n</span><span class="w"> </span><span class="s">&quot;!&quot;</span><span class="p">)</span>
-<a id="__codelineno-11-4" name="__codelineno-11-4" href="#__codelineno-11-4"></a><span class="w">    </span><span class="s">&quot;Olá, visitante!&quot;</span><span class="p">))</span>
+<a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a><span class="w">    </span><span class="p">(</span><span class="nb">str </span><span class="s">"Olá, "</span><span class="w"> </span><span class="nv">n</span><span class="w"> </span><span class="s">"!"</span><span class="p">)</span>
+<a id="__codelineno-11-4" name="__codelineno-11-4" href="#__codelineno-11-4"></a><span class="w">    </span><span class="s">"Olá, visitante!"</span><span class="p">))</span>
 </code></pre></div>
 <p><strong>Uso:</strong></p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="p">(</span><span class="nf">saudacao</span><span class="w"> </span><span class="s">&quot;Ana&quot;</span><span class="p">)</span>
-<a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a><span class="c1">;; =&gt; &quot;Olá, Ana!&quot;</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="p">(</span><span class="nf">saudacao</span><span class="w"> </span><span class="s">"Ana"</span><span class="p">)</span>
+<a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a><span class="c1">;; =&gt; "Olá, Ana!"</span>
 <a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a>
 <a id="__codelineno-12-4" name="__codelineno-12-4" href="#__codelineno-12-4"></a><span class="p">(</span><span class="nf">saudacao</span><span class="w"> </span><span class="nv">nil</span><span class="p">)</span>
-<a id="__codelineno-12-5" name="__codelineno-12-5" href="#__codelineno-12-5"></a><span class="c1">;; =&gt; &quot;Olá, visitante!&quot;</span>
+<a id="__codelineno-12-5" name="__codelineno-12-5" href="#__codelineno-12-5"></a><span class="c1">;; =&gt; "Olá, visitante!"</span>
 </code></pre></div>
 <blockquote>
 <p>Uma forma elegante de combinar verificação e binding de valor.
@@ -2543,7 +2543,7 @@
 <p><strong>Exemplo 1 – Imprimir apenas se o número for positivo</strong></p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a><span class="p">(</span><span class="kd">defn </span><span class="nv">mostrar-se-positivo</span><span class="w"> </span><span class="p">[</span><span class="nv">n</span><span class="p">]</span>
 <a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a><span class="w">  </span><span class="p">(</span><span class="nb">when </span><span class="p">(</span><span class="nb">&gt; </span><span class="nv">n</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span>
-<a id="__codelineno-13-3" name="__codelineno-13-3" href="#__codelineno-13-3"></a><span class="w">    </span><span class="p">(</span><span class="nb">println </span><span class="nv">n</span><span class="w"> </span><span class="s">&quot;é positivo.&quot;</span><span class="p">)))</span>
+<a id="__codelineno-13-3" name="__codelineno-13-3" href="#__codelineno-13-3"></a><span class="w">    </span><span class="p">(</span><span class="nb">println </span><span class="nv">n</span><span class="w"> </span><span class="s">"é positivo."</span><span class="p">)))</span>
 </code></pre></div>
 <p><strong>Uso:</strong></p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a><span class="p">(</span><span class="nf">mostrar-se-positivo</span><span class="w"> </span><span class="mi">10</span><span class="p">)</span>
@@ -2555,12 +2555,12 @@
 <p><strong>Exemplo 2 – Atualizar estado apenas se uma chave existir</strong></p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a><span class="p">(</span><span class="kd">defn </span><span class="nv">atualizar-nome</span><span class="w"> </span><span class="p">[</span><span class="nv">usuario</span><span class="p">]</span>
 <a id="__codelineno-15-2" name="__codelineno-15-2" href="#__codelineno-15-2"></a><span class="w">  </span><span class="p">(</span><span class="nb">when </span><span class="p">(</span><span class="ss">:nome</span><span class="w"> </span><span class="nv">usuario</span><span class="p">)</span>
-<a id="__codelineno-15-3" name="__codelineno-15-3" href="#__codelineno-15-3"></a><span class="w">    </span><span class="p">(</span><span class="nb">println </span><span class="s">&quot;Atualizando nome para:&quot;</span><span class="w"> </span><span class="p">(</span><span class="ss">:nome</span><span class="w"> </span><span class="nv">usuario</span><span class="p">))</span>
+<a id="__codelineno-15-3" name="__codelineno-15-3" href="#__codelineno-15-3"></a><span class="w">    </span><span class="p">(</span><span class="nb">println </span><span class="s">"Atualizando nome para:"</span><span class="w"> </span><span class="p">(</span><span class="ss">:nome</span><span class="w"> </span><span class="nv">usuario</span><span class="p">))</span>
 <a id="__codelineno-15-4" name="__codelineno-15-4" href="#__codelineno-15-4"></a><span class="w">    </span><span class="c1">;; outras ações poderiam vir aqui</span>
 <a id="__codelineno-15-5" name="__codelineno-15-5" href="#__codelineno-15-5"></a><span class="w">    </span><span class="nv">true</span><span class="p">))</span>
 </code></pre></div>
 <p><strong>Uso:</strong></p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a><span class="p">(</span><span class="nf">atualizar-nome</span><span class="w"> </span><span class="p">{</span><span class="ss">:nome</span><span class="w"> </span><span class="s">&quot;Carlos&quot;</span><span class="p">})</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a><span class="p">(</span><span class="nf">atualizar-nome</span><span class="w"> </span><span class="p">{</span><span class="ss">:nome</span><span class="w"> </span><span class="s">"Carlos"</span><span class="p">})</span>
 <a id="__codelineno-16-2" name="__codelineno-16-2" href="#__codelineno-16-2"></a><span class="c1">;; =&gt; Imprime: Atualizando nome para: Carlos</span>
 <a id="__codelineno-16-3" name="__codelineno-16-3" href="#__codelineno-16-3"></a>
 <a id="__codelineno-16-4" name="__codelineno-16-4" href="#__codelineno-16-4"></a><span class="p">(</span><span class="nf">atualizar-nome</span><span class="w"> </span><span class="p">{</span><span class="ss">:idade</span><span class="w"> </span><span class="mi">30</span><span class="p">})</span>
@@ -2574,7 +2574,7 @@
 <p><strong>Exemplo 3 – Combinar com Predicados</strong></p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a><span class="p">(</span><span class="kd">defn </span><span class="nv">alertar-se-vazio</span><span class="w"> </span><span class="p">[</span><span class="nv">colecao</span><span class="p">]</span>
 <a id="__codelineno-17-2" name="__codelineno-17-2" href="#__codelineno-17-2"></a><span class="w">  </span><span class="p">(</span><span class="nb">when </span><span class="p">(</span><span class="nf">empty?</span><span class="w"> </span><span class="nv">colecao</span><span class="p">)</span>
-<a id="__codelineno-17-3" name="__codelineno-17-3" href="#__codelineno-17-3"></a><span class="w">    </span><span class="p">(</span><span class="nb">println </span><span class="s">&quot;Atenção: a coleção está vazia!&quot;</span><span class="p">)))</span>
+<a id="__codelineno-17-3" name="__codelineno-17-3" href="#__codelineno-17-3"></a><span class="w">    </span><span class="p">(</span><span class="nb">println </span><span class="s">"Atenção: a coleção está vazia!"</span><span class="p">)))</span>
 </code></pre></div>
 <p><strong>Uso:</strong></p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a><span class="p">(</span><span class="nf">alertar-se-vazio</span><span class="w"> </span><span class="p">[])</span>
@@ -2595,9 +2595,9 @@
 <p>Para um iniciante, isso se traduz em algo muito concreto: a mesma sintaxe que você usa para criar uma lista de dados é a sintaxe que você usa para escrever seu código. Uma lista de Clojure é um conjunto de itens entre parênteses, e uma chamada de função também é um conjunto de itens entre parênteses.</p>
 <h3 id="62-a-diferenca-entre-dados-e-execucao">6.2. A Diferença entre Dados e Execução<a class="headerlink" href="#62-a-diferenca-entre-dados-e-execucao" title="Permanent link">&para;</a></h3>
 <p>Como Clojure sabe quando uma lista é apenas uma lista e quando é um código para executar? A resposta está no <code>quote</code> (ou seu atalho, a apóstrofo <code>'</code>).</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a><span class="c1">;; A apóstrofo (&#39;) &quot;cita&quot; a lista, tratando-a como dados.</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a><span class="c1">;; A apóstrofo (') "cita" a lista, tratando-a como dados.</span>
 <a id="__codelineno-19-2" name="__codelineno-19-2" href="#__codelineno-19-2"></a><span class="c1">;; O resultado é a própria lista.</span>
-<a id="__codelineno-19-3" name="__codelineno-19-3" href="#__codelineno-19-3"></a><span class="o">&#39;</span><span class="p">(</span><span class="nb">+ </span><span class="mi">1</span><span class="w"> </span><span class="mi">2</span><span class="p">)</span>
+<a id="__codelineno-19-3" name="__codelineno-19-3" href="#__codelineno-19-3"></a><span class="o">'</span><span class="p">(</span><span class="nb">+ </span><span class="mi">1</span><span class="w"> </span><span class="mi">2</span><span class="p">)</span>
 <a id="__codelineno-19-4" name="__codelineno-19-4" href="#__codelineno-19-4"></a><span class="c1">; =&gt; (+ 1 2)</span>
 <a id="__codelineno-19-5" name="__codelineno-19-5" href="#__codelineno-19-5"></a>
 <a id="__codelineno-19-6" name="__codelineno-19-6" href="#__codelineno-19-6"></a><span class="c1">;; Sem a apóstrofo, a lista é executada como código.</span>

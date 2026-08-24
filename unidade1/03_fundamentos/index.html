@@ -2008,10 +2008,10 @@
 </table>
 <h3 id="a-variavel-especial-it">A variável especial <code>it</code><a class="headerlink" href="#a-variavel-especial-it" title="Permanent link">&para;</a></h3>
 <p>O GHCi guarda o resultado da última expressão avaliada em uma variável especial chamada <strong><code>it</code></strong>. Isso permite usar o resultado anterior na próxima expressão:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="kt">Prelude</span><span class="o">&gt;</span><span class="w"> </span><span class="s">&quot;foo&quot;</span>
-<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="s">&quot;foo&quot;</span>
-<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="kt">Prelude</span><span class="o">&gt;</span><span class="w"> </span><span class="n">it</span><span class="w"> </span><span class="o">++</span><span class="w"> </span><span class="s">&quot;bar&quot;</span>
-<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="s">&quot;foobar&quot;</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="kt">Prelude</span><span class="o">&gt;</span><span class="w"> </span><span class="s">"foo"</span>
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="s">"foo"</span>
+<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="kt">Prelude</span><span class="o">&gt;</span><span class="w"> </span><span class="n">it</span><span class="w"> </span><span class="o">++</span><span class="w"> </span><span class="s">"bar"</span>
+<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="s">"foobar"</span>
 </code></pre></div>
 <p>Se a avaliação de uma expressão falhar, o valor de <code>it</code> não muda — então podemos experimentar expressões potencialmente inválidas com segurança. Combinando o <code>it</code> com as setas do teclado (que recuperam e editam as linhas anteriores), ganhamos uma ótima forma de experimentação interativa: o custo de errar é baixíssimo. Aproveite para cometer erros baratos e abundantes enquanto explora a linguagem!</p>
 <div class="admonition tip">
@@ -2034,7 +2034,7 @@
 <h3 id="parenteses-e-numeros-negativos">Parênteses e Números Negativos<a class="headerlink" href="#parenteses-e-numeros-negativos" title="Permanent link">&para;</a></h3>
 <p>Diferentemente de outras linguagens, o operador <code>-</code> pode ser ambíguo em Haskell. Quando queremos utilizar um número negativo em uma expressão, devemos <strong>obrigatoriamente envolvê-lo entre parênteses</strong>:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="kt">Prelude</span><span class="o">&gt;</span><span class="w"> </span><span class="mi">5</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="o">-</span><span class="mi">3</span>
-<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="c1">-- ERRO! O compilador tentará aplicar o operador &quot;+&quot; e o operador &quot;-&quot; consecutivamente.</span>
+<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="c1">-- ERRO! O compilador tentará aplicar o operador "+" e o operador "-" consecutivamente.</span>
 <a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a>
 <a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a><span class="kt">Prelude</span><span class="o">&gt;</span><span class="w"> </span><span class="mi">5</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="p">(</span><span class="o">-</span><span class="mi">3</span><span class="p">)</span>
 <a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a><span class="mi">2</span>
@@ -2085,7 +2085,7 @@
 <a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a><span class="kt">True</span>
 <a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a><span class="kt">Prelude</span><span class="o">&gt;</span><span class="w"> </span><span class="mi">10</span><span class="w"> </span><span class="o">/=</span><span class="w"> </span><span class="mi">9</span>
 <a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a><span class="kt">True</span>
-<a id="__codelineno-9-5" name="__codelineno-9-5" href="#__codelineno-9-5"></a><span class="kt">Prelude</span><span class="o">&gt;</span><span class="w"> </span><span class="sc">&#39;a&#39;</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="sc">&#39;b&#39;</span>
+<a id="__codelineno-9-5" name="__codelineno-9-5" href="#__codelineno-9-5"></a><span class="kt">Prelude</span><span class="o">&gt;</span><span class="w"> </span><span class="sc">'a'</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="sc">'b'</span>
 <a id="__codelineno-9-6" name="__codelineno-9-6" href="#__codelineno-9-6"></a><span class="kt">False</span>
 </code></pre></div>
 <hr />
